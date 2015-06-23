@@ -11,7 +11,7 @@ This is a starter boiler plate app I've put together using the following technol
 * [Babel](http://babeljs.io) for ES6 and ES7
 * [Webpack](http://webpack.github.io) for bundling
 * [Webpack Dev Server](http://webpack.github.io/docs/webpack-dev-server.html)
-* [React Hot Loader]https://github.com/gaearon/react-hot-loader)
+* [React Hot Loader](https://github.com/gaearon/react-hot-loader)
 * [Redux](https://github.com/gaearon/redux)'s futuristic [Flux](https://facebook.github.io/react/blog/2014/05/06/flux
 .html) implementation
 * [React Style](https://github.com/js-next/react-style) for inline styles
