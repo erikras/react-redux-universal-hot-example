@@ -21,13 +21,7 @@ config.output.hotUpdateChunkFilename = "update/[hash]/[id].update.js";
 config.plugins = [
   new webpack.DefinePlugin({__CLIENT__: true, __SERVER__: false}),
   new webpack.HotModuleReplacementPlugin(),
-  new webpack.NoErrorsPlugin(),
-  function (compiler) {
-    this.plugin('done', function (stats) {
-      fs.writeFileSync(path.join(__dirname, 'stats.generated.json'),
-        JSON.stringify(stats.toJson()));
-    });
-  }
+  new webpack.NoErrorsPlugin()
 ];
 
 config.module = {
