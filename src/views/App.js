@@ -25,7 +25,7 @@ export default class App {
           <h1>React Redux Example</h1>
 
           <p>by <a href="https://twitter.com/erikras">@erikras</a></p>
-          <iframe style={styles.iframe} src="https://ghbtns.com/github-btn.html?user=erikras&repo=react-redux-universal-hot-example&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+          <iframe style={styles.iframe} src="https://ghbtns.com/github-btn.html?user=erikras&repo=react-redux-universal-hot-example&type=star&count=true&size=large" frameBorder="0" scrolling="0" width="160px" height="30px"></iframe>
         </div>
         <nav className="navbar navbar-default">
           <div className="container-fluid">
