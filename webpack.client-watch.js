@@ -1,9 +1,8 @@
 var webpack = require("webpack"),
   fs = require('fs'),
   path = require('path'),
-  configs = require("./webpack.client.js"),
-  loaders = require('./loaders'),
-  config = configs[0];
+  config = require("./webpack.client.js"),
+  loaders = require('./loaders');
 
 config.cache = true;
 config.debug = true;

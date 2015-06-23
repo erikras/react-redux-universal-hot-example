@@ -15,7 +15,7 @@ import api from './api/api';
 import ApiClient from './ApiClient';
 const app = new Express();
 const proxy = httpProxy.createProxyServer({
-  target: 'http://localhost:'+config.apiPort
+  target: 'http://localhost:' + config.apiPort
 });
 
 app.use(compression());
@@ -70,13 +70,17 @@ app.use((req, res, next) => {
 });
 
 
-app.listen(config.port, function(err) {
-  if(err) {
-    console.error(err);
-  } else {
-    api().then(function () {
-      console.info('==> ✅  Server is listening');
-      console.info('==> 🌎  %s running on port %s, API on port %s', config.app.name, config.port, config.apiPort);
-    });
-  }
-});
+if (config.port) {
+  app.listen(config.port, function (err) {
+    if (err) {
+      console.error(err);
+    } else {
+      api().then(function () {
+        console.info('==> ✅  Server is listening');
+        console.info('==> 🌎  %s running on port %s, API on port %s', config.app.name, config.port, config.apiPort);
+      });
+    }
+  });
+} else {
+  console.error('==>     ERROR: No PORT environment variable has been specified');
+}
