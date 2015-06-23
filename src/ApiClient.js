@@ -18,7 +18,7 @@ function formatUrl(path) {
 
 export default class ApiClient {
   constructor(req) {
-    ['get', 'post', 'put', 'path', 'del'].
+    ['get', 'post', 'put', 'patch', 'del'].
       forEach((method) => {
         this[method] = (path, options) => {
           return new Promise((resolve, reject) => {
