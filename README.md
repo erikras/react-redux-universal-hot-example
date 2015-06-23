@@ -8,7 +8,7 @@ This is a starter boiler plate app I've put together using the following technol
 * [React](https://github.com/facebook/react)
 * [React Router](https://github.com/rackt/react-router)
 * [Express](http://expressjs.com)
-* [Babel](http://babeljs.io) for ES6 and ES7
+* [Babel](http://babeljs.io) for ES6 and ES7 magic
 * [Webpack](http://webpack.github.io) for bundling
 * [Webpack Dev Server](http://webpack.github.io/docs/webpack-dev-server.html)
 * [React Hot Loader](https://github.com/gaearon/react-hot-loader)
@@ -25,14 +25,13 @@ npm install
 npm run start
 ```
 
-#### Running Webpack Dev Server
+### Running Webpack Dev Server
 
 ```
 npm run watch-client
 ```
 
-Both `npm run start` and `npm run watch-client` must be running at the same time for the webapp to work with
-hot reloading.
+Both `npm run start` and `npm run watch-client` must be running at the same time for the webapp to work with hot reloading.
 
 Thanks for checking this out.
 
