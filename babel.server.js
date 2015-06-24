@@ -1,6 +1,6 @@
 require('babel/register')({
-	stage: 0,
-	plugins: ['typecheck']
+  stage: 0,
+  plugins: ['typecheck']
 });
 
 /**
@@ -8,11 +8,15 @@ require('babel/register')({
  */
 global.__CLIENT__ = false;
 global.__SERVER__ = true;
+delete global.__BROWSER__;
 
 if (process.env.NODE_ENV !== 'production') {
-	if (!require('piping')({hook: true})) {
-		return;
-	}
+  if (!require('piping')({
+      hook: true,
+      ignore: /(\/\.|~$|\.json|\.scss$)/i
+    })) {
+    return;
+  }
 }
 
 require('./src/server');
