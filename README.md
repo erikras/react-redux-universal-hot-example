@@ -73,5 +73,4 @@ To understand how the data and action bindings get into the components – there
 ---
 Thanks for checking this out.
 
----
 – Erik Rasmussen, [@erikras](https://twitter.com/erikras)
