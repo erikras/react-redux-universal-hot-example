@@ -7,7 +7,6 @@ import config from './config';
 import favicon from 'serve-favicon';
 import compression from 'compression';
 import httpProxy from 'http-proxy';
-import url from 'url';
 import path from 'path';
 import createRedux from './redux/create';
 import { Provider } from 'redux/react';
@@ -36,7 +35,7 @@ app.use('/api', (req, res) => {
   proxy.web(req, res);
 });
 
-app.use((req, res, next) => {
+app.use((req, res) => {
   const client = new ApiClient(req);
   const redux = createRedux(client);
   const location = new Location(req.path, req.query);
@@ -46,7 +45,7 @@ app.use((req, res, next) => {
     // hot module replacement is enabled in the development env
     delete require.cache[require.resolve('../webpack-stats.json')];
   }
-  Router.run(routes, location, (error, initialState, transition) => {
+  Router.run(routes, location, (error, initialState) => {
     if (error) {
       res.status(500).send(error);
     } else {
@@ -80,20 +79,19 @@ app.use((req, res, next) => {
               <script src={webpackStats.script}/>
               </body>
               </html>));
-        }).catch((error) => {
-          res.status(500).send(error.stack);
+        }).catch((err) => {
+          res.status(500).send(err.stack);
         });
     }
-  })
+  });
 });
 
-
 if (config.port) {
-  app.listen(config.port, function (err) {
+  app.listen(config.port, (err) => {
     if (err) {
       console.error(err);
     } else {
-      api().then(function () {
+      api().then(() => {
         console.info('==> ✅  Server is listening');
         console.info('==> 🌎  %s running on port %s, API on port %s', config.app.name, config.port, config.apiPort);
       });

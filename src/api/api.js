@@ -4,16 +4,16 @@ import * as actions from './routes/index';
 
 const app = express();
 
-module.exports = function () {
-  return new Promise((resolve, reject) => {
-    app.use(function (req, res) {
-      var matcher = /\/([^?]+)/.exec(req.url),
-        action = matcher && actions[matcher[1]];
+export default function api() {
+  return new Promise((resolve) => {
+    app.use((req, res) => {
+      let matcher = /\/([^?]+)/.exec(req.url);
+      let action = matcher && actions[matcher[1]];
       if (action) {
         action(req)
-          .then(function (result) {
+          .then((result) => {
             res.json(result);
-          }, function (reason) {
+          }, (reason) => {
             if (reason && reason.redirect) {
               res.redirect(reason.redirect);
             } else {
@@ -28,4 +28,4 @@ module.exports = function () {
     app.listen(config.apiPort);
     resolve();
   });
-};
+}

@@ -1,4 +1,5 @@
-import React from 'react';
+/*global __CLIENT__*/
+import React, {PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'redux/react';
 import * as infoActions from '../actions/infoActions';
@@ -7,6 +8,11 @@ if (__CLIENT__) {
 }
 
 class InfoBar {
+  static propTypes = {
+    info: PropTypes.object,
+    load: PropTypes.func.isRequired
+  }
+
   render() {
     const {info, load} = this.props;
     return (
@@ -25,6 +31,11 @@ class InfoBar {
   info: state.info.data
 }))
 export default class InfoBarContainer {
+  static propTypes = {
+    info: PropTypes.object,
+    dispatch: PropTypes.func.isRequired
+  }
+
   render() {
     const { info, dispatch } = this.props;
     return <InfoBar info={info} {...bindActionCreators(infoActions, dispatch)}/>;

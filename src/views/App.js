@@ -1,3 +1,4 @@
+/*global __CLIENT__*/
 import React from 'react';
 import {Link} from 'react-router';
 import {load} from '../actions/infoActions';
@@ -7,10 +8,6 @@ if (__CLIENT__) {
 }
 
 export default class App {
-  static fetchData(dispatch) {
-    return dispatch(load());
-  }
-
   render() {
     return (
       <div className="container app">
@@ -23,8 +20,12 @@ export default class App {
               <i className="fa fa-github"/> View on Github
             </a>
           </p>
-          <iframe src="https://ghbtns.com/github-btn.html?user=erikras&repo=react-redux-universal-hot-example&type=star&count=true&size=large" frameBorder="0" allowTransparency="true" scrolling="0" width="160px" height="30px"></iframe>
-          <iframe src="https://ghbtns.com/github-btn.html?user=erikras&amp;repo=react-redux-universal-hot-example&amp;type=fork&amp;count=true&size=large" allowTransparency="true" frameBorder="0" scrolling="0" width="160px" height="30px"></iframe>
+          <iframe
+            src="https://ghbtns.com/github-btn.html?user=erikras&repo=react-redux-universal-hot-example&type=star&count=true&size=large"
+            frameBorder="0" allowTransparency="true" scrolling="0" width="160px" height="30px"></iframe>
+          <iframe
+            src="https://ghbtns.com/github-btn.html?user=erikras&amp;repo=react-redux-universal-hot-example&amp;type=fork&amp;count=true&size=large"
+            allowTransparency="true" frameBorder="0" scrolling="0" width="160px" height="30px"></iframe>
         </div>
         <nav className="navbar navbar-default">
           <div className="container-fluid">
@@ -36,10 +37,15 @@ export default class App {
           </div>
         </nav>
         <InfoBar/>
+
         <div className="app-content">
           {this.props.children}
         </div>
       </div>
     );
+  }
+
+  static fetchData(dispatch) {
+    return dispatch(load());
   }
 }

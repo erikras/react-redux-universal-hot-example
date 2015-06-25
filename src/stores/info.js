@@ -1,4 +1,3 @@
-'use strict';
 import {
   INFO_LOAD,
   INFO_LOAD_SUCCESS,
@@ -30,6 +29,7 @@ export default function info(state = initialState, action = {}) {
         loaded: false,
         error: action.error
       };
+    default:
+      return state;
   }
-  return state;
-};
+}

@@ -12,4 +12,4 @@ export default function clientMiddleware(client) {
       (error) => next({...rest, error, type: FAILURE})
     );
   };
-};
+}
