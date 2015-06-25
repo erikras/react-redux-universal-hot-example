@@ -3,7 +3,7 @@
 
 This is a starter boiler plate app I've put together using the following technologies:
 
-* Isomorphic/Universal rendering
+* ~~Isomorphic~~ [Universal](https://medium.com/@mjackson/universal-javascript-4761051b7ae9) rendering
 * Both client and server make calls to load data from separate API server
 * [React](https://github.com/facebook/react)
 * [React Router](https://github.com/rackt/react-router)
@@ -77,6 +77,7 @@ To understand how the data and action bindings get into the components – there
 ## Todo
 
 * Ideally we [wouldn't use global css styles at all](https://medium.com/seek-ui-engineering/the-end-of-global-css-90d2a4a06284). It would be nice if we could get [css-loader](https://github.com/webpack/css-loader)'s "module" local styles, but at the time of this writing, I can't get [that](https://github.com/css-modules/webpack-demo) to work on the server side. If you can figure out how to do that, please let me know and submit a pull request!
+* If someone would like to figure out how to get this example to work in Windows (apparently [it doesn't](https://github.com/erikras/react-redux-universal-hot-example/issues/6)) and write up a short guide, I'd be happy to share it in this document.
 
 ---
 Thanks for checking this out.
