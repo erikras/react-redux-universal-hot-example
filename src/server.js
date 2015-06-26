@@ -76,9 +76,7 @@ app.use((req, res) => {
                 </Provider>)
               }}/>
               <script dangerouslySetInnerHTML={{__html: `window.__data=${JSON.stringify(state)};`}}/>
-              {webpackStats.script.map((script, i) =>
-                <script src={script} key={i}/>
-              )}
+              <script src={webpackStats.script[0]}/>
               </body>
               </html>));
         }).catch((err) => {
