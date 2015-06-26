@@ -26,6 +26,7 @@
   "scripts": {
     "start": "NODE_PATH=\"./src\" NODE_ENV=\"production\" PORT=\"8080\" node ./babel.server",
     "build": "node ./node_modules/webpack/bin/webpack.js --verbose --colors --display-error-details --config webpack/prod.config.js",
+    "lint": "node ./node_modules/eslint/bin/eslint.js -c .eslintrc src",
     "start-dev": "NODE_PATH=\"./src\" NODE_ENV=\"development\" node ./babel.server",
     "watch-client": "NODE_PATH=\"./src\" node webpack/webpack-dev-server.js",
     "dev": "node ./node_modules/concurrently/src/main.js --kill-others \"npm run watch-client\" \"npm run start-dev\""
@@ -64,7 +65,6 @@
     "node-sass": "^3.2.0",
     "react-a11y": "0.1.1",
     "react-hot-loader": "1.2.7",
-    "react-style-webpack-plugin": "^0.4.0",
     "sass-loader": "^1.0.2",
     "strip-loader": "^0.1.0",
     "style-loader": "^0.12.3",
