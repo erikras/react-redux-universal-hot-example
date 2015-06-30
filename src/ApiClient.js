@@ -23,7 +23,9 @@ export default class ApiClient {
               request.query(options.params);
             }
             if (__SERVER__) {
-              request.set('cookie', req.get('cookie'));
+              if(req.get('cookie')){
+                request.set('cookie', req.get('cookie'));
+              }
             }
             if (options && options.data) {
               request.send(options.data);
