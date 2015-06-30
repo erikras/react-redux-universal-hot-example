@@ -19,7 +19,7 @@ module.exports = {
   },
   output: {
     path: assetsPath,
-    filename: '[name]-[chunkhash].js',
+    filename: '[name]-[hash].js',
     chunkFilename: '[name]-[chunkhash].js',
     publicPath: 'http://' + host + ':' + port + '/dist/'
   },
