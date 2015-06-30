@@ -2,7 +2,7 @@ import Express from 'express';
 import React from 'react';
 import Router from 'react-router';
 import Location from 'react-router/lib/Location';
-import routes from './views/routes';
+import routes from './server-routes.bundle';
 import config from './config';
 import favicon from 'serve-favicon';
 import compression from 'compression';
