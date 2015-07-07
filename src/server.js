@@ -26,9 +26,7 @@ if (process.env.NODE_ENV === 'production') {
   webpackStats = require('../webpack-stats.json');
 }
 
-if (app.get('env') === 'production') {
-  app.use(require('serve-static')(path.join(__dirname, '..', 'static')));
-}
+app.use(require('serve-static')(path.join(__dirname, '..', 'static')));
 
 // Proxy to API server
 app.use('/api', (req, res) => {
