@@ -1,6 +1,6 @@
 /*global __SERVER__*/
 import superagent from 'superagent';
-import config from 'config';
+import config from './config';
 
 function formatUrl(path) {
   let adjustedPath = path[0] !== '/' ? '/' + path : path;
