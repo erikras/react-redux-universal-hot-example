@@ -24,11 +24,11 @@
   ],
   "main": "babel.server.js",
   "scripts": {
-    "start": "NODE_PATH=\"./src\" NODE_ENV=\"production\" PORT=\"8080\" node ./babel.server",
+    "start": "SET NODE_PATH=./src && SET \"NODE_ENV=production\" && SET PORT=8080 && node ./babel.server",
     "build": "node ./node_modules/webpack/bin/webpack.js --verbose --colors --display-error-details --config webpack/prod.config.js",
     "lint": "node ./node_modules/eslint/bin/eslint.js -c .eslintrc src",
-    "start-dev": "NODE_PATH=\"./src\" NODE_ENV=\"development\" node ./babel.server",
-    "watch-client": "NODE_PATH=\"./src\" node webpack/webpack-dev-server.js",
+    "start-dev": "SET NODE_PATH=./src && SET \"NODE_ENV=development\" && node ./babel.server",
+    "watch-client": "SET NODE_PATH=./src && node webpack/webpack-dev-server.js",
     "dev": "node ./node_modules/concurrently/src/main.js --kill-others \"npm run watch-client\" \"npm run start-dev\""
   },
   "dependencies": {

@@ -13,6 +13,7 @@ import { Provider } from 'redux/react';
 import api from './api/api';
 import ApiClient from './ApiClient';
 const app = new Express();
+
 const proxy = httpProxy.createProxyServer({
   target: 'http://localhost:' + config.apiPort
 });
