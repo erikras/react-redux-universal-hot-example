@@ -48,9 +48,11 @@ app.use((req, res) => {
       res.status(500).send(error);
     } else {
       Promise.all(initialState.components
-        .filter(component => component.fetchData)
+        .filter(component => {
+          return component.fetchData || (component.DecoratedComponent && component.DecoratedComponent.fetchData);
+        })
         .map(component => {
-          return component.fetchData(redux.dispatch);
+          return (component.fetchData && component.fetchData(redux.dispatch)) || (component.DecoratedComponent.fetchData && component.DecoratedComponent.fetchData(redux.dispatch));
         }))
         .then(() => {
           const state = redux.getState();
