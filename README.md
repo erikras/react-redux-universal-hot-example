@@ -74,10 +74,16 @@ This is where the meat of your server-side application goes. It doesn't have to 
 
 To understand how the data and action bindings get into the components – there's only one, `InfoBar`, in this example – I'm going to refer to you to the [Redux](https://github.com/gaearon/redux) library. The only innovation I've made is to package the component and its wrapper in the same js file. This is to encapsulate the fact that the component is bound to the `redux` actions and state. The component using `InfoBar` needn't know or care if `InfoBar` uses the `redux` data or not.
 
+## FAQ
+
+#### Help! It doesn't work on Windows! What do I do?
+
+Fear not. [chtefi](https://github.com/chtefi) has figured out [what needs to be changed](https://github.com/erikras/react-redux-universal-hot-example/pull/21/files) to make it work on Windows 8.
+
+
 ## Todo
 
 * Ideally we [wouldn't use global css styles at all](https://medium.com/seek-ui-engineering/the-end-of-global-css-90d2a4a06284). It would be nice if we could get [css-loader](https://github.com/webpack/css-loader)'s "module" local styles, but at the time of this writing, I can't get [that](https://github.com/css-modules/webpack-demo) to work on the server side. If you can figure out how to do that, please let me know and submit a pull request!
-* If someone would like to figure out how to get this example to work in Windows (apparently [it doesn't](https://github.com/erikras/react-redux-universal-hot-example/issues/6)) and write up a short guide, I'd be happy to share it in this document.
 
 ---
 Thanks for checking this out.
