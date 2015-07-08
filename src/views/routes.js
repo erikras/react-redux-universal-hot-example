@@ -1,9 +1,9 @@
 import React from 'react';
 import {Route} from 'react-router';
-import App from 'views/App';
-import Home from 'views/Home';
-import SignUp from 'views/SignUp';
-import Login from 'views/Login';
+import App from './App';
+import Home from './Home';
+import SignUp from './SignUp';
+import Login from './Login';
 
 export default (
   <Route component={App}>
