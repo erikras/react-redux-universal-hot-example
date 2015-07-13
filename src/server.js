@@ -8,8 +8,8 @@ import favicon from 'serve-favicon';
 import compression from 'compression';
 import httpProxy from 'http-proxy';
 import path from 'path';
-import createRedux from './redux/create';
-import { Provider } from 'redux/react';
+import createStore from './redux/create';
+import { Provider } from 'react-redux';
 import api from './api/api';
 import ApiClient from './ApiClient';
 const app = new Express();
@@ -35,7 +35,7 @@ app.use('/api', (req, res) => {
 
 app.use((req, res) => {
   const client = new ApiClient(req);
-  const redux = createRedux(client);
+  const store = createStore(client);
   const location = new Location(req.path, req.query);
   if (process.env.NODE_ENV === 'development') {
     webpackStats = require('../webpack-stats.json');
@@ -52,10 +52,10 @@ app.use((req, res) => {
           return component.fetchData || (component.DecoratedComponent && component.DecoratedComponent.fetchData);
         })
         .map(component => {
-          return (component.fetchData && component.fetchData(redux.dispatch)) || (component.DecoratedComponent.fetchData && component.DecoratedComponent.fetchData(redux.dispatch));
+          return (component.fetchData && component.fetchData(store.dispatch)) || (component.DecoratedComponent.fetchData && component.DecoratedComponent.fetchData(store.dispatch));
         }))
         .then(() => {
-          const state = redux.getState();
+          const state = store.getState();
           res.send('<!doctype html>\n' + React.renderToString(
               <html lang="en-us">
               <head>
@@ -71,7 +71,7 @@ app.use((req, res) => {
               </head>
               <body>
               <div id="content" dangerouslySetInnerHTML={{__html: React.renderToString(
-                <Provider redux={redux}>
+                <Provider store={store}>
                   {() => <Router location={location} {...initialState}/>}
                 </Provider>)
               }}/>

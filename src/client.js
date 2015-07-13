@@ -2,15 +2,15 @@ import React from 'react';
 import Router from 'react-router';
 import BrowserHistory from 'react-router/lib/BrowserHistory';
 import routes from './views/routes';
-import createRedux from './redux/create';
-import { Provider } from 'redux/react';
+import createStore from './redux/create';
+import { Provider } from 'react-redux';
 import ApiClient from './ApiClient';
 const history = new BrowserHistory();
 const client = new ApiClient();
 
 const dest = document.getElementById('content');
-const redux = createRedux(client, window.__data);
-const element = (<Provider redux={redux}>
+const store = createStore(client, window.__data);
+const element = (<Provider store={store}>
   {() => <Router history={history} children={routes}/> }
 </Provider>);
 React.render(element, dest);

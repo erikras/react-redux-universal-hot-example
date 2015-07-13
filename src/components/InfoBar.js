@@ -1,7 +1,7 @@
 /*global __CLIENT__*/
 import React, {PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
-import {connect} from 'redux/react';
+import {connect} from 'react-redux';
 import * as infoActions from '../actions/infoActions';
 if (__CLIENT__) {
   require('./InfoBar.scss');

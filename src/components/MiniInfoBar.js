@@ -1,6 +1,6 @@
 /*global __CLIENT__*/
 import React, {PropTypes} from 'react';
-import {connect} from 'redux/react';
+import {connect} from 'react-redux';
 if (__CLIENT__) {
   require('./InfoBar.scss');
 }
@@ -33,7 +33,7 @@ class MiniInfoBarContainer {
   }
 
   render() {
-    const { time, dispatch } = this.props;
+    const { time } = this.props;
     return <MiniInfoBar time={time}/>;
     // no bindActionCreators() because this component is display-only
   }

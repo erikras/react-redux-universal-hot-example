@@ -1,12 +1,11 @@
-import { createRedux, createDispatcher, composeStores } from 'redux';
-import middleware from './clientMiddleware';
-import * as stores from '../stores/index';
-
-const store = composeStores(stores);
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import createMiddleware from './clientMiddleware';
+import * as reducers from '../reducers/index';
+const reducer = combineReducers(reducers);
 
 export default function(client, data) {
-  const dispatcher = createDispatcher(store, () => [middleware(client)]);
-
-  return createRedux(dispatcher, data);
+  const middleware = createMiddleware(client);
+  const finalCreateStore = applyMiddleware(middleware)(createStore);
+  return finalCreateStore(reducer, data);
 }
 
