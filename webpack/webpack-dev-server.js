@@ -10,12 +10,19 @@ var WebpackDevServer = require('webpack-dev-server'),
     hot: true,
     inline: true,
     lazy: false,
-    publicPath: config.output.publicPath,
+    publicPath: config.browser.output.publicPath,
     headers: {"Access-Control-Allow-Origin": "*"},
     stats: {colors: true}
   },
-  compiler = webpack(config),
-  webpackDevServer = new WebpackDevServer(compiler, serverOptions);
+  browserCompiler = webpack(config.browser),
+  webpackDevServer = new WebpackDevServer(browserCompiler, serverOptions);
+
+var serverCompiler = webpack(config.server);
+serverCompiler.run(function(err) {
+  if (err) {
+    throw err;
+  }
+});
 
 webpackDevServer.listen(port, host, function() {
   console.info('==> 🚧  Webpack development server listening on %s:%s', host, port);
