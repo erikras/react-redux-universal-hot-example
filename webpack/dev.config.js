@@ -39,11 +39,15 @@ module.exports = {
     extensions: ['', '.json', '.js']
   },
   plugins: [
-
     // hot reload
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    new webpack.DefinePlugin({__CLIENT__: true, __SERVER__: false}),
+    new webpack.DefinePlugin({
+      __CLIENT__: true,
+      __SERVER__: false,
+      __DEVELOPMENT__: true,
+      __DEVTOOLS__: true  // <-------- DISABLE redux-devtools HERE
+    }),
 
     // stats
     function () {

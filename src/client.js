@@ -5,15 +5,25 @@ import routes from './views/routes';
 import createStore from './redux/create';
 import { Provider } from 'react-redux';
 import ApiClient from './ApiClient';
+import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 const history = new BrowserHistory();
 const client = new ApiClient();
 
 const dest = document.getElementById('content');
 const store = createStore(client, window.__data);
-const element = (<Provider store={store}>
-  {() => <Router history={history} children={routes}/> }
-</Provider>);
-React.render(element, dest);
+const elements = [
+  <Provider store={store} key="provider">
+    {() => <Router history={history} children={routes}/> }
+  </Provider>
+];
+if(__DEVTOOLS__) {
+  elements.push(
+    <DebugPanel top right bottom key="debugPanel">
+      <DevTools store={store} monitor={LogMonitor}/>
+    </DebugPanel>
+  );
+}
+React.render(<div>{elements}</div>, dest);
 
 if (process.env.NODE_ENV !== 'production') {
   window.React = React; // enable debugger
