@@ -42,7 +42,7 @@
     "piping": "0.1.8",
     "react": "0.13.3",
     "react-inline-css": "1.1.1",
-    "react-redux": "^1.0.0-alpha",
+    "react-redux": "0.2.2",
     "react-router": "v1.0.0-beta2",
     "redux": "1.0.0-rc",
     "serve-favicon": "^2.3.0",
