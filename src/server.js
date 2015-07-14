@@ -60,7 +60,7 @@ app.use((req, res) => {
               <html lang="en-us">
               <head>
                 <meta charSet="utf-8"/>
-                <title>React Redux Isomorphic Example</title>
+                <title>React Redux Universal Hot Example</title>
                 <link rel="shortcut icon" href="/favicon.ico"/>
                 <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.css"
                       media="screen, projection" rel="stylesheet" type="text/css"/>

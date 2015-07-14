@@ -2,12 +2,12 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import createMiddleware from './clientMiddleware';
 import * as reducers from '../reducers/index';
 const reducer = combineReducers(reducers);
-import { devTools, persistState } from 'redux-devtools';
 
 export default function(client, data) {
   const middleware = createMiddleware(client);
   let finalCreateStore;
   if (__DEVELOPMENT__ && __CLIENT__) {
+    import { devTools, persistState } from 'redux-devtools';
     finalCreateStore = compose(
       applyMiddleware(middleware),
       devTools(),
