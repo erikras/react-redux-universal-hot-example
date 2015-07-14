@@ -12,8 +12,8 @@ This is a starter boiler plate app I've put together using the following technol
 * [Webpack](http://webpack.github.io) for bundling
 * [Webpack Dev Server](http://webpack.github.io/docs/webpack-dev-server.html)
 * [React Hot Loader](https://github.com/gaearon/react-hot-loader)
-* [Redux](https://github.com/gaearon/redux)'s futuristic [Flux](https://facebook.github.io/react/blog/2014/05/06/flux
-.html) implementation
+* [Redux](https://github.com/gaearon/redux)'s futuristic [Flux](https://facebook.github.io/react/blog/2014/05/06/flux.html) implementation
+* [Redux Dev Tools](https://github.com/gaearon/redux-devtools) for next generation DX (developer experience) Watch [Dan Abramov's talk](https://github.com/gaearon/redux-devtools).
 * [style-loader](https://github.com/webpack/style-loader) and [sass-loader](https://github.com/jtangelder/sass-loader) to allow import of stylesheets
 
 I cobbled this together from a wide variety of similar "starter" repositories. As I post this in June 2015, all of these libraries are right at the bleeding edge of web development. They may fall out of fashion as quickly as they have come into it, but I personally believe that this stack is the future of web development and will survive for several years. I'm building my new projects like this, and I recommend that you do, too.
@@ -80,6 +80,9 @@ To understand how the data and action bindings get into the components – there
 
 Fear not. [chtefi](https://github.com/chtefi) has figured out [what needs to be changed](https://github.com/erikras/react-redux-universal-hot-example/pull/21/files) to make it work on Windows 8.
 
+#### How do I disable the dev tools?
+
+They will only show in development, but if you want to disable them even there, set `__DEVTOOLS__` to `false` in `/webpack/dev.config.js`.
 
 ## Todo
 
