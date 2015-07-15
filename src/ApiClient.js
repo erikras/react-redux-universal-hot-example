@@ -12,7 +12,7 @@ function formatUrl(path) {
   return '/api' + adjustedPath;
 }
 
-export default class ApiClient {
+class ApiClient {
   constructor(req) {
     ['get', 'post', 'put', 'patch', 'del'].
       forEach((method) => {
@@ -42,3 +42,4 @@ export default class ApiClient {
       });
   }
 }
+export default ApiClient;
