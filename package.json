@@ -28,7 +28,7 @@
     "build": "node ./node_modules/webpack/bin/webpack.js --verbose --colors --display-error-details --config webpack/prod.config.js",
     "lint": "node ./node_modules/eslint/bin/eslint.js -c .eslintrc src",
     "start-dev": "NODE_PATH=\"./src\" NODE_ENV=\"development\" node ./babel.server",
-    "watch-client": "NODE_PATH=\"./src\" node webpack/webpack-dev-server.js",
+    "watch-client": "UV_THREADPOOL_SIZE=100 NODE_PATH=\"./src\" node webpack/webpack-dev-server.js",
     "dev": "node ./node_modules/concurrently/src/main.js --kill-others \"npm run watch-client\" \"npm run start-dev\""
   },
   "dependencies": {
