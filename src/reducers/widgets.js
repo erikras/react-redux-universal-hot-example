@@ -1,32 +1,34 @@
 import {
-  INFO_LOAD,
-  INFO_LOAD_SUCCESS,
-  INFO_LOAD_FAIL
+  WIDGET_LOAD,
+  WIDGET_LOAD_SUCCESS,
+  WIDGET_LOAD_FAIL
 } from '../actions/actionTypes';
 
 const initialState = {
   loaded: false
 };
 
-export default function info(state = initialState, action = {}) {
+export default function widgets(state = initialState, action = {}) {
   switch (action.type) {
-    case INFO_LOAD:
+    case WIDGET_LOAD:
       return {
         ...state,
         loading: true
       };
-    case INFO_LOAD_SUCCESS:
+    case WIDGET_LOAD_SUCCESS:
       return {
         ...state,
         loading: false,
         loaded: true,
-        data: action.result
+        data: action.result,
+        error: null
       };
-    case INFO_LOAD_FAIL:
+    case WIDGET_LOAD_FAIL:
       return {
         ...state,
         loading: false,
         loaded: false,
+        data: null,
         error: action.error
       };
     default:
@@ -35,5 +37,5 @@ export default function info(state = initialState, action = {}) {
 }
 
 export function isLoaded(globalState) {
-  return globalState.info && globalState.info.loaded;
+  return globalState.widgets && globalState.widgets.loaded;
 }
