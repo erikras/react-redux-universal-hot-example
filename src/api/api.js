@@ -16,10 +16,10 @@ app.use(bodyParser.json());
 export default function api() {
   return new Promise((resolve) => {
     app.use((req, res) => {
-      let matcher = /\/([^?]+)/.exec(req.url);
+      let matcher = req.url.split('/');
       let action = matcher && actions[matcher[1]];
       if (action) {
-        action(req)
+        action(req, matcher.slice(2));
           .then((result) => {
             res.json(result);
           }, (reason) => {
