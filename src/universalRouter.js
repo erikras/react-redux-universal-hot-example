@@ -17,8 +17,8 @@ export function createTransitionHook(store) {
       })
       .map(getFetchData)
       .map(fetchData => {
-				if (routeParams !== {})
-					return fetchData(store, nextState.params);
+	if (routeParams !== {})
+	  return fetchData(store, nextState.params);
         return fetchData(store);
       }))
       .then(() => {
