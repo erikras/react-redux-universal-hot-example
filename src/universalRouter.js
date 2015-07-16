@@ -9,7 +9,7 @@ const getFetchData = (component) => {
 
 export function createTransitionHook(store) {
   return (nextState, transition, callback) => {
-		const routeParams = nextState.params;
+    const routeParams = nextState.params;
     Promise.all(nextState.branch
       .map(route => route.component)
       .filter(component => {
