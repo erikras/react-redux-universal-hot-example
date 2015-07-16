@@ -9,7 +9,6 @@ const getFetchData = (component) => {
 
 export function createTransitionHook(store) {
   return (nextState, transition, callback) => {
-    const routeParams = nextState.params;
     Promise.all(nextState.branch
       .map(route => route.component)
       .filter(component => {
@@ -17,9 +16,7 @@ export function createTransitionHook(store) {
       })
       .map(getFetchData)
       .map(fetchData => {
-	if (routeParams !== {})
-	  return fetchData(store, nextState.params);
-        return fetchData(store);
+        return fetchData(store, nextState.params);
       }))
       .then(() => {
         callback(); // can't just pass callback to then() because callback assumes first param is error
