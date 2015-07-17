@@ -19,7 +19,7 @@ export default function api() {
       let matcher = req.url.split('/');
       let action = matcher && actions[matcher[1]];
       if (action) {
-        action(req, matcher.slice(2));
+        action(req, matcher.slice(2))
           .then((result) => {
             res.json(result);
           }, (reason) => {
