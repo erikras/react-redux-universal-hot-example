@@ -2,7 +2,7 @@
 import superagent from 'superagent';
 import config from 'config';
 
-class ApiClient {
+class ApiClient_ {
   constructor(req) {
     ['get', 'post', 'put', 'patch', 'del'].
       forEach((method) => {
@@ -32,6 +32,8 @@ class ApiClient {
       });
   }
 }
+
+let ApiClient = ApiClient_;
 
 function formatUrl(path) {
   let adjustedPath = path[0] !== '/' ? '/' + path : path;
