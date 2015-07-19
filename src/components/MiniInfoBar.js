@@ -1,11 +1,11 @@
 /*global __CLIENT__*/
-import React, {PropTypes} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 if (__CLIENT__) {
   require('./InfoBar.scss');
 }
 
-class MiniInfoBar {
+class MiniInfoBar extends Component {
   static propTypes = {
     time: PropTypes.number
   }

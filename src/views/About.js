@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {Component} from 'react';
 import MiniInfoBar from '../components/MiniInfoBar';
 
-export default class SignUp {
+export default class SignUp extends Component {
   render() {
     return (
       <div>

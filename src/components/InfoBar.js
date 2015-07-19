@@ -1,5 +1,5 @@
 /*global __CLIENT__*/
-import React, {PropTypes} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as infoActions from '../actions/infoActions';
@@ -7,7 +7,7 @@ if (__CLIENT__) {
   require('./InfoBar.scss');
 }
 
-class InfoBar {
+class InfoBar extends Component {
   static propTypes = {
     info: PropTypes.object,
     load: PropTypes.func.isRequired
