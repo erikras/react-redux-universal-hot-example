@@ -7,6 +7,7 @@ import favicon from 'serve-favicon';
 import compression from 'compression';
 import httpProxy from 'http-proxy';
 import path from 'path';
+import serialize from 'serialize-javascript';
 import createStore from './redux/create';
 import api from './api/api';
 import ApiClient from './ApiClient';
@@ -60,7 +61,7 @@ app.use((req, res) => {
             </head>
             <body>
             <div id="content" dangerouslySetInnerHTML={{__html: React.renderToString(component)}}/>
-            <script dangerouslySetInnerHTML={{__html: `window.__data=${JSON.stringify(store.getState())};`}}/>
+            <script dangerouslySetInnerHTML={{__html: `window.__data=${serialize(store.getState())};`}}/>
             <script src={webpackStats.script[0]}/>
             </body>
             </html>));
