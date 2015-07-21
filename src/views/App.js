@@ -80,7 +80,8 @@ class App extends Component {
 @connect(state => ({
   user: state.auth.user
 }))
-export default class AppContainer {
+export default
+class AppContainer {
   static propTypes = {
     user: PropTypes.object,
     dispatch: PropTypes.func.isRequired
