@@ -1,4 +1,3 @@
-/*global __CLIENT__*/
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {isLoaded} from '../reducers/widgets';

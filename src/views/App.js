@@ -1,4 +1,3 @@
-/*global __CLIENT__*/
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
 import {bindActionCreators} from 'redux';
@@ -61,7 +60,7 @@ class App extends Component {
               <li><Link to="/">Home</Link></li>
               <li><Link to="/widgets">Widgets</Link></li>
               <li><Link to="/about">About Us</Link></li>
-              <li><Link to="/redirect">Redirect</Link></li>
+              <li><Link to="/redirect">Redirect to Home</Link></li>
               {!user && <li><Link to="/login">Login</Link></li>}
               {user && <li className="logout-link"><a href="/logout" onClick={::this.handleLogout}>Logout</a></li>}
             </ul>
