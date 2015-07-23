@@ -44,8 +44,14 @@ app.use((req, res) => {
   const store = createStore(client);
   const location = new Location(req.path, req.query);
   universalRouter(location, undefined, store)
-    .then((component) => {
+    .then(({component, transition, isRedirect}) => {
       try {
+
+        if (isRedirect) {
+          res.redirect(transition.redirectInfo.pathname);
+          return;
+        }
+
         res.send('<!doctype html>\n' + React.renderToString(
             <html lang="en-us">
             <head>
