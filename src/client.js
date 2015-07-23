@@ -12,7 +12,7 @@ const dest = document.getElementById('content');
 const store = createStore(client, window.__data);
 const location = new Location(document.location.pathname, document.location.search);
 universalRouter(location, history, store)
-  .then((component) => {
+  .then(({component}) => {
     if (__DEVTOOLS__) {
       const { DevTools, DebugPanel, LogMonitor } = require('redux-devtools/lib/react');
       console.info('You will see a "Warning: React attempted to reuse markup in a container but the checksum was' +
