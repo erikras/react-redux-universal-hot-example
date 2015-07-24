@@ -1,4 +1,3 @@
-/*global __CLIENT__*/
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 if (__CLIENT__) {

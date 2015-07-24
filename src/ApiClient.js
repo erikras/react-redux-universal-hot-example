@@ -1,4 +1,3 @@
-/*global __SERVER__*/
 import superagent from 'superagent';
 import config from 'config';
 

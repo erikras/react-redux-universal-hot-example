@@ -1,4 +1,3 @@
-/*global __DEVELOPMENT__*/
 import Express from 'express';
 import React from 'react';
 import Location from 'react-router/lib/Location';
