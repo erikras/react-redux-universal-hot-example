@@ -1,3 +1,4 @@
+import path from 'path';
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
 import {bindActionCreators} from 'redux';
@@ -9,9 +10,14 @@ import * as authActions from '../actions/authActions';
 import {load as loadAuth} from '../actions/authActions';
 import InfoBar from '../components/InfoBar';
 import {createTransitionHook} from '../universalRouter';
-if (__CLIENT__) {
-  require('./App.scss');
-}
+
+const styles = (function getStyle() {
+  const stats = require('../../webpack-stats.json');
+  if (__CLIENT__) {
+    return require('./App.scss');
+  }
+  return stats.css.modules[path.join(__dirname, './App.scss')];
+})();
 
 class App extends Component {
   static propTypes = {
@@ -37,13 +43,13 @@ class App extends Component {
   render() {
     const {user} = this.props;
     return (
-      <div className="container app">
+      <div className={styles.app + " container"}>
         <div className="jumbotron">
           <h1>React Redux Example</h1>
 
           <p>
             by <a href="https://twitter.com/erikras" target="_blank">@erikras</a>
-            <a className="github" href="https://github.com/erikras/react-redux-universal-hot-example" target="_blank">
+            <a className={styles.github} href="https://github.com/erikras/react-redux-universal-hot-example" target="_blank">
               <i className="fa fa-github"/> View on Github
             </a>
           </p>
@@ -64,12 +70,12 @@ class App extends Component {
               {!user && <li><Link to="/login">Login</Link></li>}
               {user && <li className="logout-link"><a href="/logout" onClick={::this.handleLogout}>Logout</a></li>}
             </ul>
-            {user && <p className="navbar-text logged-in-message">Logged in as <strong>{user.name}</strong>.</p>}
+            {user && <p className={styles.loggedInMessage + " navbar-text"}>Logged in as <strong>{user.name}</strong>.</p>}
           </div>
         </nav>
         <InfoBar/>
 
-        <div className="app-content">
+        <div className={styles.appContent}>
           {this.props.children}
         </div>
       </div>

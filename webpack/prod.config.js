@@ -24,7 +24,8 @@ module.exports = {
     loaders: [
       { test: /\.(jpe?g|png|gif|svg)$/, loader: 'file' },
       { test: /\.js$/, exclude: /node_modules/, loaders: [strip.loader('debug'), 'babel?stage=0&optional=runtime&plugins=typecheck']},
-      { test: /\.scss$/, loader: ExtractTextPlugin.extract('style', 'css!autoprefixer?browsers=last 2 version!sass') }
+      { test: /\.json$/, loader: 'json-loader' },
+      { test: /\.scss$/, loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=2!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true') }
     ]
   },
   progress: true,
@@ -38,7 +39,7 @@ module.exports = {
   plugins: [
 
     // css files from the extract-text-plugin loader
-    new ExtractTextPlugin('[name]-[chunkhash].css'),
+    new ExtractTextPlugin('[name]-[chunkhash].css', {allChunks: true}),
     new webpack.DefinePlugin({__CLIENT__: true, __SERVER__: false, __DEVELOPMENT__: false, __DEVTOOLS__: false}),
 
     // ignore dev config
@@ -68,7 +69,10 @@ module.exports = {
     }),
 
     // stats
-    function() { this.plugin('done', writeStats); }
-
+    function () {
+      this.plugin('done', function(stats) {
+        writeStats.call(this, stats, 'prod');
+      });
+    }
   ]
 };
