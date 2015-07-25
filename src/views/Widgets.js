@@ -1,12 +1,18 @@
+import path from 'path';
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {isLoaded} from '../reducers/widgets';
 import {connect} from 'react-redux';
 import * as widgetActions from '../actions/widgetActions';
 import {load as loadWidgets} from '../actions/widgetActions';
-if (__CLIENT__) {
-  require('./Widgets.scss');
-}
+
+const styles = (function getStyle() {
+  const stats = require('../../webpack-stats.json');
+  if (__CLIENT__) {
+    return require('./Widgets.scss');
+  }
+  return stats.css.modules[path.join(__dirname, './Widgets.scss')];
+})();
 
 class Widgets extends Component {
   static propTypes = {
@@ -23,10 +29,10 @@ class Widgets extends Component {
       refreshClassName += ' fa-spin';
     }
     return (
-      <div className="widgets">
+      <div className={styles.widgets}>
         <h1>
           Widgets
-          <button className="refresh-btn btn btn-success" onClick={load}><i className={refreshClassName}/> {' '} Reload Widgets</button>
+          <button className={styles.refreshBtn + " btn btn-success"} onClick={load}><i className={refreshClassName}/> {' '} Reload Widgets</button>
         </h1>
         {error &&
         <div className="alert alert-danger" role="alert">

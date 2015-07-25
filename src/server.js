@@ -61,7 +61,7 @@ app.use((req, res) => {
                     media="screen, projection" rel="stylesheet" type="text/css"/>
               <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
                     media="screen, projection" rel="stylesheet" type="text/css"/>
-              {webpackStats.css.map((css, i) => <link href={css} key={i}
+              {webpackStats.css.files.map((css, i) => <link href={css} key={i}
                                                       media="screen, projection" rel="stylesheet" type="text/css"/>)}
             </head>
             <body>

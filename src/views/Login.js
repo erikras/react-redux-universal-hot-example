@@ -1,12 +1,18 @@
+import path from 'path';
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {isLoaded as isAuthLoaded} from '../reducers/auth';
 import * as authActions from '../actions/authActions';
 import {load as loadAuth} from '../actions/authActions';
-if (__CLIENT__) {
-  require('./Login.scss');
-}
+
+const styles = (function getStyle() {
+  const stats = require('../../webpack-stats.json');
+  if (__CLIENT__) {
+    return require('./Login.scss');
+  }
+  return stats.css.modules[path.join(__dirname, './Login.scss')];
+})();
 
 class Login extends Component {
   static propTypes = {
@@ -35,7 +41,7 @@ class Login extends Component {
     const {user, logout} = this.props;
     const {username} = this.state;
     return (
-      <div className="login-page">
+      <div className={styles.loginPage}>
         <h1>Login</h1>
         {!user &&
         <div>

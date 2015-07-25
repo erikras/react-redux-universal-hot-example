@@ -64,7 +64,7 @@
     "eslint": "^0.23.0",
     "eslint-config-airbnb": "0.0.6",
     "eslint-plugin-react": "^2.5.2",
-    "extract-text-webpack-plugin": "^0.3.1",
+    "extract-text-webpack-plugin": "^0.8.1",
     "json-loader": "0.5.2",
     "node-sass": "^3.2.0",
     "react-a11y": "0.1.1",

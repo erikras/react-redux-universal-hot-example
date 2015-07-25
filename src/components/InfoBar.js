@@ -1,10 +1,16 @@
+import path from 'path';
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as infoActions from '../actions/infoActions';
-if (__CLIENT__) {
-  require('./InfoBar.scss');
-}
+
+const styles = (function getStyle() {
+  const stats = require('../../webpack-stats.json');
+  if (__CLIENT__) {
+    return require('./InfoBar.scss');
+  }
+  return stats.css.modules[path.join(__dirname, './InfoBar.scss')];
+})();
 
 class InfoBar extends Component {
   static propTypes = {
@@ -15,11 +21,11 @@ class InfoBar extends Component {
   render() {
     const {info, load} = this.props;
     return (
-      <div className="info-bar well">
+      <div className={styles.infoBar + " well"}>
         This is an info bar
         {' '}
         <strong>{info ? info.message : 'no info!'}</strong>
-        <span className="time">{info && new Date(info.time).toString()}</span>
+        <span className={styles.time}>{info && new Date(info.time).toString()}</span>
         <button className="btn btn-primary" onClick={load}>Reload from server</button>
       </div>
     );
