@@ -43,7 +43,7 @@ class App extends Component {
   render() {
     const {user} = this.props;
     return (
-      <div className={styles.app + " container"}>
+      <div className={styles.app + ' container'}>
         <div className="jumbotron">
           <h1>React Redux Example</h1>
 
@@ -70,7 +70,7 @@ class App extends Component {
               {!user && <li><Link to="/login">Login</Link></li>}
               {user && <li className="logout-link"><a href="/logout" onClick={::this.handleLogout}>Logout</a></li>}
             </ul>
-            {user && <p className={styles.loggedInMessage + " navbar-text"}>Logged in as <strong>{user.name}</strong>.</p>}
+            {user && <p className={styles.loggedInMessage + ' navbar-text'}>Logged in as <strong>{user.name}</strong>.</p>}
           </div>
         </nav>
         <InfoBar/>

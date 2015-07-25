@@ -32,7 +32,7 @@ class Widgets extends Component {
       <div className={styles.widgets}>
         <h1>
           Widgets
-          <button className={styles.refreshBtn + " btn btn-success"} onClick={load}><i className={refreshClassName}/> {' '} Reload Widgets</button>
+          <button className={styles.refreshBtn + ' btn btn-success'} onClick={load}><i className={refreshClassName}/> {' '} Reload Widgets</button>
         </h1>
         {error &&
         <div className="alert alert-danger" role="alert">

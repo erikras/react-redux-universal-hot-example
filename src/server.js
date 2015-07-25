@@ -10,9 +10,7 @@ import createStore from './redux/create';
 import api from './api/api';
 import ApiClient from './ApiClient';
 import universalRouter from './universalRouter';
-import ContainerHTML from './components/ContainerHTML';
-
-const containerDoctype = '<!doctype html>\n';
+import Html from './Html';
 
 const app = new Express();
 const proxy = httpProxy.createProxyServer({
@@ -53,13 +51,8 @@ app.use((req, res) => {
           res.redirect(transition.redirectInfo.pathname);
           return;
         }
-
-        res.send(containerDoctype + React.renderToString(
-          <ContainerHTML
-           webpackStats={webpackStats}
-           componentHTML={React.renderToString(component)}
-           storeState={store.getState()} />
-        ));
+        res.send('<!doctype html>\n' +
+          React.renderToString(<Html webpackStats={webpackStats} component={component} store={store}/>));
       } catch (error) {
         console.error('ERROR', error);
         res.status(500).send({error: error});

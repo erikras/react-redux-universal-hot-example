@@ -21,7 +21,7 @@ class InfoBar extends Component {
   render() {
     const {info, load} = this.props;
     return (
-      <div className={styles.infoBar + " well"}>
+      <div className={styles.infoBar + ' well'}>
         This is an info bar
         {' '}
         <strong>{info ? info.message : 'no info!'}</strong>
