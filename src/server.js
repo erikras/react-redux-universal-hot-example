@@ -11,6 +11,9 @@ import api from './api/api';
 import ApiClient from './ApiClient';
 import universalRouter from './universalRouter';
 import Html from './Html';
+import PrettyError from 'pretty-error';
+
+let pe = new PrettyError();
 
 const app = new Express();
 const proxy = httpProxy.createProxyServer({
@@ -54,12 +57,12 @@ app.use((req, res) => {
         res.send('<!doctype html>\n' +
           React.renderToString(<Html webpackStats={webpackStats} component={component} store={store}/>));
       } catch (error) {
-        console.error('ERROR', error);
-        res.status(500).send({error: error});
+        console.error('REACT ERROR', pe.render(error));
+        res.status(500).send({error: error.stack});
       }
     }, (error) => {
-      console.error('ERROR', error);
-      res.status(500).send({error: error});
+      console.error('ROUTER ERROR', pe.render(error));
+      res.status(500).send({error: error.stack});
     });
 });
 
