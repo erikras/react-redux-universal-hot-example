@@ -1,7 +1,13 @@
 import superagent from 'superagent';
 import config from 'config';
 
-class ApiClient {
+/*
+ * This silly underscore is here to avoid a mysterious "ReferenceError: ApiClient is not defined" error.
+ * See Issue #14. https://github.com/erikras/react-redux-universal-hot-example/issues/14
+ *
+ * Remove it at your own risk.
+ */
+class ApiClient_ {
   constructor(req) {
     ['get', 'post', 'put', 'patch', 'del'].
       forEach((method) => {
@@ -42,5 +48,6 @@ class ApiClient {
     return '/api' + adjustedPath;
   }
 }
+const ApiClient = ApiClient_;
 
 export default ApiClient;
