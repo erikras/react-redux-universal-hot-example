@@ -6,11 +6,14 @@ import favicon from 'serve-favicon';
 import compression from 'compression';
 import httpProxy from 'http-proxy';
 import path from 'path';
-import serialize from 'serialize-javascript';
 import createStore from './redux/create';
 import api from './api/api';
 import ApiClient from './ApiClient';
 import universalRouter from './universalRouter';
+import ContainerHTML from './components/ContainerHTML';
+
+const containerDoctype = '<!doctype html>\n';
+
 const app = new Express();
 const proxy = httpProxy.createProxyServer({
   target: 'http://localhost:' + config.apiPort
@@ -51,25 +54,12 @@ app.use((req, res) => {
           return;
         }
 
-        res.send('<!doctype html>\n' + React.renderToString(
-            <html lang="en-us">
-            <head>
-              <meta charSet="utf-8"/>
-              <title>React Redux Universal Hot Example</title>
-              <link rel="shortcut icon" href="/favicon.ico"/>
-              <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.css"
-                    media="screen, projection" rel="stylesheet" type="text/css"/>
-              <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
-                    media="screen, projection" rel="stylesheet" type="text/css"/>
-              {webpackStats.css.files.map((css, i) => <link href={css} key={i}
-                                                      media="screen, projection" rel="stylesheet" type="text/css"/>)}
-            </head>
-            <body>
-            <div id="content" dangerouslySetInnerHTML={{__html: React.renderToString(component)}}/>
-            <script dangerouslySetInnerHTML={{__html: `window.__data=${serialize(store.getState())};`}}/>
-            <script src={webpackStats.script[0]}/>
-            </body>
-            </html>));
+        res.send(containerDoctype + React.renderToString(
+          <ContainerHTML
+           webpackStats={webpackStats}
+           componentHTML={React.renderToString(component)}
+           storeState={store.getState()} />
+        ));
       } catch (error) {
         console.error('ERROR', error);
         res.status(500).send({error: error});
