@@ -31,7 +31,7 @@ export default class Html extends Component {
           <link href={cdn + 'font-awesome/4.3.0/css/font-awesome.min.css'}
                 media="screen, projection" rel="stylesheet" type="text/css" />
           {webpackStats.css.files.map((css, i) =>
-            <link href={css} ref={i} media="screen, projection"
+            <link href={css} key={i} media="screen, projection"
                   rel="stylesheet" type="text/css"/>)}
         </head>
         <body>
