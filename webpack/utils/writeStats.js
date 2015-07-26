@@ -45,8 +45,8 @@ module.exports = function writeStats(stats, env) {
   }).forEach(function(m) {
     var name = path.resolve(__dirname, '../../', env === 'prod' ? m.name : m.name.slice(namePrefix.length));
     var regex = env === 'prod' ? /module\.exports = ((.|\n)+);/ : /exports\.locals = ((.|\n)+);/;
-
-    cssModules[name] = JSON.parse(m.source.match(regex)[1]);
+    var match = m.source.match(regex);
+    cssModules[name] = match ? JSON.parse(match[1]) : {};
   });
 
   var content = {
