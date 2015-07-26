@@ -3,7 +3,7 @@
   "description": "Example of an isomorphic (universal) webapp using react redux and hot reloading",
   "author": "Erik Rasmussen <rasmussenerik@gmail.com> (http://github.com/erikras)",
   "license": "MIT",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "repository": {
     "type": "git",
     "url": "https://github.com/erikras/react-redux-universal-hot-example"
