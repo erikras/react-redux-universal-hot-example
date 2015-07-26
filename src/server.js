@@ -13,8 +13,7 @@ import universalRouter from './universalRouter';
 import Html from './Html';
 import PrettyError from 'pretty-error';
 
-let pe = new PrettyError();
-
+const pretty = new PrettyError();
 const app = new Express();
 const proxy = httpProxy.createProxyServer({
   target: 'http://localhost:' + config.apiPort
@@ -57,11 +56,11 @@ app.use((req, res) => {
         res.send('<!doctype html>\n' +
           React.renderToString(<Html webpackStats={webpackStats} component={component} store={store}/>));
       } catch (error) {
-        console.error('REACT ERROR', pe.render(error));
+        console.error('REACT ERROR:', pretty.render(error));
         res.status(500).send({error: error.stack});
       }
     }, (error) => {
-      console.error('ROUTER ERROR', pe.render(error));
+      console.error('ROUTER ERROR:', pretty.render(error));
       res.status(500).send({error: error.stack});
     });
 });

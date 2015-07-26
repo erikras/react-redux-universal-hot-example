@@ -3,7 +3,9 @@ import session from 'express-session';
 import bodyParser from 'body-parser';
 import config from '../config';
 import * as actions from './routes/index';
+import PrettyError from 'pretty-error';
 
+const pretty = new PrettyError();
 const app = express();
 app.use(session({
   secret: 'react and redux rule!!!!',
@@ -26,7 +28,7 @@ export default function api() {
             if (reason && reason.redirect) {
               res.redirect(reason.redirect);
             } else {
-              console.error('API ERROR:', reason);
+              console.error('API ERROR:', pretty.render(reason));
               res.status(reason.status || 500).json(reason);
             }
           });
