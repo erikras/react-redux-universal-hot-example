@@ -3,10 +3,12 @@
 var path = require('path');
 var webpack = require('webpack');
 var writeStats = require('./utils/writeStats');
+var CleanPlugin = require('clean-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var strip = require('strip-loader');
 
-var assetsPath = path.join(__dirname, '../static/dist');
+var relativeAssetsPath = '../static/dist';
+var assetsPath = path.join(__dirname, relativeAssetsPath);
 
 module.exports = {
   devtool: 'source-map',
@@ -37,6 +39,7 @@ module.exports = {
     extensions: ['', '.json', '.js']
   },
   plugins: [
+    new CleanPlugin([relativeAssetsPath]),
 
     // css files from the extract-text-plugin loader
     new ExtractTextPlugin('[name]-[chunkhash].css', {allChunks: true}),
