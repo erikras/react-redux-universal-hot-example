@@ -1,5 +1,16 @@
+# Webstorm / IntelliJ Idea project
 .idea/
+
+# node.js modules
 node_modules/
+
+# Compiled stuff
 dist/
+
+# Generated file with git stats
+tmp/authors.txt
+
 *.iml
+
+# Webpack stats
 webpack-stats.json
