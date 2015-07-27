@@ -96,6 +96,10 @@ That's a little ugly, I know, but what it allows is very powerful.
 <div className={styles.mySection}> ... </div>
 ```
 
+## The Future
+
+* [Inline Styles](docs/InlineStyles.md) - CSS is dead.
+
 ## FAQ
 
 #### Help! It doesn't work on Windows! What do I do?
