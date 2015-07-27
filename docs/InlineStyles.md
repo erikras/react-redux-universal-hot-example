@@ -7,7 +7,7 @@ In the long term, CSS, LESS and SASS are dead. To keep this project on the bleed
 I think the case is made pretty strongly in these three presentations.
 
 Christopher Chedeau | Michael Chan | Colin Megill
-- | - | -
+--- | --- | ---
 [![CSS In Your JS by Christopher Chedeau](https://i.vimeocdn.com/video/502495328_295x166.jpg)](http://blog.vjeux.com/2014/javascript/react-css-in-js-nationjs.html) | [![Michael Chan - Inline Styles: themes, media queries, contexts, & when it's best to use CSS](https://i.ytimg.com/vi/ERB1TJBn32c/mqdefault.jpg)](https://www.youtube.com/watch?v=ERB1TJBn32c) | [![Colin Megill - Inline Styles are About to Kill CSS](https://i.ytimg.com/vi/NoaxsCi13yQ/mqdefault.jpg)](https://www.youtube.com/watch?v=NoaxsCi13yQ)
 
 Clearly this is the direction in which web development is moving.
