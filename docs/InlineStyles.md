@@ -32,3 +32,7 @@ This is a list of possible style libraries that we could implement into this pro
 * _Add more if you know of others._
 
 Users and contributors to this project should periodically go through this list and see if any of them have developed features that make them really worthy of server side rendering in a production environment.
+
+## Additional Reading
+
+* [How do we make “styles in components” play nicely with server-side rendering?](https://medium.com/@jedwatson/how-do-we-make-styles-in-components-play-nicely-with-server-side-rendering-25de9ecb1b49)
