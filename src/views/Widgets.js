@@ -5,13 +5,14 @@ import {isLoaded} from '../reducers/widgets';
 import {connect} from 'react-redux';
 import * as widgetActions from '../actions/widgetActions';
 import {load as loadWidgets} from '../actions/widgetActions';
+import {relativeToSrc} from '../util';
 
 const styles = (function getStyle() {
   const stats = require('../../webpack-stats.json');
   if (__CLIENT__) {
     return require('./Widgets.scss');
   }
-  return stats.css.modules[path.join(__dirname, './Widgets.scss')];
+  return stats.css.modules[relativeToSrc(path.join(__dirname, './Widgets.scss'))];
 })();
 
 class Widgets extends Component {

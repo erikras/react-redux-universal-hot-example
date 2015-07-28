@@ -1,8 +1,5 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-if (__CLIENT__) {
-  require('./InfoBar.scss');
-}
 
 class MiniInfoBar extends Component {
   static propTypes = {

@@ -10,13 +10,14 @@ import * as authActions from '../actions/authActions';
 import {load as loadAuth} from '../actions/authActions';
 import InfoBar from '../components/InfoBar';
 import {createTransitionHook} from '../universalRouter';
+import {relativeToSrc} from '../util';
 
 const styles = (function getStyle() {
   const stats = require('../../webpack-stats.json');
   if (__CLIENT__) {
     return require('./App.scss');
   }
-  return stats.css.modules[path.join(__dirname, './App.scss')];
+  return stats.css.modules[relativeToSrc(path.resolve(__dirname, './App.scss'))];
 })();
 
 class App extends Component {

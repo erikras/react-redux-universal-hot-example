@@ -34,7 +34,7 @@ module.exports = function writeStats(stats, env) {
   var cssModules = {};
 
   // Is there a way to get this dynamically so it doesn't depend on loader?
-  var namePrefix = "./~/css-loader?modules&importLoaders=2&localIdentName=[local]___[hash:base64:5]!./~/autoprefixer-loader?browsers=last 2 version!./~/sass-loader?outputStyle=expanded&sourceMap=true&sourceMapContents=true!";
+  var namePrefix = './~/css-loader?modules&importLoaders=2&localIdentName=[local]___[hash:base64:5]!./~/autoprefixer-loader?browsers=last 2 version!./~/sass-loader?outputStyle=expanded&sourceMap=true&sourceMapContents=true!';
 
   json.modules.filter(function(m) {
     if (env === 'prod') {
@@ -43,7 +43,9 @@ module.exports = function writeStats(stats, env) {
 
     return m.name.slice(0, namePrefix.length) === namePrefix;
   }).forEach(function(m) {
-    var name = path.resolve(__dirname, '../../', env === 'prod' ? m.name : m.name.slice(namePrefix.length));
+    var name = path.resolve(__dirname, '../../', env === 'prod' ?
+      m.name.slice('./src'.length) :
+      m.name.slice(namePrefix.length + './src'.length));
     var regex = env === 'prod' ? /module\.exports = ((.|\n)+);/ : /exports\.locals = ((.|\n)+);/;
     var match = m.source.match(regex);
     cssModules[name] = match ? JSON.parse(match[1]) : {};

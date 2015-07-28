@@ -5,13 +5,14 @@ import {connect} from 'react-redux';
 import {isLoaded as isAuthLoaded} from '../reducers/auth';
 import * as authActions from '../actions/authActions';
 import {load as loadAuth} from '../actions/authActions';
+import {relativeToSrc} from '../util';
 
 const styles = (function getStyle() {
   const stats = require('../../webpack-stats.json');
   if (__CLIENT__) {
     return require('./Login.scss');
   }
-  return stats.css.modules[path.join(__dirname, './Login.scss')];
+  return stats.css.modules[relativeToSrc(path.join(__dirname, './Login.scss'))];
 })();
 
 class Login extends Component {
