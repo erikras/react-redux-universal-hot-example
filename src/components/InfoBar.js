@@ -3,13 +3,14 @@ import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as infoActions from '../actions/infoActions';
+import {relativeToSrc} from '../util';
 
 const styles = (function getStyle() {
   const stats = require('../../webpack-stats.json');
   if (__CLIENT__) {
     return require('./InfoBar.scss');
   }
-  return stats.css.modules[path.join(__dirname, './InfoBar.scss')];
+  return stats.css.modules[relativeToSrc(path.join(__dirname, './InfoBar.scss'))];
 })();
 
 class InfoBar extends Component {
