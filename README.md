@@ -2,6 +2,7 @@
 ---
 [![build status](https://img.shields.io/travis/erikras/react-redux-universal-hot-example/master.svg?style=flat-square)](https://travis-ci.org/erikras/react-redux-universal-hot-example)
 [![react-redux-example channel on slack](https://img.shields.io/badge/slack-react--redux--example%40reactiflux-blue.svg)](http://www.reactiflux.com)
+[![Demo on Heroku](https://img.shields.io/badge/demo-heroku-lightgrey.png)](https://react-redux.herokuapp.com)
 
 This is a starter boiler plate app I've put together using the following technologies:
 
@@ -38,6 +39,10 @@ npm run dev
 npm run build
 npm run start
 ```
+
+## Demo
+
+A demonstration of this app can be see [running on heroku](https://react-redux.herokuapp.com), which is a deployment of the [heroku branch](https://github.com/erikras/react-redux-universal-hot-example/tree/heroku).
 
 ## Explanation
 

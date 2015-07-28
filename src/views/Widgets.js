@@ -30,11 +30,16 @@ class Widgets extends Component {
       refreshClassName += ' fa-spin';
     }
     return (
-      <div className={styles.widgets}>
+      <div className={styles.widgets + ' container'}>
         <h1>
           Widgets
           <button className={styles.refreshBtn + ' btn btn-success'} onClick={load}><i className={refreshClassName}/> {' '} Reload Widgets</button>
         </h1>
+        <p>
+          This data was loaded from the server before this route was rendered. If you hit refresh on your browser, the
+          data loading will take place on the server before the page is returned. If you navigated here from another
+          page, the data was fetched from the client.
+        </p>
         {error &&
         <div className="alert alert-danger" role="alert">
           <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
