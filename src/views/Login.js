@@ -42,7 +42,7 @@ class Login extends Component {
     const {user, logout} = this.props;
     const {username} = this.state;
     return (
-      <div className={styles.loginPage}>
+      <div className={styles.loginPage + ' container'}>
         <h1>Login</h1>
         {!user &&
         <div>

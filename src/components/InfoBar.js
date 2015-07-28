@@ -23,11 +23,13 @@ class InfoBar extends Component {
     const {info, load} = this.props;
     return (
       <div className={styles.infoBar + ' well'}>
-        This is an info bar
-        {' '}
-        <strong>{info ? info.message : 'no info!'}</strong>
-        <span className={styles.time}>{info && new Date(info.time).toString()}</span>
-        <button className="btn btn-primary" onClick={load}>Reload from server</button>
+        <div className="container">
+          This is an info bar
+          {' '}
+          <strong>{info ? info.message : 'no info!'}</strong>
+          <span className={styles.time}>{info && new Date(info.time).toString()}</span>
+          <button className="btn btn-primary" onClick={load}>Reload from server</button>
+        </div>
       </div>
     );
   }
@@ -36,7 +38,8 @@ class InfoBar extends Component {
 @connect(state => ({
   info: state.info.data
 }))
-export default class InfoBarContainer {
+export default
+class InfoBarContainer {
   static propTypes = {
     info: PropTypes.object,
     dispatch: PropTypes.func.isRequired
