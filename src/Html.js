@@ -22,7 +22,7 @@ export default class Html extends Component {
     const {webpackStats, component, store} = this.props;
     const title = 'React Redux Example';
     const description = 'All the modern best practices in one example.';
-    const image = '/static/logo.jpg';
+    const image = '/logo.jpg';
     return (
       <html lang="en-us">
         <head>
