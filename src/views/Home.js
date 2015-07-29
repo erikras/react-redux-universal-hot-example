@@ -75,7 +75,7 @@ export default class Home extends Component {
             </li>
             <li><a href="https://github.com/gaearon/redux-devtools" target="_blank">Redux Dev Tools</a> for next
               generation DX (developer experience).
-              Watch <a href="https://github.com/gaearon/redux-devtools" target="_blank">Dan Abramov's talk</a>.
+              Watch <a href="https://www.youtube.com/watch?v=xsSnOQynTHs" target="_blank">Dan Abramov's talk</a>.
             </li>
             <li><a href="https://github.com/webpack/style-loader" target="_blank">style-loader</a> and <a
               href="https://github.com/jtangelder/sass-loader" target="_blank">sass-loader</a> to allow import of
