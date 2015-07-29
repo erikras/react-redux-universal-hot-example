@@ -74,6 +74,7 @@ if (config.port) {
       api().then(() => {
         console.info('==> ✅  Server is listening');
         console.info('==> 🌎  %s running on port %s, API on port %s', config.app.name, config.port, config.apiPort);
+        console.info('----------\n==> 💻  Open http://localhost:%s in a browser to view the app.', config.port);
       });
     }
   });
