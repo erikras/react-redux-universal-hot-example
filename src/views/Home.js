@@ -5,10 +5,10 @@ import GithubButton from '../components/GithubButton';
 import {relativeToSrc} from '../util';
 
 const styles = (function getStyle() {
-  const stats = require('../../webpack-stats.json');
   if (__CLIENT__) {
     return require('./Home.scss');
   }
+  const stats = require('../../webpack-stats.json');
   return stats.css.modules[relativeToSrc(path.resolve(__dirname, './Home.scss'))];
 })();
 

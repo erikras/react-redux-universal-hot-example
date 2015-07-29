@@ -6,10 +6,10 @@ import * as infoActions from '../actions/infoActions';
 import {relativeToSrc} from '../util';
 
 const styles = (function getStyle() {
-  const stats = require('../../webpack-stats.json');
   if (__CLIENT__) {
     return require('./InfoBar.scss');
   }
+  const stats = require('../../webpack-stats.json');
   return stats.css.modules[relativeToSrc(path.join(__dirname, './InfoBar.scss'))];
 })();
 

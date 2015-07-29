@@ -13,10 +13,10 @@ import {createTransitionHook} from '../universalRouter';
 import {relativeToSrc} from '../util';
 
 const styles = (function getStyle() {
-  const stats = require('../../webpack-stats.json');
   if (__CLIENT__) {
     return require('./App.scss');
   }
+  const stats = require('../../webpack-stats.json');
   return stats.css.modules[relativeToSrc(path.resolve(__dirname, './App.scss'))];
 })();
 

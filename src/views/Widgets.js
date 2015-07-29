@@ -8,10 +8,10 @@ import {load as loadWidgets} from '../actions/widgetActions';
 import {relativeToSrc} from '../util';
 
 const styles = (function getStyle() {
-  const stats = require('../../webpack-stats.json');
   if (__CLIENT__) {
     return require('./Widgets.scss');
   }
+  const stats = require('../../webpack-stats.json');
   return stats.css.modules[relativeToSrc(path.join(__dirname, './Widgets.scss'))];
 })();
 
