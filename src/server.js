@@ -51,7 +51,6 @@ app.use((req, res) => {
   } else {
     universalRouter(location, undefined, store)
       .then(({component, transition, isRedirect}) => {
-        try {
 
           if (isRedirect) {
             res.redirect(transition.redirectInfo.pathname);
@@ -59,11 +58,8 @@ app.use((req, res) => {
           }
           res.send('<!doctype html>\n' +
             React.renderToString(<Html webpackStats={webpackStats} component={component} store={store}/>));
-        } catch (error) {
-          console.error('REACT ERROR:', pretty.render(error));
-          res.status(500).send({error: error.stack});
-        }
-      }, (error) => {
+      })
+      .catch((error) => {
         console.error('ROUTER ERROR:', pretty.render(error));
         res.status(500).send({error: error.stack});
       });
