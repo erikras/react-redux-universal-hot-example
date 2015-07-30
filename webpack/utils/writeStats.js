@@ -57,12 +57,28 @@ module.exports = function writeStats(stats, env) {
     cssModules[name] = match ? JSON.parse(match[1]) : {};
   });
 
+  // Find compiled images in modules
+  // it will be used to map original filename to the compiled one
+  // for server side rendering
+  const imagesRegex = /\.(jpe?g|png|gif|svg)$/;
+  const images = json.modules
+    .filter(function(module) {
+      return imagesRegex.test(module.name);
+    })
+    .map(function(image) {
+      return {
+        original: image.name,
+        compiled: `${publicPath}${image.assets[0]}`
+      };
+    });
+
   var content = {
     script: script,
     css: {
       files: cssFiles,
       modules: cssModules
-    }
+    },
+    images: images
   };
 
   fs.writeFileSync(filepath, JSON.stringify(content));
