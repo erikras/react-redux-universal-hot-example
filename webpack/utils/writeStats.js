@@ -20,10 +20,10 @@ module.exports = function writeStats(stats, env) {
 
     return chunk
       // filter by extension
-      .filter(function (chunkName) {
+      .filter(function(chunkName) {
         return path.extname(chunkName) === '.' + ext;
       })
-      .map(function (chunkName) {
+      .map(function(chunkName) {
         return publicPath + chunkName;
       });
   }
@@ -47,7 +47,7 @@ module.exports = function writeStats(stats, env) {
       m.name.slice('./src'.length) :
       m.name.slice(namePrefix.length + './src'.length));
     //Resolve the e.g.:"C:\"  issue on windows
-    if(name) {
+    if (name) {
       const i = name.indexOf(":");
       name = name.substring(i > -1 ? i + 1 : 0, name.length + 1);
     }
@@ -57,12 +57,28 @@ module.exports = function writeStats(stats, env) {
     cssModules[name] = match ? JSON.parse(match[1]) : {};
   });
 
+  // Find compiled images in modules
+  // it will be used to map original filename to the compiled one
+  // for server side rendering
+  const imagesRegex = /\.(jpe?g|png|gif|svg)$/;
+  const images = json.modules
+    .filter(function(module) {
+      return imagesRegex.test(module.name);
+    })
+    .map(function(image) {
+      return {
+        original: image.name,
+        compiled: publicPath + image.assets[0]
+      };
+    });
+
   var content = {
     script: script,
     css: {
       files: cssFiles,
       modules: cssModules
-    }
+    },
+    images: images
   };
 
   fs.writeFileSync(filepath, JSON.stringify(content));
