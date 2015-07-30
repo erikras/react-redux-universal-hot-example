@@ -1,17 +1,20 @@
 import React, {Component} from 'react';
 import MiniInfoBar from '../components/MiniInfoBar';
+import {requireServerImage} from '../util';
+
+const kitten = __CLIENT__ ? require('./kitten.jpg') : requireServerImage('./kitten.jpg');
 
 export default class About extends Component {
   state = {
-    kitten: false
+    showKitten: false
   }
 
   handleToggleKitten() {
-    this.setState({kitten: !this.state.kitten});
+    this.setState({showKitten: !this.state.showKitten});
   }
 
   render() {
-    const {kitten} = this.state;
+    const {showKitten} = this.state;
     return (
       <div>
         <div className="container">
@@ -36,13 +39,13 @@ export default class About extends Component {
           <p>
             Psst! Would you like to see a kitten?
 
-            <button className={'btn btn-' + (kitten ? 'danger' : 'success')}
+            <button className={'btn btn-' + (showKitten ? 'danger' : 'success')}
                     style={{marginLeft: 50}}
                     onClick={::this.handleToggleKitten}>
-              {kitten ? 'No! Take it away!' : 'Yes! Please!'}</button>
+              {showKitten ? 'No! Take it away!' : 'Yes! Please!'}</button>
           </p>
 
-          {kitten && <div><img src={require('./kitten.jpg')}/></div>}
+          {showKitten && <div><img src={kitten}/></div>}
         </div>
       </div>
     );
