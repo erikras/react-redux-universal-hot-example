@@ -3,22 +3,19 @@ import Router from 'react-router';
 import routes from './views/routes';
 import { Provider } from 'react-redux';
 
-const getFetchData = (component) => {
-  //need to check if the component is not undefined when using nested router without passing a component in props.
-  return  (component && component.fetchData) || (component && component.DecoratedComponent && component.DecoratedComponent.fetchData);
+const getFetchData = (component={}) => {
+  return component.DecoratedComponent ? 
+    getFetchData(component.DecoratedComponent) :
+    component.fetchData;
 };
 
 export function createTransitionHook(store) {
   return (nextState, transition, callback) => {
     Promise.all(nextState.branch
       .map(route => route.component)
-      .filter(component => {
-        return getFetchData(component);
-      })
+      .filter(getFetchData(component))
       .map(getFetchData)
-      .map(fetchData => {
-        return fetchData(store, nextState.params);
-      }))
+      .map(fetchData => fetchData(store, nextState.params))
       .then(() => {
         callback(); // can't just pass callback to then() because callback assumes first param is error
       }, (error) => {
