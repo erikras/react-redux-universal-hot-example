@@ -24,16 +24,16 @@
   ],
   "main": "babel.server.js",
   "scripts": {
-    "start": "better-npm-run start",
+    "start": "node ./node_modules/better-npm-run start",
     "build": "node ./node_modules/webpack/bin/webpack.js --verbose --colors --display-error-details --config webpack/prod.config.js",
     "lint": "node ./node_modules/eslint/bin/eslint.js -c .eslintrc src",
-    "start-dev": "better-npm-run start-dev",
-    "watch-client": "better-npm-run watch-client",
+    "start-dev": "node ./node_modules/better-npm-run start-dev",
+    "watch-client": "node ./node_modules/better-npm-run watch-client",
     "dev": "node ./node_modules/concurrently/src/main.js --kill-others \"npm run watch-client\" \"npm run start-dev\""
   },
   "betterScripts": {
     "start": {
-      "command": "node ./babel.server",
+      "command": "node ./babel.server.js",
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "production",
@@ -41,7 +41,7 @@
       }
     },
     "start-dev": {
-      "command": "node ./babel.server",
+      "command": "node ./babel.server.js",
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "development"
