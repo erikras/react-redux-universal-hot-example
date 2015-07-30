@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import path from 'path';
 import CounterButton from '../components/CounterButton';
 import GithubButton from '../components/GithubButton';
-import {relativeToSrc} from '../util';
-import {requireServerImage} from '../util';
+import {relativeToSrc, requireServerImage} from '../util';
 
 const styles = (function getStyle() {
   if (__CLIENT__) {
