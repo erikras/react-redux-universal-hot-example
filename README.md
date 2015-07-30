@@ -83,7 +83,7 @@ To understand how the data and action bindings get into the components – there
 
 #### Images
 
-Now it's able to render the image both on client and server. Please refer to issue [#39](https://github.com/erikras/react-redux-universal-hot-example/issues/39) for more detail discussion，the usage would be like below (super easy):
+Now it's able to render the image both on client and server. Please refer to issue [#39](https://github.com/erikras/react-redux-universal-hot-example/issues/39) for more detail discussion, the usage would be like below (super easy):
 
 ```javascript
 let logoImage = ""
