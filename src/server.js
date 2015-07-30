@@ -51,13 +51,12 @@ app.use((req, res) => {
   } else {
     universalRouter(location, undefined, store)
       .then(({component, transition, isRedirect}) => {
-
-          if (isRedirect) {
-            res.redirect(transition.redirectInfo.pathname);
-            return;
-          }
-          res.send('<!doctype html>\n' +
-            React.renderToString(<Html webpackStats={webpackStats} component={component} store={store}/>));
+        if (isRedirect) {
+          res.redirect(transition.redirectInfo.pathname);
+          return;
+        }
+        res.send('<!doctype html>\n' +
+          React.renderToString(<Html webpackStats={webpackStats} component={component} store={store}/>));
       })
       .catch((error) => {
         console.error('ROUTER ERROR:', pretty.render(error));
