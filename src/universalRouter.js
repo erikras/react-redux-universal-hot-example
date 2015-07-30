@@ -4,7 +4,8 @@ import routes from './views/routes';
 import { Provider } from 'react-redux';
 
 const getFetchData = (component) => {
-  return component.fetchData || (component.DecoratedComponent && component.DecoratedComponent.fetchData);
+  //need to check if the component is not undefined when using nested router without passing a component in props.
+  return  (component && component.fetchData) || (component && component.DecoratedComponent && component.DecoratedComponent.fetchData);
 };
 
 export function createTransitionHook(store) {

@@ -46,6 +46,12 @@ module.exports = function writeStats(stats, env) {
     var name = path.resolve(__dirname, '../../', env === 'prod' ?
       m.name.slice('./src'.length) :
       m.name.slice(namePrefix.length + './src'.length));
+    //Resolve the e.g.:"C:\"  issue on windows
+    if(name) {
+      const i = name.indexOf(":");
+      name = name.substring(i > -1 ? i + 1 : 0, name.length + 1);
+    }
+    //end
     var regex = env === 'prod' ? /module\.exports = ((.|\n)+);/ : /exports\.locals = ((.|\n)+);/;
     var match = m.source.match(regex);
     cssModules[name] = match ? JSON.parse(match[1]) : {};
