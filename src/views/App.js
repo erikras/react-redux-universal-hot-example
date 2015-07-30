@@ -54,6 +54,7 @@ class App extends Component {
 
             <ul className="nav navbar-nav">
               <li><Link to="/widgets">Widgets</Link></li>
+              <li><Link to="/survey">Survey</Link></li>
               <li><Link to="/about">About Us</Link></li>
               <li><Link to="/redirect">Redirect to Home</Link></li>
               {!user && <li><Link to="/login">Login</Link></li>}
