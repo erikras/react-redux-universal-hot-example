@@ -24,12 +24,36 @@
   ],
   "main": "babel.server.js",
   "scripts": {
-    "start": "NODE_PATH=\"./src\" NODE_ENV=\"production\" PORT=\"8080\" node ./babel.server",
+    "start": "better-npm-run start",
     "build": "node ./node_modules/webpack/bin/webpack.js --verbose --colors --display-error-details --config webpack/prod.config.js",
     "lint": "node ./node_modules/eslint/bin/eslint.js -c .eslintrc src",
-    "start-dev": "NODE_PATH=\"./src\" NODE_ENV=\"development\" node ./babel.server",
-    "watch-client": "UV_THREADPOOL_SIZE=100 NODE_PATH=\"./src\" node webpack/webpack-dev-server.js",
+    "start-dev": "better-npm-run start-dev",
+    "watch-client": "better-npm-run watch-client",
     "dev": "node ./node_modules/concurrently/src/main.js --kill-others \"npm run watch-client\" \"npm run start-dev\""
+  },
+  "betterScripts": {
+    "start": {
+      "command": "node ./babel.server",
+      "env": {
+        "NODE_PATH": "./src",
+        "NODE_ENV": "production",
+        "PORT": 8080
+      }
+    },
+    "start-dev": {
+      "command": "node ./babel.server",
+      "env": {
+        "NODE_PATH": "./src",
+        "NODE_ENV": "development"
+      }
+    },
+    "watch-client": {
+      "command": "node webpack/webpack-dev-server.js",
+      "env": {
+        "UV_THREADPOOL_SIZE": 100,
+        "NODE_PATH": "./src"
+      }
+    }
   },
   "dependencies": {
     "babel": "5.4.7",
@@ -60,6 +84,7 @@
     "babel-eslint": "^3.1.18",
     "babel-loader": "5.1.3",
     "babel-runtime": "5.4.7",
+    "better-npm-run": "0.0.1",
     "clean-webpack-plugin": "^0.1.3",
     "concurrently": "0.1.1",
     "css-loader": "^0.15.1",
