@@ -13,13 +13,12 @@ const styles = (function getStyle() {
 })();
 
 // require the logo image both from client and server
-let logoImage = ""
+let logoImage = ''
 if(__CLIENT__) {
   logoImage = require('./logo.png');
 } else {
   logoImage = requireServerImage('./logo.png');
 }
-
 
 export default class Home extends Component {
   render() {

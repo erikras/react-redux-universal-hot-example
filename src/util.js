@@ -7,20 +7,22 @@ export function relativeToSrc(value) {
 }
 
 export function requireServerImage(imagePath) {
-  if(!imagePath) {
+  if (!imagePath) {
     return '';
   }
   if (__CLIENT__) {
-      throw new Error('image-resolver called on browser');
-  }
-  else {
+    throw new Error('image-resolver called on browser');
+  } else {
     // Load images compiled from `webpack-stats`
     // don't cache the `webpack-stats.json` on dev
     // so we gonna read the file on each request
     // on production, use simple `require` to cache the file
-    let images = require('../webpack-stats.json').images;;
+    let images = require('../webpack-stats.json').images;
     if (__DEVELOPMENT__) {
       delete require.cache[require.resolve('../webpack-stats.json')];
+    }
+    if (!images) {
+      return '';
     }
 
     // Find the correct image
