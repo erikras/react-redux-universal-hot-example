@@ -66,7 +66,7 @@ module.exports = function writeStats(stats, env) {
       return imagesRegex.test(module.name);
     })
     .map(function(image) {
-    const i = image.source.indexOf("\"");
+    var i = image.source.indexOf('"');
     var imageSource = image.source.slice(i + 1, -1);
     imageSource = imageSource.lastIndexOf('data:image', 0) === 0 ? imageSource : publicPath + imageSource;
       return {

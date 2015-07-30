@@ -13,8 +13,8 @@ const styles = (function getStyle() {
 })();
 
 // require the logo image both from client and server
-let logoImage = ''
-if(__CLIENT__) {
+let logoImage = '';
+if (__CLIENT__) {
   logoImage = require('./logo.png');
 } else {
   logoImage = requireServerImage('./logo.png');
@@ -96,6 +96,7 @@ export default class Home extends Component {
           </ul>
 
           <h3>From the author</h3>
+
           <p>
             I cobbled this together from a wide variety of similar "starter" repositories. As I post this in June 2015,
             all of these libraries are right at the bleeding edge of web development. They may fall out of fashion as
@@ -103,7 +104,9 @@ export default class Home extends Component {
             and will survive for several years. I'm building my new projects like this, and I recommend that you do,
             too.
           </p>
+
           <p>Thanks for taking the time to check this out.</p>
+
           <p>– Erik Rasmussen</p>
         </div>
       </div>
