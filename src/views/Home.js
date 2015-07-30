@@ -3,6 +3,7 @@ import path from 'path';
 import CounterButton from '../components/CounterButton';
 import GithubButton from '../components/GithubButton';
 import {relativeToSrc} from '../util';
+import {requireServerImage} from '../util';
 
 const styles = (function getStyle() {
   if (__CLIENT__) {
@@ -12,13 +13,26 @@ const styles = (function getStyle() {
   return stats.css.modules[relativeToSrc(path.resolve(__dirname, './Home.scss'))];
 })();
 
+// require the logo image both from client and server
+let logoImage = ""
+if(__CLIENT__) {
+  logoImage = require('./logo.png');
+} else {
+  logoImage = requireServerImage('./logo.png');
+}
+
+
 export default class Home extends Component {
   render() {
     return (
       <div>
         <div className={styles.masthead}>
           <div className="container">
-            <div className={styles.logo}/>
+            <div className={styles.logo}>
+              <p>
+                <img src={logoImage}/>
+              </p>
+            </div>
             <h1>React Redux Example</h1>
 
             <h2>All the modern best practices in one example.</h2>
