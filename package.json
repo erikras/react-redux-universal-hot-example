@@ -29,7 +29,7 @@
     "lint": "eslint -c .eslintrc src",
     "start-dev": "node ./node_modules/better-npm-run start-dev",
     "watch-client": "node ./node_modules/better-npm-run watch-client",
-    "dev": "concurrently --kill-others \"npm run watch-client\" \"npm run start-dev\""
+    "dev": "concurrent --kill-others \"npm run watch-client\" \"npm run start-dev\""
   },
   "betterScripts": {
     "start": {
@@ -72,7 +72,7 @@
     "react-router": "v1.0.0-beta2",
     "redux": "1.0.0-rc",
     "redux-devtools": "0.1.2",
-    "redux-form": "0.0.1",
+    "redux-form": "^0.0.2",
     "serialize-javascript": "^1.0.0",
     "serve-favicon": "^2.3.0",
     "serve-static": "^1.10.0",
