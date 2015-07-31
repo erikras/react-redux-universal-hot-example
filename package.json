@@ -25,11 +25,11 @@
   "main": "babel.server.js",
   "scripts": {
     "start": "node ./node_modules/better-npm-run start",
-    "build": "node ./node_modules/webpack/bin/webpack.js --verbose --colors --display-error-details --config webpack/prod.config.js",
-    "lint": "node ./node_modules/eslint/bin/eslint.js -c .eslintrc src",
+    "build": "webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
+    "lint": "eslint -c .eslintrc src",
     "start-dev": "node ./node_modules/better-npm-run start-dev",
     "watch-client": "node ./node_modules/better-npm-run watch-client",
-    "dev": "node ./node_modules/concurrently/src/main.js --kill-others \"npm run watch-client\" \"npm run start-dev\""
+    "dev": "concurrently --kill-others \"npm run watch-client\" \"npm run start-dev\""
   },
   "betterScripts": {
     "start": {
