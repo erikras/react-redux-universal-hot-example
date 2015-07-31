@@ -37,7 +37,6 @@ class App extends Component {
 
   render() {
     const {user} = this.props;
-    debugger;
     return (
       <div className={styles.app}>
         <nav className="navbar navbar-default navbar-fixed-top">
