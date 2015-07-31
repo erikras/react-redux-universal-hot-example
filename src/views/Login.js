@@ -1,19 +1,12 @@
-import path from 'path';
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {isLoaded as isAuthLoaded} from '../reducers/auth';
 import * as authActions from '../actions/authActions';
 import {load as loadAuth} from '../actions/authActions';
-import {relativeToSrc} from '../util';
+import {requireServerCss} from '../util';
 
-const styles = (function getStyle() {
-  if (__CLIENT__) {
-    return require('./Login.scss');
-  }
-  const stats = require('../../webpack-stats.json');
-  return stats.css.modules[relativeToSrc(path.join(__dirname, './Login.scss'))];
-})();
+const styles = __CLIENT__ ? require('./Login.scss') : requireServerCss(require.resolve('./Login.scss'));
 
 class Login extends Component {
   static propTypes = {

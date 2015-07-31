@@ -10,15 +10,9 @@ import * as authActions from '../actions/authActions';
 import {load as loadAuth} from '../actions/authActions';
 import InfoBar from '../components/InfoBar';
 import {createTransitionHook} from '../universalRouter';
-import {relativeToSrc} from '../util';
+import {requireServerCss} from '../util';
 
-const styles = (function getStyle() {
-  if (__CLIENT__) {
-    return require('./App.scss');
-  }
-  const stats = require('../../webpack-stats.json');
-  return stats.css.modules[relativeToSrc(path.resolve(__dirname, './App.scss'))];
-})();
+const styles = __CLIENT__ ? require('./App.scss') : requireServerCss(require.resolve('./App.scss'));
 
 class App extends Component {
   static propTypes = {
@@ -43,6 +37,7 @@ class App extends Component {
 
   render() {
     const {user} = this.props;
+    debugger;
     return (
       <div className={styles.app}>
         <nav className="navbar navbar-default navbar-fixed-top">

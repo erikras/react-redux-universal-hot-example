@@ -1,8 +1,20 @@
 import React, {Component} from 'react';
 import MiniInfoBar from '../components/MiniInfoBar';
+import {requireServerImage} from '../util';
+
+const kitten = __CLIENT__ ? require('./kitten.jpg') : requireServerImage('./kitten.jpg');
 
 export default class About extends Component {
+  state = {
+    showKitten: false
+  }
+
+  handleToggleKitten() {
+    this.setState({showKitten: !this.state.showKitten});
+  }
+
   render() {
+    const {showKitten} = this.state;
     return (
       <div>
         <div className="container">
@@ -18,9 +30,22 @@ export default class About extends Component {
           <h3>Mini Bar <span style={{color: '#aaa'}}>(not that kind)</span></h3>
 
           <p>Hey! You found the mini info bar! The following component is display-only. Note that it shows the same
-          time as the info bar.</p>
+            time as the info bar.</p>
 
           <MiniInfoBar/>
+
+          <h3>Images</h3>
+
+          <p>
+            Psst! Would you like to see a kitten?
+
+            <button className={'btn btn-' + (showKitten ? 'danger' : 'success')}
+                    style={{marginLeft: 50}}
+                    onClick={::this.handleToggleKitten}>
+              {showKitten ? 'No! Take it away!' : 'Yes! Please!'}</button>
+          </p>
+
+          {showKitten && <div><img src={kitten}/></div>}
         </div>
       </div>
     );

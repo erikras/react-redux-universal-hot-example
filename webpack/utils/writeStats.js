@@ -20,10 +20,10 @@ module.exports = function writeStats(stats, env) {
 
     return chunk
       // filter by extension
-      .filter(function (chunkName) {
+      .filter(function(chunkName) {
         return path.extname(chunkName) === '.' + ext;
       })
-      .map(function (chunkName) {
+      .map(function(chunkName) {
         return publicPath + chunkName;
       });
   }
@@ -40,16 +40,17 @@ module.exports = function writeStats(stats, env) {
     if (env === 'prod') {
       return /\.scss$/.test(m.name);
     }
-
     return m.name.slice(0, namePrefix.length) === namePrefix;
   }).forEach(function(m) {
     var name = path.resolve(__dirname, '../../', env === 'prod' ?
       m.name.slice('./src'.length) :
       m.name.slice(namePrefix.length + './src'.length));
-    //Resolve the e.g.:"C:\"  issue on windows
-    if(name) {
-      const i = name.indexOf(":");
-      name = name.substring(i > -1 ? i + 1 : 0, name.length + 1);
+    if (name) {
+      // Resolve the e.g.: "C:\"  issue on windows
+      const i = name.indexOf(':');
+      if (i >= 0) {
+        name = name.slice(i + 1);
+      }
     }
     //end
     var regex = env === 'prod' ? /module\.exports = ((.|\n)+);/ : /exports\.locals = ((.|\n)+);/;
@@ -57,12 +58,31 @@ module.exports = function writeStats(stats, env) {
     cssModules[name] = match ? JSON.parse(match[1]) : {};
   });
 
+  // Find compiled images in modules
+  // it will be used to map original filename to the compiled one
+  // for server side rendering
+  const imagesRegex = /\.(jpe?g|png|gif|svg)$/;
+  const images = json.modules
+    .filter(function(module) {
+      return imagesRegex.test(module.name);
+    })
+    .map(function(image) {
+    var i = image.source.indexOf('"');
+    var imageSource = image.source.slice(i + 1, -1);
+    imageSource = imageSource.lastIndexOf('data:image', 0) === 0 ? imageSource : publicPath + imageSource;
+      return {
+        original: image.name,
+        compiled: imageSource
+      };
+    });
+
   var content = {
     script: script,
     css: {
       files: cssFiles,
       modules: cssModules
-    }
+    },
+    images: images
   };
 
   fs.writeFileSync(filepath, JSON.stringify(content));
