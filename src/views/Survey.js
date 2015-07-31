@@ -3,7 +3,7 @@ import reduxForm from 'redux-form';
 import surveyValidation from '../validation/surveyValidation';
 
 
-@reduxForm('survey')
+@reduxForm('survey', surveyValidation)
 export default
 class Survey extends Component {
   static propTypes = {
@@ -11,16 +11,16 @@ class Survey extends Component {
     errors: PropTypes.object.isRequired,
     visited: PropTypes.object.isRequired,
     handleChange: PropTypes.func.isRequired,
-    validate: PropTypes.func.isRequired,
+    showAll: PropTypes.func.isRequired,
     reset: PropTypes.func.isRequired
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    const {data, validate, reset} = this.props;
+    const {data, showAll, reset} = this.props;
     const errors = surveyValidation(data);
     if (Object.keys(errors).some(key => errors[key])) {
-      validate();
+      showAll();
       window.alert('Form is invalid!');
     } else {
       window.alert('Data submitted! ' + JSON.stringify(this.props.data));
