@@ -1,4 +1,3 @@
-import path from 'path';
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
 import {bindActionCreators} from 'redux';
@@ -37,7 +36,6 @@ class App extends Component {
 
   render() {
     const {user} = this.props;
-    debugger;
     return (
       <div className={styles.app}>
         <nav className="navbar navbar-default navbar-fixed-top">

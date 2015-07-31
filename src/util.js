@@ -6,7 +6,7 @@ const readStats = () => {
     delete require.cache[require.resolve('../webpack-stats.json')];
   }
   return stats;
-}
+};
 
 export function requireServerCss(cssPath) {
   if (__CLIENT__) {

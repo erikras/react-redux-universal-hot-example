@@ -1,20 +1,8 @@
-const rules = {
-  name: (value) => {
-    if (value === undefined || value === null || value === '') {
-      return 'Required';
-    }
-  },
-  email: (value) => {
-    if (value === undefined || value === null || value === '') {
-      return 'Required';
-    }
-  }
-};
+import {createValidator, required, maxLength, email} from './validation';
 
-export default function surveyValidation(data = {}) {
-  const errors = {};
-  Object.keys(rules).forEach((key) => {
-    errors[key] = rules[key](data[key]);
-  });
-  return errors;
-}
+const surveyValidation = createValidator({
+  name: [required, maxLength(10)],
+  email: [required, email],
+  occupation: maxLength(20) // single rules don't have to in an array
+});
+export default surveyValidation;
