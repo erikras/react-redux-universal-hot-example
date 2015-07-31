@@ -1,16 +1,9 @@
 import React, {Component} from 'react';
-import path from 'path';
 import CounterButton from '../components/CounterButton';
 import GithubButton from '../components/GithubButton';
-import {relativeToSrc, requireServerImage} from '../util';
+import {requireServerCss, requireServerImage} from '../util';
 
-const styles = (function getStyle() {
-  if (__CLIENT__) {
-    return require('./Home.scss');
-  }
-  const stats = require('../../webpack-stats.json');
-  return stats.css.modules[relativeToSrc(path.resolve(__dirname, './Home.scss'))];
-})();
+const styles = __CLIENT__ ? require('./Home.scss') : requireServerCss(require.resolve('./Home.scss'));
 
 // require the logo image both from client and server
 let logoImage = '';

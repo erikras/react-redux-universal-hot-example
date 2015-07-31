@@ -40,16 +40,17 @@ module.exports = function writeStats(stats, env) {
     if (env === 'prod') {
       return /\.scss$/.test(m.name);
     }
-
     return m.name.slice(0, namePrefix.length) === namePrefix;
   }).forEach(function(m) {
     var name = path.resolve(__dirname, '../../', env === 'prod' ?
       m.name.slice('./src'.length) :
       m.name.slice(namePrefix.length + './src'.length));
-    //Resolve the e.g.:"C:\"  issue on windows
     if (name) {
-      const i = name.indexOf(":");
-      name = name.substring(i > -1 ? i + 1 : 0, name.length + 1);
+      // Resolve the e.g.: "C:\"  issue on windows
+      const i = name.indexOf(':');
+      if (i >= 0) {
+        name = name.slice(i + 1);
+      }
     }
     //end
     var regex = env === 'prod' ? /module\.exports = ((.|\n)+);/ : /exports\.locals = ((.|\n)+);/;

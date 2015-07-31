@@ -101,16 +101,12 @@ if(__CLIENT__) {
 This project uses [local styles](https://medium.com/seek-ui-engineering/the-end-of-global-css-90d2a4a06284) using [css-loader](https://github.com/webpack/css-loader). The way it works is that you import your stylesheet at the top of the class with your React Component, and then you use the classnames returned from that import. Like so:
 
 ```javascript
-const styles = (function getStyle() {
-  if (__CLIENT__) {
-    return require('./App.scss');
-  }
-  const stats = require('../../webpack-stats.json');
-  return stats.css.modules[path.join(__dirname, './App.scss')];
-})();
+const styles = __CLIENT__ ?
+  require('./App.scss') :
+  requireServerCss(require.resolve('./App.scss'));
 ```
 
-That's a little ugly, I know, but what it allows is very powerful.
+Then you set the `className` of your element ot match one of the CSS classes in your SCSS file, and you're good to go!
 
 ```jsx
 <div className={styles.mySection}> ... </div>
