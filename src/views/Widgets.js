@@ -1,19 +1,12 @@
-import path from 'path';
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {isLoaded} from '../reducers/widgets';
 import {connect} from 'react-redux';
 import * as widgetActions from '../actions/widgetActions';
 import {load as loadWidgets} from '../actions/widgetActions';
-import {relativeToSrc} from '../util';
+import {requireServerCss} from '../util';
 
-const styles = (function getStyle() {
-  const stats = require('../../webpack-stats.json');
-  if (__CLIENT__) {
-    return require('./Widgets.scss');
-  }
-  return stats.css.modules[relativeToSrc(path.join(__dirname, './Widgets.scss'))];
-})();
+const styles = __CLIENT__ ? require('./Widgets.scss') : requireServerCss(require.resolve('./Widgets.scss'));
 
 class Widgets extends Component {
   static propTypes = {

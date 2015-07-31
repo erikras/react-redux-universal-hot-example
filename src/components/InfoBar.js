@@ -1,17 +1,10 @@
-import path from 'path';
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as infoActions from '../actions/infoActions';
-import {relativeToSrc} from '../util';
+import {requireServerCss} from '../util';
 
-const styles = (function getStyle() {
-  const stats = require('../../webpack-stats.json');
-  if (__CLIENT__) {
-    return require('./InfoBar.scss');
-  }
-  return stats.css.modules[relativeToSrc(path.join(__dirname, './InfoBar.scss'))];
-})();
+const styles = __CLIENT__ ? require('./InfoBar.scss') : requireServerCss(require.resolve('./InfoBar.scss'));
 
 class InfoBar extends Component {
   static propTypes = {

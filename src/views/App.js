@@ -1,4 +1,3 @@
-import path from 'path';
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
 import {bindActionCreators} from 'redux';
@@ -10,15 +9,9 @@ import * as authActions from '../actions/authActions';
 import {load as loadAuth} from '../actions/authActions';
 import InfoBar from '../components/InfoBar';
 import {createTransitionHook} from '../universalRouter';
-import {relativeToSrc} from '../util';
+import {requireServerCss} from '../util';
 
-const styles = (function getStyle() {
-  const stats = require('../../webpack-stats.json');
-  if (__CLIENT__) {
-    return require('./App.scss');
-  }
-  return stats.css.modules[relativeToSrc(path.resolve(__dirname, './App.scss'))];
-})();
+const styles = __CLIENT__ ? require('./App.scss') : requireServerCss(require.resolve('./App.scss'));
 
 class App extends Component {
   static propTypes = {
@@ -54,6 +47,7 @@ class App extends Component {
 
             <ul className="nav navbar-nav">
               <li><Link to="/widgets">Widgets</Link></li>
+              <li><Link to="/survey">Survey</Link></li>
               <li><Link to="/about">About Us</Link></li>
               <li><Link to="/redirect">Redirect to Home</Link></li>
               {!user && <li><Link to="/login">Login</Link></li>}
