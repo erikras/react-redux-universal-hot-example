@@ -59,7 +59,7 @@ Then we perform [server-side data fetching](#server-side-data-fetching), wait fo
 
 The last interesting bit of the main routing section of `server.js` is that we swap in the hashed script and css from the `webpack-stats.json` that the Webpack Dev Server – or the Webpack build process on production – has spit out on its last run.
 
-We also spit out the `redux` state into a global `window.__data__` variable in the webpage to be loaded by the client-side `redux` code.
+We also spit out the `redux` state into a global `window.__data` variable in the webpage to be loaded by the client-side `redux` code.
 
 #### Server-side Data Fetching
 
@@ -107,7 +107,7 @@ const styles = __CLIENT__ ?
   requireServerCss(require.resolve('./App.scss'));
 ```
 
-Then you set the `className` of your element ot match one of the CSS classes in your SCSS file, and you're good to go!
+Then you set the `className` of your element to match one of the CSS classes in your SCSS file, and you're good to go!
 
 ```jsx
 <div className={styles.mySection}> ... </div>
