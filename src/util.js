@@ -10,7 +10,7 @@ const readStats = () => {
 
 export function requireServerCss(cssPath) {
   if (__CLIENT__) {
-    throw new Error('image-resolver called on browser');
+    throw new Error('server-side only css resolver called on client');
   }
   return readStats().css.modules[cssPath.slice(__dirname.length)];
 }
@@ -20,7 +20,7 @@ export function requireServerImage(imagePath) {
     return '';
   }
   if (__CLIENT__) {
-    throw new Error('server-side only resolver called on client');
+    throw new Error('server-side only image resolver called on client');
   }
   const images = readStats().images;
   if (!images) {
