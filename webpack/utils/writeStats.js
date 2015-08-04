@@ -53,9 +53,11 @@ module.exports = function writeStats(stats, env) {
       }
     }
     //end
-    var regex = env === 'prod' ? /module\.exports = ((.|\n)+);/ : /exports\.locals = ((.|\n)+);/;
-    var match = m.source.match(regex);
-    cssModules[name] = match ? JSON.parse(match[1]) : {};
+    if (m.source) {
+      var regex = env === 'prod' ? /module\.exports = ((.|\n)+);/ : /exports\.locals = ((.|\n)+);/;
+      var match = m.source.match(regex);
+      cssModules[name] = match ? JSON.parse(match[1]) : {};
+    }
   });
 
   // Find compiled images in modules
