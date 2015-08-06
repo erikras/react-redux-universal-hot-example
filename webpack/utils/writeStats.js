@@ -33,18 +33,17 @@ module.exports = function writeStats(stats, env) {
 
   var cssModules = {};
 
-  // Is there a way to get this dynamically so it doesn't depend on loader?
-  var namePrefix = './~/css-loader?modules&importLoaders=2&localIdentName=[local]___[hash:base64:5]!./~/autoprefixer-loader?browsers=last 2 version!./~/sass-loader?outputStyle=expanded&sourceMap=true&sourceMapContents=true!';
-
   json.modules.filter(function(m) {
     if (env === 'prod') {
       return /\.scss$/.test(m.name);
     }
-    return m.name.slice(0, namePrefix.length) === namePrefix;
+    //filter by modules with '.scss' inside name string, that also have name and moduleName that end with 'ss'(allows for css, less, sass, and scss extensions)
+    //this ensures that the proper scss module is returned, so that namePrefix variable is no longer needed
+    return (/\.scss$/.test(m.name) && m.name.slice(-2) === 'ss' && m.reasons[0].moduleName.slice(-2) === 'ss');
   }).forEach(function(m) {
-    var name = path.resolve(__dirname, '../../', env === 'prod' ?
-      m.name.slice('./src'.length) :
-      m.name.slice(namePrefix.length + './src'.length));
+    //find index of '/src' inside the module name, slice it and resolve path
+    var srcIndex = m.name.indexOf('/src');
+    var name = path.resolve(__dirname, '../../', m.name.slice(srcIndex + '/src'.length));
     if (name) {
       // Resolve the e.g.: "C:\"  issue on windows
       const i = name.indexOf(':');
