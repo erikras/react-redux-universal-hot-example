@@ -26,7 +26,13 @@ class App extends Component {
 
   componentWillMount() {
     const {router, store} = this.context;
-    router.addTransitionHook(createTransitionHook(store));
+    this.transitionHook = createTransitionHook(store);
+    router.addTransitionHook(this.transitionHook);
+  }
+
+  componentWillUnmount() {
+    const {router, store} = this.context;
+    router.removeTransitionHook(this.transitionHook);
   }
 
   handleLogout(event) {

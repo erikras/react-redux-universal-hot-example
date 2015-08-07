@@ -3,6 +3,8 @@
 [![build status](https://img.shields.io/travis/erikras/react-redux-universal-hot-example/master.svg?style=flat-square)](https://travis-ci.org/erikras/react-redux-universal-hot-example)
 [![react-redux-example channel on slack](https://img.shields.io/badge/slack-react--redux--example%40reactiflux-blue.svg)](http://www.reactiflux.com)
 [![Demo on Heroku](https://img.shields.io/badge/demo-heroku-lightgrey.png)](https://react-redux.herokuapp.com)
+[![Dependency Status](https://david-dm.org/erikras/react-redux-universal-hot-example.svg)](https://david-dm.org/erikras/react-redux-universal-hot-example)
+[![devDependency Status](https://david-dm.org/erikras/react-redux-universal-hot-example/dev-status.svg)](https://david-dm.org/erikras/react-redux-universal-hot-example#info=devDependencies)
 
 This is a starter boiler plate app I've put together using the following technologies:
 
@@ -59,7 +61,7 @@ Then we perform [server-side data fetching](#server-side-data-fetching), wait fo
 
 The last interesting bit of the main routing section of `server.js` is that we swap in the hashed script and css from the `webpack-stats.json` that the Webpack Dev Server – or the Webpack build process on production – has spit out on its last run.
 
-We also spit out the `redux` state into a global `window.__data__` variable in the webpage to be loaded by the client-side `redux` code.
+We also spit out the `redux` state into a global `window.__data` variable in the webpage to be loaded by the client-side `redux` code.
 
 #### Server-side Data Fetching
 
@@ -107,7 +109,7 @@ const styles = __CLIENT__ ?
   requireServerCss(require.resolve('./App.scss'));
 ```
 
-Then you set the `className` of your element ot match one of the CSS classes in your SCSS file, and you're good to go!
+Then you set the `className` of your element to match one of the CSS classes in your SCSS file, and you're good to go!
 
 ```jsx
 <div className={styles.mySection}> ... </div>

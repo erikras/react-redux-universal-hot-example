@@ -15,15 +15,6 @@ class Login extends Component {
     logout: PropTypes.func
   }
 
-  state = {
-    username: ''
-  }
-
-  handleChange(event) {
-    // normally you would encapsulate this state tracking into the input component
-    this.setState({username: event.target.value});
-  }
-
   handleSubmit(event) {
     event.preventDefault();
     const input = this.refs.username.getDOMNode();  // need for getDOMNode() call going away in React 0.14
@@ -33,14 +24,13 @@ class Login extends Component {
 
   render() {
     const {user, logout} = this.props;
-    const {username} = this.state;
     return (
       <div className={styles.loginPage + ' container'}>
         <h1>Login</h1>
         {!user &&
         <div>
           <form className="login-form" onSubmit={::this.handleSubmit}>
-            <input type="text" value={username} ref="username" onChange={::this.handleChange} placeholder="Enter a username"/>
+            <input type="text" ref="username" placeholder="Enter a username"/>
             <button className="btn btn-success" onClick={::this.handleSubmit}><i className="fa fa-sign-in"/>{' '}Log In</button>
           </form>
           <p>This will "log you in" as this user, storing the username in the session of the API server.</p>
