@@ -11,6 +11,7 @@ class Survey extends Component {
     errors: PropTypes.object.isRequired,
     visited: PropTypes.object.isRequired,
     handleChange: PropTypes.func.isRequired,
+    handleBlur: PropTypes.func.isRequired,
     showAll: PropTypes.func.isRequired,
     reset: PropTypes.func.isRequired
   }
@@ -33,7 +34,7 @@ class Survey extends Component {
       data: {name, email, occupation},
       errors: {name: nameError, email: emailError, occupation: occupationError},
       visited: {name: nameVisited, email: emailVisited, occupation: occupationVisited},
-      handleChange
+      handleChange, handleBlur
       } = this.props;
     return (
       <div className="container">
@@ -64,7 +65,7 @@ class Survey extends Component {
                      id="name"
                      value={name}
                      onChange={handleChange('name')}
-                     onBlur={handleChange('name')}/>
+                     onBlur={handleBlur('name')}/>
               {nameError && nameVisited && <div className="text-danger">{nameError}</div>}
             </div>
           </div>
@@ -77,7 +78,7 @@ class Survey extends Component {
                      id="email"
                      value={email}
                      onChange={handleChange('email')}
-                     onBlur={handleChange('email')}/>
+                     onBlur={handleBlur('email')}/>
               {emailError && emailVisited && <div className="text-danger">{emailError}</div>}
             </div>
           </div>
@@ -90,7 +91,7 @@ class Survey extends Component {
                      id="occupation"
                      value={occupation}
                      onChange={handleChange('occupation')}
-                     onBlur={handleChange('occupation')}/>
+                     onBlur={handleBlur('occupation')}/>
               {occupationError && occupationVisited && <div className="text-danger">{occupationError}</div>}
             </div>
           </div>
@@ -110,4 +111,3 @@ class Survey extends Component {
     );
   }
 }
-
