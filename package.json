@@ -97,7 +97,7 @@
     "node-sass": "^3.2.0",
     "react-a11y": "0.1.1",
     "react-hot-loader": "1.2.7",
-    "sass-loader": "^1.0.2",
+    "sass-loader": "^2.0.0",
     "strip-loader": "^0.1.0",
     "style-loader": "^0.12.3",
     "webpack": "^1.9.11",
