@@ -1,4 +1,5 @@
 /* global __DEVTOOLS__ */
+import 'babel/polyfill';
 import React from 'react';
 import BrowserHistory from 'react-router/lib/BrowserHistory';
 import Location from 'react-router/lib/Location';
