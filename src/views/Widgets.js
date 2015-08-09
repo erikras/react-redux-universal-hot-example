@@ -70,7 +70,7 @@ class Widgets extends Component {
   error: state.widgets.error,
   loading: state.widgets.loading
 }))
-export default class WidgetsContainer {
+export default class WidgetsContainer extends Component {
   static propTypes = {
     widgets: PropTypes.array,
     error: PropTypes.string,

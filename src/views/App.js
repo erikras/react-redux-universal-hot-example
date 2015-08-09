@@ -35,6 +35,16 @@ class App extends Component {
     router.removeTransitionHook(this.transitionHook);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(!this.props.user && nextProps.user) {
+      // login
+      this.context.router.transitionTo('/loginSuccess');
+    } else if(this.props.user && !nextProps.user) {
+      // logout
+      this.context.router.transitionTo('/');
+    }
+  }
+
   handleLogout(event) {
     event.preventDefault();
     this.props.logout();
@@ -55,7 +65,6 @@ class App extends Component {
               <li><Link to="/widgets">Widgets</Link></li>
               <li><Link to="/survey">Survey</Link></li>
               <li><Link to="/about">About Us</Link></li>
-              <li><Link to="/redirect">Redirect to Home</Link></li>
               {!user && <li><Link to="/login">Login</Link></li>}
               {user && <li className="logout-link"><a href="/logout" onClick={::this.handleLogout}>Logout</a></li>}
             </ul>
@@ -89,7 +98,7 @@ class App extends Component {
   user: state.auth.user
 }))
 export default
-class AppContainer {
+class AppContainer extends Component {
   static propTypes = {
     user: PropTypes.object,
     dispatch: PropTypes.func.isRequired
