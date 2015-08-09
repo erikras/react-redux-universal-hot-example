@@ -31,15 +31,15 @@ class App extends Component {
   }
 
   componentWillUnmount() {
-    const {router, store} = this.context;
+    const {router} = this.context;
     router.removeTransitionHook(this.transitionHook);
   }
 
   componentWillReceiveProps(nextProps) {
-    if(!this.props.user && nextProps.user) {
+    if (!this.props.user && nextProps.user) {
       // login
       this.context.router.transitionTo('/loginSuccess');
-    } else if(this.props.user && !nextProps.user) {
+    } else if (this.props.user && !nextProps.user) {
       // logout
       this.context.router.transitionTo('/');
     }

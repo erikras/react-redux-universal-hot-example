@@ -19,7 +19,7 @@ export function minLength(min) {
     if (!isEmpty(value) && value.length < min) {
       return `Must be fewer than ${min} characters`;
     }
-  }
+  };
 }
 
 export function maxLength(max) {
@@ -27,7 +27,7 @@ export function maxLength(max) {
     if (!isEmpty(value) && value.length > max) {
       return `Must be fewer than ${max} characters`;
     }
-  }
+  };
 }
 
 export function createValidator(rules) {
@@ -41,5 +41,5 @@ export function createValidator(rules) {
       }
     });
     return errors;
-  }
+  };
 }

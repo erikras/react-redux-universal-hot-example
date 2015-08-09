@@ -59,7 +59,7 @@ app.use((req, res) => {
           React.renderToString(<Html webpackStats={webpackStats} component={component} store={store}/>));
       })
       .catch((error) => {
-        if(error.redirect) {
+        if (error.redirect) {
           res.redirect(error.redirect);
           return;
         }
