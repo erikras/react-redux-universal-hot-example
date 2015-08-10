@@ -53,7 +53,7 @@ class Login extends Component {
   user: state.auth.user
 }))
 export default
-class LoginContainer {
+class LoginContainer extends Component {
   static propTypes = {
     user: PropTypes.object,
     dispatch: PropTypes.func.isRequired

@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 export default function api() {
   return new Promise((resolve) => {
     app.use((req, res) => {
-      let matcher = req.url.split('/');
+      let matcher = req.url.split('?')[0].split('/');
       let action = matcher && actions[matcher[1]];
       if (action) {
         action(req, matcher.slice(2))

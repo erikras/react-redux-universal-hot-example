@@ -1,39 +1,61 @@
 import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
 import reduxForm from 'redux-form';
 import surveyValidation from '../validation/surveyValidation';
 
 
+@connect(state => ({
+  form: state.survey
+}))
 @reduxForm('survey', surveyValidation)
 export default
 class Survey extends Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
+    dirty: PropTypes.bool.isRequired,
     errors: PropTypes.object.isRequired,
-    visited: PropTypes.object.isRequired,
+    handleBlur: PropTypes.func.isRequired,
     handleChange: PropTypes.func.isRequired,
-    showAll: PropTypes.func.isRequired,
-    reset: PropTypes.func.isRequired
+    initializeForm: PropTypes.func.isRequired,
+    invalid: PropTypes.bool.isRequired,
+    pristine: PropTypes.bool.isRequired,
+    touch: PropTypes.func.isRequired,
+    touched: PropTypes.object.isRequired,
+    touchAll: PropTypes.func.isRequired,
+    untouch: PropTypes.func.isRequired,
+    untouchAll: PropTypes.func.isRequired,
+    resetForm: PropTypes.func.isRequired,
+    valid: PropTypes.bool.isRequired
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    const {data, showAll, reset} = this.props;
-    const errors = surveyValidation(data);
-    if (Object.keys(errors).some(key => errors[key])) {
-      showAll();
-      window.alert('Form is invalid!');
+    const {data, touchAll, resetForm, valid} = this.props;
+    if (valid) {
+      window.alert('Data submitted! ' + JSON.stringify(data));
+      resetForm();
     } else {
-      window.alert('Data submitted! ' + JSON.stringify(this.props.data));
-      reset();
+      touchAll();
+      window.alert('Form is invalid!');
     }
+  }
+
+  handleInitialize() {
+    const {initializeForm} = this.props;
+    initializeForm({name: 'Little Bobby Tables', email: 'bobby@gmail.com', occupation: 'Redux Wizard'});
   }
 
   render() {
     const {
       data: {name, email, occupation},
       errors: {name: nameError, email: emailError, occupation: occupationError},
-      visited: {name: nameVisited, email: emailVisited, occupation: occupationVisited},
-      handleChange
+      touched: {name: nameTouched, email: emailTouched, occupation: occupationTouched},
+      handleBlur,
+      handleChange,
+      valid,
+      invalid,
+      pristine,
+      dirty
       } = this.props;
     return (
       <div className="container">
@@ -50,12 +72,21 @@ class Survey extends Component {
 
         <ul>
           <li>No validation errors are shown initially.</li>
-          <li>Validation errors are only shown onChange and onBlur</li>
+          <li>Validation errors are only shown onBlur</li>
+          <li>Validation errors are hidden onChange when the error is rectified</li>
+          <li><code>valid</code>, <code>invalid</code>, <code>pristine</code> and <code>dirty</code> flags
+            are passed with each change</li>
           <li><em>Except</em> when you submit the form, in which case they are shown for all invalid fields.</li>
+          <li>If you click the Initialize Form button, the form will be prepopupated with some values and
+            the <code>pristine</code> and <code>dirty</code> flags will be based on those values.
+          </li>
         </ul>
 
+        <div style={{textAlign: 'center', margin: 15}}>
+          <button className="btn btn-primary" onClick={::this.handleInitialize}>Initialize Form</button>
+        </div>
         <form className="form-horizontal" onSubmit={::this.handleSubmit}>
-          <div className={'form-group' + (nameError && nameVisited ? ' has-error' : '')}>
+          <div className={'form-group' + (nameError && nameTouched ? ' has-error' : '')}>
             <label htmlFor="name" className="col-sm-2">Full Name</label>
 
             <div className="col-sm-10">
@@ -64,11 +95,11 @@ class Survey extends Component {
                      id="name"
                      value={name}
                      onChange={handleChange('name')}
-                     onBlur={handleChange('name')}/>
-              {nameError && nameVisited && <div className="text-danger">{nameError}</div>}
+                     onBlur={handleBlur('name')}/>
+              {nameError && nameTouched && <div className="text-danger">{nameError}</div>}
             </div>
           </div>
-          <div className={'form-group' + (emailError && emailVisited ? ' has-error' : '')}>
+          <div className={'form-group' + (emailError && emailTouched ? ' has-error' : '')}>
             <label htmlFor="email" className="col-sm-2">Email address</label>
 
             <div className="col-sm-10">
@@ -77,11 +108,11 @@ class Survey extends Component {
                      id="email"
                      value={email}
                      onChange={handleChange('email')}
-                     onBlur={handleChange('email')}/>
-              {emailError && emailVisited && <div className="text-danger">{emailError}</div>}
+                     onBlur={handleBlur('email')}/>
+              {emailError && emailTouched && <div className="text-danger">{emailError}</div>}
             </div>
           </div>
-          <div className={'form-group' + (occupationError && occupationVisited ? ' has-error' : '')}>
+          <div className={'form-group' + (occupationError && occupationTouched ? ' has-error' : '')}>
             <label htmlFor="occupation" className="col-sm-2">Occupation</label>
 
             <div className="col-sm-10">
@@ -90,8 +121,8 @@ class Survey extends Component {
                      id="occupation"
                      value={occupation}
                      onChange={handleChange('occupation')}
-                     onBlur={handleChange('occupation')}/>
-              {occupationError && occupationVisited && <div className="text-danger">{occupationError}</div>}
+                     onBlur={handleBlur('occupation')}/>
+              {occupationError && occupationTouched && <div className="text-danger">{occupationError}</div>}
             </div>
           </div>
           <div className="form-group">
@@ -106,6 +137,29 @@ class Survey extends Component {
         <p>
           Pardon the use of <code>window.alert()</code>, but I wanted to keep this component stateless.
         </p>
+
+        <h4>Props from redux-form</h4>
+
+        <table className="table table-striped">
+          <tbody>
+          <tr>
+            <th>Dirty</th>
+            <td className={dirty ? 'success' : 'danger'}>{dirty ? 'true' : 'false'}</td>
+          </tr>
+          <tr>
+            <th>Pristine</th>
+            <td className={pristine ? 'success' : 'danger'}>{pristine ? 'true' : 'false'}</td>
+          </tr>
+          <tr>
+            <th>Valid</th>
+            <td className={valid ? 'success' : 'danger'}>{valid ? 'true' : 'false'}</td>
+          </tr>
+          <tr>
+            <th>Invalid</th>
+            <td className={invalid ? 'success' : 'danger'}>{invalid ? 'true' : 'false'}</td>
+          </tr>
+          </tbody>
+        </table>
       </div>
     );
   }
