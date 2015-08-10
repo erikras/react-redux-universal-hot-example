@@ -21,6 +21,7 @@ This is a starter boiler plate app I've put together using the following technol
 * [Redux Dev Tools](https://github.com/gaearon/redux-devtools) for next generation DX (developer experience). Watch [Dan Abramov's talk](https://www.youtube.com/watch?v=xsSnOQynTHs).
 * [redux-form](https://github.com/erikras/redux-form) to manage form state in Redux
 * [style-loader](https://github.com/webpack/style-loader) and [sass-loader](https://github.com/jtangelder/sass-loader) to allow import of stylesheets
+* [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools) to allow require() work for statics both on client and server
 
 I cobbled this together from a wide variety of similar "starter" repositories. As I post this in June 2015, all of these libraries are right at the bleeding edge of web development. They may fall out of fashion as quickly as they have come into it, but I personally believe that this stack is the future of web development and will survive for several years. I'm building my new projects like this, and I recommend that you do, too.
 
@@ -59,7 +60,7 @@ The primary section of `server.js` generates an HTML page with the contents retu
 
 Then we perform [server-side data fetching](#server-side-data-fetching), wait for the data to be loaded, and render the page with the now-fully-loaded `redux` state.
 
-The last interesting bit of the main routing section of `server.js` is that we swap in the hashed script and css from the `webpack-stats.json` that the Webpack Dev Server – or the Webpack build process on production – has spit out on its last run.
+The last interesting bit of the main routing section of `server.js` is that we swap in the hashed script and css from the `webpack-stats.json` that the Webpack Dev Server – or the Webpack build process on production – has spit out on its last run. You won't have to deal with `webpack-stats.json` manually because [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools) take care of that.
 
 We also spit out the `redux` state into a global `window.__data` variable in the webpage to be loaded by the client-side `redux` code.
 
@@ -91,12 +92,7 @@ To understand how the data and action bindings get into the components – there
 Now it's possible to render the image both on client and server. Please refer to issue [#39](https://github.com/erikras/react-redux-universal-hot-example/issues/39) for more detail discussion, the usage would be like below (super easy):
 
 ```javascript
-let logoImage = '';
-if(__CLIENT__) {
-  logoImage = require('./logo.png');
-} else {
-  logoImage = requireServerImage('./logo.png');
-}
+let logoImage = require('./logo.png');
 ```
 
 #### Styles
@@ -104,9 +100,7 @@ if(__CLIENT__) {
 This project uses [local styles](https://medium.com/seek-ui-engineering/the-end-of-global-css-90d2a4a06284) using [css-loader](https://github.com/webpack/css-loader). The way it works is that you import your stylesheet at the top of the class with your React Component, and then you use the classnames returned from that import. Like so:
 
 ```javascript
-const styles = __CLIENT__ ?
-  require('./App.scss') :
-  requireServerCss(require.resolve('./App.scss'));
+const styles = require('./App.scss');
 ```
 
 Then you set the `className` of your element to match one of the CSS classes in your SCSS file, and you're good to go!

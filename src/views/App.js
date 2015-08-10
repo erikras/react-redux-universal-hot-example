@@ -9,9 +9,6 @@ import * as authActions from '../actions/authActions';
 import {load as loadAuth} from '../actions/authActions';
 import InfoBar from '../components/InfoBar';
 import {createTransitionHook} from '../universalRouter';
-import {requireServerCss} from '../util';
-
-const styles = __CLIENT__ ? require('./App.scss') : requireServerCss(require.resolve('./App.scss'));
 
 class App extends Component {
   static propTypes = {
@@ -52,6 +49,7 @@ class App extends Component {
 
   render() {
     const {user} = this.props;
+    const styles = require('./App.scss');
     return (
       <div className={styles.app}>
         <nav className="navbar navbar-default navbar-fixed-top">

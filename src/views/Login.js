@@ -4,9 +4,6 @@ import {connect} from 'react-redux';
 import {isLoaded as isAuthLoaded} from '../reducers/auth';
 import * as authActions from '../actions/authActions';
 import {load as loadAuth} from '../actions/authActions';
-import {requireServerCss} from '../util';
-
-const styles = __CLIENT__ ? require('./Login.scss') : requireServerCss(require.resolve('./Login.scss'));
 
 class Login extends Component {
   static propTypes = {
@@ -24,6 +21,7 @@ class Login extends Component {
 
   render() {
     const {user, logout} = this.props;
+    const styles = require('./Login.scss');
     return (
       <div className={styles.loginPage + ' container'}>
         <h1>Login</h1>

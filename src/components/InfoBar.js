@@ -2,9 +2,6 @@ import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as infoActions from '../actions/infoActions';
-import {requireServerCss} from '../util';
-
-const styles = __CLIENT__ ? require('./InfoBar.scss') : requireServerCss(require.resolve('./InfoBar.scss'));
 
 class InfoBar extends Component {
   static propTypes = {
@@ -14,6 +11,7 @@ class InfoBar extends Component {
 
   render() {
     const {info, load} = this.props;
+    const styles = require('./InfoBar.scss');
     return (
       <div className={styles.infoBar + ' well'}>
         <div className="container">
