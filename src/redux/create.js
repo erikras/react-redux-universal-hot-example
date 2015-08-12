@@ -18,6 +18,8 @@ export default function(client, data) {
   } else {
     finalCreateStore = applyMiddleware(middleware)(createStore);
   }
-  return finalCreateStore(reducer, data);
+  const store = finalCreateStore(reducer, data);
+  store.client = client;
+  return store;
 }
 
