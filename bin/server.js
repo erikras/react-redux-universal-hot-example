@@ -1,7 +1,9 @@
-require('babel/register')({
-  stage: 0,
-  plugins: ['typecheck']
-});
+#!/usr/bin/env node
+
+
+// enables ES6 support
+require('../compiler');
+
 
 /**
  * Define isomorphic constants.
@@ -20,4 +22,5 @@ if (__DEVELOPMENT__) {
   }
 }
 
-require('./src/server');
+
+require('../src/server');
