@@ -8,11 +8,20 @@ import {requireServerCss} from '../util';
 
 const styles = __CLIENT__ ? require('./Login.scss') : requireServerCss(require.resolve('./Login.scss'));
 
-class Login extends Component {
+@connect(
+    state => ({user: state.auth.user}),
+    dispatch => bindActionCreators(authActions, dispatch))
+export default class Login extends Component {
   static propTypes = {
     user: PropTypes.object,
     login: PropTypes.func,
     logout: PropTypes.func
+  }
+
+  static fetchData(store) {
+    if (!isAuthLoaded(store.getState())) {
+      return store.dispatch(loadAuth());
+    }
   }
 
   handleSubmit(event) {
@@ -31,7 +40,8 @@ class Login extends Component {
         <div>
           <form className="login-form" onSubmit={::this.handleSubmit}>
             <input type="text" ref="username" placeholder="Enter a username"/>
-            <button className="btn btn-success" onClick={::this.handleSubmit}><i className="fa fa-sign-in"/>{' '}Log In</button>
+            <button className="btn btn-success" onClick={::this.handleSubmit}><i className="fa fa-sign-in"/>{' '}Log In
+            </button>
           </form>
           <p>This will "log you in" as this user, storing the username in the session of the API server.</p>
         </div>
@@ -39,6 +49,7 @@ class Login extends Component {
         {user &&
         <div>
           <p>You are currently logged in as {user.name}.</p>
+
           <div>
             <button className="btn btn-danger" onClick={logout}><i className="fa fa-sign-out"/>{' '}Log Out</button>
           </div>
@@ -49,26 +60,3 @@ class Login extends Component {
   }
 }
 
-@connect(state => ({
-  user: state.auth.user
-}))
-export default
-class LoginContainer extends Component {
-  static propTypes = {
-    user: PropTypes.object,
-    dispatch: PropTypes.func.isRequired
-  }
-
-  static fetchData(store) {
-    if (!isAuthLoaded(store.getState())) {
-      return store.dispatch(loadAuth());
-    }
-  }
-
-  render() {
-    const { user, dispatch } = this.props;
-    return <Login user={user} {...bindActionCreators(authActions, dispatch)}>
-      {this.props.children}
-    </Login>;
-  }
-}
