@@ -16,7 +16,7 @@ export default class InfoBar extends Component {
   }
 
   render() {
-    const {info, load} = this.props;
+    const {info, load} = this.props; // eslint-disable-line no-shadow
     return (
       <div className={styles.infoBar + ' well'}>
         <div className="container">

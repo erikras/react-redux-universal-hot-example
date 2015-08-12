@@ -25,6 +25,12 @@ class Widgets extends Component {
     load: PropTypes.func.isRequired
   }
 
+  static fetchData(store) {
+    if (!isLoaded(store.getState())) {
+      return store.dispatch(loadWidgets());
+    }
+  }
+
   render() {
     const {widgets, error, loading, load} = this.props;
     let refreshClassName = 'fa fa-refresh';

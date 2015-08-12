@@ -18,7 +18,7 @@ export default class CounterButton extends Component {
   }
 
   render() {
-    const {count, increment} = this.props;
+    const {count, increment} = this.props; // eslint-disable-line no-shadow
     let {className} = this.props;
     className += ' btn btn-default';
     return (
