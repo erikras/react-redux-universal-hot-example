@@ -29,7 +29,11 @@
     "lint": "eslint -c .eslintrc src",
     "start-dev": "node ./node_modules/better-npm-run start-dev",
     "watch-client": "node ./node_modules/better-npm-run watch-client",
-    "dev": "concurrent --kill-others \"npm run watch-client\" \"npm run start-dev\""
+    "dev": "concurrent --kill-others \"npm run watch-client\" \"npm run start-dev\"",
+
+    "test": "scripts/test",
+    "test:watch": "scripts/test-watch",
+    "test:cov": "scripts/test-cov"
   },
   "betterScripts": {
     "start": {
@@ -102,7 +106,14 @@
     "strip-loader": "^0.1.0",
     "style-loader": "^0.12.3",
     "webpack": "^1.9.11",
-    "webpack-dev-server": "1.9.0"
+    "webpack-dev-server": "1.9.0",
+
+    "expect": "^1.7.0",
+    "isparta": "^3.0.3",
+    "jsdom": "~5.4.3",
+    "mocha": "^2.2.5",
+    "mocha-jsdom": "~0.4.0"
+
   },
   "engines": {
     "node": ">=0.10.32"
