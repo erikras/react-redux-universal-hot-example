@@ -3,14 +3,30 @@ import {connect} from 'react-redux';
 import reduxForm from 'redux-form';
 import surveyValidation from '../validation/surveyValidation';
 
+function asyncValidate(data) {
+  // TODO: figure out a way to move this to the server. need an instance of ApiClient
+  if (!data.email) {
+    return {}
+  }
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const errors = {};
+      if (~['bobby@gmail.com', 'timmy@microsoft.com'].indexOf(data.email)) {
+        errors.email = 'Email address already used';
+      }
+      resolve(errors);
+    }, 1000);
+  });
+}
 
 @connect(state => ({
   form: state.survey
 }))
-@reduxForm('survey', surveyValidation)
+@reduxForm('survey', surveyValidation, {validate: asyncValidate, fields: ['email']})
 export default
 class Survey extends Component {
   static propTypes = {
+    asyncValidating: PropTypes.bool.isRequired,
     data: PropTypes.object.isRequired,
     dirty: PropTypes.bool.isRequired,
     errors: PropTypes.object.isRequired,
@@ -31,13 +47,16 @@ class Survey extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const {data, touchAll, resetForm, valid} = this.props;
-    if (valid) {
-      window.alert('Data submitted! ' + JSON.stringify(data));
-      resetForm();
-    } else {
-      touchAll();
-      window.alert('Form is invalid!');
-    }
+    asyncValidate(data)
+      .then(errors => {
+        if (valid && !Object.keys(errors).length) {
+          window.alert('Data submitted! ' + JSON.stringify(data));
+          resetForm();
+        } else {
+          touchAll();
+          window.alert('Form is invalid!');
+        }
+      })
   }
 
   handleInitialize() {
@@ -50,6 +69,7 @@ class Survey extends Component {
       data: {name, email, occupation},
       errors: {name: nameError, email: emailError, occupation: occupationError},
       touched: {name: nameTouched, email: emailTouched, occupation: occupationTouched},
+      asyncValidating,
       handleBlur,
       handleChange,
       valid,
@@ -75,7 +95,8 @@ class Survey extends Component {
           <li>Validation errors are only shown onBlur</li>
           <li>Validation errors are hidden onChange when the error is rectified</li>
           <li><code>valid</code>, <code>invalid</code>, <code>pristine</code> and <code>dirty</code> flags
-            are passed with each change</li>
+            are passed with each change
+          </li>
           <li><em>Except</em> when you submit the form, in which case they are shown for all invalid fields.</li>
           <li>If you click the Initialize Form button, the form will be prepopupated with some values and
             the <code>pristine</code> and <code>dirty</code> flags will be based on those values.
@@ -110,6 +131,7 @@ class Survey extends Component {
                      onChange={handleChange('email')}
                      onBlur={handleBlur('email')}/>
               {emailError && emailTouched && <div className="text-danger">{emailError}</div>}
+              {asyncValidating && <div>Validating...</div>}
             </div>
           </div>
           <div className={'form-group' + (occupationError && occupationTouched ? ' has-error' : '')}>
