@@ -6,7 +6,7 @@ module.exports = function (config) {
 
     browsers: [ process.env.CONTINUOUS_INTEGRATION ? 'Firefox' : 'Chrome' ],
 
-    singleRun: false,
+    singleRun: true,
 
     frameworks: [ 'mocha' ],
 
