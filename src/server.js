@@ -19,16 +19,20 @@ const proxy = httpProxy.createProxyServer({
   target: 'http://localhost:' + config.apiPort
 });
 
+const baseDir = path.join(__dirname, '..');
+const staticDir = path.join(baseDir, 'static');
+const webpackStatsPath = '../webpack-stats.json';
+
 app.use(compression());
-app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
+app.use(favicon(path.join(staticDir, 'favicon.ico')));
 
 let webpackStats;
 
 if (!__DEVELOPMENT__) {
-  webpackStats = require('../webpack-stats.json');
+  webpackStats = require(webpackStatsPath);
 }
 
-app.use(require('serve-static')(path.join(__dirname, '..', 'static')));
+app.use(require('serve-static')(staticDir));
 
 // Proxy to API server
 app.use('/api', (req, res) => {
@@ -37,10 +41,10 @@ app.use('/api', (req, res) => {
 
 app.use((req, res) => {
   if (__DEVELOPMENT__) {
-    webpackStats = require('../webpack-stats.json');
+    webpackStats = require(webpackStatsPath);
     // Do not cache webpack stats: the script file would change since
     // hot module replacement is enabled in the development env
-    delete require.cache[require.resolve('../webpack-stats.json')];
+    delete require.cache[require.resolve(webpackStatsPath)];
   }
   const client = new ApiClient(req);
   const store = createStore(client);
