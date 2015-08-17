@@ -2,9 +2,6 @@ import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {load} from '../actions/infoActions';
-import {requireServerCss} from '../util';
-
-const styles = __CLIENT__ ? require('./InfoBar.scss') : requireServerCss(require.resolve('./InfoBar.scss'));
 
 @connect(
     state => ({info: state.info.data}),
@@ -17,6 +14,7 @@ export default class InfoBar extends Component {
 
   render() {
     const {info, load} = this.props; // eslint-disable-line no-shadow
+    const styles = require('./InfoBar.scss');
     return (
       <div className={styles.infoBar + ' well'}>
         <div className="container">
