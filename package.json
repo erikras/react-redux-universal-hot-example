@@ -22,7 +22,7 @@
     "boilerplate",
     "babel"
   ],
-  "main": "babel.server.js",
+  "main": "bin/server.js",
   "scripts": {
     "start": "node ./node_modules/better-npm-run start",
     "build": "webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
@@ -34,7 +34,7 @@
   },
   "betterScripts": {
     "start": {
-      "command": "node ./babel.server.js",
+      "command": "node ./bin/server.js",
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "production",
@@ -42,7 +42,7 @@
       }
     },
     "start-dev": {
-      "command": "node ./babel.server.js",
+      "command": "node ./bin/server.js",
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "development"
