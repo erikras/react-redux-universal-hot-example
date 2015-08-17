@@ -18,12 +18,12 @@ if (__DEVELOPMENT__) {
   }
 }
 
-// alternatively, if you you can skip using this and instead use this:
-// (and webpack DefinePlugin for setting _client_ environment variable)
-// const picture = _client_ ? require('./image.png') : webpackIsomorphicTools.require('./image.png')
+// https://github.com/halt-hammerzeit/webpack-isomorphic-tools
 var webpackConfiguration = require('../webpack/prod.config.js');
 var WebpackIsomorphicTools = require('webpack-isomorphic-tools');
-global.webpackIsomorphicTools = new WebpackIsomorphicTools(webpackConfiguration, require('../webpack/webpack-isomorphic-tools'));
-global.webpackIsomorphicTools.register();
-
-require('../src/server');
+global.webpackIsomorphicTools = new WebpackIsomorphicTools(require('../webpack/webpack-isomorphic-tools'))
+	.development(__DEVELOPMENT__)
+	.server(webpackConfiguration.context, function()
+	{
+		require('../src/server');
+	});

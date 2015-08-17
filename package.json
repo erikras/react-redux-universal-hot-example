@@ -79,7 +79,7 @@
     "serve-static": "^1.10.0",
     "superagent": "^1.2.0",
     "url-loader": "^0.5.6",
-    "webpack-isomorphic-tools": "^0.3.3"
+    "webpack-isomorphic-tools": "^0.8.1"
   },
   "devDependencies": {
     "redux-devtools": "1.0.2",
