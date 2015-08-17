@@ -1,9 +1,5 @@
 #!/usr/bin/env node
-
-
-// enables ES6 support
-require('../compiler');
-
+require('../compiler'); // enables ES6 support
 
 /**
  * Define isomorphic constants.
@@ -22,12 +18,12 @@ if (__DEVELOPMENT__) {
   }
 }
 
-// alternatively, if you you can skip using this and insted use this:
+// alternatively, if you you can skip using this and instead use this:
 // (and webpack DefinePlugin for setting _client_ environment variable)
 // const picture = _client_ ? require('./image.png') : webpackIsomorphicTools.require('./image.png')
-var webpackConfiguration = require('./webpack/prod.config.js');
+var webpackConfiguration = require('../webpack/prod.config.js');
 var WebpackIsomorphicTools = require('webpack-isomorphic-tools');
-global.webpackIsomorphicTools = new WebpackIsomorphicTools(webpackConfiguration, require('./webpack/webpack-isomorphic-tools'));
+global.webpackIsomorphicTools = new WebpackIsomorphicTools(webpackConfiguration, require('../webpack/webpack-isomorphic-tools'));
 global.webpackIsomorphicTools.register();
 
 require('../src/server');
