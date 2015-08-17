@@ -8,9 +8,6 @@ import {load as loadInfo} from '../actions/infoActions';
 import {load as loadAuth, logout} from '../actions/authActions';
 import InfoBar from '../components/InfoBar';
 import {createTransitionHook} from '../universalRouter';
-import {requireServerCss} from '../util';
-
-const styles = __CLIENT__ ? require('./App.scss') : requireServerCss(require.resolve('./App.scss'));
 
 @connect(
     state => ({user: state.auth.user}),
@@ -65,6 +62,7 @@ export default class App extends Component {
 
   render() {
     const {user} = this.props;
+    const styles = require('./App.scss');
     return (
       <div className={styles.app}>
         <nav className="navbar navbar-default navbar-fixed-top">

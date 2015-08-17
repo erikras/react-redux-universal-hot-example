@@ -22,12 +22,6 @@ const proxy = httpProxy.createProxyServer({
 app.use(compression());
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
 
-let webpackStats;
-
-if (!__DEVELOPMENT__) {
-  webpackStats = require('../webpack-stats.json');
-}
-
 app.use(require('serve-static')(path.join(__dirname, '..', 'static')));
 
 // Proxy to API server
@@ -37,17 +31,16 @@ app.use('/api', (req, res) => {
 
 app.use((req, res) => {
   if (__DEVELOPMENT__) {
-    webpackStats = require('../webpack-stats.json');
     // Do not cache webpack stats: the script file would change since
     // hot module replacement is enabled in the development env
-    delete require.cache[require.resolve('../webpack-stats.json')];
+    webpackIsomorphicTools.refresh();
   }
   const client = new ApiClient(req);
   const store = createStore(client);
   const location = new Location(req.path, req.query);
   if (__DISABLE_SSR__) {
     res.send('<!doctype html>\n' +
-      React.renderToString(<Html webpackStats={webpackStats} component={<div/>} store={store}/>));
+      React.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={<div/>} store={store}/>));
   } else {
     universalRouter(location, undefined, store)
       .then(({component, transition, isRedirect}) => {
@@ -56,7 +49,7 @@ app.use((req, res) => {
           return;
         }
         res.send('<!doctype html>\n' +
-          React.renderToString(<Html webpackStats={webpackStats} component={component} store={store}/>));
+          React.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store}/>));
       })
       .catch((error) => {
         if (error.redirect) {
