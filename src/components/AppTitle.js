@@ -2,6 +2,10 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Helmet from 'react-helmet';
 
+export const initTitle = 'React Redux Example';
+export const initDescription = 'All the modern best practices in one example.';
+export const initImage = 'https://react-redux.herokuapp.com/logo.jpg';
+
 export const siteName = 'React Redux Example';
 export const twitterAccount = '@erikras';
 

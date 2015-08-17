@@ -2,14 +2,12 @@ import {
   TITLE_META_UPDATE
 } from '../actions/actionTypes';
 
-const title = 'React Redux Example';
-const description = 'All the modern best practices in one example.';
-const image = 'https://react-redux.herokuapp.com/logo.jpg';
+import {initTitle, initDescription, initImage} from '../components/AppTitle';
 
 const initialState = {
-    title,
-    description,
-    image
+    title: initTitle,
+    description: initDescription,
+    image: initImage
 };
 
 export default function apptitle(state = initialState, action = {}) {
@@ -17,9 +15,9 @@ export default function apptitle(state = initialState, action = {}) {
     case TITLE_META_UPDATE:
       return {
         ...state,
-        title: action.titleObj.title,
-        description: action.titleObj.description,
-        image: action.titleObj.image
+        title: action.titleObj.title || initTitle,
+        description: action.titleObj.description || initDescription,
+        image: action.titleObj.image || initImage
       };
     default:
       return state;
