@@ -32,12 +32,13 @@ export function maxLength(max) {
 
 export function createValidator(rules) {
   return (data = {}) => {
-    const errors = {};
+    const errors = { valid: true };
     Object.keys(rules).forEach((key) => {
       const rule = join([].concat(rules[key])); // concat enables both functions and arrays of functions
       const error = rule(data[key]);
       if (error) {
         errors[key] = error;
+        errors.valid = false;
       }
     });
     return errors;
