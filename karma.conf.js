@@ -1,5 +1,4 @@
 var webpack = require('webpack');
-var writeStats = require('./webpack/utils/writeStats');
 
 module.exports = function (config) {
   config.set({
@@ -47,12 +46,7 @@ module.exports = function (config) {
           __SERVER__: false,
           __DEVELOPMENT__: true,
           __DEVTOOLS__: false  // <-------- DISABLE redux-devtools HERE
-        }),
-        function () {
-          this.plugin('done', function(stats) {
-            writeStats.call(this, stats, 'dev');
-          });
-        }
+        })
       ]
     },
 
