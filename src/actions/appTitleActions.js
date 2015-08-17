@@ -1,6 +1,6 @@
 import {
   TITLE_META_UPDATE
-} from './actionTypes';
+} from '../actions/actionTypes';
 
 export function updateTitleObj(titleObj = {}) {
   return {
