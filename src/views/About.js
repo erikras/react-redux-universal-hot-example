@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import MiniInfoBar from '../components/MiniInfoBar';
 import {requireServerImage} from '../util';
+import { updateTitleObj } from '../actions/appTitleActions';
 
 const kitten = __CLIENT__ ? require('./kitten.jpg') : requireServerImage('./kitten.jpg');
 
@@ -11,6 +12,13 @@ export default class About extends Component {
 
   handleToggleKitten() {
     this.setState({showKitten: !this.state.showKitten});
+  }
+
+  static fetchData(store) {
+    return store.dispatch(updateTitleObj({
+      title: 'About Page',
+      description: 'About description'
+    }));
   }
 
   render() {

@@ -7,6 +7,7 @@ import {isLoaded as isAuthLoaded} from '../reducers/auth';
 import {load as loadInfo} from '../actions/infoActions';
 import {load as loadAuth, logout} from '../actions/authActions';
 import InfoBar from '../components/InfoBar';
+import AppTitle from '../components/AppTitle';
 import {createTransitionHook} from '../universalRouter';
 import {requireServerCss} from '../util';
 
@@ -102,8 +103,8 @@ export default class App extends Component {
           target="_blank">on Github</a> or in the <a
           href="http://www.reactiflux.com/" target="_blank">#react-redux-universal</a> Slack channel.
         </div>
+        <AppTitle/>
       </div>
     );
   }
 }
-

@@ -3,6 +3,7 @@ import {Link} from 'react-router';
 import CounterButton from '../components/CounterButton';
 import GithubButton from '../components/GithubButton';
 import {requireServerCss, requireServerImage} from '../util';
+import { updateTitleObj } from '../actions/appTitleActions';
 
 const styles = __CLIENT__ ? require('./Home.scss') : requireServerCss(require.resolve('./Home.scss'));
 
@@ -15,6 +16,14 @@ if (__CLIENT__) {
 }
 
 export default class Home extends Component {
+
+  static fetchData(store) {
+    return store.dispatch(updateTitleObj({
+      title: 'Home Page',
+      description: 'Home description'
+    }));
+  }
+
   render() {
     return (
       <div className={styles.home}>

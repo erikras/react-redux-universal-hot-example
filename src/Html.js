@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import serialize from 'serialize-javascript';
 const cdn = '//cdnjs.cloudflare.com/ajax/libs/';
+import {siteName, twitterAccount} from './components/AppTitle';
 
 /**
  * Wrapper component containing HTML metadata and boilerplate tags.
@@ -20,22 +21,23 @@ export default class Html extends Component {
 
   render() {
     const {webpackStats, component, store} = this.props;
-    const title = 'React Redux Example';
-    const description = 'All the modern best practices in one example.';
-    const image = 'https://react-redux.herokuapp.com/logo.jpg';
+    const apptitle = store.getState().apptitle;
+    const title = apptitle.title;
+    const description = apptitle.description;
+    const image = apptitle.description.image;
     return (
       <html lang="en-us">
         <head>
           <meta charSet="utf-8"/>
           <title>{title}</title>
-          <meta property="og:site_name" content={title}/>
+          <meta property="og:site_name" content={siteName}/>
           <meta property="og:image" content={image}/>
           <meta property="og:locale" content="en_US"/>
           <meta property="og:title" content={title}/>
           <meta property="og:description" content={description}/>
           <meta name="twitter:card" content="summary"/>
-          <meta property="twitter:site" content="@erikras"/>
-          <meta property="twitter:creator" content="@erikras"/>
+          <meta property="twitter:site" content={twitterAccount}/>
+          <meta property="twitter:creator" content={twitterAccount}/>
           <meta property="twitter:image" content={image}/>
           <meta property="twitter:image:width" content="200"/>
           <meta property="twitter:image:height" content="200"/>

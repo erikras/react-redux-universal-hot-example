@@ -5,6 +5,7 @@ import {isLoaded as isAuthLoaded} from '../reducers/auth';
 import * as authActions from '../actions/authActions';
 import {load as loadAuth} from '../actions/authActions';
 import {requireServerCss} from '../util';
+import { updateTitleObj } from '../actions/appTitleActions';
 
 const styles = __CLIENT__ ? require('./Login.scss') : requireServerCss(require.resolve('./Login.scss'));
 
@@ -19,9 +20,16 @@ export default class Login extends Component {
   }
 
   static fetchData(store) {
+    const promises = [];
     if (!isAuthLoaded(store.getState())) {
-      return store.dispatch(loadAuth());
+      promises.push(store.dispatch(loadAuth()));
     }
+    promises.push(store.dispatch(updateTitleObj({
+        title: 'Login Page',
+        description: 'Login description'
+      }
+    )));
+    return promises;
   }
 
   handleSubmit(event) {
@@ -59,4 +67,3 @@ export default class Login extends Component {
     );
   }
 }
-
