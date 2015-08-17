@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import serialize from 'serialize-javascript';
+import DocumentMeta from 'react-document-meta';
 const cdn = '//cdnjs.cloudflare.com/ajax/libs/';
 
 /**
@@ -27,6 +28,7 @@ export default class Html extends Component {
       <html lang="en-us">
         <head>
           <meta charSet="utf-8"/>
+          {DocumentMeta.rewind({asReact: true})}
           <title>{title}</title>
           <meta property="og:site_name" content={title}/>
           <meta property="og:image" content={image}/>

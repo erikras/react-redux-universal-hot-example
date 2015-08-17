@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+import DocumentMeta from 'react-document-meta';
 import reduxForm from 'redux-form';
 import surveyValidation from '../validation/surveyValidation';
 
@@ -81,6 +82,7 @@ class Survey extends Component {
     return (
       <div className="container">
         <h1>Survey</h1>
+        <DocumentMeta title="React Redux Example: Survey"/>
 
         <p>
           This is an example of a form in redux in which all the state is kept within the redux store.

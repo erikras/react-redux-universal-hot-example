@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import DocumentMeta from 'react-document-meta';
 
 export default class RequireLogin extends Component {
   static onEnter(store) {
