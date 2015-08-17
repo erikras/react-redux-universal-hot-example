@@ -28,4 +28,3 @@ export default class InfoBar extends Component {
     );
   }
 }
-

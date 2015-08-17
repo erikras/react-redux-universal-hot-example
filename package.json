@@ -29,7 +29,9 @@
     "lint": "eslint -c .eslintrc src",
     "start-dev": "node ./node_modules/better-npm-run start-dev",
     "watch-client": "node ./node_modules/better-npm-run watch-client",
-    "dev": "concurrent --kill-others \"npm run watch-client\" \"npm run start-dev\""
+    "dev": "concurrent --kill-others \"npm run watch-client\" \"npm run start-dev\"",
+
+    "test": "karma start"
   },
   "betterScripts": {
     "start": {
@@ -103,7 +105,19 @@
     "strip-loader": "^0.1.0",
     "style-loader": "^0.12.3",
     "webpack": "^1.9.11",
-    "webpack-dev-server": "1.9.0"
+    "webpack-dev-server": "1.9.0",
+
+    "chai": "^3.2.0",
+    "karma": "^0.13.3",
+    "karma-chrome-launcher": "^0.2.0",
+    "karma-cli": "0.0.4",
+    "karma-firefox-launcher": "^0.1.4",
+    "karma-mocha": "^0.1.10",
+    "karma-sourcemap-loader": "^0.3.5",
+    "karma-webpack": "^1.7.0",
+    "mocha": "^2.2.5",
+    "karma-mocha-reporter": "^1.1.0"
+
   },
   "engines": {
     "node": ">=0.10.32"
