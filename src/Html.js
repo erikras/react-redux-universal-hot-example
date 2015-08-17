@@ -24,7 +24,7 @@ export default class Html extends Component {
     const apptitle = store.getState().apptitle;
     const title = apptitle.title;
     const description = apptitle.description;
-    const image = apptitle.description.image;
+    const image = apptitle.image;
     return (
       <html lang="en-us">
         <head>
