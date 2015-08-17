@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 require('../compiler'); // enables ES6 support
-
+var path = require('path');
+var rootDir = path.resolve(__dirname, '..');
 /**
  * Define isomorphic constants.
  */
@@ -19,11 +20,10 @@ if (__DEVELOPMENT__) {
 }
 
 // https://github.com/halt-hammerzeit/webpack-isomorphic-tools
-var webpackConfiguration = require('../webpack/prod.config.js');
 var WebpackIsomorphicTools = require('webpack-isomorphic-tools');
 global.webpackIsomorphicTools = new WebpackIsomorphicTools(require('../webpack/webpack-isomorphic-tools'))
 	.development(__DEVELOPMENT__)
-	.server(webpackConfiguration.context, function()
+	.server(rootDir, function()
 	{
 		require('../src/server');
 	});
