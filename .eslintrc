@@ -13,8 +13,7 @@
     "block-scoped-var": 0,
     // Temporarily disabled for test/* until babel/babel-eslint#33 is resolved
     "padded-blocks": 0,
-    "no-console": 0,
-    "no-unused-expressions": 0
+    "no-console": 0
   },
   "plugins": [
     "react"
