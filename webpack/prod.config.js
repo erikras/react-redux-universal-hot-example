@@ -2,7 +2,6 @@
 
 var path = require('path');
 var webpack = require('webpack');
-var WebpackIsomorphicTools = require('webpack-isomorphic-tools');
 var CleanPlugin = require('clean-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var strip = require('strip-loader');
@@ -10,7 +9,11 @@ var strip = require('strip-loader');
 var relativeAssetsPath = '../static/dist';
 var assetsPath = path.join(__dirname, relativeAssetsPath);
 
-var config = {
+// https://github.com/halt-hammerzeit/webpack-isomorphic-tools
+var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
+var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools'))
+
+module.exports = {
   devtool: 'source-map',
   context: path.resolve(__dirname, '..'),
   entry: {
@@ -26,7 +29,8 @@ var config = {
     loaders: [
       { test: /\.js$/, exclude: /node_modules/, loaders: [strip.loader('debug'), 'babel?stage=0&optional=runtime&plugins=typecheck']},
       { test: /\.json$/, loader: 'json-loader' },
-      { test: /\.scss$/, loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true') }
+      { test: /\.scss$/, loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true') },
+      { test: webpackIsomorphicToolsPlugin.regular_expression('images'), loader: 'url-loader?limit=10240' }
     ]
   },
   progress: true,
@@ -67,10 +71,8 @@ var config = {
       compress: {
           warnings: false
         }
-    })
+    }),
+
+    webpackIsomorphicToolsPlugin
   ]
 };
-
-new WebpackIsomorphicTools(config, require('./webpack-isomorphic-tools')).populate(config);
-
-module.exports = config;
