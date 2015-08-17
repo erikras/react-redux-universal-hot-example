@@ -9,8 +9,9 @@ import {requireServerCss} from '../util';
 const styles = __CLIENT__ ? require('./Login.scss') : requireServerCss(require.resolve('./Login.scss'));
 
 @connect(
-    state => ({user: state.auth.user}),
-    dispatch => bindActionCreators(authActions, dispatch))
+  state => ({user: state.auth.user}),
+  dispatch => bindActionCreators(authActions, dispatch)
+)
 export default class Login extends Component {
   static propTypes = {
     user: PropTypes.object,
@@ -59,4 +60,3 @@ export default class Login extends Component {
     );
   }
 }
-
