@@ -2,7 +2,7 @@
 
 var path = require('path');
 var webpack = require('webpack');
-var writeStats = require('./utils/writeStats');
+var WebpackIsomorphicTools = require('webpack-isomorphic-tools');
 var CleanPlugin = require('clean-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var strip = require('strip-loader');
@@ -10,7 +10,7 @@ var strip = require('strip-loader');
 var relativeAssetsPath = '../static/dist';
 var assetsPath = path.join(__dirname, relativeAssetsPath);
 
-module.exports = {
+var config = {
   devtool: 'source-map',
   context: path.resolve(__dirname, '..'),
   entry: {
@@ -24,7 +24,6 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.(jpe?g|png|gif|svg)$/, loader: 'url', query: {limit: 10240} },
       { test: /\.js$/, exclude: /node_modules/, loaders: [strip.loader('debug'), 'babel?stage=0&optional=runtime&plugins=typecheck']},
       { test: /\.json$/, loader: 'json-loader' },
       { test: /\.scss$/, loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true') }
@@ -68,13 +67,10 @@ module.exports = {
       compress: {
           warnings: false
         }
-    }),
-
-    // stats
-    function () {
-      this.plugin('done', function(stats) {
-        writeStats.call(this, stats, 'prod');
-      });
-    }
+    })
   ]
 };
+
+new WebpackIsomorphicTools(config, require('./webpack-isomorphic-tools')).populate(config);
+
+module.exports = config;

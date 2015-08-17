@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
 import MiniInfoBar from '../components/MiniInfoBar';
-import {requireServerImage} from '../util';
-
-const kitten = __CLIENT__ ? require('./kitten.jpg') : requireServerImage('./kitten.jpg');
 
 export default class About extends Component {
   state = {
@@ -15,6 +12,7 @@ export default class About extends Component {
 
   render() {
     const {showKitten} = this.state;
+    const kitten = require('./kitten.jpg');
     return (
       <div>
         <div className="container">

@@ -4,9 +4,6 @@ import {isLoaded} from '../reducers/widgets';
 import {connect} from 'react-redux';
 import * as widgetActions from '../actions/widgetActions';
 import {load as loadWidgets} from '../actions/widgetActions';
-import {requireServerCss} from '../util';
-
-const styles = __CLIENT__ ? require('./Widgets.scss') : requireServerCss(require.resolve('./Widgets.scss'));
 
 @connect(
     state => ({
@@ -37,6 +34,7 @@ class Widgets extends Component {
     if (loading) {
       refreshClassName += ' fa-spin';
     }
+    const styles = require('./Widgets.scss');
     return (
       <div className={styles.widgets + ' container'}>
         <h1>
