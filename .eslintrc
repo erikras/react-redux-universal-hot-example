@@ -23,6 +23,7 @@
     "__CLIENT__": true,
     "__SERVER__": true,
     "__DISABLE_SSR__": true,
-    "__DEVTOOLS__": true
+    "__DEVTOOLS__": true,
+    "webpackIsomorphicTools": true
   }
 }

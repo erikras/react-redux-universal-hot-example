@@ -11,7 +11,7 @@ function asyncValidate(data) {
   }
   return new Promise((resolve) => {
     setTimeout(() => {
-      const errors = {valid:true};
+      const errors = {valid: true};
       if (~['bobby@gmail.com', 'timmy@microsoft.com'].indexOf(data.email)) {
         errors.email = 'Email address already used';
         errors.valid = false;
@@ -58,7 +58,7 @@ class Survey extends Component {
           touchAll();
           window.alert('Form is invalid!');
         }
-      })
+      });
   }
 
   handleInitialize() {
