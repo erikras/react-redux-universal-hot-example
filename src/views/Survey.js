@@ -1,18 +1,20 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+import DocumentMeta from 'react-document-meta';
 import reduxForm from 'redux-form';
 import surveyValidation from '../validation/surveyValidation';
 
 function asyncValidate(data) {
   // TODO: figure out a way to move this to the server. need an instance of ApiClient
   if (!data.email) {
-    return {}
+    return Promise.resolve({valid: true});
   }
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     setTimeout(() => {
-      const errors = {};
+      const errors = {valid: true};
       if (~['bobby@gmail.com', 'timmy@microsoft.com'].indexOf(data.email)) {
         errors.email = 'Email address already used';
+        errors.valid = false;
       }
       resolve(errors);
     }, 1000);
@@ -56,7 +58,7 @@ class Survey extends Component {
           touchAll();
           window.alert('Form is invalid!');
         }
-      })
+      });
   }
 
   handleInitialize() {
@@ -80,6 +82,7 @@ class Survey extends Component {
     return (
       <div className="container">
         <h1>Survey</h1>
+        <DocumentMeta title="React Redux Example: Survey"/>
 
         <p>
           This is an example of a form in redux in which all the state is kept within the redux store.

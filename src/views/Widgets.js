@@ -1,12 +1,10 @@
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
+import DocumentMeta from 'react-document-meta';
 import {isLoaded} from '../reducers/widgets';
 import {connect} from 'react-redux';
 import * as widgetActions from '../actions/widgetActions';
 import {load as loadWidgets} from '../actions/widgetActions';
-import {requireServerCss} from '../util';
-
-const styles = __CLIENT__ ? require('./Widgets.scss') : requireServerCss(require.resolve('./Widgets.scss'));
 
 @connect(
     state => ({
@@ -37,6 +35,7 @@ class Widgets extends Component {
     if (loading) {
       refreshClassName += ' fa-spin';
     }
+    const styles = require('./Widgets.scss');
     return (
       <div className={styles.widgets + ' container'}>
         <h1>
@@ -45,6 +44,7 @@ class Widgets extends Component {
             className={refreshClassName}/> {' '} Reload Widgets
           </button>
         </h1>
+        <DocumentMeta title="React Redux Example: Widgets"/>
         <p>
           This data was loaded from the server before this route was rendered. If you hit refresh on your browser, the
           data loading will take place on the server before the page is returned. If you navigated here from another

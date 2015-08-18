@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import serialize from 'serialize-javascript';
+import DocumentMeta from 'react-document-meta';
 const cdn = '//cdnjs.cloudflare.com/ajax/libs/';
 
 /**
@@ -13,13 +14,13 @@ const cdn = '//cdnjs.cloudflare.com/ajax/libs/';
  */
 export default class Html extends Component {
   static propTypes = {
-    webpackStats: PropTypes.object,
+    assets: PropTypes.object,
     component: PropTypes.object,
     store: PropTypes.object
   }
 
   render() {
-    const {webpackStats, component, store} = this.props;
+    const {assets, component, store} = this.props;
     const title = 'React Redux Example';
     const description = 'All the modern best practices in one example.';
     const image = 'https://react-redux.herokuapp.com/logo.jpg';
@@ -27,6 +28,7 @@ export default class Html extends Component {
       <html lang="en-us">
         <head>
           <meta charSet="utf-8"/>
+          {DocumentMeta.rewind({asReact: true})}
           <title>{title}</title>
           <meta property="og:site_name" content={title}/>
           <meta property="og:image" content={image}/>
@@ -47,14 +49,17 @@ export default class Html extends Component {
                 media="screen, projection" rel="stylesheet" type="text/css" />
           <link href={cdn + 'font-awesome/4.3.0/css/font-awesome.min.css'}
                 media="screen, projection" rel="stylesheet" type="text/css" />
-          {webpackStats.css.files.map((css, i) =>
-            <link href={css} key={i} media="screen, projection"
-                  rel="stylesheet" type="text/css"/>)}
+
+          {/* styles (will be present only in production with webpack extract text plugin) */}
+          {Object.keys(assets.styles).map((style, i) =>
+            <link href={assets.styles[style]} key={i} media="screen, projection"
+                  rel="stylesheet" type="text/css"/>
+          )}
         </head>
         <body>
           <div id="content" dangerouslySetInnerHTML={{__html: React.renderToString(component)}}/>
           <script dangerouslySetInnerHTML={{__html: `window.__data=${serialize(store.getState())};`}} />
-          <script src={webpackStats.script[0]}/>
+          <script src={assets.javascript.main}/>
         </body>
       </html>
     );
