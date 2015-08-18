@@ -2,7 +2,16 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import createMiddleware from './clientMiddleware';
 import * as reducers from '../reducers/index';
-const reducer = combineReducers(reducers);
+
+let reducer = combineReducers(reducers);
+let lastCreatedStore;
+
+if (module.hot) {
+  module.hot.accept('../reducers/index', () => {
+    reducer = combineReducers(require('../reducers/index'));
+    lastCreatedStore.replaceReducer(reducer);
+  });
+}
 
 export default function(client, data) {
   const middleware = createMiddleware(client);
@@ -20,6 +29,7 @@ export default function(client, data) {
   }
   const store = finalCreateStore(reducer, data);
   store.client = client;
+  lastCreatedStore = store;
   return store;
 }
 
