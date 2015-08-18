@@ -17,7 +17,7 @@ export function required(value) {
 export function minLength(min) {
   return value => {
     if (!isEmpty(value) && value.length < min) {
-      return `Must be fewer than ${min} characters`;
+      return `Must be more than ${min} characters`;
     }
   };
 }
