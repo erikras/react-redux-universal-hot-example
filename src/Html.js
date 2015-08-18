@@ -29,20 +29,6 @@ export default class Html extends Component {
         <head>
           <meta charSet="utf-8"/>
           {DocumentMeta.rewind({asReact: true})}
-          <title>{title}</title>
-          <meta property="og:site_name" content={title}/>
-          <meta property="og:image" content={image}/>
-          <meta property="og:locale" content="en_US"/>
-          <meta property="og:title" content={title}/>
-          <meta property="og:description" content={description}/>
-          <meta name="twitter:card" content="summary"/>
-          <meta property="twitter:site" content="@erikras"/>
-          <meta property="twitter:creator" content="@erikras"/>
-          <meta property="twitter:image" content={image}/>
-          <meta property="twitter:image:width" content="200"/>
-          <meta property="twitter:image:height" content="200"/>
-          <meta property="twitter:title" content={title}/>
-          <meta property="twitter:description" content={description}/>
 
           <link rel="shortcut icon" href="/favicon.ico" />
           <link href={cdn + 'twitter-bootstrap/3.3.5/css/bootstrap.css'}
