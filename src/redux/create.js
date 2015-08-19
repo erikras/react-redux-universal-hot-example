@@ -1,6 +1,5 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import createMiddleware from './clientMiddleware';
-import * as reducers from '../reducers/index';
 
 export default function(client, data) {
   const middleware = createMiddleware(client);

@@ -2,13 +2,12 @@ import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import DocumentMeta from 'react-document-meta';
-import reduxForm, {initialize} from 'redux-form';
+import {initialize} from 'redux-form';
 import SurveyForm from '../components/SurveyForm';
-import surveyValidation from '../validation/surveyValidation';
 
 @connect(
-    state => ({}),
-    dispatch => bindActionCreators({initialize}, dispatch)
+  () => ({}),
+  dispatch => bindActionCreators({initialize}, dispatch)
 )
 export default class Survey extends Component {
   static propTypes = {

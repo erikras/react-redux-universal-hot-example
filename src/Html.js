@@ -21,9 +21,6 @@ export default class Html extends Component {
 
   render() {
     const {assets, component, store} = this.props;
-    const title = 'React Redux Example';
-    const description = 'All the modern best practices in one example.';
-    const image = 'https://react-redux.herokuapp.com/logo.jpg';
     return (
       <html lang="en-us">
         <head>
