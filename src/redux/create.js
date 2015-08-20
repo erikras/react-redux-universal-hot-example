@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import createMiddleware from './clientMiddleware';
 
-export default function(client, data) {
+export default function createStoreWithAPIClientAndInitialState(client, data) {
   const middleware = createMiddleware(client);
   let finalCreateStore;
   if (__DEVELOPMENT__ && __CLIENT__ && __DEVTOOLS__) {
