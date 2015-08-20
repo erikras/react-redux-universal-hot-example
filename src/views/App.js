@@ -42,7 +42,7 @@ const meta = {
     dispatch => bindActionCreators({logout}, dispatch))
 export default class App extends Component {
   static propTypes = {
-    children: PropTypes.array.isRequired,
+    children: PropTypes.object.isRequired,
     user: PropTypes.object,
     logout: PropTypes.func.isRequired
   }
