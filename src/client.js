@@ -1,4 +1,6 @@
-/* global __DEVTOOLS__ */
+/**
+ * THIS IS THE ENTRY POINT FOR THE CLIENT, JUST LIKE server.js IS THE ENTRY POINT FOR THE SERVER.
+ */
 import 'babel/polyfill';
 import React from 'react';
 import BrowserHistory from 'react-router/lib/BrowserHistory';
