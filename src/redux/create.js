@@ -10,7 +10,7 @@ export default function createApiClientStore(client, data) {
       applyMiddleware(middleware),
       devTools(),
       persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)),
-      createStorem
+      createStore
     );
   } else {
     finalCreateStore = applyMiddleware(middleware)(createStore);
