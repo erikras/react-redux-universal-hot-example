@@ -7,12 +7,12 @@ import * as widgetActions from '../actions/widgetActions';
 import {load as loadWidgets} from '../actions/widgetActions';
 
 @connect(
-    state => ({
+  state => ({
     widgets: state.widgets.data,
     error: state.widgets.error,
     loading: state.widgets.loading
   }),
-    dispatch => bindActionCreators(widgetActions, dispatch)
+  dispatch => bindActionCreators(widgetActions, dispatch)
 )
 export default
 class Widgets extends Component {
@@ -21,12 +21,6 @@ class Widgets extends Component {
     error: PropTypes.string,
     loading: PropTypes.bool,
     load: PropTypes.func.isRequired
-  }
-
-  static fetchData(store) {
-    if (!isLoaded(store.getState())) {
-      return store.dispatch(loadWidgets());
-    }
   }
 
   render() {
@@ -79,6 +73,12 @@ class Widgets extends Component {
         </table>}
       </div>
     );
+  }
+
+  static fetchData(store) {
+    if (!isLoaded(store.getState())) {
+      return store.dispatch(loadWidgets());
+    }
   }
 }
 

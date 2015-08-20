@@ -42,6 +42,7 @@ const meta = {
     dispatch => bindActionCreators({logout}, dispatch))
 export default class App extends Component {
   static propTypes = {
+    children: PropTypes.array.isRequired,
     user: PropTypes.object,
     logout: PropTypes.func.isRequired
   }
@@ -51,26 +52,10 @@ export default class App extends Component {
     store: PropTypes.object.isRequired
   };
 
-  static fetchData(store) {
-    const promises = [];
-    if (!isInfoLoaded(store.getState())) {
-      promises.push(store.dispatch(loadInfo()));
-    }
-    if (!isAuthLoaded(store.getState())) {
-      promises.push(store.dispatch(loadAuth()));
-    }
-    return Promise.all(promises);
-  }
-
   componentWillMount() {
     const {router, store} = this.context;
     this.transitionHook = createTransitionHook(store);
     router.addTransitionHook(this.transitionHook);
-  }
-
-  componentWillUnmount() {
-    const {router} = this.context;
-    router.removeTransitionHook(this.transitionHook);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -83,9 +68,9 @@ export default class App extends Component {
     }
   }
 
-  handleLogout(event) {
-    event.preventDefault();
-    this.props.logout();
+  componentWillUnmount() {
+    const {router} = this.context;
+    router.removeTransitionHook(this.transitionHook);
   }
 
   render() {
@@ -131,6 +116,22 @@ export default class App extends Component {
         </div>
       </div>
     );
+  }
+
+  handleLogout(event) {
+    event.preventDefault();
+    this.props.logout();
+  }
+
+  static fetchData(store) {
+    const promises = [];
+    if (!isInfoLoaded(store.getState())) {
+      promises.push(store.dispatch(loadInfo()));
+    }
+    if (!isAuthLoaded(store.getState())) {
+      promises.push(store.dispatch(loadAuth()));
+    }
+    return Promise.all(promises);
   }
 }
 
