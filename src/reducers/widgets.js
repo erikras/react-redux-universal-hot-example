@@ -1,11 +1,18 @@
 import {
   WIDGET_LOAD,
   WIDGET_LOAD_SUCCESS,
-  WIDGET_LOAD_FAIL
+  WIDGET_LOAD_FAIL,
+  WIDGET_EDIT_START,
+  WIDGET_EDIT_STOP,
+  WIDGET_SAVE,
+  WIDGET_SAVE_SUCCESS,
+  WIDGET_SAVE_FAIL
 } from '../actions/actionTypes';
 
 const initialState = {
-  loaded: false
+  loaded: false,
+  editing: {},
+  saveError: {}
 };
 
 export default function widgets(state = initialState, action = {}) {
@@ -30,6 +37,47 @@ export default function widgets(state = initialState, action = {}) {
         loaded: false,
         data: null,
         error: action.error
+      };
+    case WIDGET_EDIT_START:
+      return {
+        ...state,
+        editing: {
+          ...state.editing,
+          [action.id]: true
+        }
+      };
+    case WIDGET_EDIT_STOP:
+      return {
+        ...state,
+        editing: {
+          ...state.editing,
+          [action.id]: false
+        }
+      };
+    case WIDGET_SAVE:
+      return state; // 'saving' flag handled by redux-form
+    case WIDGET_SAVE_SUCCESS:
+      const data = [...state.data];
+      data[action.result.id - 1] = action.result;
+      return {
+        ...state,
+        data: data,
+        editing: {
+          ...state.editing,
+          [action.id]: false
+        },
+        saveError: {
+          ...state.saveError,
+          [action.id]: null
+        }
+      };
+    case WIDGET_SAVE_FAIL:
+      return {
+        ...state,
+        saveError: {
+          ...state.saveError,
+          [action.id]: action.error
+        }
       };
     default:
       return state;

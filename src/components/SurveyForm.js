@@ -21,9 +21,9 @@ function asyncValidator(data) {
 }
 
 @connect(state => ({
-  form: state.survey
+  form: state.surveyForm
 }))
-@reduxForm('survey', surveyValidation).async(asyncValidator, 'email')
+@reduxForm('surveyForm', surveyValidation).async(asyncValidator, 'email')
 export default
 class SurveyForm extends Component {
   static propTypes = {

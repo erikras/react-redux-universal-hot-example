@@ -1,4 +1,4 @@
-export default function(req) {
+export default function login(req) {
   const user = {
     name: req.body.name
   };
