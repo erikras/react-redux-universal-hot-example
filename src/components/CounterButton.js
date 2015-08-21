@@ -13,10 +13,6 @@ export default class CounterButton extends Component {
     className: PropTypes.string
   }
 
-  props = {
-    className: ''
-  }
-
   render() {
     const {count, increment} = this.props; // eslint-disable-line no-shadow
     let {className} = this.props;
@@ -26,6 +22,10 @@ export default class CounterButton extends Component {
         You have clicked me {count} time{count === 1 ? '' : 's'}.
       </button>
     );
+  }
+
+  props = {
+    className: ''
   }
 }
 

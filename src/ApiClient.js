@@ -13,7 +13,7 @@ class ApiClient_ {
       forEach((method) => {
         this[method] = (path, options) => {
           return new Promise((resolve, reject) => {
-            let request = superagent[method](this.formatUrl(path));
+            const request = superagent[method](this.formatUrl(path));
             if (options && options.params) {
               request.query(options.params);
             }
@@ -39,7 +39,7 @@ class ApiClient_ {
 
   /* This was originally a standalone function outside of this class, but babel kept breaking, and this fixes it  */
   formatUrl(path) {
-    let adjustedPath = path[0] !== '/' ? '/' + path : path;
+    const adjustedPath = path[0] !== '/' ? '/' + path : path;
     if (__SERVER__) {
       // Prepend host and port of the API server to the path.
       return 'http://localhost:' + config.apiPort + adjustedPath;

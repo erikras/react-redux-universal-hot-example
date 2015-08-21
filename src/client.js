@@ -1,8 +1,11 @@
-/* global __DEVTOOLS__ */
+/**
+ * THIS IS THE ENTRY POINT FOR THE CLIENT, JUST LIKE server.js IS THE ENTRY POINT FOR THE SERVER.
+ */
 import 'babel/polyfill';
 import React from 'react';
 import BrowserHistory from 'react-router/lib/BrowserHistory';
 import Location from 'react-router/lib/Location';
+import queryString from 'query-string';
 import createStore from './redux/create';
 import ApiClient from './ApiClient';
 import universalRouter from './universalRouter';
@@ -11,7 +14,9 @@ const client = new ApiClient();
 
 const dest = document.getElementById('content');
 const store = createStore(client, window.__data);
-const location = new Location(document.location.pathname, document.location.search);
+const search = document.location.search;
+const query = search && queryString.parse(search);
+const location = new Location(document.location.pathname, query);
 universalRouter(location, history, store)
   .then(({component}) => {
     if (__DEVTOOLS__) {

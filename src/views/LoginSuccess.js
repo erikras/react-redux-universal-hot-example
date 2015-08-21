@@ -16,12 +16,6 @@ class LoginSuccess extends Component {
     logout: PropTypes.func
   }
 
-  static fetchData(store) {
-    if (!isAuthLoaded(store.getState())) {
-      return store.dispatch(loadAuth());
-    }
-  }
-
   render() {
     const {user, logout} = this.props;
     return (
@@ -44,5 +38,11 @@ class LoginSuccess extends Component {
         </div>
       </div>
     );
+  }
+
+  static fetchData(store) {
+    if (!isAuthLoaded(store.getState())) {
+      return store.dispatch(loadAuth());
+    }
   }
 }

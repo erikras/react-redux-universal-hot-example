@@ -5,14 +5,22 @@ import {isLoaded} from '../reducers/widgets';
 import {connect} from 'react-redux';
 import * as widgetActions from '../actions/widgetActions';
 import {load as loadWidgets} from '../actions/widgetActions';
+import {initializeWithKey} from 'redux-form';
+import WidgetForm from '../components/WidgetForm';
 
 @connect(
-    state => ({
+  state => ({
     widgets: state.widgets.data,
+    editing: state.widgets.editing,
     error: state.widgets.error,
     loading: state.widgets.loading
   }),
-    dispatch => bindActionCreators(widgetActions, dispatch)
+  dispatch => ({
+    ...bindActionCreators({
+      ...widgetActions,
+      initializeWithKey
+    }, dispatch)
+  })
 )
 export default
 class Widgets extends Component {
@@ -20,17 +28,15 @@ class Widgets extends Component {
     widgets: PropTypes.array,
     error: PropTypes.string,
     loading: PropTypes.bool,
-    load: PropTypes.func.isRequired
-  }
-
-  static fetchData(store) {
-    if (!isLoaded(store.getState())) {
-      return store.dispatch(loadWidgets());
-    }
+    initializeWithKey: PropTypes.func.isRequired,
+    editing: PropTypes.object.isRequired,
+    load: PropTypes.func.isRequired,
+    editStart: PropTypes.func.isRequired,
+    editStop: PropTypes.func.isRequired
   }
 
   render() {
-    const {widgets, error, loading, load} = this.props;
+    const {widgets, error, editing, loading, load} = this.props;
     let refreshClassName = 'fa fa-refresh';
     if (loading) {
       refreshClassName += ' fa-spin';
@@ -50,6 +56,9 @@ class Widgets extends Component {
           data loading will take place on the server before the page is returned. If you navigated here from another
           page, the data was fetched from the client.
         </p>
+        <p>
+          This widgets are stored in your session, so feel free to edit it and refresh.
+        </p>
         {error &&
         <div className="alert alert-danger" role="alert">
           <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -60,25 +69,47 @@ class Widgets extends Component {
         <table className="table table-striped">
           <thead>
           <tr>
-            <th>ID</th>
-            <th>Color</th>
-            <th>Sprockets</th>
-            <th>Owner</th>
+            <th className={styles.idCol}>ID</th>
+            <th className={styles.colorCol}>Color</th>
+            <th className={styles.sprocketsCol}>Sprockets</th>
+            <th className={styles.ownerCol}>Owner</th>
+            <th className={styles.buttonCol}></th>
           </tr>
           </thead>
           <tbody>
           {
-            widgets.map((widget) => <tr key={widget.id}>
-              <td>{widget.id}</td>
-              <td>{widget.color}</td>
-              <td>{widget.sprocketCount}</td>
-              <td>{widget.owner}</td>
-            </tr>)
+            widgets.map((widget) => editing[widget.id] ?
+              <WidgetForm sliceKey={String(widget.id)}/> :
+              <tr key={widget.id}>
+                <td className={styles.idCol}>{widget.id}</td>
+                <td className={styles.colorCol}>{widget.color}</td>
+                <td className={styles.sprocketsCol}>{widget.sprocketCount}</td>
+                <td className={styles.ownerCol}>{widget.owner}</td>
+                <td className={styles.buttonCol}>
+                  <button className="btn btn-primary" onClick={::this.handleEdit(widget)}>
+                    <i className="fa fa-pencil"/> Edit
+                  </button>
+                </td>
+              </tr>)
           }
           </tbody>
         </table>}
       </div>
     );
+  }
+
+  handleEdit(widget) {
+    const {editStart, initializeWithKey} = this.props;
+    return () => {
+      initializeWithKey('widgetForm', widget.id, widget);
+      editStart(String(widget.id));
+    };
+  }
+
+  static fetchData(store) {
+    if (!isLoaded(store.getState())) {
+      return store.dispatch(loadWidgets());
+    }
   }
 }
 

@@ -1,10 +1,7 @@
-/* global __DEVELOPMENT__, __CLIENT__, __DEVTOOLS__ */
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import createMiddleware from './clientMiddleware';
-import * as reducers from '../reducers/index';
-const reducer = combineReducers(reducers);
 
-export default function(client, data) {
+export default function createApiClientStore(client, data) {
   const middleware = createMiddleware(client);
   let finalCreateStore;
   if (__DEVELOPMENT__ && __CLIENT__ && __DEVTOOLS__) {
@@ -18,8 +15,17 @@ export default function(client, data) {
   } else {
     finalCreateStore = applyMiddleware(middleware)(createStore);
   }
+
+  const reducer = combineReducers(require('../reducers/index'));
   const store = finalCreateStore(reducer, data);
   store.client = client;
+
+  if (module.hot) {
+    module.hot.accept('../reducers/index', () => {
+      const nextReducer = combineReducers(require('../reducers/index'));
+      store.replaceReducer(nextReducer);
+    });
+  }
+
   return store;
 }
-

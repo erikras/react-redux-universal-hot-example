@@ -1,7 +1,8 @@
 export default function clientMiddleware(client) {
-  return ({/* dispatch, getState */}) => {
-    return (next) => (action) => {
-      const { promise, types, ...rest } = action;
+  return ({dispatch, getState}) => {
+    return next => action => {
+      const { promise, types, ...rest } =
+        typeof action === 'function' ? action(dispatch, getState) : action;
       if (!promise) {
         return next(action);
       }
