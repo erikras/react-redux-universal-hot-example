@@ -76,7 +76,7 @@ export default class WidgetForm extends Component {
           <button className="btn btn-success"
                   onClick={handleSubmit(() => save(data))}
                   disabled={pristine || invalid || submitting}>
-            <i className={'fa '+(submitting ? 'fa-cog fa-spin' : 'fa-cloud')}/> Save
+            <i className={'fa ' + (submitting ? 'fa-cog fa-spin' : 'fa-cloud')}/> Save
           </button>
           {saveError && <div className="text-danger">{saveError}</div>}
         </td>

@@ -99,7 +99,7 @@ class Widgets extends Component {
   }
 
   handleEdit(widget) {
-    const {editStart, initializeWithKey} = this.props;
+    const {editStart, initializeWithKey} = this.props; // eslint-disable-line no-shadow
     return () => {
       initializeWithKey('widgetForm', widget.id, widget);
       editStart(String(widget.id));
