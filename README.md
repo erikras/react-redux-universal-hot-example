@@ -80,6 +80,10 @@ The middleware, [`clientMiddleware.js`](https://github.com/erikras/react-redux-u
 1. To allow the action creators access to the client API facade. Remember this is the same on both the client and the server, and cannot simply be `import`ed because it holds the cookie needed to maintain session on server-to-server requests.
 2. To allow some actions to pass a "promise generator", a function that takes the API client and returns a promise. Such actions require three action types, the `REQUEST` action that initiates the data loading, and a `SUCCESS` and `FAILURE` action that will be fired depending on the result of the promise. There are other ways to accomplish this, some discussed [here](https://github.com/gaearon/redux/issues/99), which you may prefer, but to the author of this example, the middleware way feels cleanest.
 
+#### What the Duck?
+
+[Ducks](https://github.com/erikras/react-redux-universal-hot-example/blob/master/docs/Ducks.md) are a Redux Style Proposal that I came up with to better isolate concerns within a Redux application. I encourage you to read the [Ducks Docs](https://github.com/erikras/react-redux-universal-hot-example/blob/master/docs/Ducks.md) and provide feedback.
+
 #### API Server
 
 This is where the meat of your server-side application goes. It doesn't have to be implemented in Node or Express at all. This is where you connect to your database and provide authentication and session management. In this example, it's just spitting out some json with the current time stamp.
