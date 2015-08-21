@@ -4,7 +4,7 @@
 
 I find as I am building my redux app, one piece of functionality at a time, I keep needing to add  `{actionTypes, actions, reducer}` tuples for each use case. I have been keeping these in separate files and even separate folders, however 95% of the time, it's only one reducer/actions pair that ever needs their associated actions.
 
-<div style="clear:right;"></div>
+To me, it makes more sense for these components to be bundled together in an isolated module that is self contained, and can even be packaged easily into a library.
 
 ## The Proposal
 
@@ -50,6 +50,8 @@ A module...
 3. MUST have action types in the form `npm-module-or-app/reducer/ACTION_TYPE`
 3. MAY export its action types as `UPPER_SNAKE_CASE`, if an external reducer needs to listen for them, or if it is a published reusable library
 
+These same guidelines are recommended for `{actionType, action, reducer}` bundles that are shared as reusable Redux libraries.
+
 ### Name
 
 Java has jars and beans. Ruby has gems. I suggest we call these reducer bundles "ducks", as in the last syllable of "redux".
@@ -78,3 +80,7 @@ import * as widgetActions from './ducks/widgets';
 The migration to this code structure was [painless](https://github.com/erikras/react-redux-universal-hot-example/commit/3fdf194683abb7c40f3cb7969fd1f8aa6a4f9c57), and I foresee it reducing much future development misery.
 
 Please submit any feedback via an issue or a tweet to [@erikras](https://twitter.com/erikras). It will be much appreciated.
+
+Happy coding!
+
+-- Erik Rasmussen
