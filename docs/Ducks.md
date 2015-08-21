@@ -75,6 +75,14 @@ import * as widgetActions from './ducks/widgets';
 ```
 ...and it will only import the action creators, ready to be passed to `bindActionCreators()`.
 
+There will be some times when you want to `export` something other than an action creator. That's okay, too. The rules don't say that you can *only* `export` action creators. When that happens, you'll just have to enumerate the action creators that you want. Not a big deal.
+
+```javascript
+import {create, update, remove, increment} as widgetActions from './ducks/widgets';
+// ...
+bindActionCreators({create, update, remove, increment}, dispatch);
+```
+
 ### Implementation
 
 The migration to this code structure was [painless](https://github.com/erikras/react-redux-universal-hot-example/commit/3fdf194683abb7c40f3cb7969fd1f8aa6a4f9c57), and I foresee it reducing much future development misery.
