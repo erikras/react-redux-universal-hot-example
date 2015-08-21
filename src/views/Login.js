@@ -2,9 +2,8 @@ import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import DocumentMeta from 'react-document-meta';
-import {isLoaded as isAuthLoaded} from '../reducers/auth';
-import * as authActions from '../actions/authActions';
-import {load as loadAuth} from '../actions/authActions';
+import * as authActions from '../ducks/auth';
+import {isLoaded as isAuthLoaded, load as loadAuth} from '../ducks/auth';
 
 @connect(
   state => ({user: state.auth.user}),
