@@ -73,7 +73,7 @@ You can still do:
 ```javascript
 import * as widgetActions from './ducks/widgets';
 ```
-...and it will only import the actions, ready to be passed to `bindActionCreators()`.
+...and it will only import the action creators, ready to be passed to `bindActionCreators()`.
 
 ### Implementation
 
