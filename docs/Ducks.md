@@ -1,6 +1,6 @@
-<img style="float:right;height:150px;width:150px;margin-top:30px;" src="duck.jpg"/>
-
 # Ducks: Redux Reducer Bundles
+
+<img src="duck.jpg" align="right"/>
 
 I find as I am building my redux app, one piece of functionality at a time, I keep needing to add  `{actionTypes, actions, reducer}` tuples for each use case. I have been keeping these in separate files and even separate folders, however 95% of the time, it's only one reducer/actions pair that ever needs their associated actions.
 
