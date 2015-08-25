@@ -7,7 +7,7 @@ import * as widgetActions from '../ducks/widgets';
 
 @connect(
   state => ({
-    form: state.widgetForm,
+    form: state.form,
     saveError: state.widgets.saveError
   }),
   dispatch => ({
@@ -15,7 +15,7 @@ import * as widgetActions from '../ducks/widgets';
     dispatch
   })
 )
-@reduxForm('widgetForm', widgetValidation)
+@reduxForm('widget', ['color', 'sprocketCount', 'owner'], widgetValidation)
 export default class WidgetForm extends Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
@@ -28,15 +28,15 @@ export default class WidgetForm extends Component {
     pristine: PropTypes.bool.isRequired,
     save: PropTypes.func.isRequired,
     submitting: PropTypes.bool.isRequired,
-    saveError: PropTypes.string,
-    sliceKey: PropTypes.string.isRequired,
+    saveError: PropTypes.object,
+    formKey: PropTypes.string.isRequired,
     touched: PropTypes.object.isRequired
   };
 
   render() {
-    const {sliceKey} = this.props;
+    const {formKey} = this.props;
     const { data, editStop, errors, handleBlur, handleChange, handleSubmit, invalid,
-      pristine, save, submitting, saveError: { [sliceKey]: saveError }, touched } = this.props;
+      pristine, save, submitting, saveError: { [formKey]: saveError }, touched } = this.props;
     const styles = require('../views/Widgets.scss');
     return (
       <tr className={submitting ? styles.saving : ''}>
@@ -69,7 +69,7 @@ export default class WidgetForm extends Component {
         </td>
         <td className={styles.buttonCol}>
           <button className="btn btn-default"
-                  onClick={() => editStop(sliceKey)}
+                  onClick={() => editStop(formKey)}
                   disabled={submitting}>
             <i className="fa fa-ban"/> Cancel
           </button>

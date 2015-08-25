@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import reduxForm from 'redux-form';
 import surveyValidation from '../validation/surveyValidation';
+import mapProps from 'map-props';
 
 function asyncValidator(data) {
   // TODO: figure out a way to move this to the server. need an instance of ApiClient
@@ -21,9 +22,12 @@ function asyncValidator(data) {
 }
 
 @connect(state => ({
-  form: state.surveyForm
+  form: state.form
 }))
-@reduxForm('surveyForm', surveyValidation).async(asyncValidator, 'email')
+@reduxForm('survey', ['name','email','occupation'], surveyValidation).async(asyncValidator, 'email')
+@mapProps({
+  hasEmail: props => !!props.data.email
+})
 export default
 class SurveyForm extends Component {
   static propTypes = {
@@ -31,6 +35,7 @@ class SurveyForm extends Component {
     data: PropTypes.object.isRequired,
     dirty: PropTypes.bool.isRequired,
     errors: PropTypes.object.isRequired,
+    hasEmail: PropTypes.bool.isRequired,
     handleBlur: PropTypes.func.isRequired,
     handleChange: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
@@ -49,6 +54,7 @@ class SurveyForm extends Component {
       handleBlur,
       handleChange,
       handleSubmit,
+      hasEmail,
       valid,
       invalid,
       pristine,
@@ -105,6 +111,7 @@ class SurveyForm extends Component {
             </div>
           </div>
         </form>
+        {hasEmail && <div>We have email data!</div>}
 
         <h4>Props from redux-form</h4>
 
