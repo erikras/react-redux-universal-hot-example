@@ -1,21 +1,17 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import reduxForm from 'redux-form';
+import {connectReduxForm} from 'redux-form';
 import widgetValidation, {colors} from '../validation/widgetValidation';
 import * as widgetActions from '../ducks/widgets';
 
 @connect(
   state => ({
-    form: state.form,
     saveError: state.widgets.saveError
   }),
-  dispatch => ({
-    ...bindActionCreators(widgetActions, dispatch),
-    dispatch
-  })
+  dispatch => bindActionCreators(widgetActions, dispatch)
 )
-@reduxForm('widget', ['color', 'sprocketCount', 'owner'], widgetValidation)
+@connectReduxForm('widget', ['color', 'sprocketCount', 'owner'], widgetValidation)
 export default class WidgetForm extends Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
