@@ -32,6 +32,7 @@ class SurveyForm extends Component {
     handleChange: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     invalid: PropTypes.bool.isRequired,
+    isDirty: PropTypes.func.isRequired,
     pristine: PropTypes.bool.isRequired,
     touched: PropTypes.object.isRequired,
     valid: PropTypes.bool.isRequired
@@ -46,6 +47,7 @@ class SurveyForm extends Component {
       handleBlur,
       handleChange,
       handleSubmit,
+      isDirty,
       valid,
       invalid,
       pristine,
@@ -55,7 +57,10 @@ class SurveyForm extends Component {
       <div>
         <form className="form-horizontal" onSubmit={handleSubmit}>
           <div className={'form-group' + (nameError && nameTouched ? ' has-error' : '')}>
-            <label htmlFor="name" className="col-sm-2">Full Name</label>
+            <label htmlFor="name" className="col-sm-2">
+              Full Name
+              {isDirty('name') && <span>*</span>}
+            </label>
 
             <div className="col-sm-10">
               <input type="text"
@@ -68,7 +73,10 @@ class SurveyForm extends Component {
             </div>
           </div>
           <div className={'form-group' + (emailError && emailTouched ? ' has-error' : '')}>
-            <label htmlFor="email" className="col-sm-2">Email address</label>
+            <label htmlFor="email" className="col-sm-2">
+              Email address
+              {isDirty('email') && <span>*</span>}
+            </label>
 
             <div className="col-sm-10">
               <input type="email"
@@ -82,7 +90,10 @@ class SurveyForm extends Component {
             </div>
           </div>
           <div className={'form-group' + (occupationError && occupationTouched ? ' has-error' : '')}>
-            <label htmlFor="occupation" className="col-sm-2">Occupation</label>
+            <label htmlFor="occupation" className="col-sm-2">
+              Occupation
+              {isDirty('occupation') && <span>*</span>}
+            </label>
 
             <div className="col-sm-10">
               <input type="text"
