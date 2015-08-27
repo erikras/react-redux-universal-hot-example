@@ -11,11 +11,10 @@ import * as widgetActions from '../ducks/widgets';
   }),
   dispatch => bindActionCreators(widgetActions, dispatch)
 )
-@connectReduxForm('widget', ['color', 'sprocketCount', 'owner'], widgetValidation)
+@connectReduxForm('widget', ['id', 'color', 'sprocketCount', 'owner'], widgetValidation)
 export default class WidgetForm extends Component {
   static propTypes = {
-    data: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired,
+    fields: PropTypes.object.isRequired,
     editStop: PropTypes.func.isRequired,
     handleBlur: PropTypes.func.isRequired,
     handleChange: PropTypes.func.isRequired,
@@ -26,42 +25,41 @@ export default class WidgetForm extends Component {
     submitting: PropTypes.bool.isRequired,
     saveError: PropTypes.object,
     formKey: PropTypes.string.isRequired,
-    touched: PropTypes.object.isRequired
+    values: PropTypes.object.isRequired
   };
 
   render() {
-    const {formKey} = this.props;
-    const { data, editStop, errors, handleBlur, handleChange, handleSubmit, invalid,
-      pristine, save, submitting, saveError: { [formKey]: saveError }, touched } = this.props;
+    const { editStop, fields: {id, color, sprocketCount, owner}, formKey, handleBlur, handleChange, handleSubmit, invalid,
+      pristine, save, submitting, saveError: { [formKey]: saveError }, values } = this.props;
     const styles = require('../views/Widgets.scss');
     return (
       <tr className={submitting ? styles.saving : ''}>
-        <td className={styles.idCol}>{data.id}</td>
+        <td className={styles.idCol}>{id.value}</td>
         <td className={styles.colorCol}>
           <select name="color"
                   className="form-control"
-                  value={data.color}
+                  value={color.value}
                   onChange={handleChange('color')}
                   onBlur={handleBlur('color')}>
             {colors.map(color => <option value={color} key={color}>{color}</option>)}
           </select>
-          {errors.color && touched.color && <div className="text-danger">{errors.color}</div>}
+          {color.error && color.touched && <div className="text-danger">{color.error}</div>}
         </td>
         <td className={styles.sprocketsCol}>
           <input type="text"
                  className="form-control"
-                 value={data.sprocketCount}
+                 value={sprocketCount.value}
                  onChange={handleChange('sprocketCount')}
                  onBlur={handleBlur('sprocketCount')}/>
-          {errors.sprocketCount && touched.sprocketCount && <div className="text-danger">{errors.sprocketCount}</div>}
+          {sprocketCount.error && sprocketCount.touched && <div className="text-danger">{sprocketCount.error}</div>}
         </td>
         <td className={styles.ownerCol}>
           <input type="text"
                  className="form-control"
-                 value={data.owner}
+                 value={owner.value}
                  onChange={handleChange('owner')}
                  onBlur={handleBlur('owner')}/>
-          {errors.owner && touched.owner && <div className="text-danger">{errors.owner}</div>}
+          {owner.error && owner.touched && <div className="text-danger">{owner.error}</div>}
         </td>
         <td className={styles.buttonCol}>
           <button className="btn btn-default"
@@ -70,7 +68,7 @@ export default class WidgetForm extends Component {
             <i className="fa fa-ban"/> Cancel
           </button>
           <button className="btn btn-success"
-                  onClick={handleSubmit(() => save(data))}
+                  onClick={handleSubmit(() => save(values))}
                   disabled={pristine || invalid || submitting}>
             <i className={'fa ' + (submitting ? 'fa-cog fa-spin' : 'fa-cloud')}/> Save
           </button>

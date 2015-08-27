@@ -47,7 +47,9 @@ export default class Survey extends Component {
         </p>
 
         <div style={{textAlign: 'center', margin: 15}}>
-          <button className="btn btn-primary" onClick={::this.handleInitialize}>Initialize Form</button>
+          <button className="btn btn-primary" onClick={::this.handleInitialize}>
+            <i className="fa fa-pencil"/> Initialize Form
+          </button>
         </div>
         <SurveyForm onSubmit={::this.handleSubmit}/>
       </div>

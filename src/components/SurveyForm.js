@@ -25,90 +25,89 @@ export default
 class SurveyForm extends Component {
   static propTypes = {
     asyncValidating: PropTypes.bool.isRequired,
-    data: PropTypes.object.isRequired,
+    fields: PropTypes.object.isRequired,
     dirty: PropTypes.bool.isRequired,
-    errors: PropTypes.object.isRequired,
     handleBlur: PropTypes.func.isRequired,
     handleChange: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
+    resetForm: PropTypes.func.isRequired,
     invalid: PropTypes.bool.isRequired,
-    isDirty: PropTypes.func.isRequired,
     pristine: PropTypes.bool.isRequired,
-    touched: PropTypes.object.isRequired,
     valid: PropTypes.bool.isRequired
   }
 
   render() {
     const {
-      data: {name, email, occupation},
-      errors: {name: nameError, email: emailError, occupation: occupationError},
-      touched: {name: nameTouched, email: emailTouched, occupation: occupationTouched},
       asyncValidating,
+      dirty,
+      fields: {name, email, occupation},
       handleBlur,
       handleChange,
       handleSubmit,
-      isDirty,
-      valid,
       invalid,
+      resetForm,
       pristine,
-      dirty
+      valid
       } = this.props;
     return (
       <div>
         <form className="form-horizontal" onSubmit={handleSubmit}>
-          <div className={'form-group' + (nameError && nameTouched ? ' has-error' : '')}>
+          <div className={'form-group' + (name.error && name.touched ? ' has-error' : '')}>
             <label htmlFor="name" className="col-sm-2">
               Full Name
-              {isDirty('name') && <span>*</span>}
+              {name.dirty && <span>*</span>}
             </label>
 
             <div className="col-sm-10">
               <input type="text"
                      className="form-control"
                      id="name"
-                     value={name}
+                     value={name.value}
                      onChange={handleChange('name')}
                      onBlur={handleBlur('name')}/>
-              {nameError && nameTouched && <div className="text-danger">{nameError}</div>}
+              {name.error && name.touched && <div className="text-danger">{name.error}</div>}
             </div>
           </div>
-          <div className={'form-group' + (emailError && emailTouched ? ' has-error' : '')}>
+          <div className={'form-group' + (email.error && email.touched ? ' has-error' : '')}>
             <label htmlFor="email" className="col-sm-2">
               Email address
-              {isDirty('email') && <span>*</span>}
+              {email.dirty && <span>*</span>}
             </label>
 
             <div className="col-sm-10">
               <input type="email"
                      className="form-control"
                      id="email"
-                     value={email}
+                     value={email.value}
                      onChange={handleChange('email')}
                      onBlur={handleBlur('email')}/>
-              {emailError && emailTouched && <div className="text-danger">{emailError}</div>}
+              {email.error && email.touched && <div className="text-danger">{email.error}</div>}
               {asyncValidating && <div>Validating...</div>}
             </div>
           </div>
-          <div className={'form-group' + (occupationError && occupationTouched ? ' has-error' : '')}>
+          <div className={'form-group' + (occupation.error && occupation.touched ? ' has-error' : '')}>
             <label htmlFor="occupation" className="col-sm-2">
               Occupation
-              {isDirty('occupation') && <span>*</span>}
+              {occupation.dirty && <span>*</span>}
             </label>
 
             <div className="col-sm-10">
               <input type="text"
                      className="form-control"
                      id="occupation"
-                     value={occupation}
+                     value={occupation.value}
                      onChange={handleChange('occupation')}
                      onBlur={handleBlur('occupation')}/>
-              {occupationError && occupationTouched && <div className="text-danger">{occupationError}</div>}
+              {occupation.error && occupation.touched && <div className="text-danger">{occupation.error}</div>}
             </div>
           </div>
           <div className="form-group">
             <div className="col-sm-offset-2 col-sm-10">
               <button className="btn btn-success" onClick={handleSubmit}>
-                <i className="fa fa-paper-airplane"/> Submit
+                <i className="fa fa-paper-plane"/> Submit
+              </button>
+              <button className="btn btn-warning" onClick={resetForm} style={{marginLeft:15}}>
+                <i className="fa fa-undo"/> Reset
               </button>
             </div>
           </div>
