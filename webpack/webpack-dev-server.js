@@ -14,7 +14,7 @@ var WebpackDevServer = require('webpack-dev-server'),
     headers: {"Access-Control-Allow-Origin": "*"},
     stats: {colors: true}
   },
-  webpackDevServer = new WebpackDevServer(compiler, serverOptions);
+  webpackDevServer = new WebpackDevServer(webpack(config), serverOptions);
 
 webpackDevServer.listen(port, host, function() {
   console.info('==> 🚧  Webpack development server listening on %s:%s', host, port);
