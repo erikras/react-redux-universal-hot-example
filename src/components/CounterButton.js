@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {increment} from '../actions/counterActions';
+import {increment} from '../ducks/counter';
 
 @connect(
     state => ({count: state.counter.count}),
@@ -13,10 +13,6 @@ export default class CounterButton extends Component {
     className: PropTypes.string
   }
 
-  props = {
-    className: ''
-  }
-
   render() {
     const {count, increment} = this.props; // eslint-disable-line no-shadow
     let {className} = this.props;
@@ -26,6 +22,10 @@ export default class CounterButton extends Component {
         You have clicked me {count} time{count === 1 ? '' : 's'}.
       </button>
     );
+  }
+
+  props = {
+    className: ''
   }
 }
 

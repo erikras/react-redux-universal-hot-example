@@ -5,6 +5,7 @@
 [![Demo on Heroku](https://img.shields.io/badge/demo-heroku-lightgrey.png)](https://react-redux.herokuapp.com)
 [![Dependency Status](https://david-dm.org/erikras/react-redux-universal-hot-example.svg)](https://david-dm.org/erikras/react-redux-universal-hot-example)
 [![devDependency Status](https://david-dm.org/erikras/react-redux-universal-hot-example/dev-status.svg)](https://david-dm.org/erikras/react-redux-universal-hot-example#info=devDependencies)
+[![PayPal donate button](http://img.shields.io/paypal/donate.png?color=yellowgreen)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=E2LK57ZQ9YRMN)
 
 This is a starter boiler plate app I've put together using the following technologies:
 
@@ -22,6 +23,7 @@ This is a starter boiler plate app I've put together using the following technol
 * [redux-form](https://github.com/erikras/redux-form) to manage form state in Redux
 * [lru-memoize](https://github.com/erikras/lru-memoize) to speed up form validation
 * [style-loader](https://github.com/webpack/style-loader) and [sass-loader](https://github.com/jtangelder/sass-loader) to allow import of stylesheets
+* [react-document-meta](https://github.com/kodyl/react-document-meta) to manage title and meta tag information on both server and client
 * [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools) to allow require() work for statics both on client and server
 * [mocha](https://mochajs.org/) to allow writing unit tests for the project.
 
@@ -48,7 +50,7 @@ npm run start
 
 ## Demo
 
-A demonstration of this app can be see [running on heroku](https://react-redux.herokuapp.com), which is a deployment of the [heroku branch](https://github.com/erikras/react-redux-universal-hot-example/tree/heroku).
+A demonstration of this app can be seen [running on heroku](https://react-redux.herokuapp.com), which is a deployment of the [heroku branch](https://github.com/erikras/react-redux-universal-hot-example/tree/heroku).
 
 ## Explanation
 
@@ -78,6 +80,10 @@ The middleware, [`clientMiddleware.js`](https://github.com/erikras/react-redux-u
 
 1. To allow the action creators access to the client API facade. Remember this is the same on both the client and the server, and cannot simply be `import`ed because it holds the cookie needed to maintain session on server-to-server requests.
 2. To allow some actions to pass a "promise generator", a function that takes the API client and returns a promise. Such actions require three action types, the `REQUEST` action that initiates the data loading, and a `SUCCESS` and `FAILURE` action that will be fired depending on the result of the promise. There are other ways to accomplish this, some discussed [here](https://github.com/gaearon/redux/issues/99), which you may prefer, but to the author of this example, the middleware way feels cleanest.
+
+#### What the Duck?
+
+[Ducks](https://github.com/erikras/react-redux-universal-hot-example/blob/master/docs/Ducks.md) are a Redux Style Proposal that I came up with to better isolate concerns within a Redux application. I encourage you to read the [Ducks Docs](https://github.com/erikras/react-redux-universal-hot-example/blob/master/docs/Ducks.md) and provide feedback.
 
 #### API Server
 

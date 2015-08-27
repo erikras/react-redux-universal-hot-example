@@ -1,9 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {isLoaded as isAuthLoaded} from '../reducers/auth';
-import {load as loadAuth} from '../actions/authActions';
-import * as authActions from '../actions/authActions';
+import {isLoaded as isAuthLoaded, load as loadAuth} from '../ducks/auth';
+import * as authActions from '../ducks/auth';
 
 @connect(
     state => ({user: state.auth.user}),
@@ -16,12 +15,6 @@ class LoginSuccess extends Component {
     logout: PropTypes.func
   }
 
-  static fetchData(store) {
-    if (!isAuthLoaded(store.getState())) {
-      return store.dispatch(loadAuth());
-    }
-  }
-
   render() {
     const {user, logout} = this.props;
     return (
@@ -31,7 +24,7 @@ class LoginSuccess extends Component {
         <div>
           <p>Hi, {user.name}. You have just successfully logged in, and were forwarded here
             by <code>componentWillReceiveProps()</code> in <code>App.js</code>, which is listening to
-            the auth reducer via redux `@connect`. How exciting!
+            the auth reducer via redux <code>@connect</code>. How exciting!
           </p>
 
           <p>
@@ -44,5 +37,11 @@ class LoginSuccess extends Component {
         </div>
       </div>
     );
+  }
+
+  static fetchData(store) {
+    if (!isAuthLoaded(store.getState())) {
+      return store.dispatch(loadAuth());
+    }
   }
 }

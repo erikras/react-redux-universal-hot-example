@@ -1,9 +1,9 @@
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {isLoaded as isAuthLoaded} from '../reducers/auth';
-import * as authActions from '../actions/authActions';
-import {load as loadAuth} from '../actions/authActions';
+import DocumentMeta from 'react-document-meta';
+import * as authActions from '../ducks/auth';
+import {isLoaded as isAuthLoaded, load as loadAuth} from '../ducks/auth';
 
 @connect(
   state => ({user: state.auth.user}),
@@ -16,24 +16,12 @@ export default class Login extends Component {
     logout: PropTypes.func
   }
 
-  static fetchData(store) {
-    if (!isAuthLoaded(store.getState())) {
-      return store.dispatch(loadAuth());
-    }
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    const input = this.refs.username.getDOMNode();  // need for getDOMNode() call going away in React 0.14
-    this.props.login(input.value);
-    input.value = '';
-  }
-
   render() {
     const {user, logout} = this.props;
     const styles = require('./Login.scss');
     return (
       <div className={styles.loginPage + ' container'}>
+        <DocumentMeta title="React Redux Example: Login"/>
         <h1>Login</h1>
         {!user &&
         <div>
@@ -56,5 +44,18 @@ export default class Login extends Component {
         }
       </div>
     );
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    const input = this.refs.username.getDOMNode();  // need for getDOMNode() call going away in React 0.14
+    this.props.login(input.value);
+    input.value = '';
+  }
+
+  static fetchData(store) {
+    if (!isAuthLoaded(store.getState())) {
+      return store.dispatch(loadAuth());
+    }
   }
 }
