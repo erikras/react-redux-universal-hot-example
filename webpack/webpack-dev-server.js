@@ -14,11 +14,6 @@ var WebpackDevServer = require('webpack-dev-server'),
     headers: {"Access-Control-Allow-Origin": "*"},
     stats: {colors: true}
   },
-  compiler = webpack(config, function(err, stats){
-    var json = stats.toJson();
-    if (json.errors.length)
-      console.error(json.errors[0])
-  }),
   webpackDevServer = new WebpackDevServer(compiler, serverOptions);
 
 webpackDevServer.listen(port, host, function() {
