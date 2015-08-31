@@ -87,7 +87,9 @@ The middleware, [`clientMiddleware.js`](https://github.com/erikras/react-redux-u
 
 #### What the Duck?
 
-[Ducks](https://github.com/erikras/react-redux-universal-hot-example/blob/master/docs/Ducks.md) are a Redux Style Proposal that I came up with to better isolate concerns within a Redux application. I encourage you to read the [Ducks Docs](https://github.com/erikras/react-redux-universal-hot-example/blob/master/docs/Ducks.md) and provide feedback.
+[Ducks](https://github.com/erikras/ducks-modular-redux) are a Redux Style Proposal that I came up with to better 
+isolate concerns within a Redux application. I encourage you to read the
+[Ducks Docs](https://github.com/erikras/ducks-modular-redux) and provide feedback.
 
 #### API Server
 
