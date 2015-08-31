@@ -18,16 +18,15 @@ module.exports = {
     },
     style_modules: {
       extension: 'scss',
-      development: true,
-      filter: function(m, regex, options) {
-        if (options.environment === 'production') {
+      filter: function(m, regex, options, log) {
+        if (!options.development) {
           return regex.test(m.name);
         }
         //filter by modules with '.scss' inside name string, that also have name and moduleName that end with 'ss'(allows for css, less, sass, and scss extensions)
         //this ensures that the proper scss module is returned, so that namePrefix variable is no longer needed
         return (regex.test(m.name) && m.name.slice(-2) === 'ss' && m.reasons[0].moduleName.slice(-2) === 'ss');
       },
-      naming: function(m) {
+      naming: function(m, options, log) {
         //find index of '/src' inside the module name, slice it and resolve path
         var srcIndex = m.name.indexOf('/src');
         var name = '.' + m.name.slice(srcIndex);
@@ -40,9 +39,9 @@ module.exports = {
         }
         return name;
       },
-      parser: function(m, options) {
+      parser: function(m, options, log) {
         if (m.source) {
-          var regex = options.environment === 'production' ? /module\.exports = ((.|\n)+);/ : /exports\.locals = ((.|\n)+);/;
+          var regex = options.development ? /exports\.locals = ((.|\n)+);/ : /module\.exports = ((.|\n)+);/;
           var match = m.source.match(regex);
           return match ? JSON.parse(match[1]) : {};
         }
