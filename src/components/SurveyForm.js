@@ -3,7 +3,7 @@ import {connectReduxForm} from 'redux-form';
 import surveyValidation from '../validation/surveyValidation';
 import mapProps from 'map-props';
 
-function asyncValidator(data) {
+function asyncValidate(data) {
   // TODO: figure out a way to move this to the server. need an instance of ApiClient
   if (!data.email) {
     return Promise.resolve({valid: true});
@@ -20,7 +20,13 @@ function asyncValidator(data) {
   });
 }
 
-@connectReduxForm('survey', ['name','email','occupation'], surveyValidation).async(asyncValidator, 'email')
+@connectReduxForm({
+  form: 'survey',
+  fields: ['name', 'email', 'occupation'],
+  validate: surveyValidation,
+  asyncValidate,
+  asyncBlurFields: ['email']
+})
 export default
 class SurveyForm extends Component {
   static propTypes = {

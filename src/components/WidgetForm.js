@@ -11,7 +11,11 @@ import * as widgetActions from '../ducks/widgets';
   }),
   dispatch => bindActionCreators(widgetActions, dispatch)
 )
-@connectReduxForm('widget', ['id', 'color', 'sprocketCount', 'owner'], widgetValidation)
+@connectReduxForm({
+  form: 'widget',
+  fields: ['id', 'color', 'sprocketCount', 'owner'],
+  validate: widgetValidation
+})
 export default class WidgetForm extends Component {
   static propTypes = {
     fields: PropTypes.object.isRequired,
