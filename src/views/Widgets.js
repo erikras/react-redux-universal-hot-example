@@ -77,7 +77,7 @@ class Widgets extends Component {
           <tbody>
           {
             widgets.map((widget) => editing[widget.id] ?
-              <WidgetForm formKey={String(widget.id)} key={String(widget.id)}/> :
+              <WidgetForm formKey={String(widget.id)} key={String(widget.id)} initialValues={widget}/> :
               <tr key={widget.id}>
                 <td className={styles.idCol}>{widget.id}</td>
                 <td className={styles.colorCol}>{widget.color}</td>
@@ -97,9 +97,8 @@ class Widgets extends Component {
   }
 
   handleEdit(widget) {
-    const {editStart, initializeWithKey} = this.props; // eslint-disable-line no-shadow
+    const {editStart} = this.props; // eslint-disable-line no-shadow
     return () => {
-      initializeWithKey('widget', widget.id, widget);
       editStart(String(widget.id));
     };
   }
