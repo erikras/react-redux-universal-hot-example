@@ -9,9 +9,8 @@ export default function createApiClientStore(client, data) {
     finalCreateStore = compose(
       applyMiddleware(middleware),
       devTools(),
-      persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)),
-      createStore
-    );
+      persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
+    )(createStore);
   } else {
     finalCreateStore = applyMiddleware(middleware)(createStore);
   }
