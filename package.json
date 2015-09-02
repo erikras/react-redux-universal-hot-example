@@ -64,6 +64,7 @@
     "express": "^4.13.0",
     "express-session": "^1.11.3",
     "file-loader": "^0.8.4",
+    "history": "^1.8.4",
     "http-proxy": "^1.11.1",
     "lru-memoize": "0.0.2",
     "map-props": "^0.1.1",

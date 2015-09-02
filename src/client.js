@@ -3,13 +3,13 @@
  */
 import 'babel/polyfill';
 import React from 'react';
-import BrowserHistory from 'react-router/lib/BrowserHistory';
+import createHistory from 'history/lib/createBrowserHistory';
 import Location from 'react-router/lib/Location';
 import queryString from 'query-string';
 import createStore from './redux/create';
 import ApiClient from './ApiClient';
 import universalRouter from './universalRouter';
-const history = new BrowserHistory();
+const history = createHistory();
 const client = new ApiClient();
 
 const dest = document.getElementById('content');
