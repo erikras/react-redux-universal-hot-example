@@ -9,21 +9,19 @@ export default function createApiClientStore(client, data) {
     finalCreateStore = compose(
       applyMiddleware(middleware),
       devTools(),
-      persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)),
-      createStore
-    );
+      persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
+    )(createStore);
   } else {
     finalCreateStore = applyMiddleware(middleware)(createStore);
   }
 
-  const reducer = combineReducers(require('../reducers/index'));
+  const reducer = require('../ducks/reducer');
   const store = finalCreateStore(reducer, data);
   store.client = client;
 
-  if (module.hot) {
-    module.hot.accept('../reducers/index', () => {
-      const nextReducer = combineReducers(require('../reducers/index'));
-      store.replaceReducer(nextReducer);
+  if (__DEVELOPMENT__ && module.hot) {
+    module.hot.accept('../ducks/reducer', () => {
+      store.replaceReducer(require('../ducks/reducer'));
     });
   }
 

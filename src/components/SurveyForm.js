@@ -1,9 +1,9 @@
 import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
-import reduxForm from 'redux-form';
+import {connectReduxForm} from 'redux-form';
 import surveyValidation from '../validation/surveyValidation';
+import mapProps from 'map-props';
 
-function asyncValidator(data) {
+function asyncValidate(data) {
   // TODO: figure out a way to move this to the server. need an instance of ApiClient
   if (!data.email) {
     return Promise.resolve({valid: true});
@@ -20,87 +20,70 @@ function asyncValidator(data) {
   });
 }
 
-@connect(state => ({
-  form: state.surveyForm
-}))
-@reduxForm('surveyForm', surveyValidation).async(asyncValidator, 'email')
+@connectReduxForm({
+  form: 'survey',
+  fields: ['name', 'email', 'occupation'],
+  validate: surveyValidation,
+  asyncValidate,
+  asyncBlurFields: ['email']
+})
 export default
 class SurveyForm extends Component {
   static propTypes = {
     asyncValidating: PropTypes.bool.isRequired,
-    data: PropTypes.object.isRequired,
+    fields: PropTypes.object.isRequired,
     dirty: PropTypes.bool.isRequired,
-    errors: PropTypes.object.isRequired,
     handleBlur: PropTypes.func.isRequired,
     handleChange: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
+    resetForm: PropTypes.func.isRequired,
     invalid: PropTypes.bool.isRequired,
     pristine: PropTypes.bool.isRequired,
-    touched: PropTypes.object.isRequired,
     valid: PropTypes.bool.isRequired
   }
 
   render() {
     const {
-      data: {name, email, occupation},
-      errors: {name: nameError, email: emailError, occupation: occupationError},
-      touched: {name: nameTouched, email: emailTouched, occupation: occupationTouched},
       asyncValidating,
-      handleBlur,
-      handleChange,
+      dirty,
+      fields: {name, email, occupation},
+      active,
       handleSubmit,
-      valid,
       invalid,
+      resetForm,
       pristine,
-      dirty
+      valid
       } = this.props;
+    const styles = require('./SurveyForm.scss');
+    const renderInput = (field, label, showAsyncValidating) =>
+      <div className={'form-group' + (field.error && field.touched ? ' has-error' : '')}>
+        <label htmlFor={field.name} className="col-sm-2">{label}</label>
+        <div className={'col-sm-8 ' + styles.inputGroup}>
+          {showAsyncValidating && asyncValidating && <i className={'fa fa-cog fa-spin ' + styles.cog}/>}
+          <input type="text" className="form-control" id={field.name} {...field}/>
+          {field.error && field.touched && <div className="text-danger">{field.error}</div>}
+          <div className={styles.flags}>
+            {field.dirty && <span className={styles.dirty} title="Dirty">D</span>}
+            {field.active && <span className={styles.active} title="Active">A</span>}
+            {field.visited && <span className={styles.visited} title="Visited">V</span>}
+            {field.touched && <span className={styles.touched} title="Touched">T</span>}
+          </div>
+        </div>
+      </div>;
+
     return (
       <div>
         <form className="form-horizontal" onSubmit={handleSubmit}>
-          <div className={'form-group' + (nameError && nameTouched ? ' has-error' : '')}>
-            <label htmlFor="name" className="col-sm-2">Full Name</label>
-
-            <div className="col-sm-10">
-              <input type="text"
-                     className="form-control"
-                     id="name"
-                     value={name}
-                     onChange={handleChange('name')}
-                     onBlur={handleBlur('name')}/>
-              {nameError && nameTouched && <div className="text-danger">{nameError}</div>}
-            </div>
-          </div>
-          <div className={'form-group' + (emailError && emailTouched ? ' has-error' : '')}>
-            <label htmlFor="email" className="col-sm-2">Email address</label>
-
-            <div className="col-sm-10">
-              <input type="email"
-                     className="form-control"
-                     id="email"
-                     value={email}
-                     onChange={handleChange('email')}
-                     onBlur={handleBlur('email')}/>
-              {emailError && emailTouched && <div className="text-danger">{emailError}</div>}
-              {asyncValidating && <div>Validating...</div>}
-            </div>
-          </div>
-          <div className={'form-group' + (occupationError && occupationTouched ? ' has-error' : '')}>
-            <label htmlFor="occupation" className="col-sm-2">Occupation</label>
-
-            <div className="col-sm-10">
-              <input type="text"
-                     className="form-control"
-                     id="occupation"
-                     value={occupation}
-                     onChange={handleChange('occupation')}
-                     onBlur={handleBlur('occupation')}/>
-              {occupationError && occupationTouched && <div className="text-danger">{occupationError}</div>}
-            </div>
-          </div>
+          {renderInput(name, 'Full Name')}
+          {renderInput(email, 'Email', true)}
+          {renderInput(occupation, 'Occupation')}
           <div className="form-group">
             <div className="col-sm-offset-2 col-sm-10">
               <button className="btn btn-success" onClick={handleSubmit}>
-                <i className="fa fa-paper-airplane"/> Submit
+                <i className="fa fa-paper-plane"/> Submit
+              </button>
+              <button className="btn btn-warning" onClick={resetForm} style={{marginLeft:15}}>
+                <i className="fa fa-undo"/> Reset
               </button>
             </div>
           </div>
@@ -110,6 +93,10 @@ class SurveyForm extends Component {
 
         <table className="table table-striped">
           <tbody>
+          <tr>
+            <th>Active Field</th>
+            <td>{active}</td>
+          </tr>
           <tr>
             <th>Dirty</th>
             <td className={dirty ? 'success' : 'danger'}>{dirty ? 'true' : 'false'}</td>

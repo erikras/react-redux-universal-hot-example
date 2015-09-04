@@ -1,10 +1,9 @@
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import DocumentMeta from 'react-document-meta';
-import {isLoaded} from '../reducers/widgets';
 import {connect} from 'react-redux';
-import * as widgetActions from '../actions/widgetActions';
-import {load as loadWidgets} from '../actions/widgetActions';
+import * as widgetActions from '../ducks/widgets';
+import {isLoaded, load as loadWidgets} from '../ducks/widgets';
 import {initializeWithKey} from 'redux-form';
 import WidgetForm from '../components/WidgetForm';
 
@@ -31,8 +30,7 @@ class Widgets extends Component {
     initializeWithKey: PropTypes.func.isRequired,
     editing: PropTypes.object.isRequired,
     load: PropTypes.func.isRequired,
-    editStart: PropTypes.func.isRequired,
-    editStop: PropTypes.func.isRequired
+    editStart: PropTypes.func.isRequired
   }
 
   render() {
@@ -79,7 +77,7 @@ class Widgets extends Component {
           <tbody>
           {
             widgets.map((widget) => editing[widget.id] ?
-              <WidgetForm sliceKey={String(widget.id)}/> :
+              <WidgetForm formKey={String(widget.id)} key={String(widget.id)} initialValues={widget}/> :
               <tr key={widget.id}>
                 <td className={styles.idCol}>{widget.id}</td>
                 <td className={styles.colorCol}>{widget.color}</td>
@@ -99,9 +97,8 @@ class Widgets extends Component {
   }
 
   handleEdit(widget) {
-    const {editStart, initializeWithKey} = this.props; // eslint-disable-line no-shadow
+    const {editStart} = this.props; // eslint-disable-line no-shadow
     return () => {
-      initializeWithKey('widgetForm', widget.id, widget);
       editStart(String(widget.id));
     };
   }

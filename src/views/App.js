@@ -3,10 +3,8 @@ import {Link} from 'react-router';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import DocumentMeta from 'react-document-meta';
-import {isLoaded as isInfoLoaded} from '../reducers/info';
-import {isLoaded as isAuthLoaded} from '../reducers/auth';
-import {load as loadInfo} from '../actions/infoActions';
-import {load as loadAuth, logout} from '../actions/authActions';
+import {isLoaded as isInfoLoaded, load as loadInfo} from '../ducks/info';
+import {isLoaded as isAuthLoaded, load as loadAuth, logout} from '../ducks/auth';
 import InfoBar from '../components/InfoBar';
 import {createTransitionHook} from '../universalRouter';
 

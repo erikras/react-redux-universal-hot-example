@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {increment} from '../actions/counterActions';
+import {increment} from '../ducks/counter';
 
 @connect(
     state => ({count: state.counter.count}),

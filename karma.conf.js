@@ -8,7 +8,7 @@ module.exports = function (config) {
     singleRun: true,
 
     frameworks: [ 'mocha' ],
-
+  
     files: [
       'tests.webpack.js'
     ],

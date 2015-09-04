@@ -5,6 +5,7 @@
 [![Demo on Heroku](https://img.shields.io/badge/demo-heroku-lightgrey.png)](https://react-redux.herokuapp.com)
 [![Dependency Status](https://david-dm.org/erikras/react-redux-universal-hot-example.svg)](https://david-dm.org/erikras/react-redux-universal-hot-example)
 [![devDependency Status](https://david-dm.org/erikras/react-redux-universal-hot-example/dev-status.svg)](https://david-dm.org/erikras/react-redux-universal-hot-example#info=devDependencies)
+[![PayPal donate button](http://img.shields.io/paypal/donate.png?color=yellowgreen)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=E2LK57ZQ9YRMN)
 
 This is a starter boiler plate app I've put together using the following technologies:
 
@@ -49,11 +50,15 @@ npm run start
 
 ## Demo
 
-A demonstration of this app can be see [running on heroku](https://react-redux.herokuapp.com), which is a deployment of the [heroku branch](https://github.com/erikras/react-redux-universal-hot-example/tree/heroku).
+A demonstration of this app can be seen [running on heroku](https://react-redux.herokuapp.com), which is a deployment of the [heroku branch](https://github.com/erikras/react-redux-universal-hot-example/tree/heroku).
 
 ## Explanation
 
-What initally gets run is `babel.server.js`, which does little more than enable ES6 and ES7 awesomeness in the server-side node code. It then initiates `server.js`. In `server.js` we proxy any requests to `/api/*` to the [API server](#api-server), running at `localhost:3030`. All the data fetching calls from the client go to `/api/*`. Aside from serving the favicon and static content from `/static`, the only thing `server.js` does is initiate delegate rendering to `react-router`. At the bottom of `server.js`, we listen to port `3000` and initiate the API server.
+What initally gets run is `bin/server.js`, which does little more than enable ES6 and ES7 awesomeness in the 
+server-side node code. It then initiates `server.js`. In `server.js` we proxy any requests to `/api/*` to the 
+[API server](#api-server), running at `localhost:3030`. All the data fetching calls from the client go to `/api/*`.
+Aside from serving the favicon and static content from `/static`, the only thing `server.js` does is initiate delegate
+rendering to `react-router`. At the bottom of `server.js`, we listen to port `3000` and initiate the API server.
 
 #### Routing and HTML return
 
@@ -79,6 +84,12 @@ The middleware, [`clientMiddleware.js`](https://github.com/erikras/react-redux-u
 
 1. To allow the action creators access to the client API facade. Remember this is the same on both the client and the server, and cannot simply be `import`ed because it holds the cookie needed to maintain session on server-to-server requests.
 2. To allow some actions to pass a "promise generator", a function that takes the API client and returns a promise. Such actions require three action types, the `REQUEST` action that initiates the data loading, and a `SUCCESS` and `FAILURE` action that will be fired depending on the result of the promise. There are other ways to accomplish this, some discussed [here](https://github.com/gaearon/redux/issues/99), which you may prefer, but to the author of this example, the middleware way feels cleanest.
+
+#### What the Duck?
+
+[Ducks](https://github.com/erikras/ducks-modular-redux) are a Redux Style Proposal that I came up with to better 
+isolate concerns within a Redux application. I encourage you to read the
+[Ducks Docs](https://github.com/erikras/ducks-modular-redux) and provide feedback.
 
 #### API Server
 
