@@ -47,66 +47,36 @@ class SurveyForm extends Component {
       asyncValidating,
       dirty,
       fields: {name, email, occupation},
-      handleBlur,
-      handleChange,
+      active,
       handleSubmit,
       invalid,
       resetForm,
       pristine,
       valid
       } = this.props;
+    const styles = require('./SurveyForm.scss');
+    const renderInput = (field, label, showAsyncValidating) =>
+      <div className={'form-group' + (field.error && field.touched ? ' has-error' : '')}>
+        <label htmlFor={field.name} className="col-sm-2">{label}</label>
+        <div className={'col-sm-8 ' + styles.inputGroup}>
+          {showAsyncValidating && asyncValidating && <i className={'fa fa-cog fa-spin ' + styles.cog}/>}
+          <input type="text" className="form-control" id={field.name} {...field}/>
+          {field.error && field.touched && <div className="text-danger">{field.error}</div>}
+          <div className={styles.flags}>
+            {field.dirty && <span className={styles.dirty} title="Dirty">D</span>}
+            {field.active && <span className={styles.active} title="Active">A</span>}
+            {field.visited && <span className={styles.visited} title="Visited">V</span>}
+            {field.touched && <span className={styles.touched} title="Touched">T</span>}
+          </div>
+        </div>
+      </div>;
+
     return (
       <div>
         <form className="form-horizontal" onSubmit={handleSubmit}>
-          <div className={'form-group' + (name.error && name.touched ? ' has-error' : '')}>
-            <label htmlFor="name" className="col-sm-2">
-              Full Name
-              {name.dirty && <span>*</span>}
-            </label>
-
-            <div className="col-sm-10">
-              <input type="text"
-                     className="form-control"
-                     id="name"
-                     value={name.value}
-                     onChange={handleChange('name')}
-                     onBlur={handleBlur('name')}/>
-              {name.error && name.touched && <div className="text-danger">{name.error}</div>}
-            </div>
-          </div>
-          <div className={'form-group' + (email.error && email.touched ? ' has-error' : '')}>
-            <label htmlFor="email" className="col-sm-2">
-              Email address
-              {email.dirty && <span>*</span>}
-            </label>
-
-            <div className="col-sm-10">
-              <input type="email"
-                     className="form-control"
-                     id="email"
-                     value={email.value}
-                     onChange={handleChange('email')}
-                     onBlur={handleBlur('email')}/>
-              {email.error && email.touched && <div className="text-danger">{email.error}</div>}
-              {asyncValidating && <div>Validating...</div>}
-            </div>
-          </div>
-          <div className={'form-group' + (occupation.error && occupation.touched ? ' has-error' : '')}>
-            <label htmlFor="occupation" className="col-sm-2">
-              Occupation
-              {occupation.dirty && <span>*</span>}
-            </label>
-
-            <div className="col-sm-10">
-              <input type="text"
-                     className="form-control"
-                     id="occupation"
-                     value={occupation.value}
-                     onChange={handleChange('occupation')}
-                     onBlur={handleBlur('occupation')}/>
-              {occupation.error && occupation.touched && <div className="text-danger">{occupation.error}</div>}
-            </div>
-          </div>
+          {renderInput(name, 'Full Name')}
+          {renderInput(email, 'Email', true)}
+          {renderInput(occupation, 'Occupation')}
           <div className="form-group">
             <div className="col-sm-offset-2 col-sm-10">
               <button className="btn btn-success" onClick={handleSubmit}>
@@ -123,6 +93,10 @@ class SurveyForm extends Component {
 
         <table className="table table-striped">
           <tbody>
+          <tr>
+            <th>Active Field</th>
+            <td>{active}</td>
+          </tr>
           <tr>
             <th>Dirty</th>
             <td className={dirty ? 'success' : 'danger'}>{dirty ? 'true' : 'false'}</td>
