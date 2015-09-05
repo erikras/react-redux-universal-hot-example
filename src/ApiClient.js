@@ -1,5 +1,5 @@
 import superagent from 'superagent';
-import config from 'config';
+import config from './config';
 
 /*
  * This silly underscore is here to avoid a mysterious "ReferenceError: ApiClient is not defined" error.
