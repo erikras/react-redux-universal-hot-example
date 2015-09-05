@@ -45,7 +45,7 @@ export default class WidgetForm extends Component {
                   value={color.value}
                   onChange={handleChange('color')}
                   onBlur={handleBlur('color')}>
-            {colors.map(color => <option value={color} key={color}>{color}</option>)}
+            {colors.map(valueColor => <option value={valueColor} key={valueColor}>{valueColor}</option>)}
           </select>
           {color.error && color.touched && <div className="text-danger">{color.error}</div>}
         </td>

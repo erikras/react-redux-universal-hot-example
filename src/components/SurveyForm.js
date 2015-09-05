@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connectReduxForm} from 'redux-form';
 import surveyValidation from '../validation/surveyValidation';
-import mapProps from 'map-props';
 
 function asyncValidate(data) {
   // TODO: figure out a way to move this to the server. need an instance of ApiClient
@@ -30,6 +29,7 @@ function asyncValidate(data) {
 export default
 class SurveyForm extends Component {
   static propTypes = {
+    active: PropTypes.bool.isRequired,
     asyncValidating: PropTypes.bool.isRequired,
     fields: PropTypes.object.isRequired,
     dirty: PropTypes.bool.isRequired,
@@ -82,7 +82,7 @@ class SurveyForm extends Component {
               <button className="btn btn-success" onClick={handleSubmit}>
                 <i className="fa fa-paper-plane"/> Submit
               </button>
-              <button className="btn btn-warning" onClick={resetForm} style={{marginLeft:15}}>
+              <button className="btn btn-warning" onClick={resetForm} style={{marginLeft: 15}}>
                 <i className="fa fa-undo"/> Reset
               </button>
             </div>

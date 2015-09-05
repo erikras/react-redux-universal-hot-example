@@ -4,7 +4,7 @@ export default function clientMiddleware(client) {
       if (typeof action === 'function') {
         return action(dispatch, getState);
       }
-      
+
       const { promise, types, ...rest } = action;
       if (!promise) {
         return next(action);
