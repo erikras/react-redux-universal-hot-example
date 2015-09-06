@@ -65,9 +65,9 @@ export default class Home extends Component {
             <li><a href="http://expressjs.com" target="_blank">Express</a></li>
             <li><a href="http://babeljs.io" target="_blank">Babel</a> for ES6 and ES7 magic</li>
             <li><a href="http://webpack.github.io" target="_blank">Webpack</a> for bundling</li>
-            <li><a href="http://webpack.github.io/docs/webpack-dev-server.html" target="_blank">Webpack Dev Server</a>
-            </li>
-            <li><a href="https://github.com/gaearon/react-hot-loader" target="_blank">React Hot Loader</a></li>
+            <li><a href="https://github.com/gaearon/babel-plugin-react-transform" target="_blank">Babel plugin React transform as the base for Hot Module Replacement</a></li>
+            <li><a href="https://github.com/gaearon/react-transform-webpack-hmr" target="_blank">The Hot Module Replacement React transform for Babel</a></li>
+            <li><a href="https://github.com/glenjamin/webpack-hot-middleware" target="_blank">Express middleware replacing webpack-dev-server</a></li>
             <li><a href="https://github.com/gaearon/redux" target="_blank">Redux</a>'s futuristic <a
               href="https://facebook.github.io/react/blog/2014/05/06/flux.html" target="_blank">Flux</a> implementation
             </li>
