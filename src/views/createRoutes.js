@@ -1,14 +1,14 @@
 import React from 'react';
 import {Route} from 'react-router';
-import App from 'views/App';
-import Home from 'views/Home';
-import Widgets from 'views/Widgets';
-import About from 'views/About';
-import Login from 'views/Login';
-import RequireLogin from 'views/RequireLogin';
-import LoginSuccess from 'views/LoginSuccess';
-import Survey from 'views/Survey';
-import NotFound from 'views/NotFound';
+import App from './App';
+import Home from './Home';
+import Widgets from './Widgets';
+import About from './About';
+import Login from './Login';
+import RequireLogin from './RequireLogin';
+import LoginSuccess from './LoginSuccess';
+import Survey from './Survey';
+import NotFound from './NotFound';
 
 export default function(store) {
   return (
