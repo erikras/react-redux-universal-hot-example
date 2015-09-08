@@ -72,7 +72,13 @@ export default class WidgetForm extends Component {
             <i className="fa fa-ban"/> Cancel
           </button>
           <button className="btn btn-success"
-                  onClick={handleSubmit(() => save(values))}
+                  onClick={handleSubmit(() => save(values)
+                    .catch(x => {
+                      if (x && typeof x.error === 'object') {
+                        return Promise.reject(x.error);
+                      }
+                    })
+                  )}
                   disabled={pristine || invalid || submitting}>
             <i className={'fa ' + (submitting ? 'fa-cog fa-spin' : 'fa-cloud')}/> Save
           </button>

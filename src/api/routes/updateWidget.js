@@ -9,6 +9,11 @@ export default function updateWidget(req) {
       } else {
         const widgets = getWidgets(req);
         const widget = req.body;
+        if (widget.color === 'Green') {
+          reject({
+            color: 'We do not accept green widgets' // example server-side validation error
+          });
+        }
         if (widget.id) {
           widgets[widget.id - 1] = widget;  // id is 1-based. please don't code like this in production! :-)
         }
