@@ -3,6 +3,14 @@ import DocumentMeta from 'react-document-meta';
 import MiniInfoBar from '../components/MiniInfoBar';
 
 export default class About extends Component {
+  handleToggleKitten() {
+    this.setState({showKitten: !this.state.showKitten});
+  }
+
+  state = {
+    showKitten: false
+  }
+
   render() {
     const {showKitten} = this.state;
     const kitten = require('./kitten.jpg');
@@ -39,13 +47,5 @@ export default class About extends Component {
         {showKitten && <div><img src={kitten}/></div>}
       </div>
     );
-  }
-
-  handleToggleKitten() {
-    this.setState({showKitten: !this.state.showKitten});
-  }
-
-  state = {
-    showKitten: false
   }
 }

@@ -33,6 +33,19 @@ class Widgets extends Component {
     editStart: PropTypes.func.isRequired
   }
 
+  static fetchData(store) {
+    if (!isLoaded(store.getState())) {
+      return store.dispatch(loadWidgets());
+    }
+  }
+
+  handleEdit(widget) {
+    const {editStart} = this.props; // eslint-disable-line no-shadow
+    return () => {
+      editStart(String(widget.id));
+    };
+  }
+
   render() {
     const {widgets, error, editing, loading, load} = this.props;
     let refreshClassName = 'fa fa-refresh';
@@ -94,19 +107,6 @@ class Widgets extends Component {
         </table>}
       </div>
     );
-  }
-
-  handleEdit(widget) {
-    const {editStart} = this.props; // eslint-disable-line no-shadow
-    return () => {
-      editStart(String(widget.id));
-    };
-  }
-
-  static fetchData(store) {
-    if (!isLoaded(store.getState())) {
-      return store.dispatch(loadWidgets());
-    }
   }
 }
 
