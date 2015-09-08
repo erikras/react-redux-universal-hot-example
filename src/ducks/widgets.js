@@ -70,13 +70,13 @@ export default function reducer(state = initialState, action = {}) {
         }
       };
     case SAVE_FAIL:
-      return {
+      return typeof action.error === 'string' ? {
         ...state,
         saveError: {
           ...state.saveError,
           [action.id]: action.error
         }
-      };
+      } : state;
     default:
       return state;
   }
