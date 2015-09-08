@@ -71,6 +71,22 @@ export default class App extends Component {
     router.removeTransitionHook(this.transitionHook);
   }
 
+  static fetchData(store) {
+    const promises = [];
+    if (!isInfoLoaded(store.getState())) {
+      promises.push(store.dispatch(loadInfo()));
+    }
+    if (!isAuthLoaded(store.getState())) {
+      promises.push(store.dispatch(loadAuth()));
+    }
+    return Promise.all(promises);
+  }
+
+  handleLogout(event) {
+    event.preventDefault();
+    this.props.logout();
+  }
+
   render() {
     const {user} = this.props;
     const styles = require('./App.scss');
@@ -115,21 +131,4 @@ export default class App extends Component {
       </div>
     );
   }
-
-  handleLogout(event) {
-    event.preventDefault();
-    this.props.logout();
-  }
-
-  static fetchData(store) {
-    const promises = [];
-    if (!isInfoLoaded(store.getState())) {
-      promises.push(store.dispatch(loadInfo()));
-    }
-    if (!isAuthLoaded(store.getState())) {
-      promises.push(store.dispatch(loadAuth()));
-    }
-    return Promise.all(promises);
-  }
 }
-

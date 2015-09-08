@@ -16,6 +16,19 @@ export default class Login extends Component {
     logout: PropTypes.func
   }
 
+  static fetchData(store) {
+    if (!isAuthLoaded(store.getState())) {
+      return store.dispatch(loadAuth());
+    }
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    const input = this.refs.username.getDOMNode();  // need for getDOMNode() call going away in React 0.14
+    this.props.login(input.value);
+    input.value = '';
+  }
+
   render() {
     const {user, logout} = this.props;
     const styles = require('./Login.scss');
@@ -44,18 +57,5 @@ export default class Login extends Component {
         }
       </div>
     );
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    const input = this.refs.username.getDOMNode();  // need for getDOMNode() call going away in React 0.14
-    this.props.login(input.value);
-    input.value = '';
-  }
-
-  static fetchData(store) {
-    if (!isAuthLoaded(store.getState())) {
-      return store.dispatch(loadAuth());
-    }
   }
 }
