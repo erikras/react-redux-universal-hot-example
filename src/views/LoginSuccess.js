@@ -42,6 +42,6 @@ class LoginSuccess extends Component {
           </div>
         </div>
       </div>
-    ) || <div/>;
+    );
   }
 }
