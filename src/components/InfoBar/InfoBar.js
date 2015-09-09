@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {load} from '../ducks/info';
+import {load} from 'ducks/info';
 
 @connect(
     state => ({info: state.info.data}),

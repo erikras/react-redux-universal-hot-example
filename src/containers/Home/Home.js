@@ -1,7 +1,6 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router';
-import CounterButton from '../components/CounterButton';
-import GithubButton from '../components/GithubButton';
+import React, { Component } from 'react';
+import { Link } from 'react-router';
+import { CounterButton, GithubButton } from 'components';
 
 export default class Home extends Component {
   render() {

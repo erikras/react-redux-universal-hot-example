@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connectReduxForm} from 'redux-form';
-import surveyValidation from '../validation/surveyValidation';
+import surveyValidation from 'validation/surveyValidation';
 
 function asyncValidate(data) {
   // TODO: figure out a way to move this to the server. need an instance of ApiClient

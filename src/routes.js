@@ -1,14 +1,16 @@
 import React from 'react';
-import {Route} from 'react-router';
-import App from './App';
-import Home from './Home';
-import Widgets from './Widgets';
-import About from './About';
-import Login from './Login';
-import RequireLogin from './RequireLogin';
-import LoginSuccess from './LoginSuccess';
-import Survey from './Survey';
-import NotFound from './NotFound';
+import { Route } from 'react-router';
+import {
+    App,
+    Home,
+    Widgets,
+    About,
+    Login,
+    RequireLogin,
+    LoginSuccess,
+    Survey,
+    NotFound
+  } from 'containers';
 
 export default function(store) {
   return (

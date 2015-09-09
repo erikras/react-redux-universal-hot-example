@@ -2,10 +2,10 @@ import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import DocumentMeta from 'react-document-meta';
 import {connect} from 'react-redux';
-import * as widgetActions from '../ducks/widgets';
-import {isLoaded, load as loadWidgets} from '../ducks/widgets';
+import * as widgetActions from 'ducks/widgets';
+import {isLoaded, load as loadWidgets} from 'ducks/widgets';
 import {initializeWithKey} from 'redux-form';
-import WidgetForm from '../components/WidgetForm';
+import { WidgetForm } from 'components';
 
 @connect(
   state => ({
