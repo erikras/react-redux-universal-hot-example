@@ -23,7 +23,7 @@ class LoginSuccess extends Component {
 
   render() {
     const {user, logout} = this.props;
-    return (
+    return (user &&
       <div className="container">
         <h1>Login Success</h1>
 
@@ -42,6 +42,6 @@ class LoginSuccess extends Component {
           </div>
         </div>
       </div>
-    );
+    ) || <div/>;
   }
 }
