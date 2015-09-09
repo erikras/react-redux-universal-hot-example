@@ -2,8 +2,8 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {connectReduxForm} from 'redux-form';
-import widgetValidation, {colors} from 'validation/widgetValidation';
-import * as widgetActions from 'ducks/widgets';
+import widgetValidation, {colors} from './widgetValidation';
+import * as widgetActions from 'redux/modules/widgets';
 
 @connect(
   state => ({

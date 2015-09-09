@@ -1,4 +1,4 @@
-import {createValidator, required, maxLength, integer, oneOf} from './validation';
+import {createValidator, required, maxLength, integer, oneOf} from 'utils/validation';
 
 export const colors = ['Blue', 'Fuchsia', 'Green', 'Orange', 'Red', 'Taupe'];
 

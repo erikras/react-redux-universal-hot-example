@@ -2,7 +2,7 @@ import express from 'express';
 import session from 'express-session';
 import bodyParser from 'body-parser';
 import config from '../config';
-import * as actions from './routes/index';
+import * as actions from './actions/index';
 import PrettyError from 'pretty-error';
 
 const pretty = new PrettyError();

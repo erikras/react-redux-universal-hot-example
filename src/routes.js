@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router';
+import {Route} from 'react-router';
 import {
     App,
     Home,
@@ -9,7 +9,7 @@ import {
     RequireLogin,
     LoginSuccess,
     Survey,
-    NotFound
+    NotFound,
   } from 'containers';
 
 export default function(store) {
