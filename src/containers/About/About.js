@@ -3,12 +3,12 @@ import DocumentMeta from 'react-document-meta';
 import { MiniInfoBar } from 'components';
 
 export default class About extends Component {
-  handleToggleKitten() {
-    this.setState({showKitten: !this.state.showKitten});
-  }
-
   state = {
     showKitten: false
+  }
+
+  handleToggleKitten() {
+    this.setState({showKitten: !this.state.showKitten});
   }
 
   render() {
