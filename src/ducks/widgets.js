@@ -89,7 +89,7 @@ export function isLoaded(globalState) {
 export function load() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.get('/loadWidgets')
+    promise: (client) => client.get('/widget/load/param1/param2')
   };
 }
 
@@ -97,7 +97,7 @@ export function save(widget) {
   return {
     types: [SAVE, SAVE_SUCCESS, SAVE_FAIL],
     id: widget.id,
-    promise: (client) => client.post('/updateWidget', {
+    promise: (client) => client.post('/widget/update', {
       data: widget
     })
   };

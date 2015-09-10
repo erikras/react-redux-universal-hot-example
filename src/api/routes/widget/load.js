@@ -14,8 +14,11 @@ export function getWidgets(req) {
   return widgets;
 }
 
-export default function loadWidgets(req) {
+export default function load(req, params) {
   return new Promise((resolve, reject) => {
+
+    console.log(params);
+
     // make async call to database
     setTimeout(() => {
       if (Math.floor(Math.random() * 3) === 0) {
