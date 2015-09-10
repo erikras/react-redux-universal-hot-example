@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import DocumentMeta from 'react-document-meta';
-import MiniInfoBar from '../components/MiniInfoBar';
+import { MiniInfoBar } from 'components';
 
 export default class About extends Component {
   handleToggleKitten() {

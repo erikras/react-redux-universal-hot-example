@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-require('../compiler'); // enables ES6 support
+require('../server.babel'); // babel registration (runtime transpilation for node)
 var path = require('path');
 var rootDir = path.resolve(__dirname, '..');
 /**
@@ -22,8 +22,7 @@ if (__DEVELOPMENT__) {
 // https://github.com/halt-hammerzeit/webpack-isomorphic-tools
 var WebpackIsomorphicTools = require('webpack-isomorphic-tools');
 global.webpackIsomorphicTools = new WebpackIsomorphicTools(require('../webpack/webpack-isomorphic-tools'))
-	.development(__DEVELOPMENT__)
-	.server(rootDir, function()
-	{
-		require('../src/server');
-	});
+  .development(__DEVELOPMENT__)
+  .server(rootDir, function() {
+    require('../src/server');
+  });

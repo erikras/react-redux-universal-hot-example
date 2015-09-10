@@ -1,7 +1,7 @@
 import React from 'react';
 import Router from 'react-router';
-import createRoutes from './views/createRoutes';
-import { Provider } from 'react-redux';
+import createRoutes from '../routes';
+import {Provider} from 'react-redux';
 
 const getFetchData = (component = {}) => {
   return component.WrappedComponent ?

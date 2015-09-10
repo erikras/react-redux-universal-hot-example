@@ -7,8 +7,8 @@ import BrowserHistory from 'react-router/lib/BrowserHistory';
 import Location from 'react-router/lib/Location';
 import queryString from 'query-string';
 import createStore from './redux/create';
-import ApiClient from './ApiClient';
-import universalRouter from './universalRouter';
+import ApiClient from './helpers/ApiClient';
+import universalRouter from './helpers/universalRouter';
 const history = new BrowserHistory();
 const client = new ApiClient();
 

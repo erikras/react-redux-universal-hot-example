@@ -1,9 +1,9 @@
 import React from 'react/addons';
-import {expect} from 'chai';
-import InfoBar from '../InfoBar';
+import { expect} from 'chai';
+import { InfoBar } from 'components';
 import { Provider } from 'react-redux';
 import createStore from 'redux/create';
-import ApiClient from 'ApiClient';
+import ApiClient from 'helpers/ApiClient';
 const { TestUtils } = React.addons;
 const client = new ApiClient();
 
@@ -43,7 +43,7 @@ describe('InfoBar', () => {
   });
 
   it('should render the correct className', () => {
-    const styles = require('../InfoBar.scss');
+    const styles = require('components/InfoBar/InfoBar.scss');
     expect(styles.infoBar).to.be.a('string');
     expect(dom.className).to.include(styles.infoBar);
   });

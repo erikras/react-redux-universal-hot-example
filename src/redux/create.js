@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import createMiddleware from './clientMiddleware';
+import createMiddleware from './middleware/clientMiddleware';
 
 export default function createApiClientStore(client, data) {
   const middleware = createMiddleware(client);
@@ -15,13 +15,13 @@ export default function createApiClientStore(client, data) {
     finalCreateStore = applyMiddleware(middleware)(createStore);
   }
 
-  const reducer = require('../ducks/reducer');
+  const reducer = require('./modules/reducer');
   const store = finalCreateStore(reducer, data);
   store.client = client;
 
   if (__DEVELOPMENT__ && module.hot) {
-    module.hot.accept('../ducks/reducer', () => {
-      store.replaceReducer(require('../ducks/reducer'));
+    module.hot.accept('./modules/reducer', () => {
+      store.replaceReducer(require('./modules/reducer'));
     });
   }
 
