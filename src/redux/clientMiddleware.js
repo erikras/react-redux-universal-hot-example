@@ -14,7 +14,7 @@ export default function clientMiddleware(client) {
       next({...rest, type: REQUEST});
       return promise(client).then(
         (result) => next({...rest, result, type: SUCCESS}),
-        (error) => { return Promise.reject(next({...rest, error, type: FAILURE})); }
+        (error) => next({...rest, error, type: FAILURE})
       );
     };
   };
