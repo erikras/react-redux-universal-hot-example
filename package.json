@@ -76,7 +76,7 @@
     "react-redux": "^2.0.0",
     "react-router": "v1.0.0-beta2",
     "redux": "^2.0.0",
-    "redux-form": "^1.5.0",
+    "redux-form": "^1.5.2",
     "serialize-javascript": "^1.0.0",
     "serve-favicon": "^2.3.0",
     "serve-static": "^1.10.0",
