@@ -1,12 +1,12 @@
-import React, {Component, PropTypes} from 'react';
-import {Link} from 'react-router';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import DocumentMeta from 'react-document-meta';
-import {isLoaded as isInfoLoaded, load as loadInfo} from '../ducks/info';
-import {isLoaded as isAuthLoaded, load as loadAuth, logout} from '../ducks/auth';
-import InfoBar from '../components/InfoBar';
-import {createTransitionHook} from '../universalRouter';
+import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
+import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
+import { InfoBar } from 'components';
+import { createTransitionHook } from 'helpers/universalRouter';
 
 const title = 'React Redux Example';
 const description = 'All the modern best practices in one example.';

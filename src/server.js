@@ -8,9 +8,9 @@ import httpProxy from 'http-proxy';
 import path from 'path';
 import createStore from './redux/create';
 import api from './api/api';
-import ApiClient from './ApiClient';
-import universalRouter from './universalRouter';
-import Html from './Html';
+import ApiClient from './helpers/ApiClient';
+import universalRouter from './helpers/universalRouter';
+import Html from './helpers/Html';
 import PrettyError from 'pretty-error';
 
 const pretty = new PrettyError();
@@ -50,9 +50,15 @@ app.use((req, res) => {
   const client = new ApiClient(req);
   const store = createStore(client);
   const location = new Location(req.path, req.query);
-  if (__DISABLE_SSR__) {
+
+  const hydrateOnClient = function() {
     res.send('<!doctype html>\n' +
       React.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={<div/>} store={store}/>));
+  }
+
+  if (__DISABLE_SSR__) {
+    hydrateOnClient();
+    return;
   } else {
     universalRouter(location, undefined, store)
       .then(({component, transition, isRedirect}) => {
@@ -69,7 +75,7 @@ app.use((req, res) => {
           return;
         }
         console.error('ROUTER ERROR:', pretty.render(error));
-        res.status(500).send({error: error.stack});
+        hydrateOnClient(); // let client render error page or re-request data
       });
   }
 });

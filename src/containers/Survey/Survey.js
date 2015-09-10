@@ -3,7 +3,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import DocumentMeta from 'react-document-meta';
 import {initialize} from 'redux-form';
-import SurveyForm from '../components/SurveyForm';
+import {SurveyForm} from 'components';
 
 @connect(
   () => ({}),
