@@ -23,11 +23,6 @@ export default class Html extends Component {
     const {assets, component, store} = this.props;
     const content = React.renderToString(component);
 
-    let stateData = serialize(store.getState());
-    if (!__DEVELOPMENT__) {
-      stateData = stateData.replace(/\s+/g, '');
-    }
-
     return (
       <html lang="en-us">
         <head>
@@ -48,7 +43,7 @@ export default class Html extends Component {
         </head>
         <body>
           <div id="content" dangerouslySetInnerHTML={{__html: content}}/>
-          <script dangerouslySetInnerHTML={{__html: `window.__data=${stateData};`}} />
+          <script dangerouslySetInnerHTML={{__html: `window.__data=${serialize(store.getState())};`}} />
           <script src={assets.javascript.main}/>
         </body>
       </html>
