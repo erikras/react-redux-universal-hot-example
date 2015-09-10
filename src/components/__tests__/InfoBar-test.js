@@ -3,7 +3,7 @@ import { expect} from 'chai';
 import { InfoBar } from 'components';
 import { Provider } from 'react-redux';
 import createStore from 'redux/create';
-import ApiClient from 'ApiClient';
+import ApiClient from 'helpers/ApiClient';
 const { TestUtils } = React.addons;
 const client = new ApiClient();
 
