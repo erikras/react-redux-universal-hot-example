@@ -2,7 +2,7 @@ import express from 'express';
 import session from 'express-session';
 import bodyParser from 'body-parser';
 import config from '../config';
-import * as actions from './routes/index';
+import * as actions from './actions/index';
 import PrettyError from 'pretty-error';
 
 const pretty = new PrettyError();
@@ -18,10 +18,30 @@ app.use(bodyParser.json());
 export default function api() {
   return new Promise((resolve) => {
     app.use((req, res) => {
-      const matcher = req.url.split('?')[0].split('/');
-      const action = matcher && actions[matcher[1]];
-      if (action) {
-        action(req, matcher.slice(2))
+      
+      const matcher = req.url.split('?')[0].split('/').slice(1);
+
+      let action = false;
+      let params = null;
+      let apiActions = actions;
+      let sliceIndex = 0; 
+
+      for (let actionName of matcher) {
+
+        if (apiActions[actionName]) {
+          action = apiActions[actionName];
+        }
+
+        if (typeof action === 'function') {
+          params = matcher.slice(++sliceIndex);
+          break;
+        }
+        apiActions = action;
+        ++sliceIndex;
+      }
+
+      if (action && typeof action == 'function') {
+        action(req, params)
           .then((result) => {
             res.json(result);
           }, (reason) => {
