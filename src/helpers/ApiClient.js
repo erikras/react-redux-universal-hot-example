@@ -27,7 +27,7 @@ class ApiClient_ {
             }
             request.end((err, res) => {
               if (err) {
-                reject(res.body || err);
+                reject((res && res.body) || err);
               } else {
                 resolve(res.body);
               }
