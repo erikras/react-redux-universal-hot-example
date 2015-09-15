@@ -7,7 +7,6 @@ import compression from 'compression';
 import httpProxy from 'http-proxy';
 import path from 'path';
 import createStore from './redux/create';
-import api from './api/api';
 import ApiClient from './helpers/ApiClient';
 import universalRouter from './helpers/universalRouter';
 import Html from './helpers/Html';
@@ -84,13 +83,9 @@ if (config.port) {
   app.listen(config.port, (err) => {
     if (err) {
       console.error(err);
-    } else {
-      api().then(() => {
-        console.info('==> ✅  Server is listening');
-        console.info('==> 🌎  %s running on port %s, API on port %s', config.app.name, config.port, config.apiPort);
-        console.info('----------\n==> 💻  Open http://localhost:%s in a browser to view the app.', config.port);
-      });
     }
+    console.info('----\n==> ✅  %s is running.', config.app.name);
+    console.info('==> 💻  Open http://localhost:%s in a browser to view the app.', config.port);
   });
 } else {
   console.error('==>     ERROR: No PORT environment variable has been specified');
