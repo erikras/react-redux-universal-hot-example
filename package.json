@@ -24,8 +24,9 @@
   ],
   "main": "bin/server.js",
   "scripts": {
-    "start": "node ./node_modules/better-npm-run start",
-    "start-api": "node ./node_modules/better-npm-run start-api",
+    "start": "concurrent --kill-others \"npm run start-prod\" \"npm run start-prod-api\"",
+    "start-prod": "node ./node_modules/better-npm-run start-prod",
+    "start-prod-api": "node ./node_modules/better-npm-run start-prod-api",
     "build": "webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
     "lint": "eslint -c .eslintrc src",
     "start-dev": "node ./node_modules/better-npm-run start-dev",
@@ -35,7 +36,7 @@
     "test": "karma start"
   },
   "betterScripts": {
-    "start": {
+    "start-prod": {
       "command": "node ./bin/server.js",
       "env": {
         "NODE_PATH": "./src",
@@ -44,7 +45,7 @@
         "APIPORT": 3030
       }
     },
-    "start-api": {
+    "start-prod-api": {
       "command": "node ./bin/api.js",
       "env": {
         "NODE_PATH": "./api",
