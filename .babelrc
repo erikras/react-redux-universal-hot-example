@@ -1,4 +1,23 @@
 {
   "stage": 0,
-  "loose": "all"
+  "optional": "runtime",
+  "loose": "all",
+  "plugins": [
+    "typecheck"
+  ],
+  "env": {
+    "development": {
+      "plugins": [
+        "typecheck",
+        "react-transform"
+      ],
+      "extra": {
+        "react-transform": [{
+            "target": "react-transform-webpack-hmr",
+            "imports": ["react"],
+            "locals": ["module"]
+        }]
+      }
+    }
+  }
 }
