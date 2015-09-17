@@ -80,7 +80,6 @@ app.use((req, res) => {
 });
 
 if (config.port) {
-  require('../api/api');
   app.listen(config.port, (err) => {
     if (err) {
       console.error(err);

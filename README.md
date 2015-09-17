@@ -130,6 +130,19 @@ To run the tests in the project, just simply run `npm test` if you have `Chrome`
 
 To keep watching your test suites that you are working on, just set `singleRun: false` in the `karma.conf.js` file. Please be sure set it to `true` if you are running `npm test` on a continuous integration server (travis-ci, etc).
 
+## Heroku Deploy
+
+To get this project to work on Heroku, you need to:
+
+1. `heroku config:set NPM_CONFIG_PRODUCTION=false -a [your-app-name]`
+  * This is to enable webpack to run the build on deploy.
+2. Set the following config variables:
+  * `APIPORT` = `3030`
+  * `NODE_ENV` = `production`
+  * `NODE_PATH` = `./src`
+
+The first deploy might take a while, but after that your `node_modules` dir should be cached.
+
 ## The Future
 
 * [Inline Styles](docs/InlineStyles.md) - CSS is dead.
