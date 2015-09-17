@@ -73,7 +73,7 @@ export default class WidgetForm extends Component {
           </button>
           <button className="btn btn-success"
                   onClick={handleSubmit(() => save(values)
-                    .catch(x => {
+                    .then(x => {
                       if (x && typeof x.error === 'object') {
                         return Promise.reject(x.error);
                       }

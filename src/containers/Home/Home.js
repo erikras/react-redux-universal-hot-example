@@ -64,9 +64,9 @@ export default class Home extends Component {
             <li><a href="http://expressjs.com" target="_blank">Express</a></li>
             <li><a href="http://babeljs.io" target="_blank">Babel</a> for ES6 and ES7 magic</li>
             <li><a href="http://webpack.github.io" target="_blank">Webpack</a> for bundling</li>
-            <li><a href="http://webpack.github.io/docs/webpack-dev-server.html" target="_blank">Webpack Dev Server</a>
+            <li><a href="http://webpack.github.io/docs/webpack-dev-middleware.html" target="_blank">Webpack Dev Middleware</a>
             </li>
-            <li><a href="https://github.com/gaearon/react-hot-loader" target="_blank">React Hot Loader</a></li>
+            <li><a href="https://github.com/glenjamin/webpack-hot-middleware" target="_blank">Webpack Hot Middleware</a></li>
             <li><a href="https://github.com/gaearon/redux" target="_blank">Redux</a>'s futuristic <a
               href="https://facebook.github.io/react/blog/2014/05/06/flux.html" target="_blank">Flux</a> implementation
             </li>
@@ -74,6 +74,7 @@ export default class Home extends Component {
               generation DX (developer experience).
               Watch <a href="https://www.youtube.com/watch?v=xsSnOQynTHs" target="_blank">Dan Abramov's talk</a>.
             </li>
+            <li><a href="http://eslint.org" target="_blank">ESLint</a> to maintain a consistent code style</li>
             <li><a href="https://github.com/erikras/redux-form" target="_blank">redux-form</a> to manage form state
               in Redux
             </li>
