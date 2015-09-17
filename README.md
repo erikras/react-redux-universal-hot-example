@@ -16,10 +16,11 @@ This is a starter boiler plate app I've put together using the following technol
 * [Express](http://expressjs.com)
 * [Babel](http://babeljs.io) for ES6 and ES7 magic
 * [Webpack](http://webpack.github.io) for bundling
-* [Webpack Dev Server](http://webpack.github.io/docs/webpack-dev-server.html)
-* [React Hot Loader](https://github.com/gaearon/react-hot-loader)
+* [Webpack Dev Middleware](http://webpack.github.io/docs/webpack-dev-middleware.html)
+* [Webpack Hot Middleware](https://github.com/glenjamin/webpack-hot-middleware)
 * [Redux](https://github.com/gaearon/redux)'s futuristic [Flux](https://facebook.github.io/react/blog/2014/05/06/flux.html) implementation
 * [Redux Dev Tools](https://github.com/gaearon/redux-devtools) for next generation DX (developer experience). Watch [Dan Abramov's talk](https://www.youtube.com/watch?v=xsSnOQynTHs).
+* [ESLint](http://eslint.org) to maintain a consistent code style
 * [redux-form](https://github.com/erikras/redux-form) to manage form state in Redux
 * [lru-memoize](https://github.com/erikras/lru-memoize) to speed up form validation
 * [style-loader](https://github.com/webpack/style-loader) and [sass-loader](https://github.com/jtangelder/sass-loader) to allow import of stylesheets
