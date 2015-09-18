@@ -1,4 +1,7 @@
 # React Redux Universal Hot Example
+
+## About
+
 ---
 [![build status](https://img.shields.io/travis/erikras/react-redux-universal-hot-example/master.svg?style=flat-square)](https://travis-ci.org/erikras/react-redux-universal-hot-example)
 [![react-redux-universal channel on slack](https://img.shields.io/badge/slack-react--redux--universal%40reactiflux-blue.svg)](http://www.reactiflux.com)
