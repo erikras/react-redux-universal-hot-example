@@ -89,7 +89,7 @@ export default class App extends Component {
 
   render() {
     const {user} = this.props;
-    const styles = require('./App.scss');
+    const styles = require('./App.less');
     return (
       <div className={styles.app}>
         <DocumentMeta {...meta}/>
