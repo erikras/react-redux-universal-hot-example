@@ -88,6 +88,7 @@
     "express-session": "^1.11.3",
     "file-loader": "^0.8.4",
     "http-proxy": "^1.11.1",
+    "less-loader": "^2.2.1",
     "lru-memoize": "1.0.0",
     "map-props": "^1.0.0",
     "piping": "0.2.0",
