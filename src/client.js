@@ -3,22 +3,19 @@
  */
 import 'babel/polyfill';
 import React from 'react';
-import BrowserHistory from 'react-router/lib/BrowserHistory';
-import Location from 'react-router/lib/Location';
-import queryString from 'query-string';
+import ReactDOM from 'react-dom';
+import createHistory from 'history/lib/createBrowserHistory';
+import createLocation from 'history/lib/createLocation';
 import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
 import universalRouter from './helpers/universalRouter';
 import io from 'socket.io-client';
 
-const history = new BrowserHistory();
+const history = createHistory();
 const client = new ApiClient();
 
 const dest = document.getElementById('content');
 const store = createStore(client, window.__data);
-const search = document.location.search;
-const query = search && queryString.parse(search);
-const location = new Location(document.location.pathname, query);
 
 function initSocket() {
   // TODO: add better support for production when running behind proxy (nginx)
@@ -36,22 +33,32 @@ function initSocket() {
 
 window.socket = initSocket();
 
-universalRouter(location, history, store)
-  .then(({component}) => {
-    React.render(component, dest);
-    if (__DEVTOOLS__) {
-      const { DevTools, DebugPanel, LogMonitor } = require('redux-devtools/lib/react');
-      React.render(<div>
-        {component}
-        <DebugPanel top right bottom key="debugPanel">
-          <DevTools store={store} monitor={LogMonitor}/>
-        </DebugPanel>
-      </div>, dest);
-    }
-  }, (error) => {
-    console.error(error);
-  });
+const location = createLocation(document.location.pathname, document.location.search);
 
+const render = (loc, hist, str, preload) => {
+  return universalRouter(loc, hist, str, preload)
+    .then(({component}) => {
+      ReactDOM.render(component, dest);
+      if (__DEVTOOLS__) {
+        const { DevTools, DebugPanel, LogMonitor } = require('redux-devtools/lib/react');
+        ReactDOM.render(<div>
+          {component}
+          <DebugPanel top right bottom key="debugPanel">
+            <DevTools store={store} monitor={LogMonitor}/>
+          </DebugPanel>
+        </div>, dest);
+      }
+    }, (error) => {
+      console.error(error);
+    });
+};
+
+history.listenBefore((loc, callback) => {
+  render(loc, history, store, true)
+    .then((callback));
+});
+
+render(location, history, store);
 
 if (process.env.NODE_ENV !== 'production') {
   window.React = React; // enable debugger
