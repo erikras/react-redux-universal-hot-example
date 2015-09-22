@@ -1,3 +1,4 @@
+var fs = require('fs');
 var path = require('path');
 var webpack = require('webpack');
 var WebpackIsomorphicTools = require('webpack-isomorphic-tools');
@@ -8,6 +9,26 @@ var port = parseInt(process.env.PORT) + 1 || 3001;
 // https://github.com/halt-hammerzeit/webpack-isomorphic-tools
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools'));
+
+var babelrc = fs.readFileSync('./.babelrc');
+var babelLoaderQuery = {};
+
+try {
+  babelLoaderQuery = JSON.parse(babelrc);
+} catch (err) {
+  console.error('==>     ERROR: Error parsing your .babelrc.');
+  console.error(err);
+}
+
+babelLoaderQuery.plugins = babelLoaderQuery.plugins || [];
+babelLoaderQuery.plugins.push('react-transform');
+babelLoaderQuery.extra = {
+  'react-transform': [{
+    target: 'react-transform-hmr',
+    imports: ['react'],
+    locals: ['module']
+  }]
+};
 
 module.exports = {
   devtool: 'inline-source-map',
@@ -26,7 +47,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loaders: ['babel', 'eslint-loader']},
+      { test: /\.js$/, exclude: /node_modules/, loaders: ['babel?' + JSON.stringify(babelLoaderQuery), 'eslint-loader']},
       { test: /\.json$/, loader: 'json-loader' },
       { test: /\.less$/, loader: 'style!css!less' },
       { test: /\.scss$/, loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap' },
