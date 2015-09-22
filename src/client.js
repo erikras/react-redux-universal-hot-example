@@ -19,18 +19,15 @@ const query = search && queryString.parse(search);
 const location = new Location(document.location.pathname, query);
 universalRouter(location, history, store)
   .then(({component}) => {
+    React.render(component, dest);
     if (__DEVTOOLS__) {
       const { DevTools, DebugPanel, LogMonitor } = require('redux-devtools/lib/react');
-      console.info('You will see a "Warning: React attempted to reuse markup in a container but the checksum was' +
-        ' invalid." message. That\'s because the redux-devtools are enabled.');
       React.render(<div>
         {component}
         <DebugPanel top right bottom key="debugPanel">
           <DevTools store={store} monitor={LogMonitor}/>
         </DebugPanel>
       </div>, dest);
-    } else {
-      React.render(component, dest);
     }
   }, (error) => {
     console.error(error);
