@@ -1,7 +1,7 @@
 import Express from 'express';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
-import createLocation from 'history/lib/createLocation'
+import createLocation from 'history/lib/createLocation';
 import config from './config';
 import favicon from 'serve-favicon';
 import compression from 'compression';
@@ -55,7 +55,7 @@ app.use((req, res) => {
   const store = createStore(client);
   const location = createLocation(req.path, req.query);
 
-  const hydrateOnClient = function() {
+  function hydrateOnClient() {
     res.send('<!doctype html>\n' +
       ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={<div/>} store={store}/>));
   }
@@ -63,25 +63,25 @@ app.use((req, res) => {
   if (__DISABLE_SSR__) {
     hydrateOnClient();
     return;
-  } else {
-    universalRouter(location, undefined, store, true)
-      .then(({component, redirectLocation}) => {
-        if (redirectLocation) {
-          res.redirect(redirectLocation.pathname + redirectLocation.search);
-          return;
-        }
-        res.send('<!doctype html>\n' +
-          ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store}/>));
-      })
-      .catch((error) => {
-        if (error.redirect) {
-          res.redirect(error.redirect);
-          return;
-        }
-        console.error('ROUTER ERROR:', pretty.render(error));
-        hydrateOnClient(); // let client render error page or re-request data
-      });
   }
+
+  universalRouter(location, undefined, store, true)
+    .then(({component, redirectLocation}) => {
+      if (redirectLocation) {
+        res.redirect(redirectLocation.pathname + redirectLocation.search);
+        return;
+      }
+      res.send('<!doctype html>\n' +
+        ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store}/>));
+    })
+    .catch((error) => {
+      if (error.redirect) {
+        res.redirect(error.redirect);
+        return;
+      }
+      console.error('ROUTER ERROR:', pretty.render(error));
+      hydrateOnClient(); // let client render error page or re-request data
+    });
 });
 
 if (config.port) {
