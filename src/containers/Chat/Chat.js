@@ -14,8 +14,6 @@ class Chat extends Component {
   componentDidMount() {
     if (socket && !this.onMsgListener) {
       this.onMsgListener = socket.on('msg', (data) => {
-        console.log(data);
-
         const messages = this.state.messages;
         messages.push(data);
         this.setState({messages});
@@ -45,7 +43,6 @@ class Chat extends Component {
     e.preventDefault();
 
     const msg = this.state.message;
-    console.log(msg);
 
     this.setState({message: ''});
 
