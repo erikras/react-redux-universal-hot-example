@@ -11,7 +11,9 @@ export default class RequireLogin extends Component {
   componentWillMount() {
     const {history, user} = this.props;
     if (!user) {
-      history.pushState(null, '/');
+      setTimeout(() => {
+        history.replaceState(null, '/');
+      });
     }
   }
 
