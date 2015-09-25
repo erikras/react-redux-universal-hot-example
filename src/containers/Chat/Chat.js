@@ -13,11 +13,11 @@ class Chat extends Component {
 
   componentDidMount() {
     if (socket && !this.onMsgListener) {
-      this.onMsgListener = socket.on('msg', (data) => {
-        const messages = this.state.messages;
-        messages.push(data);
-        this.setState({messages});
-      });
+      this.onMsgListener = socket.on('msg', this.onMessageReceived.bind(this));
+
+      setTimeout(() => {
+        socket.emit('history', {offset: 0, length: 100});
+      }, 100);
     }
   }
 
@@ -28,16 +28,22 @@ class Chat extends Component {
     }
   }
 
-  static fetchData(store) {
-    if (!isAuthLoaded(store.getState())) {
-      return store.dispatch(loadAuth());
-    }
+  onMessageReceived(data) {
+    const messages = this.state.messages;
+    messages.push(data);
+    this.setState({messages});
   }
 
   state = {
     message: '',
     messages: []
   };
+
+  static fetchData(store) {
+    if (!isAuthLoaded(store.getState())) {
+      return store.dispatch(loadAuth());
+    }
+  }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -64,7 +70,7 @@ class Chat extends Component {
         <div>
           <ul>
           {this.state.messages.map((msg) => {
-            return <li>{msg.from}: {msg.text}</li>;
+            return <li key={`chat.msg.${msg.id}`}>{msg.from}: {msg.text}</li>;
           })}
           </ul>
           <form className="login-form" onSubmit={this.handleSubmit.bind(this)}>
