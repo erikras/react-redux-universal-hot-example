@@ -10,7 +10,6 @@ import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
 import universalRouter from './helpers/universalRouter';
 import io from 'socket.io-client';
-import config from './config';
 
 const history = new BrowserHistory();
 const client = new ApiClient();
@@ -23,8 +22,7 @@ const location = new Location(document.location.pathname, query);
 
 function initSocket() {
   // TODO: add better support for production when running behind proxy (nginx)
-  const port = config.isProduction ? 8080 : 3000;
-  const socket = io(`localhost:${port}`, {path: '/api/ws', transports: ['polling']});
+  const socket = io('', {path: '/api/ws', transports: ['polling']});
   socket.on('news', (data) => {
     console.log(data);
     socket.emit('my other event', { my: 'data from client' });
