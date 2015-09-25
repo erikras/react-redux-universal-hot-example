@@ -21,7 +21,6 @@ const query = search && queryString.parse(search);
 const location = new Location(document.location.pathname, query);
 
 function initSocket() {
-  // TODO: add better support for production when running behind proxy (nginx)
   const socket = io('', {path: '/api/ws', transports: ['polling']});
   socket.on('news', (data) => {
     console.log(data);

@@ -67,6 +67,10 @@ app.use((req, res) => {
 });
 
 
+const bufferSize = 100;
+const messageBuffer = new Array(bufferSize);
+let messageIndex = 0;
+
 if (config.apiPort) {
   const runnable = app.listen(config.apiPort, (err) => {
     if (err) {
@@ -78,7 +82,21 @@ if (config.apiPort) {
 
   io.on('connection', (socket) => {
     socket.emit('news', {msg: `'Hello World!' from server`});
+
+    socket.on('history', () => {
+      for(let i = 0; i < bufferSize; i++) {
+        const msgNo = (messageIndex + i) % bufferSize;
+        const msg = messageBuffer[msgNo];
+        if(msg) {
+          socket.emit('msg', msg);
+        }
+      }
+    });
+
     socket.on('msg', (data) => {
+      data.id = messageIndex;
+      messageBuffer[messageIndex % bufferSize] = data;
+      messageIndex++;
       io.emit('msg', data);
     });
   });

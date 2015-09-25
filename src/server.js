@@ -85,7 +85,6 @@ app.use((req, res) => {
 
 if (config.port) {
   if (config.isProduction) {
-    console.log('Initializing SOCKET SERVER!!!');
     const io = new SocketIo(server);
     io.path('/api/ws');
   }
