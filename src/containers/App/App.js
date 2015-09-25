@@ -101,6 +101,8 @@ export default class App extends Component {
             </Link>
 
             <ul className="nav navbar-nav">
+              {user && <li><Link to="/chat">Chat</Link></li>}
+
               <li><Link to="/widgets">Widgets</Link></li>
               <li><Link to="/survey">Survey</Link></li>
               <li><Link to="/about">About Us</Link></li>

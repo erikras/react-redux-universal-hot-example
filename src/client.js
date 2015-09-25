@@ -29,6 +29,11 @@ function initSocket() {
     console.log(data);
     socket.emit('my other event', { my: 'data from client' });
   });
+  socket.on('msg', (data) => {
+    console.log(data);
+  });
+
+  return socket;
 }
 
 window.socket = initSocket();

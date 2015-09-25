@@ -78,8 +78,8 @@ if (config.apiPort) {
 
   io.on('connection', (socket) => {
     socket.emit('news', {msg: `'Hello World!' from server`});
-    socket.on('my other event', (data) => {
-      console.log(data);
+    socket.on('msg', (data) => {
+      io.emit('msg', data);
     });
   });
   io.listen(runnable);
