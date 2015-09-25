@@ -82,6 +82,7 @@ export default class Home extends Component {
               href="https://github.com/jtangelder/sass-loader" target="_blank">sass-loader</a> to allow import of
               stylesheets
             </li>
+            <li><a href="http://socket.io/">socket.io</a> for real-time communication</li>
           </ul>
 
           <h3>Features demonstrated in this project</h3>
@@ -134,6 +135,11 @@ export default class Home extends Component {
               The <Link to="/survey">Survey page</Link> uses the
               still-experimental <a href="https://github.com/erikras/redux-form" target="_blank">redux-form</a> to
               manage form state inside the Redux store. This includes immediate client-side validation.
+            </dd>
+            <dt>WebSockets / socket.io</dt>
+            <dd>
+              The <Link to="/chat">Chat</Link> uses the socket.io technology for real-time
+              commnunication between clients. You need to <Link to="/login">login</Link> first.
             </dd>
           </dl>
 
