@@ -11,11 +11,15 @@ import ApiClient from './helpers/ApiClient';
 import universalRouter from './helpers/universalRouter';
 import Html from './helpers/Html';
 import PrettyError from 'pretty-error';
+import http from 'http';
+import SocketIo from 'socket.io';
 
 const pretty = new PrettyError();
 const app = new Express();
+const server = new http.Server(app);
 const proxy = httpProxy.createProxyServer({
-  target: 'http://localhost:' + config.apiPort
+  target: 'http://localhost:' + config.apiPort,
+  ws: true
 });
 
 app.use(compression());
@@ -80,7 +84,13 @@ app.use((req, res) => {
 });
 
 if (config.port) {
-  app.listen(config.port, (err) => {
+  if (config.isProduction) {
+    console.log('Initializing SOCKET SERVER!!!');
+    const io = new SocketIo(server);
+    io.path('/api/ws');
+  }
+
+  server.listen(config.port, (err) => {
     if (err) {
       console.error(err);
     }

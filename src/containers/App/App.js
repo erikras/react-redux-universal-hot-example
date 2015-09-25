@@ -43,7 +43,7 @@ export default class App extends Component {
     children: PropTypes.object.isRequired,
     user: PropTypes.object,
     logout: PropTypes.func.isRequired
-  }
+  };
 
   static contextTypes = {
     router: PropTypes.object.isRequired,
