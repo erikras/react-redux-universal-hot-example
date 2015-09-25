@@ -99,6 +99,10 @@ if (config.apiPort) {
       messageIndex++;
       io.emit('msg', data);
     });
+
+    socket.on('disconnect', function() {
+      io.emit('msg', data);
+    });
   });
   io.listen(runnable);
 
