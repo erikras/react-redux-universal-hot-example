@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import ReactDOM from 'react-dom/server';
 import serialize from 'serialize-javascript';
 import DocumentMeta from 'react-document-meta';
 const cdn = '//cdnjs.cloudflare.com/ajax/libs/';
@@ -21,7 +22,7 @@ export default class Html extends Component {
 
   render() {
     const {assets, component, store} = this.props;
-    const content = React.renderToString(component);
+    const content = ReactDOM.renderToString(component);
 
     return (
       <html lang="en-us">

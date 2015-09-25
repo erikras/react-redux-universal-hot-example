@@ -1,5 +1,6 @@
+import qs from 'query-string';
 import React from 'react';
-import Router from 'react-router';
+import {match, RoutingContext} from 'react-router';
 import createRoutes from '../routes';
 import {Provider} from 'react-redux';
 
@@ -9,52 +10,56 @@ const getFetchData = (component = {}) => {
     component.fetchData;
 };
 
-export function createTransitionHook(store) {
-  return (nextState, transition, callback) => {
-    const { params, location: { query } } = nextState;
-    const promises = nextState.branch
-      .map(route => route.component)                          // pull out individual route components
-      .filter((component) => getFetchData(component))         // only look at ones with a static fetchData()
-      .map(getFetchData)                                      // pull out fetch data methods
-      .map(fetchData => fetchData(store, params, query || {}));  // call fetch data methods and save promises
-    Promise.all(promises)
-      .then(() => {
-        callback(); // can't just pass callback to then() because callback assumes first param is error
-      }, (error) => {
-        callback(error);
-      });
-  };
-}
+const fetchDataForContainers = (containers, store, params, query) => {
+  const promises = containers
+    .filter((component) => getFetchData(component))         // only look at ones with a static fetchData()
+    .map(getFetchData)                                      // pull out fetch data methods
+    .map(fetchData => fetchData(store, params, query || {}));  // call fetch data methods and save promises
 
-export default function universalRouter(location, history, store) {
+  return Promise.all(promises);
+};
+
+export default function universalRouter(location, history, store, preload) {
   const routes = createRoutes(store);
   return new Promise((resolve, reject) => {
-    Router.run(routes, location, [createTransitionHook(store)], (error, initialState, transition) => {
+    match({routes, history, location}, (error, redirectLocation, renderProps) => {
       if (error) {
         return reject(error);
       }
 
-      if (transition && transition.redirectInfo) {
+      if (redirectLocation) {
         return resolve({
-          transition,
-          isRedirect: true
+          redirectLocation
         });
       }
 
       if (history) {  // only on client side
-        initialState.history = history;
+        renderProps.history = history;
       }
 
-      const component = (
-        <Provider store={store} key="provider">
-          {() => <Router {...initialState} children={routes}/>}
-        </Provider>
-      );
+      function resolveWithComponent() {
+        const component = (
+          <Provider store={store} key="provider">
+            <RoutingContext {...renderProps}/>
+          </Provider>
+        );
 
-      return resolve({
-        component,
-        isRedirect: false
-      });
+        resolve({
+          component
+        });
+      }
+
+      if (preload) {
+        fetchDataForContainers(
+          renderProps.components,
+          store,
+          renderProps.params,
+          qs.parse(renderProps.location.search)
+        )
+          .then(() => resolveWithComponent(), err => reject(err));
+      } else {
+        resolveWithComponent();
+      }
     });
   });
 }

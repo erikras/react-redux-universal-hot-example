@@ -1,6 +1,7 @@
 import Express from 'express';
 import React from 'react';
-import Location from 'react-router/lib/Location';
+import ReactDOM from 'react-dom/server';
+import createLocation from 'history/lib/createLocation'
 import config from './config';
 import favicon from 'serve-favicon';
 import compression from 'compression';
@@ -52,25 +53,25 @@ app.use((req, res) => {
   }
   const client = new ApiClient(req);
   const store = createStore(client);
-  const location = new Location(req.path, req.query);
+  const location = createLocation(req.path, req.query);
 
   const hydrateOnClient = function() {
     res.send('<!doctype html>\n' +
-      React.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={<div/>} store={store}/>));
+      ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={<div/>} store={store}/>));
   }
 
   if (__DISABLE_SSR__) {
     hydrateOnClient();
     return;
   } else {
-    universalRouter(location, undefined, store)
-      .then(({component, transition, isRedirect}) => {
-        if (isRedirect) {
-          res.redirect(transition.redirectInfo.pathname);
+    universalRouter(location, undefined, store, true)
+      .then(({component, redirectLocation}) => {
+        if (redirectLocation) {
+          res.redirect(redirectLocation.pathname + redirectLocation.search);
           return;
         }
         res.send('<!doctype html>\n' +
-          React.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store}/>));
+          ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store}/>));
       })
       .catch((error) => {
         if (error.redirect) {

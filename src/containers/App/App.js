@@ -6,7 +6,6 @@ import DocumentMeta from 'react-document-meta';
 import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
 import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
 import { InfoBar } from 'components';
-import { createTransitionHook } from 'helpers/universalRouter';
 
 const title = 'React Redux Example';
 const description = 'All the modern best practices in one example.';
@@ -42,33 +41,22 @@ export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
     user: PropTypes.object,
-    logout: PropTypes.func.isRequired
+    logout: PropTypes.func.isRequired,
+    history: PropTypes.object
   };
 
   static contextTypes = {
-    router: PropTypes.object.isRequired,
     store: PropTypes.object.isRequired
   };
-
-  componentWillMount() {
-    const {router, store} = this.context;
-    this.transitionHook = createTransitionHook(store);
-    router.addTransitionHook(this.transitionHook);
-  }
 
   componentWillReceiveProps(nextProps) {
     if (!this.props.user && nextProps.user) {
       // login
-      this.context.router.transitionTo('/loginSuccess');
+      this.props.history.pushState(null, '/loginSuccess');
     } else if (this.props.user && !nextProps.user) {
       // logout
-      this.context.router.transitionTo('/');
+      this.props.history.pushState(null, '/');
     }
-  }
-
-  componentWillUnmount() {
-    const {router} = this.context;
-    router.removeTransitionHook(this.transitionHook);
   }
 
   static fetchData(store) {
