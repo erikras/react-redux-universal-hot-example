@@ -9,6 +9,9 @@ import queryString from 'query-string';
 import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
 import universalRouter from './helpers/universalRouter';
+import io from 'socket.io-client';
+import config from './config';
+
 const history = new BrowserHistory();
 const client = new ApiClient();
 
@@ -17,6 +20,24 @@ const store = createStore(client, window.__data);
 const search = document.location.search;
 const query = search && queryString.parse(search);
 const location = new Location(document.location.pathname, query);
+
+function initSocket() {
+  // TODO: add better support for production when running behind proxy (nginx)
+  const port = config.isProduction ? 8080 : 3000;
+  const socket = io(`localhost:${port}`, {path: '/api/ws', transports: ['polling']});
+  socket.on('news', (data) => {
+    console.log(data);
+    socket.emit('my other event', { my: 'data from client' });
+  });
+  socket.on('msg', (data) => {
+    console.log(data);
+  });
+
+  return socket;
+}
+
+window.socket = initSocket();
+
 universalRouter(location, history, store)
   .then(({component}) => {
     React.render(component, dest);
