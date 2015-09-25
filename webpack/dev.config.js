@@ -22,9 +22,10 @@ try {
 
 babelLoaderQuery.plugins = babelLoaderQuery.plugins || [];
 babelLoaderQuery.plugins.push('react-transform');
-babelLoaderQuery.extra = {
-  'react-transform': [{
-    target: 'react-transform-hmr',
+babelLoaderQuery.extra = babelLoaderQuery.extra || {};
+babelLoaderQuery.extra['react-transform'] = {
+  transforms: [{
+    transform: 'react-transform-hmr',
     imports: ['react'],
     locals: ['module']
   }]
