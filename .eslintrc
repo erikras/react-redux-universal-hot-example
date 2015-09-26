@@ -4,6 +4,7 @@
     "browser": true,
     "node": true,
     "mocha": true,
+    "es6": true
   },
   "rules": {
     "react/jsx-uses-react": 2,
@@ -30,5 +31,11 @@
     "__DISABLE_SSR__": true,
     "__DEVTOOLS__": true,
     "webpackIsomorphicTools": true
+  },
+  "ecmaFeatures": {
+    "modules": true,
+    "jsx": true,
+    "spread": true,
+    "experimentalObjectRestSpread": true
   }
 }
