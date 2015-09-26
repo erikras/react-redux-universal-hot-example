@@ -13,14 +13,14 @@ import {
     NotFound,
   } from 'containers';
 
-export default function(store) {
+export default function() {
   return (
     <Route component={App}>
       <Route path="/" component={Home}/>
       <Route path="/widgets" component={Widgets}/>
       <Route path="/about" component={About}/>
       <Route path="/login" component={Login}/>
-      <Route component={RequireLogin} onEnter={RequireLogin.onEnter(store)}>
+      <Route component={RequireLogin}>
         <Route path="/chat" component={Chat}/>
         <Route path="/loginSuccess" component={LoginSuccess}/>
       </Route>

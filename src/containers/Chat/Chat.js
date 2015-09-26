@@ -11,6 +11,11 @@ class Chat extends Component {
     user: PropTypes.object
   };
 
+  state = {
+    message: '',
+    messages: []
+  };
+
   componentDidMount() {
     if (socket && !this.onMsgListener) {
       this.onMsgListener = socket.on('msg', this.onMessageReceived.bind(this));
@@ -33,11 +38,6 @@ class Chat extends Component {
     messages.push(data);
     this.setState({messages});
   }
-
-  state = {
-    message: '',
-    messages: []
-  };
 
   static fetchData(store) {
     if (!isAuthLoaded(store.getState())) {
