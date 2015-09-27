@@ -52,9 +52,8 @@ const render = (loc, hist, str, preload) => {
     });
 };
 
-history.listenBefore((loc, callback) => {
-  render(loc, history, store, true)
-    .then((callback));
+history.listen((loc) => {
+  render(loc, history, store, true);
 });
 
 render(location, history, store);
