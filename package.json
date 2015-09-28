@@ -96,7 +96,7 @@
     "piping": "0.2.0",
     "pretty-error": "1.2.0",
     "query-string": "2.4.1",
-    "react": "0.14.0-rc1",
+    "react": "^0.14.0-rc1",
     "react-document-meta": "2.0.0-rc2",
     "react-dom": "0.14.0-rc1",
     "react-inline-css": "2.0.0",

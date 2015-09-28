@@ -10,7 +10,7 @@ import widgets from './widgets';
 export default combineReducers({
   auth,
   form,
-  multireducer({
+  multireducer: multireducer({
     counter1: counter,
     counter2: counter,
     counter3: counter

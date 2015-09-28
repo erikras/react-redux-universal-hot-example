@@ -30,7 +30,7 @@ function initSocket() {
   return socket;
 }
 
-window.socket = initSocket();
+global.socket = initSocket();
 
 const location = createLocation(document.location.pathname, document.location.search);
 

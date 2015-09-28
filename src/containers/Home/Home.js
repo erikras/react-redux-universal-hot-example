@@ -47,7 +47,9 @@ export default class Home extends Component {
 
         <div className="container">
           <div className={styles.counterContainer}>
-            <CounterButton/>
+            <CounterButton multireducerKey="counter1"/>
+            <CounterButton multireducerKey="counter2"/>
+            <CounterButton multireducerKey="counter3"/>
           </div>
 
           <p>This starter boilerplate app uses the following technologies:</p>
@@ -78,6 +80,8 @@ export default class Home extends Component {
             <li><a href="https://github.com/erikras/redux-form" target="_blank">redux-form</a> to manage form state
               in Redux
             </li>
+            <li><a href="https://github.com/erikras/multireducer" target="_blank">multireducer</a> combine several
+              identical reducer states into one key-based reducer</li>
             <li><a href="https://github.com/webpack/style-loader" target="_blank">style-loader</a> and <a
               href="https://github.com/jtangelder/sass-loader" target="_blank">sass-loader</a> to allow import of
               stylesheets

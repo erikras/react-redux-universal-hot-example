@@ -45,8 +45,8 @@ class Chat extends Component {
     }
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
+  handleSubmit(event) {
+    event.preventDefault();
 
     const msg = this.state.message;
 
@@ -76,8 +76,8 @@ class Chat extends Component {
           <form className="login-form" onSubmit={this.handleSubmit.bind(this)}>
             <input type="text" ref="message" placeholder="Enter your message"
              value={this.state.message}
-             onChange={(e) => {
-               this.setState({message: e.target.value});
+             onChange={(event) => {
+               this.setState({message: event.target.value});
              }
             }/>
             <button className="btn" onClick={this.handleSubmit.bind(this)}>Send</button>
