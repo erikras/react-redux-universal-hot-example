@@ -125,7 +125,7 @@
     "concurrently": "0.1.1",
     "css-loader": "0.19.0",
     "eslint": "1.5.1",
-    "eslint-config-airbnb": "0.0.8",
+    "eslint-config-airbnb": "0.1.0",
     "eslint-loader": "1.0.0",
     "eslint-plugin-react": "3.4.2",
     "extract-text-webpack-plugin": "0.8.2",
