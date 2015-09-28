@@ -52,6 +52,8 @@ const render = (loc, hist, str, preload) => {
     });
 };
 
+history.listen(() => {});
+
 history.listenBefore((loc, callback) => {
   render(loc, history, store, true)
     .then((callback));
