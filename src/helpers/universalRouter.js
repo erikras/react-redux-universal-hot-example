@@ -20,7 +20,7 @@ const fetchDataForContainers = (containers, store, params, query) => {
 };
 
 export default function universalRouter(location, history, store, preload) {
-  const routes = createRoutes();
+  const routes = createRoutes(history);
   return new Promise((resolve, reject) => {
     match({routes, history, location}, (error, redirectLocation, renderProps) => {
       if (error) {
@@ -31,10 +31,6 @@ export default function universalRouter(location, history, store, preload) {
         return resolve({
           redirectLocation
         });
-      }
-
-      if (history) {  // only on client side
-        renderProps.history = history;
       }
 
       function resolveWithComponent() {
