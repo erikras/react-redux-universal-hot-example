@@ -92,6 +92,7 @@
     "less-loader": "2.2.1",
     "lru-memoize": "1.0.0",
     "map-props": "1.0.0",
+    "multireducer": "1.0.0",
     "piping": "0.2.0",
     "pretty-error": "1.2.0",
     "query-string": "2.4.1",

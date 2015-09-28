@@ -1,11 +1,11 @@
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import {connectMultireducer} from 'multireducer';
 import {increment} from 'redux/modules/counter';
 
-@connect(
-    state => ({count: state.counter.count}),
-    dispatch => bindActionCreators({increment}, dispatch))
+@connectMultireducer(
+  state => ({count: state.counter.count}),
+  {increment})
 export default class CounterButton extends Component {
   static propTypes = {
     count: PropTypes.number,
