@@ -80,7 +80,7 @@
   },
   "dependencies": {
     "babel": "5.8.23",
-    "babel-plugin-typecheck": "1.2.0",
+    "babel-plugin-typecheck": "1.3.0",
     "body-parser": "1.14.1",
     "compression": "1.5.2",
     "express": "4.13.3",
