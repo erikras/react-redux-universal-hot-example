@@ -29,7 +29,7 @@
     "start-prod-api": "node ./node_modules/better-npm-run start-prod-api",
     "build": "webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
     "postinstall": "webpack --display-error-details --config webpack/prod.config.js",
-    "lint": "eslint -c .eslintrc src",
+    "lint": "eslint -c .eslintrc src api",
     "start-dev": "node ./node_modules/better-npm-run start-dev",
     "start-dev-api": "node ./node_modules/better-npm-run start-dev-api",
     "watch-client": "node ./node_modules/better-npm-run watch-client",
