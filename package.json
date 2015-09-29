@@ -128,7 +128,7 @@
     "eslint": "1.5.1",
     "eslint-config-airbnb": "0.1.0",
     "eslint-loader": "1.0.0",
-    "eslint-plugin-react": "3.4.2",
+    "eslint-plugin-react": "3.5.0",
     "extract-text-webpack-plugin": "0.8.2",
     "json-loader": "0.5.3",
     "karma": "0.13.10",
