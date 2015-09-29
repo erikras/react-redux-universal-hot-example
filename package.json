@@ -151,7 +151,7 @@
     "style-loader": "0.12.4",
     "webpack": "1.12.2",
     "webpack-dev-middleware": "1.2.0",
-    "webpack-hot-middleware": "2.2.1"
+    "webpack-hot-middleware": "2.3.0"
   },
   "engines": {
     "node": "0.10.32"
