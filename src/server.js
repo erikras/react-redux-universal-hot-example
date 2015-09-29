@@ -1,7 +1,6 @@
 import Express from 'express';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
-import createHistory from 'history/lib/createHistory';
 import config from './config';
 import favicon from 'serve-favicon';
 import compression from 'compression';
@@ -9,11 +8,18 @@ import httpProxy from 'http-proxy';
 import path from 'path';
 import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
-import universalRouter from './helpers/universalRouter';
+import getDataDependencies from './helpers/getDataDependencies';
 import Html from './helpers/Html';
 import PrettyError from 'pretty-error';
 import http from 'http';
 import SocketIo from 'socket.io';
+
+import {ReduxRouter} from 'redux-router';
+import {reduxReactRouter, match} from 'redux-router/server';
+import {Provider} from 'react-redux';
+import qs from 'query-string';
+import routes from './routes';
+import getStatusFromRoutes from './helpers/getStatusFromRoutes';
 
 const pretty = new PrettyError();
 const app = new Express();
@@ -52,8 +58,7 @@ app.use((req, res) => {
     webpackIsomorphicTools.refresh();
   }
   const client = new ApiClient(req);
-  const store = createStore(client);
-  const location = createHistory().createLocation(req.originalUrl);
+  const store = createStore(reduxReactRouter, routes, null, client);
 
   function hydrateOnClient() {
     res.send('<!doctype html>\n' +
@@ -65,23 +70,45 @@ app.use((req, res) => {
     return;
   }
 
-  universalRouter(location, undefined, store, true)
-    .then(({component, redirectLocation}) => {
-      if (redirectLocation) {
-        res.redirect(redirectLocation.pathname + redirectLocation.search);
-        return;
-      }
-      res.send('<!doctype html>\n' +
-        ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store}/>));
-    })
-    .catch((error) => {
-      if (error.redirect) {
-        res.redirect(error.redirect);
-        return;
-      }
+  const query = qs.stringify(req.query);
+  const url = req.path + (query.length ? '?' + query : '');
+
+  store.dispatch(match(url, (error, redirectLocation, routerState) => {
+    if (redirectLocation) {
+      res.redirect(redirectLocation.pathname + redirectLocation.search);
+    } else if (error) {
       console.error('ROUTER ERROR:', pretty.render(error));
-      hydrateOnClient(); // let client render error page or re-request data
-    });
+      res.status(500);
+      hydrateOnClient();
+    } else if (!routerState) {
+      res.status(500);
+      hydrateOnClient();
+    } else {
+      Promise.all(getDataDependencies(
+        routerState.components,
+        store.getState,
+        store.dispatch,
+        routerState.location,
+        routerState.params
+      )).then(() => {
+        const component = (
+          <Provider store={store} key="provider">
+            <ReduxRouter/>
+          </Provider>
+        );
+        const status = getStatusFromRoutes(store.getState().router.routes);
+        if (status) {
+          res.status(status);
+        }
+        res.send('<!doctype html>\n' +
+          ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store}/>));
+      }).catch((err) => {
+        console.error('DATA FETCHING ERROR:', pretty.render(err));
+        res.status(500);
+        hydrateOnClient();
+      });
+    }
+  }));
 });
 
 if (config.port) {
