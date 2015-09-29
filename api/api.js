@@ -35,7 +35,7 @@ app.use((req, res) => {
   let apiActions = actions;
   let sliceIndex = 0;
 
-  for (let actionName of matcher) {
+  for (const actionName of matcher) {
 
     if (apiActions[actionName]) {
       action = apiActions[actionName];
@@ -49,7 +49,7 @@ app.use((req, res) => {
     ++sliceIndex;
   }
 
-  if (action && typeof action == 'function') {
+  if (action && typeof action === 'function') {
     action(req, params)
       .then((result) => {
         res.json(result);
@@ -84,10 +84,10 @@ if (config.apiPort) {
     socket.emit('news', {msg: `'Hello World!' from server`});
 
     socket.on('history', () => {
-      for(let i = 0; i < bufferSize; i++) {
-        const msgNo = (messageIndex + i) % bufferSize;
+      for (let index = 0; index < bufferSize; index++) {
+        const msgNo = (messageIndex + index) % bufferSize;
         const msg = messageBuffer[msgNo];
-        if(msg) {
+        if (msg) {
           socket.emit('msg', msg);
         }
       }

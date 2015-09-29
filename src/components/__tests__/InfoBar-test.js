@@ -30,7 +30,7 @@ describe('InfoBar', () => {
   const dom = ReactDOM.findDOMNode(renderer);
 
   it('should render correctly', () => {
-    expect(renderer).to.be.ok;
+    return expect(renderer).to.be.ok;
   });
 
   it('should render with correct value', () => {

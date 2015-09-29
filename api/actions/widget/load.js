@@ -14,7 +14,7 @@ export function getWidgets(req) {
   return widgets;
 }
 
-export default function load(req, params) {
+export default function load(req) {
   return new Promise((resolve, reject) => {
     // make async call to database
     setTimeout(() => {
