@@ -146,7 +146,7 @@
     "react-hot-loader": "1.3.0",
     "react-transform-hmr": "1.0.1",
     "redux-devtools": "2.1.5",
-    "sass-loader": "2.0.1",
+    "sass-loader": "3.0.0",
     "strip-loader": "0.1.0",
     "style-loader": "0.12.4",
     "webpack": "1.12.2",
