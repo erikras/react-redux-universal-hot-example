@@ -13,17 +13,19 @@ import {
     NotFound,
   } from 'containers';
 
-export default (
-  <Route component={App}>
-    <Route path="/" component={Home}/>
-    <Route path="/widgets" component={Widgets}/>
-    <Route path="/about" component={About}/>
-    <Route path="/login" component={Login}/>
-    <Route component={RequireLogin}>
-      <Route path="/chat" component={Chat}/>
-      <Route path="/loginSuccess" component={LoginSuccess}/>
+export default (store) => {
+  return (
+    <Route component={App}>
+      <Route path="/" component={Home}/>
+      <Route path="/widgets" component={Widgets}/>
+      <Route path="/about" component={About}/>
+      <Route path="/login" component={Login}/>
+      <Route component={RequireLogin} onEnter={RequireLogin.onEnter(store)}>
+        <Route path="/chat" component={Chat}/>
+        <Route path="/loginSuccess" component={LoginSuccess}/>
+      </Route>
+      <Route path="/survey" component={Survey}/>
+      <Route path="*" component={NotFound} status={404} />
     </Route>
-    <Route path="/survey" component={Survey}/>
-    <Route path="*" component={NotFound} status={404} />
-  </Route>
-);
+  );
+};

@@ -18,7 +18,7 @@ import {ReduxRouter} from 'redux-router';
 import {reduxReactRouter, match} from 'redux-router/server';
 import {Provider} from 'react-redux';
 import qs from 'query-string';
-import routes from './routes';
+import getRoutes from './routes';
 import getStatusFromRoutes from './helpers/getStatusFromRoutes';
 
 const pretty = new PrettyError();
@@ -58,7 +58,7 @@ app.use((req, res) => {
     webpackIsomorphicTools.refresh();
   }
   const client = new ApiClient(req);
-  const store = createStore(reduxReactRouter, routes, null, client);
+  const store = createStore(reduxReactRouter, getRoutes, null, client);
 
   function hydrateOnClient() {
     res.send('<!doctype html>\n' +
