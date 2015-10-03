@@ -37,8 +37,9 @@ const location = createLocation(document.location.pathname, document.location.se
 const render = (loc, hist, str, preload) => {
   return universalRouter(loc, hist, str, preload)
     .then(({component}) => {
-      ReactDOM.render(component, dest);
-      if (__DEVTOOLS__) {
+      if (!__DEVTOOLS__) {
+        ReactDOM.render(component, dest);
+      } else {
         const { DevTools, DebugPanel, LogMonitor } = require('redux-devtools/lib/react');
         ReactDOM.render(<div>
           {component}
