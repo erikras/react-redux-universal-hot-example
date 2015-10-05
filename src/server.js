@@ -1,7 +1,7 @@
 import Express from 'express';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
-import createLocation from 'history/lib/createLocation';
+import createHistory from 'history/lib/createHistory';
 import config from './config';
 import favicon from 'serve-favicon';
 import compression from 'compression';
@@ -53,7 +53,7 @@ app.use((req, res) => {
   }
   const client = new ApiClient(req);
   const store = createStore(client);
-  const location = createLocation(req.path, req.query);
+  const location = createHistory().createLocation(req.path, req.query);
 
   function hydrateOnClient() {
     res.send('<!doctype html>\n' +
