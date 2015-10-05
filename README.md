@@ -58,6 +58,12 @@ npm run start
 
 A demonstration of this app can be seen [running on heroku](https://react-redux.herokuapp.com), which is a deployment of the [heroku branch](https://github.com/erikras/react-redux-universal-hot-example/tree/heroku).
 
+## Tutorials
+
+If you are the kind of person that learns best by following along a tutorial, I can recommend the following.
+
+* [React Tutorial - Converting Reflux to Redux](http://engineering.wework.com/process/2015/10/01/react-reflux-to-redux/), by Matt Star
+
 ## Explanation
 
 What initally gets run is `bin/server.js`, which does little more than enable ES6 and ES7 awesomeness in the 
