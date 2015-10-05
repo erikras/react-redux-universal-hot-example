@@ -12,7 +12,7 @@
     "type": "git",
     "url": "https://github.com/patpaev/explore-msd.git"
   },
-  "homepage": "https://github.com/erikras/react-redux-universal-hot-example",
+  "homepage": "https://github.com/patpaev/explore-msd",
   "main": "bin/server.js",
   "scripts": {
     "start": "concurrent --kill-others \"npm run start-prod\" \"npm run start-prod-api\"",

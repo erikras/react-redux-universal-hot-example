@@ -1,19 +1,10 @@
 {
-  "name": "react-redux-universal-hot-example",
-  "description": "Example of an isomorphic (universal) webapp using react redux and hot reloading",
-  "repository": "https://github.com/erikras/react-redux-universal-hot-example",
-  "logo": "http://node-js-sample.herokuapp.com/node.svg",
+  "name": "explore-msd",
+  "description": "A React app to explore the unique features of the MSD building at the University of Melbourne",
+  "repository": "https://github.com/patpaev/explore-msd.git",
   "keywords": [
     "react",
-    "isomorphic",
-    "universal",
-    "webpack",
-    "express",
-    "hot reloading",
-    "react-hot-reloader",
-    "redux",
-    "starter",
-    "boilerplate",
-    "babel"
+    "MSD",
+    "unimelb"
   ]
 }
