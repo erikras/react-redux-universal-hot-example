@@ -2,6 +2,7 @@ import Express from 'express';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 import createLocation from 'history/lib/createLocation';
+import createHistory from 'history/lib/createDOMHistory';
 import config from './config';
 import favicon from 'serve-favicon';
 import compression from 'compression';
@@ -15,6 +16,7 @@ import PrettyError from 'pretty-error';
 import http from 'http';
 import SocketIo from 'socket.io';
 
+const history = createHistory();
 const pretty = new PrettyError();
 const app = new Express();
 const server = new http.Server(app);
@@ -65,7 +67,7 @@ app.use((req, res) => {
     return;
   }
 
-  universalRouter(location, undefined, store, true)
+  universalRouter(location, history, store, true)
     .then(({component, redirectLocation}) => {
       if (redirectLocation) {
         res.redirect(redirectLocation.pathname + redirectLocation.search);
