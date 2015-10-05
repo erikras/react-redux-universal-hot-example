@@ -2,10 +2,20 @@ require('babel-core/polyfill');
 
 const environment = {
   development: {
-    isProduction: false
+    isProduction: false,
+    port: process.env.PORT,
+    apiPort: process.env.APIPORT,
+    app: {
+      name: 'Explore the Melbourne School of Design [Development]'
+    }
   },
   production: {
-    isProduction: true
+    isProduction: true,
+    port: process.env.PORT,
+    apiPort: process.env.APIPORT,
+    app: {
+      name: 'Explore the Melbourne School of Design'
+    }
   }
 }[process.env.NODE_ENV || 'development'];
 

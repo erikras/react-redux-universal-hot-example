@@ -12,6 +12,7 @@ import DocumentMeta from 'react-document-meta';
  * HTML doctype declaration, which is added to the rendered output
  * by the server.js file.
  */
+
 export default class Html extends Component {
   static propTypes = {
     assets: PropTypes.object,

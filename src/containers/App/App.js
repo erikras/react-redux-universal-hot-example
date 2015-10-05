@@ -8,16 +8,31 @@ import { InfoBar } from 'components';
 import { pushState } from 'redux-router';
 import config from '../../config';
 
-const NavbarLink = ({to, className, component, children}) => {
-  const Comp = component || Link;
+const title = 'Explore the Melbourne School of Design';
+const description = 'Find out what makes the MSD unique in the design landscape.';
+const image = '';
 
-  return (
-    <Comp to={to} className={className} activeStyle={{
-      color: '#33e0ff'
-    }}>
-      {children}
-    </Comp>
-  );
+const meta = {
+  title,
+  description,
+  meta: {
+    charSet: 'utf-8',
+    property: {
+      'og:site_name': title,
+      'og:image': image,
+      'og:locale': 'en_US',
+      'og:title': title,
+      'og:description': description,
+      'twitter:card': 'summary',
+      'twitter:site': '@msdsocial',
+      'twitter:creator': '@msdsocial',
+      'twitter:title': title,
+      'twitter:description': description,
+      'twitter:image': image,
+      'twitter:image:width': '200',
+      'twitter:image:height': '200'
+    }
+  }
 };
 
 @connect(
@@ -68,29 +83,17 @@ export default class App extends Component {
       <div className={styles.app}>
         <DocumentMeta {...config.app}/>
         <nav className="navbar navbar-default navbar-fixed-top">
-          <div className="container">
-            <NavbarLink to="/" className="navbar-brand" component={IndexLink}>
-              <div className={styles.brand}/>
-              React Redux Example
-            </NavbarLink>
-
-            <ul className="nav navbar-nav">
-              {user && <li><NavbarLink to="/chat">Chat</NavbarLink></li>}
-
-              <li><NavbarLink to="/widgets">Widgets</NavbarLink></li>
-              <li><NavbarLink to="/survey">Survey</NavbarLink></li>
-              <li><NavbarLink to="/about">About Us</NavbarLink></li>
-              {!user && <li><NavbarLink to="/login">Login</NavbarLink></li>}
-              {user && <li className="logout-link"><a href="/logout" onClick={::this.handleLogout}>Logout</a></li>}
+          <div>
+            <ul>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/explore">Explore</Link></li>
+              <li><Link to="/landmark">Landmark</Link></li>
+              <li><Link to="/more">More</Link></li>
+              {!user && <li><Link to="/login">Login</Link></li>}
+              {user && <li><a href="/logout" onClick={::this.handleLogout}>Logout</a></li>}
             </ul>
             {user &&
-            <p className={styles.loggedInMessage + ' navbar-text'}>Logged in as <strong>{user.name}</strong>.</p>}
-            <ul className="nav navbar-nav navbar-right">
-              <li>
-                <a href="https://github.com/erikras/react-redux-universal-hot-example"
-                   target="_blank" title="View on Github"><i className="fa fa-github"/></a>
-              </li>
-            </ul>
+            <p>Logged in as <strong>{user.name}</strong>.</p>}
           </div>
         </nav>
         <div className={styles.appContent}>
@@ -98,7 +101,7 @@ export default class App extends Component {
         </div>
         <InfoBar/>
 
-        <div className="well text-center">
+        <div>
           Have questions? Ask for help <a
           href="https://github.com/erikras/react-redux-universal-hot-example/issues"
           target="_blank">on Github</a> or in the <a
