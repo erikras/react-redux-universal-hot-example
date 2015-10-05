@@ -2,7 +2,12 @@
   "name": "explore-msd",
   "version": "0.0.0",
   "description": "A React app to explore the unique features of the MSD building at the University of Melbourne",
-  "author": "Patrick Paevere (@patpaev)",
+  "author": {
+    "name": "Patrick Paevere",
+    "email": "patrick.paevere@unimelb.edu.au",
+    "url": "https://github.com/patpaev"
+  },
+  "license": "SEE LICENSE IN LICENSE.txt",
   "repository": {
     "type": "git",
     "url": "https://github.com/patpaev/explore-msd.git"
