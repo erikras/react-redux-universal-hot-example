@@ -5,7 +5,6 @@ import 'babel/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import createHistory from 'history/lib/createBrowserHistory';
-import createLocation from 'history/lib/createLocation';
 import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
 import universalRouter from './helpers/universalRouter';
@@ -32,7 +31,7 @@ function initSocket() {
 
 global.socket = initSocket();
 
-const location = createLocation(document.location.pathname, document.location.search);
+const location = history.createLocation(document.location.pathname, document.location.search);
 
 const render = (loc, hist, str, preload) => {
   return universalRouter(loc, hist, str, preload)
