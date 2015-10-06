@@ -54,6 +54,7 @@ export default class App extends Component {
               <li><Link to="/explore">Explore</Link></li>
               <li><Link to="/landmark">Landmark</Link></li>
               <li><Link to="/more">More</Link></li>
+              <li><Link to="/survey">Info</Link></li>
             </ul>
           </div>
         </nav>
@@ -61,13 +62,9 @@ export default class App extends Component {
           {this.props.children}
         </div>
         <InfoBar/>
-
-        <div>
-          Have questions? Ask for help <a
-          href="https://github.com/erikras/react-redux-universal-hot-example/issues"
-          target="_blank">on Github</a> or in the <a
-          href="https://discordapp.com/channels/102860784329052160/105739309289623552" target="_blank">#react-redux-universal</a> Discord channel.
-        </div>
+        <footer>
+          &copy; 2015
+        </footer>
       </div>
     );
   }

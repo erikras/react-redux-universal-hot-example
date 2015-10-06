@@ -1,10 +1,25 @@
-.app {
-  :global(.navbar-brand) {
-    position:relative;
-    padding-left: 50px;
-  }
-  nav :global(.fa) {
-    font-size: 2em;
-    line-height: 20px;
+body {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+}
+
+:global(.navbar-brand) {
+  position:relative;
+  padding-left: 50px;
+}
+nav {
+  font-size: 0.9em;
+  ul {
+    border-bottom: 3px solid darkSlateGrey;
+    padding-bottom: 6px;
+    padding-left: 0;
+
+    li {
+      display: inline;
+      padding-right: 1em;
+
+      a {
+        color: darkSlateGrey;
+      }
+    }
   }
 }
