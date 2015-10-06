@@ -1,6 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
 
 export default class InfoBar extends Component {
   static propTypes = {

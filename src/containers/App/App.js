@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { IndexLink, Link } from 'react-router';
-import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import DocumentMeta from 'react-document-meta';
 import { InfoBar } from 'components';
 import { pushState } from 'redux-router';
@@ -44,7 +43,6 @@ export default class App extends Component {
   };
 
   render() {
-    const {user} = this.props;
     const styles = require('./App.scss');
     return (
       <div className={styles.app}>
@@ -57,8 +55,6 @@ export default class App extends Component {
               <li><Link to="/landmark">Landmark</Link></li>
               <li><Link to="/more">More</Link></li>
             </ul>
-            {user &&
-            <p>Logged in as <strong>{user.name}</strong>.</p>}
           </div>
         </nav>
         <div className={styles.appContent}>
