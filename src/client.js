@@ -60,13 +60,12 @@ history.listenBefore((loc, callback) => {
     .then((callback));
 });
 
-render(location, history, store);
+render(location, history, store, !dest.firstChild);
 
 if (process.env.NODE_ENV !== 'production') {
   window.React = React; // enable debugger
-  const reactRoot = window.document.getElementById('content');
 
-  if (!reactRoot || !reactRoot.firstChild || !reactRoot.firstChild.attributes || !reactRoot.firstChild.attributes['data-react-checksum']) {
+  if (!dest || !dest.firstChild || !dest.firstChild.attributes || !dest.firstChild.attributes['data-react-checksum']) {
     console.error('Server-side React render was discarded. Make sure that your initial render does not contain any client-side code.');
   }
 }

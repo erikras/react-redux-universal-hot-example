@@ -57,7 +57,7 @@ app.use((req, res) => {
 
   function hydrateOnClient() {
     res.send('<!doctype html>\n' +
-      ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={<div/>} store={store}/>));
+      ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} store={store}/>));
   }
 
   if (__DISABLE_SSR__) {
