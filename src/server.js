@@ -53,7 +53,7 @@ app.use((req, res) => {
   }
   const client = new ApiClient(req);
   const store = createStore(client);
-  const location = createHistory().createLocation(req.path, req.query);
+  const location = createHistory().createLocation(req.originalUrl);
 
   function hydrateOnClient() {
     res.send('<!doctype html>\n' +
