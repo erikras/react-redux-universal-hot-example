@@ -3,7 +3,7 @@
   "description": "Example of an isomorphic (universal) webapp using react redux and hot reloading",
   "author": "Erik Rasmussen <rasmussenerik@gmail.com> (http://github.com/erikras)",
   "license": "MIT",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "repository": {
     "type": "git",
     "url": "https://github.com/erikras/react-redux-universal-hot-example"
@@ -92,11 +92,11 @@
     "less-loader": "2.2.1",
     "lru-memoize": "1.0.0",
     "map-props": "1.0.0",
-    "multireducer": "1.0.0",
+    "multireducer": "1.0.1",
     "piping": "0.2.0",
     "pretty-error": "1.2.0",
     "query-string": "2.4.2",
-    "react": "^0.14.0-rc1",
+    "react": "^0.14.0",
     "react-document-meta": "2.0.0-rc2",
     "react-dom": "0.14.0-rc1",
     "react-inline-css": "2.0.0",
