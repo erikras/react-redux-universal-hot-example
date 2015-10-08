@@ -101,7 +101,7 @@
     "react-dom": "0.14.0-rc1",
     "react-inline-css": "2.0.0",
     "react-redux": "3.1.0",
-    "react-router": "1.0.0-rc2",
+    "react-router": "1.0.0-rc1",
     "redux": "3.0.1",
     "redux-form": "2.1.0",
     "serialize-javascript": "1.1.2",
