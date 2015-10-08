@@ -1,19 +1,27 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore as _createStore, applyMiddleware, compose } from 'redux';
 import createMiddleware from './middleware/clientMiddleware';
+import transitionMiddleware from './middleware/transitionMiddleware';
 
-export default function createApiClientStore(client, data) {
-  const middleware = createMiddleware(client);
+export default function createStore(reduxReactRouter, getRoutes, createHistory, client, data) {
+  const middleware = [createMiddleware(client)];
+
+  if (__CLIENT__) {
+    middleware.push(transitionMiddleware);
+  }
+
   let finalCreateStore;
   if (__DEVELOPMENT__ && __CLIENT__ && __DEVTOOLS__) {
     const { devTools, persistState } = require('redux-devtools');
     finalCreateStore = compose(
-      applyMiddleware(middleware),
+      applyMiddleware(...middleware),
       devTools(),
       persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
-    )(createStore);
+    )(_createStore);
   } else {
-    finalCreateStore = applyMiddleware(middleware)(createStore);
+    finalCreateStore = applyMiddleware(...middleware)(_createStore);
   }
+
+  finalCreateStore = reduxReactRouter({ getRoutes, createHistory })(finalCreateStore);
 
   const reducer = require('./modules/reducer');
   const store = finalCreateStore(reducer, data);

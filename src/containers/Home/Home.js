@@ -69,12 +69,15 @@ export default class Home extends Component {
             <li><a href="http://webpack.github.io/docs/webpack-dev-middleware.html" target="_blank">Webpack Dev Middleware</a>
             </li>
             <li><a href="https://github.com/glenjamin/webpack-hot-middleware" target="_blank">Webpack Hot Middleware</a></li>
-            <li><a href="https://github.com/gaearon/redux" target="_blank">Redux</a>'s futuristic <a
+            <li><a href="https://github.com/rackt/redux" target="_blank">Redux</a>'s futuristic <a
               href="https://facebook.github.io/react/blog/2014/05/06/flux.html" target="_blank">Flux</a> implementation
             </li>
             <li><a href="https://github.com/gaearon/redux-devtools" target="_blank">Redux Dev Tools</a> for next
               generation DX (developer experience).
               Watch <a href="https://www.youtube.com/watch?v=xsSnOQynTHs" target="_blank">Dan Abramov's talk</a>.
+            </li>
+            <li><a href="https://github.com/rackt/redux-router" target="_blank">Redux Router</a> Keep
+              your router state in your Redux store
             </li>
             <li><a href="http://eslint.org" target="_blank">ESLint</a> to maintain a consistent code style</li>
             <li><a href="https://github.com/erikras/redux-form" target="_blank">redux-form</a> to manage form state
@@ -103,9 +106,8 @@ export default class Home extends Component {
             <dd>
               The <Link to="/widgets">Widgets page</Link> demonstrates how to fetch data asynchronously from
               some source that is needed to complete the server-side rendering. <code>Widgets.js</code>'s
-              <code>fetchData()</code> function is called from <code>universalRouter.js</code> before
-              the widgets page is loaded, on either the server or the client, allowing all the widget data
-              to be loaded and ready for the page to render.
+              <code>fetchData()</code> function is called before the widgets page is loaded, on either the server
+              or the client, allowing all the widget data to be loaded and ready for the page to render.
             </dd>
             <dt>Data loading errors</dt>
             <dd>

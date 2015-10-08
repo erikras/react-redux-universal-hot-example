@@ -7,7 +7,7 @@
 [![devDependency Status](https://david-dm.org/erikras/react-redux-universal-hot-example/dev-status.svg)](https://david-dm.org/erikras/react-redux-universal-hot-example#info=devDependencies)
 [![PayPal donate button](http://img.shields.io/paypal/donate.png?color=yellowgreen)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=E2LK57ZQ9YRMN)
 
---- 
+---
 
 ## About
 
@@ -22,8 +22,9 @@ This is a starter boiler plate app I've put together using the following technol
 * [Webpack](http://webpack.github.io) for bundling
 * [Webpack Dev Middleware](http://webpack.github.io/docs/webpack-dev-middleware.html)
 * [Webpack Hot Middleware](https://github.com/glenjamin/webpack-hot-middleware)
-* [Redux](https://github.com/gaearon/redux)'s futuristic [Flux](https://facebook.github.io/react/blog/2014/05/06/flux.html) implementation
+* [Redux](https://github.com/rackt/redux)'s futuristic [Flux](https://facebook.github.io/react/blog/2014/05/06/flux.html) implementation
 * [Redux Dev Tools](https://github.com/gaearon/redux-devtools) for next generation DX (developer experience). Watch [Dan Abramov's talk](https://www.youtube.com/watch?v=xsSnOQynTHs).
+* [Redux Router](https://github.com/rackt/redux-router) Keep your router state in your Redux store
 * [ESLint](http://eslint.org) to maintain a consistent code style
 * [redux-form](https://github.com/erikras/redux-form) to manage form state in Redux
 * [lru-memoize](https://github.com/erikras/lru-memoize) to speed up form validation
@@ -66,8 +67,8 @@ If you are the kind of person that learns best by following along a tutorial, I 
 
 ## Explanation
 
-What initally gets run is `bin/server.js`, which does little more than enable ES6 and ES7 awesomeness in the 
-server-side node code. It then initiates `server.js`. In `server.js` we proxy any requests to `/api/*` to the 
+What initally gets run is `bin/server.js`, which does little more than enable ES6 and ES7 awesomeness in the
+server-side node code. It then initiates `server.js`. In `server.js` we proxy any requests to `/api/*` to the
 [API server](#api-server), running at `localhost:3030`. All the data fetching calls from the client go to `/api/*`.
 Aside from serving the favicon and static content from `/static`, the only thing `server.js` does is initiate delegate
 rendering to `react-router`. At the bottom of `server.js`, we listen to port `3000` and initiate the API server.
@@ -99,7 +100,7 @@ The middleware, [`clientMiddleware.js`](https://github.com/erikras/react-redux-u
 
 #### Redux Modules... *What the Duck*?
 
-The `src/redux/modules` folder contains "modules" to help 
+The `src/redux/modules` folder contains "modules" to help
 isolate concerns within a Redux application (aka [Ducks](https://github.com/erikras/ducks-modular-redux), a Redux Style Proposal that I came up with). I encourage you to read the
 [Ducks Docs](https://github.com/erikras/ducks-modular-redux) and provide feedback.
 

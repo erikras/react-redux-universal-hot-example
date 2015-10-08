@@ -1,20 +1,14 @@
-import {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
+import {Component} from 'react';
 
-@connect(state => ({user: state.auth.user}))
 export default class RequireLogin extends Component {
-  static propTypes = {
-    user: PropTypes.object,
-    history: PropTypes.object.isRequired
-  }
-
-  componentWillMount() {
-    const {history, user} = this.props;
-    if (!user) {
-      setTimeout(() => {
-        history.replaceState(null, '/');
-      });
-    }
+  static onEnter(store) {
+    return (nextState, replaceState) => {
+      const { auth: { user }} = store.getState();
+      if (!user) {
+        // oops, not logged in, so can't be here!
+        replaceState(null, '/');
+      }
+    };
   }
 
   render() {
