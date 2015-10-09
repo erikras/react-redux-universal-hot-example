@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import DocumentMeta from 'react-document-meta';
 import {initialize} from 'redux-form';
@@ -7,8 +6,7 @@ import {SurveyForm} from 'components';
 
 @connect(
   () => ({}),
-  dispatch => bindActionCreators({initialize}, dispatch)
-)
+  {initialize})
 export default class Survey extends Component {
   static propTypes = {
     initialize: PropTypes.func.isRequired

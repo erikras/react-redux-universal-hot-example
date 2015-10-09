@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import DocumentMeta from 'react-document-meta';
 import * as authActions from 'redux/modules/auth';
@@ -7,8 +6,7 @@ import {isLoaded as isAuthLoaded, load as loadAuth} from 'redux/modules/auth';
 
 @connect(
   state => ({user: state.auth.user}),
-  dispatch => bindActionCreators(authActions, dispatch)
-)
+  authActions)
 export default class Login extends Component {
   static propTypes = {
     user: PropTypes.object,

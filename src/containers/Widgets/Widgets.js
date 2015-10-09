@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-import {bindActionCreators} from 'redux';
 import DocumentMeta from 'react-document-meta';
 import {connect} from 'react-redux';
 import * as widgetActions from 'redux/modules/widgets';
@@ -14,13 +13,7 @@ import { WidgetForm } from 'components';
     error: state.widgets.error,
     loading: state.widgets.loading
   }),
-  dispatch => ({
-    ...bindActionCreators({
-      ...widgetActions,
-      initializeWithKey
-    }, dispatch)
-  })
-)
+  {...widgetActions, initializeWithKey })
 export default
 class Widgets extends Component {
   static propTypes = {
