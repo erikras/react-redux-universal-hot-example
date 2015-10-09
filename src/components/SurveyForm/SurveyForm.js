@@ -29,7 +29,7 @@ function asyncValidate(data) {
 export default
 class SurveyForm extends Component {
   static propTypes = {
-    active: PropTypes.bool.isRequired,
+    active: PropTypes.string,
     asyncValidating: PropTypes.bool.isRequired,
     fields: PropTypes.object.isRequired,
     dirty: PropTypes.bool.isRequired,
