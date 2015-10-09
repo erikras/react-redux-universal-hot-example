@@ -133,8 +133,7 @@ export default class Home extends Component {
               The aforementioned Login Success page is only visible to you if you are logged in. If you try
               to <Link to="/loginSuccess">go there</Link> when you are not logged in, you will be forwarded back
               to this home page. This <strike>magic</strike> logic is performed by the
-              <code>RequireLogin</code> component, which generates an <code>onEnter()</code> function given
-              the Redux store, and then it simply wraps any routes that need to be secured.
+              <code>onEnter</code> hook within <code>routes.js</code>.
             </dd>
             <dt>Forms</dt>
             <dd>
