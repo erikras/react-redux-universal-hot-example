@@ -20,6 +20,7 @@ import {Provider} from 'react-redux';
 import qs from 'query-string';
 import getRoutes from './routes';
 import getStatusFromRoutes from './helpers/getStatusFromRoutes';
+import { load as loadAuth } from './redux/modules/auth';
 
 const pretty = new PrettyError();
 const app = new Express();
@@ -73,42 +74,46 @@ app.use((req, res) => {
   const query = qs.stringify(req.query);
   const url = req.path + (query.length ? '?' + query : '');
 
-  store.dispatch(match(url, (error, redirectLocation, routerState) => {
-    if (redirectLocation) {
-      res.redirect(redirectLocation.pathname + redirectLocation.search);
-    } else if (error) {
-      console.error('ROUTER ERROR:', pretty.render(error));
-      res.status(500);
-      hydrateOnClient();
-    } else if (!routerState) {
-      res.status(500);
-      hydrateOnClient();
-    } else {
-      Promise.all(getDataDependencies(
-        routerState.components,
-        store.getState,
-        store.dispatch,
-        routerState.location,
-        routerState.params
-      )).then(() => {
-        const component = (
-          <Provider store={store} key="provider">
-            <ReduxRouter/>
-          </Provider>
-        );
-        const status = getStatusFromRoutes(store.getState().router.routes);
-        if (status) {
-          res.status(status);
-        }
-        res.send('<!doctype html>\n' +
-          ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store}/>));
-      }).catch((err) => {
-        console.error('DATA FETCHING ERROR:', pretty.render(err));
+  const afterAuth = () => {
+    store.dispatch(match(url, (error, redirectLocation, routerState) => {
+      if (redirectLocation) {
+        res.redirect(redirectLocation.pathname + redirectLocation.search);
+      } else if (error) {
+        console.error('ROUTER ERROR:', pretty.render(error));
         res.status(500);
         hydrateOnClient();
-      });
-    }
-  }));
+      } else if (!routerState) {
+        res.status(500);
+        hydrateOnClient();
+      } else {
+        Promise.all(getDataDependencies(
+          routerState.components,
+          store.getState,
+          store.dispatch,
+          routerState.location,
+          routerState.params
+        )).then(() => {
+          const component = (
+            <Provider store={store} key="provider">
+              <ReduxRouter/>
+            </Provider>
+          );
+          const status = getStatusFromRoutes(store.getState().router.routes);
+          if (status) {
+            res.status(status);
+          }
+          res.send('<!doctype html>\n' +
+            ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store}/>));
+        }).catch((err) => {
+          console.error('DATA FETCHING ERROR:', pretty.render(err));
+          res.status(500);
+          hydrateOnClient();
+        });
+      }
+    }));
+  };
+
+  store.dispatch(loadAuth()).then(afterAuth, afterAuth);
 });
 
 if (config.port) {
