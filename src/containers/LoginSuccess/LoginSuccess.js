@@ -13,9 +13,9 @@ class LoginSuccess extends Component {
     logout: PropTypes.func
   }
 
-  static fetchData(store) {
-    if (!isAuthLoaded(store.getState())) {
-      return store.dispatch(loadAuth());
+  static fetchData(getState, dispatch) {
+    if (!isAuthLoaded(getState())) {
+      return dispatch(loadAuth());
     }
   }
 

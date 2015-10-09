@@ -5,6 +5,7 @@ import DocumentMeta from 'react-document-meta';
 import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
 import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
 import { InfoBar } from 'components';
+import { pushState } from 'redux-router';
 
 const title = 'React Redux Example';
 const description = 'All the modern best practices in one example.';
@@ -33,15 +34,23 @@ const meta = {
   }
 };
 
+const NavbarLink = ({to, children}) => (
+  <Link to={to} activeStyle={{
+    color: 'red'
+  }}>
+    {children}
+  </Link>
+);
+
 @connect(
   state => ({user: state.auth.user}),
-  {logout})
+  {logout, pushState})
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
     user: PropTypes.object,
     logout: PropTypes.func.isRequired,
-    history: PropTypes.object
+    pushState: PropTypes.func.isRequired
   };
 
   static contextTypes = {
@@ -51,20 +60,20 @@ export default class App extends Component {
   componentWillReceiveProps(nextProps) {
     if (!this.props.user && nextProps.user) {
       // login
-      this.props.history.pushState(null, '/loginSuccess');
+      this.props.pushState(null, '/loginSuccess');
     } else if (this.props.user && !nextProps.user) {
       // logout
-      this.props.history.pushState(null, '/');
+      this.props.pushState(null, '/');
     }
   }
 
-  static fetchData(store) {
+  static fetchData(getState, dispatch) {
     const promises = [];
-    if (!isInfoLoaded(store.getState())) {
-      promises.push(store.dispatch(loadInfo()));
+    if (!isInfoLoaded(getState())) {
+      promises.push(dispatch(loadInfo()));
     }
-    if (!isAuthLoaded(store.getState())) {
-      promises.push(store.dispatch(loadAuth()));
+    if (!isAuthLoaded(getState())) {
+      promises.push(dispatch(loadAuth()));
     }
     return Promise.all(promises);
   }
@@ -88,12 +97,12 @@ export default class App extends Component {
             </Link>
 
             <ul className="nav navbar-nav">
-              {user && <li><Link to="/chat">Chat</Link></li>}
+              {user && <li><NavbarLink to="/chat">Chat</NavbarLink></li>}
 
-              <li><Link to="/widgets">Widgets</Link></li>
-              <li><Link to="/survey">Survey</Link></li>
-              <li><Link to="/about">About Us</Link></li>
-              {!user && <li><Link to="/login">Login</Link></li>}
+              <li><NavbarLink to="/widgets">Widgets</NavbarLink></li>
+              <li><NavbarLink to="/survey">Survey</NavbarLink></li>
+              <li><NavbarLink to="/about">About Us</NavbarLink></li>
+              {!user && <li><NavbarLink to="/login">Login</NavbarLink></li>}
               {user && <li className="logout-link"><a href="/logout" onClick={::this.handleLogout}>Logout</a></li>}
             </ul>
             {user &&

@@ -26,9 +26,9 @@ class Widgets extends Component {
     editStart: PropTypes.func.isRequired
   }
 
-  static fetchData(store) {
-    if (!isLoaded(store.getState())) {
-      return store.dispatch(loadWidgets());
+  static fetchData(getState, dispatch) {
+    if (!isLoaded(getState())) {
+      return dispatch(loadWidgets());
     }
   }
 

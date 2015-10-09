@@ -1,7 +1,6 @@
 import Express from 'express';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
-import createHistory from 'history/lib/createHistory';
 import config from './config';
 import favicon from 'serve-favicon';
 import compression from 'compression';
@@ -9,11 +8,20 @@ import httpProxy from 'http-proxy';
 import path from 'path';
 import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
-import universalRouter from './helpers/universalRouter';
+import getDataDependencies from './helpers/getDataDependencies';
 import Html from './helpers/Html';
 import PrettyError from 'pretty-error';
 import http from 'http';
 import SocketIo from 'socket.io';
+
+import {ReduxRouter} from 'redux-router';
+import createHistory from 'history/lib/createMemoryHistory';
+import {reduxReactRouter, match} from 'redux-router/server';
+import {Provider} from 'react-redux';
+import qs from 'query-string';
+import getRoutes from './routes';
+import getStatusFromRoutes from './helpers/getStatusFromRoutes';
+import { load as loadAuth } from './redux/modules/auth';
 
 const pretty = new PrettyError();
 const app = new Express();
@@ -52,8 +60,8 @@ app.use((req, res) => {
     webpackIsomorphicTools.refresh();
   }
   const client = new ApiClient(req);
-  const store = createStore(client);
-  const location = createHistory().createLocation(req.path, req.query);
+
+  const store = createStore(reduxReactRouter, getRoutes, createHistory, client);
 
   function hydrateOnClient() {
     res.send('<!doctype html>\n' +
@@ -65,23 +73,49 @@ app.use((req, res) => {
     return;
   }
 
-  universalRouter(location, undefined, store, true)
-    .then(({component, redirectLocation}) => {
+  const query = qs.stringify(req.query);
+  const url = req.path + (query.length ? '?' + query : '');
+
+  const afterAuth = () => {
+    store.dispatch(match(url, (error, redirectLocation, routerState) => {
       if (redirectLocation) {
         res.redirect(redirectLocation.pathname + redirectLocation.search);
-        return;
+      } else if (error) {
+        console.error('ROUTER ERROR:', pretty.render(error));
+        res.status(500);
+        hydrateOnClient();
+      } else if (!routerState) {
+        res.status(500);
+        hydrateOnClient();
+      } else {
+        Promise.all(getDataDependencies(
+          routerState.components,
+          store.getState,
+          store.dispatch,
+          routerState.location,
+          routerState.params
+        )).then(() => {
+          const component = (
+            <Provider store={store} key="provider">
+              <ReduxRouter/>
+            </Provider>
+          );
+          const status = getStatusFromRoutes(store.getState().router.routes);
+          if (status) {
+            res.status(status);
+          }
+          res.send('<!doctype html>\n' +
+            ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store}/>));
+        }).catch((err) => {
+          console.error('DATA FETCHING ERROR:', pretty.render(err));
+          res.status(500);
+          hydrateOnClient();
+        });
       }
-      res.send('<!doctype html>\n' +
-        ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store}/>));
-    })
-    .catch((error) => {
-      if (error.redirect) {
-        res.redirect(error.redirect);
-        return;
-      }
-      console.error('ROUTER ERROR:', pretty.render(error));
-      hydrateOnClient(); // let client render error page or re-request data
-    });
+    }));
+  };
+
+  store.dispatch(loadAuth()).then(afterAuth, afterAuth);
 });
 
 if (config.port) {
