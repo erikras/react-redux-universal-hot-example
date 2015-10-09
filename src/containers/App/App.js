@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import DocumentMeta from 'react-document-meta';
 import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
@@ -44,8 +43,8 @@ const NavbarLink = ({to, children}) => (
 );
 
 @connect(
-    state => ({user: state.auth.user}),
-    dispatch => bindActionCreators({logout, pushState}, dispatch))
+  state => ({user: state.auth.user}),
+  {logout, pushState})
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
