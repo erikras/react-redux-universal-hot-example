@@ -15,6 +15,7 @@ import http from 'http';
 import SocketIo from 'socket.io';
 
 import {ReduxRouter} from 'redux-router';
+import createHistory from 'history/lib/createMemoryHistory';
 import {reduxReactRouter, match} from 'redux-router/server';
 import {Provider} from 'react-redux';
 import qs from 'query-string';
@@ -58,7 +59,8 @@ app.use((req, res) => {
     webpackIsomorphicTools.refresh();
   }
   const client = new ApiClient(req);
-  const store = createStore(reduxReactRouter, getRoutes, null, client);
+
+  const store = createStore(reduxReactRouter, getRoutes, createHistory, client);
 
   function hydrateOnClient() {
     res.send('<!doctype html>\n' +
