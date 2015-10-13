@@ -95,7 +95,7 @@
     "multireducer": "1.0.1",
     "piping": "0.2.0",
     "pretty-error": "1.2.0",
-    "query-string": "2.4.2",
+    "query-string": "3.0.0",
     "react": "^0.14.0",
     "react-document-meta": "2.0.0-rc2",
     "react-dom": "0.14.0",
