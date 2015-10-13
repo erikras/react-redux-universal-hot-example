@@ -73,11 +73,8 @@ app.use((req, res) => {
     return;
   }
 
-  const query = qs.stringify(req.query);
-  const url = req.path + (query.length ? '?' + query : '');
-
   const afterAuth = () => {
-    store.dispatch(match(url, (error, redirectLocation, routerState) => {
+    store.dispatch(match(req.originalUrl, (error, redirectLocation, routerState) => {
       if (redirectLocation) {
         res.redirect(redirectLocation.pathname + redirectLocation.search);
       } else if (error) {
