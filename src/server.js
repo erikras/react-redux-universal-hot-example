@@ -85,6 +85,12 @@ app.use((req, res) => {
         res.status(500);
         hydrateOnClient();
       } else {
+        // Workaround redux-router query string issue:
+        // https://github.com/rackt/redux-router/issues/106
+        if (routerState.location.search && !routerState.location.query) {
+          routerState.location.query = qs.parse(routerState.location.search);
+        }
+
         Promise.all(getDataDependencies(
           routerState.components,
           store.getState,
