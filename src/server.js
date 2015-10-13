@@ -73,11 +73,8 @@ app.use((req, res) => {
     return;
   }
 
-  const query = qs.stringify(req.query);
-  const url = req.path + (query.length ? '?' + query : '');
-
   const afterAuth = () => {
-    store.dispatch(match(url, (error, redirectLocation, routerState) => {
+    store.dispatch(match(req.originalUrl, (error, redirectLocation, routerState) => {
       if (redirectLocation) {
         res.redirect(redirectLocation.pathname + redirectLocation.search);
       } else if (error) {
@@ -88,6 +85,12 @@ app.use((req, res) => {
         res.status(500);
         hydrateOnClient();
       } else {
+        // Workaround redux-router query string issue:
+        // https://github.com/rackt/redux-router/issues/106
+        if (routerState.location.search && !routerState.location.query) {
+          routerState.location.query = qs.parse(routerState.location.search);
+        }
+
         Promise.all(getDataDependencies(
           routerState.components,
           store.getState,
