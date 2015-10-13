@@ -8,7 +8,6 @@ import httpProxy from 'http-proxy';
 import path from 'path';
 import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
-import getDataDependencies from './helpers/getDataDependencies';
 import Html from './helpers/Html';
 import PrettyError from 'pretty-error';
 import http from 'http';
@@ -93,19 +92,14 @@ app.use((req, res) => {
           routerState.location.query = qs.parse(routerState.location.search);
         }
 
-        Promise.all(getDataDependencies(
-          routerState.components,
-          store.getState,
-          store.dispatch,
-          routerState.location,
-          routerState.params
-        )).then(() => {
+        store.getState().router.then(() => {
           const component = (
             <Provider store={store} key="provider">
               <ReduxRouter/>
             </Provider>
           );
-          const status = getStatusFromRoutes(store.getState().router.routes);
+
+          const status = getStatusFromRoutes(routerState.routes);
           if (status) {
             res.status(status);
           }
