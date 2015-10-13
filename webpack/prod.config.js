@@ -1,5 +1,5 @@
 // Webpack config for creating the production bundle.
-
+require('babel-core/polyfill');
 var path = require('path');
 var webpack = require('webpack');
 var CleanPlugin = require('clean-webpack-plugin');
