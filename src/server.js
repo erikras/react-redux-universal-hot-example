@@ -44,12 +44,14 @@ app.use('/api', (req, res) => {
 // added the error handling to avoid https://github.com/nodejitsu/node-http-proxy/issues/527
 proxy.on('error', (error, req, res) => {
   let json;
-  console.log('proxy error', error);
+  if (error.code !== 'ECONNRESET') {
+    console.error('proxy error', error);
+  }
   if (!res.headersSent) {
     res.writeHead(500, {'content-type': 'application/json'});
   }
 
-  json = { error: 'proxy_error', reason: error.message };
+  json = {error: 'proxy_error', reason: error.message};
   res.end(JSON.stringify(json));
 });
 
@@ -108,7 +110,8 @@ app.use((req, res) => {
             res.status(status);
           }
           res.send('<!doctype html>\n' +
-            ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store}/>));
+            ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component}
+                                          store={store}/>));
         }).catch((err) => {
           console.error('DATA FETCHING ERROR:', pretty.render(err));
           res.status(500);
