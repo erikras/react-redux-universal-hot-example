@@ -1,6 +1,5 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {isLoaded as isAuthLoaded, load as loadAuth} from 'redux/modules/auth';
 
 @connect(
   state => ({user: state.auth.user})
@@ -37,12 +36,6 @@ class Chat extends Component {
     const messages = this.state.messages;
     messages.push(data);
     this.setState({messages});
-  }
-
-  static fetchData(getState, dispatch) {
-    if (!isAuthLoaded(getState())) {
-      return dispatch(loadAuth());
-    }
   }
 
   handleSubmit(event) {
