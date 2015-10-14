@@ -17,7 +17,7 @@ const locationsAreEqual = (locA, locB) => {
 export default ({getState, dispatch}) => next => action => {
   if (action.type === ROUTER_DID_CHANGE) {
     if (getState().router && locationsAreEqual(action.payload.location, getState().router.location)) {
-      next(action);
+      return next(action);
     } else {
       const {components, location, params} = action.payload;
       const promise = new Promise((resolve) => {
@@ -37,8 +37,10 @@ export default ({getState, dispatch}) => next => action => {
         // our promise to let the server know when it can render
         getState().router = promise;
       }
+      
+      return promise;
     }
   } else {
-    next(action);
+    return next(action);
   }
 };
