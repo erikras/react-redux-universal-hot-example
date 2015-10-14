@@ -5,16 +5,15 @@ import surveyValidation from './surveyValidation';
 function asyncValidate(data) {
   // TODO: figure out a way to move this to the server. need an instance of ApiClient
   if (!data.email) {
-    return Promise.resolve({valid: true});
+    return Promise.resolve({});
   }
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
-      const errors = {valid: true};
+      const errors = {};
       if (~['bobby@gmail.com', 'timmy@microsoft.com'].indexOf(data.email)) {
         errors.email = 'Email address already used';
-        errors.valid = false;
       }
-      resolve(errors);
+      reject(errors);
     }, 1000);
   });
 }
