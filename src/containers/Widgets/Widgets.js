@@ -26,7 +26,7 @@ class Widgets extends Component {
     editStart: PropTypes.func.isRequired
   }
 
-  static fetchData(getState, dispatch) {
+  static fetchDataDeferred(getState, dispatch) {
     if (!isLoaded(getState())) {
       return dispatch(loadWidgets());
     }
@@ -56,9 +56,10 @@ class Widgets extends Component {
         </h1>
         <DocumentMeta title="React Redux Example: Widgets"/>
         <p>
-          This data was loaded from the server before this route was rendered. If you hit refresh on your browser, the
-          data loading will take place on the server before the page is returned. If you navigated here from another
-          page, the data was fetched from the client.
+          If you hit refresh on your browser, the data loading will take place on the server before the page is returned.
+          If you navigated here from another page, the data was fetched from the client after the route transition.
+          This uses the static method <code>fetchDataDeferred</code>. To block a route transition until some data is loaded, use <code>fetchData</code>.
+          To always render before loading data, even on the server, use <code>componentDidMount</code>.
         </p>
         <p>
           This widgets are stored in your session, so feel free to edit it and refresh.
