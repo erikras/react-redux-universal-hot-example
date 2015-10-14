@@ -1,9 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import DocumentMeta from 'react-document-meta';
-import { InfoBar } from 'components';
-import { pushState } from 'redux-router';
-import config from '../../config';
+import { Header } from 'components';
 
 const title = 'Explore the Melbourne School of Design';
 const description = 'Find out what makes the MSD unique in the design landscape.';
@@ -42,11 +40,23 @@ export default class App extends Component {
     store: PropTypes.object.isRequired
   };
 
+  constructor() {
+    super();
+    this.state = {
+      headerTitle: 'asdfdsasdf'
+    };
+  }
+
   render() {
+    const headerTitle = this.state.headerTitle;
     const styles = require('./App.scss');
     return (
       <div className={styles.app}>
         <DocumentMeta {...meta}/>
+        <Header title={headerTitle} />
+        <div className={styles.appContent}>
+          {this.props.children}
+        </div>
         <nav>
           <div>
             <ul>
@@ -58,10 +68,6 @@ export default class App extends Component {
             </ul>
           </div>
         </nav>
-        <div className={styles.appContent}>
-          {this.props.children}
-        </div>
-        <InfoBar/>
         <footer>
           &copy; 2015
         </footer>

@@ -5,11 +5,11 @@ import {
     App,
     Chat,
     Home,
-    Widgets,
-    About,
     Login,
     LoginSuccess,
     Survey,
+    Explore,
+    Landmark,
     NotFound,
   } from 'containers';
 
@@ -35,24 +35,17 @@ export default (store) => {
    * Please keep routes in alphabetical order
    */
   return (
-    <Route path="/" component={App}>
-      { /* Home (main) route */ }
-      <IndexRoute component={Home}/>
-
-      { /* Routes requiring login */ }
-      <Route onEnter={requireLogin}>
-        <Route path="chat" component={Chat}/>
-        <Route path="loginSuccess" component={LoginSuccess}/>
+    <Route component={App} history={history}>
+      <Route path="/" component={Home}/>
+      <Route path="/login" component={Login}/>
+      <Route component={RequireLogin}>
+        <Route path="/chat" component={Chat}/>
+        <Route path="/loginSuccess" component={LoginSuccess}/>
       </Route>
-
-      { /* Routes */ }
-      <Route path="about" component={About}/>
-      <Route path="login" component={Login}/>
-      <Route path="survey" component={Survey}/>
-      <Route path="widgets" component={Widgets}/>
-
-      { /* Catch all route */ }
-      <Route path="*" component={NotFound} status={404} />
+      <Route path="/survey" component={Survey}/>
+      <Route path="/landmark" component={Landmark}/>
+      <Route path="/explore" component={Explore}/>
+      <Route path="*" component={NotFound}/>
     </Route>
   );
 };

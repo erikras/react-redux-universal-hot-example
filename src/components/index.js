@@ -5,4 +5,4 @@
  *
  */
 
-export InfoBar from './InfoBar/InfoBar';
+export Header from './Header/Header';
