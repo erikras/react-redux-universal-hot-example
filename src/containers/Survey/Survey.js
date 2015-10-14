@@ -21,7 +21,9 @@ export default class Survey extends Component {
     this.props.initialize('survey', {
       name: 'Little Bobby Tables',
       email: 'bobby@gmail.com',
-      occupation: 'Redux Wizard'
+      occupation: 'Redux Wizard',
+      currentlyEmployed: true,
+      sex: 'male'
     });
   }
 
