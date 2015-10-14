@@ -31,6 +31,10 @@ function makeHooksSafe(routes, store) {
     makeHooksSafe(routes.childRoutes, store);
   }
 
+  if (routes.indexRoute) {
+    makeHooksSafe(routes.indexRoute, store);
+  }
+
   return routes;
 }
 

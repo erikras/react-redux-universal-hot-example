@@ -14,7 +14,7 @@ describe('makeRouteHooksSafe', () => {
     const getRoutes = makeRouteHooksSafe(() => {
       return (
         <Route path="/" >
-          <IndexRoute />
+          <IndexRoute onEnter={onEnter} />
           <Route path="1" />
           <Route onEnter={onEnter}>
             <Route path="2" />
@@ -26,6 +26,7 @@ describe('makeRouteHooksSafe', () => {
 
     const routes = getRoutes(null);
 
+    expect(routes[0].indexRoute.onEnter).to.not.throw(Error);
     expect(routes[0].childRoutes[1].onEnter).to.not.throw(Error);
     expect(routes[0].childRoutes[1].childRoutes[1].onEnter).to.not.throw(Error);
   });
@@ -38,7 +39,9 @@ describe('makeRouteHooksSafe', () => {
     const getRoutes = makeRouteHooksSafe(() => {
       return {
         path: '/',
-        indexRoute: {},
+        indexRoute: {
+          onEnter: onEnter
+        },
         onEnter: onEnter,
         childRoutes: [
           {path: '1'},
@@ -55,6 +58,7 @@ describe('makeRouteHooksSafe', () => {
 
     const routes = getRoutes(null);
 
+    expect(routes[0].indexRoute.onEnter).to.not.throw(Error);
     expect(routes[0].onEnter).to.not.throw(Error);
     expect(routes[0].childRoutes[1].onEnter).to.not.throw(Error);
   });
