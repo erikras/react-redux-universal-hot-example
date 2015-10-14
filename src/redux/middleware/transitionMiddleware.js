@@ -20,11 +20,17 @@ export default ({getState, dispatch}) => next => action => {
       next(action);
     } else {
       const {components, location, params} = action.payload;
-      const promises = getDataDependencies(components, getState, dispatch, location, params);
-      const promise = Promise.all(promises)
-        .then(
-          () => next(action)
-        );
+      const promise = new Promise((resolve) => {
+
+        const doTransition = () => {
+          next(action);
+          Promise.all(getDataDependencies(components, getState, dispatch, location, params, true))
+            .then(resolve, resolve);
+        };
+
+        Promise.all(getDataDependencies(components, getState, dispatch, location, params))
+          .then(doTransition, doTransition);
+      });
 
       if (__SERVER__) {
         // router state is null until ReduxRouter is created so we can use this to store
