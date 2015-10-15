@@ -40,8 +40,6 @@ const component = (
   </Provider>
 );
 
-ReactDOM.render(component, dest);
-
 if (process.env.NODE_ENV !== 'production') {
   window.React = React; // enable debugger
 
@@ -58,4 +56,6 @@ if (__DEVTOOLS__) {
       <DevTools store={store} monitor={LogMonitor}/>
     </DebugPanel>
   </div>, dest);
+} else {
+  ReactDOM.render(component, dest);
 }
