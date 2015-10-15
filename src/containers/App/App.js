@@ -30,6 +30,8 @@ const meta = {
   }
 };
 
+// const headerTitle = 'Explore the MSD';
+
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
@@ -43,34 +45,42 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      headerTitle: 'asdfdsasdf'
+      headerTitle: 'Explore the MSD'
     };
+    this.headerChangeHandler = this.headerChangeHandler.bind(this);
+  }
+
+  headerChangeHandler(headerTitle) {
+    this.setState({ headerTitle: headerTitle});
   }
 
   render() {
+    console.log('rendering app');
     const headerTitle = this.state.headerTitle;
     const styles = require('./App.scss');
+    // headerChangeHandler = this.headerChangeHandler;
+    console.log(this);
     return (
       <div className={styles.app}>
         <DocumentMeta {...meta}/>
-        <Header title={headerTitle} />
-        <div className={styles.appContent}>
-          {this.props.children}
+        <div className="pageHeader">
+          <Header title={ headerTitle ? headerTitle : null } />
         </div>
-        <nav>
-          <div>
-            <ul>
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/explore">Explore</Link></li>
-              <li><Link to="/landmark">Landmark</Link></li>
-              <li><Link to="/more">More</Link></li>
-              <li><Link to="/survey">Info</Link></li>
-            </ul>
-          </div>
-        </nav>
-        <footer>
-          &copy; 2015
-        </footer>
+        <div className={styles.appContent}>
+          {React.cloneElement(this.props.children, {changeHeader: this.headerChangeHandler })}
+        </div>
+        <div className="navbar">
+          <nav>
+            <div>
+              <ul>
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="/explore">Explore</Link></li>
+                <li><Link to="/landmark">Landmark</Link></li>
+                <li><Link to="/survey">Info</Link></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
       </div>
     );
   }

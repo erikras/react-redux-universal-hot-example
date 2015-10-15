@@ -1,23 +1,22 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import DocumentMeta from 'react-document-meta';
 // import {} from 'components';
 
 export default class Explore extends Component {
-  constructor() {
-    super();
-    this.state = {
-      headerTitle: 'qwerqwwer'
-    };
+  static propTypes = {
+    changeHeader: PropTypes.func,
   }
 
-  componentWillMount() {
-    this.setState({headerTitle: 'rstacruz'});
+  componentDidMount() {
+    const headerTitle = 'The Bold Explorer';
+    console.log('mounting explore');
+    this.props.changeHeader(headerTitle);
   }
 
   render() {
-    // const styles = require('./Explore.scss');
+    const styles = require('./Explore.scss');
     return (
-      <div>
+      <div className={styles.explore}>
         <h1>Explore</h1>
         <DocumentMeta title="Explore"/>
         <p>I am exploring</p>

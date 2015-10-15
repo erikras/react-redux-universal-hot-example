@@ -1,23 +1,22 @@
 import React, {Component, PropTypes} from 'react';
 import DocumentMeta from 'react-document-meta';
-// import {} from 'components';
 
-export default class Landmark extends Component {
+export default class NotFound extends Component {
   static propTypes = {
     changeHeader: PropTypes.func,
   }
 
   componentDidMount() {
-    const headerTitle = 'Landmark';
+    const headerTitle = 'Page Not Found';
     this.props.changeHeader(headerTitle);
   }
+
   render() {
-    // const styles = require('./Landmark.scss');
     return (
-      <div>
-        <h1>Landmark</h1>
-        <DocumentMeta title="Landmark"/>
-        <p>This is a landmark</p>
+      <div className="container">
+        <DocumentMeta title="404 – Page not found"/>
+        <h1>Doh! 404!</h1>
+        <p>These are <em>not</em> the droids you are looking for!</p>
       </div>
     );
   }
