@@ -21,7 +21,6 @@ export default function createStore(reduxReactRouter, getRoutes, createHistory, 
 
   const reducer = require('./modules/reducer');
   const store = finalCreateStore(reducer, data);
-  store.client = client;
 
   if (__DEVELOPMENT__ && module.hot) {
     module.hot.accept('./modules/reducer', () => {
