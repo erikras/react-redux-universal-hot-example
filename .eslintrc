@@ -1,15 +1,20 @@
-{
-  "extends": "eslint-config-airbnb",
+{ "extends": "eslint-config-airbnb",
   "env": {
     "browser": true,
     "node": true,
-    "mocha": true,
+    "mocha": true
   },
   "rules": {
     "react/jsx-uses-react": 2,
     "react/jsx-uses-vars": 2,
     "react/react-in-jsx-scope": 2,
     "react/jsx-quotes": 0,
+    "import/default": 0,
+    "import/no-duplicates": 0,
+    "import/named": 0,
+    "import/namespace": 0,
+    "import/no-unresolved": 0,
+    "import/no-named-as-default": 2,
     "jsx-quotes": 2,
     // Temporarirly disabled due to a possible bug in babel-eslint (todomvc example)
     "block-scoped-var": 0,
@@ -21,8 +26,9 @@
     "no-alert": 0
   },
   "plugins": [
-    "react"
+    "react", "import"
   ],
+  "import/parser": "babel-eslint",
   "globals": {
     "__DEVELOPMENT__": true,
     "__CLIENT__": true,

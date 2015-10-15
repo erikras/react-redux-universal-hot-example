@@ -129,6 +129,7 @@
     "eslint": "1.6.0",
     "eslint-config-airbnb": "0.1.0",
     "eslint-loader": "^1.0.0",
+    "eslint-plugin-import": "^0.8.0",
     "eslint-plugin-react": "^3.5.0",
     "extract-text-webpack-plugin": "^0.8.2",
     "json-loader": "^0.5.3",
