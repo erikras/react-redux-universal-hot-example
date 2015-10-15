@@ -67,7 +67,7 @@ If you are the kind of person that learns best by following along a tutorial, I 
 
 ## Explanation
 
-What initally gets run is `bin/server.js`, which does little more than enable ES6 and ES7 awesomeness in the
+What initially gets run is `bin/server.js`, which does little more than enable ES6 and ES7 awesomeness in the
 server-side node code. It then initiates `server.js`. In `server.js` we proxy any requests to `/api/*` to the
 [API server](#api-server), running at `localhost:3030`. All the data fetching calls from the client go to `/api/*`.
 Aside from serving the favicon and static content from `/static`, the only thing `server.js` does is initiate delegate
