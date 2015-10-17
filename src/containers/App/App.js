@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
 import DocumentMeta from 'react-document-meta';
-import { Header } from 'components';
+import { Header, Navbar } from 'components';
 
 const title = 'Explore the Melbourne School of Design';
 const description = 'Find out what makes the MSD unique in the design landscape.';
@@ -30,17 +29,15 @@ const meta = {
   }
 };
 
-// const headerTitle = 'Explore the MSD';
-
 export default class App extends Component {
   static propTypes = {
-    children: PropTypes.object.isRequired,
+    children: PropTypes.object,
     history: PropTypes.object
-  };
+  }
 
   static contextTypes = {
     store: PropTypes.object.isRequired
-  };
+  }
 
   constructor() {
     super();
@@ -55,11 +52,10 @@ export default class App extends Component {
   }
 
   render() {
-    console.log('rendering app');
+    console.log('we going to render le app');
     const headerTitle = this.state.headerTitle;
     const styles = require('./App.scss');
-    // headerChangeHandler = this.headerChangeHandler;
-    console.log(this);
+    console.log('now we rendering le app');
     return (
       <div className={styles.app}>
         <DocumentMeta {...meta}/>
@@ -69,18 +65,7 @@ export default class App extends Component {
         <div className={styles.appContent}>
           {React.cloneElement(this.props.children, {changeHeader: this.headerChangeHandler })}
         </div>
-        <div className="navbar">
-          <nav>
-            <div>
-              <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/explore">Explore</Link></li>
-                <li><Link to="/landmark">Landmark</Link></li>
-                <li><Link to="/survey">Info</Link></li>
-              </ul>
-            </div>
-          </nav>
-        </div>
+        <Navbar />
       </div>
     );
   }

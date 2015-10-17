@@ -7,6 +7,7 @@ import {
     Explore,
     Landmark,
     NotFound,
+    Snippet
   } from 'containers';
 
 export default (store) => {
@@ -34,6 +35,7 @@ export default (store) => {
     <Route component={App} history={history}>
       <Route path="/" component={Home}/>
       <Route path="/landmark" component={Landmark}/>
+      <Route path="/snippet/:key" component={Snippet}/>
       <Route path="/explore" component={Explore}/>
       <Route path="*" component={NotFound}/>
     </Route>

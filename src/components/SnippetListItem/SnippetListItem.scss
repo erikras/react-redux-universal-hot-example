@@ -1,0 +1,15 @@
+.snippetListItem {
+  background-color: #fff;
+  border: 1px solid #000;
+  display: inline-block;
+  margin: 1em;
+  padding: 0.5em;
+  width: 200px;
+
+  div {
+    &> img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}

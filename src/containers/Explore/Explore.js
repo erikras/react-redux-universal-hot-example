@@ -9,7 +9,6 @@ export default class Explore extends Component {
 
   componentDidMount() {
     const headerTitle = 'The Bold Explorer';
-    console.log('mounting explore');
     this.props.changeHeader(headerTitle);
   }
 
