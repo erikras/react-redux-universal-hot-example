@@ -132,7 +132,7 @@
     "eslint-config-airbnb": "0.1.0",
     "eslint-loader": "^1.0.0",
     "eslint-plugin-import": "^0.8.0",
-    "eslint-plugin-react": "^3.5.0",
+    "eslint-plugin-react": "^3.6.0",
     "extract-text-webpack-plugin": "^0.8.2",
     "font-awesome": "^4.4.0",
     "font-awesome-webpack": "0.0.4",
