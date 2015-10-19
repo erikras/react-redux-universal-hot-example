@@ -5,6 +5,7 @@ import config from './config';
 import favicon from 'serve-favicon';
 import compression from 'compression';
 import httpProxy from 'http-proxy';
+import reactCookie from 'react-cookie';
 import path from 'path';
 import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
@@ -13,6 +14,7 @@ import PrettyError from 'pretty-error';
 import http from 'http';
 import SocketIo from 'socket.io';
 
+import {IntlProvider} from 'react-intl';
 import {ReduxRouter} from 'redux-router';
 import createHistory from 'history/lib/createMemoryHistory';
 import {reduxReactRouter, match} from 'redux-router/server';
@@ -20,6 +22,7 @@ import {Provider} from 'react-redux';
 import qs from 'query-string';
 import getRoutes from './routes';
 import getStatusFromRoutes from './helpers/getStatusFromRoutes';
+import { intlDataHash, getCurrentLocale } from './utils/intl';
 
 const pretty = new PrettyError();
 const app = new Express();
@@ -51,6 +54,11 @@ proxy.on('error', (error, req, res) => {
 
   json = {error: 'proxy_error', reason: error.message};
   res.end(JSON.stringify(json));
+});
+
+app.use((req, res, next) => {
+  reactCookie.plugToRequest(req, res);
+  next();
 });
 
 app.use((req, res) => {
@@ -90,10 +98,18 @@ app.use((req, res) => {
         routerState.location.query = qs.parse(routerState.location.search);
       }
 
+      const localeFromRoute = getCurrentLocale(routerState.params.locale);
+      const locale = intlDataHash[localeFromRoute].locale;
+      const localeFileName = intlDataHash[localeFromRoute].file;
+      const localeMessages = require(`./intl/${localeFromRoute}`);
+      const localeData = require(`react-intl/dist/locale-data/${localeFileName}`);
+
       store.getState().router.then(() => {
         const component = (
           <Provider store={store} key="provider">
-            <ReduxRouter/>
+            <IntlProvider locale={locale} messages={localeMessages}>
+              <ReduxRouter/>
+            </IntlProvider>
           </Provider>
         );
 
@@ -102,7 +118,7 @@ app.use((req, res) => {
           res.status(status);
         }
         res.send('<!doctype html>\n' +
-          ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store}/>));
+          ReactDOM.renderToString(<Html locale={locale} localeData={localeData} localeMessages={localeMessages} assets={webpackIsomorphicTools.assets()} component={component} store={store}/>));
       }).catch((err) => {
         console.error('DATA FETCHING ERROR:', pretty.render(err));
         res.status(500);

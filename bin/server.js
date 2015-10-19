@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 require('../server.babel'); // babel registration (runtime transpilation for node)
+require("../src/server/intl-polyfill");
 var path = require('path');
 var rootDir = path.resolve(__dirname, '..');
 /**

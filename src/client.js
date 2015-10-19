@@ -10,14 +10,17 @@ import ApiClient from './helpers/ApiClient';
 import io from 'socket.io-client';
 import {Provider} from 'react-redux';
 import {reduxReactRouter, ReduxRouter} from 'redux-router';
+import {addLocaleData, IntlProvider} from 'react-intl';
 
 import getRoutes from './routes';
 import makeRouteHooksSafe from './helpers/makeRouteHooksSafe';
+
 
 const client = new ApiClient();
 
 const dest = document.getElementById('content');
 const store = createStore(reduxReactRouter, makeRouteHooksSafe(getRoutes), createHistory, client, window.__data);
+const {locale, localeData, localeMessages} = window.__data;
 
 function initSocket() {
   const socket = io('', {path: '/api/ws', transports: ['polling']});
@@ -34,13 +37,17 @@ function initSocket() {
 
 global.socket = initSocket();
 
+addLocaleData(localeData);
+
 const component = (
   <ReduxRouter routes={getRoutes(store)} />
 );
 
 ReactDOM.render(
   <Provider store={store} key="provider">
-    {component}
+    <IntlProvider locale={locale} messages={localeMessages}>
+      {component}
+    </IntlProvider>
   </Provider>,
   dest
 );
