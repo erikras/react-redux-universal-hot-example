@@ -158,7 +158,7 @@
     "redux-router": "1.0.0-beta3",
     "sass-loader": "^3.0.0",
     "strip-loader": "^0.1.0",
-    "style-loader": "^0.12.4",
+    "style-loader": "^0.13.0",
     "webpack": "^1.12.2",
     "webpack-dev-middleware": "^1.2.0",
     "webpack-hot-middleware": "^2.4.1"
