@@ -87,7 +87,7 @@
     "express-session": "1.11.3",
     "file-loader": "0.8.4",
     "history": "1.12.5",
-    "http-proxy": "1.11.2",
+    "http-proxy": "1.11.3",
     "less": "2.5.3",
     "less-loader": "2.2.1",
     "lru-memoize": "1.0.0",
