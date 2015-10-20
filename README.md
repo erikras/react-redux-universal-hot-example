@@ -1,7 +1,7 @@
 # React Redux Universal Hot Example
 
 [![build status](https://img.shields.io/travis/erikras/react-redux-universal-hot-example/master.svg?style=flat-square)](https://travis-ci.org/erikras/react-redux-universal-hot-example)
-[![react-redux-universal channel on slack](https://img.shields.io/badge/slack-react--redux--universal%40reactiflux-blue.svg)](http://www.reactiflux.com)
+[![react-redux-universal channel on discord](https://img.shields.io/badge/discord-react--redux--universal%40reactiflux-blue.svg)](https://discordapp.com/channels/102860784329052160/105739309289623552)
 [![Demo on Heroku](https://img.shields.io/badge/demo-heroku-lightgrey.png)](https://react-redux.herokuapp.com)
 [![Dependency Status](https://david-dm.org/erikras/react-redux-universal-hot-example.svg)](https://david-dm.org/erikras/react-redux-universal-hot-example)
 [![devDependency Status](https://david-dm.org/erikras/react-redux-universal-hot-example/dev-status.svg)](https://david-dm.org/erikras/react-redux-universal-hot-example#info=devDependencies)
