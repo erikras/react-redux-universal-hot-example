@@ -5,7 +5,7 @@ export default class Header extends Component {
     title: PropTypes.string,
   }
 
-  static defaultProps = { title: 'HEADER default' }
+  static defaultProps = { title: 'Explore the MSD' }
 
   render() {
     const {title} = this.props; // eslint-disable-line no-shadow

@@ -1,14 +1,14 @@
 import React from 'react';
-import {IndexRoute, Route} from 'react-router';
-import { isLoaded as isAuthLoaded, load as loadAuth } from 'redux/modules/auth';
+import {Route, IndexRoute} from 'react-router';
 import {
     App,
     Home,
     Explore,
     Landmark,
-    NotFound,
-    Snippet
+    NotFound
   } from 'containers';
+import { Snippet } from 'components';
+
 
 export default (store) => {
   const requireLogin = (nextState, replaceState, cb) => {
@@ -32,12 +32,12 @@ export default (store) => {
    * Please keep routes in alphabetical order
    */
   return (
-    <Route component={App} history={history}>
-      <Route path="/" component={Home}/>
-      <Route path="/landmark" component={Landmark}/>
-      <Route path="/snippet/:key" component={Snippet}/>
-      <Route path="/explore" component={Explore}/>
-      <Route path="*" component={NotFound}/>
+    <Route path="/" component={App} history={history}>
+      <IndexRoute component={Home} />
+      <Route path="/landmark" component={Landmark} />
+      <Route path="/snippet/:key" component={Snippet} />
+      <Route path="/explore" component={Explore} />
+      <Route path="*" component={NotFound} status={404} />
     </Route>
   );
 };

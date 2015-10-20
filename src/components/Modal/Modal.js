@@ -8,23 +8,26 @@ export default class Modal extends Component {
     returnTo: PropTypes.string
   }
 
-  styles: {
-    position: 'fixed',
-    top: '20%',
-    right: '20%',
-    bottom: '20%',
-    left: '20%',
-    padding: 20,
-    boxShadow: '0px 0px 60px 5px rgba(0, 0, 0, 0.33)',
-    overflow: 'auto',
-    background: '#fff'
-  }
 
   render() {
+    const styles = {
+      position: 'fixed',
+      top: '20%',
+      right: '20%',
+      bottom: '20%',
+      left: '20%',
+      padding: '20px',
+      boxShadow: '0px 0px 60px 5px rgba(0, 0, 0, 0.33)',
+      overflow: 'auto',
+      background: '#fff'
+    };
+
+    console.log('I am a modal that will return to', this.props.returnTo);
+
     return (
-      <div style={this.styles}>
+      <div style={styles}>
         <p><Link to={this.props.returnTo}>Back</Link></p>
-        {this.props.children}
+        { this.props.children }
       </div>
     );
   }
