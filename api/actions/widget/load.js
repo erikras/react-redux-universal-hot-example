@@ -18,7 +18,7 @@ export default function load(req) {
   return new Promise((resolve, reject) => {
     // make async call to database
     setTimeout(() => {
-      if (Math.floor(Math.random() * 3) === 0) {
+      if (Math.random() < 0.33) {
         reject('Widget load fails 33% of the time. You were unlucky.');
       } else {
         resolve(getWidgets(req));
