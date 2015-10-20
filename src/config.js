@@ -1,18 +1,16 @@
-module.exports = {
+const environment = {
   development: {
-    isProduction: false,
-    port: process.env.PORT,
-    apiPort: process.env.APIPORT,
-    app: {
-      name: 'React Redux Example Development'
-    }
+    isProduction: false
   },
   production: {
-    isProduction: true,
-    port: process.env.PORT,
-    apiPort: process.env.APIPORT,
-    app: {
-      name: 'React Redux Example Production'
-    }
+    isProduction: true
   }
 }[process.env.NODE_ENV || 'development'];
+
+module.exports = Object.assign({
+  port: process.env.PORT,
+  apiPort: process.env.APIPORT,
+  app: {
+    name: 'React Redux Example Development'
+  }
+}, environment);
