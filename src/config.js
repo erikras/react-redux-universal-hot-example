@@ -7,7 +7,8 @@ const environment = {
   }
 }[process.env.NODE_ENV || 'development'];
 
-module.exports = Object.assign({
+module.exports = {
+  isProduction: environment,
   port: process.env.PORT,
   apiPort: process.env.APIPORT,
   app: {
@@ -32,4 +33,4 @@ module.exports = Object.assign({
       }
     }
   }
-}, environment);
+};
