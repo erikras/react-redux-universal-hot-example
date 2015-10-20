@@ -1,3 +1,5 @@
+require('babel-core/polyfill');
+
 const environment = {
   development: {
     isProduction: false
