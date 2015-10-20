@@ -66,7 +66,7 @@ export default class App extends Component {
     const styles = require('./App.scss');
     return (
       <div className={styles.app}>
-        <DocumentMeta {...config.meta}/>
+        <DocumentMeta {...config.app.meta}/>
         <nav className="navbar navbar-default navbar-fixed-top">
           <div className="container">
             <NavbarLink to="/" className="navbar-brand" component={IndexLink}>
