@@ -26,7 +26,6 @@ export default class Html extends Component {
     return (
       <html lang="en-us">
         <head>
-          <meta charSet="utf-8"/>
           {DocumentMeta.renderAsReact()}
 
           <link rel="shortcut icon" href="/favicon.ico" />
