@@ -97,7 +97,7 @@
     "pretty-error": "1.2.0",
     "query-string": "3.0.0",
     "react": "^0.14.0",
-    "react-document-meta": "2.0.0-rc2",
+    "react-document-meta": "2.0.0",
     "react-dom": "0.14.0",
     "react-inline-css": "2.0.0",
     "react-redux": "^4.0.0",
