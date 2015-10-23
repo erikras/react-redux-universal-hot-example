@@ -35,7 +35,7 @@ export default (store) => {
     <Route path="/" component={App} history={history}>
       <IndexRoute component={Home} />
       <Route path="/landmark" component={Landmark} />
-      <Route path="/snippet/:key" component={Snippet} />
+      <Route path="/snippet/:slug" component={Snippet} />
       <Route path="/explore" component={Explore} />
       <Route path="*" component={NotFound} status={404} />
     </Route>

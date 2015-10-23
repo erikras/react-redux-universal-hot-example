@@ -7,11 +7,11 @@ export default class Snippet extends Component {
   }
 
   render() {
-    const key = this.props.params.key;
+    const slug = this.props.params.slug;
 
     return (
       <div className="snippy">
-        <p>I am a snippety snippy number {key}</p>
+        <p>I am a snippy slug <strong>{slug}</strong></p>
       </div>
     );
   }

@@ -2,7 +2,20 @@ body {
   font-family: "Helvetica Neue", Helvetica, sans-serif;
 }
 
+.app {
+  // reset
+}
+
 :global(.navbar-brand) {
   position:relative;
   padding-left: 50px;
+}
+
+.modalBlanket {
+  background: rgba(0,0,0,.6);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }

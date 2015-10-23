@@ -5,8 +5,7 @@ import { SnippetList } from 'components';
 export default class Landmark extends Component {
   static propTypes = {
     changeHeader: PropTypes.func,
-    children: PropTypes.object,
-    location: PropTypes.object
+    location: PropTypes.object.isRequired
   }
 
   componentDidMount() {
@@ -16,30 +15,34 @@ export default class Landmark extends Component {
 
   render() {
     // const styles = require('./Landmark.scss');
+    const { location } = this.props;
     const SnippetListItems = [
       {
         title: 'Snip 1',
-        id: '1',
+        id: 1,
+        slug: 'snip-1',
         description: 'I am a real snippet!',
-        image: 'http://placeimg.com/400/300'
+        image: '/1.jpg'
       },
       {
         title: 'Snippy 2',
-        id: '2',
+        id: 2,
+        slug: 'snippy-2',
         description: 'Also a snippet. Fo real.',
-        image: 'http://placeimg.com/400/300'
+        image: '/2.jpg'
       },
       {
         title: 'Gobley Gookidy',
-        id: '3',
+        id: 3,
+        slug: 'gobley-gookidy',
         description: 'Hey hey hey I am a Gobley?!',
-        image: 'http://placeimg.com/400/300'
+        image: '/3.jpg'
       }
     ];
     return (
       <div>
-        <h1>Landmark</h1>
         <DocumentMeta title="Landmark"/>
+        <h1>Landmark</h1>
         <p>This is a landmark</p>
         <SnippetList items={SnippetListItems} location={location} />
       </div>

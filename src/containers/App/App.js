@@ -50,15 +50,12 @@ export default class App extends Component {
 
   componentWillReceiveProps(nextProps) {
     // if we changed routes...
-    console.log('nextProps is ', nextProps);
     if (( nextProps.location.key !== this.props.location.key &&
       nextProps.location.state &&
       nextProps.location.state.modal
     )) {
       // save the old children (just like animation)
-      console.log('we have changed routes');
       this.previousChildren = this.props.children;
-      console.log('now my prev children are ', this.previousChildren);
     }
   }
 
@@ -87,14 +84,17 @@ export default class App extends Component {
 
           {isModal ?
             this.previousChildren :
-            React.cloneElement(this.props.children, {changeHeader: this.headerChangeHandler })
+            React.cloneElement(this.props.children, {changeHeader: this.headerChangeHandler})
           }
 
-          {isModal && (
-            <Modal isOpen returnTo={this.previousChildren.props.location.pathname}>
-              { this.props.children }
-            </Modal>
-          )}
+          {isModal ? (
+            <div>
+              <div className={styles.modalBlanket}></div>
+              <Modal isOpen returnTo={this.previousChildren.props.location.pathname}>
+                { this.props.children }
+              </Modal>
+            </div>
+          ) : '' }
 
         </div>
         <Navbar />

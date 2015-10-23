@@ -8,7 +8,6 @@ export default class Modal extends Component {
     returnTo: PropTypes.string
   }
 
-
   render() {
     const styles = {
       position: 'fixed',
@@ -17,12 +16,10 @@ export default class Modal extends Component {
       bottom: '20%',
       left: '20%',
       padding: '20px',
-      boxShadow: '0px 0px 60px 5px rgba(0, 0, 0, 0.33)',
+      boxShadow: '0px 0px 60px 2px rgba(0, 0, 0, 0.75)',
       overflow: 'auto',
       background: '#fff'
     };
-
-    console.log('I am a modal that will return to', this.props.returnTo);
 
     return (
       <div style={styles}>
