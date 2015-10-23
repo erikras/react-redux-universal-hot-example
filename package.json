@@ -38,7 +38,7 @@
   },
   "betterScripts": {
     "start-prod": {
-      "command": "node ./bin/server.js",
+      "command": "babel-node ./bin/server.js",
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "production",
@@ -47,7 +47,7 @@
       }
     },
     "start-prod-api": {
-      "command": "node ./bin/api.js",
+      "command": "babel-node ./bin/api.js",
       "env": {
         "NODE_PATH": "./api",
         "NODE_ENV": "production",
@@ -55,7 +55,7 @@
       }
     },
     "start-dev": {
-      "command": "node ./bin/server.js",
+      "command": "babel-node ./bin/server.js",
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "development",
@@ -64,7 +64,7 @@
       }
     },
     "start-dev-api": {
-      "command": "node ./bin/api.js",
+      "command": "babel-node ./bin/api.js",
       "env": {
         "NODE_PATH": "./api",
         "NODE_ENV": "development",

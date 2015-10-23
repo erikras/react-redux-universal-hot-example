@@ -1,5 +1,3 @@
-require('../server.babel'); // babel registration (runtime transpilation for node)
-
 import express from 'express';
 import session from 'express-session';
 import bodyParser from 'body-parser';
