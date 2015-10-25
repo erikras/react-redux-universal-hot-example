@@ -156,7 +156,7 @@
     "redux-devtools-dock-monitor": "^1.0.0-beta-3",
     "redux-devtools-log-monitor": "^1.0.0-beta-3",
     "redux-router": "1.0.0-beta3",
-    "sass-loader": "^3.0.0",
+    "sass-loader": "^3.1.0",
     "strip-loader": "^0.1.0",
     "style-loader": "^0.13.0",
     "webpack": "^1.12.2",
