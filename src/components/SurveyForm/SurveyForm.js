@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {connectReduxForm} from 'redux-form';
+import {reduxForm} from 'redux-form';
 import surveyValidation from './surveyValidation';
 
 function asyncValidate(data) {
@@ -10,15 +10,21 @@ function asyncValidate(data) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       const errors = {};
+      let valid = true;
       if (~['bobby@gmail.com', 'timmy@microsoft.com'].indexOf(data.email)) {
         errors.email = 'Email address already used';
+        valid = false;
       }
-      reject(errors);
+      if (valid) {
+        resolve();
+      } else {
+        reject(errors);
+      }
     }, 1000);
   });
 }
 
-@connectReduxForm({
+@reduxForm({
   form: 'survey',
   fields: ['name', 'email', 'occupation', 'currentlyEmployed', 'sex'],
   validate: surveyValidation,

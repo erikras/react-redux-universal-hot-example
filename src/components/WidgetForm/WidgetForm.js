@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {connectReduxForm} from 'redux-form';
+import {reduxForm} from 'redux-form';
 import widgetValidation, {colors} from './widgetValidation';
 import * as widgetActions from 'redux/modules/widgets';
 
@@ -11,7 +11,7 @@ import * as widgetActions from 'redux/modules/widgets';
   }),
   dispatch => bindActionCreators(widgetActions, dispatch)
 )
-@connectReduxForm({
+@reduxForm({
   form: 'widget',
   fields: ['id', 'color', 'sprocketCount', 'owner'],
   validate: widgetValidation
@@ -20,8 +20,6 @@ export default class WidgetForm extends Component {
   static propTypes = {
     fields: PropTypes.object.isRequired,
     editStop: PropTypes.func.isRequired,
-    handleBlur: PropTypes.func.isRequired,
-    handleChange: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     invalid: PropTypes.bool.isRequired,
     pristine: PropTypes.bool.isRequired,
@@ -33,36 +31,24 @@ export default class WidgetForm extends Component {
   };
 
   render() {
-    const { editStop, fields: {id, color, sprocketCount, owner}, formKey, handleBlur, handleChange, handleSubmit, invalid,
+    const { editStop, fields: {id, color, sprocketCount, owner}, formKey, handleSubmit, invalid,
       pristine, save, submitting, saveError: { [formKey]: saveError }, values } = this.props;
     const styles = require('containers/Widgets/Widgets.scss');
     return (
       <tr className={submitting ? styles.saving : ''}>
         <td className={styles.idCol}>{id.value}</td>
         <td className={styles.colorCol}>
-          <select name="color"
-                  className="form-control"
-                  value={color.value}
-                  onChange={handleChange('color')}
-                  onBlur={handleBlur('color')}>
+          <select name="color" className="form-control" {...color}>
             {colors.map(valueColor => <option value={valueColor} key={valueColor}>{valueColor}</option>)}
           </select>
           {color.error && color.touched && <div className="text-danger">{color.error}</div>}
         </td>
         <td className={styles.sprocketsCol}>
-          <input type="text"
-                 className="form-control"
-                 value={sprocketCount.value}
-                 onChange={handleChange('sprocketCount')}
-                 onBlur={handleBlur('sprocketCount')}/>
+          <input type="text" className="form-control" {...sprocketCount}/>
           {sprocketCount.error && sprocketCount.touched && <div className="text-danger">{sprocketCount.error}</div>}
         </td>
         <td className={styles.ownerCol}>
-          <input type="text"
-                 className="form-control"
-                 value={owner.value}
-                 onChange={handleChange('owner')}
-                 onBlur={handleBlur('owner')}/>
+          <input type="text" className="form-control" {...owner}/>
           {owner.error && owner.touched && <div className="text-danger">{owner.error}</div>}
         </td>
         <td className={styles.buttonCol}>
