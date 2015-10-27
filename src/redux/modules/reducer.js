@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import multireducer from 'multireducer';
 import { routerStateReducer } from 'redux-router';
+
+import landmarks from './landmarks';
 
 export default combineReducers({
   router: routerStateReducer,
-  info,
-  widgets
+  landmarks
 });

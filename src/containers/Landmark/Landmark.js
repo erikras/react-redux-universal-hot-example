@@ -1,8 +1,20 @@
 import React, { Component, PropTypes } from 'react';
 import DocumentMeta from 'react-document-meta';
+import {connect} from 'react-redux';
+import * as landmarkActions from 'redux/modules/landmarks';
+import { isLoaded, load as loadLandmarks } from 'redux/modules/landmarks';
 import { SnippetList } from 'components';
 
-export default class Landmark extends Component {
+@connect(
+  state => ({
+    landmarks: state.landmarks.data,
+    error: state.landmarks.error,
+    loading: state.landmarks.loading
+  }),
+  {...landmarkActions})
+
+export default
+class Landmark extends Component {
   static propTypes = {
     changeHeader: PropTypes.func,
     location: PropTypes.object.isRequired
@@ -11,6 +23,12 @@ export default class Landmark extends Component {
   componentDidMount() {
     const headerTitle = 'Landmark';
     this.props.changeHeader(headerTitle);
+  }
+
+  static fetchDataDeferred(getState, dispatch) {
+    if (!isLoaded(getState())) {
+      return dispatch(loadLandmarks());
+    }
   }
 
   render() {
