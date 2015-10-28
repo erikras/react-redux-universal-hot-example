@@ -10,33 +10,16 @@ import {
 import { Snippet } from 'components';
 
 
-export default (store) => {
-  const requireLogin = (nextState, replaceState, cb) => {
-    function checkAuth() {
-      const { auth: { user }} = store.getState();
-      if (!user) {
-        // oops, not logged in, so can't be here!
-        replaceState(null, '/');
-      }
-      cb();
-    }
-
-    if (!isAuthLoaded(store.getState())) {
-      store.dispatch(loadAuth()).then(checkAuth);
-    } else {
-      checkAuth();
-    }
-  };
-
+export default () => {
   /**
    * Please keep routes in alphabetical order
    */
   return (
-    <Route path="/" component={App} history={history}>
+    <Route path="/" component={App}>
       <IndexRoute component={Home} />
+      <Route path="/explore" component={Explore} />
       <Route path="/landmark" component={Landmark} />
       <Route path="/snippet/:slug" component={Snippet} />
-      <Route path="/explore" component={Explore} />
       <Route path="*" component={NotFound} status={404} />
     </Route>
   );
