@@ -1,2 +1,2 @@
 export * as landmarks from './landmarks/index';
-export * as snippet from './snippet/index';
+export * as snippets from './snippets/index';

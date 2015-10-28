@@ -17,7 +17,7 @@ export default class SnippetListItem extends Component {
         <div>
           <img src={image} alt="" />
           <h2>
-            <Link key={id} to={`/snippet/${slug}`} state={{ modal: true, returnTo: location.pathname, snippets: { [slug]: snippet } }}>
+            <Link key={id} to={`/snippet/${slug}`} state={{ modal: true, returnTo: location.pathname, snippet: snippet }}>
               {title}
             </Link>
           </h2>

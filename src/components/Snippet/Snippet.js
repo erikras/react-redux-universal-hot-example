@@ -8,17 +8,24 @@ export default class Snippet extends Component {
     snippet: PropTypes.object,
   }
 
+  componentWillMount() {
+    if (this.props.location.state && this.props.location.state.snippet) {
+      // Bypass AJAX call if already have data
+      const snippetFromState = this.props.location.state.snippet;
+      this.setState({snippet: snippetFromState});
+    } else {
+      // do ajax call
+      // const slug = this.props.params.slug;
+    }
+  }
+
   render() {
-    const slug = this.props.params.slug;
-    const snippetFromState = this.props.location.state.snippets[slug];
-    const snippetFromProps = this.props.snippet;
-    const {title} = ( snippetFromState || snippetFromProps );
-    console.log('title: ', title);
-    if (!title) return (<h2>Cannot render snippet</h2>);
+    if (!(this.state && this.state.snippet)) return (<h2>Cannot render snippet</h2>);
+    const { description, title } = this.state.snippet;
     return (
       <div className="snippy">
         <h2>{title}</h2>
-        <p>I am a snippy slug <strong>{slug}</strong></p>
+        <code>{description}</code>
       </div>
     );
   }

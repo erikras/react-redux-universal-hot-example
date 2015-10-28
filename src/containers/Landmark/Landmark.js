@@ -18,6 +18,7 @@ class Landmark extends Component {
   static propTypes = {
     changeHeader: PropTypes.func,
     landmarks: PropTypes.object,
+    loading: PropTypes.bool,
     location: PropTypes.object.isRequired
   }
 
@@ -34,8 +35,8 @@ class Landmark extends Component {
 
   render() {
     // const styles = require('./Landmark.scss');
-    console.log('iam render landmark, and look at what i loaded: ', this.props.landmarks);
-    const { location, landmarks } = this.props;
+    const { location, landmarks, loading } = this.props;
+    if (loading) return (<h2>Loading landmark...</h2>);
     if (!landmarks) return (<h2>Unable to load landmark</h2>);
     return (
       <div>
