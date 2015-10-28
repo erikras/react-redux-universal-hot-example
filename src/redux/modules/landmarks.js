@@ -39,6 +39,7 @@ export function isLoaded(globalState) {
 }
 
 export function load() {
+  console.log('it\'s api call time!');
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
     promise: (client) => client.get('/landmarks/load/param1/param2') // params not used, just shown as demonstration

@@ -17,6 +17,7 @@ export default
 class Landmark extends Component {
   static propTypes = {
     changeHeader: PropTypes.func,
+    landmarks: PropTypes.object,
     location: PropTypes.object.isRequired
   }
 
@@ -33,36 +34,15 @@ class Landmark extends Component {
 
   render() {
     // const styles = require('./Landmark.scss');
-    const { location } = this.props;
-    const SnippetListItems = [
-      {
-        title: 'Snip 1',
-        id: 1,
-        slug: 'snip-1',
-        description: 'I am a real snippet!',
-        image: '/1.jpg'
-      },
-      {
-        title: 'Snippy 2',
-        id: 2,
-        slug: 'snippy-2',
-        description: 'Also a snippet. Fo real.',
-        image: '/2.jpg'
-      },
-      {
-        title: 'Gobley Gookidy',
-        id: 3,
-        slug: 'gobley-gookidy',
-        description: 'Hey hey hey I am a Gobley?!',
-        image: '/3.jpg'
-      }
-    ];
+    console.log('iam render landmark, and look at what i loaded: ', this.props.landmarks);
+    const { location, landmarks } = this.props;
+    if (!landmarks) return (<h2>Unable to load landmark</h2>);
     return (
       <div>
         <DocumentMeta title="Landmark"/>
-        <h1>Landmark</h1>
-        <p>This is a landmark</p>
-        <SnippetList items={SnippetListItems} location={location} />
+        <h1>{landmarks.title}</h1>
+        <p>{landmarks.description}</p>
+        <SnippetList items={landmarks.snippets} location={location} />
       </div>
     );
   }

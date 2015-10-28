@@ -4,6 +4,7 @@
   display: inline-block;
   height: 300px;
   margin: 1em;
+  overflow: hidden;
   padding: 0.5em;
   vertical-align: middle;
   width: 200px;
@@ -12,6 +13,16 @@
     &> img {
       max-width: 100%;
       height: auto;
+    }
+
+    &> h2 {
+      font-size: 1.1em;
+      margin: 6px 0;
+    }
+
+    &> p {
+      font-size: 0.9em;
+      margin: 0;
     }
   }
 }

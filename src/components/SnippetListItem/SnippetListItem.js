@@ -9,18 +9,19 @@ export default class SnippetListItem extends Component {
 
   render() {
     const { location } = this.props;
-    const { description, image, id, slug, title } = this.props.item;
+    const { image, id, slug, title, teaser } = this.props.item;
+    const snippet = this.props.item;
     const styles = require('./SnippetListItem.scss');
     return (
       <li className={styles.snippetListItem}>
         <div>
           <img src={image} alt="" />
           <h2>
-            <Link key={id} to={`/snippet/${slug}`} state={{ modal: true, returnTo: location.pathname }}>
+            <Link key={id} to={`/snippet/${slug}`} state={{ modal: true, returnTo: location.pathname, snippets: { [slug]: snippet } }}>
               {title}
             </Link>
           </h2>
-          <p>{description}</p>
+          <p>{teaser}</p>
         </div>
       </li>
     );
