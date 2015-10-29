@@ -85,7 +85,7 @@
     "body-parser": "1.14.1",
     "compression": "1.6.0",
     "express": "4.13.3",
-    "express-session": "1.11.3",
+    "express-session": "1.12.1",
     "file-loader": "0.8.4",
     "history": "1.12.5",
     "http-proxy": "1.12.0",
