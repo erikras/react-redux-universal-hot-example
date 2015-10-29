@@ -15,8 +15,10 @@ export default class SnippetListItem extends Component {
     console.log(this.props.item);
     return (
       <li className={styles.snippetListItem}>
-        <div>
+        <div className={styles.thumb}>
           <img src={image.thumb} srcSet={`${image.thumb} 300w, ${image.small} 600w`} alt="" />
+        </div>
+        <div>
           <h2>
             <Link key={id} to={`/snippet/${slug}`} state={{ modal: true, returnTo: location.pathname, snippet: snippet }}>
               {title}
