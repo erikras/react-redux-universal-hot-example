@@ -20,10 +20,12 @@ export default class Snippet extends Component {
   }
 
   render() {
+    const styles = require('./Snippet.scss');
     if (!(this.state && this.state.snippet)) return (<h2>Cannot render snippet</h2>);
-    const { description, title } = this.state.snippet;
+    const { description, image, title } = this.state.snippet;
     return (
-      <div className="snippy">
+      <div className={styles.snippet}>
+        <img src={image.small} srcSet={`${image.small} 600w, ${image.medium} 1400w`} alt="" />
         <h2>{title}</h2>
         <code>{description}</code>
       </div>
