@@ -1,7 +1,7 @@
 /**
  * THIS IS THE ENTRY POINT FOR THE CLIENT, JUST LIKE server.js IS THE ENTRY POINT FOR THE SERVER.
  */
-import 'babel/polyfill';
+import 'babel-core/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import createHistory from 'history/lib/createBrowserHistory';
