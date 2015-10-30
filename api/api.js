@@ -5,6 +5,7 @@ import session from 'express-session';
 import bodyParser from 'body-parser';
 import config from '../src/config';
 import * as actions from './actions/index';
+import {mapUrl} from 'utils/url.js';
 import PrettyError from 'pretty-error';
 import http from 'http';
 import SocketIo from 'socket.io';
@@ -28,28 +29,11 @@ app.use(bodyParser.json());
 
 app.use((req, res) => {
 
-  const matcher = req.url.split('?')[0].split('/').slice(1);
+  const splittedUrlPath = req.url.split('?')[0].split('/').slice(1);
 
-  let action = false;
-  let params = null;
-  let apiActions = actions;
-  let sliceIndex = 0;
+  const {action, params} = mapUrl(actions, splittedUrlPath);
 
-  for (const actionName of matcher) {
-
-    if (apiActions[actionName]) {
-      action = apiActions[actionName];
-    }
-
-    if (typeof action === 'function') {
-      params = matcher.slice(++sliceIndex);
-      break;
-    }
-    apiActions = action;
-    ++sliceIndex;
-  }
-
-  if (action && typeof action === 'function') {
+  if (action) {
     action(req, params)
       .then((result) => {
         res.json(result);
