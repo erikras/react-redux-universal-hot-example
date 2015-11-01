@@ -80,7 +80,7 @@ The primary section of `server.js` generates an HTML page with the contents retu
 
 Then we perform [server-side data fetching](#server-side-data-fetching), wait for the data to be loaded, and render the page with the now-fully-loaded `redux` state.
 
-The last interesting bit of the main routing section of `server.js` is that we swap in the hashed script and css from the `webpack-stats.json` that the Webpack Dev Server – or the Webpack build process on production – has spit out on its last run. You won't have to deal with `webpack-stats.json` manually because [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools) take care of that.
+The last interesting bit of the main routing section of `server.js` is that we swap in the hashed script and css from the `webpack-assets.json` that the Webpack Dev Server – or the Webpack build process on production – has spit out on its last run. You won't have to deal with `webpack-assets.json` manually because [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools) take care of that.
 
 We also spit out the `redux` state into a global `window.__data` variable in the webpage to be loaded by the client-side `redux` code.
 
