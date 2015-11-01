@@ -67,42 +67,32 @@ export default class App extends Component {
     return (
       <div className={styles.app}>
         <DocumentMeta {...config.app}/>
-          <nav className="navbar navbar-default navbar-fixed-top">
-            <div className="container">
-              <div className="navbar-header">
-                <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#react-redux-navbar-collapse" aria-expanded="false">
-                  <span className="sr-only">Toggle navigation</span>
-                  <span className="icon-bar"></span>
-                  <span className="icon-bar"></span>
-                  <span className="icon-bar"></span>
-                </button>
-                <NavbarLink to="/" className="navbar-brand" component={IndexLink}>
-                  <div className={styles.brand}/>
-                  React Redux Example
-                </NavbarLink>
-              </div>
+        <nav className="navbar navbar-default navbar-fixed-top">
+          <div className="container">
+            <NavbarLink to="/" className="navbar-brand" component={IndexLink}>
+              <div className={styles.brand}/>
+              React Redux Example
+            </NavbarLink>
 
-              <div className="collapse navbar-collapse" id="react-redux-navbar-collapse">
-                <ul className="nav navbar-nav">
-                  {user && <li><NavbarLink to="/chat">Chat</NavbarLink></li>}
+            <ul className="nav navbar-nav">
+              {user && <li><NavbarLink to="/chat">Chat</NavbarLink></li>}
 
-                  <li><NavbarLink to="/widgets">Widgets</NavbarLink></li>
-                  <li><NavbarLink to="/survey">Survey</NavbarLink></li>
-                  <li><NavbarLink to="/about">About Us</NavbarLink></li>
-                  {!user && <li><NavbarLink to="/login">Login</NavbarLink></li>}
-                  {user && <li className="logout-link"><a href="/logout" onClick={::this.handleLogout}>Logout</a></li>}
-                </ul>
-                {user &&
-                <p className={styles.loggedInMessage + ' navbar-text'}>Logged in as <strong>{user.name}</strong>.</p>}
-                <ul className="nav navbar-nav navbar-right">
-                  <li>
-                    <a href="https://github.com/erikras/react-redux-universal-hot-example"
-                       target="_blank" title="View on Github"><i className="fa fa-github"/></a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </nav>
+              <li><NavbarLink to="/widgets">Widgets</NavbarLink></li>
+              <li><NavbarLink to="/survey">Survey</NavbarLink></li>
+              <li><NavbarLink to="/about">About Us</NavbarLink></li>
+              {!user && <li><NavbarLink to="/login">Login</NavbarLink></li>}
+              {user && <li className="logout-link"><a href="/logout" onClick={::this.handleLogout}>Logout</a></li>}
+            </ul>
+            {user &&
+            <p className={styles.loggedInMessage + ' navbar-text'}>Logged in as <strong>{user.name}</strong>.</p>}
+            <ul className="nav navbar-nav navbar-right">
+              <li>
+                <a href="https://github.com/erikras/react-redux-universal-hot-example"
+                   target="_blank" title="View on Github"><i className="fa fa-github"/></a>
+              </li>
+            </ul>
+          </div>
+        </nav>
         <div className={styles.appContent}>
           {this.props.children}
         </div>
