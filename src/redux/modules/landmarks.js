@@ -1,3 +1,5 @@
+// import fetch from 'isomorphic-fetch';
+
 const LOAD = 'explore-msd/landmarks/LOAD';
 const LOAD_SUCCESS = 'explore-msd/landmarks/LOAD_SUCCESS';
 const LOAD_FAIL = 'explore-msd/landmarks/LOAD_FAIL';
@@ -42,6 +44,6 @@ export function load() {
   console.log('it\'s api call time!');
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.get('/landmarks/load')
+    promise: (client) => client.get('/landmarks/load?id=1')
   };
 }

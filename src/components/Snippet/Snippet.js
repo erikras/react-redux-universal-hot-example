@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
-export default class Snippet extends Component {
+export default
+class Snippet extends Component {
 
   static propTypes = {
     location: PropTypes.object,
