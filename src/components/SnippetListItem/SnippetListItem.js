@@ -15,7 +15,7 @@ export default class SnippetListItem extends Component {
     return (
       <li className={styles.snippetListItem}>
         <div className={styles.thumb}>
-          <img src={image.thumb.src} srcSet={`${image.thumb.src} ${image.thumb.width}w, ${image.small.src} ${image.small.width}w`} alt="" />
+          <img src={image.thumb.src} width={image.thumb.width} height={image.thumb.height} style={{backgroundImage: `url(data:image/jpeg;base64,${image.preview})`, backgroundSize: 'cover', backgroundPosition: 'center'}} alt="" />
         </div>
         <div>
           <h2>
@@ -29,3 +29,4 @@ export default class SnippetListItem extends Component {
     );
   }
 }
+/*  srcSet={`${image.thumb.src} ${image.thumb.width}w, ${image.small.src} ${image.small.width}w`} */
