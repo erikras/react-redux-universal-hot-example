@@ -62,7 +62,6 @@ export function createValidator(rules) {
       const error = rule(data[key], data);
       if (error) {
         errors[key] = error;
-        errors.valid = false;
       }
     });
     return errors;
