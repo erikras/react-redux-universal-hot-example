@@ -12,7 +12,6 @@ export default class SnippetListItem extends Component {
     const { image, id, slug, title, teaser } = this.props.item;
     const snippet = this.props.item;
     const styles = require('./SnippetListItem.scss');
-    console.log(this.props.item);
     return (
       <li className={styles.snippetListItem}>
         <div className={styles.thumb}>
