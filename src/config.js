@@ -12,7 +12,8 @@ const environment = {
   production: {
     isProduction: true,
     port: process.env.PORT,
-    apiPort: process.env.APIPORT,
+    apiPort: 80,
+    apiServer: '//api.explore.msd.unimelb.edu.au',
     app: {
       name: 'Explore the Melbourne School of Design'
     }
@@ -23,22 +24,22 @@ module.exports = Object.assign({
   port: process.env.PORT,
   apiPort: process.env.APIPORT,
   app: {
-    title: 'React Redux Example',
-    description: 'All the modern best practices in one example.',
+    title: 'Explore the Melbourne School of Design',
+    description: 'Find out what makes the MSD unique in both the design and higher education landscapes.',
     meta: {
       charSet: 'utf-8',
       property: {
-        'og:site_name': 'React Redux Example',
-        'og:image': 'https://react-redux.herokuapp.com/logo.jpg',
+        'og:site_name': 'Explore the Melbourne School of Design',
+        'og:image': '',
         'og:locale': 'en_US',
-        'og:title': 'React Redux Example',
-        'og:description': 'All the modern best practices in one example.',
+        'og:title': 'Explore the Melbourne School of Design',
+        'og:description': 'Find out what makes the MSD unique in both the design and higher education landscapes.',
         'twitter:card': 'summary',
-        'twitter:site': '@erikras',
-        'twitter:creator': '@erikras',
-        'twitter:title': 'React Redux Example',
-        'twitter:description': 'All the modern best practices in one example.',
-        'twitter:image': 'https://react-redux.herokuapp.com/logo.jpg',
+        'twitter:site': '@msdsocial',
+        'twitter:creator': '@msdsocial',
+        'twitter:title': 'Explore the Melbourne School of Design',
+        'twitter:description': 'Find out what makes the MSD unique in both the design and higher education landscapes.',
+        'twitter:image': '',
         'twitter:image:width': '200',
         'twitter:image:height': '200'
       }

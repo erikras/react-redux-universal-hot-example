@@ -1,4 +1,5 @@
-// import fetch from 'isomorphic-fetch';
+// import request from 'superagent';
+import urlHelper from 'helpers/urlHelper';
 
 const LOAD = 'explore-msd/landmarks/LOAD';
 const LOAD_SUCCESS = 'explore-msd/landmarks/LOAD_SUCCESS';
@@ -44,6 +45,6 @@ export function load() {
   console.log('it\'s api call time!');
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.get('/landmarks/load?id=1')
+    promise: (client) => client.get(urlHelper.landmarkEndpoint(1))
   };
 }

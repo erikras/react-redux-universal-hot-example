@@ -1,33 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import DocumentMeta from 'react-document-meta';
 import { Header, Navbar, Modal } from 'components';
+import config from '../../config';
 
-const title = 'Explore the Melbourne School of Design';
-const description = 'Find out what makes the MSD unique in the design landscape.';
-const image = '';
-
-const meta = {
-  title,
-  description,
-  meta: {
-    charSet: 'utf-8',
-    property: {
-      'og:site_name': title,
-      'og:image': image,
-      'og:locale': 'en_US',
-      'og:title': title,
-      'og:description': description,
-      'twitter:card': 'summary',
-      'twitter:site': '@msdsocial',
-      'twitter:creator': '@msdsocial',
-      'twitter:title': title,
-      'twitter:description': description,
-      'twitter:image': image,
-      'twitter:image:width': '200',
-      'twitter:image:height': '200'
-    }
-  }
-};
 
 export default class App extends Component {
   static propTypes = {
@@ -76,7 +51,7 @@ export default class App extends Component {
 
     return (
       <div className={styles.app}>
-        <DocumentMeta {...meta}/>
+        <DocumentMeta {...config.app}/>
         <div className="pageHeader">
           <Header title={ headerTitle ? headerTitle : null } />
         </div>
