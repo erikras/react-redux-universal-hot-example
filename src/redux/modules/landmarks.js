@@ -37,14 +37,28 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-export function isLoaded(globalState) {
+export function landmarkIsLoaded(globalState) {
+  return globalState.landmark && globalState.landmark.loaded;
+}
+
+export function landmarksAreLoaded(globalState) {
   return globalState.landmarks && globalState.landmarks.loaded;
 }
 
-export function load() {
-  console.log('it\'s api call time!');
+export function loadLandmark() {
+  console.log('let\'s load a landmark');
+  const url = urlHelper.landmarkEndpoint('1');
+  console.log(url);
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.get(urlHelper.landmarkEndpoint(1))
+    promise: (client) => client.get(url)
+  };
+}
+
+export function loadLandmarks() {
+  console.log('load ALL the landmarks!');
+  return {
+    types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
+    promise: (client) => client.get(urlHelper.landmarksEndpoint())
   };
 }

@@ -15,7 +15,7 @@ export default class SnippetListItem extends Component {
     return (
       <li className={styles.snippetListItem}>
         <div className={styles.thumb}>
-          <img src={image.thumb} srcSet={`${image.thumb} 300w, ${image.small} 600w`} alt="" />
+          <img src={image.thumb.src} srcSet={`${image.thumb.src} ${image.thumb.width}w, ${image.small.src} ${image.small.width}w`} alt="" />
         </div>
         <div>
           <h2>

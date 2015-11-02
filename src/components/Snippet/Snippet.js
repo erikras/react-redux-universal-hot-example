@@ -26,7 +26,7 @@ class Snippet extends Component {
     const { description, image, title } = this.state.snippet;
     return (
       <div className={styles.snippet}>
-        <img src={image.small} srcSet={`${image.small} 600w, ${image.medium} 1400w`} alt="" />
+        <img src={image.small.src} srcSet={`${image.small.src} ${image.small.width}w, ${image.medium.src} ${image.medium.width}w`} alt="" />
         <h2>{title}</h2>
         <code>{description}</code>
       </div>
