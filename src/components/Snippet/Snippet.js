@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Image } from 'components';
 
 export default
 class Snippet extends Component {
@@ -26,7 +27,7 @@ class Snippet extends Component {
     const { description, image, title } = this.state.snippet;
     return (
       <div className={styles.snippet}>
-        <img src={image.small.src} srcSet={`${image.small.src} ${image.small.width}w, ${image.medium.src} ${image.medium.width}w`} alt="" />
+        { image && <Image image={image} size="small" /> }
         <h2>{title}</h2>
         <code>{description}</code>
       </div>

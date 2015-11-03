@@ -6,6 +6,7 @@
  */
 
 export Header from './Header/Header';
+export Image from './Image/Image';
 export Modal from './Modal/Modal';
 export Navbar from './Navbar/Navbar';
 export Snippet from './Snippet/Snippet';

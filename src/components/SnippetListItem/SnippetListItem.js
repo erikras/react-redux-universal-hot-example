@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import { Link } from 'react-router';
+import { Image } from 'components';
 
 export default class SnippetListItem extends Component {
   static propTypes = {
@@ -15,7 +16,7 @@ export default class SnippetListItem extends Component {
     return (
       <li className={styles.snippetListItem}>
         <div className={styles.thumb}>
-          <img src={image.thumb.src} width={image.thumb.width} height={image.thumb.height} style={{backgroundImage: `url(data:image/jpeg;base64,${image.preview})`, backgroundSize: 'cover', backgroundPosition: 'center'}} alt="" />
+          <Image image={image} size="thumb" />
         </div>
         <div>
           <h2>
@@ -29,4 +30,3 @@ export default class SnippetListItem extends Component {
     );
   }
 }
-/*  srcSet={`${image.thumb.src} ${image.thumb.width}w, ${image.small.src} ${image.small.width}w`} */
