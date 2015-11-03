@@ -6,6 +6,10 @@ const urlHelper = {
 
   landmarkEndpoint: (landmarkId) => {
     return `/api/landmarks/${landmarkId}`;
+  },
+
+  snippetEndpoint: (snippetId) => {
+    return `/api/snippets/${snippetId}`;
   }
 
 };

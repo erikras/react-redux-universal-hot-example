@@ -1,15 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import DocumentMeta from 'react-document-meta';
 import {connect} from 'react-redux';
-import * as landmarkActions from 'redux/modules/landmarks';
-import { landmarkIsLoaded, loadLandmark } from 'redux/modules/landmarks';
+import * as landmarkActions from 'redux/modules/landmark';
+import { landmarkIsLoaded, loadLandmark } from 'redux/modules/landmark';
 import { SnippetList } from 'components';
 
 @connect(
   state => ({
-    landmark: state.landmarks.data,
-    error: state.landmarks.error,
-    loading: state.landmarks.loading
+    landmark: state.landmark.data,
+    error: state.landmark.error,
+    loading: state.landmark.loading
   }),
   {...landmarkActions})
 

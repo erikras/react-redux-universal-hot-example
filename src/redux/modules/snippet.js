@@ -1,8 +1,8 @@
 import urlHelper from 'helpers/urlHelper';
 
-const LOAD = 'explore-msd/landmarks/LOAD';
-const LOAD_SUCCESS = 'explore-msd/landmarks/LOAD_SUCCESS';
-const LOAD_FAIL = 'explore-msd/landmarks/LOAD_FAIL';
+const LOAD = 'explore-msd/snippet/LOAD';
+const LOAD_SUCCESS = 'explore-msd/snippet/LOAD_SUCCESS';
+const LOAD_FAIL = 'explore-msd/snippet/LOAD_FAIL';
 
 const initialState = {
   loaded: false,
@@ -36,14 +36,16 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-export function landmarksAreLoaded(globalState) {
-  return globalState.landmarks && globalState.landmarks.loaded;
+export function landmarkIsLoaded(globalState) {
+  return globalState.snippet && globalState.snippet.loaded;
 }
 
-export function loadLandmarks() {
-  console.log('load ALL the landmarks!');
+export function loadSnippet(id) {
+  console.log('let\'s load a snippet');
+  const url = urlHelper.snippetEndpoint(id);
+  console.log(url);
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.get(urlHelper.landmarksEndpoint())
+    promise: (client) => client.get(url)
   };
 }
