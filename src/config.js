@@ -3,26 +3,18 @@ require('babel-core/polyfill');
 const environment = {
   development: {
     isProduction: false,
-    port: process.env.PORT,
-    apiPort: process.env.APIPORT,
-    app: {
-      name: 'Explore the Melbourne School of Design [Development]'
-    }
+    apiServer: 'http://localhost:3333'
   },
   production: {
     isProduction: true,
-    port: process.env.PORT,
-    apiPort: 80,
-    apiServer: '//api.explore.msd.unimelb.edu.au',
-    app: {
-      name: 'Explore the Melbourne School of Design'
-    }
+    apiServer: '//api.explore.msd.unimelb.edu.au'
   }
 }[process.env.NODE_ENV || 'development'];
 
 module.exports = Object.assign({
   port: process.env.PORT,
   apiPort: process.env.APIPORT,
+  apiPath: '/api',
   app: {
     title: 'Explore the Melbourne School of Design',
     description: 'Find out what makes the MSD unique in both the design and higher education landscapes.',

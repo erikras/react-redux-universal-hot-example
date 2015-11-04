@@ -1,15 +1,15 @@
 const urlHelper = {
 
   landmarksEndpoint: () => {
-    return `/api/landmarks`;
+    return `/landmarks`;
   },
 
   landmarkEndpoint: (landmarkId) => {
-    return `/api/landmarks/${landmarkId}`;
+    return `/landmarks/${landmarkId}`;
   },
 
   snippetEndpoint: (snippetId) => {
-    return `/api/snippets/${snippetId}`;
+    return `/snippets/${snippetId}`;
   }
 
 };
