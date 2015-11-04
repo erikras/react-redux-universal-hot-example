@@ -5,6 +5,7 @@ const methods = ['get', 'post', 'put', 'patch', 'del'];
 
 function formatUrl(path) {
   const adjustedPath = path[0] !== '/' ? '/' + path : path;
+  console.log('doing an api thing ', config.apiServer + config.apiPath + adjustedPath);
   return config.apiServer + config.apiPath + adjustedPath;
 }
 
@@ -19,7 +20,6 @@ class _ApiClient {
     methods.forEach((method) =>
       this[method] = (path, { params, data } = {}) => new Promise((resolve, reject) => {
         const request = superagent[method](formatUrl(path));
-        console.log('my formatted path is', formatUrl(path));
 
         if (params) {
           request.query(params);

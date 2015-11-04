@@ -36,7 +36,8 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-export function landmarkIsLoaded(globalState) {
+export function snippetIsLoaded(globalState) {
+  console.log('checking if snippet is loaded');
   return globalState.snippet && globalState.snippet.loaded;
 }
 
