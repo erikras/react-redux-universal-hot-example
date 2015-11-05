@@ -9,6 +9,7 @@
     "react/jsx-uses-vars": 2,
     "react/react-in-jsx-scope": 2,
     "react/jsx-quotes": 0,
+    "react/no-multi-comp": 0,
     "import/default": 0,
     "import/no-duplicates": 0,
     "import/named": 0,
