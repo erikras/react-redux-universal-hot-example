@@ -20,6 +20,9 @@ import {Provider} from 'react-redux';
 import qs from 'query-string';
 import getRoutes from './routes';
 import getStatusFromRoutes from './helpers/getStatusFromRoutes';
+import {ReduxTheme} from 'redux-theme';
+import styles from './helpers/stylesProvider';
+import themes from './helpers/themesProvider';
 
 const pretty = new PrettyError();
 const app = new Express();
@@ -92,9 +95,16 @@ app.use((req, res) => {
 
       store.getState().router.then(() => {
         const component = (
-          <Provider store={store} key="provider">
-            <ReduxRouter/>
-          </Provider>
+          <div>
+            <ReduxTheme
+              store={store}
+              styles={styles}
+              themes={themes}
+              defaultTheme={'default'} />
+            <Provider store={store} key="provider">
+              <ReduxRouter/>
+            </Provider>
+          </div>
         );
 
         const status = getStatusFromRoutes(routerState.routes);

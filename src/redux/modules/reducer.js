@@ -5,6 +5,7 @@ import { routerStateReducer } from 'redux-router';
 import auth from './auth';
 import counter from './counter';
 import {reducer as form} from 'redux-form';
+import {themeReducer} from 'redux-theme';
 import info from './info';
 import widgets from './widgets';
 
@@ -18,5 +19,6 @@ export default combineReducers({
     counter3: counter
   }),
   info,
+  theme: themeReducer,
   widgets
 });
