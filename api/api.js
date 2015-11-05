@@ -61,7 +61,7 @@ if (config.apiPort) {
       console.error(err);
     }
     console.info('----\n==> 🌎  API is running on port %s', config.apiPort);
-    console.info('==> 💻  Send requests to http://localhost:%s', config.apiPort);
+    console.info('==> 💻  Send requests to http://%s:%s', (process.env.HOST || 'localhost'), config.apiPort);
   });
 
   io.on('connection', (socket) => {
