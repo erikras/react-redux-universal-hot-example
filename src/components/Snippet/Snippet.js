@@ -7,8 +7,6 @@ import { snippetIsLoaded, loadSnippet } from 'redux/modules/snippet';
 @connect(
   state => ({
     snippet: state.snippet.data,
-    error: state.snippet.error,
-    loading: state.snippet.loading
   }),
   {...snippetActions})
 
@@ -16,7 +14,6 @@ export default
 class Snippet extends Component {
 
   static propTypes = {
-    loading: PropTypes.bool,
     location: PropTypes.object,
     params: PropTypes.object,
     snippet: PropTypes.object,
@@ -24,8 +21,9 @@ class Snippet extends Component {
 
   static fetchDataDeferred(getState, dispatch) {
     const state = getState();
-    if (!snippetIsLoaded(state)) {
-      return dispatch(loadSnippet(state.router.params.slug));
+    const snippetId = state.router.params.slug;
+    if (!snippetIsLoaded(state, snippetId)) {
+      return dispatch(loadSnippet(snippetId));
     }
   }
 
@@ -45,14 +43,15 @@ class Snippet extends Component {
     // if (!(this.state && this.state.snippet)) return (<h2>Cannot render snippet</h2>);
     // const { description, image, title } = this.state.snippet;
 
-    const { location, loading, snippet } = this.props;
-
+    const { params, snippet } = this.props;
+    const snippetId = params.slug;
+    const loading = snippet[snippetId].loading;
+    const error = snippet[snippetId].error;
+    console.log(error);
     if (loading) return (<h2>Loading snippet...</h2>);
-    if (!snippet) return (<h2>Unable to load snippet</h2>);
+    if (error) return (<h2>Unable to load snippet</h2>);
 
-    const { description, image, title } = this.props.snippet;
-    console.log('rendering snippet...', location);
-
+    const { description, image, title } = snippet[snippetId];
     return (
       <div className={styles.snippet}>
         { image && <Image image={image} size="small" /> }
