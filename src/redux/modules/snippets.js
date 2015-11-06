@@ -1,11 +1,10 @@
 import urlHelper from 'helpers/urlHelper';
 
-const LOAD = 'explore-msd/snippet/LOAD';
-const LOAD_SUCCESS = 'explore-msd/snippet/LOAD_SUCCESS';
-const LOAD_FAIL = 'explore-msd/snippet/LOAD_FAIL';
+const LOAD = 'explore-msd/snippets/LOAD';
+const LOAD_SUCCESS = 'explore-msd/snippets/LOAD_SUCCESS';
+const LOAD_FAIL = 'explore-msd/snippets/LOAD_FAIL';
 
 const initialState = {
-  data: {}
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -13,37 +12,29 @@ export default function reducer(state = initialState, action = {}) {
     case LOAD:
       return {
         ...state,
-        data: {
-          ...state.data,
-          [action.id]: {
-            loading: true,
-            loaded: false
-          }
+        [action.id]: {
+          loading: true,
+          loaded: false
         }
       };
     case LOAD_SUCCESS:
       return {
         ...state,
-        data: {
-          ...state.data,
-          [action.id]: {
-            error: null,
-            loading: false,
-            loaded: true,
-            ...action.result
-          }
+        [action.id]: {
+          error: null,
+          loading: false,
+          loaded: true,
+          payload: action.result
         }
       };
     case LOAD_FAIL:
       return {
         ...state,
-        data: {
-          ...state.data,
-          [action.id]: {
-            loading: false,
-            loaded: false,
-            error: action.error
-          }
+        [action.id]: {
+          loading: false,
+          loaded: false,
+          error: action.error,
+          payload: null
         }
       };
     default:
@@ -52,7 +43,7 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 export function snippetIsLoaded(globalState, snippetId) {
-  return snippetId in globalState.snippet.data;
+  return globalState.snippets.hasOwnProperty(snippetId) && globalState.snippets[snippetId].loaded;
 }
 
 export function loadSnippet(id) {

@@ -3,10 +3,10 @@ import { routerStateReducer } from 'redux-router';
 
 import landmark from './landmark';
 // import landmarks from './landmarks';
-import snippet from './snippet';
+import snippets from './snippets';
 
 export default combineReducers({
   router: routerStateReducer,
   landmark,
-  snippet
+  snippets
 });

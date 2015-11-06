@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import {connect} from 'react-redux';
 import { Image } from 'components';
-import * as snippetActions from 'redux/modules/snippet';
-import { snippetIsLoaded, loadSnippet } from 'redux/modules/snippet';
+import * as snippetActions from 'redux/modules/snippets';
+import { snippetIsLoaded, loadSnippet } from 'redux/modules/snippets';
 
 @connect(
   state => ({
-    snippet: state.snippet.data,
+    snippets: state.snippets,
   }),
   {...snippetActions})
 
@@ -16,7 +16,7 @@ class Snippet extends Component {
   static propTypes = {
     location: PropTypes.object,
     params: PropTypes.object,
-    snippet: PropTypes.object,
+    snippets: PropTypes.object,
   }
 
   static fetchDataDeferred(getState, dispatch) {
@@ -27,31 +27,17 @@ class Snippet extends Component {
     }
   }
 
-  // componentWillMount() {
-  //   if (this.props.location.state && this.props.location.state.snippet) {
-  //     // Bypass AJAX call if already have data
-  //     const snippetFromState = this.props.location.state.snippet;
-  //     this.setState({snippet: snippetFromState});
-  //   } else {
-  //     // do ajax call
-  //     // const slug = this.props.params.slug;
-  //   }
-  // }
-
   render() {
     const styles = require('./Snippet.scss');
-    // if (!(this.state && this.state.snippet)) return (<h2>Cannot render snippet</h2>);
-    // const { description, image, title } = this.state.snippet;
+    const snippetId = this.props.params.slug;
+    const snippet = this.props.snippets[snippetId];
+    const loading = !snippet || snippet.loading;
+    const error = !snippet || snippet.error;
 
-    const { params, snippet } = this.props;
-    const snippetId = params.slug;
-    const loading = snippet[snippetId].loading;
-    const error = snippet[snippetId].error;
-    console.log(error);
     if (loading) return (<h2>Loading snippet...</h2>);
     if (error) return (<h2>Unable to load snippet</h2>);
 
-    const { description, image, title } = snippet[snippetId];
+    const { description, image, title } = snippet.payload;
     return (
       <div className={styles.snippet}>
         { image && <Image image={image} size="small" /> }
