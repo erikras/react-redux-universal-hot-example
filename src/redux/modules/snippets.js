@@ -47,7 +47,6 @@ export function snippetIsLoaded(globalState, snippetId) {
 }
 
 export function loadSnippet(id) {
-  console.log('let\'s load snippet ', id);
   const url = urlHelper.snippetEndpoint(id);
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],

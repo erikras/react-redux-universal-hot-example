@@ -5,6 +5,7 @@ import {
     Home,
     Explore,
     Landmark,
+    Landmarks,
     NotFound
   } from 'containers';
 import { Snippet } from 'components';
@@ -18,7 +19,8 @@ export default () => {
     <Route path="/" component={App}>
       <IndexRoute component={Home} />
       <Route path="/explore" component={Explore} />
-      <Route path="/landmark" component={Landmark} />
+      <Route path="/landmark" component={Landmarks} />
+      <Route path="/landmark/:slug" component={Landmark} />
       <Route path="/snippet/:slug" component={Snippet} />
       <Route path="*" component={NotFound} status={404} />
     </Route>

@@ -7,7 +7,6 @@ export default class Error extends Component {
 
   render() {
     const { error } = this.props;
-    console.log(error);
     let description = 'An unknown error has occurred';
     if (typeof error === 'string') {
       description = error;

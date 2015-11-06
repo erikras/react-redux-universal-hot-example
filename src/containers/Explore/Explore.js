@@ -8,7 +8,7 @@ export default class Explore extends Component {
   }
 
   componentDidMount() {
-    const headerTitle = 'The Bold Explorer';
+    const headerTitle = 'Explore the MSD';
     this.props.changeHeader(headerTitle);
   }
 

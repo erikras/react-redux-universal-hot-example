@@ -4,7 +4,6 @@ import { Link } from 'react-router';
 export default class Modal extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
-    history: PropTypes.object,
     returnTo: PropTypes.string
   }
 
