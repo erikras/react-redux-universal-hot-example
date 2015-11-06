@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import {connect} from 'react-redux';
-import { Image } from 'components';
+import { Error, Image, Loader } from 'components';
 import * as snippetActions from 'redux/modules/snippets';
 import { snippetIsLoaded, loadSnippet } from 'redux/modules/snippets';
 
@@ -34,8 +34,8 @@ class Snippet extends Component {
     const loading = !snippet || snippet.loading;
     const error = !snippet || snippet.error;
 
-    if (loading) return (<h2>Loading snippet...</h2>);
-    if (error) return (<h2>Unable to load snippet</h2>);
+    if (loading) return (<Loader />);
+    if (error) return (<Error error={error} />);
 
     const { description, image, title } = snippet.payload;
     return (
