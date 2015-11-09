@@ -103,7 +103,6 @@ export function loadLandmark(id) {
 }
 
 export function loadLandmarks() {
-  console.log('let\'s load ALL THE LANDMARKS!');
   const url = urlHelper.landmarksEndpoint();
   return {
     types: [LOAD_ALL, LOAD_ALL_SUCCESS, LOAD_ALL_FAIL],

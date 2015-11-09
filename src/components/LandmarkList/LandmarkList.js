@@ -3,7 +3,7 @@ import {Loader, LandmarkListItem} from 'components';
 
 export default class LandmarkList extends Component {
   static propTypes = {
-    items: PropTypes.array,
+    items: PropTypes.array.isRequired,
   }
 
   render() {

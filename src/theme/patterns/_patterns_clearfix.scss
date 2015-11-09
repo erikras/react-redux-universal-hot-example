@@ -1,0 +1,26 @@
+// Micro clearfix
+// http://nicolasgallagher.com/micro-clearfix-hack/
+
+%clearfix {
+  zoom: 1;
+
+  &:before,
+  &:after {
+    content: '';
+    display: table;
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+
+  &::after {
+    clear: both;
+  }
+}

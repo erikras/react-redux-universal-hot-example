@@ -12,9 +12,11 @@ export default class LandmarkListItem extends Component {
     const styles = require('./LandmarkListItem.scss');
     return (
       <li className={styles.landmarkListItem}>
-        <div className={styles.thumb}>
-          { <Image image={image} size="thumb" /> }
-        </div>
+        { image &&
+          <div className={styles.thumb}>
+            { <Image image={image} size="thumb" /> }
+          </div>
+        }
         <div>
           <h2>
             <Link key={id} to={`/landmark/${slug}`}>

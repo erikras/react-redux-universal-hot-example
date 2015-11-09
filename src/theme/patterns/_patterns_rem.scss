@@ -1,0 +1,40 @@
+// REM mixin
+$baseline-px: 16px;
+
+@function strip-units($number) {
+  @return $number / ($number * 0 + 1);
+}
+
+@mixin rem($property, $px-values) {
+  $baseline-rem: $baseline-px / 1rem;
+
+  // Single value, provide px fallback on vertical rhythm mixins
+  @if type-of($px-values) == 'number' {
+    @if unit($px-values) != 'rem' {
+      #{$property}: $px-values;
+      #{$property}: #{strip-units($px-values) / strip-units($baseline-rem)}rem;
+
+    } @else {
+      #{$property}: #{strip-units($px-values) * strip-units($baseline-rem)}px;
+      #{$property}: $px-values;
+    }
+
+  // Multiple unit, calculate rem with px passthrough
+  } @else {
+
+    $rem-values: unquote('');
+    $non-rem: false;
+
+    @each $value in $px-values {
+      @if $value == 0px or $value == 0 or type-of($value) == 'string' or type-of($value) == 'color' {
+        $rem-values: append($rem-values, $value);
+
+      } @else {
+        $rem-values: #{append($rem-values, strip-units($value) / strip-units($baseline-rem))}rem;
+      }
+    }
+
+    #{$property}: $px-values;
+    #{$property}: $rem-values;
+  }
+}

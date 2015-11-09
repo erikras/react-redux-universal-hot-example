@@ -38,10 +38,6 @@ class Landmarks extends Component {
     const error = !landmarks || landmarks.error;
     if (loading) return (<Loader />);
     if (error) return (<Error error={error} />);
-    // const { location } = this.props;
-    // const { title, description, snippets } = landmark.payload;
-    console.log('here are the landmarks I been fed!!!');
-    console.log(landmarks);
     const landmarkItems = landmarks.payload;
     return (
       <div>

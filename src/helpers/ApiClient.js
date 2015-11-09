@@ -5,7 +5,6 @@ const methods = ['get', 'post', 'put', 'patch', 'del'];
 
 function formatUrl(path) {
   const adjustedPath = path[0] !== '/' ? '/' + path : path;
-  console.log('doing an api thing ', config.apiServer + config.apiPath + adjustedPath);
   return config.apiServer + config.apiPath + adjustedPath;
 }
 

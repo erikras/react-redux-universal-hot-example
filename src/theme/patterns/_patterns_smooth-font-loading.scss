@@ -1,0 +1,10 @@
+// Smoother font loading
+h1, h2, h3, h4, h5, h6, ol, p, ul, a, dl {
+  opacity: auto;
+  transition: 100ms linear opacity;
+
+  .js.wf-loading & {
+    opacity: 0;
+    // *visibility: hidden !important;
+  }
+}

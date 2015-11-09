@@ -1,15 +1,4 @@
-body {
-  font-family: "Helvetica Neue", Helvetica, sans-serif;
-}
-
-.app {
-  // reset
-}
-
-:global(.navbar-brand) {
-  position:relative;
-  padding-left: 50px;
-}
+@import 'src/theme/main.scss';
 
 .modalBlanket {
   background: rgba(0,0,0,.6);
