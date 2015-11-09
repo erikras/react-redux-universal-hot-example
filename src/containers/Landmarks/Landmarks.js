@@ -3,11 +3,11 @@ import DocumentMeta from 'react-document-meta';
 import {connect} from 'react-redux';
 import * as landmarkActions from 'redux/modules/landmarks';
 import { landmarksAreLoaded, loadLandmarks } from 'redux/modules/landmarks';
-import { Error, Loader } from 'components';
+import { Error, Loader, LandmarkList } from 'components';
 
 @connect(
   state => ({
-    landmarks: state.landmarks,
+    landmarks: state.landmarks.ALL,
   }),
   {...landmarkActions})
 
@@ -40,11 +40,14 @@ class Landmarks extends Component {
     if (error) return (<Error error={error} />);
     // const { location } = this.props;
     // const { title, description, snippets } = landmark.payload;
+    console.log('here are the landmarks I been fed!!!');
+    console.log(landmarks);
+    const landmarkItems = landmarks.payload;
     return (
       <div>
         <DocumentMeta title="Landmark"/>
         <h1>All landmarks</h1>
-        <p>list of all landmarks.......</p>
+        <LandmarkList items={landmarkItems} />
       </div>
     );
   }

@@ -1,0 +1,9 @@
+.landmarkList {
+  background-color: rgba(234, 234, 234, 0.8);
+
+  &> ul {
+    margin: 0 auto;
+    padding: 0;
+    text-align: left;
+  }
+}

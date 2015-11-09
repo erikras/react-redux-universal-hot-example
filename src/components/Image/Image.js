@@ -8,6 +8,14 @@ export default class Image extends Component {
 
   render() {
     const { image, size } = this.props;
+    if (!image) {
+      const missing = require('./missing.svg');
+      return (
+        <svg style={{ backgroundColor: '#000', width: '100%' }}>
+          <image width="100%" height="100%" xlinkHref={missing} alt="" />
+        </svg>
+      );
+    }
     return (
       <img src={image[size].src}
            width={image[size].width}

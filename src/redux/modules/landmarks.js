@@ -8,7 +8,9 @@ const LOAD_ALL_SUCCESS = 'explore-msd/landmarks/LOAD_ALL_SUCCESS';
 const LOAD_ALL_FAIL = 'explore-msd/landmarks/LOAD_ALL_FAIL';
 
 const initialState = {
-  loaded: false,
+  ALL: {
+    loaded: false
+  }
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -44,22 +46,39 @@ export default function reducer(state = initialState, action = {}) {
     case LOAD_ALL:
       return {
         ...state,
-        loaded: false,
-        loading: true
+        ALL: {
+          loaded: false,
+          loading: true
+        }
       };
     case LOAD_ALL_SUCCESS:
-      console.log(action.result);
+      const landmarks = {};
+      for (const landmark of action.result) {
+        landmarks[landmark.id] = {
+          error: null,
+          loaded: true,
+          loading: false,
+          payload: landmark
+        };
+      }
       return {
         ...state,
-        loaded: true,
-        loading: false,
+        ALL: {
+          loaded: true,
+          loading: false,
+          payload: action.result
+        },
+        ...landmarks
       };
     case LOAD_ALL_FAIL:
       return {
         ...state,
-        loading: false,
-        loaded: false,
-        error: action.error,
+        ALL: {
+          loading: false,
+          loaded: false,
+          error: action.error,
+          payload: null
+        }
       };
     default:
       return state;
@@ -71,7 +90,7 @@ export function landmarkIsLoaded(globalState, landmarkId) {
 }
 
 export function landmarksAreLoaded(globalState) {
-  return globalState.landmarks && globalState.landmarks.loaded;
+  return globalState.landmarks.ALL && globalState.landmarks.ALL.loaded;
 }
 
 export function loadLandmark(id) {
