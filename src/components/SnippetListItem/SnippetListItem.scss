@@ -2,9 +2,9 @@
 
 .snippetListItem {
   @extend %card; 
-  @include rem(height, 400px);
+  @include rem(height, 300px);
   @include rem(margin, 16px);
-  @include rem(width, 300px);
+  @include rem(width, 270px);
   overflow: hidden;
   padding: 0;
   vertical-align: middle;

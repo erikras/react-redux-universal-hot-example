@@ -2,7 +2,7 @@
 
 .snippetList {
   @include rem(bottom, $navbar-height);
-  @include rem(height, 432px);
+  @include rem(height, 332px);
   background-color: $bgfloating;
   width: 100%;
   overflow-x: scroll;

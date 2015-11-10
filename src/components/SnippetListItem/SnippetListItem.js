@@ -14,19 +14,19 @@ export default class SnippetListItem extends Component {
     const styles = require('./SnippetListItem.scss');
     return (
       <li className={styles.snippetListItem}>
-        <div className={styles.thumb}>
-          <Image image={image} size="thumb" />
-        </div>
-        <div className={styles.cardContent}>
-          <h2 className={styles.cardTitle}>
-            <Link key={id} to={`/snippet/${slug}`} state={{ modal: true, returnTo: location.pathname }}>
-              {title}
-            </Link>
-          </h2>
-          <div className={styles.cardBody}>
-            <p>{teaser}</p>
+        <Link key={id} to={`/snippet/${slug}`} state={{ modal: true, returnTo: location.pathname }}>
+          <div className={styles.thumb}>
+            <Image image={image} size="thumb" />
           </div>
-        </div>
+          <div className={styles.cardContent}>
+            <h2 className={styles.cardTitle}>
+                {title}
+            </h2>
+            <div className={styles.cardBody}>
+              <p>{teaser}</p>
+            </div>
+          </div>
+        </Link>
       </li>
     );
   }

@@ -17,8 +17,9 @@
 }
 
 .MSDContent {
+  @include rem(padding-bottom, $navbar-height);
   @include rem(padding-top, 76px);
-  height: 100vh;
+  min-height: 100vh;
   z-index: 1;
 }
 

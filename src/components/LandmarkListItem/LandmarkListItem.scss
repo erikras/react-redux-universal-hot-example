@@ -4,18 +4,42 @@
   @extend %card;
   @include rem(height, 200px);
   position: relative;
-
-  .thumb {
-    @include rem(height, 200px);
-    @include rem(width, 300px);
-    position: absolute;
-  }
-
-  .thumb + .cardContent {
-    @include rem(padding-left, 320px);
-  }
   
   .cardContent {
     width: 100%;
+  }
+
+  .thumb {
+    @include rem(height, 120px);
+    @include rem(width, 120px);
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+
+  .thumb + .cardContent {
+    @include rem(padding-left, 136px);
+  }
+
+  @include breakpoint(tablet) {
+    .thumb {
+      @include rem(height, 200px);
+      @include rem(width, 250px);
+    }
+
+    .thumb + .cardContent {
+      @include rem(padding-left, 265px);
+    }
+  }
+
+  @include breakpoint(desktop) {
+    .thumb {
+      @include rem(height, 200px);
+      @include rem(width, 300px);
+    }
+
+    .thumb + .cardContent {
+      @include rem(padding-left, 316px);
+    }
   }
 }

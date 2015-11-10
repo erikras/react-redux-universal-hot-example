@@ -6,6 +6,7 @@
   height: 100%;
 
   .coverImage {
+    background-color: $midgray;
     height: 100%;
     position: fixed;
     top: 0;
@@ -20,6 +21,35 @@
       margin: auto; /* this centers image inside */
       width: 100%; /* this is to shrink the images of large width */
       height: auto;
+    }
+  }
+
+  .landmarkDetails {
+    position: relative;
+
+    h1 {
+      text-align: center;
+      padding-top: rhythm(1);
+    }
+
+    .landmarkTitle {
+      @include rem(padding-bottom, 8px);
+      @include rem(padding-top, 12px);
+      @include rem(font-size, 56px);
+      background-color: $black;
+      box-shadow: 16px 0 0 $black, -16px 0 0 $black;
+      color: $white;
+      font-weight: $bold;
+      line-height: 1.2;
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+    }
+
+    .landmarkDescription {
+      @include rem(max-width, 544px);
+      background-color: $bgfloating;
+      margin: auto;
+      padding: rhythm(1) rhythm(1) 0 rhythm(1);
     }
   }
 }

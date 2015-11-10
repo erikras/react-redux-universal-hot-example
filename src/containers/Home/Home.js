@@ -7,7 +7,7 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
-    const headerTitle = 'Homeo';
+    const headerTitle = 'Explore the MSD';
     this.props.changeHeader(headerTitle);
   }
 
@@ -15,9 +15,9 @@ export default class Home extends Component {
     // const styles = require('./Home.scss');
     return (
       <div>
-        <h1>Home</h1>
+        <h1>Welcome.</h1>
         <DocumentMeta title="Home"/>
-        <p>I am exploring</p>
+        <p>awesome videos and a slick little introduction to what the app is.</p>
       </div>
     );
   }

@@ -1,0 +1,10 @@
+@mixin block-width($w) {
+  @include rem(max-width, $w);
+  padding: 0 3%;
+  margin: 0 auto;
+
+  @include breakpoint(desktop) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

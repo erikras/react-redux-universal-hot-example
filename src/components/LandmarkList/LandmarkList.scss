@@ -2,10 +2,11 @@
 
 .landmarkList {
   background-color: $lightgray;
+  padding: rhythm(1) 0;
 
   &> ul {
+    @include block-width($w-sml);
     margin: 0 auto;
-    padding: 0;
     text-align: left;
   }
 }

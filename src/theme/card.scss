@@ -2,7 +2,7 @@
   @include shadow-2dp();
   background-color: $white;
   display: inline-block;
-  margin: rhythm(1) auto;
+  margin: rhythm(0.5) auto;
   padding: 0;
   width: 100%;
 
@@ -10,6 +10,7 @@
     color: $black;
     display: block;
     height: 100%;
+    overflow: hidden;
     text-decoration: none;
     width: 100%;
   }
@@ -20,12 +21,15 @@
 
   .cardTitle {
     @include rem(font-size, 18px);
+    font-family: $ff-sans;
+    font-weight: $bold;
+    letter-spacing: 0;
     padding: rhythm(0.5) 0;
     text-transform: none;
   }
 
   .cardBody {
-
+    overflow: hidden;
   }
 
   .thumb {
@@ -48,8 +52,11 @@
   }
 
   @include breakpoint(desktop) {
+    transition: all 160ms;
+
     &:hover {
-      @include shadow-4dp();
+      @include shadow-6dp();
+      transform: scale(1.04);
     }
   }
 }

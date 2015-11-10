@@ -52,8 +52,16 @@ class Landmark extends Component {
         <div className={styles.coverImage}>
           <Image image={image} size="medium" />
         </div>
-        <h1>{title}</h1>
-        <p>{description}</p>
+        <div className={styles.landmarkDetails}>
+          <h1>
+            <span className={styles.landmarkTitle}>
+              {title}
+            </span>
+          </h1>
+          <div className={styles.landmarkDescription}>
+            <p>{description}</p>
+          </div>
+        </div>
         <SnippetList items={snippets} location={location} />
       </div>
     );
