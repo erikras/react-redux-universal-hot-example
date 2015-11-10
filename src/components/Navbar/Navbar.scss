@@ -1,5 +1,11 @@
+@import 'src/theme/main.scss';
+
 .navbar {
-  background-color: #000;
+  background-color: $black;
+  bottom: 0;
+  height: $navbar-height;
+  position: fixed;
+  width: 100%;
 
   ul {
     padding: 1em;

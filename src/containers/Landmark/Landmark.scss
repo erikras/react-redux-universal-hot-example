@@ -1,0 +1,26 @@
+@import 'src/theme/main';
+
+.landmark {
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+
+  .coverImage {
+    height: 100%;
+    position: fixed;
+    top: 0;
+    width: 100%;
+
+    img {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto; /* this centers image inside */
+      width: 100%; /* this is to shrink the images of large width */
+      height: auto;
+    }
+  }
+}
+

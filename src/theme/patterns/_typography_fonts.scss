@@ -1,8 +1,10 @@
-$ff-sans: Roboto, Helvetica, Arial, sans-serif;
+$ff-headings: 'ff-din-web', Helvetica, Arial, sans-serif; 
+$ff-sans: -apple-system-body, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $ff-fixed: 'Courier New', Courier, fixed;
 $ff-serif: Georgia, 'Times New Roman', Times, serif;
 
-$thin: 100;
-$light: 300;
-$regular: 400;
+// $thin: 100;
+$light: 200;
+$regular: 400; 
+$semibold: 600; // for headings
 $bold: 700;

@@ -1,5 +1,27 @@
 @import 'src/theme/main.scss';
 
+.app {
+  position: relative;
+  background-color: $white;
+}
+
+.MSDHeader {
+  @include rem(height, 60px);
+  @include shadow-2dp();
+  left: 0;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.MSDContent {
+  @include rem(padding-top, 76px);
+  height: 100vh;
+  z-index: 1;
+}
+
 .modalBlanket {
   background: rgba(0,0,0,.6);
   height: 100%;

@@ -1,3 +1,7 @@
+body {
+  font-family: $ff-sans;
+}
+
 h1,
 h2,
 h3,
@@ -16,7 +20,8 @@ table {
 h1 {
   @include adjust-font-size-to(26px);
   @include padding-trailer(1);
-  font-weight: $light;
+  font-family: $ff-headings;
+  font-weight: $semibold;
 
   @include breakpoint(desktop) {
     @include adjust-font-size-to(33px);
@@ -29,18 +34,25 @@ h2 {
   @include padding-leader(1);
   @include padding-trailer(1);
   clear: left;
-  font-weight: $bold;
+  font-family: $ff-headings;
+  font-weight: $semibold;
   text-transform: uppercase;
 }
 
 h3 {
   @include adjust-font-size-to(16px);
-  font-weight: $bold;
+  font-family: $ff-headings;
+  font-weight: $semibold;
 
   &.subtitle {
     text-decoration: underline;
     text-transform: none;
   }
+}
+
+h4, h5, h6 {
+  font-family: $ff-headings;
+  font-weight: $semibold;
 }
 
 p,

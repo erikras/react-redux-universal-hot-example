@@ -1,0 +1,55 @@
+%card {
+  @include shadow-2dp();
+  background-color: $white;
+  display: inline-block;
+  margin: rhythm(1) auto;
+  padding: 0;
+  width: 100%;
+
+  a {
+    color: $black;
+    display: block;
+    height: 100%;
+    text-decoration: none;
+    width: 100%;
+  }
+
+  .cardContent {
+    padding: rhythm(0.5);
+  }
+
+  .cardTitle {
+    @include rem(font-size, 18px);
+    padding: rhythm(0.5) 0;
+    text-transform: none;
+  }
+
+  .cardBody {
+
+  }
+
+  .thumb {
+    overflow: hidden;
+    width: 100%;
+    height: 150px;
+    padding: 0;
+    position: relative;
+
+    img {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  @include breakpoint(desktop) {
+    &:hover {
+      @include shadow-4dp();
+    }
+  }
+}

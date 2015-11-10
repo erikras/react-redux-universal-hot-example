@@ -52,10 +52,11 @@ export default class App extends Component {
     return (
       <div className={styles.app}>
         <DocumentMeta {...config.app}/>
-        <div className="pageHeader">
+        <div className={styles.MSDHeaderUnderlay} />
+        <div className={styles.MSDHeader}>
           <Header title={ headerTitle ? headerTitle : null } />
         </div>
-        <div className={styles.appContent}>
+        <div className={styles.MSDContent}>
 
           {isModal ?
             this.previousChildren :

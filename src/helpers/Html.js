@@ -41,6 +41,9 @@ export default class Html extends Component {
           <div id="content" dangerouslySetInnerHTML={{__html: content}}/>
           <script dangerouslySetInnerHTML={{__html: `window.__data=${serialize(store.getState())};`}} charSet="UTF-8"/>
           <script src={assets.javascript.main} charSet="UTF-8"/>
+          {/* webfonts */}
+          <script src="https://use.typekit.net/fpp4zlv.js"></script>
+          <script dangerouslySetInnerHTML={{__html: "try{Typekit.load({ async: true });}catch(e){}"}} />
         </body>
       </html>
     );

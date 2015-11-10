@@ -3,7 +3,7 @@ import DocumentMeta from 'react-document-meta';
 import {connect} from 'react-redux';
 import * as landmarkActions from 'redux/modules/landmarks';
 import { landmarkIsLoaded, loadLandmark } from 'redux/modules/landmarks';
-import { Error, Loader, SnippetList } from 'components';
+import { Error, Image, Loader, SnippetList } from 'components';
 
 @connect(
   state => ({
@@ -23,6 +23,9 @@ class Landmark extends Component {
   componentDidMount() {
     const headerTitle = 'Landmark';
     this.props.changeHeader(headerTitle);
+    //
+    // TODO: store the snippets in the state
+    //
   }
 
   static fetchDataDeferred(getState, dispatch) {
@@ -34,7 +37,7 @@ class Landmark extends Component {
   }
 
   render() {
-    // const styles = require('./Landmark.scss');
+    const styles = require('./Landmark.scss');
     const landmarkId = this.props.params.slug;
     const landmark = this.props.landmarks[landmarkId];
     const loading = !landmark || landmark.loading;
@@ -42,10 +45,13 @@ class Landmark extends Component {
     if (loading) return (<Loader />);
     if (error) return (<Error error={error} />);
     const { location } = this.props;
-    const { title, description, snippets } = landmark.payload;
+    const { title, description, image, snippets } = landmark.payload;
     return (
-      <div>
+      <div className={styles.landmark}>
         <DocumentMeta title="Landmark"/>
+        <div className={styles.coverImage}>
+          <Image image={image} size="medium" />
+        </div>
         <h1>{title}</h1>
         <p>{description}</p>
         <SnippetList items={snippets} location={location} />

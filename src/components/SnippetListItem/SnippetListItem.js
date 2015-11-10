@@ -17,13 +17,15 @@ export default class SnippetListItem extends Component {
         <div className={styles.thumb}>
           <Image image={image} size="thumb" />
         </div>
-        <div>
-          <h2>
+        <div className={styles.cardContent}>
+          <h2 className={styles.cardTitle}>
             <Link key={id} to={`/snippet/${slug}`} state={{ modal: true, returnTo: location.pathname }}>
               {title}
             </Link>
           </h2>
-          <p>{teaser}</p>
+          <div className={styles.cardBody}>
+            <p>{teaser}</p>
+          </div>
         </div>
       </li>
     );

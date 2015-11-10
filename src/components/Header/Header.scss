@@ -1,8 +1,11 @@
+@import 'src/theme/main';
+
 .pageHeader {
-  background-color: rgba(0,0,0,0.05);
+  background-color: $bgfloating;
 
   div {
     display: inline-block;
-    margin: 0.5em;
+    margin: 0 0.5em;
+    padding: 0.5em;
   }
 }

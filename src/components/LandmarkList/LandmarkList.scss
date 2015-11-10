@@ -1,5 +1,7 @@
+@import 'src/theme/main';
+
 .landmarkList {
-  background-color: rgba(234, 234, 234, 0.8);
+  background-color: $lightgray;
 
   &> ul {
     margin: 0 auto;

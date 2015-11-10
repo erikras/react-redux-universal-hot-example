@@ -1,9 +1,24 @@
+@import 'src/theme/main';
+
 .snippetList {
-  background-color: rgba(234, 234, 234, 0.8);
+  @include rem(bottom, $navbar-height);
+  @include rem(height, 432px);
+  background-color: $bgfloating;
+  width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  position: absolute;
 
   &> ul {
     margin: 0 auto;
     padding: 0;
+    max-width: 100%;
     text-align: left;
+    width: auto;
+    white-space: nowrap;
+
+    * {
+      white-space: normal;
+    }
   }
 }

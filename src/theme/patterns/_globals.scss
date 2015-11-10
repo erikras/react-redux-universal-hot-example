@@ -12,41 +12,21 @@
 
 $black:         #000 !default;
 $darkgray:      #333;
-$midgray:       #666;
-$gray:          #adb8c1;
 $lightgray:     #f6f6f6;
-$lightergray:   #e0e0e0;
 $white:         #fff !default;
 
-$navy:          #0c304a;
-$blue:          #304e64;
-$menu:          #036;
-$darkblue:      #004576;
-$borderblue:    #7399b7;
-$midblue:       #366996;
-$lightblue:     #82a1bd;
-$lighterblue:   #0076de;
-$paleblue:      #f2f5f8;
-$lightestblue:  #e1eaf5;
+$midblue:       #3DAAC3;
 
-$paleyellow:    #fffbcc;
-$palegreen:     #d2f1cf;
-$salmon:        #ea4f62;
-$bronze:        #e5e1dc;
-
-//$cyan:          #0084ee;
-$cyan:          $lighterblue;
-//$green:         #3fc76e;
+$cyan:          #0076de;
 $green:         #008a00;
 $cherry:        #df0620;
 
+$bgfloating:    rgba(234, 234, 234, 0.8);
+
 // Vars
 $warning:       $cherry;
-$cta:           $green;
-$highlight:     $lighterblue;
-$brand:         $darkblue;
-$base:          $darkgray;
-$soft:          $lightergray;
+$cta:           $midblue;
+$success:       $green;
 
 // Layout widths
 $w-sml:         700px;
@@ -58,6 +38,9 @@ $base-font-size: 16px;
 $base-line-height: 24px;
 $rhythm-unit: 'rem';
 $round-to-nearest-half-line: true;
+
+// App units
+$navbar-height: 60px;
 
 %wrapper {
   margin: 0 auto;

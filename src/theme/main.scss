@@ -15,6 +15,7 @@ body {
 @import 'patterns/patterns_accessibility';
 @import 'patterns/patterns_clearfix';
 @import 'patterns/patterns_rem';
+@import 'patterns/patterns_shadows';
 @import 'patterns/patterns_media-queries';
 @import 'patterns/globals';
 @import 'patterns/typography_fonts';
@@ -26,4 +27,5 @@ body {
 
 /************************/
 
+@import 'card';
 @import 'typography';
