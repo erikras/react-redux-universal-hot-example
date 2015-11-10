@@ -8,8 +8,21 @@ import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
 import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
 import { InfoBar } from 'components';
 import { pushState } from 'redux-router';
+import connectData from 'helpers/connectData';
 import config from '../../config';
 
+function fetchData(getState, dispatch) {
+  const promises = [];
+  if (!isInfoLoaded(getState())) {
+    promises.push(dispatch(loadInfo()));
+  }
+  if (!isAuthLoaded(getState())) {
+    promises.push(dispatch(loadAuth()));
+  }
+  return Promise.all(promises);
+}
+
+@connectData(fetchData)
 @connect(
   state => ({user: state.auth.user}),
   {logout, pushState})
@@ -33,17 +46,6 @@ export default class App extends Component {
       // logout
       this.props.pushState(null, '/');
     }
-  }
-
-  static fetchData(getState, dispatch) {
-    const promises = [];
-    if (!isInfoLoaded(getState())) {
-      promises.push(dispatch(loadInfo()));
-    }
-    if (!isAuthLoaded(getState())) {
-      promises.push(dispatch(loadAuth()));
-    }
-    return Promise.all(promises);
   }
 
   handleLogout(event) {
