@@ -48,17 +48,6 @@ export default class App extends Component {
     }
   }
 
-  static fetchData(getState, dispatch) {
-    const promises = [];
-    if (!isInfoLoaded(getState())) {
-      promises.push(dispatch(loadInfo()));
-    }
-    if (!isAuthLoaded(getState())) {
-      promises.push(dispatch(loadAuth()));
-    }
-    return Promise.all(promises);
-  }
-
   handleLogout(event) {
     event.preventDefault();
     this.props.logout();
