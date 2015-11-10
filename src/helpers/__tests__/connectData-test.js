@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import React, { Component } from 'react';
+import React from 'react';
 import { div } from 'react-dom';
 import connectData from '../connectData';
 
@@ -16,7 +16,7 @@ describe('connectData', () => {
     WrappedComponent = () =>
       <div />;
 
-    DataComponent = connectData(fetchData, fetchDataDeferred)(WrappedComponent)
+    DataComponent = connectData(fetchData, fetchDataDeferred)(WrappedComponent);
   });
 
   it('should set fetchData as a static property of the final component', () => {
