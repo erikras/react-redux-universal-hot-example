@@ -6,7 +6,6 @@
 }
 
 .MSDHeader {
-  @include rem(height, 60px);
   @include shadow-2dp();
   left: 0;
   overflow: hidden;
@@ -18,9 +17,17 @@
 
 .MSDContent {
   @include rem(padding-bottom, $navbar-height);
-  @include rem(padding-top, 76px);
+  @include rem(padding-top, $header-height-small);
   min-height: 100vh;
   z-index: 1;
+
+  @include breakpoint(height-small) {
+    @include rem(padding-top, $header-height-medium);
+  }
+
+  @include breakpoint(height-small) {
+    @include rem(padding-top, $header-height-large);
+  }
 }
 
 .modalBlanket {

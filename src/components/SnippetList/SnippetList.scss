@@ -2,7 +2,7 @@
 
 .snippetList {
   @include rem(bottom, $navbar-height);
-  @include rem(height, 332px);
+  @include rem(height, $snippet-height-small);
   background-color: $bgfloating;
   width: 100%;
   overflow-x: scroll;
@@ -10,8 +10,11 @@
   position: absolute;
 
   &> ul {
+    @include rem(padding-left, $snippet-margin / 2);
+    @include rem(padding-right, $snippet-margin / 2);
     margin: 0 auto;
-    padding: 0;
+    padding-bottom: 0;
+    padding-top: 0;
     max-width: 100%;
     text-align: left;
     width: auto;
@@ -20,5 +23,13 @@
     * {
       white-space: normal;
     }
+  }
+
+  @include breakpoint(height-small) {
+    @include rem(height, $snippet-height-medium);
+  }
+
+    @include breakpoint(height-medium) {
+    @include rem(height, $snippet-height-large);
   }
 }

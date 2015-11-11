@@ -1,8 +1,7 @@
 @import 'src/theme/main';
+$busy-space-small: $header-height-small + $navbar-height + $snippet-height-small;
 
 .landmark {
-  overflow: hidden;
-  position: relative;
   height: 100%;
 
   .coverImage {
@@ -13,29 +12,40 @@
     width: 100%;
 
     img {
-      position: absolute;
-      top: 0;
-      right: 0;
       bottom: 0;
-      left: 0;
-      margin: auto; /* this centers image inside */
-      width: 100%; /* this is to shrink the images of large width */
       height: auto;
+      left: 0;
+      object-fit: cover;
+      margin: auto; /* this centers image inside */
+      min-height: 100%;
+      min-width: 100%;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 100%; /* this is to shrink the images of large width */
     }
   }
 
   .landmarkDetails {
+    @include padding-leader(1);
+    @include padding-trailer(1);
+    overflow-y: auto;
+    max-height: 480px - $busy-space-small;
+    max-height: calc(100vh - #{$busy-space-small});
     position: relative;
 
     h1 {
       text-align: center;
-      padding-top: rhythm(1);
+
+      @include breakpoint(height-smallest) {
+        padding-top: rhythm(1);
+      }
     }
 
     .landmarkTitle {
       @include rem(padding-bottom, 8px);
       @include rem(padding-top, 12px);
-      @include rem(font-size, 56px);
+      @include rem(font-size, 32px);
       background-color: $black;
       box-shadow: 16px 0 0 $black, -16px 0 0 $black;
       color: $white;
@@ -43,14 +53,37 @@
       line-height: 1.2;
       -webkit-box-decoration-break: clone;
       box-decoration-break: clone;
+
+      @include breakpoint(height-smallest) {
+        @include rem(font-size, 48px);
+      }
+
+      @include breakpoint(height-medium) {
+        @include rem(font-size, 64px);
+      }
     }
 
     .landmarkDescription {
+      @include adjust-font-size-to(14px);
       @include rem(max-width, 544px);
-      background-color: $bgfloating;
+      background-color: rgb(21, 21, 21);
+      background-color: rgba(21, 21, 21, 0.42);
+      color: $white;
       margin: auto;
       padding: rhythm(1) rhythm(1) 0 rhythm(1);
+      text-shadow: 2px 2px rgba(0,0,0,.7);
+
+      @include breakpoint(height-medium) {
+        @include adjust-font-size-to(18px);
+      }
+
+      @include breakpoint(height-big) {
+        @include adjust-font-size-to(21px);
+      }
+
+      @include breakpoint(wide) {
+        @include rem(max-width, 700px);
+      }
     }
   }
 }
-

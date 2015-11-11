@@ -14,7 +14,7 @@ export default class Header extends Component {
       <header className={styles.pageHeader}>
         <div className="page-header-logo">
         </div>
-        <div className="page-header-title">
+        <div className={styles.pageHeaderTitle}>
           <h1>{title}</h1>
         </div>
         <div className="page-header-tools">

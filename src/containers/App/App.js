@@ -39,8 +39,8 @@ export default class App extends Component {
   }
 
   render() {
-    const headerTitle = this.state.headerTitle;
     const styles = require('./App.scss');
+    const headerTitle = this.state.headerTitle;
     const { location } = this.props;
 
     const isModal = (

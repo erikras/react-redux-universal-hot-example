@@ -62,7 +62,7 @@ class Landmark extends Component {
             <p>{description}</p>
           </div>
         </div>
-        <SnippetList items={snippets} location={location} />
+        { snippets.length && <SnippetList items={snippets} location={location} /> }
       </div>
     );
   }

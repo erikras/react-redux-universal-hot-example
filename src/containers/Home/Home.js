@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import DocumentMeta from 'react-document-meta';
+import {Loader} from 'components';
 
 export default class Home extends Component {
   static propTypes = {
@@ -17,6 +18,7 @@ export default class Home extends Component {
       <div>
         <h1>Welcome.</h1>
         <DocumentMeta title="Home"/>
+        <Loader/>
         <p>awesome videos and a slick little introduction to what the app is.</p>
       </div>
     );

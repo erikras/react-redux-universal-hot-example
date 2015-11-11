@@ -1,11 +1,73 @@
 @import 'src/theme/main';
 
 .snippetListItem {
-  @extend %card; 
-  @include rem(height, 300px);
-  @include rem(margin, 16px);
-  @include rem(width, 270px);
+  @extend %card;
+  @include rem(height, $snippet-height-small - (2 * $snippet-margin));
+  @include rem(margin-bottom, $snippet-margin);
+  @include rem(margin-left, $snippet-margin / 2);
+  @include rem(margin-right, $snippet-margin / 2);
+  @include rem(margin-top, $snippet-margin);
+  @include rem(width, 128px);
   overflow: hidden;
   padding: 0;
   vertical-align: middle;
+
+  .thumb {
+    @include rem(height, 66px);
+  }
+
+  .cardContent {
+    .cardTitle {
+      @include rem(font-size, 12px);
+      @include rem(padding-bottom, 4px);
+      line-height: 1;
+      padding-top: 0;
+    }
+
+    .cardBody {
+      @include rem(font-size, 10px);
+    }
+  }
+
+  @include breakpoint(height-small){
+    @include rem(height, $snippet-height-medium - (2 * $snippet-margin));
+    @include rem(width, 208px);
+
+    .thumb {
+      @include rem(height, 96px);
+    }
+
+    .cardContent {
+      .cardTitle {
+        @include rem(font-size, 14px);
+        @include rem(padding-bottom, 8px);
+        @include rem(padding-top, 4px);
+      }
+
+      .cardBody {
+        @include rem(font-size, 12px);
+      }
+    }
+  }
+
+  @include breakpoint(height-medium){
+    @include rem(height, $snippet-height-large - (2 * $snippet-margin));
+    @include rem(width, 256px);
+
+    .thumb {
+      @include rem(height, 144px);
+    }
+
+    .cardContent {
+      .cardTitle {
+        @include rem(font-size, 18px);
+        @include rem(padding-bottom, 8px);
+        @include rem(padding-top, 8px);
+      }
+
+      .cardBody {
+        @include rem(font-size, 16px);
+      }
+    }
+  }
 }

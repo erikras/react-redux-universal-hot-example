@@ -40,14 +40,17 @@
     position: relative;
 
     img {
-      position: absolute;
-      top: 0;
-      right: 0;
       bottom: 0;
-      left: 0;
-      margin: auto;
-      width: 100%;
       height: auto;
+      left: 0;
+      object-fit: cover;
+      margin: auto;
+      min-height: 100%;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 100%;
+
     }
   }
 

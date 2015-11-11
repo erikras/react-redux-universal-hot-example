@@ -2,10 +2,23 @@
 
 .pageHeader {
   background-color: $bgfloating;
+  @include rem(height, $header-height-small);
+
+  @include breakpoint(height-small) {
+    @include rem(height, $header-height-medium);
+  }
+
+  @include breakpoint(height-small) {
+    @include rem(height, $header-height-large);
+  }
 
   div {
     display: inline-block;
     margin: 0 0.5em;
     padding: 0.5em;
+  }
+
+  .pageHeaderTitle {
+    letter-spacing: -1px;
   }
 }

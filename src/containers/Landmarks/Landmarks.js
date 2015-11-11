@@ -32,7 +32,7 @@ class Landmarks extends Component {
   }
 
   render() {
-    // const styles = require('./Landmark.scss');
+    const styles = require('./Landmarks.scss');
     const { landmarks } = this.props;
     const loading = !landmarks || landmarks.loading;
     const error = !landmarks || landmarks.error;
@@ -40,7 +40,7 @@ class Landmarks extends Component {
     if (error) return (<Error error={error} />);
     const landmarkItems = landmarks.payload;
     return (
-      <div>
+      <div className={styles.landmarks}>
         <DocumentMeta title="Landmark"/>
         <h1>All landmarks</h1>
         <LandmarkList items={landmarkItems} />

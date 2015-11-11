@@ -22,7 +22,7 @@ $cyan:          #0076de;
 $green:         #008a00;
 $cherry:        #df0620;
 
-$bgfloating:    rgba(234, 234, 234, 0.8);
+$bgfloating:    rgba(234, 234, 234, 0.88);
 
 // Vars
 $warning:       $cherry;
@@ -42,6 +42,13 @@ $round-to-nearest-half-line: true;
 
 // App units
 $navbar-height: 60px;
+$header-height-small: 60px;
+$header-height-medium: 80px;
+$header-height-large: 100px;
+$snippet-margin: 16px;
+$snippet-height-small: 160px;
+$snippet-height-medium: 240px;
+$snippet-height-large: 320px;
 
 %wrapper {
   margin: 0 auto;
