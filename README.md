@@ -178,7 +178,7 @@ Although this isn't a library, we recently started versioning to make it easier 
 
 I am more than happy to accept external contributions to the project in the form of feedback, bug reports and even better - pull requests :) 
 
-If you would like to submit a pull request, please make an effort to follow the guide in [CONTRIBUTING.md](contributing.md). 
+If you would like to submit a pull request, please make an effort to follow the guide in [CONTRIBUTING.md](CONTRIBUTING.md). 
  
 ---
 Thanks for checking this out.
