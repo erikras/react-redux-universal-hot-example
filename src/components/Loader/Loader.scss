@@ -1,21 +1,26 @@
-@import 'src/theme/main';
-
-@keyframes rotateplane {
-  0% {
-    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
-  }
-  50% {
-    transform: perspective(120px) rotateX(-180deg) rotateY(0deg);
-  }
-  100% {
-    transform: perspective(120px) rotateX(-180deg) rotateY(-180deg);
-  }
-}
-
 .loader {
-  @include padding-leader(3);
-  @include padding-trailer(3);
-  width: 100%;
+  padding: 1em 0;
+
+  .hourglass {
+    animation: spin 3050ms cubic-bezier(.34,-0.27,.14,1) infinite;
+    height: 66px;
+    margin: 0 auto;
+    position: relative;
+    width: 66px;
+
+    svg {
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+
+    svg.full {
+      animation: empty 3050ms linear infinite;
+      fill: #3DAAC3;
+    }
+  }
 
   span {
     display: block;
@@ -24,19 +29,5 @@
   }
 }
 
-.loading-dark {
-  @extend .loading;
-  background-color: $darkgray;
-
-  .cube {
-    background-color: $white;
-  }
-}
-
-.cube {
-  @include animation(rotateplane 1.2s infinite ease-in-out);
-  @include rem(height, 50px);
-  @include rem(width, 50px);
-  background-color: $darkgray;
-  margin: 0 auto;
-}
+@keyframes spin { 100% { transform:rotate(1080deg); } }
+@keyframes empty { 0% { clip: rect(66px, 66px, 66px, 0) } 6% { clip: rect(0, 66px, 66px, 0) } 100% { clip: rect(66px, 66px, 66px, 0) }; }
