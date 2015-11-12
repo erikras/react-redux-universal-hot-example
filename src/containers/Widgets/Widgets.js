@@ -4,16 +4,14 @@ import {connect} from 'react-redux';
 import * as widgetActions from 'redux/modules/widgets';
 import {isLoaded, load as loadWidgets} from 'redux/modules/widgets';
 import {initializeWithKey} from 'redux-form';
-import connectData from 'helpers/connectData';
+import {defer} from 'react-fetcher';
 import { WidgetForm } from 'components';
 
-function fetchDataDeferred(getState, dispatch) {
+@defer(({ getState, dispatch }) => {
   if (!isLoaded(getState())) {
     return dispatch(loadWidgets());
   }
-}
-
-@connectData(null, fetchDataDeferred)
+})
 @connect(
   state => ({
     widgets: state.widgets.data,
@@ -60,8 +58,10 @@ class Widgets extends Component {
         <p>
           If you hit refresh on your browser, the data loading will take place on the server before the page is returned.
           If you navigated here from another page, the data was fetched from the client after the route transition.
-          This uses the static method <code>fetchDataDeferred</code>. To block a route transition until some data is loaded, use <code>fetchData</code>.
-          To always render before loading data, even on the server, use <code>componentDidMount</code>.
+          This uses the <code>@defer</code> decorator
+          from <a href="https://github.com/markdalgleish/react-fetcher" target="_blank">react-fetcher</a>. To block a
+          route transition until some data is loaded, use <code>@prefetch</code>. To always render before loading data,
+          even on the server, use <code>componentDidMount</code>.
         </p>
         <p>
           This widgets are stored in your session, so feel free to edit it and refresh.

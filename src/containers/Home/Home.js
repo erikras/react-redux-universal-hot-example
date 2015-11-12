@@ -79,6 +79,7 @@ export default class Home extends Component {
             <li><a href="https://github.com/rackt/redux-router" target="_blank">Redux Router</a> Keep
               your router state in your Redux store
             </li>
+            <li><a href="https://github.com/markdalgleish/react-fetcher" target="_blank">react-fetcher</a> for route-based universal data fetching</li>
             <li><a href="http://eslint.org" target="_blank">ESLint</a> to maintain a consistent code style</li>
             <li><a href="https://github.com/erikras/redux-form" target="_blank">redux-form</a> to manage form state
               in Redux
@@ -108,9 +109,11 @@ export default class Home extends Component {
             <dt>Server-side data loading</dt>
             <dd>
               The <Link to="/widgets">Widgets page</Link> demonstrates how to fetch data asynchronously from
-              some source that is needed to complete the server-side rendering. <code>Widgets.js</code>'s
-              <code>fetchData()</code> function is called before the widgets page is loaded, on either the server
-              or the client, allowing all the widget data to be loaded and ready for the page to render.
+              some source that is needed to complete the server-side rendering.
+              <code>Widgets.js</code>'s <code>@defer</code> decorator is passed a function that is called
+              by <a href="https://github.com/markdalgleish/react-fetcher" target="_blank">react-fetcher</a>
+              before the widgets page is loaded, on either the server or the client, allowing all the widget
+              data to be loaded and ready for the page to render.
             </dd>
             <dt>Data loading errors</dt>
             <dd>

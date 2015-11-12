@@ -25,6 +25,7 @@ This is a starter boilerplate app I've put together using the following technolo
 * [Redux](https://github.com/rackt/redux)'s futuristic [Flux](https://facebook.github.io/react/blog/2014/05/06/flux.html) implementation
 * [Redux Dev Tools](https://github.com/gaearon/redux-devtools) for next generation DX (developer experience). Watch [Dan Abramov's talk](https://www.youtube.com/watch?v=xsSnOQynTHs).
 * [Redux Router](https://github.com/rackt/redux-router) Keep your router state in your Redux store
+* [react-fetcher](https://github.com/markdalgleish/react-fetcher) for route-based universal data fetching
 * [ESLint](http://eslint.org) to maintain a consistent code style
 * [redux-form](https://github.com/erikras/redux-form) to manage form state in Redux
 * [lru-memoize](https://github.com/erikras/lru-memoize) to speed up form validation
@@ -86,7 +87,7 @@ We also spit out the `redux` state into a global `window.__data` variable in the
 
 #### Server-side Data Fetching
 
-We ask `react-router` for a list of all the routes that match the current request and we check to see if any of the matched routes has a static `fetchData()` function. If it does, we pass the redux dispatcher to it and collect the promises returned. Those promises will be resolved when each matching route has loaded its necessary data from the API server.
+We ask `react-router` for a list of all the routes that match the current request and pass them to `react-fetcher` to check to see if any of the matched routes have a `@prefetch` or `@defer` decorator function. If it does, we pass the redux dispatcher to it and `react-fetcher` collects the promises returned. Those promises will be resolved when each matching route has loaded its necessary data from the API server.
 
 #### Client Side
 
