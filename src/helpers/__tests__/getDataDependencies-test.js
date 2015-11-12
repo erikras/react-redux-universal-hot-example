@@ -11,6 +11,7 @@ describe('getDataDependencies', () => {
   let CompWithFetchData;
   let CompWithNoData;
   let CompWithFetchDataDeferred;
+  const NullComponent = null;
 
   beforeEach(() => {
     getState = 'getState';
@@ -37,6 +38,7 @@ describe('getDataDependencies', () => {
 
   it('should get fetchDatas', () => {
     const deps = getDataDependencies([
+      NullComponent,
       CompWithFetchData,
       CompWithNoData,
       CompWithFetchDataDeferred
@@ -49,6 +51,7 @@ describe('getDataDependencies', () => {
 
   it('should get fetchDataDeferreds', () => {
     const deps = getDataDependencies([
+      NullComponent,
       CompWithFetchData,
       CompWithNoData,
       CompWithFetchDataDeferred
