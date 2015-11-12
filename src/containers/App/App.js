@@ -8,10 +8,10 @@ import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
 import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
 import { InfoBar } from 'components';
 import { pushState } from 'redux-router';
-import connectData from 'helpers/connectData';
+import { prefetch } from 'react-fetcher';
 import config from '../../config';
 
-function fetchData(getState, dispatch) {
+@prefetch(({ getState, dispatch }) => {
   const promises = [];
   if (!isInfoLoaded(getState())) {
     promises.push(dispatch(loadInfo()));
@@ -20,9 +20,7 @@ function fetchData(getState, dispatch) {
     promises.push(dispatch(loadAuth()));
   }
   return Promise.all(promises);
-}
-
-@connectData(fetchData)
+})
 @connect(
   state => ({user: state.auth.user}),
   {logout, pushState})

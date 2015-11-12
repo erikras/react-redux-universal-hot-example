@@ -1,5 +1,5 @@
 import {ROUTER_DID_CHANGE} from 'redux-router/lib/constants';
-import getDataDependencies from '../../helpers/getDataDependencies';
+import {getPrefetchedData, getDeferredData} from 'react-fetcher';
 
 const locationsAreEqual = (locA, locB) => (locA.pathname === locB.pathname) && (locA.search === locB.search);
 
@@ -10,24 +10,25 @@ export default ({getState, dispatch}) => next => action => {
     }
 
     const {components, location, params} = action.payload;
+    const locals = {getState, dispatch, location, params};
     const promise = new Promise((resolve) => {
 
       const doTransition = () => {
         next(action);
-        Promise.all(getDataDependencies(components, getState, dispatch, location, params, true))
+        getDeferredData(components, locals)
           .then(resolve)
           .catch(error => {
-            // TODO: You may want to handle errors for fetchDataDeferred here
-            console.warn('Warning: Error in fetchDataDeferred', error);
+            // TODO: You may want to handle errors for @defer here
+            console.warn('Warning: Error in "defer" decorator function', error);
             return resolve();
           });
       };
 
-      Promise.all(getDataDependencies(components, getState, dispatch, location, params))
+      getPrefetchedData(components, locals)
         .then(doTransition)
         .catch(error => {
-          // TODO: You may want to handle errors for fetchData here
-          console.warn('Warning: Error in fetchData', error);
+          // TODO: You may want to handle errors for @prefetch here
+          console.warn('Warning: Error in "prefetch" decorator function', error);
           return doTransition();
         });
     });
