@@ -58,9 +58,11 @@ class Landmark extends Component {
               {title}
             </span>
           </h1>
-          <div className={styles.landmarkDescription}>
-            <p>{description}</p>
-          </div>
+          { description &&
+            <div className={styles.landmarkDescription}>
+              <p>{description}</p>
+            </div>
+          }
         </div>
         { snippets.length && <SnippetList items={snippets} location={location} /> }
       </div>

@@ -1,6 +1,7 @@
 @import 'src/theme/main';
 
 .pageHeader {
+  background-color: $white;
   background-color: $bgfloating;
   @include rem(height, $header-height-small);
 

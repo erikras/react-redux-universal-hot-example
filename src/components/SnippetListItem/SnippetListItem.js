@@ -23,7 +23,7 @@ export default class SnippetListItem extends Component {
                 {title}
             </h2>
             <div className={styles.cardBody}>
-              <p>{teaser}</p>
+              <span>{teaser}</span>
             </div>
           </div>
         </Link>

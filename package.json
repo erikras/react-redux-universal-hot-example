@@ -30,16 +30,14 @@
       "command": "node ./bin/server.js",
       "env": {
         "NODE_PATH": "./src",
-        "NODE_ENV": "production",
-        "PORT": 80
+        "NODE_ENV": "production"
       }
     },
     "start-dev": {
       "command": "node ./bin/server.js",
       "env": {
         "NODE_PATH": "./src",
-        "NODE_ENV": "development",
-        "PORT": 3000
+        "NODE_ENV": "development"
       }
     },
     "watch-client": {

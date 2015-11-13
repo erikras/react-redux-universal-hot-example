@@ -71,7 +71,7 @@ $busy-space-small: $header-height-small + $navbar-height + $snippet-height-small
       color: $white;
       margin: auto;
       padding: rhythm(1) rhythm(1) 0 rhythm(1);
-      text-shadow: 2px 2px rgba(0,0,0,.7);
+      text-shadow: 1px 1px rgba(0,0,0,0.7);
 
       @include breakpoint(height-medium) {
         @include adjust-font-size-to(18px);
