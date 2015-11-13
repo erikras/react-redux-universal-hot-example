@@ -7,7 +7,7 @@ const environment = {
   },
   production: {
     isProduction: true,
-    apiServer: '//api.explore.msd.unimelb.edu.au'
+    apiServer: '//explore-msd-api-production.elasticbeanstalk.com'
   }
 }[process.env.NODE_ENV || 'development'];
 
