@@ -23,7 +23,7 @@ export default class Html extends Component {
   render() {
     const {assets, component, store} = this.props;
     const content = component ? ReactDOM.renderToString(component) : '';
-
+    const comment = '<!--[if lt IE 9]><script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><![endif]-->';
     return (
       <html lang="en-us">
         <head>
@@ -32,7 +32,7 @@ export default class Html extends Component {
           <meta content="width=device-width, initial-scale=1.0" name="viewport" />
           <meta content="IE=edge" http-equiv="X-UA-Compatible" />
           <link rel="shortcut icon" href="/favicon.ico" />
-
+          <meta name="react-comment-hack" dangerouslySetInnerHTML={{__html: comment}}></meta>
           {/* styles (will be present only in production with webpack extract text plugin) */}
           {Object.keys(assets.styles).map((style, key) =>
             <link href={assets.styles[style]} key={key} media="screen, projection"
