@@ -31,7 +31,7 @@
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "production",
-        "PORT": 8080
+        "PORT": 80
       }
     },
     "start-dev": {
@@ -131,6 +131,6 @@
     "webpack-hot-middleware": "^2.4.1"
   },
   "engines": {
-    "node": "4.1.1"
+    "node": "4.2.1"
   }
 }
