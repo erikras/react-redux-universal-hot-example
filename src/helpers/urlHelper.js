@@ -1,5 +1,13 @@
 const urlHelper = {
 
+  areasEndpoint: () => {
+    return `/areas`;
+  },
+
+  areaEndpoint: (areaId) => {
+    return `/areas/${areaId}`;
+  },
+
   landmarksEndpoint: () => {
     return `/landmarks`;
   },

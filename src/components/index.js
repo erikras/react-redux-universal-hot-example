@@ -5,6 +5,8 @@
  *
  */
 
+export AreaList from './AreaList/AreaList';
+export AreaListItem from './AreaListItem/AreaListItem';
 export Error from './Error/Error';
 export Header from './Header/Header';
 export Image from './Image/Image';

@@ -3,7 +3,7 @@ require('babel-core/polyfill');
 const environment = {
   development: {
     isProduction: false,
-    apiServer: 'http://localhost:3333'
+    apiServer: '//explore-msd-api-production.elasticbeanstalk.com'
   },
   production: {
     isProduction: true,

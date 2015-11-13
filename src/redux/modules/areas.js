@@ -56,7 +56,7 @@ export default function reducer(state = initialState, action = {}) {
       for (const landmark of action.result) {
         landmarks[landmark.id] = {
           error: null,
-          loaded: true,
+          loaded: false,
           loading: false,
           payload: landmark
         };
@@ -85,16 +85,16 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-export function landmarkIsLoaded(globalState, landmarkId) {
-  return globalState.landmarks.hasOwnProperty(landmarkId) && globalState.landmarks[landmarkId].loaded;
+export function areaIsLoaded(globalState, areaId) {
+  return globalState.areas.hasOwnProperty(areaId) && globalState.areas[areaId].loaded;
 }
 
-export function landmarksAreLoaded(globalState) {
-  return globalState.landmarks.ALL && globalState.landmarks.ALL.loaded;
+export function areasAreLoaded(globalState) {
+  return globalState.areas.ALL && globalState.areas.ALL.loaded;
 }
 
-export function loadLandmark(id) {
-  const url = urlHelper.landmarkEndpoint(id);
+export function loadArea(id) {
+  const url = urlHelper.areaEndpoint(id);
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
     id: id,
@@ -102,8 +102,8 @@ export function loadLandmark(id) {
   };
 }
 
-export function loadLandmarks() {
-  const url = urlHelper.landmarksEndpoint();
+export function loadAreas() {
+  const url = urlHelper.areasEndpoint();
   return {
     types: [LOAD_ALL, LOAD_ALL_SUCCESS, LOAD_ALL_FAIL],
     promise: (client) => client.get(url)
