@@ -31,7 +31,7 @@
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "production",
-        "PORT": 8080,
+        "PORT": 8080
       }
     },
     "start-dev": {
@@ -39,7 +39,7 @@
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "development",
-        "PORT": 3000,
+        "PORT": 3000
       }
     },
     "watch-client": {
