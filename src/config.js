@@ -3,11 +3,11 @@ require('babel-core/polyfill');
 const environment = {
   development: {
     isProduction: false,
-    apiServer: '//explore-msd-api-production.elasticbeanstalk.com'
+    apiServer: 'http://explore-msd-api-production.elasticbeanstalk.com'
   },
   production: {
     isProduction: true,
-    apiServer: '//explore-msd-api-production.elasticbeanstalk.com'
+    apiServer: 'http://explore-msd-api-production.elasticbeanstalk.com'
   }
 }[process.env.NODE_ENV || 'development'];
 

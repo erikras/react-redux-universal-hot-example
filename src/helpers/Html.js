@@ -28,9 +28,9 @@ export default class Html extends Component {
       <html lang="en-us">
         <head>
           {DocumentMeta.renderAsReact()}
-          <meta charset="utf-8" />
+          <meta charSet="utf-8" />
           <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-          <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+          <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
           <link rel="shortcut icon" href="/favicon.ico" />
           <meta name="react-comment-hack" dangerouslySetInnerHTML={{__html: comment}}></meta>
           {/* styles (will be present only in production with webpack extract text plugin) */}
