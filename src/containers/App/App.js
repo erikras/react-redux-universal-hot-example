@@ -1,25 +1,28 @@
 import React, { Component, PropTypes } from 'react';
-import { IndexLink, Link } from 'react-router';
 import { connect } from 'react-redux';
+import { IndexLink } from 'react-router';
+import { LinkContainer } from 'react-router-bootstrap';
+import { Navbar, NavBrand, Nav, NavItem, CollapsibleNav } from 'react-bootstrap';
 import DocumentMeta from 'react-document-meta';
 import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
 import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
 import { InfoBar } from 'components';
 import { pushState } from 'redux-router';
+import connectData from 'helpers/connectData';
 import config from '../../config';
 
-const NavbarLink = ({to, className, component, children}) => {
-  const Comp = component || Link;
+function fetchData(getState, dispatch) {
+  const promises = [];
+  if (!isInfoLoaded(getState())) {
+    promises.push(dispatch(loadInfo()));
+  }
+  if (!isAuthLoaded(getState())) {
+    promises.push(dispatch(loadAuth()));
+  }
+  return Promise.all(promises);
+}
 
-  return (
-    <Comp to={to} className={className} activeStyle={{
-      color: '#33e0ff'
-    }}>
-      {children}
-    </Comp>
-  );
-};
-
+@connectData(fetchData)
 @connect(
   state => ({user: state.auth.user}),
   {logout, pushState})
@@ -45,17 +48,6 @@ export default class App extends Component {
     }
   }
 
-  static fetchData(getState, dispatch) {
-    const promises = [];
-    if (!isInfoLoaded(getState())) {
-      promises.push(dispatch(loadInfo()));
-    }
-    if (!isAuthLoaded(getState())) {
-      promises.push(dispatch(loadAuth()));
-    }
-    return Promise.all(promises);
-  }
-
   handleLogout(event) {
     event.preventDefault();
     this.props.logout();
@@ -67,32 +59,51 @@ export default class App extends Component {
     return (
       <div className={styles.app}>
         <DocumentMeta {...config.app}/>
-        <nav className="navbar navbar-default navbar-fixed-top">
-          <div className="container">
-            <NavbarLink to="/" className="navbar-brand" component={IndexLink}>
+        <Navbar fixedTop toggleNavKey={0}>
+          <NavBrand>
+            <IndexLink to="/" activeStyle={{color: '#33e0ff'}}>
               <div className={styles.brand}/>
-              React Redux Example
-            </NavbarLink>
+              <span>React Redux Example</span>
+            </IndexLink>
+          </NavBrand>
 
-            <ul className="nav navbar-nav">
-              {user && <li><NavbarLink to="/chat">Chat</NavbarLink></li>}
+          <CollapsibleNav eventKey={0}>
+            <Nav navbar>
+              {user && <LinkContainer to="/chat">
+                <NavItem eventKey={1}>Chat</NavItem>
+              </LinkContainer>}
 
-              <li><NavbarLink to="/widgets">Widgets</NavbarLink></li>
-              <li><NavbarLink to="/survey">Survey</NavbarLink></li>
-              <li><NavbarLink to="/about">About Us</NavbarLink></li>
-              {!user && <li><NavbarLink to="/login">Login</NavbarLink></li>}
-              {user && <li className="logout-link"><a href="/logout" onClick={::this.handleLogout}>Logout</a></li>}
-            </ul>
+              <LinkContainer to="/widgets">
+                <NavItem eventKey={2}>Widgets</NavItem>
+              </LinkContainer>
+              <LinkContainer to="/survey">
+                <NavItem eventKey={3}>Survey</NavItem>
+              </LinkContainer>
+              <LinkContainer to="/about">
+                <NavItem eventKey={4}>About Us</NavItem>
+              </LinkContainer>
+
+              {!user &&
+              <LinkContainer to="/login">
+                <NavItem eventKey={5}>Login</NavItem>
+              </LinkContainer>}
+              {user &&
+              <LinkContainer to="/logout">
+                <NavItem eventKey={6} className="logout-link" onClick={::this.handleLogout}>
+                  Logout
+                </NavItem>
+              </LinkContainer>}
+            </Nav>
             {user &&
             <p className={styles.loggedInMessage + ' navbar-text'}>Logged in as <strong>{user.name}</strong>.</p>}
-            <ul className="nav navbar-nav navbar-right">
-              <li>
-                <a href="https://github.com/erikras/react-redux-universal-hot-example"
-                   target="_blank" title="View on Github"><i className="fa fa-github"/></a>
-              </li>
-            </ul>
-          </div>
-        </nav>
+            <Nav navbar right>
+              <NavItem eventKey={1} target="_blank" title="View on Github" href="https://github.com/erikras/react-redux-universal-hot-example">
+                <i className="fa fa-github"/>
+              </NavItem>
+            </Nav>
+          </CollapsibleNav>
+        </Navbar>
+
         <div className={styles.appContent}>
           {this.props.children}
         </div>
