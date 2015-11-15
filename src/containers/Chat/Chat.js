@@ -4,8 +4,8 @@ import {connect} from 'react-redux';
 @connect(
   state => ({user: state.auth.user})
 )
-export default
-class Chat extends Component {
+export default class Chat extends Component {
+
   static propTypes = {
     user: PropTypes.object
   };
@@ -17,7 +17,7 @@ class Chat extends Component {
 
   componentDidMount() {
     if (socket && !this.onMsgListener) {
-      this.onMsgListener = socket.on('msg', this.onMessageReceived.bind(this));
+      this.onMsgListener = socket.on('msg', this.onMessageReceived);
 
       setTimeout(() => {
         socket.emit('history', {offset: 0, length: 100});
@@ -32,13 +32,13 @@ class Chat extends Component {
     }
   }
 
-  onMessageReceived(data) {
+  onMessageReceived = (data) => {
     const messages = this.state.messages;
     messages.push(data);
     this.setState({messages});
   }
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     event.preventDefault();
 
     const msg = this.state.message;
@@ -66,14 +66,14 @@ class Chat extends Component {
             return <li key={`chat.msg.${msg.id}`}>{msg.from}: {msg.text}</li>;
           })}
           </ul>
-          <form className="login-form" onSubmit={this.handleSubmit.bind(this)}>
+          <form className="login-form" onSubmit={this.handleSubmit}>
             <input type="text" ref="message" placeholder="Enter your message"
              value={this.state.message}
              onChange={(event) => {
                this.setState({message: event.target.value});
              }
             }/>
-            <button className="btn" onClick={this.handleSubmit.bind(this)}>Send</button>
+            <button className="btn" onClick={this.handleSubmit}>Send</button>
           </form>
         </div>
         }

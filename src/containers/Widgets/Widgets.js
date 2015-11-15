@@ -22,8 +22,7 @@ function fetchDataDeferred(getState, dispatch) {
     loading: state.widgets.loading
   }),
   {...widgetActions, initializeWithKey })
-export default
-class Widgets extends Component {
+export default class Widgets extends Component {
   static propTypes = {
     widgets: PropTypes.array,
     error: PropTypes.string,
@@ -34,14 +33,11 @@ class Widgets extends Component {
     editStart: PropTypes.func.isRequired
   }
 
-  handleEdit(widget) {
-    const {editStart} = this.props; // eslint-disable-line no-shadow
-    return () => {
-      editStart(String(widget.id));
-    };
-  }
-
   render() {
+    const handleEdit = (widget) => {
+      const {editStart} = this.props; // eslint-disable-line no-shadow
+      return () => editStart(String(widget.id));
+    };
     const {widgets, error, editing, loading, load} = this.props;
     let refreshClassName = 'fa fa-refresh';
     if (loading) {
@@ -52,8 +48,8 @@ class Widgets extends Component {
       <div className={styles.widgets + ' container'}>
         <h1>
           Widgets
-          <button className={styles.refreshBtn + ' btn btn-success'} onClick={load}><i
-            className={refreshClassName}/> {' '} Reload Widgets
+          <button className={styles.refreshBtn + ' btn btn-success'} onClick={load}>
+            <i className={refreshClassName}/> {' '} Reload Widgets
           </button>
         </h1>
         <DocumentMeta title="React Redux Example: Widgets"/>
@@ -93,7 +89,7 @@ class Widgets extends Component {
                 <td className={styles.sprocketsCol}>{widget.sprocketCount}</td>
                 <td className={styles.ownerCol}>{widget.owner}</td>
                 <td className={styles.buttonCol}>
-                  <button className="btn btn-primary" onClick={::this.handleEdit(widget)}>
+                  <button className="btn btn-primary" onClick={handleEdit(widget)}>
                     <i className="fa fa-pencil"/> Edit
                   </button>
                 </td>
