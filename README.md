@@ -53,9 +53,8 @@ npm run dev
 
 In development, Redux Devtools are enabled by default. You can toggle visibility and move the dock around using the following keyboard shortcuts:
 
-<kbd>Ctrl+H</kbd> Toggle DevTools Dock
-<kbd>Ctrl+Q</kbd> Move Dock Position
-
+- <kbd>Ctrl+H</kbd> Toggle DevTools Dock
+- <kbd>Ctrl+Q</kbd> Move Dock Position
 - see [redux-devtools-dock-monitor](https://github.com/gaearon/redux-devtools-dock-monitor) for more detail information.
 
 ## Building and Running Production Server
