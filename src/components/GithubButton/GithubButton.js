@@ -1,7 +1,7 @@
 import React from 'react';
 
-export default function GithubButton({user, repo, type, width, height, count, large}) {
-
+const GithubButton = (props) => {
+  const {user, repo, type, width, height, count, large} = props;
   let src = `https://ghbtns.com/github-btn.html?user=${user}&repo=${repo}&type=${type}`;
   if (count) src += '&count=true';
   if (large) src += '&size=large';
@@ -16,4 +16,16 @@ export default function GithubButton({user, repo, type, width, height, count, la
       height={height}
       style={{border: 'none', width: width, height: height}}></iframe>
   );
-}
+};
+
+GithubButton.propTypes = {
+  user: React.PropTypes.string.isRequired,
+  repo: React.PropTypes.string.isRequired,
+  type: React.PropTypes.oneOf(['star', 'watch', 'fork', 'follow']).isRequired,
+  width: React.PropTypes.number.isRequired,
+  height: React.PropTypes.number.isRequired,
+  count: React.PropTypes.bool,
+  large: React.PropTypes.bool
+};
+
+export default GithubButton;
