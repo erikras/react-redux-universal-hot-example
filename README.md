@@ -39,19 +39,27 @@ I cobbled this together from a wide variety of similar "starter" repositories. A
 
 ## Installation
 
-```
+```bash
 npm install
 ```
 
 ## Running Dev Server
 
-```
+```bash
 npm run dev
 ```
 
+### Using Redux DevTools
+
+In development, Redux Devtools are enabled by default. You can toggle visibility and move the dock around using the following keyboard shortcuts:
+
+- <kbd>Ctrl+H</kbd> Toggle DevTools Dock
+- <kbd>Ctrl+Q</kbd> Move Dock Position
+- see [redux-devtools-dock-monitor](https://github.com/gaearon/redux-devtools-dock-monitor) for more detail information.
+
 ## Building and Running Production Server
 
-```
+```bash
 npm run build
 npm run start
 ```
@@ -178,7 +186,7 @@ Although this isn't a library, we recently started versioning to make it easier 
 
 I am more than happy to accept external contributions to the project in the form of feedback, bug reports and even better - pull requests :) 
 
-If you would like to submit a pull request, please make an effort to follow the guide in [CONTRIBUTING.md](CONTRIBUTING.md). 
+If you would like to submit a pull request, please make an effort to follow the guide in [CONTRIBUTING.md](contributing.md). 
  
 ---
 Thanks for checking this out.
