@@ -52,13 +52,13 @@ export default function reducer(state = initialState, action = {}) {
         }
       };
     case LOAD_ALL_SUCCESS:
-      const landmarks = {};
-      for (const landmark of action.result) {
-        landmarks[landmark.id] = {
+      const areas = {};
+      for (const area of action.result) {
+        areas[area.id] = {
           error: null,
           loaded: false,
           loading: false,
-          payload: landmark
+          payload: area
         };
       }
       return {
@@ -68,7 +68,7 @@ export default function reducer(state = initialState, action = {}) {
           loading: false,
           payload: action.result
         },
-        ...landmarks
+        ...areas
       };
     case LOAD_ALL_FAIL:
       return {

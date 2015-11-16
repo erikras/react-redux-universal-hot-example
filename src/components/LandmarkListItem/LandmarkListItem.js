@@ -22,9 +22,7 @@ export default class LandmarkListItem extends Component {
             <h2 className={styles.cardTitle}>
               {title}
             </h2>
-            <div className={styles.cardBody}>
-              <p>{teaser}</p>
-            </div>
+            <div className={styles.cardBody} dangerouslySetInnerHTML={{__html: teaser}} />
           </div>
         </Link>
       </li>

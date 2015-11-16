@@ -29,7 +29,7 @@ export default class Html extends Component {
         <head>
           {DocumentMeta.renderAsReact()}
           <meta charSet="utf-8" />
-          <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+          <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
           <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
           <link rel="shortcut icon" href="/favicon.ico" />
           <meta name="react-comment-hack" dangerouslySetInnerHTML={{__html: comment}}></meta>

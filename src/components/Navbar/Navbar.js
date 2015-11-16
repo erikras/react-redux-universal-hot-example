@@ -12,7 +12,7 @@ export default class Navbar extends Component {
               <li><Link to="/">Home</Link></li>
               <li><Link to="/explore">Explore</Link></li>
               <li><Link to="/landmark">Landmark</Link></li>
-              <li><Link to="/survey">Info</Link></li>
+              <li><Link to="/more">More</Link></li>
             </ul>
           </div>
         </nav>

@@ -32,7 +32,6 @@ class Explore extends Component {
   }
 
   render() {
-    // const styles = require('./Explore.scss');
     const styles = require('./../Landmarks/Landmarks.scss');
     const { areas } = this.props;
     const loading = !areas || areas.loading;
@@ -43,7 +42,7 @@ class Explore extends Component {
     return (
       <div className={styles.landmarks}>
         <DocumentMeta title="Explore the MSD"/>
-        <h1>All areas</h1>
+
         <AreaList items={areaItems} />
       </div>
     );

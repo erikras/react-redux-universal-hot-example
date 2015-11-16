@@ -12,11 +12,14 @@ export default class NotFound extends Component {
   }
 
   render() {
+    const styles = require('./NotFound.scss');
+    const fourofour = require('./404.jpg');
     return (
-      <div className="container">
+      <div className={styles.notFound}>
         <DocumentMeta title="404 – Page not found"/>
-        <h1>Doh! 404!</h1>
-        <p>These are <em>not</em> the droids you are looking for!</p>
+        <h1>We cannot find the page you were looking for</h1>
+        <p>This can happen if the page has moved or the URL has been typed incorrectly.</p>
+        <img src={fourofour} width="737" height="615" alt="Photo of Barry the bear holding a telescope" />
       </div>
     );
   }

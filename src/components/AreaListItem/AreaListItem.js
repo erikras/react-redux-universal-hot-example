@@ -12,7 +12,7 @@ export default class AreaListItem extends Component {
     const styles = require('./../LandmarkListItem/LandmarkListItem.scss');
     return (
       <li className={styles.landmarkListItem}>
-        <Link key={id} to={`/area/${slug}`}>
+        <Link key={id} to={`/explore/${slug}`}>
           { image &&
             <div className={styles.thumb}>
               { <Image image={image} size="thumb" /> }
@@ -22,9 +22,7 @@ export default class AreaListItem extends Component {
             <h2 className={styles.cardTitle}>
               {title}
             </h2>
-            <div className={styles.cardBody}>
-              <p>{teaser}</p>
-            </div>
+            <div className={styles.cardBody} dangerouslySetInnerHTML={{__html: teaser}} />
           </div>
         </Link>
       </li>

@@ -1,0 +1,35 @@
+img {
+  border: 0;
+  height: auto;
+  max-width: 100%;
+  width: 100%;
+}
+
+.video {
+  height: 0;
+  margin-left: auto;
+  max-width: 1099px;
+  padding-bottom: 56.25%;
+  padding-top: 0;
+  position: relative;
+
+  @include breakpoint(wide) {
+    @include trailer(2);
+    max-width: 100%;
+    padding-bottom: 39.45%;
+  }
+  
+  iframe {
+    height: 100%;
+    left: 0;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    @include breakpoint(wide) {
+      margin-left: 15%;
+      width: 70%;
+    }
+  }
+}
