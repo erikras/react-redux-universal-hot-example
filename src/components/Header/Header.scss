@@ -1,25 +1,54 @@
 @import 'src/theme/main';
 
 .pageHeader {
+  @include rem(height, $header-height-small);
+  align-items: center;
   background-color: $white;
   background-color: $bgfloating;
-  @include rem(height, $header-height-small);
+  display: flex;
 
   @include breakpoint(height-small) {
     @include rem(height, $header-height-medium);
   }
 
-  @include breakpoint(height-small) {
+  @include breakpoint(height-medium) {
     @include rem(height, $header-height-large);
   }
 
   div {
     display: inline-block;
+    flex-basis: auto;
     margin: 0 0.5em;
-    padding: 0.5em;
+
+    @include breakpoint(desktop) {
+      padding: 0.5em 0;
+    }
   }
 
   .pageHeaderTitle {
-    letter-spacing: -1px;
+    flex-grow: 1;
+    h1 {
+      letter-spacing: -1px;
+      max-width: 100%;
+      padding-bottom: 0;
+    }
+  }
+
+  .pageHeaderLogo {
+    margin-left: 0;
+    padding: 0;
+
+    svg {
+      width: auto;
+      @include rem(height, $header-height-small);
+
+      @include breakpoint(height-small) {
+        @include rem(height, $header-height-medium);
+      }
+
+      @include breakpoint(height-medium) {
+        @include rem(height, $header-height-large);
+      }
+    }
   }
 }

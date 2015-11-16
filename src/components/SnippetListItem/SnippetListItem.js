@@ -22,9 +22,7 @@ export default class SnippetListItem extends Component {
             <h2 className={styles.cardTitle}>
                 {title}
             </h2>
-            <div className={styles.cardBody}>
-              <span>{teaser}</span>
-            </div>
+            <div className={styles.cardBody} dangerouslySetInnerHTML={{__html: teaser}} />
           </div>
         </Link>
       </li>
