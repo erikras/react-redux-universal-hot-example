@@ -17,7 +17,7 @@ import makeRouteHooksSafe from './helpers/makeRouteHooksSafe';
 
 const client = new ApiClient();
 
-// Three differnt types of scroll behavior available.
+// Three different types of scroll behavior available.
 // Documented here: https://github.com/rackt/scroll-behavior
 const scrollablehistory = useScroll(createHistory);
 
