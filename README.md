@@ -167,10 +167,6 @@ The first deploy might take a while, but after that your `node_modules` dir shou
 
 This project moves fast and has an active community, so if you have a question that is not answered below please visit our [discord channel](https://discordapp.com/channels/102860784329052160/105739309289623552) or file an issue.
 
-#### Help! It doesn't work on Windows! What do I do?
-
-Fear not. [chtefi](https://github.com/chtefi) has figured out [what needs to be changed](https://github.com/erikras/react-redux-universal-hot-example/pull/21/files) to make it work on Windows 8.
-
 #### How do I disable the dev tools?
 
 They will only show in development, but if you want to disable them even there, set `__DEVTOOLS__` to `false` in `/webpack/dev.config.js`.
