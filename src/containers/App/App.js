@@ -48,7 +48,7 @@ export default class App extends Component {
     }
   }
 
-  handleLogout(event) {
+  handleLogout = (event) => {
     event.preventDefault();
     this.props.logout();
   }
@@ -89,7 +89,7 @@ export default class App extends Component {
               </LinkContainer>}
               {user &&
               <LinkContainer to="/logout">
-                <NavItem eventKey={6} className="logout-link" onClick={::this.handleLogout}>
+                <NavItem eventKey={6} className="logout-link" onClick={this.handleLogout}>
                   Logout
                 </NavItem>
               </LinkContainer>}
