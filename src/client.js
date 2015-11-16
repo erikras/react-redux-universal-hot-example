@@ -5,6 +5,7 @@ import 'babel/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import createHistory from 'history/lib/createBrowserHistory';
+import useScroll from 'scroll-behavior/lib/useStandardScroll';
 import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
 import io from 'socket.io-client';
@@ -16,8 +17,12 @@ import makeRouteHooksSafe from './helpers/makeRouteHooksSafe';
 
 const client = new ApiClient();
 
+// Three differnt types of scroll behavior available.
+// Documented here: https://github.com/rackt/scroll-behavior
+const scrollablehistory = useScroll(createHistory);
+
 const dest = document.getElementById('content');
-const store = createStore(reduxReactRouter, makeRouteHooksSafe(getRoutes), createHistory, client, window.__data);
+const store = createStore(reduxReactRouter, makeRouteHooksSafe(getRoutes), scrollablehistory, client, window.__data);
 
 function initSocket() {
   const socket = io('', {path: '/api/ws', transports: ['polling']});
