@@ -21,7 +21,7 @@ class Landmarks extends Component {
   }
 
   componentDidMount() {
-    const headerTitle = 'Landmark';
+    const headerTitle = 'All landmarks';
     this.props.changeHeader(headerTitle);
   }
 
@@ -32,7 +32,6 @@ class Landmarks extends Component {
   }
 
   render() {
-    const styles = require('./Landmarks.scss');
     const { landmarks } = this.props;
     const loading = !landmarks || landmarks.loading;
     const error = !landmarks || landmarks.error;
@@ -40,9 +39,8 @@ class Landmarks extends Component {
     if (error) return (<Error error={error} />);
     const landmarkItems = landmarks.payload;
     return (
-      <div className={styles.landmarks}>
-        <DocumentMeta title="Landmark"/>
-        <h1>All landmarks</h1>
+      <div>
+        <DocumentMeta title="Explore the MSD"/>
         <LandmarkList items={landmarkItems} />
       </div>
     );

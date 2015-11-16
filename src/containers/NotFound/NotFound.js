@@ -7,7 +7,7 @@ export default class NotFound extends Component {
   }
 
   componentDidMount() {
-    const headerTitle = 'Page Not Found';
+    const headerTitle = 'Page not found';
     this.props.changeHeader(headerTitle);
   }
 

@@ -12,11 +12,11 @@ export default class Home extends Component {
   }
 
   render() {
-    // const styles = require('./Home.scss');
+    const styles = require('./Home.scss');
     return (
-      <div>
+      <div className={styles.home}>
         <h1>Welcome.</h1>
-        <DocumentMeta title="Home"/>
+        <DocumentMeta title="Welcome to the Melbourne School of Design"/>
         <p>awesome videos and a slick little introduction to what the app is.</p>
       </div>
     );
