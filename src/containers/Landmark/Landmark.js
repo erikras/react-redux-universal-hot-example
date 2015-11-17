@@ -14,15 +14,16 @@ import { Error, Image, Loader, SnippetList } from 'components';
 export default
 class Landmark extends Component {
   static propTypes = {
+    activeNavItem: PropTypes.func,
     changeHeader: PropTypes.func,
     landmarks: PropTypes.object,
     location: PropTypes.object,
-    params: PropTypes.object,
+    params: PropTypes.object
   }
 
   componentDidMount() {
-    const headerTitle = 'Landmark';
-    this.props.changeHeader(headerTitle);
+    this.props.changeHeader('Landmark');
+    this.props.activeNavItem('landmark');
     //
     // TODO: store the snippets in the state
     //

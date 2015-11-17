@@ -3,12 +3,13 @@ import DocumentMeta from 'react-document-meta';
 
 export default class NotFound extends Component {
   static propTypes = {
-    changeHeader: PropTypes.func,
+    activeNavItem: PropTypes.func,
+    changeHeader: PropTypes.func
   }
 
   componentDidMount() {
-    const headerTitle = 'Page not found';
-    this.props.changeHeader(headerTitle);
+    this.props.changeHeader('Page not found');
+    this.props.activeNavItem(null);
   }
 
   render() {

@@ -15,7 +15,7 @@
   "homepage": "https://github.com/patpaev/explore-msd",
   "main": "bin/server.js",
   "scripts": {
-    "start": "concurrent --kill-others \"npm run start-prod\"",
+    "start": "concurrent --kill-others \"npm run build; npm run start-prod\"",
     "start-prod": "node ./node_modules/better-npm-run start-prod",
     "build": "webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
     "postinstall": "webpack --display-error-details --config webpack/prod.config.js",

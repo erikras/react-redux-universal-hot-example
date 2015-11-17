@@ -14,15 +14,16 @@ import { Error, Loader, LandmarkList } from 'components';
 export default
 class Landmarks extends Component {
   static propTypes = {
+    activeNavItem: PropTypes.func,
     changeHeader: PropTypes.func,
     landmarks: PropTypes.object,
     location: PropTypes.object,
-    params: PropTypes.object,
+    params: PropTypes.object
   }
 
   componentDidMount() {
-    const headerTitle = 'All landmarks';
-    this.props.changeHeader(headerTitle);
+    this.props.changeHeader('All landmarks');
+    this.props.activeNavItem('landmark');
   }
 
   static fetchDataDeferred(getState, dispatch) {

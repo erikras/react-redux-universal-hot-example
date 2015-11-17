@@ -18,9 +18,11 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      headerTitle: 'Explore the MSD'
+      headerTitle: 'Explore the MSD',
+      activeNavItem: null
     };
     this.headerChangeHandler = this.headerChangeHandler.bind(this);
+    this.navChangeHandler = this.navChangeHandler.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -38,9 +40,13 @@ export default class App extends Component {
     this.setState({ headerTitle: headerTitle});
   }
 
+  navChangeHandler(itemName) {
+    this.setState({ activeNavItem: itemName});
+  }
+
   render() {
     const styles = require('./App.scss');
-    const headerTitle = this.state.headerTitle;
+    const { activeNavItem, headerTitle } = this.state;
     const { location } = this.props;
 
     const isModal = (
@@ -60,7 +66,7 @@ export default class App extends Component {
 
           {isModal ?
             this.previousChildren :
-            React.cloneElement(this.props.children, {changeHeader: this.headerChangeHandler})
+            React.cloneElement(this.props.children, {changeHeader: this.headerChangeHandler, activeNavItem: this.navChangeHandler})
           }
 
           {isModal ? (
@@ -73,7 +79,7 @@ export default class App extends Component {
           ) : '' }
 
         </div>
-        <Navbar />
+        <Navbar activeNavItem={ activeNavItem ? activeNavItem : null } />
       </div>
     );
   }

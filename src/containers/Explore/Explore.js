@@ -14,6 +14,7 @@ import { Error, Loader, AreaList } from 'components';
 export default
 class Explore extends Component {
   static propTypes = {
+    activeNavItem: PropTypes.func,
     changeHeader: PropTypes.func,
     areas: PropTypes.object,
     location: PropTypes.object,
@@ -21,8 +22,8 @@ class Explore extends Component {
   }
 
   componentDidMount() {
-    const headerTitle = 'Choose an area';
-    this.props.changeHeader(headerTitle);
+    this.props.changeHeader('Choose an area');
+    this.props.activeNavItem('explore');
   }
 
   static fetchDataDeferred(getState, dispatch) {

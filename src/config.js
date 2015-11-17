@@ -3,11 +3,11 @@ require('babel-core/polyfill');
 const environment = {
   development: {
     isProduction: false,
-    apiServer: 'http://explore-msd-api-production.elasticbeanstalk.com'
+    apiServer: 'http://api.explore.msd.unimelb.edu.au'
   },
   production: {
     isProduction: true,
-    apiServer: 'http://explore-msd-api-production.elasticbeanstalk.com'
+    apiServer: 'http://api.explore.msd.unimelb.edu.au'
   }
 }[process.env.NODE_ENV || 'development'];
 
@@ -25,12 +25,12 @@ module.exports = Object.assign({
         'og:image': '',
         'og:locale': 'en_US',
         'og:title': 'Explore the Melbourne School of Design',
-        'og:description': 'Find out what makes the MSD unique in both the design and higher education landscapes.',
+        'og:description': 'A living learning building, the Melbourne School of Design sets a new standard for design education in the Asia-Pacific region.',
         'twitter:card': 'summary',
         'twitter:site': '@msdsocial',
         'twitter:creator': '@msdsocial',
         'twitter:title': 'Explore the Melbourne School of Design',
-        'twitter:description': 'Find out what makes the MSD unique in both the design and higher education landscapes.',
+        'twitter:description': 'A living learning building, the Melbourne School of Design sets a new standard for design education in the Asia-Pacific region.',
         'twitter:image': '',
         'twitter:image:width': '200',
         'twitter:image:height': '200'
