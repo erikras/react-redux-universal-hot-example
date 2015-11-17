@@ -25,17 +25,17 @@
   "main": "bin/server.js",
   "scripts": {
     "start": "concurrent --kill-others \"npm run start-prod\" \"npm run start-prod-api\"",
-    "start-prod": "node ./node_modules/better-npm-run start-prod",
-    "start-prod-api": "node ./node_modules/better-npm-run start-prod-api",
+    "start-prod": "better-npm-run start-prod",
+    "start-prod-api": "better-npm-run start-prod-api",
     "build": "webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
     "postinstall": "webpack --display-error-details --config webpack/prod.config.js",
     "lint": "eslint -c .eslintrc src api",
-    "start-dev": "node ./node_modules/better-npm-run start-dev",
-    "start-dev-api": "node ./node_modules/better-npm-run start-dev-api",
-    "watch-client": "node ./node_modules/better-npm-run watch-client",
+    "start-dev": "better-npm-run start-dev",
+    "start-dev-api": "better-npm-run start-dev-api",
+    "watch-client": "better-npm-run watch-client",
     "dev": "concurrent --kill-others \"npm run watch-client\" \"npm run start-dev\" \"npm run start-dev-api\"",
     "test": "karma start",
-    "test-node": "./node_modules/mocha/bin/mocha ./api/**/__tests__/*-test.js --compilers js:babel-core/register"
+    "test-node": "mocha ./api/**/__tests__/*-test.js --compilers js:babel-core/register"
   },
   "betterScripts": {
     "start-prod": {
@@ -125,7 +125,7 @@
     "babel-loader": "~5.3.3",
     "babel-plugin-react-transform": "~1.1.1",
     "babel-runtime": "~5.8.29",
-    "better-npm-run": "^0.0.3",
+    "better-npm-run": "^0.0.4",
     "bootstrap-sass": "^3.3.5",
     "bootstrap-sass-loader": "^1.0.9",
     "chai": "^3.3.0",
