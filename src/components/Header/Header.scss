@@ -25,15 +25,6 @@
     }
   }
 
-  .pageHeaderTitle {
-    flex-grow: 1;
-    h1 {
-      letter-spacing: -1px;
-      max-width: 100%;
-      padding-bottom: 0;
-    }
-  }
-
   .pageHeaderLogo {
     margin-left: 0;
     padding: 0;
@@ -49,6 +40,15 @@
       @include breakpoint(height-medium) {
         @include rem(height, $header-height-large);
       }
+    }
+  }
+
+  .pageHeaderTitle {
+    flex-grow: 1;
+    h1 {
+      letter-spacing: -1px;
+      max-width: 100%;
+      padding-bottom: 0;
     }
   }
 }
