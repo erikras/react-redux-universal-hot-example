@@ -1,9 +1,9 @@
 @import 'src/theme/main.scss';
 
 .navbar {
+  @include rem(height, $navbar-height);
   background-color: $black;
   bottom: 0;
-  height: $navbar-height;
   position: fixed;
   width: 100%;
 
@@ -40,7 +40,7 @@
 
         svg {
           @include rem(margin-bottom, 4px);
-          @include rem(width, 38px);
+          @include rem(width, 34px);
           display: block;
           height: auto;
           margin-left: auto;
