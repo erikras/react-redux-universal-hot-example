@@ -34,6 +34,7 @@ export default class Html extends Component {
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-status-bar-style" content="black" />
           <link rel="shortcut icon" href="/favicon.ico" />
+          <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon.png">
           <meta name="react-comment-hack" dangerouslySetInnerHTML={{__html: comment}}></meta>
           {/* styles (will be present only in production with webpack extract text plugin) */}
           {Object.keys(assets.styles).map((style, key) =>
