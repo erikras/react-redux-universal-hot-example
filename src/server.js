@@ -25,10 +25,21 @@ const pretty = new PrettyError();
 const app = new Express();
 const server = new http.Server(app);
 
+function wwwRedirect(req, res, next) {
+    if (req.headers.host.slice(0, 4) === 'www.') {
+        var newHost = req.headers.host.slice(4);
+        return res.redirect(301, req.protocol + '://' + newHost + req.originalUrl);
+    }
+    next();
+};
+
 app.use(compression());
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
 
 app.use(require('serve-static')(path.join(__dirname, '..', 'static')));
+
+app.set('trust proxy', true);
+app.use(wwwRedirect);
 
 app.use((req, res) => {
   if (__DEVELOPMENT__) {
