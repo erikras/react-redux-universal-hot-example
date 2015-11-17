@@ -1,5 +1,7 @@
 @import 'src/theme/main';
 $busy-space-small: $header-height-small + $navbar-height + $snippet-height-small;
+$busy-space-medium: $header-height-medium + $navbar-height + $snippet-height-medium;
+$busy-space-large: $header-height-large + $navbar-height + $snippet-height-large;
 
 .landmark {
   height: 100%;
@@ -33,6 +35,14 @@ $busy-space-small: $header-height-small + $navbar-height + $snippet-height-small
     max-height: 480px - $busy-space-small;
     max-height: calc(100vh - #{$busy-space-small});
     position: relative;
+
+    @include breakpoint(height-small) {
+      max-height: calc(100vh - #{$busy-space-medium});
+    }
+
+    @include breakpoint(height-medium) {
+      max-height: calc(100vh - #{$busy-space-large});
+    }
 
     h1 {
       text-align: center;

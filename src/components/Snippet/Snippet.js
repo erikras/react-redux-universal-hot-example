@@ -42,7 +42,7 @@ class Snippet extends Component {
       <div className={styles.snippet}>
         { image && <Image image={image} size="small" /> }
         <h2>{title}</h2>
-        <code>{description}</code>
+        <div dangerouslySetInnerHTML={{__html: description}} />
       </div>
     );
   }

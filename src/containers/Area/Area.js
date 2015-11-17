@@ -3,7 +3,7 @@ import DocumentMeta from 'react-document-meta';
 import {connect} from 'react-redux';
 import * as areaActions from 'redux/modules/areas';
 import { areaIsLoaded, loadArea } from 'redux/modules/areas';
-import { Error, Image, Loader, LandmarkList } from 'components';
+import { Error, Loader, LandmarkList } from 'components';
 
 @connect(
   state => ({
@@ -18,10 +18,11 @@ class Area extends Component {
     areas: PropTypes.object,
     location: PropTypes.object,
     params: PropTypes.object,
+    title: PropTypes.string
   }
 
   componentDidMount() {
-    const headerTitle = 'Area';
+    const headerTitle = 'Explore an area';
     this.props.changeHeader(headerTitle);
     //
     // TODO: store the snippets in the state
@@ -49,18 +50,15 @@ class Area extends Component {
     return (
       <div className={styles.area}>
         <DocumentMeta title="Area"/>
-        <h1>{area.title}</h1>
-        <div className={styles.description}>
+        <h1>{area.title}’s Landmarks</h1>
+        {/* <div className={styles.description}>
           { area.image && <Image image={area.image} size="small" /> }
           <div dangerouslySetInnerHTML={{__html: area.description}} />
-        </div>
+        </div> */}
         {
           area.landmarks.length ?
-          (<div>
-            <h2>{area.title}&rsquo;s landmarks:</h2>
-            <LandmarkList items={area.landmarks} />
-          </div>)
-          : ''
+          <LandmarkList items={area.landmarks} />
+          : <p>No landmarks for {area.title} yet.</p>
         }
       </div>
     );

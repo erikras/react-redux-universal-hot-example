@@ -12,7 +12,7 @@ export default class AreaListItem extends Component {
     const styles = require('./../LandmarkListItem/LandmarkListItem.scss');
     return (
       <li className={styles.landmarkListItem}>
-        <Link key={id} to={`/explore/${slug}`}>
+        <Link key={id} to={`/explore/${slug}`} state={{title: title}}>
           { image &&
             <div className={styles.thumb}>
               { <Image image={image} size="thumb" /> }
