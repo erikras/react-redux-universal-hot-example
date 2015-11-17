@@ -80,6 +80,7 @@ export default class App extends Component {
 
         </div>
         <Navbar activeNavItem={ activeNavItem ? activeNavItem : null } />
+        <div style={{zIndex: 100000, position: 'fixed', overflow: 'scroll', WebkitOverflowScrolling: 'touch'}} />
       </div>
     );
   }

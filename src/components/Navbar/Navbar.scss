@@ -17,13 +17,16 @@
     padding: 0;
 
     li {
+      cursor: pointer;
       flex-basis: 20%;
       list-style: none;
       margin: 0 2.5%;
       padding: 0;
 
       a {
+        @include rem(padding-bottom, 12px);
         color: #fff;
+        cursor: pointer;
         display: block;
         height: 100%;
         text-align: center;
@@ -51,6 +54,7 @@
         span {
           @include rem(font-size, 12px);
           display: block;
+          font-weight: $regular;
           text-transform: uppercase;
           width: 100%;
         }
