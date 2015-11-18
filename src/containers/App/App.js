@@ -48,7 +48,7 @@ export default class App extends Component {
     }
   }
 
-  handleLogout(event) {
+  handleLogout = (event) => {
     event.preventDefault();
     this.props.logout();
   }
@@ -89,7 +89,7 @@ export default class App extends Component {
               </LinkContainer>}
               {user &&
               <LinkContainer to="/logout">
-                <NavItem eventKey={6} className="logout-link" onClick={::this.handleLogout}>
+                <NavItem eventKey={6} className="logout-link" onClick={this.handleLogout}>
                   Logout
                 </NavItem>
               </LinkContainer>}
@@ -113,7 +113,7 @@ export default class App extends Component {
           Have questions? Ask for help <a
           href="https://github.com/erikras/react-redux-universal-hot-example/issues"
           target="_blank">on Github</a> or in the <a
-          href="https://discordapp.com/channels/102860784329052160/105739309289623552" target="_blank">#react-redux-universal</a> Discord channel.
+          href="https://discord.gg/0ZcbPKXt5bZZb1Ko" target="_blank">#react-redux-universal</a> Discord channel.
         </div>
       </div>
     );

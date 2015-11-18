@@ -13,7 +13,7 @@ export default class Login extends Component {
     logout: PropTypes.func
   }
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     event.preventDefault();
     const input = this.refs.username;
     this.props.login(input.value);
@@ -29,9 +29,9 @@ export default class Login extends Component {
         <h1>Login</h1>
         {!user &&
         <div>
-          <form className="login-form" onSubmit={::this.handleSubmit}>
+          <form className="login-form" onSubmit={this.handleSubmit}>
             <input type="text" ref="username" placeholder="Enter a username"/>
-            <button className="btn btn-success" onClick={::this.handleSubmit}><i className="fa fa-sign-in"/>{' '}Log In
+            <button className="btn btn-success" onClick={this.handleSubmit}><i className="fa fa-sign-in"/>{' '}Log In
             </button>
           </form>
           <p>This will "log you in" as this user, storing the username in the session of the API server.</p>

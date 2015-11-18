@@ -3,13 +3,12 @@ import DocumentMeta from 'react-document-meta';
 import { MiniInfoBar } from 'components';
 
 export default class About extends Component {
+
   state = {
     showKitten: false
   }
 
-  handleToggleKitten() {
-    this.setState({showKitten: !this.state.showKitten});
-  }
+  handleToggleKitten = () => this.setState({showKitten: !this.state.showKitten});
 
   render() {
     const {showKitten} = this.state;
@@ -40,7 +39,7 @@ export default class About extends Component {
 
           <button className={'btn btn-' + (showKitten ? 'danger' : 'success')}
                   style={{marginLeft: 50}}
-                  onClick={::this.handleToggleKitten}>
+                  onClick={this.handleToggleKitten}>
             {showKitten ? 'No! Take it away!' : 'Yes! Please!'}</button>
         </p>
 
