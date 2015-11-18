@@ -18,7 +18,7 @@ img {
     max-width: 100%;
     padding-bottom: 39.45%;
   }
-  
+
   iframe {
     height: 100%;
     left: 0;
@@ -30,6 +30,30 @@ img {
     @include breakpoint(wide) {
       margin-left: 15%;
       width: 70%;
+    }
+  }
+}
+
+header {
+
+  .videoLoop {
+    background-color: $black;
+    display: none;
+
+    @include breakpoint(wide) {
+      display: block;
+      height: 100%;
+      overflow: hidden;
+      position: absolute;
+      top: 0;
+      width: 100%;
+
+      video {
+        background-color: $black;
+        display: block;
+        height: auto;
+        width: 100%;
+      }
     }
   }
 }

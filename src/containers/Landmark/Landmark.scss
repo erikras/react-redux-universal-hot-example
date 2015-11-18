@@ -71,7 +71,7 @@ $busy-space-large: $header-height-large + $navbar-height + $snippet-height-large
       }
 
       @include breakpoint(height-medium) {
-        @include rem(font-size, 40px);
+        @include rem(font-size, 48px);
       }
     }
 

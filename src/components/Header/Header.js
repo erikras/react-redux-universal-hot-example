@@ -13,7 +13,7 @@ export default class Header extends Component {
     const raster = require('./logo-msd.png');
     const logo = require('./logo-msd.svg');
     return (
-      <header className={styles.pageHeader}>
+      <div className={styles.pageHeader}>
         <div className={styles.pageHeaderLogo}>
           <svg viewBox="0 0 214 100" role="img" aria-labelledby="aria-uom-title">
             <title id="aria-uom-title">Melbourne School of Design Logo</title>
@@ -26,7 +26,7 @@ export default class Header extends Component {
         {/* <div className="page-header-tools">
           <p><a href="#">Search</a></p>
         </div> */}
-      </header>
+      </div>
     );
   }
 }
