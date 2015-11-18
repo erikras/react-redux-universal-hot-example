@@ -7,6 +7,7 @@ import {
     Explore,
     Landmark,
     Landmarks,
+    More,
     NotFound
   } from 'containers';
 import { Snippet } from 'components';
@@ -23,6 +24,7 @@ export default () => {
       <Route path="/explore/:area" component={Area} />
       <Route path="/landmark" component={Landmarks} />
       <Route path="/landmark/:slug" component={Landmark} />
+      <Route path="/more" component={More} />
       <Route path="/snippet/:slug" component={Snippet} />
       <Route path="*" component={NotFound} status={404} />
     </Route>
