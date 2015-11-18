@@ -28,18 +28,20 @@ export default class Html extends Component {
       <html lang="en-us">
         <head>
           <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
+          <link rel="shortcut icon" href="/favicon.ico" />
+          <link rel="icon" type="image/png" href="/favicon.png" />
           {DocumentMeta.renderAsReact()}
           <meta charSet="utf-8" />
           <meta content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+          <meta name="mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-          <link rel="shortcut icon" href="/favicon.ico" />
+          <meta name="apple-mobile-web-app-title" content="Explore MSD">
           <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon.png" />
           <meta name="react-comment-hack" dangerouslySetInnerHTML={{__html: comment}}></meta>
           {/* styles (will be present only in production with webpack extract text plugin) */}
           {Object.keys(assets.styles).map((style, key) =>
-            <link href={assets.styles[style]} key={key} media="screen, projection"
-                  rel="stylesheet" type="text/css" charSet="UTF-8"/>
+            <link href={assets.styles[style]} key={key} rel="stylesheet" type="text/css" />
           )}
         </head>
         <body>

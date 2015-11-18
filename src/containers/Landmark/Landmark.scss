@@ -55,7 +55,7 @@ $busy-space-large: $header-height-large + $navbar-height + $snippet-height-large
     .landmarkTitle {
       @include rem(padding-bottom, 8px);
       @include rem(padding-top, 12px);
-      @include rem(font-size, 32px);
+      @include rem(font-size, 28px);
       background-color: $black;
       box-shadow: 16px 0 0 $black, -16px 0 0 $black;
       color: $white;
@@ -65,11 +65,11 @@ $busy-space-large: $header-height-large + $navbar-height + $snippet-height-large
       box-decoration-break: clone;
 
       @include breakpoint(height-smallest) {
-        @include rem(font-size, 48px);
+        @include rem(font-size, 36px);
       }
 
       @include breakpoint(height-medium) {
-        @include rem(font-size, 64px);
+        @include rem(font-size, 48px);
       }
     }
 

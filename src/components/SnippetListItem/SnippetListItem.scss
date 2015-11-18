@@ -30,7 +30,7 @@
     }
   }
 
-  @include breakpoint(height-small){
+  @include breakpoint(height-small) {
     @include rem(height, $snippet-height-medium - (2 * $snippet-margin));
     @include rem(width, 208px);
 
@@ -42,7 +42,6 @@
       .cardTitle {
         @include rem(font-size, 14px);
         @include rem(padding-bottom, 8px);
-        @include rem(padding-top, 4px);
       }
 
       .cardBody {
@@ -51,7 +50,7 @@
     }
   }
 
-  @include breakpoint(height-medium){
+  @include breakpoint(height-medium) {
     @include rem(height, $snippet-height-large - (2 * $snippet-margin));
     @include rem(width, 256px);
 
@@ -63,7 +62,6 @@
       .cardTitle {
         @include rem(font-size, 18px);
         @include rem(padding-bottom, 8px);
-        @include rem(padding-top, 8px);
       }
 
       .cardBody {
