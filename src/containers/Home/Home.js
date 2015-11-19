@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { CounterButton, GithubButton } from 'components';
+import config from '../../config';
 
 export default class Home extends Component {
   render() {
@@ -16,9 +17,9 @@ export default class Home extends Component {
                 <img src={logoImage}/>
               </p>
             </div>
-            <h1>React Redux Example</h1>
+            <h1>{config.app.title}</h1>
 
-            <h2>All the modern best practices in one example.</h2>
+            <h2>{config.app.description}</h2>
 
             <p>
               <a className={styles.github} href="https://github.com/erikras/react-redux-universal-hot-example"

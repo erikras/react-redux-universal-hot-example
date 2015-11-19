@@ -6,6 +6,7 @@ import {isLoaded, load as loadWidgets} from 'redux/modules/widgets';
 import {initializeWithKey} from 'redux-form';
 import connectData from 'helpers/connectData';
 import { WidgetForm } from 'components';
+import config from '../../config';
 
 function fetchDataDeferred(getState, dispatch) {
   if (!isLoaded(getState())) {
@@ -52,7 +53,7 @@ export default class Widgets extends Component {
             <i className={refreshClassName}/> {' '} Reload Widgets
           </button>
         </h1>
-        <DocumentMeta title="React Redux Example: Widgets"/>
+        <DocumentMeta title={config.app.title + ': Widgets'}/>
         <p>
           If you hit refresh on your browser, the data loading will take place on the server before the page is returned.
           If you navigated here from another page, the data was fetched from the client after the route transition.
