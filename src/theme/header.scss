@@ -20,6 +20,7 @@ header {
     @extend %bannerbox;
     @include rem(min-height, 300px);
     height: auto;
+    position: relative;
 
     @include breakpoint(height-smallest) {
       @include rem(min-height, 400px);
@@ -42,10 +43,55 @@ header {
         @include adjust-font-size-to(50px);
       }
     }
+
     @include breakpoint(wide) {
       h1 {
         @include adjust-font-size-to(60px);
       }
+    }
+
+    .background {
+      height: 100%;
+      left: 0;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      min-width: 100%;
+      top: 0;
+
+      img {
+        bottom: 0;
+        height: auto;
+        left: 0;
+        object-fit: cover;
+        margin: auto;
+        min-height: 100%;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 100%;
+      }
+    }
+  }
+
+  &.bannerMini {
+    @extend .banner;
+    @include rem(min-height, 210px);
+
+    @include breakpoint(height-smallest) {
+      @include rem(min-height, 320px);
+    }
+
+    @include breakpoint(height-small) {
+      @include rem(min-height, 380px);
+    }
+
+    @include breakpoint(height-medium) {
+      @include rem(min-height, 460px);
+    }
+
+    @include breakpoint(height-big) {
+      @include rem(min-height, 500px);
     }
   }
 
@@ -62,10 +108,10 @@ header {
 
     h1 {
       @include adjust-font-size-to(42px);
-      font-weight: $bold;
+      // font-weight: $bold; // no din-bold
 
       @include breakpoint(desktop) {
-        @include adjust-font-size-to(68px);
+        @include adjust-font-size-to(64px);
       }
     }
 
@@ -84,6 +130,7 @@ header {
     @include align-self(flex-end);
     @include rem(margin-bottom, -25px);
     width: 100%;
+    z-index: 1;
 
     p {
       @include adjust-font-size-to(22px);

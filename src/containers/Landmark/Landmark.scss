@@ -54,6 +54,13 @@ $busy-space-large: $header-height-large + $navbar-height + $snippet-height-large
       }
     }
 
+    a {
+      color: $skyblue;
+      &:hover {
+        color: $duckeggblue;
+      }
+    }
+
     .landmarkTitle {
       @include rem(padding-bottom, 8px);
       @include rem(padding-top, 12px);

@@ -49,8 +49,9 @@ class Area extends Component {
 
     return (
       <div className={styles.area}>
-        <DocumentMeta title="Area"/>
-        <h1>{area.title}’s Landmarks</h1>
+        <DocumentMeta title="Explore an Area"/>
+        <div dangerouslySetInnerHTML={{__html: area.description}} />
+        <h2>{area.title}’s Landmarks</h2>
         {/* <div className={styles.description}>
           { area.image && <Image image={area.image} size="small" /> }
           <div dangerouslySetInnerHTML={{__html: area.description}} />

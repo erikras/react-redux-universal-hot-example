@@ -1,0 +1,58 @@
+@import 'src/theme/main';
+$bottom: $navbar-height + 16px;
+
+.modal {
+  @include rem(max-width, $w-mid);
+  background: $white;
+  bottom: $bottom;
+  box-shadow: 0px 0px 60px 2px rgba(0, 0, 0, 0.75);
+  left: 4%;
+  margin: 0 auto;
+  overflow: auto;
+  padding: 0;
+  position: fixed;
+  right: 4%;
+  top: 14%;
+
+  .close {
+    @include rem(right, 16px);
+    @include rem(top, 8px);
+    position: absolute;
+    z-index: 999;
+    a {
+      color: $white;
+      line-height: 0.9;
+      text-decoration: none;
+      text-align: center;
+      text-shadow: 1px 1px rgba(0, 0, 0, 0.75);
+      transition: text-shadow 120ms;
+      &:hover {
+        text-shadow: 1px 1px rgba(0, 0, 0, 0.95);
+        .icon {
+          transform: scale(1.25);
+        }
+      }
+
+      .icon {
+        @include rem(font-size, 40px);
+        display: block;
+        font-weight: $light;
+        transition: transform 120ms;
+        width: 100%;
+      }
+
+      .label {
+        @include rem(font-size, 12px);
+        font-weight: $light;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  h1, h2, h3, h4, h5, h6, p, li, table {
+    @include breakpoint(tablet) {
+      padding-left: 3%;
+      padding-right: 3%;
+    }
+  }
+}

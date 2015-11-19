@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 
 export default class Header extends Component {
   static propTypes = {
-    title: PropTypes.string.required,
+    title: PropTypes.string,
   }
 
   static defaultProps = { title: 'Explore the MSD' }

@@ -8,22 +8,18 @@ export default class Modal extends Component {
   }
 
   render() {
-    const styles = {
-      position: 'fixed',
-      top: '20%',
-      right: '20%',
-      bottom: '20%',
-      left: '20%',
-      padding: '20px',
-      boxShadow: '0px 0px 60px 2px rgba(0, 0, 0, 0.75)',
-      overflow: 'auto',
-      background: '#fff'
-    };
+    const styles = require('./Modal.scss');
 
     return (
-      <div style={styles}>
-        <p><Link to={this.props.returnTo}>Back</Link></p>
+      <div className={styles.modal}>
+        <div className={styles.close}>
+          <Link to={this.props.returnTo}>
+            <span className={styles.icon}>×</span>
+            <span className={styles.label}>Close</span>
+          </Link>
+        </div>
         { this.props.children }
+        <p><Link to={this.props.returnTo}>&larr; Back</Link></p>
       </div>
     );
   }

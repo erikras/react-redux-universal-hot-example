@@ -42,3 +42,10 @@
 section {
   @include padding-leader(1);
 }
+
+a {
+  color: $cyan;
+  &:hover {
+    color: darken($cyan, 20%);
+  }
+}

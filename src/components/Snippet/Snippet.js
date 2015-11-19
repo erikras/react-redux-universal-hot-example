@@ -40,9 +40,15 @@ class Snippet extends Component {
     const { description, image, title } = snippet.payload;
     return (
       <div className={styles.snippet}>
-        { image && <Image image={image} size="small" /> }
-        <h2>{title}</h2>
-        <div dangerouslySetInnerHTML={{__html: description}} />
+        <header className={styles.bannerMini}>
+          <div className={styles.background}>
+            { image && <Image image={image} size="medium" /> }
+          </div>
+          <div className={styles.bottomAlign}>
+            <h1>{title}</h1>
+          </div>
+        </header>
+        <section dangerouslySetInnerHTML={{__html: description}} />
       </div>
     );
   }

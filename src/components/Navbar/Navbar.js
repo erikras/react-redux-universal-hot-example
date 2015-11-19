@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 export default class Navbar extends Component {
   static propTypes = {
-    activeNavItem: PropTypes.string.required,
+    activeNavItem: PropTypes.string,
   }
 
   render() {
