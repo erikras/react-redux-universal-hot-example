@@ -42,7 +42,7 @@ class Explore extends Component {
     return (
       <div>
         <DocumentMeta title="Explore the MSD"/>
-        <AreaList items={areaItems} />
+        { areaItems && <AreaList items={areaItems} /> }
       </div>
     );
   }

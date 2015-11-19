@@ -39,10 +39,12 @@ class Landmarks extends Component {
     if (loading) return (<Loader />);
     if (error) return (<Error error={error} />);
     const landmarkItems = landmarks.payload;
-    landmarkItems.sort( function(first, second) {
-      if (first.title === second.title) return 0;
-      return (first.title > second.title ? 1 : -1);
-    });
+    if (landmarkItems && landmarkItems.length) {
+      landmarkItems.sort( function(first, second) {
+        if (first.title === second.title) return 0;
+        return (first.title > second.title ? 1 : -1);
+      });
+    }
     return (
       <div>
         <DocumentMeta title="Explore the MSD"/>
