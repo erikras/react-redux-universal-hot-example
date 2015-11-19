@@ -63,7 +63,7 @@ export default class App extends Component {
           <NavBrand>
             <IndexLink to="/" activeStyle={{color: '#33e0ff'}}>
               <div className={styles.brand}/>
-              <span>React Redux Example</span>
+              <span>{config.app.title}</span>
             </IndexLink>
           </NavBrand>
 
