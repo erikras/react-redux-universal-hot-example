@@ -15,9 +15,20 @@ export default class Home extends Component {
   render() {
     const styles = require('./Home.scss');
     const msdHero = require('./msd.jpg');
+    const meta = {
+      title: 'Welcome to the Melbourne School of Design',
+      meta: {
+        property: {
+          'og:image': msdHero,
+          'twitter:image': msdHero,
+          'twitter:image:width': 1400,
+          'twitter:image:height': 934
+        }
+      }
+    };
     return (
       <div className={styles.home}>
-      <DocumentMeta title="Welcome to the Melbourne School of Design" />
+      <DocumentMeta {...meta} extend />
         <header className={styles.article} style={{backgroundImage: `url(${msdHero})`}}>
           <div className={styles.videoLoop}>
             <video autoPlay="true" loop="true" preload="auto">

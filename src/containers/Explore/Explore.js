@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import DocumentMeta from 'react-document-meta';
 import {connect} from 'react-redux';
 import * as landmarkActions from 'redux/modules/landmarks';
 import { areasAreLoaded, loadAreas } from 'redux/modules/areas';
@@ -41,7 +40,6 @@ class Explore extends Component {
     const areaItems = areas.payload;
     return (
       <div>
-        <DocumentMeta title="Explore the MSD"/>
         { areaItems && <AreaList items={areaItems} /> }
       </div>
     );

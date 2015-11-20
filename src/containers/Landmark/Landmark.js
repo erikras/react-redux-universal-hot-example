@@ -46,10 +46,23 @@ class Landmark extends Component {
     if (loading) return (<Loader />);
     if (error) return (<Error error={error} />);
     const { location } = this.props;
-    const { title, description, image, snippets } = landmark.payload;
+    const { description, image, snippets, teaser, title } = landmark.payload;
+    const meta = {
+      title: title,
+      description: teaser,
+      meta: {
+        property: {
+          'og:image': image.large.src,
+          'twitter:image': image.medium.src,
+          'twitter:image:width': image.medium.width,
+          'twitter:image:height': image.medium.height,
+          'twitter:description': teaser
+        }
+      }
+    };
     return (
       <div className={styles.landmark}>
-        <DocumentMeta title={title} />
+        <DocumentMeta {...meta} extend />
         <div className={styles.coverImage}>
           <Image image={image} size="medium" />
         </div>

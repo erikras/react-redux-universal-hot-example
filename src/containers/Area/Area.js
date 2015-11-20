@@ -3,7 +3,7 @@ import DocumentMeta from 'react-document-meta';
 import {connect} from 'react-redux';
 import * as areaActions from 'redux/modules/areas';
 import { areaIsLoaded, loadArea } from 'redux/modules/areas';
-import { Error, Loader, LandmarkList } from 'components';
+import { Error, Image, Loader, LandmarkList } from 'components';
 
 @connect(
   state => ({
@@ -45,21 +45,38 @@ class Area extends Component {
     const error = !areaItem || areaItem.error;
     if (loading) return (<Loader />);
     if (error) return (<Error error={error} />);
-    const area = areaItem.payload;
-
+    const { description, image, landmarks, teaser, title } = areaItem.payload;
+    const meta = {
+      title: title,
+      description: teaser,
+      meta: {
+        property: {
+          'og:image': image.large.src,
+          'twitter:image': image.medium.src,
+          'twitter:image:width': image.medium.width,
+          'twitter:image:height': image.medium.height,
+          'twitter:description': teaser
+        }
+      }
+    };
     return (
       <div className={styles.area}>
-        <DocumentMeta title="Explore an Area"/>
-        <div dangerouslySetInnerHTML={{__html: area.description}} />
-        <h2>{area.title}’s Landmarks</h2>
+        <DocumentMeta {...meta} extend />
+        { description && image ?
+          <div className={styles.description}>
+          <Image image={image} size="small" />
+          <div dangerouslySetInnerHTML={{__html: description}} />
+        </div>
+        : '' }
+        <h2>{title}’s Landmarks</h2>
         {/* <div className={styles.description}>
-          { area.image && <Image image={area.image} size="small" /> }
-          <div dangerouslySetInnerHTML={{__html: area.description}} />
+          { image && <Image image={image} size="small" /> }
+          <div dangerouslySetInnerHTML={{__html: description}} />
         </div> */}
         {
-          area.landmarks.length ?
-          <LandmarkList items={area.landmarks} />
-          : <p>No landmarks for {area.title} yet.</p>
+          landmarks.length ?
+          <LandmarkList items={landmarks} />
+          : <p>No landmarks for {title} yet.</p>
         }
       </div>
     );

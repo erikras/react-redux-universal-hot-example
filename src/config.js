@@ -17,15 +17,13 @@ module.exports = Object.assign({
   apiPath: '/api',
   app: {
     title: 'Explore the Melbourne School of Design',
-    description: 'Find out what makes the MSD unique in both the design and higher education landscapes.',
+    description: 'A living learning building, the Melbourne School of Design sets a new standard for design education in the Asia-Pacific region.',
     meta: {
       charSet: 'utf-8',
       property: {
         'og:site_name': 'Explore the Melbourne School of Design',
         'og:image': 'http://explore.msd.unimelb.edu.au/explore_msd_logo.jpg',
         'og:locale': 'en_US',
-        'og:title': 'Explore the Melbourne School of Design',
-        'og:description': 'A living learning building, the Melbourne School of Design sets a new standard for design education in the Asia-Pacific region.',
         'twitter:card': 'summary_large_image',
         'twitter:site': '@msdsocial',
         'twitter:creator': '@msdsocial',
