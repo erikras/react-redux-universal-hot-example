@@ -60,11 +60,19 @@
   }
 
   @include breakpoint(desktop) {
-    transition: all 160ms;
+    transition: all 160ms ease-in-out;
 
     &:hover {
       @include shadow-6dp();
       transform: scale(1.04);
+    }
+
+    a img {
+      transition: all 160ms ease-in-out;
+    }
+
+    a:hover img {
+      transform: scale(1.1);
     }
   }
 }

@@ -2,7 +2,7 @@
 
 .snippet {
 
-  .tour, .interview {
+  .tour, .interview, .timelapse {
     .bannerMini {
       @include breakpoint(height-smallest) {
         @include rem(min-height, 200px);

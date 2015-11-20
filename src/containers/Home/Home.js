@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import DocumentMeta from 'react-document-meta';
+import config from '../../config';
 
 export default class Home extends Component {
   static propTypes = {
@@ -19,8 +20,8 @@ export default class Home extends Component {
       title: 'Welcome to the Melbourne School of Design',
       meta: {
         property: {
-          'og:image': msdHero,
-          'twitter:image': msdHero,
+          'og:image': config.host + msdHero,
+          'twitter:image': config.host + msdHero,
           'twitter:image:width': 1400,
           'twitter:image:height': 934
         }
