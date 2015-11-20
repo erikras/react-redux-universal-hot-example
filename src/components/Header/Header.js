@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import { Link } from 'react-router';
 
 export default class Header extends Component {
   static propTypes = {
@@ -15,10 +16,12 @@ export default class Header extends Component {
     return (
       <div className={styles.pageHeader}>
         <div className={styles.pageHeaderLogo}>
-          <svg viewBox="0 0 214 100" role="img" aria-labelledby="aria-uom-title">
-            <title id="aria-uom-title">Melbourne School of Design Logo</title>
-            <image xlinkHref={logo} src={raster} width="214" height="100" alt="Melbourne School of Design | The University of Melbourne" preserveAspectRatio="xMaxYMin meet" />
-          </svg>
+          <Link to="/">
+            <svg viewBox="0 0 214 100" role="img" aria-labelledby="aria-uom-title">
+              <title id="aria-uom-title">Melbourne School of Design Logo</title>
+              <image xlinkHref={logo} src={raster} width="214" height="100" alt="Melbourne School of Design | The University of Melbourne" preserveAspectRatio="xMaxYMin meet" />
+            </svg>
+          </Link>
         </div>
         <div className={styles.pageHeaderTitle}>
           <h1>{title}</h1>

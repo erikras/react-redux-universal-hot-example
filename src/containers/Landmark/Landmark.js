@@ -49,7 +49,7 @@ class Landmark extends Component {
     const { title, description, image, snippets } = landmark.payload;
     return (
       <div className={styles.landmark}>
-        <DocumentMeta title="Landmark"/>
+        <DocumentMeta title={title} />
         <div className={styles.coverImage}>
           <Image image={image} size="medium" />
         </div>

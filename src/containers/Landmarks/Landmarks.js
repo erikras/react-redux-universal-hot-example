@@ -40,7 +40,7 @@ class Landmarks extends Component {
     if (error) return (<Error error={error} />);
     const landmarkItems = landmarks.payload;
     if (landmarkItems && landmarkItems.length) {
-      landmarkItems.sort( function(first, second) {
+      landmarkItems.sort( (first, second) => {
         if (first.title === second.title) return 0;
         return (first.title > second.title ? 1 : -1);
       });

@@ -9,14 +9,15 @@
 
   ul {
     @include block-width($w-sml);
+    @include rem(height, $navbar-height);
     align-items: center;
     display: flex;
-    height: 100%;
     justify-content: center;
     margin: 0 auto;
     padding: 0;
 
     li {
+      @include rem(height, $navbar-height);
       cursor: pointer;
       flex-basis: 20%;
       list-style: none;
@@ -24,11 +25,12 @@
       padding: 0;
 
       a {
+        @include rem(height, $navbar-height);
         @include rem(padding-bottom, 24px);
+        @include rem(padding-top, 4px);
         color: #fff;
         cursor: pointer;
         display: block;
-        height: 100%;
         text-align: center;
         text-decoration: none;
         width: 100%;
@@ -70,5 +72,9 @@
         }
       }
     }
+  }
+
+  @media print {
+    display: none;
   }
 }

@@ -37,18 +37,20 @@ class Snippet extends Component {
     if (loading) return (<Loader />);
     if (error) return (<Error error={error} />);
 
-    const { description, image, title } = snippet.payload;
+    const { category, description, image, title } = snippet.payload;
     return (
       <div className={styles.snippet}>
-        <header className={styles.bannerMini}>
-          <div className={styles.background}>
-            { image && <Image image={image} size="medium" /> }
-          </div>
-          <div className={styles.bottomAlign}>
-            <h1>{title}</h1>
-          </div>
-        </header>
-        <section dangerouslySetInnerHTML={{__html: description}} />
+        <div className={styles[`${category}`]}>
+          <header className={image ? styles.bannerMini : ''}>
+            <div className={styles.background}>
+              { image && <Image image={image} size="medium" /> }
+            </div>
+            <div className={styles.bottomAlign}>
+              <h1>{title}</h1>
+            </div>
+          </header>
+          <section dangerouslySetInnerHTML={{__html: description}} />
+        </div>
       </div>
     );
   }

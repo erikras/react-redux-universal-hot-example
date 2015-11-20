@@ -14,6 +14,16 @@ $bottom: $navbar-height + 16px;
   right: 4%;
   top: 14%;
 
+  .back {
+    @include padding-leader(1);
+    text-align: center;
+
+    a {
+      font-weight: $bold;
+      text-decoration: none;
+    }
+  }
+
   .close {
     @include rem(right, 16px);
     @include rem(top, 8px);
@@ -46,6 +56,10 @@ $bottom: $navbar-height + 16px;
         font-weight: $light;
         text-transform: uppercase;
       }
+    }
+
+    @media print {
+      display: none;
     }
   }
 

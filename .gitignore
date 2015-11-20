@@ -23,3 +23,5 @@ node_modules
 dist/
 *.iml
 webpack-stats.json
+*.sublime-project
+*.sublime-workspace

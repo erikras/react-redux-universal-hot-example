@@ -1,6 +1,31 @@
 @import 'src/theme/main';
 
 .snippet {
+
+  .tour, .interview {
+    .bannerMini {
+      @include breakpoint(height-smallest) {
+        @include rem(min-height, 200px);
+      }
+
+      @include breakpoint(height-small) {
+        @include rem(min-height, 200px);
+      }
+
+      @include breakpoint(height-medium) {
+        @include rem(min-height, 250px);
+      }
+
+      @include breakpoint(height-big) {
+        @include rem(min-height, 280px);
+      }
+    }
+  }
+
+  aside {
+    @extend .video;
+  }
+
   img {
     height: auto;
     max-width: 100%;
