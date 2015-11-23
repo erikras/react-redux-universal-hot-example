@@ -2,7 +2,11 @@
 
 .snippet {
 
-  .tour, .interview, .timelapse {
+  .bannerMini {
+    margin-bottom: rhythm(1);
+  }
+
+  .tour, .interview, .timelapse, .video {
     .bannerMini {
       @include breakpoint(height-smallest) {
         @include rem(min-height, 200px);
@@ -24,6 +28,10 @@
 
   aside {
     @extend .video;
+
+    iframe {
+      @extend %clearfix;
+    }
   }
 
   img {

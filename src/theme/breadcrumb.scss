@@ -1,0 +1,18 @@
+.breadcrumb {
+  @include block-width($w-sml);
+  border-bottom: 1px solid $lightgray;
+  margin-bottom: 1em;
+  padding-bottom: 5px;
+
+  a {
+    color: $silver;
+    font-weight: $regular;
+    text-decoration: none;
+
+    &:hover {
+      @include breakpoint(desktop) {
+        color: $midgray;
+      }
+    }
+  }
+}

@@ -6,18 +6,21 @@ img {
 }
 
 .video {
+  @include rem(max-width, 1200px);
   height: 0;
+  margin-bottom: rhythm(1);
   margin-left: auto;
-  max-width: 1099px;
+  margin-right: auto;
   padding-bottom: 56.25%;
   padding-top: 0;
   position: relative;
+  width: 100%;
 
-  // @include breakpoint(wide) {
-  //   @include trailer(2);
-  //   max-width: 100%;
-  //   padding-bottom: 39.45%;
-  // }
+  @include breakpoint(wide) {
+    @include trailer(2);
+    max-width: 100%;
+    padding-bottom: 39.45%;
+  }
 
   iframe {
     height: 100%;
@@ -27,10 +30,10 @@ img {
     top: 0;
     width: 100%;
 
-    // @include breakpoint(wide) {
-    //   margin-left: 15%;
-    //   width: 70%;
-    // }
+    @include breakpoint(wide) {
+      margin-left: 15%;
+      width: 70%;
+    }
   }
 }
 

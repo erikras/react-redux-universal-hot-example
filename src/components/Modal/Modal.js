@@ -19,10 +19,6 @@ export default class Modal extends Component {
           </Link>
         </div>
         { this.props.children }
-        <div className={styles.back}>
-          <hr className={styles.spacer} />
-          <p><Link to={this.props.returnTo}>&larr; Back</Link></p>
-        </div>
       </div>
     );
   }

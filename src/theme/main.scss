@@ -24,10 +24,11 @@ body {
 
 @import 'normalise.scss';
 @import 'reset.scss';
+@import 'foundation';
 
 /************************/
 
-@import 'foundation';
+@import 'breadcrumb';
 @import 'card';
 @import 'header';
 @import 'media';

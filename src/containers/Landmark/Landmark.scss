@@ -49,7 +49,7 @@ $busy-space-large: $header-height-large + $navbar-height + $snippet-height-large
       text-align: center;
 
       @include breakpoint(height-smallest) {
-        padding-bottom: rhythm(1);
+        padding-bottom: rhythm(0.5);
         padding-top: rhythm(1);
       }
     }
@@ -58,6 +58,36 @@ $busy-space-large: $header-height-large + $navbar-height + $snippet-height-large
       color: $skyblue;
       &:hover {
         color: $duckeggblue;
+      }
+    }
+
+    .breadcrumb {
+      @include rem(font-size, 14px);
+      border-bottom: none;
+      margin-bottom: 0;
+      text-align: center;
+
+      @include breakpoint(height-smallest) {
+        padding-bottom: rhythm(1);
+      }
+
+      a {
+        @include rem(border-radius, 4px);
+        @include rem(padding-bottom, 2px);
+        @include rem(padding-left, 12px);
+        @include rem(padding-right, 12px);
+        @include rem(padding-top, 2px);
+        background-color: $darkgray;//$bgfloating;
+        border-bottom: 2px solid $silver;
+        color: $silver; //$midgray;
+        display: inline-block;
+
+        &:hover {
+          @include breakpoint(desktop) {
+            margin-top: 2px;
+            border-bottom-width: 0;
+          }
+        }
       }
     }
 

@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 import {connect} from 'react-redux';
 import { Error, Image, Loader } from 'components';
 import * as snippetActions from 'redux/modules/snippets';
@@ -37,7 +38,9 @@ class Snippet extends Component {
     if (loading) return (<Loader />);
     if (error) return (<Error error={error} />);
 
-    const { category, description, image, title } = snippet.payload;
+    const { category, description, image, landmark, title } = snippet.payload;
+    const landmarkId = snippet.payload.landmark_id;
+
     return (
       <div className={styles.snippet}>
         <div className={styles[`${category}`]}>
@@ -49,6 +52,9 @@ class Snippet extends Component {
               <h1>{title}</h1>
             </div>
           </header>
+          <div className={styles.breadcrumb}>
+            <Link to={`/landmark/${landmarkId}`}>← Back to {landmark}</Link>
+          </div>
           <section dangerouslySetInnerHTML={{__html: description}} />
         </div>
       </div>

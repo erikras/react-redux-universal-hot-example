@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 import DocumentMeta from 'react-document-meta';
 import {connect} from 'react-redux';
 import * as landmarkActions from 'redux/modules/landmarks';
@@ -46,7 +47,8 @@ class Landmark extends Component {
     if (loading) return (<Loader />);
     if (error) return (<Error error={error} />);
     const { location } = this.props;
-    const { description, image, snippets, teaser, title } = landmark.payload;
+    const {area, description, image, snippets, teaser, title } = landmark.payload;
+    const areaId = landmark.payload.area_id;
     const meta = {
       title: title,
       description: teaser,
@@ -60,6 +62,7 @@ class Landmark extends Component {
         }
       }
     };
+
     return (
       <div className={styles.landmark}>
         <DocumentMeta {...meta} extend />
@@ -72,6 +75,9 @@ class Landmark extends Component {
               {title}
             </span>
           </h1>
+          <div className={styles.breadcrumb}>
+            <Link to={`/explore/${areaId}`}>← Back to {area}</Link>
+          </div>
           { description && <div className={styles.landmarkDescription} dangerouslySetInnerHTML={{__html: description}} /> }
         </div>
         { snippets.length && <SnippetList items={snippets} location={location} /> }

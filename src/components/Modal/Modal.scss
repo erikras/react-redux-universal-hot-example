@@ -14,14 +14,8 @@ $bottom: $navbar-height + 16px;
   right: 4%;
   top: 14%;
 
-  .back {
-    @include padding-leader(1);
-    text-align: center;
-
-    a {
-      font-weight: $bold;
-      text-decoration: none;
-    }
+  @include breakpoint(wide) {
+    @include rem(max-width, $w-lge);
   }
 
   .close {

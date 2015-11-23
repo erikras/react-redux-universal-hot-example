@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 import DocumentMeta from 'react-document-meta';
 import {connect} from 'react-redux';
 import * as areaActions from 'redux/modules/areas';
@@ -62,6 +63,9 @@ class Area extends Component {
     return (
       <div className={styles.area}>
         <DocumentMeta {...meta} extend />
+        <div className={styles.breadcrumb}>
+          <Link to="/explore">← Back to all areas</Link>
+        </div>
         { description && image ?
           <div className={styles.description}>
           <Image image={image} size="small" />
