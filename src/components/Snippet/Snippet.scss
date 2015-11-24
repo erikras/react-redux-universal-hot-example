@@ -2,8 +2,8 @@
 
 .snippet {
 
-  .bannerMini {
-    margin-bottom: rhythm(1);
+  .breadcrumb {
+    @include padding-leader(1);
   }
 
   .tour, .interview, .timelapse, .video {
@@ -23,6 +23,13 @@
       @include breakpoint(height-big) {
         @include rem(min-height, 280px);
       }
+    }
+  }
+
+  .tour {
+    iframe {
+      @include rem(height, 600px);
+      width: 100%;
     }
   }
 

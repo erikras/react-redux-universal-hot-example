@@ -7,7 +7,7 @@
   width: 100%;
   overflow-x: scroll;
   overflow-y: hidden;
-  position: absolute;
+  position: fixed;
 
   &> ul {
     @include rem(padding-left, $snippet-margin / 2);

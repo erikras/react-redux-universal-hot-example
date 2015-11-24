@@ -32,16 +32,67 @@ $busy-space-large: $header-height-large + $navbar-height + $snippet-height-large
     @include padding-leader(1);
     @include padding-trailer(1);
     overflow-y: auto;
-    max-height: 480px - $busy-space-small;
+    max-height: 480px - $busy-space-small; // for devices with no viewport unit/calc support
     max-height: calc(100vh - #{$busy-space-small});
     position: relative;
 
     @include breakpoint(height-small) {
+      // 700px
       max-height: calc(100vh - #{$busy-space-medium});
     }
 
     @include breakpoint(height-medium) {
+      // 850px
       max-height: calc(100vh - #{$busy-space-large});
+    }
+
+    /****************************************
+     Device-specific hacks
+    *****************************************/
+
+    /* iPhone 6 landscape */
+    @media screen and (height: 375px) {
+      max-height: 375px - $busy-space-small;
+    }
+
+    /* iPhone 6 Plus landscape */
+    @media screen and (height: 414px) {
+      max-height: 414px - $busy-space-small;
+    }
+
+    /* iPhone 4 portrait */
+   @media screen and (height: 480px) {
+      max-height: 480px - $busy-space-small;
+    }
+
+    /* iPhone 5 portrait */
+   @media screen and (height: 568px) {
+      max-height: 568px - $busy-space-small;
+    }
+
+    /* iPhone 6 portrait: chrome – navbar */
+   @media screen and (height: 558px) {
+      max-height: 558px - $busy-space-small;
+    }
+
+    /* iPhone 6 portrait: stackoverflow */
+   @media screen and (height: 559px) {
+      max-height: 559px - $busy-space-small;
+    }
+
+    /* iPhone 6 portrait: chrome - default */
+   @media screen and (height: 627px) {
+      max-height: 627px - $busy-space-small;
+    }
+
+    /* iPad landscape */
+   @media screen and (height: 768px) {
+      max-height: 768px - $busy-space-medium;
+    }
+
+    /* iPad portrait */
+     @media screen and (height: 1024px) {
+      max-height: 1024px - $busy-space-large;
     }
 
     h1 {
@@ -62,7 +113,7 @@ $busy-space-large: $header-height-large + $navbar-height + $snippet-height-large
     }
 
     .breadcrumb {
-      @include rem(font-size, 14px);
+      @include rem(font-size, 15px);
       border-bottom: none;
       margin-bottom: 0;
       text-align: center;
@@ -77,12 +128,14 @@ $busy-space-large: $header-height-large + $navbar-height + $snippet-height-large
         @include rem(padding-left, 12px);
         @include rem(padding-right, 12px);
         @include rem(padding-top, 2px);
-        background-color: $darkgray;//$bgfloating;
+        @include shadow-2dp();
+        background-color: $darkgray;
         border-bottom: 2px solid $silver;
-        color: $silver; //$midgray;
+        color: $lightgray;
         display: inline-block;
+        font-weight: $bold;
 
-        &:hover {
+        &:focus {
           @include breakpoint(desktop) {
             margin-top: 2px;
             border-bottom-width: 0;

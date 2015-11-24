@@ -24,7 +24,12 @@ export default class Home extends Component {
           <p>Have a look at our <a href="http://msd.unimelb.edu.au/graduate-programs">Graduate Programs</a>, or our Undergraduate Degree, the <a href="http://benvs.unimelb.edu.au/">Bachelor of Environments</a>.</p>
           <p><b>Authoriser:</b> Manager, Marketing and Engagement, Faculty of Architecture, Building and Planning.</p>
           <p><b>Maintainer:</b> Web Officer, Faculty of Architecture, Building and Planning.</p>
-          <p><b>The University of Melbourne</b> CRICOS Provider Code: 00116K.</p>
+
+          <p><b>The University of Melbourne</b><br />
+          <a href="http://www.unimelb.edu.au/disclaimer/">Disclaimer &amp; Copyright</a><br />
+          Phone: 13 MELB (13 6352) | International: +61 3 9035 5511<br />
+          ABN: 84 002 705 224<br />
+          CRICOS Provider Code: 00116K.</p>
           <p><i>We acknowledge that the Melbourne School of Design and the Parkville campus is located on Wurundjeri land.</i></p>
         </section>
       </div>

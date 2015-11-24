@@ -18,7 +18,6 @@
 .MSDContent {
   @include rem(padding-bottom, $navbar-height);
   @include rem(padding-top, $header-height-small);
-  min-height: 100vh;
   z-index: 1;
 
   @include breakpoint(height-small) {
