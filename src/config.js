@@ -7,7 +7,7 @@ const environment = {
   },
   production: {
     isProduction: true,
-    apiServer: 'https://api.explore.msd.unimelb.edu.au'
+    apiServer: 'https://api.explore.msd.unimelb.edu.au',
   }
 }[process.env.NODE_ENV || 'development'];
 
@@ -15,6 +15,7 @@ module.exports = Object.assign({
   port: process.env.PORT,
   apiPort: process.env.APIPORT,
   host: process.env.PREFERRED_HOST,
+  cloudfrontDistribution: process.env.CLOUDFRONT_DISTRIBUTION,
   apiPath: '/api',
   app: {
     title: 'Explore the Melbourne School of Design',

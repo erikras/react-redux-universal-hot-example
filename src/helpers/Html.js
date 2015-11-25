@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom/server';
 import serialize from 'serialize-javascript';
 import DocumentMeta from 'react-document-meta';
+import config from '../config';
 
 /**
  * Wrapper component containing HTML metadata and boilerplate tags.
@@ -41,13 +42,13 @@ export default class Html extends Component {
           <meta name="react-comment-hack" dangerouslySetInnerHTML={{__html: comment}}></meta>
           {/* styles (will be present only in production with webpack extract text plugin) */}
           {Object.keys(assets.styles).map((style, key) =>
-            <link href={assets.styles[style]} key={key} rel="stylesheet" type="text/css" />
+            <link href={process.env.NODE_ENV === 'production' ? config.cloudfrontDistribution + assets.styles[style] : assets.styles[style]} key={key} rel="stylesheet" type="text/css" />
           )}
         </head>
         <body>
           <div id="content" dangerouslySetInnerHTML={{__html: content}}/>
           <script dangerouslySetInnerHTML={{__html: `window.__data=${serialize(store.getState())};`}} charSet="UTF-8"/>
-          <script src={assets.javascript.main} charSet="UTF-8"/>
+          <script src={process.env.NODE_ENV === 'production' ? config.cloudfrontDistribution + assets.javascript.main : assets.javascript.main} charSet="UTF-8"/>
           {/* webfonts */}
           <script src="https://use.typekit.net/fpp4zlv.js"></script>
           <script dangerouslySetInnerHTML={{__html: "try{Typekit.load({ async: true });}catch(e){}"}} />
