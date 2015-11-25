@@ -133,7 +133,7 @@
     "eslint": "1.8.0",
     "eslint-config-airbnb": "0.1.0",
     "eslint-loader": "^1.0.0",
-    "eslint-plugin-import": "^0.8.0",
+    "eslint-plugin-import": "^0.10.1",
     "eslint-plugin-react": "^3.5.0",
     "clean-webpack-plugin": "^0.1.4",
     "css-loader": "^0.23.0",
