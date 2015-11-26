@@ -12,6 +12,9 @@ module.exports = {
       'font-awesome-webpack!' + sourceRoot + '/theme/font-awesome.config.js'
     ]
   },
+  output: {
+    path: projectRoot + '/static/dist'
+  },
   resolve: {
     root: sourceRoot,
     alias: {
