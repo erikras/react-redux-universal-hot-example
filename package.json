@@ -41,7 +41,8 @@
     "build-prod": {
       "command": "node node_modules/redux-universal-test/webpack/build-prod.js",
       "env": {
-        "NODE_PATH": "./src"
+        "NODE_PATH": "./src",
+        "NODE_ENV": "production"
       }
     },
     "start-prod": {
