@@ -28,7 +28,7 @@
     "start-prod": "better-npm-run start-prod",
     "start-prod-api": "better-npm-run start-prod-api",
     "build": "better-npm-run build-prod",
-    "postinstall": "better-npm-run build-prod",
+    "postinstall": "npm run build",
     "lint": "eslint -c .eslintrc src api",
     "start-dev": "better-npm-run start-dev",
     "start-dev-api": "better-npm-run start-dev-api",
@@ -41,18 +41,14 @@
     "build-prod": {
       "command": "node node_modules/redux-universal-test/webpack/build-prod.js",
       "env": {
-        "NODE_PATH": "/Users/d4/code/react-redux-universal-hot-example-fork/src",
-        "CONFIG_PATH": "/Users/d4/code/react-redux-universal-hot-example-fork/src/config.js",
-        "WEBPACK_OVERRIDES_PATH": "/Users/d4/code/react-redux-universal-hot-example-fork/webpack-overrides-config.js"
+        "NODE_PATH": "./src"
       }
     },
     "start-prod": {
       "command": "node node_modules/redux-universal-test/bin/server.js",
       "env": {
-        "NODE_PATH": "/Users/d4/code/react-redux-universal-hot-example-fork/src",
+        "NODE_PATH": "./src",
         "NODE_ENV": "production",
-        "CONFIG_PATH": "/Users/d4/code/react-redux-universal-hot-example-fork/src/config.js",
-        "WEBPACK_OVERRIDES_PATH": "/Users/d4/code/react-redux-universal-hot-example-fork/webpack-overrides-config.js",
         "APIPORT": 3030
       }
     },
@@ -61,18 +57,14 @@
       "env": {
         "NODE_PATH": "./api",
         "NODE_ENV": "production",
-        "CONFIG_PATH": "/Users/d4/code/react-redux-universal-hot-example-fork/src/config.js",
-        "WEBPACK_OVERRIDES_PATH": "/Users/d4/code/react-redux-universal-hot-example-fork/webpack-overrides-config.js",
         "APIPORT": 3030
       }
     },
     "start-dev": {
       "command": "node node_modules/redux-universal-test/bin/server.js",
       "env": {
-        "NODE_PATH": "/Users/d4/code/react-redux-universal-hot-example-fork/src",
+        "NODE_PATH": "./src",
         "NODE_ENV": "development",
-        "CONFIG_PATH": "/Users/d4/code/react-redux-universal-hot-example-fork/src/config.js",
-        "WEBPACK_OVERRIDES_PATH": "/Users/d4/code/react-redux-universal-hot-example-fork/webpack-overrides-config.js",
         "PORT": 3000,
         "APIPORT": 3030
       }
@@ -82,18 +74,14 @@
       "env": {
         "NODE_PATH": "node_modules/redux-universal-test/bin/api",
         "NODE_ENV": "development",
-        "CONFIG_PATH": "/Users/d4/code/react-redux-universal-hot-example-fork/src/config.js",
-        "WEBPACK_OVERRIDES_PATH": "/Users/d4/code/react-redux-universal-hot-example-fork/webpack-overrides-config.js",
         "APIPORT": 3030
       }
     },
     "watch-client": {
       "command": "node node_modules/redux-universal-test/webpack/webpack-dev-server.js",
       "env": {
-        "UV_THREADPOOL_SIZE": 100,
-        "CONFIG_PATH": "/Users/d4/code/react-redux-universal-hot-example-fork/src/config.js",
-        "WEBPACK_OVERRIDES_PATH": "/Users/d4/code/react-redux-universal-hot-example-fork/webpack-overrides-config.js",
-        "NODE_PATH": "/Users/d4/code/react-redux-universal-hot-example-fork/src"
+        "NODE_PATH": "./src",
+        "UV_THREADPOOL_SIZE": 100
       }
     }
   },
@@ -124,7 +112,7 @@
     "react-redux": "^4.0.0",
     "react-router": "^1.0.0-rc3",
     "react-router-bootstrap": "^0.19.3",
-    "redux-universal-test": "0.1.2",
+    "redux-universal-test": "0.2.0",
     "redux": "^3.0.4",
     "redux-form": "^3.0.0",
     "scroll-behavior": "^0.3.0",

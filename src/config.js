@@ -1,3 +1,6 @@
+const path = require('path');
+const sourceRoot = path.resolve(__dirname);
+const projectRoot = path.resolve(__dirname, '..');
 const environment = {
   development: {
     isProduction: false
@@ -6,6 +9,9 @@ const environment = {
     isProduction: true
   }
 }[process.env.NODE_ENV || 'development'];
+
+console.log('overrides path', sourceRoot);
+console.log('context', projectRoot);
 
 module.exports = Object.assign({
   host: process.env.HOST || 'localhost',
@@ -31,6 +37,26 @@ module.exports = Object.assign({
         'twitter:image': 'https://react-redux.herokuapp.com/logo.jpg',
         'twitter:image:width': '200',
         'twitter:image:height': '200'
+      }
+    }
+  },
+  webpack: {
+    context: projectRoot,
+    entry: {
+      main: [
+        'bootstrap-sass!' + sourceRoot + '/theme/bootstrap.config.js',
+        'font-awesome-webpack!' + sourceRoot + '/theme/font-awesome.config.js'
+      ]
+    },
+    output: {
+      path: projectRoot + '/static/dist'
+    },
+    resolve: {
+      root: sourceRoot,
+      alias: {
+        routes: sourceRoot + '/routes.js',
+        config: sourceRoot + '/config.js',
+        reducers: sourceRoot + '/redux/modules/reducer.js'
       }
     }
   }
