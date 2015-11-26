@@ -29,7 +29,7 @@
     "start-prod-api": "better-npm-run start-prod-api",
     "build": "better-npm-run build-prod",
     "postinstall": "npm run build",
-    "lint": "eslint -c .eslintrc src api",
+    "lint": "eslint -c .eslintrc src",
     "start-dev": "better-npm-run start-dev",
     "start-dev-api": "better-npm-run start-dev-api",
     "watch-client": "better-npm-run watch-client",
