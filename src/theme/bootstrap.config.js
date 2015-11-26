@@ -11,8 +11,13 @@
  */
 
 module.exports = {
-  preBootstrapCustomizations: './src/theme/variables.scss',
-  mainSass: './src/theme/bootstrap.overrides.scss',
+  // TODO: investigate what these were accomplishing. they appear to 
+  // not have any impact to disable, and were breaking webpack build
+  // while construct their paths strangely
+  // 
+  // preBootstrapCustomizations: './src/theme/variables.scss',
+  // mainSass: './src/theme/bootstrap.overrides.scss',
+  // 
   verbose: false,
   debug: false,
   scripts: {

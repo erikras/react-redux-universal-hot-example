@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import DocumentMeta from 'react-document-meta';
 import { MiniInfoBar } from 'components';
-import config from '../../config';
+import config from 'config';
 
 export default class About extends Component {
 

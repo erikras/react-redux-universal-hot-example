@@ -1,15 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { IndexLink } from 'react-router';
-import { LinkContainer } from 'react-router-bootstrap';
-import { Navbar, NavBrand, Nav, NavItem, CollapsibleNav } from 'react-bootstrap';
+// import { LinkContainer } from 'react-router-bootstrap';
+// import { Navbar, NavBrand, Nav, NavItem, CollapsibleNav } from 'react-bootstrap';
+import { Navbar, NavBrand } from 'react-bootstrap';
 import DocumentMeta from 'react-document-meta';
 import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
 import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
 import { InfoBar } from 'components';
 import { pushState } from 'redux-router';
 import connectData from 'helpers/connectData';
-import config from '../../config';
+import config from 'config';
 
 function fetchData(getState, dispatch) {
   const promises = [];
@@ -54,7 +55,7 @@ export default class App extends Component {
   }
 
   render() {
-    const {user} = this.props;
+    // const {user} = this.props;
     const styles = require('./App.scss');
     return (
       <div className={styles.app}>
@@ -66,6 +67,10 @@ export default class App extends Component {
               <span>{config.app.title}</span>
             </IndexLink>
           </NavBrand>
+          {/*
+
+          TODO: getting invariant violations from some integration of react-bootstrap
+          and when this is run outside of the original project directory
 
           <CollapsibleNav eventKey={0}>
             <Nav navbar>
@@ -102,6 +107,7 @@ export default class App extends Component {
               </NavItem>
             </Nav>
           </CollapsibleNav>
+          */}
         </Navbar>
 
         <div className={styles.appContent}>

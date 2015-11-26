@@ -27,8 +27,8 @@
     "start": "concurrent --kill-others \"npm run start-prod\" \"npm run start-prod-api\"",
     "start-prod": "better-npm-run start-prod",
     "start-prod-api": "better-npm-run start-prod-api",
-    "build": "webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
-    "postinstall": "webpack --display-error-details --config webpack/prod.config.js",
+    "build": "better-npm-run build-prod",
+    "postinstall": "better-npm-run build-prod",
     "lint": "eslint -c .eslintrc src api",
     "start-dev": "better-npm-run start-dev",
     "start-dev-api": "better-npm-run start-dev-api",
@@ -38,45 +38,62 @@
     "test-node": "./node_modules/mocha/bin/mocha ./api/**/__tests__/*-test.js --compilers js:babel-core/register"
   },
   "betterScripts": {
-    "start-prod": {
-      "command": "node ./bin/server.js",
+    "build-prod": {
+      "command": "node node_modules/redux-universal-test/webpack/build-prod.js",
       "env": {
-        "NODE_PATH": "./src",
+        "NODE_PATH": "/Users/d4/code/test/src",
+        "CONFIG_PATH": "/Users/d4/code/test/src/config.js",
+        "WEBPACK_OVERRIDES_PATH": "/Users/d4/code/test/webpack-overrides-config.js"
+      }
+    },
+    "start-prod": {
+      "command": "node node_modules/redux-universal-test/bin/server.js",
+      "env": {
+        "NODE_PATH": "/Users/d4/code/test/src",
         "NODE_ENV": "production",
-        "PORT": 8080,
+        "CONFIG_PATH": "/Users/d4/code/test/src/config.js",
+        "WEBPACK_OVERRIDES_PATH": "/Users/d4/code/test/webpack-overrides-config.js",
         "APIPORT": 3030
       }
     },
     "start-prod-api": {
-      "command": "node ./bin/api.js",
+      "command": "node node_modules/redux-universal-test/bin/api.js",
       "env": {
         "NODE_PATH": "./api",
         "NODE_ENV": "production",
+        "CONFIG_PATH": "/Users/d4/code/test/src/config.js",
+        "WEBPACK_OVERRIDES_PATH": "/Users/d4/code/test/webpack-overrides-config.js",
         "APIPORT": 3030
       }
     },
     "start-dev": {
-      "command": "node ./bin/server.js",
+      "command": "node node_modules/redux-universal-test/bin/server.js",
       "env": {
-        "NODE_PATH": "./src",
+        "NODE_PATH": "/Users/d4/code/test/src",
         "NODE_ENV": "development",
+        "CONFIG_PATH": "/Users/d4/code/test/src/config.js",
+        "WEBPACK_OVERRIDES_PATH": "/Users/d4/code/test/webpack-overrides-config.js",
         "PORT": 3000,
         "APIPORT": 3030
       }
     },
     "start-dev-api": {
-      "command": "node ./bin/api.js",
+      "command": "node node_modules/redux-universal-test/bin/api.js",
       "env": {
-        "NODE_PATH": "./api",
+        "NODE_PATH": "node_modules/redux-universal-test/bin/api",
         "NODE_ENV": "development",
+        "CONFIG_PATH": "/Users/d4/code/test/src/config.js",
+        "WEBPACK_OVERRIDES_PATH": "/Users/d4/code/test/webpack-overrides-config.js",
         "APIPORT": 3030
       }
     },
     "watch-client": {
-      "command": "node webpack/webpack-dev-server.js",
+      "command": "node node_modules/redux-universal-test/webpack/webpack-dev-server.js",
       "env": {
         "UV_THREADPOOL_SIZE": 100,
-        "NODE_PATH": "./src"
+        "CONFIG_PATH": "/Users/d4/code/test/src/config.js",
+        "WEBPACK_OVERRIDES_PATH": "/Users/d4/code/test/webpack-overrides-config.js",
+        "NODE_PATH": "/Users/d4/code/test/src"
       }
     }
   },
@@ -99,14 +116,15 @@
     "piping": "^0.3.0",
     "pretty-error": "^1.2.0",
     "query-string": "^3.0.0",
-    "react": "^0.14.2",
+    "react": "0.14.3",
     "react-bootstrap": "^0.27.3",
     "react-document-meta": "^2.0.0",
-    "react-dom": "^0.14.1",
+    "react-dom": "0.14.3",
     "react-inline-css": "^2.0.0",
     "react-redux": "^4.0.0",
     "react-router": "^1.0.0-rc3",
     "react-router-bootstrap": "^0.19.3",
+    "redux-universal-test": "0.0.1",
     "redux": "^3.0.4",
     "redux-form": "^3.0.0",
     "scroll-behavior": "^0.3.0",
@@ -116,6 +134,7 @@
     "socket.io-client": "^1.3.7",
     "superagent": "^1.4.0",
     "url-loader": "^0.5.6",
+    "webpack-config-merger": "0.0.3",
     "webpack-isomorphic-tools": "^2.2.4"
   },
   "devDependencies": {
@@ -153,14 +172,14 @@
     "phantomjs": "^1.9.18",
     "phantomjs-polyfill": "0.0.1",
     "react-a11y": "^0.2.6",
-    "react-addons-test-utils": "^0.14.0",
+    "react-addons-test-utils": "0.14.3",
     "react-transform-catch-errors": "^1.0.0",
     "react-transform-hmr": "^1.0.1",
     "redbox-react": "^1.1.1",
     "redux-devtools": "^3.0.0-beta-3",
     "redux-devtools-dock-monitor": "^1.0.0-beta-3",
     "redux-devtools-log-monitor": "^1.0.0-beta-3",
-    "redux-router": "1.0.0-beta3",
+    "redux-router": "1.0.0-beta4",
     "sass-loader": "^3.0.0",
     "strip-loader": "^0.1.0",
     "style-loader": "^0.13.0",
