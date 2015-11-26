@@ -18,9 +18,6 @@ module.exports = {
       routes: sourceRoot + '/routes.js',
       config: sourceRoot + '/config.js',
       reducers: sourceRoot + '/redux/modules/reducer.js'
-    },
-    modulesDirectories: [
-      sourceRoot + '/node_modules'
-    ]
+    }
   }
 };
