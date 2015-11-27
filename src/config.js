@@ -10,8 +10,8 @@ const environment = {
   }
 }[process.env.NODE_ENV || 'development'];
 
-console.log('overrides path', sourceRoot);
-console.log('context', projectRoot);
+// console.log('overrides path', sourceRoot);
+// console.log('context', projectRoot);
 
 module.exports = Object.assign({
   host: process.env.HOST || 'localhost',
