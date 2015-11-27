@@ -46,9 +46,14 @@
   .pageHeaderTitle {
     flex-grow: 1;
     h1 {
+      @include rem(font-size, 20px);
       letter-spacing: -1px;
       max-width: 100%;
       padding-bottom: 0;
+
+      @include breakpoint(height-medium) {
+        @include rem(font-size, 24px);
+      }
     }
   }
 }

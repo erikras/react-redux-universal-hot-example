@@ -1,5 +1,6 @@
 import {ROUTER_DID_CHANGE} from 'redux-router/lib/constants';
 import getDataDependencies from '../../helpers/getDataDependencies';
+import gaHelper from '../../helpers/gaHelper';
 
 const locationsAreEqual = (locA, locB) => (locA.pathname === locB.pathname) && (locA.search === locB.search);
 
@@ -26,6 +27,12 @@ export default ({getState, dispatch}) => next => action => {
       // router state is null until ReduxRouter is created so we can use this to store
       // our promise to let the server know when it can render
       getState().router = promise;
+    } else {
+      // Load GA trackers
+      gaHelper.init();
+
+      // Trigger GA pageview
+      gaHelper.logPageView(location.pathname);
     }
 
     return promise;

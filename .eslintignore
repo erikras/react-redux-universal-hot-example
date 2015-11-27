@@ -1,3 +1,4 @@
 webpack/*
 karma.conf.js
 tests.webpack.js
+src/helpers/gaHelper.js

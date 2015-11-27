@@ -25,6 +25,7 @@ export default class Html extends Component {
     const {assets, component, store} = this.props;
     const content = component ? ReactDOM.renderToString(component) : '';
     const comment = '<!--[if lt IE 9]><script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><![endif]-->';
+    const ga = (process.env.NODE_ENV === 'production') ? 'UA-547495-15' : 'UA-547495-16';
     return (
       <html lang="en-us">
         <head>
@@ -52,6 +53,7 @@ export default class Html extends Component {
           {/* webfonts */}
           <script src="https://use.typekit.net/fpp4zlv.js"></script>
           <script dangerouslySetInnerHTML={{__html: "try{Typekit.load({ async: true });}catch(e){}"}} />
+          <script dangerouslySetInnerHTML={{__html: "(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); ga('create', '" + ga + "', 'auto'); ga('send', 'pageview');"}} />
         </body>
       </html>
     );

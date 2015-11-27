@@ -12,7 +12,6 @@ import {
   } from 'containers';
 import { Snippet } from 'components';
 
-
 export default () => {
   /**
    * Please keep routes in alphabetical order

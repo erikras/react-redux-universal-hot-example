@@ -2,8 +2,6 @@ import assign from 'object-assign';
 import urlHelper from './urlHelper';
 
 export default {
-  // Use Heroku config var in Production for the PhotoDune GA account
-  // Fall back to the Sandbox account in dev
 
   tracker: {
     'id': (process.env.NODE_ENV === 'production') ? 'UA-547495-15' : 'UA-547495-16',
@@ -20,7 +18,7 @@ export default {
       hitType: 'pageview'
     };
 
-    if (typeof args == "string") {
+    if (typeof args === 'string') {
       data = assign(data, { page: args });
     }
 
@@ -88,12 +86,12 @@ export default {
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)}
-      )(window,document,'script','//www.google-analytics.com/analytics_debug.js','ga');
+      )(window,document,'script','https://www.google-analytics.com/analytics_debug.js','ga');
     } else {
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)}
-      )(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      )(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
     }
   },
 

@@ -3,7 +3,6 @@ import DocumentMeta from 'react-document-meta';
 import { Header, Navbar, Modal } from 'components';
 import config from '../../config';
 
-
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object,
@@ -28,9 +27,8 @@ export default class App extends Component {
   componentWillReceiveProps(nextProps) {
     // if we changed routes...
     if (( nextProps.location.key !== this.props.location.key &&
-      nextProps.location.state &&
-      nextProps.location.state.modal
-    )) {
+          nextProps.location.state && nextProps.location.state.modal)) {
+      // modal magic
       // save the old children (just like animation)
       this.previousChildren = this.props.children;
     }
@@ -69,18 +67,17 @@ export default class App extends Component {
             React.cloneElement(this.props.children, {changeHeader: this.headerChangeHandler, activeNavItem: this.navChangeHandler})
           }
 
-          {isModal ? (
+          {isModal && (
             <div>
               <div className={styles.modalBlanket}></div>
               <Modal isOpen returnTo={this.previousChildren.props.location.pathname}>
                 { this.props.children }
               </Modal>
             </div>
-          ) : '' }
+          ) }
 
         </div>
         <Navbar activeNavItem={ activeNavItem ? activeNavItem : null } />
-        <div style={{zIndex: 100000, position: 'fixed', overflow: 'scroll', WebkitOverflowScrolling: 'touch'}} />
       </div>
     );
   }
