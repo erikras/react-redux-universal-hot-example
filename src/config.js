@@ -56,7 +56,8 @@ module.exports = Object.assign({
       alias: {
         routes: sourceRoot + '/routes.js',
         config: sourceRoot + '/config.js',
-        reducers: sourceRoot + '/redux/modules/reducer.js'
+        reducers: sourceRoot + '/redux/modules/reducer.js',
+        actions: sourceRoot + '/api/actions/index.js'
       }
     }
   }
