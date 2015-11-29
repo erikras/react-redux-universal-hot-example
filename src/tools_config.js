@@ -1,4 +1,4 @@
-var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
+const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 
 module.exports = {
   assets: {
@@ -6,7 +6,7 @@ module.exports = {
     // the only place it's used is the Html.js file
     // where a <style/> tag is created with the contents of the
     // './src/theme/bootstrap.config.js' file.
-    // (the aforementioned <style/> tag can reduce the white flash 
+    // (the aforementioned <style/> tag can reduce the white flash
     //  when refreshing page in development mode)
     //
     // hooking into 'js' extension require()s isn't the best solution
@@ -14,12 +14,12 @@ module.exports = {
     bootstrap: {
       extension: 'js',
       include: ['./src/theme/bootstrap.config.js'],
-      filter: function(module, regex, options, log) {
-        function is_bootstrap_style(name) {
+      filter: (module, regex, options, log) => {
+        function isBootstrapStyle(name) {
           return name.indexOf('./src/theme/bootstrap.config.js') >= 0;
         }
         if (options.development) {
-          return is_bootstrap_style(module.name) && WebpackIsomorphicToolsPlugin.style_loader_filter(module, regex, options, log);
+          return isBootstrapStyle(module.name) && WebpackIsomorphicToolsPlugin.style_loader_filter(module, regex, options, log);
         }
         // no need for it in production mode
       },
@@ -29,4 +29,4 @@ module.exports = {
       parser: WebpackIsomorphicToolsPlugin.css_loader_parser
     }
   }
-}
+};
