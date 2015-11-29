@@ -14,8 +14,6 @@ const environment = {
 // console.log('context', projectRoot);
 
 module.exports = Object.assign({
-  host: process.env.HOST || 'localhost',
-  port: process.env.PORT,
   apiHost: process.env.APIHOST || 'localhost',
   apiPort: process.env.APIPORT,
   app: {
@@ -40,6 +38,12 @@ module.exports = Object.assign({
       }
     }
   },
+  host: process.env.HOST || 'localhost',
+  port: process.env.PORT,
+  socket: {
+    path: '/ws'
+  },
+  toolsConfigPath: sourceRoot + '/tools_config.js',
   webpack: {
     context: projectRoot,
     entry: {

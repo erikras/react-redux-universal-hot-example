@@ -86,7 +86,9 @@
     }
   },
   "dependencies": {
-    "babel": "~5.8.29"
+    "babel": "~5.8.29",
+    "redux-universal-starter": "0.11.0",
+    "webpack-isomorphic-tools": "^2.2.18"
   },
   "devDependencies": {
     "babel-core": "~5.8.33",
@@ -119,11 +121,11 @@
     "node-sass": "^3.4.2",
     "phantomjs": "^1.9.18",
     "phantomjs-polyfill": "0.0.1",
-    "react": "0.14.3",
+    "react": "^0.14.3",
     "react-addons-test-utils": "0.14.3",
     "react-bootstrap": "^0.27.3",
     "react-document-meta": "^2.0.0",
-    "react-dom": "0.14.3",
+    "react-dom": "^0.14.3",
     "react-redux": "^4.0.0",
     "react-router": "^1.0.0-rc3",
     "react-router-bootstrap": "^0.19.3",
@@ -132,7 +134,6 @@
     "redux": "^3.0.4",
     "redux-form": "^3.0.0",
     "redux-router": "1.0.0-beta4",
-    "redux-universal-starter": "0.5.1",
     "socket.io": "^1.3.7",
     "socket.io-client": "^1.3.7"
   },
