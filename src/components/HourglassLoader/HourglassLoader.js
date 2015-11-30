@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 
-export default class Loader extends Component {
+export default class HourglassLoader extends Component {
   render() {
-    const styles = require('./Loader.scss');
+    const styles = require('./HourglassLoader.scss');
     return (
 
 <div className={styles.loader}>

@@ -107,8 +107,7 @@ header {
     }
 
     h1 {
-      @include adjust-font-size-to(42px);
-      // font-weight: $bold; // no din-bold
+      @include adjust-font-size-to(32px);
 
       @include breakpoint(desktop) {
         @include adjust-font-size-to(64px);
@@ -133,7 +132,7 @@ header {
     z-index: 1;
 
     p {
-      @include adjust-font-size-to(22px);
+      @include adjust-font-size-to(18px);
       @include padding-trailer(1);
 
       @include breakpoint(desktop) {

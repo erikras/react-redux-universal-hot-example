@@ -4,7 +4,7 @@ import DocumentMeta from 'react-document-meta';
 import {connect} from 'react-redux';
 import * as landmarkActions from 'redux/modules/landmarks';
 import { landmarkIsLoaded, loadLandmark } from 'redux/modules/landmarks';
-import { Error, Image, Loader, SnippetList } from 'components';
+import { Error, Image, PaperLoader, SnippetList } from 'components';
 
 @connect(
   state => ({
@@ -44,7 +44,7 @@ class Landmark extends Component {
     const landmark = this.props.landmarks[landmarkId];
     const loading = !landmark || landmark.loading;
     const error = !landmark || landmark.error;
-    if (loading) return (<Loader />);
+    if (loading) return (<PaperLoader />);
     if (error) return (<Error error={error} />);
     const { location } = this.props;
     const {area, description, image, snippets, teaser, title } = landmark.payload;

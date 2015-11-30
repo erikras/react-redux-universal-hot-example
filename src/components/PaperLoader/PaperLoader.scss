@@ -1,0 +1,31 @@
+@import 'src/theme/main';
+
+.loader {
+  padding: 1em 0;
+
+  .cube {
+    @include rem(height, 50px);
+    @include rem(width, 50px);
+    animation: rotateplane 1.2s infinite ease-in-out;
+    background-color: $darkgray;
+    margin: 0 auto;
+  }
+
+  span {
+    display: block;
+    height: 0;
+    text-indent: -999em;
+  }
+}
+
+@keyframes rotateplane {
+  0% {
+    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+  }
+  50% {
+    transform: perspective(120px) rotateX(-180deg) rotateY(0deg);
+  }
+  100% {
+    transform: perspective(120px) rotateX(-180deg) rotateY(-180deg);
+  }
+}

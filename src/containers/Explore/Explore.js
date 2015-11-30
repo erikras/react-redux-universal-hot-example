@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import {connect} from 'react-redux';
 import * as landmarkActions from 'redux/modules/landmarks';
 import { areasAreLoaded, loadAreas } from 'redux/modules/areas';
-import { Error, Loader, AreaList } from 'components';
+import { Error, PaperLoader, AreaList } from 'components';
 
 @connect(
   state => ({
@@ -35,7 +35,7 @@ class Explore extends Component {
     const { areas } = this.props;
     const loading = !areas || areas.loading;
     const error = !areas || areas.error;
-    if (loading) return (<Loader />);
+    if (loading) return (<PaperLoader />);
     if (error) return (<Error error={error} />);
     const areaItems = areas.payload;
     return (

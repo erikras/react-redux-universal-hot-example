@@ -4,7 +4,7 @@ import DocumentMeta from 'react-document-meta';
 import {connect} from 'react-redux';
 import * as areaActions from 'redux/modules/areas';
 import { areaIsLoaded, loadArea } from 'redux/modules/areas';
-import { Error, Image, Loader, LandmarkList } from 'components';
+import { Error, Image, PaperLoader, LandmarkList } from 'components';
 
 @connect(
   state => ({
@@ -44,7 +44,7 @@ class Area extends Component {
     const areaItem = this.props.areas[areaId];
     const loading = !areaItem || areaItem.loading;
     const error = !areaItem || areaItem.error;
-    if (loading) return (<Loader />);
+    if (loading) return (<PaperLoader />);
     if (error) return (<Error error={error} />);
     const { description, image, landmarks, teaser, title } = areaItem.payload;
     const meta = {

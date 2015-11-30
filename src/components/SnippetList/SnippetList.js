@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import {Loader, SnippetListItem} from 'components';
+import {PaperLoader, SnippetListItem} from 'components';
 
 export default class SnippetList extends Component {
   static propTypes = {
@@ -10,7 +10,7 @@ export default class SnippetList extends Component {
   render() {
     const styles = require('./SnippetList.scss');
     const { items, location } = this.props;
-    if (!items) return ( <Loader /> );
+    if (!items) return ( <PaperLoader /> );
     const SnippetListItems = items.map( item =>
       <SnippetListItem key={item.id} item={item} location={location} />
     );

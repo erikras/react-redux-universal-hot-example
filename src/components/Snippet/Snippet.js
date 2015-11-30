@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import {connect} from 'react-redux';
-import { Error, Image, Loader } from 'components';
+import { Error, Image, PaperLoader } from 'components';
 import * as snippetActions from 'redux/modules/snippets';
 import { snippetIsLoaded, loadSnippet } from 'redux/modules/snippets';
 
@@ -35,7 +35,7 @@ class Snippet extends Component {
     const loading = !snippet || snippet.loading;
     const error = !snippet || snippet.error;
 
-    if (loading) return (<Loader />);
+    if (loading) return (<PaperLoader />);
     if (error) return (<Error error={error} />);
 
     const { category, description, image, landmark, title } = snippet.payload;

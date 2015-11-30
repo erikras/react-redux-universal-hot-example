@@ -3,7 +3,7 @@
 .pageHeader {
   @include rem(height, $header-height-small);
   align-items: center;
-  background-color: $white;
+  background-color: $bgfallback;
   background-color: $bgfloating;
   display: flex;
 
