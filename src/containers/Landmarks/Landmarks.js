@@ -3,7 +3,7 @@ import DocumentMeta from 'react-document-meta';
 import {connect} from 'react-redux';
 import * as landmarkActions from 'redux/modules/landmarks';
 import { landmarksAreLoaded, loadLandmarks } from 'redux/modules/landmarks';
-import { Error, PaperLoader, LandmarkList } from 'components';
+import { Error, PaperLoader, LandmarkList, LandmarkSearch } from 'components';
 
 @connect(
   state => ({
@@ -34,21 +34,26 @@ class Landmarks extends Component {
 
   render() {
     const { landmarks } = this.props;
-    const loading = !landmarks || landmarks.loading;
+    const loading = !landmarks.hasOwnProperty('loading') || landmarks.loading;
     const error = !landmarks || landmarks.error;
-    if (loading) return (<PaperLoader />);
     if (error) return (<Error error={error} />);
-    const landmarkItems = landmarks.payload;
-    if (landmarkItems && landmarkItems.length) {
-      landmarkItems.sort( (first, second) => {
-        if (first.title === second.title) return 0;
-        return (first.title > second.title ? 1 : -1);
-      });
+    let landmarkItems = [];
+    if (!loading) {
+      landmarkItems = landmarks.payload;
+      if (landmarkItems && landmarkItems.length) {
+        landmarkItems.sort( (first, second) => {
+          if (first.title === second.title) return 0;
+          return (first.title > second.title ? 1 : -1);
+        });
+      }
     }
     return (
       <div>
         <DocumentMeta title="Explore the MSD"/>
-        <LandmarkList items={landmarkItems} />
+        <h2>Search for a Landmark</h2>
+        <LandmarkSearch />
+        <h2>Or look through all landmarks</h2>
+        { loading ? <PaperLoader /> : <LandmarkList items={landmarkItems} /> }
       </div>
     );
   }

@@ -11,3 +11,10 @@
     padding-right: 0;
   }
 }
+
+@mixin appearance($a) {
+  -webkit-appearance: $a;
+  -moz-appearance: $a;
+  -ms-appearance: $a;
+  appearance: $a;
+}
