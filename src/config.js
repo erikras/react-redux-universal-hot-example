@@ -44,6 +44,7 @@ module.exports = Object.assign({
     path: '/ws'
   },
   toolsConfigPath: sourceRoot + '/tools_config.js',
+  verbose: true,
   webpack: {
     context: projectRoot,
     entry: {
