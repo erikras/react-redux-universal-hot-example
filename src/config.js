@@ -1,6 +1,7 @@
 const path = require('path');
 const sourceRoot = path.resolve(__dirname);
 const projectRoot = path.resolve(__dirname, '..');
+const isProduction = process.env.NODE_ENV === 'production';
 const environment = {
   development: {
     isProduction: false
@@ -49,8 +50,8 @@ module.exports = Object.assign({
     context: projectRoot,
     entry: {
       main: [
-        'bootstrap-sass!' + sourceRoot + '/theme/bootstrap.config.js',
-        'font-awesome-webpack!' + sourceRoot + '/theme/font-awesome.config.js'
+        'bootstrap-sass!' + sourceRoot + '/theme/bootstrap.config' + (isProduction ? '.prod' : '') + '.js',
+        'font-awesome-webpack!' + sourceRoot + '/theme/font-awesome.config' + (isProduction ? '.prod' : '') + '.js'
       ]
     },
     output: {
