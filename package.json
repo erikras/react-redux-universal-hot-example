@@ -38,14 +38,14 @@
   },
   "betterScripts": {
     "build": {
-      "command": "redux-universal-starter-build",
+      "command": "redux-universal-renderer-build",
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "production"
       }
     },
     "start-prod": {
-      "command": "redux-universal-starter-server",
+      "command": "redux-universal-renderer-server",
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "production",
@@ -54,7 +54,7 @@
       }
     },
     "start-prod-api": {
-      "command": "redux-universal-starter-api",
+      "command": "redux-universal-renderer-api",
       "env": {
         "NODE_PATH": "./api",
         "NODE_ENV": "production",
@@ -62,7 +62,7 @@
       }
     },
     "start-dev": {
-      "command": "redux-universal-starter-server",
+      "command": "redux-universal-renderer-server",
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "development",
@@ -71,15 +71,15 @@
       }
     },
     "start-dev-api": {
-      "command": "redux-universal-starter-api",
+      "command": "redux-universal-renderer-api",
       "env": {
-        "NODE_PATH": "node_modules/redux-universal-starter/bin/api",
+        "NODE_PATH": "node_modules/redux-universal-renderer/bin/api",
         "NODE_ENV": "development",
         "APIPORT": 3030
       }
     },
     "watch-client": {
-      "command": "redux-universal-starter-watch",
+      "command": "redux-universal-renderer-watch",
       "env": {
         "NODE_PATH": "./src",
         "UV_THREADPOOL_SIZE": 100
@@ -88,7 +88,7 @@
   },
   "dependencies": {
     "babel": "~5.8.29",
-    "redux-universal-starter": "0.11.10",
+    "redux-universal-renderer": "0.11.10",
     "webpack-isomorphic-tools": "^2.2.18"
   },
   "devDependencies": {
@@ -137,7 +137,8 @@
     "redux-form": "^3.0.0",
     "redux-router": "1.0.0-beta4",
     "socket.io": "^1.3.7",
-    "socket.io-client": "^1.3.7"
+    "socket.io-client": "^1.3.7",
+    "url-loader": "0.5.7"
   },
   "engines": {
     "node": "4.1.1"
