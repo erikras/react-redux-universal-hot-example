@@ -89,7 +89,7 @@
   },
   "dependencies": {
     "babel": "~5.8.29",
-    "redux-universal-renderer": "0.12.5",
+    "redux-universal-renderer": "0.12.6",
     "webpack-isomorphic-tools": "^2.2.18"
   },
   "devDependencies": {
