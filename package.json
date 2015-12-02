@@ -33,6 +33,7 @@
     "start-dev": "better-npm-run start-dev",
     "start-dev-api": "better-npm-run start-dev-api",
     "watch-client": "better-npm-run watch-client",
+    "dev-universal": "concurrent --kill-others \"npm run watch-client\" \"npm run start-dev\" \"redux-universal-renderer-dev\"",
     "dev": "concurrent --kill-others \"npm run watch-client\" \"npm run start-dev\" \"npm run start-dev-api\"",
     "test": "karma start"
   },
@@ -88,7 +89,7 @@
   },
   "dependencies": {
     "babel": "~5.8.29",
-    "redux-universal-renderer": "0.12.1",
+    "redux-universal-renderer": "0.12.5",
     "webpack-isomorphic-tools": "^2.2.18"
   },
   "devDependencies": {
