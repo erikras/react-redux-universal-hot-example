@@ -20,6 +20,10 @@ const urlHelper = {
     return `/snippets/${snippetId}`;
   },
 
+  landmarksSearchEndpoint: (query) => {
+    return `/landmarks/search/${query}`;
+  },
+
   getUrlParams: (queryString = window.location.search) => {
     // Create an array of paired params
     const params = queryString.substring(1)

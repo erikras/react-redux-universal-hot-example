@@ -27,6 +27,7 @@ class Landmarks extends Component {
   }
 
   static fetchDataDeferred(getState, dispatch) {
+    console.log('fetch data landmarks');
     if (!landmarksAreLoaded(getState())) {
       return dispatch(loadLandmarks());
     }
