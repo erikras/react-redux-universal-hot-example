@@ -22,6 +22,7 @@ node_modules
 .idea/
 dist/
 *.iml
+webpack-assets.json
 webpack-stats.json
 *.sublime-project
 *.sublime-workspace

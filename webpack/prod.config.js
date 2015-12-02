@@ -1,5 +1,6 @@
+require('babel/polyfill');
+
 // Webpack config for creating the production bundle.
-require('babel-core/polyfill');
 var path = require('path');
 var webpack = require('webpack');
 var CleanPlugin = require('clean-webpack-plugin');
@@ -77,8 +78,8 @@ module.exports = {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
-          warnings: false
-        }
+        warnings: false
+      }
     }),
 
     webpackIsomorphicToolsPlugin
