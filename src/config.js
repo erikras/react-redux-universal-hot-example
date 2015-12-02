@@ -39,7 +39,7 @@ module.exports = Object.assign({
   host: process.env.HOST || 'localhost',
   port: process.env.PORT,
   socket: {
-    path: '/ws'
+    enabled: true
   },
   toolsConfigPath: sourceRoot + '/tools_config.js',
   verbose: true,
