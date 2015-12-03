@@ -37,7 +37,7 @@ class LandmarkSearch extends Component {
 
   render() {
     const styles = require('./LandmarkSearch.scss');
-    const {results} = this.props.landmarksSearch;
+    const { loading, results } = this.props.landmarksSearch;
     return (
       <div>
         <form className={styles.landmarkSearch}>
@@ -45,7 +45,7 @@ class LandmarkSearch extends Component {
             <input ref="search" type="search" onChange={_.throttle(this.refreshSearch, 300)} placeholder="Landmark Name or Number" />
           </fieldset>
         </form>
-        { results ? <LandmarkSearchResults results={results} /> : ''}
+        { results ? <LandmarkSearchResults results={results} loading={loading} /> : ''}
       </div>
     );
   }
