@@ -163,11 +163,6 @@ module.exports = Object.assign({
         routes: sourceRoot + '/routes.js',
 
         /*
-        // The path to this configuration file. Required.
-        */
-        config: __dirname + '/redux-universal-renderer.config.js',
-
-        /*
         // The path to the index of your Redux reducers. Required.
         */
         reducers: sourceRoot + '/redux/modules/reducer.js',
@@ -188,7 +183,7 @@ module.exports = Object.assign({
 
   /*
   // Metadata for the site
-  */  
+  */
   app: {
     title: 'React Redux Example',
     description: 'All the modern best practices in one example.',
