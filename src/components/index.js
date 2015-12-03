@@ -14,6 +14,7 @@ export Image from './Image/Image';
 export LandmarkList from './LandmarkList/LandmarkList';
 export LandmarkListItem from './LandmarkListItem/LandmarkListItem';
 export LandmarkSearch from './LandmarkSearch/LandmarkSearch';
+export LandmarkSearchResults from './LandmarkSearchResults/LandmarkSearchResults';
 export Modal from './Modal/Modal';
 export Navbar from './Navbar/Navbar';
 export PaperLoader from './PaperLoader/PaperLoader';

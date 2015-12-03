@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as landmarksSearchActions from 'redux/modules/landmarksSearch';
 import { doSearch, searchIsDone } from 'redux/modules/landmarksSearch';
+import { LandmarkSearchResults } from 'components';
+import * as _ from 'lodash';
 
 @connect(
   state => ({
@@ -22,14 +24,11 @@ class LandmarkSearch extends Component {
 
   constructor(props, context) {
     super(props, context);
-    this.onSearchChanged = this.onSearchChanged.bind(this);
-    console.log('context is: ', context);
-
+    this.refreshSearch = this.refreshSearch.bind(this);
   }
 
-  onSearchChanged() {
+  refreshSearch() {
     const query = ReactDOM.findDOMNode(this.refs.search).value;
-    console.log(this);
     const state = this.context.store.getState();
     if (query.length && !searchIsDone(state, query)) {
       return this.context.store.dispatch(doSearch(query));
@@ -37,14 +36,17 @@ class LandmarkSearch extends Component {
   }
 
   render() {
-    console.log('props are: ', this.props.landmarksSearch);
     const styles = require('./LandmarkSearch.scss');
+    const {results} = this.props.landmarksSearch;
     return (
-      <form className={styles.landmarkSearch}>
-        <fieldset>
-          <input ref="search" type="search" onChange={this.onSearchChanged} placeholder="Landmark Name or Number" />
-        </fieldset>
-      </form>
+      <div>
+        <form className={styles.landmarkSearch}>
+          <fieldset>
+            <input ref="search" type="search" onChange={_.throttle(this.refreshSearch, 300)} placeholder="Landmark Name or Number" />
+          </fieldset>
+        </form>
+        { results ? <LandmarkSearchResults results={results} /> : ''}
+      </div>
     );
   }
 }
