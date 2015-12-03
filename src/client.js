@@ -19,10 +19,10 @@ const client = new ApiClient();
 
 // Three different types of scroll behavior available.
 // Documented here: https://github.com/rackt/scroll-behavior
-const scrollablehistory = useScroll(createHistory);
+const scrollableHistory = useScroll(createHistory);
 
 const dest = document.getElementById('content');
-const store = createStore(reduxReactRouter, makeRouteHooksSafe(getRoutes), scrollablehistory, client, window.__data);
+const store = createStore(reduxReactRouter, makeRouteHooksSafe(getRoutes), scrollableHistory, client, window.__data);
 
 function initSocket() {
   const socket = io('', {path: '/api/ws', transports: ['polling']});
