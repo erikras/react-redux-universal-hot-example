@@ -1,5 +1,4 @@
 export function mapUrl(availableActions = {}, url = []) {
-
   const notFound = {action: null, params: []};
 
   // test for empty input
