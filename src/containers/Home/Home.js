@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { CounterButton, GithubButton } from 'components';
-import { configResolver } from 'utils/config';
+import { configResolver } from 'redux-universal-renderer';
 
 export default class Home extends Component {
   render() {

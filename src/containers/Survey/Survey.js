@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import DocumentMeta from 'react-document-meta';
 import {initialize} from 'redux-form';
 import {SurveyForm} from 'components';
-import { configResolver } from 'utils/config';
+import { configResolver } from 'redux-universal-renderer';
 
 @connect(
   () => ({}),
