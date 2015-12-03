@@ -1,5 +1,7 @@
-require('babel/polyfill');
-
+const path = require('path');
+const sourceRoot = path.resolve(__dirname);
+const projectRoot = path.resolve(__dirname, '..');
+const isProduction = process.env.NODE_ENV === 'production';
 const environment = {
   development: {
     isProduction: false
@@ -10,8 +12,6 @@ const environment = {
 }[process.env.NODE_ENV || 'development'];
 
 module.exports = Object.assign({
-  host: process.env.HOST || 'localhost',
-  port: process.env.PORT,
   apiHost: process.env.APIHOST || 'localhost',
   apiPort: process.env.APIPORT,
   app: {
@@ -33,6 +33,34 @@ module.exports = Object.assign({
         'twitter:image': 'https://react-redux.herokuapp.com/logo.jpg',
         'twitter:image:width': '200',
         'twitter:image:height': '200'
+      }
+    }
+  },
+  host: process.env.HOST || 'localhost',
+  port: process.env.PORT,
+  socket: {
+    enabled: true
+  },
+  toolsConfigPath: sourceRoot + '/tools_config.js',
+  verbose: true,
+  webpack: {
+    context: projectRoot,
+    entry: {
+      main: [
+        'bootstrap-sass!' + sourceRoot + '/theme/bootstrap.config' + (isProduction ? '.prod' : '') + '.js',
+        'font-awesome-webpack!' + sourceRoot + '/theme/font-awesome.config' + (isProduction ? '.prod' : '') + '.js'
+      ]
+    },
+    output: {
+      path: projectRoot + '/static/dist'
+    },
+    resolve: {
+      root: sourceRoot,
+      alias: {
+        routes: sourceRoot + '/routes.js',
+        config: sourceRoot + '/config.js',
+        reducers: sourceRoot + '/redux/modules/reducer.js',
+        actions: sourceRoot + '/api/actions/index.js'
       }
     }
   }

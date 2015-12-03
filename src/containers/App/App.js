@@ -9,7 +9,7 @@ import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/module
 import { InfoBar } from 'components';
 import { pushState } from 'redux-router';
 import connectData from 'helpers/connectData';
-import config from '../../config';
+import config from 'config';
 
 function fetchData(getState, dispatch) {
   const promises = [];
