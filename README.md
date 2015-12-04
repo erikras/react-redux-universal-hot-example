@@ -155,6 +155,36 @@ To run the tests in the project, just simply run `npm test` if you have `Chrome`
 
 To keep watching your test suites that you are working on, just set `singleRun: false` in the `karma.conf.js` file. Please be sure set it to `true` if you are running `npm test` on a continuous integration server (travis-ci, etc).
 
+
+#### End-to-End Tests
+
+E2E tests are run with Nightwatch + Selenium Standalone (installed via npm)
+
+##### Setup
+
+The nightwatch config defaults to Chrome, and assumes an OSX install. You may need to install and/or customize according to your setup;
+
+1. Install the Chrome Driver
+
+On OSX, using Homebrew, it looks like this;
+
+      brew install chromedriver
+
+2. Note the Chrome driver binary path;
+
+     brew list chromedriver
+
+3. Configure nightwatch.json accordingly. E.g.
+
+```
+"webdriver.chrome.driver" : "/usr/local/Cellar/chromedriver/2.20/bin/chromedriver"
+```
+
+###### Running tests
+
+      npm run test:e2e
+
+
 ## Deployment on Heroku
 
 To get this project to work on Heroku, you need to:
@@ -175,19 +205,19 @@ This project moves fast and has an active community, so if you have a question t
 
 They will only show in development, but if you want to disable them even there, set `__DEVTOOLS__` to `false` in `/webpack/dev.config.js`.
 
-## Roadmap 
+## Roadmap
 
-Although this isn't a library, we recently started versioning to make it easier to track breaking changes and emerging best practices. 
+Although this isn't a library, we recently started versioning to make it easier to track breaking changes and emerging best practices.
 
 * [Babel 6](https://github.com/babel/babel) - Coming soon with v1 (see [#488](https://github.com/erikras/react-redux-universal-hot-example/issues/488))
 * [Inline Styles](docs/InlineStyles.md) - CSS is dead
 
 ## Contributing
 
-I am more than happy to accept external contributions to the project in the form of feedback, bug reports and even better - pull requests :) 
+I am more than happy to accept external contributions to the project in the form of feedback, bug reports and even better - pull requests :)
 
-If you would like to submit a pull request, please make an effort to follow the guide in [CONTRIBUTING.md](CONTRIBUTING.md). 
- 
+If you would like to submit a pull request, please make an effort to follow the guide in [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ---
 Thanks for checking this out.
 
