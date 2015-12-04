@@ -6,7 +6,7 @@
     @include padding-leader(1);
   }
 
-  .tour, .interview, .timelapse, .video {
+  .interview, .timelapse, .video {
     .bannerMini {
       @include breakpoint(height-smallest) {
         @include rem(min-height, 200px);
@@ -27,9 +27,16 @@
   }
 
   .tour {
+    .bannerMini {
+      @include rem(min-height, 96px);
+    }
+
     iframe {
-      @include rem(height, 600px);
-      width: 100%;
+      @include rem(min-height, 400px);
+      display: block;
+      height: calc(100vh - 320px);
+      margin: 0 auto;
+      width: 94%;
     }
   }
 
