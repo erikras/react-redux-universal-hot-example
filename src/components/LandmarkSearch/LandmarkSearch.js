@@ -42,7 +42,7 @@ class LandmarkSearch extends Component {
       <div>
         <form className={styles.landmarkSearch}>
           <fieldset>
-            <input ref="search" type="search" onChange={_.throttle(this.refreshSearch, 300)} placeholder="Landmark Name or Number" />
+            <input ref="search" type="search" onChange={_.debounce(this.refreshSearch, 300)} placeholder="Landmark Name or Number" />
           </fieldset>
         </form>
         { results ? <LandmarkSearchResults results={results} loading={loading} /> : ''}
