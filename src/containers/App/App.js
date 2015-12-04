@@ -46,15 +46,14 @@ export default class App extends Component {
     const styles = require('./App.scss');
     const { activeNavItem, headerTitle } = this.state;
     const { location } = this.props;
-
     const isModal = (
       location.state &&
       location.state.modal &&
       this.previousChildren
     );
-
+    const appClass = isModal ? styles.app + ' ' + styles.modalOpen : styles.app;
     return (
-      <div className={styles.app}>
+      <div className={appClass}>
         <DocumentMeta {...config.app} />
         <div className={styles.MSDHeaderUnderlay} />
         <div className={styles.MSDHeader}>

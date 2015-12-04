@@ -5,6 +5,27 @@
   background-color: $white;
 }
 
+.modalOpen {
+  .MSDHeader {
+    -webkit-filter: blur(3px) brightness(0.6);
+    transition: -webkit-filter 240ms;
+  }
+
+  .MSDContent > ::first-child {
+    -webkit-filter: blur(5px);
+    transition: -webkit-filter 240ms;
+  }
+
+  .MSDContent > :first-child {
+    -webkit-filter: blur(5px);
+    transition: -webkit-filter 240ms;
+  }
+  &> nav {
+    -webkit-filter: blur(5px);
+    transition: -webkit-filter 240ms;
+  }
+}
+
 .MSDHeader {
   @include shadow-2dp();
   left: 0;

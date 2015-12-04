@@ -78,3 +78,9 @@
     display: none;
   }
 }
+
+.modalOpen {
+  .navbar {
+    -webkit-filter: blur(5px);
+  }
+}
