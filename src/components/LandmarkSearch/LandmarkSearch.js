@@ -28,9 +28,10 @@ class LandmarkSearch extends Component {
   }
 
   refreshSearch() {
-    const query = ReactDOM.findDOMNode(this.refs.search).value;
+    const value = ReactDOM.findDOMNode(this.refs.search).value;
+    const query = value.length ? value : ' ';
     const state = this.context.store.getState();
-    if (query.length && !searchIsDone(state, query)) {
+    if (!searchIsDone(state, query)) {
       return this.context.store.dispatch(doSearch(query));
     }
   }
