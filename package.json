@@ -29,13 +29,15 @@
     "start-prod-api": "better-npm-run start-prod-api",
     "build": "better-npm-run build",
     "postinstall": "npm run build",
-    "lint": "eslint -c .eslintrc src",
+    "lint": "eslint -c .eslintrc src api",
     "start-dev": "better-npm-run start-dev",
     "start-dev-api": "better-npm-run start-dev-api",
     "watch-client": "better-npm-run watch-client",
     "dev-universal": "concurrent --kill-others \"npm run watch-client\" \"npm run start-dev\" \"npm run start-dev-api\" \"redux-universal-renderer-dev\"",
     "dev": "concurrent --kill-others \"npm run watch-client\" \"npm run start-dev\" \"npm run start-dev-api\"",
-    "test": "karma start"
+    "test": "karma start",
+    "test-node": "./node_modules/mocha/bin/mocha $(find api -name '*-test.js') --compilers js:babel-core/register",
+    "test-node-watch": "./node_modules/mocha/bin/mocha $(find api -name '*-test.js') --compilers js:babel-core/register --watch"
   },
   "betterScripts": {
     "build": {
@@ -46,7 +48,7 @@
       }
     },
     "start-prod": {
-      "command": "redux-universal-renderer-server",
+      "command": "node ./bin/start",
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "production",
@@ -55,7 +57,7 @@
       }
     },
     "start-prod-api": {
-      "command": "redux-universal-renderer-api",
+      "command": "node ./bin/api.js",
       "env": {
         "NODE_PATH": "./api",
         "NODE_ENV": "production",
@@ -63,7 +65,7 @@
       }
     },
     "start-dev": {
-      "command": "redux-universal-renderer-server",
+      "command": "node ./bin/start",
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "development",
@@ -72,9 +74,9 @@
       }
     },
     "start-dev-api": {
-      "command": "redux-universal-renderer-api",
+      "command": "node ./bin/api.js",
       "env": {
-        "NODE_PATH": "node_modules/redux-universal-renderer/bin/api",
+        "NODE_PATH": "./api",
         "NODE_ENV": "development",
         "APIPORT": 3030
       }
@@ -89,7 +91,14 @@
   },
   "dependencies": {
     "babel": "~5.8.29",
-    "redux-universal-renderer": "0.14.2",
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
+    "express-session": "^1.12.1",
+    "http-proxy": "^1.12.0",
+    "piping": "^0.3.0",
+    "pretty-error": "^1.2.0",
+    "redux-universal-renderer": "0.15.1",
+    "socket.io": "^1.3.7",
     "webpack-isomorphic-tools": "^2.2.18"
   },
   "devDependencies": {
@@ -137,7 +146,6 @@
     "redux": "^3.0.4",
     "redux-form": "^3.0.0",
     "redux-router": "1.0.0-beta4",
-    "socket.io": "^1.3.7",
     "socket.io-client": "^1.3.7",
     "url-loader": "0.5.7"
   },

@@ -21,41 +21,11 @@ module.exports = Object.assign({
   port: process.env.PORT,
 
   /*
-  // The prefix that Express will look for on incoming requests to determine if
-  // calls should be routed to the API. Optional.
+  // The prefix that will be prepending for all calls intended for an external API
   //
   // Expects: String
   */ 
-  // apiPrefix: 'api',
-
-  /*
-  // The host at which the Express API will be run. If left undefined, the API
-  // server will not be started. See src/api/api.js.
-  //
-  // Expects: String
-  */ 
-  apiHost: process.env.APIHOST || 'localhost',
-
-  /*
-  // The port at which the Express API will be run. If left undefined, the API
-  // server will not be started. See src/api/api.js.
-  //
-  // Expects: Number
-  */ 
-  apiPort: process.env.APIPORT,
-
-  /*
-  // Configuration for Socket.IO
-  */
-  socket: {
-
-    /*
-    // Whether or not to run Socket.IO
-    //
-    // Expects: Boolean
-    */
-    enabled: true
-  },
+  apiPrefix: 'api',
 
   /*
   // Globals available to both serverside and clientside rendering.
@@ -75,7 +45,7 @@ module.exports = Object.assign({
     //
     // Expects: Boolean
     */
-    __DEVTOOLS__: !isProduction,
+    __DEVTOOLS__: !isProduction
   },
 
   /*
@@ -166,18 +136,13 @@ module.exports = Object.assign({
         /*
         // The path to the index of your Redux reducers. Required.
         */
-        reducers: sourceRoot + '/redux/modules/reducer.js',
+        reducers: sourceRoot + '/redux/modules/reducer.js'
 
         /*
         // The path to your replacement for the default HTML shell. Optional.
         // If not provided, the default used will be that in src/helpers/Html.js.
         */
         // html: sourceRoot + '/helpers/Html.js',
-
-        /*
-        // The path to the index of your API actions. Optional.
-        */
-        actions: sourceRoot + '/api/actions/index.js'
       }
     }
   },
