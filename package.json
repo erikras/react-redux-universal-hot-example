@@ -92,6 +92,7 @@
     "file-loader": "^0.8.5",
     "hoist-non-react-statics": "^1.0.3",
     "http-proxy": "^1.12.0",
+    "invariant": "^2.2.0",
     "less": "^2.5.3",
     "less-loader": "^2.2.1",
     "lru-memoize": "^1.0.0",
@@ -118,6 +119,7 @@
     "socket.io-client": "^1.3.7",
     "superagent": "^1.4.0",
     "url-loader": "^0.5.7",
+    "warning": "^2.1.0",
     "webpack-isomorphic-tools": "^2.2.18"
   },
   "devDependencies": {
