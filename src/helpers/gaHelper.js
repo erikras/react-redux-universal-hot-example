@@ -17,11 +17,9 @@ export default {
     let data = {
       hitType: 'pageview'
     };
-
     if (typeof args === 'string') {
       data = assign(data, { page: args });
     }
-
     ga(`${this.tracker.name}.send`, data);
   },
 
@@ -32,9 +30,7 @@ export default {
       eventAction: action,
       eventLabel: label
     };
-
     data = assign(data, args);
-
     ga(`${this.tracker.name}.send`, data);
   },
 

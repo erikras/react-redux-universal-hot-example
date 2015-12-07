@@ -32,9 +32,9 @@
     }
 
     iframe {
-      @include rem(min-height, 400px);
+      @include rem(min-height, 268px);
       display: block;
-      height: calc(100vh - 320px);
+      height: calc(100vh - 360px);
       margin: 0 auto;
       width: 94%;
     }

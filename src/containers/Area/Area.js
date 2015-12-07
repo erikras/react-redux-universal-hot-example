@@ -60,7 +60,6 @@ class Area extends Component {
         }
       }
     };
-    console.log(image && image.medium.src);
     return (
       <div className={styles.area}>
         <DocumentMeta {...meta} extend />

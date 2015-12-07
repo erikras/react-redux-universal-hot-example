@@ -1,0 +1,14 @@
+@import 'src/theme/main';
+
+.numResults {
+  @include rem(padding-top, 4px);
+
+  @include breakpoint(desktop) {
+    padding-left: 3%;
+    padding-right: 3%;
+  }
+  @include breakpoint(wide) {
+    @include rem(padding-left, 32px);
+    @include rem(padding-right, 32px);
+  }
+}

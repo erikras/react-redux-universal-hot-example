@@ -8,14 +8,15 @@ export default class LandmarkSearchResults extends Component {
   }
 
   render() {
+    const styles = require('./LandmarkSearchResults.scss');
     const {loading} = this.props;
     const {query, results} = this.props.results;
     const hasResults = results && results.length;
     const numResults = results.length + ' ' + (results.length === 1 ? 'result' : 'results');
-    const styles = loading ? { opacity: 0.7, transition: 'opacity 300ms' } : {};
+    const loadingStyle = loading ? { opacity: 0.7, transition: 'opacity 300ms' } : {};
     return (
-      <div style={styles}>
-        <p>{numResults} for <i>{query}</i></p>
+      <div style={loadingStyle}>
+        <p className={styles.numResults}>{numResults} for <i>{query}</i></p>
         { hasResults ? <LandmarkList items={results} /> : '' }
       </div>
     );
