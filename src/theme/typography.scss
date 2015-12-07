@@ -116,3 +116,40 @@ ul {
     list-style-type: disc;
   }
 }
+
+.subtitle {
+  @include adjust-font-size-to(15px);
+  @include rem(letter-spacing, 2px);
+  font-weight: $bold;
+  text-transform: uppercase;
+}
+
+.line {
+  font-size: .8em;
+  letter-spacing: 1px;
+}
+
+.title {
+  @extend .subtitle;
+  text-align: center;
+
+  &:after {
+    @include margin-leader(1);
+    @include rem(width, 80px);
+    border-bottom: 2px solid $black;
+    content: '';
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &::after {
+    @include margin-leader(1);
+    @include rem(width, 80px);
+    border-bottom: 2px solid $black;
+    content: '';
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

@@ -34,6 +34,7 @@ class Landmarks extends Component {
   }
 
   render() {
+    const styles = require('./Landmarks.scss');
     const { landmarks } = this.props;
     const loading = !landmarks.hasOwnProperty('loading') || landmarks.loading;
     const error = !landmarks || landmarks.error;
@@ -50,10 +51,10 @@ class Landmarks extends Component {
     }
     return (
       <div>
-        <DocumentMeta title="Explore the MSD"/>
-        <h2>Search for a Landmark</h2>
+        <DocumentMeta title="Explore the MSD" extend/>
+        <h2 className={styles.title}>Search for a Landmark</h2>
         <LandmarkSearch />
-        <h2>Or look through all landmarks</h2>
+        <h2 className={styles.title}>Or look through all landmarks</h2>
         { loading ? <PaperLoader /> : <LandmarkList items={landmarkItems} /> }
       </div>
     );

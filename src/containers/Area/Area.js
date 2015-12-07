@@ -52,14 +52,15 @@ class Area extends Component {
       description: teaser,
       meta: {
         property: {
-          'og:image': image.large.src,
-          'twitter:image': image.medium.src,
-          'twitter:image:width': image.medium.width,
-          'twitter:image:height': image.medium.height,
-          'twitter:description': teaser
+          'og:title': title,
+          'og:image': image && image.medium.src,
+          'og:image:width': image && image.medium.width,
+          'og:image:height': image && image.medium.height,
+          'og:description': teaser
         }
       }
     };
+    console.log(image && image.medium.src);
     return (
       <div className={styles.area}>
         <DocumentMeta {...meta} extend />
@@ -72,7 +73,7 @@ class Area extends Component {
           <div dangerouslySetInnerHTML={{__html: description}} />
         </div>
         : '' }
-        <h2>{title}’s Landmarks</h2>
+        <h2 className={styles.title}>{title}’s Landmarks</h2>
         {/* <div className={styles.description}>
           { image && <Image image={image} size="small" /> }
           <div dangerouslySetInnerHTML={{__html: description}} />

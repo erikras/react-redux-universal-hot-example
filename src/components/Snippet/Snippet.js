@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import {connect} from 'react-redux';
+import DocumentMeta from 'react-document-meta';
 import { Error, Image, PaperLoader } from 'components';
 import * as snippetActions from 'redux/modules/snippets';
 import { snippetIsLoaded, loadSnippet } from 'redux/modules/snippets';
@@ -38,11 +39,24 @@ class Snippet extends Component {
     if (loading) return (<PaperLoader />);
     if (error) return (<Error error={error} />);
 
-    const { category, description, image, landmark, title } = snippet.payload;
+    const { category, description, image, landmark, teaser, title } = snippet.payload;
     const landmarkId = snippet.payload.landmark_id;
-
+    const meta = {
+      title: title,
+      description: teaser,
+      meta: {
+        property: {
+          'og:title': title,
+          'og:image': image && image.medium.src,
+          'og:image:width': image && image.medium.width,
+          'og:image:height': image && image.medium.height,
+          'og:description': teaser
+        }
+      }
+    };
     return (
       <div className={styles.snippet}>
+        <DocumentMeta {...meta} extend />
         <div className={styles[`${category}`]}>
           <header className={image ? styles.bannerMini : ''}>
             <div className={styles.background}>

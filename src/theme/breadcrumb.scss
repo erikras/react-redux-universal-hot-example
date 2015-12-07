@@ -1,6 +1,7 @@
 .breadcrumb {
   @include block-width($w-sml);
   border-bottom: 1px solid $lightgray;
+  font-family: $ff-headings;
   margin-bottom: 1em;
   padding-bottom: 5px;
   text-align: center;

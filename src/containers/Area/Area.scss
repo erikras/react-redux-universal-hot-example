@@ -14,4 +14,8 @@
       width: auto;
     }
   }
+
+  .title {
+    @include padding-leader(2);
+  }
 }

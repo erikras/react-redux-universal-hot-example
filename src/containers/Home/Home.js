@@ -21,9 +21,8 @@ export default class Home extends Component {
       meta: {
         property: {
           'og:image': config.host + msdHero,
-          'twitter:image': config.host + msdHero,
-          'twitter:image:width': 1400,
-          'twitter:image:height': 934
+          'og:image:width': 1400,
+          'og:image:height': 934
         }
       }
     };

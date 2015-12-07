@@ -28,7 +28,7 @@ export default class Html extends Component {
     const ga = (process.env.NODE_ENV === 'production') ? 'UA-547495-15' : 'UA-547495-16';
     const environment = process.env.NODE_ENV;
     return (
-      <html lang="en-us">
+      <html lang="en-us" prefix="og: http://ogp.me/ns#">
         <head>
           <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
           <link rel="shortcut icon" href="/favicon.ico" />

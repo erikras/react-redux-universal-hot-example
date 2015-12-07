@@ -23,15 +23,14 @@
     @include rem(top, 8px);
     position: absolute;
     z-index: 999;
+
     a {
       color: $white;
       line-height: 0.9;
       text-decoration: none;
       text-align: center;
-      text-shadow: 1px 1px rgba(0, 0, 0, 0.75);
       transition: text-shadow 120ms;
       &:hover {
-        text-shadow: 1px 1px rgba(0, 0, 0, 0.95);
         .icon {
           transform: scale(1.25);
         }
@@ -41,6 +40,7 @@
         @include rem(font-size, 40px);
         display: block;
         font-weight: $light;
+        text-shadow: 0px 0px 11px rgba(0, 0, 0, 0.95);
         transition: transform 120ms;
         width: 100%;
       }
@@ -48,6 +48,7 @@
       .label {
         @include rem(font-size, 12px);
         font-weight: $light;
+        text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.95);
         text-transform: uppercase;
       }
     }
