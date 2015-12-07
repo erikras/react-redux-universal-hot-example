@@ -4,6 +4,7 @@ import http from 'http';
 import renderer from 'universal-redux/lib/server';
 import httpProxy from 'http-proxy';
 import config from '../config/universal-redux.config.js';
+import SocketIo from 'socket.io';
 
 const apiPort = process.env.APIPORT;
 const apiHost = process.env.APIHOST || 'localhost';

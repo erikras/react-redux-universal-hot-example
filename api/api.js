@@ -5,7 +5,6 @@ import * as actions from './actions/index';
 import {mapUrl} from 'utils/url.js';
 import PrettyError from 'pretty-error';
 import http from 'http';
-import SocketIo from 'socket.io';
 
 const apiPort = process.env.APIPORT;
 const apiHost = process.env.APIHOST || 'localhost';
