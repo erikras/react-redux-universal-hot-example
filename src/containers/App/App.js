@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { IndexLink } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -37,6 +38,20 @@ export default class App extends Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
+
+  componentDidMount() {
+    const navBar = ReactDOM.findDOMNode(this).querySelector('nav.navbar');
+    const collapsibleNav = navBar.querySelector('div.navbar-collapse');
+    const btnToggle = navBar.querySelector('button.navbar-toggle');
+
+    navBar.addEventListener('click', (evt) => {
+      if (evt.target.tagName !== 'A' || evt.target.classList.contains('dropdown-toggle') || ! collapsibleNav.classList.contains('in')) {
+        return;
+      }
+
+      btnToggle.click();
+    }, false);
+  }
 
   componentWillReceiveProps(nextProps) {
     if (!this.props.user && nextProps.user) {
