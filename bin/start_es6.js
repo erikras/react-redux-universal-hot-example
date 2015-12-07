@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 import path from 'path';
 import http from 'http';
-import renderer from 'redux-universal-renderer/lib/server';
+import renderer from 'universal-redux/lib/server';
 import httpProxy from 'http-proxy';
-import config from '../config/redux-universal-renderer.config.js';
+import config from '../config/universal-redux.config.js';
 
 const apiPort = process.env.APIPORT;
 const apiHost = process.env.APIHOST || 'localhost';
@@ -52,11 +52,11 @@ if (renderer && renderer.app) {
     io.path(`/${config.apiPrefix}/ws`);
   }
 
-  server.listen(config.port, (err) => {
+  server.listen(config.server.port, (err) => {
     if (err) {
       console.error(err);
     }
-    console.info('==> 🌎  API calls will be received at:', config.host + ':' + config.port + '/' + config.apiPrefix);
-    console.info('==> 💻  Open http://localhost:%s in a browser to view the app.', config.port);
+    console.info('==> 🌎  API calls will be received at:', config.server.host + ':' + config.server.port + '/' + config.apiPrefix);
+    console.info('==> 💻  Open http://localhost:%s in a browser to view the app.', config.server.port);
   });
 }

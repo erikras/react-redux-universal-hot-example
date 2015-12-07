@@ -6,7 +6,7 @@ import {isLoaded, load as loadWidgets} from 'redux/modules/widgets';
 import {initializeWithKey} from 'redux-form';
 import connectData from 'helpers/connectData';
 import { WidgetForm } from 'components';
-import { configResolver } from 'redux-universal-renderer';
+import { configResolver } from 'universal-redux';
 
 function fetchDataDeferred(getState, dispatch) {
   if (!isLoaded(getState())) {

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import DocumentMeta from 'react-document-meta';
 import { MiniInfoBar } from 'components';
-import { configResolver } from 'redux-universal-renderer';
+import { configResolver } from 'universal-redux';
 
 export default class About extends Component {
 
