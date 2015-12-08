@@ -167,6 +167,7 @@
     "strip-loader": "^0.1.0",
     "style-loader": "^0.13.0",
     "timekeeper": "0.0.5",
+    "wallaby-webpack": "0.0.10",
     "webpack": "^1.12.9",
     "webpack-dev-middleware": "^1.4.0",
     "webpack-hot-middleware": "^2.5.0"
