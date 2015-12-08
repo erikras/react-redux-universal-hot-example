@@ -21,3 +21,4 @@ export PaperLoader from './PaperLoader/PaperLoader';
 export Snippet from './Snippet/Snippet';
 export SnippetList from './SnippetList/SnippetList';
 export SnippetListItem from './SnippetListItem/SnippetListItem';
+export SocialBar from './SocialBar/SocialBar';

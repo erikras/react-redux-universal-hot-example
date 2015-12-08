@@ -1,0 +1,67 @@
+@import 'src/theme/main';
+
+.socialBar {
+  @include rem(margin-bottom, 32px);
+
+  ul {
+    @include block-width($w-sml);
+    display: flex;
+
+    li {
+      @include rem(margin-left, 2px);
+      @include rem(margin-right, 2px);
+      list-style: none;
+      padding-bottom: 0;
+      text-align: center;
+
+      &.fb {
+        background-color: #3B5998;
+      }
+      &.ig {
+        background-color: #125688;
+      }
+      &.tw {
+        background-color: #55ACEE;
+      }
+      &.yt {
+        background-color: #CD201F;
+      }
+
+      a {
+        @include rem(padding-bottom, 4px);
+        @include rem(padding-top, 10px);
+        color: $white;
+        display: block;
+        text-decoration: none;
+
+        @include breakpoint(desktop) {
+          transition: background-color 240ms;
+
+          img {
+            transition: all 240ms cubic-bezier(0.415, 0.660, 0.450, 1.650);
+          }
+
+          &:hover {
+            background-color: rgba(0,0,0,.25);
+
+            img {
+              transform: scale(1.16);
+            }
+          }
+        }
+      }
+
+      img {
+        @include rem(margin-bottom, 8px);
+        @include rem(max-height, 24px);
+        @include rem(max-width, 24px);
+      }
+
+      .label {
+        @include rem(font-size, 12px);
+        font-weight: $bold;
+        display: block;
+      }
+    }
+  }
+}
