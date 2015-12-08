@@ -4,13 +4,18 @@ import DocumentMeta from 'react-document-meta';
 import {connect} from 'react-redux';
 import * as areaActions from 'redux/modules/areas';
 import { areaIsLoaded, loadArea } from 'redux/modules/areas';
+// import * as navActions from 'redux/modules/nav';
+// import { setActiveNavItem } from 'redux/modules/nav';
 import { Error, Image, PaperLoader, LandmarkList } from 'components';
 
 @connect(
   state => ({
     areas: state.areas,
+    // nav: state.nav
   }),
-  {...areaActions})
+  {...areaActions,
+    // navActions
+  })
 
 export default
 class Area extends Component {
@@ -18,8 +23,14 @@ class Area extends Component {
     changeHeader: PropTypes.func,
     areas: PropTypes.object,
     location: PropTypes.object,
+    // nav: PropTypes.string,
     params: PropTypes.object,
     title: PropTypes.string
+  }
+
+  constructor(props, context) {
+    super(props, context);
+    // this.setState({nav: {activeNavItem: 'booboo'}});
   }
 
   componentDidMount() {
@@ -39,6 +50,11 @@ class Area extends Component {
   }
 
   render() {
+    // console.log('my state is', this.state);
+    // console.log('my context is ', this.context.store.getState());
+    // console.log(setActiveNavItem);
+    // console.log('props: ', this.props);
+    // console.log('this: ', this);
     const styles = require('./Area.scss');
     const areaId = this.props.params.area;
     const areaItem = this.props.areas[areaId];
@@ -60,6 +76,7 @@ class Area extends Component {
         }
       }
     };
+
     return (
       <div className={styles.area}>
         <DocumentMeta {...meta} extend />
