@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import * as areaActions from 'redux/modules/areas';
 import { areaIsLoaded, loadArea } from 'redux/modules/areas';
 // import * as navActions from 'redux/modules/nav';
-// import { setActiveNavItem } from 'redux/modules/nav';
+import { setActiveNavItem } from 'redux/modules/nav';
 import { Error, Image, PaperLoader, LandmarkList } from 'components';
 
 @connect(
@@ -28,14 +28,20 @@ class Area extends Component {
     title: PropTypes.string
   }
 
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+  }
+
   constructor(props, context) {
     super(props, context);
-    // this.setState({nav: {activeNavItem: 'booboo'}});
+    setActiveNavItem('booboo');
   }
 
   componentDidMount() {
     const headerTitle = 'Explore an area';
     this.props.changeHeader(headerTitle);
+
+
     //
     // TODO: store the snippets in the state
     //
@@ -50,8 +56,8 @@ class Area extends Component {
   }
 
   render() {
-    // console.log('my state is', this.state);
-    // console.log('my context is ', this.context.store.getState());
+    console.log('my state is', this.state);
+    console.log('my context is ', this.context.store.getState());
     // console.log(setActiveNavItem);
     // console.log('props: ', this.props);
     // console.log('this: ', this);
