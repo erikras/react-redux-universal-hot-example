@@ -1,0 +1,26 @@
+@import 'src/theme/main';
+
+.categoryListItem {
+  @extend %card;
+  @include rem(height, 192px);
+  background-size: cover;
+  position: relative;
+
+  .cardContent {
+    color: $white;
+    display: flex;
+    height: 100%;
+    text-align: center;
+    width: 100%;
+
+    h3 {
+      @include rem(font-size, 24px);
+      align-self: center;
+      text-shadow: 1px 1px 8px $black;
+
+      @include breakpoint(desktop) {
+        @include rem(font-size, 32px);
+      }
+    }
+  }
+}

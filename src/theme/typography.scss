@@ -153,3 +153,57 @@ ul {
     margin-right: auto;
   }
 }
+
+.lead {
+  @include adjust-font-size-to(19px);
+  @include padding-leader(3);
+  @include padding-trailer(2);
+  @include rem(max-width, $w-mid);
+  background: transparent;
+  color: $black;
+  filter: none;
+  font-weight: $light;
+  margin: 0 3%;
+  position: static;
+  text-align: center;
+
+  & + p {
+    @include leader(0);
+    @include padding-leader(0);
+
+    &::before {
+      @include padding-trailer(2);
+      @include rem(margin-top, 30px);
+      @include rem(width, 80px);
+      border-top: 2px solid $black;
+      content: '';
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  h2 {
+    @include padding-leader(0);
+  }
+
+  p {
+    @include padding-trailer(0);
+    @include rem(max-width, $w-mid);
+    color: $black;
+    font-style: italic;
+  }
+
+  @include breakpoint(desktop) {
+    @include adjust-font-size-to(22px);
+  }
+
+  @include breakpoint(wide) {
+    margin: 0 auto;
+  }
+}
+
+section > .lead {
+  @include padding-leader(1);
+  @include padding-trailer(1);
+}

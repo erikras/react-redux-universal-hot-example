@@ -51,7 +51,13 @@ export default class Home extends Component {
             </p>
           </div>
         </header>
+        <section className={styles.lead}>
+        <p>
+            Vestibulum a ante vestibulum sed est scelerisque dis inceptos nullam adipiscing condimentum penatibus cursus primis adipiscing nisi vitae erat.
+          </p>
+        </section>
         <section>
+          <h2 className={styles.title}>Background of the building</h2>
           <p>Prior to colonisation, this site was a wetland that belonged to the traditional owners, the Wurundjeri people. The Melbourne School of Design acknowledges the traditional owners and pays its respects to Wurundjeri elders past, present and future.</p>
           <p>The Melbourne School of Design, located at the heart of campus and handed over to the University in October 2014, is designed as a learning building – ‘Built Pedagogy’. People learn not only within classrooms but also by using the building and observing the ways that others use it.</p>
           <p>Demolition of the old Architecture building and construction of the new MSD provided opportunities for ‘living learning’ through studio classes, exhibitions, tours, photo documentation and teaching activity on and around the site.</p>
