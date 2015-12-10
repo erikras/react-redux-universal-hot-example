@@ -7,9 +7,9 @@ import DocumentMeta from 'react-document-meta';
 import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
 import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
 import { InfoBar } from 'components';
-import { pushState } from 'redux-router';
+import { updatePath } from 'redux-simple-router';
 import connectData from 'helpers/connectData';
-import config from '../../config';
+import { configResolver } from 'universal-redux';
 
 function fetchData(getState, dispatch) {
   const promises = [];
@@ -25,13 +25,13 @@ function fetchData(getState, dispatch) {
 @connectData(fetchData)
 @connect(
   state => ({user: state.auth.user}),
-  {logout, pushState})
+  {logout, updatePath})
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
     user: PropTypes.object,
     logout: PropTypes.func.isRequired,
-    pushState: PropTypes.func.isRequired
+    updatePath: PropTypes.func.isRequired
   };
 
   static contextTypes = {
@@ -41,10 +41,10 @@ export default class App extends Component {
   componentWillReceiveProps(nextProps) {
     if (!this.props.user && nextProps.user) {
       // login
-      this.props.pushState(null, '/loginSuccess');
+      this.props.updatePath(null, '/loginSuccess');
     } else if (this.props.user && !nextProps.user) {
       // logout
-      this.props.pushState(null, '/');
+      this.props.updatePath(null, '/');
     }
   }
 
@@ -58,12 +58,12 @@ export default class App extends Component {
     const styles = require('./App.scss');
     return (
       <div className={styles.app}>
-        <DocumentMeta {...config.app}/>
+        <DocumentMeta {...configResolver().app}/>
         <Navbar fixedTop toggleNavKey={0}>
           <NavBrand>
             <IndexLink to="/" activeStyle={{color: '#33e0ff'}}>
               <div className={styles.brand}/>
-              <span>{config.app.title}</span>
+              <span>{configResolver().app.title}</span>
             </IndexLink>
           </NavBrand>
 

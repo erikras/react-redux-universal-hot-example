@@ -1,12 +1,14 @@
 import express from 'express';
 import session from 'express-session';
 import bodyParser from 'body-parser';
-import config from '../src/config';
 import * as actions from './actions/index';
 import {mapUrl} from 'utils/url.js';
 import PrettyError from 'pretty-error';
 import http from 'http';
 import SocketIo from 'socket.io';
+
+const apiPort = process.env.APIPORT;
+const apiHost = process.env.APIHOST || 'localhost';
 
 const pretty = new PrettyError();
 const app = express();
@@ -23,7 +25,6 @@ app.use(session({
   cookie: { maxAge: 60000 }
 }));
 app.use(bodyParser.json());
-
 
 app.use((req, res) => {
   const splittedUrlPath = req.url.split('?')[0].split('/').slice(1);
@@ -56,13 +57,13 @@ const bufferSize = 100;
 const messageBuffer = new Array(bufferSize);
 let messageIndex = 0;
 
-if (config.apiPort) {
-  const runnable = app.listen(config.apiPort, (err) => {
+if (apiPort) {
+  const runnable = app.listen(apiPort, (err) => {
     if (err) {
       console.error(err);
     }
-    console.info('----\n==> 🌎  API is running on port %s', config.apiPort);
-    console.info('==> 💻  Send requests to http://%s:%s', config.apiHost, config.apiPort);
+    console.info('----\n==> 🌎  API is running on port %s', apiPort);
+    console.info('==> 💻  Send requests to http://%s:%s', apiHost, apiPort);
   });
 
   io.on('connection', (socket) => {
