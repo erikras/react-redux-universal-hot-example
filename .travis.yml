@@ -15,4 +15,4 @@ before_script:
 script:
   - npm run lint
   - npm test
-  - npm test-node
+  - npm run test-node
