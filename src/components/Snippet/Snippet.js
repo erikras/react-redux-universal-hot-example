@@ -55,7 +55,7 @@ class Snippet extends Component {
       }
     };
     return (
-      <div className={styles.snippet}>
+      <article className={styles.snippet}>
         <DocumentMeta {...meta} extend />
         <div className={styles[`${category}`]}>
           <header className={image ? styles.bannerMini : ''}>
@@ -71,7 +71,7 @@ class Snippet extends Component {
           </div>
           <section dangerouslySetInnerHTML={{__html: description}} />
         </div>
-      </div>
+      </article>
     );
   }
 }
