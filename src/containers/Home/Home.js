@@ -77,7 +77,7 @@ export default class Home extends Component {
               generation DX (developer experience).
               Watch <a href="https://www.youtube.com/watch?v=xsSnOQynTHs" target="_blank">Dan Abramov's talk</a>.
             </li>
-            <li><a href="https://github.com/rackt/redux-router" target="_blank">Redux Router</a> Keep
+            <li><a href="https://github.com/jlongster/redux-simple-router" target="_blank">Redux Simple Router</a> Keep
               your router state in your Redux store
             </li>
             <li><a href="http://eslint.org" target="_blank">ESLint</a> to maintain a consistent code style</li>
