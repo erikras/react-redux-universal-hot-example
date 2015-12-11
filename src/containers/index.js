@@ -1,5 +1,6 @@
 export App from './App/App';
 export Area from './Area/Area';
+export Category from './Category/Category';
 export Explore from './Explore/Explore';
 export Home from './Home/Home';
 export Landmark from './Landmark/Landmark';

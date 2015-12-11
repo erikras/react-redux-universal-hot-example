@@ -8,6 +8,10 @@ const urlHelper = {
     return `/areas/${areaId}`;
   },
 
+  categorySnippetsEndpoint: (categoryId) => {
+    return `/snippets/categories/${categoryId}`;
+  },
+
   landmarksEndpoint: () => {
     return `/landmarks`;
   },

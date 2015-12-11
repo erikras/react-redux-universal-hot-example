@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import DocumentMeta from 'react-document-meta';
-import { SocialBar } from 'components';
+import { CategoryList, SocialBar } from 'components';
 
 export default class Home extends Component {
   static propTypes = {
@@ -15,14 +15,20 @@ export default class Home extends Component {
 
   render() {
     const styles = require('./More.scss');
-    // const categoryList = [
-    //   {
-    //     id: 5,
-    //     slug: 5,
-    //     title: 'Sustainability',
-    //     image: 'https://s3-ap-southeast-2.amazonaws.com/explore-msd-api/assets/files/000/000/007/original/forrest.jpg?1449803417'
-    //   }
-    // ];
+    const categoryList = [
+      {
+        id: 5,
+        slug: 5,
+        title: 'Sustainability',
+        image: 'https://s3-ap-southeast-2.amazonaws.com/explore-msd-api/assets/files/000/000/007/original/forrest.jpg?1449803417'
+      },
+      {
+        id: 2,
+        slug: 2,
+        title: 'Time-lapse videos',
+        image: 'https://s3-ap-southeast-2.amazonaws.com/explore-msd-api/assets/files/000/000/008/original/silverbackgroundmodel.jpg?1449812198'
+      }
+    ];
 
     return (
       <div className={styles.more}>
@@ -30,11 +36,9 @@ export default class Home extends Component {
         <section>
           <h2 className={styles.title}>Connect with us!</h2>
           <SocialBar />
-          {/*
-          <h2 className={styles.title}>Explore by theme</h2>
+          <h2 className={styles.title}>Explore popular topics</h2>
           <CategoryList items={categoryList} />
           <hr className="spacer" />
-          */}
           <p>Notice anything missing? Is something not working the way it should be? Let us know by emailing <a href="mailto:abp-webmaster@unimelb.edu.au">abp-webmaster@unimelb.edu.au</a>.</p>
           <hr className="spacer" />
           <p>Visit the <a href="http://msd.unimelb.edu.au">Melbourne School of Design website</a>.</p>

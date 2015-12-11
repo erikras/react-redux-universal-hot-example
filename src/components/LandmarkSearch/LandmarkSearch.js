@@ -37,8 +37,6 @@ class LandmarkSearch extends Component {
   }
 
   render() {
-    console.log('my state is', this.state);
-    console.log('my context is ', this.context.store.getState());
     const styles = require('./LandmarkSearch.scss');
     const { loading, results } = this.props.landmarksSearch;
     return (

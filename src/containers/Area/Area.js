@@ -4,44 +4,29 @@ import DocumentMeta from 'react-document-meta';
 import {connect} from 'react-redux';
 import * as areaActions from 'redux/modules/areas';
 import { areaIsLoaded, loadArea } from 'redux/modules/areas';
-// import * as navActions from 'redux/modules/nav';
-import { setActiveNavItem } from 'redux/modules/nav';
 import { Error, Image, PaperLoader, LandmarkList } from 'components';
 
 @connect(
   state => ({
-    areas: state.areas,
-    // nav: state.nav
+    areas: state.areas
   }),
-  {...areaActions,
-    // navActions
-  })
+  {...areaActions})
 
 export default
 class Area extends Component {
   static propTypes = {
+    activeNavItem: PropTypes.func,
     changeHeader: PropTypes.func,
     areas: PropTypes.object,
     location: PropTypes.object,
-    // nav: PropTypes.string,
     params: PropTypes.object,
     title: PropTypes.string
-  }
-
-  static contextTypes = {
-    store: PropTypes.object.isRequired
-  }
-
-  constructor(props, context) {
-    super(props, context);
-    setActiveNavItem('booboo');
   }
 
   componentDidMount() {
     const headerTitle = 'Explore an area';
     this.props.changeHeader(headerTitle);
-
-
+    this.props.activeNavItem('explore');
     //
     // TODO: store the snippets in the state
     //
@@ -56,11 +41,6 @@ class Area extends Component {
   }
 
   render() {
-    console.log('my state is', this.state);
-    console.log('my context is ', this.context.store.getState());
-    // console.log(setActiveNavItem);
-    // console.log('props: ', this.props);
-    // console.log('this: ', this);
     const styles = require('./Area.scss');
     const areaId = this.props.params.area;
     const areaItem = this.props.areas[areaId];

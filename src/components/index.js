@@ -9,6 +9,8 @@ export AreaList from './AreaList/AreaList';
 export AreaListItem from './AreaListItem/AreaListItem';
 export CategoryList from './CategoryList/CategoryList';
 export CategoryListItem from './CategoryListItem/CategoryListItem';
+export CategorySnippetsList from './CategorySnippetsList/CategorySnippetsList';
+export CategorySnippetsListItem from './CategorySnippetsListItem/CategorySnippetsListItem';
 export Error from './Error/Error';
 export Header from './Header/Header';
 export HourglassLoader from './HourglassLoader/HourglassLoader';

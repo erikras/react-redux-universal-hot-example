@@ -1,0 +1,5 @@
+@import 'src/theme/main';
+
+.title {
+  @include padding-leader(3);
+}

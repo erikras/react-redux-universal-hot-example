@@ -3,6 +3,7 @@ import {Route, IndexRoute} from 'react-router';
 import {
     App,
     Area,
+    Category,
     Home,
     Explore,
     Landmark,
@@ -19,6 +20,7 @@ export default () => {
   return (
     <Route path="/" component={App}>
       <IndexRoute component={Home} />
+      <Route path="/category/:id" component={Category} />
       <Route path="/explore" component={Explore} />
       <Route path="/explore/:area" component={Area} />
       <Route path="/landmark" component={Landmarks} />
