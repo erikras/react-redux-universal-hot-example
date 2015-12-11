@@ -77,7 +77,8 @@
       "command": "node webpack/webpack-dev-server.js",
       "env": {
         "UV_THREADPOOL_SIZE": 100,
-        "NODE_PATH": "./src"
+        "NODE_PATH": "./src",
+        "PORT": 3000
       }
     }
   },
@@ -130,20 +131,21 @@
     "better-npm-run": "^0.0.4",
     "bootstrap-sass": "^3.3.5",
     "bootstrap-sass-loader": "^1.0.9",
+    "browser-sync": "^2.10.0",
     "chai": "^3.3.0",
+    "clean-webpack-plugin": "^0.1.4",
     "concurrently": "^0.1.1",
+    "css-loader": "^0.23.0",
     "eslint": "1.10.3",
     "eslint-config-airbnb": "0.1.0",
     "eslint-loader": "^1.0.0",
     "eslint-plugin-import": "^0.8.0",
     "eslint-plugin-react": "^3.5.0",
-    "clean-webpack-plugin": "^0.1.4",
-    "css-loader": "^0.23.0",
     "extract-text-webpack-plugin": "^0.9.1",
     "font-awesome": "^4.4.0",
     "font-awesome-webpack": "0.0.4",
-    "karma": "^0.13.10",
     "json-loader": "^0.5.4",
+    "karma": "^0.13.10",
     "karma-cli": "^0.1.1",
     "karma-mocha": "^0.2.0",
     "karma-mocha-reporter": "^1.1.1",
@@ -151,8 +153,8 @@
     "karma-sourcemap-loader": "^0.3.5",
     "karma-webpack": "^1.7.0",
     "mocha": "^2.3.3",
-    "phantomjs": "^1.9.18",
     "node-sass": "^3.4.2",
+    "phantomjs": "^1.9.18",
     "phantomjs-polyfill": "0.0.1",
     "react-a11y": "^0.2.6",
     "react-addons-test-utils": "^0.14.0",
@@ -169,7 +171,8 @@
     "timekeeper": "0.0.5",
     "webpack": "^1.12.9",
     "webpack-dev-middleware": "^1.4.0",
-    "webpack-hot-middleware": "^2.5.0"
+    "webpack-hot-middleware": "^2.5.0",
+    "write-file-webpack-plugin": "^2.1.1"
   },
   "engines": {
     "node": "4.1.1"
