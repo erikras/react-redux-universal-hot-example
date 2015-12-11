@@ -20,7 +20,7 @@ export default class Home extends Component {
     //     id: 5,
     //     slug: 5,
     //     title: 'Sustainability',
-    //     image: 'https://s3-ap-southeast-2.amazonaws.com/explore-msd-api/assets/files/000/000/001/original/solarsmall.jpg?1449624988'
+    //     image: 'https://s3-ap-southeast-2.amazonaws.com/explore-msd-api/assets/files/000/000/007/original/forrest.jpg?1449803417'
     //   }
     // ];
 
