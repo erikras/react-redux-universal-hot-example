@@ -8,7 +8,7 @@ export default class CategoryListItem extends Component {
 
   render() {
     const { image, id, slug, title } = this.props.item;
-    const styles = require('./categoryListItem.scss');
+    const styles = require('./CategoryListItem.scss');
     return (
       <li className={styles.categoryListItem} style={{backgroundImage: `url(${image})`}}>
         <Link key={id} to={`/category/${slug}`} state={{title: title}}>
