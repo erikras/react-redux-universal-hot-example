@@ -1,4 +1,5 @@
-{ "extends": "eslint-config-airbnb",
+{
+  "extends": "eslint-config-airbnb",
   "env": {
     "browser": true,
     "node": true,
