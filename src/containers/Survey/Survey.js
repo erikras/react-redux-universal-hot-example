@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import DocumentMeta from 'react-document-meta';
 import {initialize} from 'redux-form';
 import {SurveyForm} from 'components';
-import { configResolver } from 'universal-redux';
 
 @connect(
   () => ({}),
@@ -32,7 +31,7 @@ export default class Survey extends Component {
     return (
       <div className="container">
         <h1>Survey</h1>
-        <DocumentMeta title={configResolver().app.title + ': Survey'}/>
+        <DocumentMeta title={__META__.title + ': Survey'}/>
 
         <p>
           This is an example of a form in redux in which all the state is kept within the redux store.

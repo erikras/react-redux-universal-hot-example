@@ -5,36 +5,9 @@ const projectRoot = path.resolve(__dirname, '..');
 const sourceRoot = path.resolve(__dirname, '../src');
 const apiPort = process.env.APIPORT;
 const apiHost = process.env.APIHOST || 'localhost';
-
-import fetcher from 'redux/middleware/fetcher';
+const meta = require('./meta.config.js');
 
 module.exports = Object.assign({
-
-  /*
-  // Metadata for the site
-  */
-  app: {
-    title: 'React Redux Example',
-    description: 'All the modern best practices in one example.',
-    meta: {
-      charSet: 'utf-8',
-      property: {
-        'og:site_name': 'React Redux Example',
-        'og:image': 'https://react-redux.herokuapp.com/logo.jpg',
-        'og:locale': 'en_US',
-        'og:title': 'React Redux Example',
-        'og:description': 'All the modern best practices in one example.',
-        'twitter:card': 'summary',
-        'twitter:site': '@erikras',
-        'twitter:creator': '@erikras',
-        'twitter:title': 'React Redux Example',
-        'twitter:description': 'All the modern best practices in one example.',
-        'twitter:image': 'https://react-redux.herokuapp.com/logo.jpg',
-        'twitter:image:width': '200',
-        'twitter:image:height': '200'
-      }
-    }
-  },
 
   /*
   // Express configuration
@@ -56,15 +29,6 @@ module.exports = Object.assign({
   },
 
   /*
-  // The prefix that will be prepending for all calls intended for an external API.
-  //
-  // Expects: String
-  */ 
-  apiPrefix: 'api',
-  apiPort: apiPort,
-  apiHost: apiHost,
-
-  /*
   // Globals available to both serverside and clientside rendering.
   // You may also add your own here.
   */
@@ -82,7 +46,12 @@ module.exports = Object.assign({
     //
     // Expects: Boolean
     */
-    __DEVTOOLS__: !isProduction
+    __DEVTOOLS__: !isProduction,
+
+    __API_ENDPOINT__: '/api',
+    __API_PORT__: apiPort,
+    __API_HOST__: apiHost,
+    __META__: meta
   },
 
   /*
@@ -91,7 +60,10 @@ module.exports = Object.assign({
   //
   // Expects: Boolean
   */  
-  lint: true,
+  lint: {
+    enabled: true,
+    config: projectRoot + '/.eslintrc'
+  },
 
   /*
   // Enable native desktop notifications for Webpack build events.

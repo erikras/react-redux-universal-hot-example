@@ -2,7 +2,6 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import DocumentMeta from 'react-document-meta';
 import * as authActions from 'redux/modules/auth';
-import { configResolver } from 'universal-redux';
 
 @connect(
   state => ({user: state.auth.user}),
@@ -26,7 +25,7 @@ export default class Login extends Component {
     const styles = require('./Login.scss');
     return (
       <div className={styles.loginPage + ' container'}>
-        <DocumentMeta title={configResolver().app.title + ': Login'}/>
+        <DocumentMeta title={__META__.title + ': Login'}/>
         <h1>Login</h1>
         {!user &&
         <div>

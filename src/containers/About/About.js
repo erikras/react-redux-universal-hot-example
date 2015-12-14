@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import DocumentMeta from 'react-document-meta';
 import { MiniInfoBar } from 'components';
-import { configResolver } from 'universal-redux';
 
 export default class About extends Component {
 
@@ -17,7 +16,7 @@ export default class About extends Component {
     return (
       <div className="container">
         <h1>About Us</h1>
-        <DocumentMeta title={configResolver().app.title + ': About Us'}/>
+        <DocumentMeta title={__META__.title + ': About Us'}/>
 
         <p>This project was orginally created by Erik Rasmussen
           (<a href="https://twitter.com/erikras" target="_blank">@erikras</a>), but has since seen many contributions
