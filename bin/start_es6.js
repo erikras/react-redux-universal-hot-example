@@ -38,27 +38,23 @@ function setupProxy(app) {
   });
 }
 
-// TODO: why is this asynchronously loading the require, forcing this bulletproofing?
-if (renderer && renderer.app) {
+const app = renderer.app();
 
-  const app = renderer.app();
+setupProxy(app);
 
-  setupProxy(app);
+renderer.setup(config);
 
-  renderer.setup(config);
+const server = new http.Server(app);
 
-  const server = new http.Server(app);
-
-  if (!isProduction) {
-    const io = new SocketIo(server);
-    io.path(`${__API_ENDPOINT__}/ws`);
-  }
-
-  server.listen(config.server.port, (err) => {
-    if (err) {
-      console.error(err);
-    }
-    console.info('==> 🌎  API calls will be received at:', config.server.host + ':' + config.server.port + apiEndpoint);
-    console.info('==> 💻  Open http://localhost:%s in a browser to view the app.', config.server.port);
-  });
+if (!isProduction) {
+  const io = new SocketIo(server);
+  io.path(`${__API_ENDPOINT__}/ws`);
 }
+
+server.listen(config.server.port, (err) => {
+  if (err) {
+    console.error(err);
+  }
+  console.info('==> 🌎  API calls will be received at:', config.server.host + ':' + config.server.port + apiEndpoint);
+  console.info('==> 💻  Open http://localhost:%s in a browser to view the app.', config.server.port);
+});
