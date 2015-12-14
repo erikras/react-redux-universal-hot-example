@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 import path from 'path';
 import http from 'http';
-import renderer from 'universal-redux/lib/server';
+import renderer from 'universal-redux';
 import httpProxy from 'http-proxy';
 import config from '../config/universal-redux.config.js';
 import SocketIo from 'socket.io';
 
+const isProduction = process.env.NODE_ENV !== 'production';
 const apiPort = process.env.APIPORT;
 const apiHost = process.env.APIHOST || 'localhost';
-const apiPrefix = 'api';
-const isProduction = process.env.NODE_ENV !== 'production';
+const apiEndpoint = '/api';
 
 function setupProxy(app) {
 
@@ -19,7 +19,7 @@ function setupProxy(app) {
   });
 
   // Proxy to API server
-  app.use(`/${config.apiPrefix}`, (req, res) => {
+  app.use(`${apiEndpoint}`, (req, res) => {
     proxy.web(req, res);
   });
 
@@ -42,6 +42,7 @@ function setupProxy(app) {
 if (renderer && renderer.app) {
 
   const app = renderer.app();
+
   setupProxy(app);
 
   renderer.setup(config);
@@ -50,14 +51,14 @@ if (renderer && renderer.app) {
 
   if (!isProduction) {
     const io = new SocketIo(server);
-    io.path(`/${config.apiPrefix}/ws`);
+    io.path(`${__API_ENDPOINT__}/ws`);
   }
 
   server.listen(config.server.port, (err) => {
     if (err) {
       console.error(err);
     }
-    console.info('==> 🌎  API calls will be received at:', config.server.host + ':' + config.server.port + '/' + config.apiPrefix);
+    console.info('==> 🌎  API calls will be received at:', config.server.host + ':' + config.server.port + apiEndpoint);
     console.info('==> 💻  Open http://localhost:%s in a browser to view the app.', config.server.port);
   });
 }

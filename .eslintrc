@@ -34,10 +34,13 @@
   "globals": {
     "__DEVELOPMENT__": true,
     "__CLIENT__": true,
-    "__CONFIG__": {},
     "__SERVER__": true,
     "__DISABLE_SSR__": true,
     "__DEVTOOLS__": true,
+    "__META__": {},
+    "__API_ENDPOINT__": '',
+    "__API_HOST__": '',
+    "__API_PORT__": '',
     "socket": true,
     "webpackIsomorphicTools": true
   }

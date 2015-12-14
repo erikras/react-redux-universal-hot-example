@@ -9,7 +9,6 @@ import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/module
 import { InfoBar } from 'components';
 import { updatePath } from 'redux-simple-router';
 import connectData from 'helpers/connectData';
-import { configResolver } from 'universal-redux';
 
 function fetchData(getState, dispatch) {
   const promises = [];
@@ -58,12 +57,12 @@ export default class App extends Component {
     const styles = require('./App.scss');
     return (
       <div className={styles.app}>
-        <DocumentMeta {...configResolver().app}/>
+        <DocumentMeta {...__META__}/>
         <Navbar fixedTop toggleNavKey={0}>
           <NavBrand>
             <IndexLink to="/" activeStyle={{color: '#33e0ff'}}>
               <div className={styles.brand}/>
-              <span>{configResolver().app.title}</span>
+              <span>{__META__.title}</span>
             </IndexLink>
           </NavBrand>
 
