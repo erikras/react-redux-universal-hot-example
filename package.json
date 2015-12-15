@@ -22,7 +22,7 @@
     "boilerplate",
     "babel"
   ],
-  "main": "bin/server.js",
+  "main": "server.js",
   "scripts": {
     "start": "concurrent --kill-others \"npm run start-prod\" \"npm run start-prod-api\"",
     "start-prod": "better-npm-run start-prod",
