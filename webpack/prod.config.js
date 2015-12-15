@@ -1,18 +1,16 @@
-require('babel/polyfill');
-
 // Webpack config for creating the production bundle.
-var path = require('path');
-var webpack = require('webpack');
-var CleanPlugin = require('clean-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var strip = require('strip-loader');
+import path from 'path';
+import webpack from 'webpack';
+import CleanPlugin from 'clean-webpack-plugin';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import strip from 'strip-loader';
 
-var relativeAssetsPath = '../static/dist';
-var assetsPath = path.join(__dirname, relativeAssetsPath);
+const relativeAssetsPath = '../static/dist';
+const assetsPath = path.join(__dirname, relativeAssetsPath);
 
 // https://github.com/halt-hammerzeit/webpack-isomorphic-tools
-var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
-var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools'));
+const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
+const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools'));
 
 module.exports = {
   devtool: 'source-map',
