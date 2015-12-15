@@ -1,13 +1,12 @@
-var Express = require('express');
-var webpack = require('webpack');
+import Express from 'express';
+import webpack from 'webpack';
+import config from '../src/config';
+import webpackConfig from './dev.config';
+const compiler = webpack(webpackConfig);
 
-var config = require('../src/config');
-var webpackConfig = require('./dev.config');
-var compiler = webpack(webpackConfig);
-
-var host = config.host || 'localhost';
-var port = (config.port + 1) || 3001;
-var serverOptions = {
+const host = config.host || 'localhost';
+const port = (config.port + 1) || 3001;
+const serverOptions = {
   contentBase: 'http://' + host + ':' + port,
   quiet: true,
   noInfo: true,
@@ -19,7 +18,7 @@ var serverOptions = {
   stats: {colors: true}
 };
 
-var app = new Express();
+const app = new Express();
 
 app.use(require('webpack-dev-middleware')(compiler, serverOptions));
 app.use(require('webpack-hot-middleware')(compiler));
