@@ -1,3 +1,13 @@
+#!/usr/bin/env babel-node
+if (process.env.NODE_ENV !== 'production') {
+  if (!require('piping')({
+    hook: true,
+    ignore: /(\/\.|~$|\.json$)/i
+  })) {
+    return;
+  }
+}
+
 import express from 'express';
 import session from 'express-session';
 import bodyParser from 'body-parser';

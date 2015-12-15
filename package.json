@@ -40,7 +40,7 @@
   },
   "betterScripts": {
     "start-prod": {
-      "command": "node ./bin/server.js",
+      "command": "babel-node server.js",
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "production",
@@ -49,7 +49,7 @@
       }
     },
     "start-prod-api": {
-      "command": "node ./bin/api.js",
+      "command": "babel-node api/api.js",
       "env": {
         "NODE_PATH": "./api",
         "NODE_ENV": "production",
@@ -57,7 +57,7 @@
       }
     },
     "start-dev": {
-      "command": "node ./bin/server.js",
+      "command": "babel-node server.js",
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "development",
@@ -66,7 +66,7 @@
       }
     },
     "start-dev-api": {
-      "command": "node ./bin/api.js",
+      "command": "babel-node api/api.js",
       "env": {
         "NODE_PATH": "./api",
         "NODE_ENV": "development",
@@ -74,7 +74,7 @@
       }
     },
     "watch-client": {
-      "command": "node webpack/webpack-dev-server.js",
+      "command": "babel-node webpack/webpack-dev-server.js",
       "env": {
         "UV_THREADPOOL_SIZE": 100,
         "NODE_PATH": "./src"
