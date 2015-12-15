@@ -1,14 +1,15 @@
 // Webpack config for development
-var path = require('path');
-var webpack = require('webpack');
-var WebpackIsomorphicTools = require('webpack-isomorphic-tools');
-var assetsPath = path.resolve(__dirname, '../static/dist');
-var host = (process.env.HOST || 'localhost');
-var port = parseInt(process.env.PORT) + 1 || 3001;
+import path from 'path';
+import webpack from'webpack';
+import WebpackIsomorphicTools from 'webpack-isomorphic-tools';
+
+const assetsPath = path.resolve(__dirname, '../static/dist');
+const host = (process.env.HOST || 'localhost');
+const port = parseInt(process.env.PORT) + 1 || 3001;
 
 // https://github.com/halt-hammerzeit/webpack-isomorphic-tools
-var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
-var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools'));
+const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
+const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools'));
 
 module.exports = {
   devtool: 'inline-source-map',
