@@ -12,4 +12,10 @@ try {
   console.error(err);
 }
 
+var Bluebird = require( 'bluebird' );
+if( process.env.NODE_ENV !== 'production' ){
+    Bluebird.longStackTraces();
+}
+
+require( 'babel-runtime/core-js/promise' ).default = Bluebird;
 require('babel-core/register')(config);

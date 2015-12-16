@@ -20,7 +20,7 @@ function formatUrl(path) {
  * Remove it at your own risk.
  */
 class _ApiClient {
-  constructor(req) {
+  constructor(ctx) {
     methods.forEach((method) =>
       this[method] = (path, { params, data } = {}) => new Promise((resolve, reject) => {
         const request = superagent[method](formatUrl(path));
@@ -29,8 +29,8 @@ class _ApiClient {
           request.query(params);
         }
 
-        if (__SERVER__ && req.get('cookie')) {
-          request.set('cookie', req.get('cookie'));
+        if (__SERVER__ && ctx.cookies.get('cookie')) {
+          request.set('cookie', ctx.cookies.get('cookie'));
         }
 
         if (data) {

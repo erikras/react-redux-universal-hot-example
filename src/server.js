@@ -1,10 +1,15 @@
-import Express from 'express';
+import Koa from 'koa';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 import config from './config';
-import favicon from 'serve-favicon';
-import compression from 'compression';
-import httpProxy from 'http-proxy';
+import favicon from 'koa-favicon';
+import serveStatic from 'koa-static';
+import compression from 'koa-compress';
+import convert from 'koa-convert'
+// import httpProxy from 'http-proxy';
+import proxy from 'koa-proxy'
+
+
 import path from 'path';
 import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
@@ -22,94 +27,78 @@ import getRoutes from './routes';
 import getStatusFromRoutes from './helpers/getStatusFromRoutes';
 
 const pretty = new PrettyError();
-const app = new Express();
-const server = new http.Server(app);
-const proxy = httpProxy.createProxyServer({
-  target: 'http://' + config.apiHost + ':' + config.apiPort,
-  ws: true
-});
+const app = new Koa();
 
-app.use(compression());
-app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
+app.use(convert(compression()));
+app.use(convert(favicon(path.join(__dirname, '..', 'static', 'favicon.ico'))));
 
-app.use(Express.static(path.join(__dirname, '..', 'static')));
+// TODO: Fix static middleware for koa 2.0
+// app.use(convert(serveStatic(path.join(__dirname, '..', 'static'))));
 
-// Proxy to API server
-app.use('/api', (req, res) => {
-  proxy.web(req, res);
-});
+// TODO: Proxy API Server - we need a router for app.use(path, middleware)
+// const p = proxy({ host: 'http://' + config.apiHost + ':' + config.apiPort })
+// app.use('/api', p)
 
-// added the error handling to avoid https://github.com/nodejitsu/node-http-proxy/issues/527
-proxy.on('error', (error, req, res) => {
-  let json;
-  if (error.code !== 'ECONNRESET') {
-    console.error('proxy error', error);
-  }
-  if (!res.headersSent) {
-    res.writeHead(500, {'content-type': 'application/json'});
-  }
+app.use(function(ctx, next)  {
 
-  json = {error: 'proxy_error', reason: error.message};
-  res.end(JSON.stringify(json));
-});
-
-app.use((req, res) => {
   if (__DEVELOPMENT__) {
     // Do not cache webpack stats: the script file would change since
     // hot module replacement is enabled in the development env
     webpackIsomorphicTools.refresh();
   }
-  const client = new ApiClient(req);
+  const client = new ApiClient(ctx);
 
   const store = createStore(reduxReactRouter, getRoutes, createHistory, client);
 
   function hydrateOnClient() {
-    res.send('<!doctype html>\n' +
-      ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} store={store}/>));
+    ctx.body = '<!doctype html>\n' +
+      ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} store={store}/>);
   }
 
   if (__DISABLE_SSR__) {
     hydrateOnClient();
-    return;
   }
 
-  store.dispatch(match(req.originalUrl, (error, redirectLocation, routerState) => {
-    if (redirectLocation) {
-      res.redirect(redirectLocation.pathname + redirectLocation.search);
-    } else if (error) {
-      console.error('ROUTER ERROR:', pretty.render(error));
-      res.status(500);
-      hydrateOnClient();
-    } else if (!routerState) {
-      res.status(500);
-      hydrateOnClient();
-    } else {
-      // Workaround redux-router query string issue:
-      // https://github.com/rackt/redux-router/issues/106
-      if (routerState.location.search && !routerState.location.query) {
-        routerState.location.query = qs.parse(routerState.location.search);
-      }
-
-      store.getState().router.then(() => {
-        const component = (
-          <Provider store={store} key="provider">
-            <ReduxRouter/>
-          </Provider>
-        );
-
-        const status = getStatusFromRoutes(routerState.routes);
-        if (status) {
-          res.status(status);
-        }
-        res.send('<!doctype html>\n' +
-          ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store}/>));
-      }).catch((err) => {
-        console.error('DATA FETCHING ERROR:', pretty.render(err));
-        res.status(500);
+  return new Promise((resolve, reject) => { 
+    store.dispatch(match(ctx.originalUrl, (error, redirectLocation, routerState) => {
+      if (redirectLocation) {
+        ctx.redirect(redirectLocation.pathname + redirectLocation.search);
+      } else if (error) {
+        console.error('ROUTER ERROR:', pretty.render(error));
+        ctx.status = 500;
         hydrateOnClient();
-      });
-    }
-  }));
+      } else if (!routerState) {
+        ctx.status = 500;
+        hydrateOnClient();
+      } else {
+        // Workaround redux-router query string issue:
+        // https://github.com/rackt/redux-router/issues/106
+        if (routerState.location.search && !routerState.location.query) {
+          routerState.location.query = qs.parse(routerState.location.search);
+        }
+
+        store.getState().router.then(() => {
+          const component = (
+            <Provider store={store} key="provider">
+              <ReduxRouter/>
+            </Provider>
+          );
+
+          const status = getStatusFromRoutes(routerState.routes);
+          if (status) {
+            ctx.status = status;
+          }
+          ctx.body = '<!doctype html>\n' +
+            ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store}/>);
+        }).catch((err) => {
+          console.error('DATA FETCHING ERROR:', pretty.render(err));
+          ctx.status = 500;
+          hydrateOnClient();
+        }).then(resolve)
+      }
+    }))
+  })
+
 });
 
 if (config.port) {
@@ -118,7 +107,7 @@ if (config.port) {
     io.path('/api/ws');
   }
 
-  server.listen(config.port, (err) => {
+  app.listen(config.port, (err) => {
     if (err) {
       console.error(err);
     }
