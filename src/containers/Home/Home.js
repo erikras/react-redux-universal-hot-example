@@ -148,7 +148,7 @@ export default class Home extends Component {
             <dt>WebSockets / socket.io</dt>
             <dd>
               The <Link to="/chat">Chat</Link> uses the socket.io technology for real-time
-              commnunication between clients. You need to <Link to="/login">login</Link> first.
+              communication between clients. You need to <Link to="/login">login</Link> first.
             </dd>
           </dl>
 

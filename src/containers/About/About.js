@@ -19,7 +19,7 @@ export default class About extends Component {
         <h1>About Us</h1>
         <DocumentMeta title={config.app.title + ': About Us'}/>
 
-        <p>This project was orginally created by Erik Rasmussen
+        <p>This project was originally created by Erik Rasmussen
           (<a href="https://twitter.com/erikras" target="_blank">@erikras</a>), but has since seen many contributions
           from the open source community. Thank you to <a
             href="https://github.com/erikras/react-redux-universal-hot-example/graphs/contributors"
