@@ -16,9 +16,8 @@ export default class Chat extends Component {
   };
 
   componentDidMount() {
-    if (socket && !this.onMsgListener) {
-      this.onMsgListener = socket.on('msg', this.onMessageReceived);
-
+    if (socket) {
+      socket.on('msg', this.onMessageReceived);
       setTimeout(() => {
         socket.emit('history', {offset: 0, length: 100});
       }, 100);
@@ -26,9 +25,8 @@ export default class Chat extends Component {
   }
 
   componentWillUnmount() {
-    if (socket && this.onMsgListener) {
-      socket.removeListener('on', this.onMsgListener);
-      this.onMsgListener = null;
+    if (socket) {
+      socket.removeListener('msg', this.onMessageReceived);
     }
   }
 
