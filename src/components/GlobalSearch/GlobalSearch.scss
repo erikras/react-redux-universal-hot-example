@@ -1,7 +1,6 @@
 @import 'src/theme/main';
 
 .search {
-  // @include rem(right, 8px);
   @include rem(top, 2px);
   background-color: rgba($white, 0);
   left: calc(100% - 72px);
@@ -12,57 +11,67 @@
     display: none;
   }
 
-  svg {
-    @include rem(margin-bottom, 4px);
-    @include rem(width, 20px);
-    display: block;
-    height: auto;
-    margin-left: auto;
-    margin-top: 0;
-    margin-right: auto;
-  }
-
-  span {
-    @include rem(font-size, 9px);
-    display: block;
-    font-weight: $regular;
-    text-transform: uppercase;
-    width: 100%;
-  }
-
-  @include breakpoint(height-small) {
-    @include rem(top, 21px);
-    svg { @include rem(width, 24px); }
-    span { @include rem(font-size, 10px); }
-  }
-
-  @include breakpoint(height-medium) {
-    @include rem(top, 24px);
-    svg { @include rem(width, 32px); }
-    span { @include rem(font-size, 11px); }
-  }
-
   button {
     -webkit-appearance: none;
     background: transparent;
     border: none;
     border-radius: 4px;
-    transition: all 240ms ease-in-out;
+    position: absolute;
 
-    &:hover {
-      @include breakpoint(desktop) {
-        background-color: rgba(255, 255, 255, 0.7);
-        transform: scale(1.12);
-      }
+    svg {
+      @include rem(margin-bottom, 4px);
+      @include rem(width, 20px);
+      display: block;
+      height: auto;
+      margin-left: auto;
+      margin-top: 0;
+      margin-right: auto;
+    }
+
+    span {
+      @include rem(font-size, 9px);
+      display: block;
+      font-weight: $regular;
+      text-transform: uppercase;
+      width: 100%;
     }
   }
 
+  @include breakpoint(height-small) {
+    @include rem(top, 21px);
+
+    button {
+      svg { @include rem(width, 24px); }
+      span { @include rem(font-size, 10px); }
+    }
+  }
+
+  @include breakpoint(height-medium) {
+    @include rem(top, 24px);
+
+    button {
+      svg { @include rem(width, 32px); }
+      span { @include rem(font-size, 11px); }
+    }
+  }
+
+  .searchBox {
+    display: none;
+  }
+
   &.searchOpen {
+    @include rem(padding-bottom, 4px);
+    @include rem(padding-top, 4px);
+    @include shadow-2dp();
     background-color: rgba($white, 1);
     left: 3%;
     right: 3%;
     margin-left: 0;
     margin-right: 0;
+    max-height: 100vh;
+    overflow: auto;
+    padding-left: 1%;
+    padding-right: 1%;
     width: 94%;
 
     .closeButton {
@@ -73,9 +82,12 @@
       display: none;
     }
 
-    button {
-      // opacity: 0;
-      transition: none;
+    .searchBox {
+      display: block;
+
+      form {
+        padding: 0;
+      }
     }
   }
 }

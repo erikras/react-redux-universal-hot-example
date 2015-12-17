@@ -15,7 +15,7 @@
     @include rem(height, $header-height-large);
   }
 
-  div {
+  .pageHeaderLogo, .pageHeaderTitle, .pageHeaderTools  {
     display: inline-block;
     flex-basis: auto;
     margin: 0 0.5em;

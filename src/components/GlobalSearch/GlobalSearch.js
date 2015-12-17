@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-// import { GlobalSearchResults } from 'components';
+import { LandmarkSearch } from 'components';
 
 export default class GlobalSearch extends Component {
   constructor(props) {
@@ -46,8 +46,10 @@ export default class GlobalSearch extends Component {
               Close
             </span>
           </div>
-
         </button>
+        <div className={styles.searchBox}>
+          <LandmarkSearch />
+        </div>
       </div>
     );
   }
