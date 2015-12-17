@@ -12,6 +12,7 @@ export CategoryListItem from './CategoryListItem/CategoryListItem';
 export CategorySnippetsList from './CategorySnippetsList/CategorySnippetsList';
 export CategorySnippetsListItem from './CategorySnippetsListItem/CategorySnippetsListItem';
 export Error from './Error/Error';
+export GlobalSearchResults from './GlobalSearchResults/GlobalSearchResults';
 export Header from './Header/Header';
 export HourglassLoader from './HourglassLoader/HourglassLoader';
 export Image from './Image/Image';

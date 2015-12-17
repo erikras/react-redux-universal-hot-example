@@ -53,7 +53,7 @@ export default class Home extends Component {
         </header>
         <section className={styles.lead}>
         <p>
-            Vestibulum a ante vestibulum sed est scelerisque dis inceptos nullam adipiscing condimentum penatibus cursus primis adipiscing nisi vitae erat.
+            This app will enhance your experience of the building – whether you’re at home or taking a self-guided tour, it will explain why key design decisions were made and demonstrate what makes the building unique.
           </p>
         </section>
         <section>
