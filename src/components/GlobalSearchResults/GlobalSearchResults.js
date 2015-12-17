@@ -6,7 +6,7 @@ export default class GlobalSearchResults extends Component {
   }
 
   render() {
-    const { image, id, slug, title } = this.props.item;
+    // const { image, id, slug, title } = this.props.item;
     const styles = require('./GlobalSearchResults.scss');
     return (
       <div className={styles.globalSearchResults}>

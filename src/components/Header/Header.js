@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import { Link } from 'react-router';
+import { GlobalSearch } from 'components';
 
 export default class Header extends Component {
   static propTypes = {
@@ -7,6 +8,10 @@ export default class Header extends Component {
   }
 
   static defaultProps = { title: 'Explore the MSD' }
+
+  toggleSearch() {
+    console.log(this.state);
+  }
 
   render() {
     const {title} = this.props; // eslint-disable-line no-shadow
@@ -26,9 +31,9 @@ export default class Header extends Component {
         <div className={styles.pageHeaderTitle}>
           <h1>{title}</h1>
         </div>
-        {/* <div className="page-header-tools">
-          <p><a href="#">Search</a></p>
-        </div> */}
+        <div className={styles.pageHeaderTools}>
+          <GlobalSearch />
+        </div>
       </div>
     );
   }

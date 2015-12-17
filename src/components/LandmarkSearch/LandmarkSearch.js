@@ -27,6 +27,10 @@ class LandmarkSearch extends Component {
     this.refreshSearch = this.refreshSearch.bind(this);
   }
 
+  landmarkSearchSubmit(event) {
+    event.preventDefault();
+  }
+
   refreshSearch() {
     const value = ReactDOM.findDOMNode(this.refs.search).value;
     const query = value.length ? value : ' ';
@@ -41,7 +45,7 @@ class LandmarkSearch extends Component {
     const { loading, results } = this.props.landmarksSearch;
     return (
       <div>
-        <form className={styles.landmarkSearch}>
+        <form className={styles.landmarkSearch} onSubmit={this.landmarkSearchSubmit}>
           <fieldset>
             <input ref="search" type="search" onChange={_.debounce(this.refreshSearch, 300)} placeholder="Landmark Name or Number" />
           </fieldset>

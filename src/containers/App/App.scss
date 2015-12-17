@@ -29,7 +29,6 @@
 .MSDHeader {
   @include shadow-2dp();
   left: 0;
-  overflow: hidden;
   position: fixed;
   top: 0;
   width: 100%;

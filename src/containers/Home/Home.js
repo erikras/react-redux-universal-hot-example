@@ -52,8 +52,8 @@ export default class Home extends Component {
           </div>
         </header>
         <section className={styles.lead}>
-        <p>
-            This app will enhance your experience of the building – whether you’re at home or taking a self-guided tour, it will explain why key design decisions were made and demonstrate what makes the building unique.
+          <p>
+            This app is designed to enhance your experience of the MSD Building. Whether you’re at home or taking a self-guided tour, it will explain why some of the key design decisions were made, and demonstrate what makes the building unique. Tap Explore when you’re ready to begin.
           </p>
         </section>
         <section>
