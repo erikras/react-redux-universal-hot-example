@@ -132,6 +132,7 @@
     "karma-webpack": "^1.7.0",
     "lru-memoize": "^1.0.0",
     "multireducer": "^1.0.2",
+    "mocha": "^2.3.3",
     "node-sass": "^3.4.2",
     "phantomjs": "^1.9.18",
     "phantomjs-polyfill": "0.0.1",
