@@ -5,8 +5,8 @@
  * disable components you don't use.
  *
  */
-
-module.exports = {
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const fontAwesomeConfig = {
   styles: {
     mixins: true,
     core: true,
@@ -16,3 +16,5 @@ module.exports = {
     animated: true,
   }
 };
+fontAwesomeConfig.styleLoader = ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader');
+module.exports = fontAwesomeConfig;

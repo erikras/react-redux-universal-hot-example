@@ -9,8 +9,8 @@
  * disable components you don't use.
  *
  */
-
-module.exports = {
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const bootstrapConfig = {
   preBootstrapCustomizations: './src/theme/variables.scss',
   mainSass: './src/theme/bootstrap.overrides.scss',
   verbose: false,
@@ -70,3 +70,5 @@ module.exports = {
     'responsive-utilities': true
   }
 };
+bootstrapConfig.styleLoader = ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader');
+module.exports = bootstrapConfig;

@@ -5,9 +5,17 @@ var fs = require('fs');
 var path = require('path');
 var webpack = require('webpack');
 var WebpackIsomorphicTools = require('webpack-isomorphic-tools');
-var assetsPath = path.resolve(__dirname, '../static/dist');
-var host = (process.env.HOST || 'localhost');
-var port = parseInt(process.env.PORT) + 1 || 3001;
+
+var projectRootPath = path.resolve(__dirname, '../');
+var assetsPath = path.resolve(projectRootPath, './static/dist');
+
+var CleanPlugin = require('clean-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var WriteFilePlugin = require('write-file-webpack-plugin').default;
+
+var config = require('../src/config');
+var host = config.host;
+var port = (config.port + 2) || 3002;
 
 // https://github.com/halt-hammerzeit/webpack-isomorphic-tools
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
@@ -47,7 +55,7 @@ babelLoaderQuery.extra['react-transform'].transforms.push({
 
 module.exports = {
   devtool: 'inline-source-map',
-  context: path.resolve(__dirname, '..'),
+  context: projectRootPath,
   entry: {
     'main': [
       'webpack-hot-middleware/client?path=http://' + host + ':' + port + '/__webpack_hmr',
@@ -56,6 +64,10 @@ module.exports = {
       './src/client.js'
     ]
   },
+
+  // Required for https://github.com/gajus/write-file-webpack-plugin/issues/5
+  devServer: {outputPath: assetsPath},
+
   output: {
     path: assetsPath,
     filename: '[name]-[hash].js',
@@ -66,8 +78,8 @@ module.exports = {
     loaders: [
       { test: /\.jsx?$/, exclude: /node_modules/, loaders: ['babel?' + JSON.stringify(babelLoaderQuery), 'eslint-loader']},
       { test: /\.json$/, loader: 'json-loader' },
-      { test: /\.less$/, loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!less?outputStyle=expanded&sourceMap' },
-      { test: /\.scss$/, loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap' },
+      { test: /\.less$/, loader: ExtractTextPlugin.extract('style', '!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!less?outputStyle=expanded&sourceMap') },
+      { test: /\.scss$/, loader: ExtractTextPlugin.extract('style', '!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap') },
       { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/font-woff" },
       { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/font-woff" },
       { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream" },
@@ -85,6 +97,14 @@ module.exports = {
     extensions: ['', '.json', '.js', '.jsx']
   },
   plugins: [
+    new CleanPlugin([assetsPath], projectRootPath),
+
+    // Force write to disk for browser-sync css hot reloading
+    new WriteFilePlugin({test: /\.css$/}),
+
+    // css file from the extract-text-plugin loader
+    new ExtractTextPlugin('[name].css', {allChunks: true}),
+
     // hot reload
     new webpack.HotModuleReplacementPlugin(),
     new webpack.IgnorePlugin(/webpack-stats\.json$/),

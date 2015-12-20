@@ -102,7 +102,8 @@ app.use((req, res) => {
           res.status(status);
         }
         res.send('<!doctype html>\n' +
-          ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store}/>));
+          ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component}
+                                        store={store}/>));
       }).catch((err) => {
         console.error('DATA FETCHING ERROR:', pretty.render(err));
         res.status(500);
@@ -113,12 +114,16 @@ app.use((req, res) => {
 });
 
 if (config.port) {
+  let port = config.port;
   if (config.isProduction) {
     const io = new SocketIo(server);
     io.path('/api/ws');
+  } else {
+    //  In development, let browser sync proxy the view to the client with the specified config.port
+    port++;
   }
 
-  server.listen(config.port, (err) => {
+  server.listen(port, (err) => {
     if (err) {
       console.error(err);
     }
