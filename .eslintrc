@@ -28,13 +28,14 @@
   "settings": {
     "import/parser": "babel-eslint",
     "import/resolve": {
-      moduleDirectory: ["node_modules", "src"]
+      moduleDirectory: ["node_modules", "node_modules/universal-redux/node-modules", "src"]
     }
   },
   "globals": {
     "__DEVELOPMENT__": true,
     "__CLIENT__": true,
     "__SERVER__": true,
+    "__LOGGER__": false,
     "__DISABLE_SSR__": true,
     "__DEVTOOLS__": true,
     "__META__": {},
