@@ -7,7 +7,7 @@ const apiPort = process.env.APIPORT;
 const apiHost = process.env.APIHOST || 'localhost';
 const meta = require('./meta.config.js');
 
-module.exports = Object.assign({
+module.exports = {
 
   /*
   // Express configuration
@@ -179,6 +179,5 @@ module.exports = Object.assign({
       }
     }
   }
-
-});
+};
 /* eslint-enable */
