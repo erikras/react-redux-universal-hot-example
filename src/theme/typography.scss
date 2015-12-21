@@ -1,4 +1,5 @@
 body {
+  @include establish-baseline;
   font-family: $ff-sans;
 }
 

@@ -53,7 +53,9 @@ class Landmarks extends Component {
         <DocumentMeta title="Explore the MSD" extend/>
         <h2 className={styles.title}>Search for a Landmark</h2>
         <LandmarkSearch />
-        <h2 className={styles.title}>Or look through all landmarks</h2>
+        <h2 className={[styles.title, styles.withTiltSibling].join(' ')}>
+          Or look through all landmarks
+        </h2>
         { loading ? <PaperLoader /> : <LandmarkList items={landmarkItems} /> }
       </div>
     );

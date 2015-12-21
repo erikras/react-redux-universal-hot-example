@@ -4,6 +4,7 @@
   @extend %card;
   @include rem(height, 288px);
   position: relative;
+  z-index: 10;
 
   .cardContent {
     width: 100%;

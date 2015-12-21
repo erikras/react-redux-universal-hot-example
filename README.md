@@ -22,3 +22,9 @@ npm run dev
 npm run build
 npm run start
 ```
+
+## Polyfills required
+
+### CSS
+
+* Pointer-events

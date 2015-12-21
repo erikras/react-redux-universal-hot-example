@@ -16,7 +16,9 @@ export default class LandmarkSearchResults extends Component {
     const loadingStyle = loading ? { opacity: 0.7, transition: 'opacity 300ms' } : {};
     return (
       <div style={loadingStyle}>
-        <p className={styles.numResults}>{numResults} for <i>{query}</i></p>
+        <div className={styles.withTiltSibling}>
+          <p className={styles.numResults}>{numResults} for <i>{query}</i></p>
+        </div>
         { hasResults ? <LandmarkList items={results} /> : '' }
       </div>
     );

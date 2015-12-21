@@ -43,7 +43,6 @@ form {
   @include block-width($w-sml);
   @include rem(font-size, 16px);
   @include rem(padding, 0 10px);
-  background-color: $white;
   color: $darkgray;
   line-height: 1.2;
 

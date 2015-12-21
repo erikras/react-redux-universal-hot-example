@@ -1,22 +1,46 @@
 @import 'src/theme/main';
 
 .search {
-  @include rem(top, 2px);
   background-color: rgba($white, 0);
-  left: calc(100% - 72px);
+  left: 0;
+  max-height: 100vh;
+  pointer-events: none;
   position: absolute;
-  transition: left 240ms;
+  top: 0;
+  transition: background-color 240ms;
+  transition-delay: 300ms;
+  width: 100%;
+  z-index: 1000;
 
-  .closeButton {
+  &:before,
+  &::before {
+    content: "";
     display: none;
+    height: 100vh;
+    left: 0;
+    position: fixed;
+    top: 0;
+    transition: background-color 240ms;
+    transition-delay: 300ms;
+    width: 100%;
+    z-index: -1;
   }
 
   button {
+    @include rem(height, 50px);
     -webkit-appearance: none;
     background: transparent;
     border: none;
-    border-radius: 4px;
+    overflow: hidden;
+    pointer-events: auto;
     position: absolute;
+
+    top: 0;
+    right: 0;
+
+    .searchButton, .closeButton {
+      transition: transform 120ms linear;
+    }
 
     svg {
       @include rem(margin-bottom, 4px);
@@ -38,55 +62,69 @@
   }
 
   @include breakpoint(height-small) {
-    @include rem(top, 21px);
-
+    @include rem(padding-top, 21px);
     button {
+      @include rem(top, 21px);
       svg { @include rem(width, 24px); }
       span { @include rem(font-size, 10px); }
     }
   }
 
   @include breakpoint(height-medium) {
-    @include rem(top, 24px);
-
+    @include rem(padding-top, 24px);
     button {
+      @include rem(top, 24px);
       svg { @include rem(width, 32px); }
       span { @include rem(font-size, 11px); }
     }
   }
 
   .searchBox {
-    display: none;
-  }
 
-  &.searchOpen {
-    @include rem(padding-bottom, 4px);
-    @include rem(padding-top, 4px);
-    @include shadow-2dp();
-    background-color: rgba($white, 1);
-    left: 3%;
-    right: 3%;
-    margin-left: 0;
-    margin-right: 0;
-    max-height: 100vh;
-    overflow: auto;
-    padding-left: 1%;
-    padding-right: 1%;
-    width: 94%;
-
-    .closeButton {
-      display: block;
-    }
-
-    .searchButton {
+    div form + div {
       display: none;
     }
 
-    .searchBox {
-      display: block;
+    form {
+      padding: 0;
 
-      form {
-        padding: 0;
+      input[type="search"] {
+        margin-top: 0;
+        transform: translateY(-200%);
+        transition: transform 240ms;
+        transition-delay: 60ms;
+      }
+    }
+  }
+
+  &.searchOpen {
+
+    &:before,
+    &::before {
+      background-color: rgba($white, .96);
+      display: block;
+    }
+
+    .closeButton {
+      transform: translateY(-100%);
+    }
+
+    .searchButton {
+      transform: translateY(-100%);
+    }
+
+    .searchBox {
+      @include padding-trailer(3);
+      overflow: auto;
+      max-height: 100vh;
+      pointer-events: auto;
+
+      div form + div {
+        display: block;
+      }
+
+      form input[type="search"] {
+        transform: translateY(0);
       }
     }
   }

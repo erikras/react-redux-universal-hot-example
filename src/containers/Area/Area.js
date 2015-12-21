@@ -75,7 +75,7 @@ class Area extends Component {
           <div dangerouslySetInnerHTML={{__html: description}} />
         </div>
         : '' }
-        <h2 className={styles.title}>{title}’s Landmarks</h2>
+        <h2 className={[styles.title, styles.withTiltSibling].join(' ')}>{title}’s Landmarks</h2>
         {/* <div className={styles.description}>
           { image && <Image image={image} size="small" /> }
           <div dangerouslySetInnerHTML={{__html: description}} />

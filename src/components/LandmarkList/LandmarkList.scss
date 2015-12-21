@@ -1,8 +1,18 @@
 @import 'src/theme/main';
 
 .landmarkList {
+  @extend .tiltBefore;
+  @extend .tiltAfter;
   background-color: $lightgray;
-  padding: rhythm(1) 0;
+  padding-left: 0;
+  padding-right: 0;
+
+  &:before,
+  &::before,
+  &:after,
+  &::after {
+    background-color: $lightgray;
+  }
 
   &> ul {
     @include block-width($w-sml);
