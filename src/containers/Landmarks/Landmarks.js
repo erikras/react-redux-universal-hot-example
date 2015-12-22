@@ -54,7 +54,7 @@ class Landmarks extends Component {
         <h2 className={styles.title}>Search for a Landmark</h2>
         <LandmarkSearch />
         <h2 className={[styles.title, styles.withTiltSibling].join(' ')}>
-          Or look through all landmarks
+          Or browse all of the building’s landmarks
         </h2>
         { loading ? <PaperLoader /> : <LandmarkList items={landmarkItems} /> }
       </div>

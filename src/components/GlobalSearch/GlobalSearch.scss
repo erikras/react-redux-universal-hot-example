@@ -29,15 +29,14 @@
   button {
     @include rem(height, 40px);
     @include rem(margin-top, 8px);
+    @include rem(right, 12px);
     -webkit-appearance: none;
     background: transparent;
     border: none;
     overflow: hidden;
     pointer-events: auto;
     position: absolute;
-
     top: 0;
-    right: 0;
 
     .searchButton, .closeButton {
       transition: transform 120ms linear;
@@ -63,13 +62,12 @@
   }
 
   .searchBox {
-
     div form + div {
       display: none;
     }
 
     form {
-      @include rem(margin-right, 64px);
+      @include rem(margin-right, 68px);
       @include rem(margin-top, 2px);
       margin-left: 1%;
       padding: 0;
@@ -96,7 +94,7 @@
 
     button {
       @include rem(height, 50px);
-      @include rem(top, 18px);
+      @include rem(top, 16px);
       svg { @include rem(width, 24px); }
       span { @include rem(font-size, 10px); }
     }
