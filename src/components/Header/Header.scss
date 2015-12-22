@@ -2,6 +2,7 @@
 
 .pageHeader {
   @include rem(height, $header-height-small);
+  @include rem(padding-right, 50px);
   align-items: center;
   background-color: $bgfallback;
   background-color: $bgfloating;

@@ -27,7 +27,8 @@
   }
 
   button {
-    @include rem(height, 50px);
+    @include rem(height, 40px);
+    @include rem(margin-top, 8px);
     -webkit-appearance: none;
     background: transparent;
     border: none;
@@ -61,24 +62,6 @@
     }
   }
 
-  @include breakpoint(height-small) {
-    @include rem(padding-top, 21px);
-    button {
-      @include rem(top, 21px);
-      svg { @include rem(width, 24px); }
-      span { @include rem(font-size, 10px); }
-    }
-  }
-
-  @include breakpoint(height-medium) {
-    @include rem(padding-top, 24px);
-    button {
-      @include rem(top, 24px);
-      svg { @include rem(width, 32px); }
-      span { @include rem(font-size, 11px); }
-    }
-  }
-
   .searchBox {
 
     div form + div {
@@ -86,7 +69,15 @@
     }
 
     form {
+      @include rem(margin-right, 64px);
+      @include rem(margin-top, 2px);
+      margin-left: 1%;
       padding: 0;
+
+      @include breakpoint(840px) {
+        margin-left: auto;
+        margin-right: auto;
+      }
 
       input[type="search"] {
         margin-top: 0;
@@ -94,6 +85,34 @@
         transition: transform 240ms;
         transition-delay: 60ms;
       }
+    }
+  }
+
+  @include breakpoint(height-small) {
+
+    .searchBox form {
+      @include rem(margin-top, 21px);
+    }
+
+    button {
+      @include rem(height, 50px);
+      @include rem(top, 18px);
+      svg { @include rem(width, 24px); }
+      span { @include rem(font-size, 10px); }
+    }
+  }
+
+  @include breakpoint(height-medium) {
+
+    .searchBox form {
+      @include rem(margin-top, 30px);
+    }
+
+    button {
+      @include rem(height, 54px);
+      @include rem(top, 24px);
+      svg { @include rem(width, 32px); }
+      span { @include rem(font-size, 11px); }
     }
   }
 
