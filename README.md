@@ -76,11 +76,12 @@ npm run start
 
 A demonstration of this app can be seen [running on heroku](https://react-redux.herokuapp.com), which is a deployment of the [heroku branch](https://github.com/erikras/react-redux-universal-hot-example/tree/heroku).
 
-## Tutorials
+## Documentation
 
-If you are the kind of person that learns best by following along a tutorial, I can recommend the following.
-
+* [Exploring the Demo App](docs/ExploringTheDemoApp/ExploringTheDemoApp.md) is a guide that can be used before you install the kit.
 * [React Tutorial - Converting Reflux to Redux](http://engineering.wework.com/process/2015/10/01/react-reflux-to-redux/), by Matt Star
+   If you are the kind of person that learns best by following along a tutorial, I can recommend Matt Star's overview and examples.
+
 
 ## Explanation
 
