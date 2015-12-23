@@ -36,7 +36,9 @@ export default class Home extends Component {
         <section>
           <h2 className={styles.title}>Connect with us!</h2>
           <SocialBar />
-          <h2 className={styles.title}>Explore popular topics</h2>
+          <h2 className={[styles.title, styles.withTiltSibling].join(' ')}>
+            Explore popular topics
+          </h2>
           <CategoryList items={categoryList} />
           <hr className="spacer" />
           <p>Notice anything missing? Is something not working the way it should be? Let us know by emailing <a href="mailto:abp-webmaster@unimelb.edu.au">abp-webmaster@unimelb.edu.au</a>.</p>

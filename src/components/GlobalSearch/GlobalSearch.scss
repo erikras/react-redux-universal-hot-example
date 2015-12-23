@@ -107,7 +107,7 @@
     }
 
     button {
-      @include rem(height, 54px);
+      @include rem(height, 52px);
       @include rem(top, 24px);
       svg { @include rem(width, 32px); }
       span { @include rem(font-size, 11px); }
@@ -120,6 +120,7 @@
     &::before {
       background-color: rgba($white, .96);
       display: block;
+      pointer-events: all;
     }
 
     .closeButton {

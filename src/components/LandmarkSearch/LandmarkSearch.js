@@ -15,7 +15,8 @@ import * as _ from 'lodash';
 export default
 class LandmarkSearch extends Component {
   static propTypes = {
-    landmarksSearch: PropTypes.object,
+    clearResults: PropTypes.bool,
+    landmarksSearch: PropTypes.object
   }
 
   static contextTypes = {
@@ -25,6 +26,13 @@ class LandmarkSearch extends Component {
   constructor(props, context) {
     super(props, context);
     this.refreshSearch = this.refreshSearch.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('landmark search receiving props: ', nextProps);
+    if (nextProps.clearResults) {
+      ReactDOM.findDOMNode(this.refs.form).reset();
+    }
   }
 
   landmarkSearchSubmit(event) {
@@ -43,9 +51,10 @@ class LandmarkSearch extends Component {
   render() {
     const styles = require('./LandmarkSearch.scss');
     const { loading, results } = this.props.landmarksSearch;
+
     return (
       <div>
-        <form className={styles.landmarkSearch} onSubmit={this.landmarkSearchSubmit}>
+        <form ref="form" className={styles.landmarkSearch} onSubmit={this.landmarkSearchSubmit}>
           <fieldset>
             <input ref="search" type="search" onChange={_.debounce(this.refreshSearch, 300)} placeholder="Landmark Name or Number" />
           </fieldset>

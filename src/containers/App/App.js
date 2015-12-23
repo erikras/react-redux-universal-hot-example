@@ -26,11 +26,15 @@ export default class App extends Component {
 
   componentWillReceiveProps(nextProps) {
     // if we changed routes...
-    if (( nextProps.location.key !== this.props.location.key &&
-          nextProps.location.state && nextProps.location.state.modal)) {
-      // modal magic
-      // save the old children (just like animation)
-      this.previousChildren = this.props.children;
+    if (nextProps.location.key !== this.props.location.key) {
+      if (nextProps.location.state && nextProps.location.state.modal) {
+        // modal magic
+        // save the old children (just like animation)
+        this.previousChildren = this.props.children;
+      }
+      this.setState({ searchShouldBeOpen: false });
+    } else {
+      this.setState({ searchShouldBeOpen: null });
     }
   }
 
@@ -44,7 +48,7 @@ export default class App extends Component {
 
   render() {
     const styles = require('./App.scss');
-    const { activeNavItem, headerTitle } = this.state;
+    const { activeNavItem, headerTitle, searchShouldBeOpen } = this.state;
     const { location } = this.props;
     const isModal = (
       location.state &&
@@ -57,7 +61,7 @@ export default class App extends Component {
         <DocumentMeta {...config.app} />
         <div className={styles.MSDHeaderUnderlay} />
         <div className={styles.MSDHeader}>
-          <Header title={ headerTitle ? headerTitle : null } />
+          <Header title={ headerTitle ? headerTitle : null } searchShouldBeOpen={searchShouldBeOpen} />
         </div>
         <div className={styles.MSDContent}>
 

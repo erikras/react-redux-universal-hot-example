@@ -1,13 +1,25 @@
-import React, {Component} from 'react';
+import React, { Component, PropTypes } from 'react';
 import { LandmarkSearch } from 'components';
 
 export default class GlobalSearch extends Component {
+  static propTypes = {
+    shouldBeClear: PropTypes.bool,
+    shouldBeOpen: PropTypes.bool,
+  }
+
   constructor(props) {
     super(props);
-    this.state = { searchVisibile: false };
+    this.state = { searchVisibile: this.props.shouldBeOpen || false };
     this.showSearch = this.showSearch.bind(this);
     this.hideSearch = this.hideSearch.bind(this);
     this.toggleSearch = this.toggleSearch.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if ( typeof nextProps.shouldBeOpen === 'boolean' ) {
+      this.setState({ searchVisibile: (nextProps.shouldBeOpen) });
+    }
+
   }
 
   showSearch() {
@@ -26,7 +38,7 @@ export default class GlobalSearch extends Component {
     const styles = require('./GlobalSearch.scss');
     const searchVisibileStyle = this.state.searchVisibile ? styles.searchOpen : '';
     return (
-      <div className={styles.search + ' ' + searchVisibileStyle}>
+      <div className={ styles.search + ' ' + searchVisibileStyle }>
         <button onClick={this.toggleSearch}>
           <div className={styles.searchButton}>
             <svg fill="#000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -48,7 +60,7 @@ export default class GlobalSearch extends Component {
           </div>
         </button>
         <div className={styles.searchBox}>
-          <LandmarkSearch />
+          <LandmarkSearch clearResults={!this.state.searchVisibile} />
         </div>
       </div>
     );
