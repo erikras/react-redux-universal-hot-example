@@ -82,7 +82,7 @@
     }
   },
   "dependencies": {
-    "babel": "~5.8.29",
+    "babel": "~6.3.26",
     "babel-plugin-typecheck": "^2.0.0",
     "body-parser": "^1.14.1",
     "compression": "^1.6.0",
