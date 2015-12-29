@@ -102,7 +102,7 @@
     "pretty-error": "^1.2.0",
     "query-string": "^3.0.0",
     "react": "^0.14.2",
-    "react-bootstrap": "^0.27.3",
+    "react-bootstrap": "^0.28.1",
     "react-document-meta": "^2.0.0",
     "react-dom": "^0.14.1",
     "react-inline-css": "^2.0.0",
