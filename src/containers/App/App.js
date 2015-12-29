@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { IndexLink } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Navbar, NavBrand, Nav, NavItem, CollapsibleNav } from 'react-bootstrap';
-import DocumentMeta from 'react-document-meta';
+import Helmet from 'react-helmet';
 import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
 import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
 import { InfoBar } from 'components';
@@ -56,9 +56,10 @@ export default class App extends Component {
   render() {
     const {user} = this.props;
     const styles = require('./App.scss');
+
     return (
       <div className={styles.app}>
-        <DocumentMeta {...config.app}/>
+        <Helmet {...config.app.head}/>
         <Navbar fixedTop toggleNavKey={0}>
           <NavBrand>
             <IndexLink to="/" activeStyle={{color: '#33e0ff'}}>
@@ -67,7 +68,7 @@ export default class App extends Component {
             </IndexLink>
           </NavBrand>
 
-          <CollapsibleNav eventKey={0}>
+          <Navbar.Collapse eventKey={0}>
             <Nav navbar>
               {user && <LinkContainer to="/chat">
                 <NavItem eventKey={1}>Chat</NavItem>
@@ -96,12 +97,12 @@ export default class App extends Component {
             </Nav>
             {user &&
             <p className={styles.loggedInMessage + ' navbar-text'}>Logged in as <strong>{user.name}</strong>.</p>}
-            <Nav navbar right>
+            <Nav navbar pullRight>
               <NavItem eventKey={1} target="_blank" title="View on Github" href="https://github.com/erikras/react-redux-universal-hot-example">
                 <i className="fa fa-github"/>
               </NavItem>
             </Nav>
-          </CollapsibleNav>
+          </Navbar.Collapse>
         </Navbar>
 
         <div className={styles.appContent}>
