@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { IndexLink } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Navbar, NavBrand, Nav, NavItem, CollapsibleNav } from 'react-bootstrap';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import Helmet from 'react-helmet';
 import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
 import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
@@ -60,13 +60,16 @@ export default class App extends Component {
     return (
       <div className={styles.app}>
         <Helmet {...config.app.head}/>
-        <Navbar fixedTop toggleNavKey={0}>
-          <NavBrand>
-            <IndexLink to="/" activeStyle={{color: '#33e0ff'}}>
-              <div className={styles.brand}/>
-              <span>{config.app.title}</span>
-            </IndexLink>
-          </NavBrand>
+        <Navbar fixedTop>
+          <Navbar.Header>
+            <Navbar.Brand>
+              <IndexLink to="/" activeStyle={{color: '#33e0ff'}}>
+                <div className={styles.brand}/>
+                <span>{config.app.title}</span>
+              </IndexLink>
+            </Navbar.Brand>
+            <Navbar.Toggle/>
+          </Navbar.Header>
 
           <Navbar.Collapse eventKey={0}>
             <Nav navbar>
