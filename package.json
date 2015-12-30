@@ -96,7 +96,7 @@
     "http-proxy": "^1.12.0",
     "piping": "^0.3.0",
     "pretty-error": "^1.2.0",
-    "universal-redux": "2.0.0-beta16",
+    "universal-redux": "2.0.0-beta17",
     "socket.io": "^1.3.7",
     "webpack-isomorphic-tools": "^2.2.18"
   },
