@@ -26,6 +26,22 @@ module.exports = {
     // Expects: Number
     */
     port: process.env.PORT,
+
+    /*
+    // The path at which static assets are served from. If omitted, Express will
+    // not serve any static assets. Optional.
+    //
+    // Expects: String
+    */
+    staticPath: projectRoot + '/static',
+
+    /*
+    // The path at which a favicon image will be served from using the `serve-favicon`
+    // library. If omitted, Express will not serve a favicon. Optional.
+    //
+    // Expects: String
+    */
+    favicon: projectRoot + '/static/favicon.ico'
   },
 
   /*
