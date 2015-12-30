@@ -38,7 +38,7 @@ You'll want to change this in a few ways:
 
 ### 1. Update `target` protocol
 
-If you changed APIHOST to include the `http://`/`https://` protocol, then get rid of the `'http://' +` in the `target` setting. Note that you'll need to restart your server after making these changes or things will break.
+If you changed APIHOST to include the `http://` or `https://` protocol, then get rid of the `'http://' +` in the `target` setting. Note that you'll need to restart your server after making these changes or things will break.
 
 ### 2. Decide if you need WebSockets
 
@@ -72,4 +72,4 @@ Once you do that, you'll also need to remove the lines in `package.json` that ca
 * the `test-node` and `test-node-watch` scripts, which were there to test the demo API
 * the `start-prod-api` and `start-dev-api` settings in the `betterScripts` section
 
-If you want, you also remove all references to `socket`, if you're not using it.
+If you want, you can also remove all references to `socket`, if you're not using it.
