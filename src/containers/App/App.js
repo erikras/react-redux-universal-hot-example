@@ -7,7 +7,7 @@ import DocumentMeta from 'react-document-meta';
 import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
 import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
 import { InfoBar } from 'components';
-import { updatePath } from 'redux-simple-router';
+import { updatePath } from 'universal-redux/lib/redux-simple-router';
 import connectData from 'helpers/connectData';
 
 function fetchData(getState, dispatch) {

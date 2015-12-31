@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import multireducer from 'multireducer';
-import { routeReducer } from 'redux-simple-router';
+import { routeReducer } from 'universal-redux/lib/redux-simple-router';
 
 import auth from './auth';
 import counter from './counter';
