@@ -4,7 +4,9 @@ Chances are, once you get comfortable with this setup, you'll want to hook into 
 
 ## Update `package.json`
 
-First things first, you need to change the `APIHOST` settings in `package.json`. If you use HTTP in dev but HTTPS in prod, you may want to include the protocol (whichever of `http://` or `https://` you need) right in this setting, and then get rid of the explicit `"http://"` found in the next section.
+First things first, you need to add `APIHOST` settings in `package.json`. If you look in `src/config.js`, you'll see that it's already configured to read this `APIHOST` setting if it's present.
+
+If the port you use differs between your dev & prod API hosts, you may want to get rid of the `APIPORT` setting, including it right in `APIHOST`. Same with the protocol – if you use HTTP in dev but HTTPS in prod, you may want to include the protocol right in `APIHOST`, and then get rid of the explicit `"http://"` found in the next section.
 
 ## Update `ApiClient`
 
