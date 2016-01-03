@@ -138,20 +138,6 @@ module.exports = {
   webpack: {
 
     /*
-    // Whether to merge into the default webpack configuration using
-    // webpack-config-merger.
-    //
-    // If the `merge` parameter is `true`, properties with the same name
-    // will be overwritten. Arrays will be concatenated. Objects will
-    // be merged.
-    //
-    // If the `merge` parameter is `false`, default webpack settings
-    // will not be used and the config specified here will need to 
-    // be the complete settings required for building.
-    */  
-    merge: true,
-
-    /*
     // Webpack configuration cusomtizations. There are more parameters
     // available than specified here. For the full list, see 
     // https://webpack.github.io/docs/configuration.html.
@@ -169,31 +155,6 @@ module.exports = {
           'bootstrap-sass!' + sourceRoot + '/theme/bootstrap.config' + (isProduction ? '.prod' : '') + '.js',
           'font-awesome-webpack!' + sourceRoot + '/theme/font-awesome.config' + (isProduction ? '.prod' : '') + '.js'
         ]
-      },
-
-      /*
-      // Not recommended to change.
-      */
-      context: projectRoot,
-
-      /*
-      // Not recommended to change.
-      */
-      output: {
-
-        /*
-        // Not recommended to change.
-        */
-        path: projectRoot + '/static/dist'
-
-      },
-
-      resolve: {
-
-        /*
-        // Not recommended to change.
-        */
-        root: sourceRoot
       }
     }
   }
