@@ -155,6 +155,7 @@
     "mocha": "^2.3.3",
     "phantomjs": "^1.9.18",
     "node-sass": "^3.4.2",
+    "opn": "^3.0.3",
     "phantomjs-polyfill": "0.0.1",
     "react-a11y": "^0.2.6",
     "react-addons-test-utils": "^0.14.0",
