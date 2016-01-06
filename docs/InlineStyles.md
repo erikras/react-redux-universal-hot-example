@@ -31,6 +31,7 @@ This is a list of possible style libraries that we could implement into this pro
 * [jsxstyle](https://github.com/petehunt/jsxstyle)
 * [css-modules](https://github.com/css-modules/css-modules)
 * [babel-plugin-react-autoprefix](https://github.com/UXtemple/babel-plugin-react-autoprefix)
+* [babel-plugin-css-in-js](https://github.com/martinandert/babel-plugin-css-in-js)
 * _Add more if you know of others._
 
 Users and contributors to this project should periodically go through this list and see if any of them have developed features that make them really worthy of server side rendering in a production environment.
