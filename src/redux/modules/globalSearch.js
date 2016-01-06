@@ -65,7 +65,6 @@ export function doSearch(query) {
 }
 
 export function clearSearch() {
-  console.log('clearing it out?');
   return {
     type: CLEAR
   };
