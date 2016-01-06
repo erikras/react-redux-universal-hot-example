@@ -27,8 +27,8 @@
     "start": "concurrent --kill-others \"npm run start-prod\" \"npm run start-prod-api\"",
     "start-prod": "better-npm-run start-prod",
     "start-prod-api": "better-npm-run start-prod-api",
-    "build": "webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
-    "postinstall": "webpack --display-error-details --config webpack/prod.config.js",
+    "build": "better-npm-run build",
+    "postinstall": "npm run build",
     "lint": "eslint -c .eslintrc src api",
     "start-dev": "better-npm-run start-dev",
     "start-dev-api": "better-npm-run start-dev-api",
@@ -78,6 +78,12 @@
       "env": {
         "UV_THREADPOOL_SIZE": 100,
         "NODE_PATH": "./src"
+      }
+    },
+    "build": {
+      "command": "webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
+      "env": {
+        "NODE_ENV": "production"
       }
     }
   },
