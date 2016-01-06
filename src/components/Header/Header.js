@@ -4,14 +4,15 @@ import { GlobalSearch } from 'components';
 
 export default class Header extends Component {
   static propTypes = {
+    location: PropTypes.object,
     title: PropTypes.string,
-    searchShouldBeOpen: PropTypes.bool,
+    searchOpen: PropTypes.func
   }
 
   static defaultProps = { title: 'Explore the MSD' }
 
   render() {
-    const { title, searchShouldBeOpen } = this.props; // eslint-disable-line no-shadow
+    const { location, searchOpen, title } = this.props; // eslint-disable-line no-shadow
     const styles = require('./Header.scss');
     const raster = require('./logo-msd.png');
     const logo = require('./logo-msd.svg');
@@ -29,7 +30,7 @@ export default class Header extends Component {
           <h1>{title}</h1>
         </div>
         <div className={styles.pageHeaderTools}>
-          <GlobalSearch shouldBeOpen={searchShouldBeOpen} />
+          <GlobalSearch location={location} searchOpen={searchOpen} />
         </div>
       </div>
     );

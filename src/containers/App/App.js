@@ -18,10 +18,12 @@ export default class App extends Component {
     super();
     this.state = {
       headerTitle: 'Explore the MSD',
-      activeNavItem: null
+      activeNavItem: null,
+      searchOpen: false
     };
     this.headerChangeHandler = this.headerChangeHandler.bind(this);
     this.navChangeHandler = this.navChangeHandler.bind(this);
+    this.searchOpenHandler = this.searchOpenHandler.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -32,9 +34,6 @@ export default class App extends Component {
         // save the old children (just like animation)
         this.previousChildren = this.props.children;
       }
-      this.setState({ searchShouldBeOpen: false });
-    } else {
-      this.setState({ searchShouldBeOpen: null });
     }
   }
 
@@ -46,22 +45,29 @@ export default class App extends Component {
     this.setState({ activeNavItem: itemName});
   }
 
+  searchOpenHandler(isOpen) {
+    isOpen ? this.setState({ searchOpen: true}) : this.setState({ searchOpen: false}); // eslint-disable-line no-unused-expressions
+  }
+
   render() {
     const styles = require('./App.scss');
-    const { activeNavItem, headerTitle, searchShouldBeOpen } = this.state;
+    const { activeNavItem, headerTitle, searchOpen } = this.state;
     const { location } = this.props;
     const isModal = (
       location.state &&
       location.state.modal &&
       this.previousChildren
     );
-    const appClass = isModal ? styles.app + ' ' + styles.modalOpen : styles.app;
+    const appClasses = [styles.app];
+    if (isModal) appClasses.push(styles.modalOpen);
+    if (searchOpen) appClasses.push(styles.searchOpen);
+
     return (
-      <div className={appClass}>
+      <div className={appClasses.join(' ')}>
         <DocumentMeta {...config.app} />
         <div className={styles.MSDHeaderUnderlay} />
         <div className={styles.MSDHeader}>
-          <Header title={ headerTitle ? headerTitle : null } searchShouldBeOpen={searchShouldBeOpen} />
+          <Header title={ headerTitle ? headerTitle : null } location={location} searchOpen={this.searchOpenHandler} />
         </div>
         <div className={styles.MSDContent}>
 

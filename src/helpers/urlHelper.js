@@ -12,6 +12,10 @@ const urlHelper = {
     return `/snippets/categories/${categoryId}`;
   },
 
+  globalSearchEndpoint: (query) => {
+    return `/landmarks/search/${query}`;
+  },
+
   landmarksEndpoint: () => {
     return `/landmarks`;
   },

@@ -8,6 +8,7 @@
 .modalOpen {
   .MSDHeader {
     -webkit-filter: blur(3px) brightness(0.6);
+    pointer-events: none;
     transition: -webkit-filter 240ms;
   }
 
@@ -26,13 +27,18 @@
   }
 }
 
+.modalOpen, .searchOpen {
+  overflow: hidden;
+  height: 100vh;
+}
+
 .MSDHeader {
   @include shadow-2dp();
   left: 0;
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 100;
+  z-index: 900;
 }
 
 .MSDContent {
@@ -53,9 +59,11 @@
   background: rgba(0,0,0,.6);
   height: 100%;
   left: 0;
+  pointer-events: all;
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: 990;
 }
 
 section {

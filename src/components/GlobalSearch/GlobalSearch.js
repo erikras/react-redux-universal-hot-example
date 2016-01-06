@@ -1,44 +1,80 @@
 import React, { Component, PropTypes } from 'react';
-import { LandmarkSearch } from 'components';
+import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
+import * as globalSearchActions from 'redux/modules/globalSearch';
+import { clearSearch, doSearch, searchIsDone } from 'redux/modules/globalSearch';
+import { LandmarkSearchResults } from 'components';
+import * as _ from 'lodash';
+
+@connect(
+  state => ({
+    globalSearch: state.globalSearch,
+  }),
+  {...globalSearchActions})
 
 export default class GlobalSearch extends Component {
   static propTypes = {
-    shouldBeClear: PropTypes.bool,
-    shouldBeOpen: PropTypes.bool,
+    globalSearch: PropTypes.object,
+    location: PropTypes.object,
+    searchOpen: PropTypes.func
   }
 
-  constructor(props) {
-    super(props);
-    this.state = { searchVisibile: this.props.shouldBeOpen || false };
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+  }
+
+  constructor(props, context) {
+    super(props, context);
     this.showSearch = this.showSearch.bind(this);
     this.hideSearch = this.hideSearch.bind(this);
     this.toggleSearch = this.toggleSearch.bind(this);
+    this.refreshSearch = this.refreshSearch.bind(this);
+    this.state = { searchVisibile: false };
   }
 
   componentWillReceiveProps(nextProps) {
-    if ( typeof nextProps.shouldBeOpen === 'boolean' ) {
-      this.setState({ searchVisibile: (nextProps.shouldBeOpen) });
+    // if we changed routes...
+    if (nextProps.location.key !== this.props.location.key) {
+      this.setState({ searchVisibile: false });
     }
-
   }
 
   showSearch() {
     this.setState({ searchVisibile: true });
+    this.props.searchOpen(true);
   }
 
   hideSearch() {
     this.setState({ searchVisibile: false });
+    ReactDOM.findDOMNode(this.refs.form).reset();
+    this.context.store.dispatch(clearSearch());
+    this.props.searchOpen(false);
   }
 
   toggleSearch() {
     this.state.searchVisibile ? this.hideSearch() : this.showSearch(); // eslint-disable-line no-unused-expressions
   }
 
+  globalSearchSubmit(event) {
+    event.preventDefault();
+  }
+
+  refreshSearch() {
+    const value = ReactDOM.findDOMNode(this.refs.search).value;
+    const query = value.length ? value : ' ';
+    const state = this.context.store.getState();
+    if (!searchIsDone(state, query)) {
+      return this.context.store.dispatch(doSearch(query));
+    }
+  }
+
   render() {
     const styles = require('./GlobalSearch.scss');
     const searchVisibileStyle = this.state.searchVisibile ? styles.searchOpen : '';
+    const { loading, results } = this.props.globalSearch;
+
     return (
-      <div className={ styles.search + ' ' + searchVisibileStyle }>
+      <div className={ [styles.search, searchVisibileStyle].join(' ') }>
         <button onClick={this.toggleSearch}>
           <div className={styles.searchButton}>
             <svg fill="#000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -60,7 +96,18 @@ export default class GlobalSearch extends Component {
           </div>
         </button>
         <div className={styles.searchBox}>
-          <LandmarkSearch clearResults={!this.state.searchVisibile} />
+        {// this.state.searchVisibile ?
+        }
+
+          <div>
+            <form ref="form" className={styles.landmarkSearch} onSubmit={this.globalSearchSubmit}>
+              <fieldset>
+                <input ref="search" type="search" onChange={_.debounce(this.refreshSearch, 300)} placeholder="Search for anything" />
+              </fieldset>
+            </form>
+            { results ? <LandmarkSearchResults results={results} loading={loading} /> : ''}
+          </div>
+
         </div>
       </div>
     );

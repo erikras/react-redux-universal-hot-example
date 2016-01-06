@@ -15,7 +15,6 @@ import * as _ from 'lodash';
 export default
 class LandmarkSearch extends Component {
   static propTypes = {
-    clearResults: PropTypes.bool,
     landmarksSearch: PropTypes.object
   }
 
@@ -26,13 +25,6 @@ class LandmarkSearch extends Component {
   constructor(props, context) {
     super(props, context);
     this.refreshSearch = this.refreshSearch.bind(this);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log('landmark search receiving props: ', nextProps);
-    if (nextProps.clearResults) {
-      ReactDOM.findDOMNode(this.refs.form).reset();
-    }
   }
 
   landmarkSearchSubmit(event) {
