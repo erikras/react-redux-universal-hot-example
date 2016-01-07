@@ -44,6 +44,7 @@ export default class GlobalSearch extends Component {
   showSearch() {
     this.setState({ searchVisibile: true });
     this.props.searchOpen(true);
+    ReactDOM.findDOMNode(this.refs.search).focus();
   }
 
   hideSearch() {
@@ -63,8 +64,7 @@ export default class GlobalSearch extends Component {
   }
 
   refreshSearch() {
-    const value = ReactDOM.findDOMNode(this.refs.search).value;
-    const query = value.length ? value : ' ';
+    const query = ReactDOM.findDOMNode(this.refs.search).value;
     const state = this.context.store.getState();
     if (!searchIsDone(state, query)) {
       return this.context.store.dispatch(doSearch(query));
@@ -99,18 +99,12 @@ export default class GlobalSearch extends Component {
           </div>
         </button>
         <div className={styles.searchBox}>
-        {// this.state.searchVisibile ?
-        }
-
-          <div>
-            <form ref="form" className={styles.landmarkSearch} onSubmit={this.globalSearchSubmit}>
-              <fieldset>
-                <input ref="search" type="search" onChange={_.debounce(this.refreshSearch, 300)} placeholder="Search for anything" />
-              </fieldset>
-            </form>
-            { results ? <LandmarkSearchResults results={results} loading={loading} /> : ''}
-          </div>
-
+          <form ref="form" className={styles.landmarkSearch} onSubmit={this.globalSearchSubmit}>
+            <fieldset>
+              <input ref="search" type="search" onChange={_.debounce(this.refreshSearch, 300)} placeholder="Search for anything" />
+            </fieldset>
+          </form>
+          { results ? <LandmarkSearchResults results={results} loading={loading} /> : ''}
         </div>
       </div>
     );

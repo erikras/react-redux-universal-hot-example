@@ -55,17 +55,20 @@ export function searchIsDone(globalState, query) {
   return ((globalState.globalSearch.query === query) && globalState.globalSearch.loaded);
 }
 
+export function clearSearch() {
+  return {
+    type: CLEAR
+  };
+}
+
 export function doSearch(query) {
+  console.log('query length:', query.length);
+  if (query.length < 1) return clearSearch();
+  console.log('doing search: ');
   const url = urlHelper.globalSearchEndpoint(query);
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
     query: query,
     promise: (client) => client.get(url)
-  };
-}
-
-export function clearSearch() {
-  return {
-    type: CLEAR
   };
 }
