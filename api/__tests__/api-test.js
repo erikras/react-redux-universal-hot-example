@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {mapUrl} from '../utils/url';
 
 describe('mapUrl', () => {
-
   it('extracts nothing if both params are undefined', () => {
     expect(mapUrl(undefined, undefined)).to.deep.equal({
       action: null,
@@ -31,8 +30,8 @@ describe('mapUrl', () => {
       params: []
     });
   });
-  it('extracts the available actions and the params from an relative url string with GET params', () => {
 
+  it('extracts the available actions and the params from an relative url string with GET params', () => {
     const url = '/widget/load/param1/xzy?foo=bar';
     const splittedUrlPath = url.split('?')[0].split('/').slice(1);
     const availableActions = {a: 1, widget: {c: 1, load: () => 'baz'}};

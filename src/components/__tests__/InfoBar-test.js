@@ -50,5 +50,4 @@ describe('InfoBar', () => {
     expect(styles.infoBar).to.be.a('string');
     expect(dom.className).to.include(styles.infoBar);
   });
-
 });

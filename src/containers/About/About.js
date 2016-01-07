@@ -1,15 +1,14 @@
 import React, {Component} from 'react';
-import DocumentMeta from 'react-document-meta';
+import Helmet from 'react-helmet';
 import { MiniInfoBar } from 'components';
 
 export default class About extends Component {
+
   state = {
     showKitten: false
   }
 
-  handleToggleKitten() {
-    this.setState({showKitten: !this.state.showKitten});
-  }
+  handleToggleKitten = () => this.setState({showKitten: !this.state.showKitten});
 
   render() {
     const {showKitten} = this.state;
@@ -17,9 +16,9 @@ export default class About extends Component {
     return (
       <div className="container">
         <h1>About Us</h1>
-        <DocumentMeta title="React Redux Example: About Us"/>
+        <Helmet title="About Us"/>
 
-        <p>This project was orginally created by Erik Rasmussen
+        <p>This project was originally created by Erik Rasmussen
           (<a href="https://twitter.com/erikras" target="_blank">@erikras</a>), but has since seen many contributions
           from the open source community. Thank you to <a
             href="https://github.com/erikras/react-redux-universal-hot-example/graphs/contributors"
@@ -40,7 +39,7 @@ export default class About extends Component {
 
           <button className={'btn btn-' + (showKitten ? 'danger' : 'success')}
                   style={{marginLeft: 50}}
-                  onClick={::this.handleToggleKitten}>
+                  onClick={this.handleToggleKitten}>
             {showKitten ? 'No! Take it away!' : 'Yes! Please!'}</button>
         </p>
 

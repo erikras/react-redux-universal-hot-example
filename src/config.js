@@ -17,23 +17,26 @@ module.exports = Object.assign({
   app: {
     title: 'React Redux Example',
     description: 'All the modern best practices in one example.',
-    meta: {
-      charSet: 'utf-8',
-      property: {
-        'og:site_name': 'React Redux Example',
-        'og:image': 'https://react-redux.herokuapp.com/logo.jpg',
-        'og:locale': 'en_US',
-        'og:title': 'React Redux Example',
-        'og:description': 'All the modern best practices in one example.',
-        'twitter:card': 'summary',
-        'twitter:site': '@erikras',
-        'twitter:creator': '@erikras',
-        'twitter:title': 'React Redux Example',
-        'twitter:description': 'All the modern best practices in one example.',
-        'twitter:image': 'https://react-redux.herokuapp.com/logo.jpg',
-        'twitter:image:width': '200',
-        'twitter:image:height': '200'
-      }
+    head: {
+      titleTemplate: 'React Redux Example: %s',
+      meta: [
+        {name: 'description', content: 'All the modern best practices in one example.'},
+        {charset: 'utf-8'},
+        {property: 'og:site_name', content: 'React Redux Example'},
+        {property: 'og:image', content: 'https://react-redux.herokuapp.com/logo.jpg'},
+        {property: 'og:locale', content: 'en_US'},
+        {property: 'og:title', content: 'React Redux Example'},
+        {property: 'og:description', content: 'All the modern best practices in one example.'},
+        {property: 'og:card', content: 'summary'},
+        {property: 'og:site', content: '@erikras'},
+        {property: 'og:creator', content: '@erikras'},
+        {property: 'og:title', content: 'React Redux Example'},
+        {property: 'og:description', content: 'All the modern best practices in one example.'},
+        {property: 'og:image', content: 'https://react-redux.herokuapp.com/logo.jpg'},
+        {property: 'og:image:width', content: '200'},
+        {property: 'og:image:height', content: '200'}
+      ]
     }
-  }
+  },
+
 }, environment);

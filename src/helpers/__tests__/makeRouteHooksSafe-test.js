@@ -5,7 +5,6 @@ import makeRouteHooksSafe from '../makeRouteHooksSafe';
 
 
 describe('makeRouteHooksSafe', () => {
-
   it('should work with JSX routes', () => {
     const onEnter = () => {
       throw new Error('Shouldn\'t call onEnter');
