@@ -61,7 +61,6 @@ export default class App extends Component {
     const appClasses = [styles.app];
     if (isModal) appClasses.push(styles.modalOpen);
     if (searchOpen) appClasses.push(styles.searchOpen);
-
     return (
       <div className={appClasses.join(' ')}>
         <DocumentMeta {...config.app} />
@@ -70,12 +69,10 @@ export default class App extends Component {
           <Header title={ headerTitle ? headerTitle : null } location={location} searchOpen={this.searchOpenHandler} />
         </div>
         <div className={styles.MSDContent}>
-
           {isModal ?
             this.previousChildren :
             React.cloneElement(this.props.children, {changeHeader: this.headerChangeHandler, activeNavItem: this.navChangeHandler})
           }
-
           {isModal && (
             <div>
               <div className={styles.modalBlanket}></div>
@@ -84,7 +81,6 @@ export default class App extends Component {
               </Modal>
             </div>
           ) }
-
         </div>
         <Navbar activeNavItem={ activeNavItem ? activeNavItem : null } />
       </div>

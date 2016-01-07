@@ -20,15 +20,17 @@ export default class GlobalSearch extends Component {
   }
 
   static contextTypes = {
+    // router: PropTypes.object.isRequired,
     store: PropTypes.object.isRequired
   }
 
   constructor(props, context) {
     super(props, context);
-    this.showSearch = this.showSearch.bind(this);
+    this.globalSearchSubmit = this.globalSearchSubmit.bind(this);
     this.hideSearch = this.hideSearch.bind(this);
-    this.toggleSearch = this.toggleSearch.bind(this);
     this.refreshSearch = this.refreshSearch.bind(this);
+    this.showSearch = this.showSearch.bind(this);
+    this.toggleSearch = this.toggleSearch.bind(this);
     this.state = { searchVisibile: false };
   }
 
@@ -57,6 +59,7 @@ export default class GlobalSearch extends Component {
 
   globalSearchSubmit(event) {
     event.preventDefault();
+    // console.log(this.context.router); // .push(...)
   }
 
   refreshSearch() {
