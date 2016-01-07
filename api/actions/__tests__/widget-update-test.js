@@ -3,7 +3,6 @@ import update from '../widget/update';
 import sinon from 'sinon';
 
 describe('widget update', () => {
-
   afterEach(()=> {
     if ('restore' in Math.random) {
       Math.random.restore(); // reset the Math.random fixture
@@ -11,7 +10,6 @@ describe('widget update', () => {
   });
 
   describe('randomly successful', () => {
-
     beforeEach(()=> {
       sinon.stub(Math, 'random').returns(0.3);
     });
@@ -37,7 +35,6 @@ describe('widget update', () => {
   });
 
   describe('randomly unsuccessful', () => {
-
     beforeEach(()=> {
       sinon.stub(Math, 'random').returns(0.1);
     });
