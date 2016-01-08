@@ -1,0 +1,12 @@
+/**
+ * Bootstrap configuration for bootstrap-sass-loader
+ *
+ * Scripts are disabled to not load jQuery.
+ * If you depend on Bootstrap scripts consider react-bootstrap instead.
+ * https://github.com/react-bootstrap/react-bootstrap
+ *
+ * In order to keep the bundle size low in production
+ * disable components you don't use.
+ *
+ */
+@import '../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
