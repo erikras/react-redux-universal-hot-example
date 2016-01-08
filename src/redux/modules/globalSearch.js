@@ -62,9 +62,7 @@ export function clearSearch() {
 }
 
 export function doSearch(query) {
-  console.log('query length:', query.length);
   if (query.length < 1) return clearSearch();
-  console.log('doing search: ');
   const url = urlHelper.globalSearchEndpoint(query);
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],

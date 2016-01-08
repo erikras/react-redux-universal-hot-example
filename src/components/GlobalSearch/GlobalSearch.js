@@ -37,7 +37,7 @@ export default class GlobalSearch extends Component {
   componentWillReceiveProps(nextProps) {
     // if we changed routes...
     if (nextProps.location.key !== this.props.location.key) {
-      this.setState({ searchVisibile: false });
+      this.hideSearch();
     }
   }
 
