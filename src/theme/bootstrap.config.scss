@@ -55,5 +55,6 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 // Utility classes
 @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/utilities";
 @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/responsive-utilities";
-
+// Override by application
 @import "./bootstrap.overrides.alone";
+// Material loader
