@@ -26,6 +26,7 @@ export default class GlobalSearch extends Component {
 
   constructor(props, context) {
     super(props, context);
+    this.formEscape = this.formEscape.bind(this);
     this.globalSearchSubmit = this.globalSearchSubmit.bind(this);
     this.hideSearch = this.hideSearch.bind(this);
     this.refreshSearch = this.refreshSearch.bind(this);
@@ -61,6 +62,12 @@ export default class GlobalSearch extends Component {
   globalSearchSubmit(event) {
     event.preventDefault();
     // console.log(this.context.router); // .push(...)
+  }
+
+  formEscape(event) {
+    if (event.key === 'Escape') {
+      this.hideSearch();
+    }
   }
 
   refreshSearch() {
@@ -99,7 +106,7 @@ export default class GlobalSearch extends Component {
           </div>
         </button>
         <div className={styles.searchBox}>
-          <form ref="form" className={styles.landmarkSearch} onSubmit={this.globalSearchSubmit}>
+          <form ref="form" className={styles.landmarkSearch} onSubmit={this.globalSearchSubmit} onKeyDownCapture={this.formEscape}>
             <fieldset>
               <input ref="search" type="search" onChange={_.debounce(this.refreshSearch, 300)} placeholder="Search for anything" />
             </fieldset>
