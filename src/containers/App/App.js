@@ -50,7 +50,7 @@ export default class App extends Component {
   handleLogout = (event) => {
     event.preventDefault();
     this.props.logout();
-  }
+  };
 
   render() {
     const {user} = this.props;

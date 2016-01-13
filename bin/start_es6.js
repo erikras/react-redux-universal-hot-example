@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import path from 'path';
 import http from 'http';
-import renderer from 'universal-redux';
+import { express, renderer } from 'universal-redux';
 import httpProxy from 'http-proxy';
 import config from '../config/universal-redux.config.js';
 import SocketIo from 'socket.io';
@@ -38,11 +38,11 @@ function setupProxy(app) {
   });
 }
 
-const app = renderer.app();
+const app = express(config);
 
 setupProxy(app);
 
-renderer.setup(config);
+app.use(renderer(config));
 
 const server = new http.Server(app);
 
