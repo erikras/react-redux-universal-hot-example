@@ -25,7 +25,7 @@ const dest = document.getElementById('content');
 const store = createStore(reduxReactRouter, makeRouteHooksSafe(getRoutes), scrollableHistory, client, window.__data);
 
 function initSocket() {
-  const socket = io('', {path: '/api/ws', transports: ['polling']});
+  const socket = io('', {path: '/ws'});
   socket.on('news', (data) => {
     console.log(data);
     socket.emit('my other event', { my: 'data from client' });
