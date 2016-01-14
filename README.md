@@ -141,10 +141,12 @@ let logoImage = require('./logo.png');
 
 #### Styles
 
-This project uses [local styles](https://medium.com/seek-ui-engineering/the-end-of-global-css-90d2a4a06284) using [css-loader](https://github.com/webpack/css-loader). The way it works is that you import your stylesheet at the top of the class with your React Component, and then you use the classnames returned from that import. Like so:
+This project uses [local styles](https://medium.com/seek-ui-engineering/the-end-of-global-css-90d2a4a06284) using [css-loader](https://github.com/webpack/css-loader). The way it works is that you import your stylesheet at the top of the `render()` function in your React Component, and then you use the classnames returned from that import. Like so:
 
 ```javascript
+render() {
 const styles = require('./App.scss');
+...
 ```
 
 Then you set the `className` of your element to match one of the CSS classes in your SCSS file, and you're good to go!
@@ -152,6 +154,64 @@ Then you set the `className` of your element to match one of the CSS classes in 
 ```jsx
 <div className={styles.mySection}> ... </div>
 ```
+
+#### Alternative to Local Styles
+
+If you'd like to use plain inline styles this is possible with a few modifications to your webpack configuration.
+
+**1. Configure Isomorphic Tools to Accept CSS**
+
+In `webpack-isomorphic-tools.js` add **css** to the list of style module extensions
+
+```javascript
+    style_modules: {
+      extensions: ['less','scss','css'],
+```
+
+**2. Add a CSS loader to webpack dev config**
+
+In `dev.config.js` modify **module loaders** to include a test and loader for css
+
+```javascript
+  module: {
+    loaders: [
+      { test: /\.css$/, loader: 'style-loader!css-loader'},
+```
+
+**3. Add a CSS loader to the webpack prod config**
+
+You must use the **ExtractTextPlugin** in this loader. In `prod.config.js` modify **module loaders** to include a test and loader for css
+
+```javascript
+  module: {
+    loaders: [
+      { test: /\.css$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader')},
+```
+
+**Now you may simply omit assigning the `required` stylesheet to a variable and keep it at the top of your `render()` function.**
+
+```javascript
+render() {
+require('./App.css');
+require('aModule/dist/style.css');
+...
+```
+
+**NOTE** In order to use this method with **scss or less** files one more modification must be made. In both `dev.config.js` and `prod.config.js` in the loaders for less and scss files remove 
+
+1. `modules`
+2. `localIdentName...`
+
+Before:
+```javascript
+{ test: /\.less$/, loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!less?outputStyle=expanded&sourceMap' },
+```
+After:
+```javascript
+{ test: /\.less$/, loader: 'style!css?importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version!less?outputStyle=expanded&sourceMap' },
+```
+
+After this modification to both loaders you will be able to use scss and less files in the same way as css files.
 
 #### Unit Tests
 
