@@ -14,17 +14,13 @@ function formatUrl(path) {
 }
 
 class ApiFetcher {
-  constructor(cookie) {
+  constructor() {
     methods.forEach((method) =>
       this[method] = (path, { params, data } = {}) => new Promise((resolve, reject) => {
         const request = superagent[method](formatUrl(path));
 
         if (params) {
           request.query(params);
-        }
-
-        if (__SERVER__ && cookie) {
-          request.set('cookie', cookie);
         }
 
         if (data) {
@@ -38,38 +34,30 @@ class ApiFetcher {
             resolve(res);
           }
         });
-
       }));
   }
 }
 
-export default function fetcherMiddleware(req) {
-  let cookie;
-  // req is only passed from serverside
-  if (req) {
-    cookie = req.get('cookie');
-  }
-  const fetcher = new ApiFetcher(cookie);
-  return ({dispatch, getState}) => {
-    return next => action => {
-      if (typeof action === 'function') {
-        return action(dispatch, getState);
-      }
+export default function fetcherMiddleware({dispatch, getState}) {
+  const fetcher = new ApiFetcher();
+  return next => action => {
+    if (typeof action === 'function') {
+      return action(dispatch, getState);
+    }
 
-      const { promise, types, ...rest } = action; // eslint-disable-line no-redeclare
-      if (!promise) {
-        return next(action);
-      }
+    const { promise, types, ...rest } = action; // eslint-disable-line no-redeclare
+    if (!promise) {
+      return next(action);
+    }
 
-      const [REQUEST, SUCCESS, FAILURE] = types;
-      next({...rest, type: REQUEST});
-      return promise(fetcher).then(
-        (response) => next({...rest, 'result': response.body, 'response': response, type: SUCCESS}),
-        (error) => next({...rest, error, type: FAILURE})
-      ).catch((error)=> {
-        console.error('FETCHdING MIDDLEWARE ERROR:', error);
-        next({...rest, error, type: FAILURE});
-      });
-    };
+    const [REQUEST, SUCCESS, FAILURE] = types;
+    next({...rest, type: REQUEST});
+    return promise(fetcher).then(
+      (response) => next({...rest, 'result': response.body, 'response': response, type: SUCCESS}),
+      (error) => next({...rest, error, type: FAILURE})
+    ).catch((error)=> {
+      console.error('FETCHING MIDDLEWARE ERROR:', error);
+      next({...rest, error, type: FAILURE});
+    });
   };
 }
