@@ -105,13 +105,17 @@ export default class GlobalSearch extends Component {
             </span>
           </div>
         </button>
-        <div className={styles.searchBox}>
-          <form ref="form" className={styles.landmarkSearch} onSubmit={this.globalSearchSubmit} onKeyDownCapture={this.formEscape}>
-            <fieldset>
-              <input ref="search" type="search" onChange={_.debounce(this.refreshSearch, 300)} placeholder="Search for anything" />
-            </fieldset>
-          </form>
-          { results ? <LandmarkSearchResults results={results} loading={loading} /> : ''}
+        <div className={styles.searchContainer}>
+          <div className={styles.searchForm}>
+            <form ref="form" onSubmit={this.globalSearchSubmit} onKeyDownCapture={this.formEscape}>
+              <fieldset>
+                <input ref="search" type="search" onChange={_.debounce(this.refreshSearch, 300)} placeholder="Search for anything" />
+              </fieldset>
+            </form>
+          </div>
+          <div className={styles.searchResults}>
+            { results ? <LandmarkSearchResults results={results} loading={loading} /> : ''}
+          </div>
         </div>
       </div>
     );

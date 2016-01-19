@@ -1,7 +1,6 @@
 @import 'src/theme/main';
 
 .search {
-  background-color: rgba($white, 0);
   left: 0;
   max-height: 100vh;
   pointer-events: none;
@@ -61,16 +60,20 @@
     }
   }
 
-  .searchBox {
-    div form + div {
+  .searchContainer {
+    .searchResults {
       display: none;
     }
 
-    form {
+    .searchForm form {
       @include rem(margin-right, 68px);
       @include rem(margin-top, 2px);
+      @include rem(padding-bottom, 10px);
+      left: 0;
       margin-left: 1%;
       padding: 0;
+      position: fixed;
+      right: 0;
 
       @include breakpoint(840px) {
         margin-left: auto;
@@ -88,12 +91,12 @@
 
   @include breakpoint(height-small) {
 
-    .searchBox form {
+    .searchContainer .searchForm form {
       @include rem(margin-top, 21px);
     }
 
     button {
-      @include rem(height, 50px);
+      @include rem(height, 48px);
       @include rem(top, 16px);
       svg { @include rem(width, 24px); }
       span { @include rem(font-size, 10px); }
@@ -102,7 +105,7 @@
 
   @include breakpoint(height-medium) {
 
-    .searchBox form {
+    .searchContainer .searchForm form {
       @include rem(margin-top, 30px);
     }
 
@@ -118,6 +121,7 @@
 
     &:before,
     &::before {
+      background-color: $white;
       background-color: rgba($white, .96);
       display: block;
       pointer-events: all;
@@ -131,17 +135,17 @@
       transform: translateY(-100%);
     }
 
-    .searchBox {
+    .searchContainer {
       @include padding-trailer(3);
       overflow: auto;
       max-height: 100vh;
       pointer-events: auto;
 
-      div form + div {
+      .searchResults {
         display: block;
       }
 
-      form input[type="search"] {
+      .searchForm form input[type="search"] {
         transform: translateY(0);
       }
     }
