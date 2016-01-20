@@ -55,8 +55,8 @@ The first time it may take a little while to generate the first `webpack-assets.
 
 [Redux Devtools](https://github.com/gaearon/redux-devtools) are enabled by default in development.
 
-- <kbd>H</kbd> Toggle DevTools Dock
-- <kbd>Q</kbd> Move DevTools Dock Position
+- <kbd>CTRL</kbd>+<kbd>H</kbd> Toggle DevTools Dock
+- <kbd>CTRL</kbd>+<kbd>Q</kbd> Move DevTools Dock Position
 - see [redux-devtools-dock-monitor](https://github.com/gaearon/redux-devtools-dock-monitor) for more detailed information.
 
 If you have the 
