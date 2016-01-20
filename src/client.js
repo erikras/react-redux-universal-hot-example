@@ -9,8 +9,7 @@ import ApiClient from './helpers/ApiClient';
 import io from 'socket.io-client';
 import {Provider} from 'react-redux';
 import { Router, browserHistory } from 'react-router';
-import AsyncProps from 'async-props';
-import asyncPropsResolver from './helpers/asyncPropsResolver';
+import { ReduxAsyncConnect } from 'redux-async-connect';
 
 import getRoutes from './routes';
 
@@ -35,7 +34,9 @@ function initSocket() {
 global.socket = initSocket();
 
 const component = (
-  <Router render={(props) => <AsyncProps {...props} resolver={asyncPropsResolver} params={{store}} />} history={browserHistory}>
+  <Router render={(props) =>
+        <ReduxAsyncConnect {...props} helpers={{client}} />
+      } history={browserHistory}>
     {getRoutes(store)}
   </Router>
 );

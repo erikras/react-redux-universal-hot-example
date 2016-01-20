@@ -13,13 +13,10 @@ import PrettyError from 'pretty-error';
 import http from 'http';
 
 import { match } from 'react-router';
-import AsyncProps, { loadPropsOnServer } from 'async-props';
-import {ReduxRouter} from 'redux-router';
+import { ReduxAsyncConnect, loadOnServer } from 'redux-async-connect';
 import createHistory from 'history/lib/createMemoryHistory';
 import {Provider} from 'react-redux';
-import qs from 'query-string';
 import getRoutes from './routes';
-import asyncPropsResolver from './helpers/asyncPropsResolver';
 
 const targetUrl = 'http://' + config.apiHost + ':' + config.apiPort;
 const pretty = new PrettyError();
@@ -91,10 +88,10 @@ app.use((req, res) => {
       res.status(500);
       hydrateOnClient();
     } else if (renderProps) {
-      loadPropsOnServer({...renderProps, params: {store}}, (err, asyncProps) => {
+      loadOnServer(renderProps, store, {client}).then(() => {
         const component = (
           <Provider store={store} key="provider">
-            <AsyncProps {...renderProps} {...asyncProps} />
+            <ReduxAsyncConnect {...renderProps} />
           </Provider>
         );
 
@@ -103,8 +100,8 @@ app.use((req, res) => {
         global.navigator = {userAgent: req.headers['user-agent']};
 
         res.send('<!doctype html>\n' +
-          ReactDOM.renderToString(<Html asyncProps={asyncProps} assets={webpackIsomorphicTools.assets()} component={component} store={store}/>));
-      }, asyncPropsResolver);
+          ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store}/>));
+      });
     } else {
       res.status(404).send('Not found');
     }
