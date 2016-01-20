@@ -35,8 +35,8 @@ export default class App extends Component {
     }
   }
 
-  static loadProps(params) {
-    const {dispatch, getState} = params.store;
+  static reduxAsyncConnect(params, store) {
+    const {dispatch, getState} = store;
     const promises = [];
 
     if (!isInfoLoaded(getState())) {

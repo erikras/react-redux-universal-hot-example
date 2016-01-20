@@ -25,8 +25,8 @@ export default class Widgets extends Component {
     editStart: PropTypes.func.isRequired
   };
 
-  static loadProps(params) {
-    const {dispatch, getState} = params.store;
+  static reduxAsyncConnect(params, store) {
+    const {dispatch, getState} = store;
     if (!isLoaded(getState())) {
       return dispatch(loadWidgets());
     }
