@@ -13,6 +13,7 @@ import {reduxReactRouter, ReduxRouter} from 'redux-router';
 
 import getRoutes from './routes';
 import makeRouteHooksSafe from './helpers/makeRouteHooksSafe';
+import gaHelper from './helpers/gaHelper';
 
 const client = new ApiClient();
 
@@ -33,6 +34,12 @@ ReactDOM.render(
   </Provider>,
   dest
 );
+
+// Load GA trackers
+gaHelper.init();
+
+// Browser sepcific hacks here...
+// console.log(window.navigator.userAgent);
 
 if (process.env.NODE_ENV !== 'production') {
   window.React = React; // enable debugger

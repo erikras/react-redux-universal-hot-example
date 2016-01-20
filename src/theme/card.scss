@@ -1,3 +1,16 @@
+%cardInset {
+  box-shadow: inset 0 0 50px rgba(0,0,0,.7575757575);
+  content: "";
+  display: block;
+  height: 100%;
+  left: 0;
+  opacity: .66;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 0;
+}
+
 %card {
   @include shadow-2dp();
   background-color: $white;
@@ -38,11 +51,15 @@
   }
 
   .thumb {
-    overflow: hidden;
-    width: 100%;
     height: 150px;
+    overflow: hidden;
     padding: 0;
     position: relative;
+    width: 100%;
+
+    &::after {
+      @extend %cardInset;
+    }
 
     img {
       bottom: 0;
@@ -55,24 +72,24 @@
       right: 0;
       top: 0;
       width: 100%;
-
+      z-index: -1;
     }
   }
 
   @include breakpoint(desktop) {
     transition: all 160ms ease-in-out;
 
-    &:hover {
-      @include shadow-6dp();
-      transform: scale(1.04);
-    }
-
-    a img {
+    .thumb img {
       transition: all 160ms ease-in-out;
     }
 
-    a:hover img {
-      transform: scale(1.1);
+    &:hover {
+      @include shadow-6dp();
+      transform: scale(1.04);
+
+      .thumb img {
+        transform: scale(1.1);
+      }
     }
   }
 }

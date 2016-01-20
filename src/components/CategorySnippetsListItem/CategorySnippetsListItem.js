@@ -9,20 +9,20 @@ export default class CategorySnippetsListItem extends Component {
 
   render() {
     const { image, id, slug, title, teaser } = this.props.item;
-    const styles = require('./../LandmarkListItem/LandmarkListItem.scss');
+    const extStyles = require('./../LandmarkListItem/LandmarkListItem.scss');
     return (
-      <li className={styles.landmarkListItem}>
+      <li className={extStyles.landmarkListItem}>
         <Link key={id} to={`/snippet/${slug}`} state={{title: title}}>
           { image &&
-            <div className={styles.thumb}>
+            <div className={extStyles.thumb}>
               { <Image image={image} size="thumb" /> }
             </div>
           }
-          <div className={styles.cardContent}>
-            <h2 className={styles.cardTitle}>
+          <div className={extStyles.cardContent}>
+            <h2 className={extStyles.cardTitle}>
               {title}
             </h2>
-            <div className={styles.cardBody} dangerouslySetInnerHTML={{__html: teaser}} />
+            <div className={extStyles.cardBody} dangerouslySetInnerHTML={{__html: teaser}} />
           </div>
         </Link>
       </li>

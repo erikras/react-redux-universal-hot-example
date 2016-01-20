@@ -52,6 +52,11 @@
           margin-left: auto;
           margin-top: 0;
           margin-right: auto;
+
+          @include breakpoint(height-medium) {
+            @include rem(margin-bottom, 8px);
+            @include rem(width, 40px);
+          }
         }
 
         span {
