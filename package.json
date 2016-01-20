@@ -139,7 +139,7 @@
     "eslint-loader": "^1.0.0",
     "eslint-plugin-import": "^0.8.0",
     "eslint-plugin-react": "^3.5.0",
-    "clean-webpack-plugin": "^0.1.4",
+    "clean-webpack-plugin": "^0.1.6",
     "css-loader": "^0.23.1",
     "extract-text-webpack-plugin": "^0.9.1",
     "font-awesome": "^4.4.0",
