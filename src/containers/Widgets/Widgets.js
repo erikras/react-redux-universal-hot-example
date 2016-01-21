@@ -4,16 +4,8 @@ import {connect} from 'react-redux';
 import * as widgetActions from 'redux/modules/widgets';
 import {isLoaded, load as loadWidgets} from 'redux/modules/widgets';
 import {initializeWithKey} from 'redux-form';
-import connectData from 'helpers/connectData';
 import { WidgetForm } from 'components';
 
-function fetchDataDeferred(getState, dispatch) {
-  if (!isLoaded(getState())) {
-    return dispatch(loadWidgets());
-  }
-}
-
-@connectData(null, fetchDataDeferred)
 @connect(
   state => ({
     widgets: state.widgets.data,
@@ -31,6 +23,13 @@ export default class Widgets extends Component {
     editing: PropTypes.object.isRequired,
     load: PropTypes.func.isRequired,
     editStart: PropTypes.func.isRequired
+  };
+
+  static reduxAsyncConnect(params, store) {
+    const {dispatch, getState} = store;
+    if (!isLoaded(getState())) {
+      return dispatch(loadWidgets());
+    }
   }
 
   render() {
