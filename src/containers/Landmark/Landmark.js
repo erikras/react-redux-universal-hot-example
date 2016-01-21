@@ -55,10 +55,9 @@ class Landmark extends Component {
       meta: {
         property: {
           'og:title': title,
-          'og:image': image.medium.src,
-          'twitter:image': image.medium.src,
-          'og:image:width': image.medium.width,
-          'og:image:height': image.medium.height,
+          'og:image': image && image.medium.src,
+          'og:image:width': image && image.medium.width,
+          'og:image:height': image && image.medium.height,
           'og:description': teaser
         }
       }
