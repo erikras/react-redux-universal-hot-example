@@ -25,6 +25,7 @@ This is a starter boilerplate app I've put together using the following technolo
 * [Redux](https://github.com/rackt/redux)'s futuristic [Flux](https://facebook.github.io/react/blog/2014/05/06/flux.html) implementation
 * [Redux Dev Tools](https://github.com/rackt/redux-devtools) for next generation DX (developer experience). Watch [Dan Abramov's talk](https://www.youtube.com/watch?v=xsSnOQynTHs).
 * [Redux Router](https://github.com/acdlite/redux-router) Keep your router state in your Redux store
+  - There is a migration in progress to [Redux Simple Router](https://github.com/jlongster/redux-simple-router/). Please test it out in the [simple-router](https://github.com/erikras/react-redux-universal-hot-example/tree/simple-router) branch! 
 * [ESLint](http://eslint.org) to maintain a consistent code style
 * [redux-form](https://github.com/erikras/redux-form) to manage form state in Redux
 * [lru-memoize](https://github.com/erikras/lru-memoize) to speed up form validation
