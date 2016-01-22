@@ -37,7 +37,7 @@ export default class Home extends Component {
           <h2 className={styles.title}>Connect with us!</h2>
           <SocialBar />
           <h2 className={[styles.title, styles.withTiltSibling].join(' ')}>
-            Explore popular topics
+            Explore popular categories
           </h2>
           <CategoryList items={categoryList} />
           <hr className="spacer" />

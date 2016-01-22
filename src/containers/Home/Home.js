@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import DocumentMeta from 'react-document-meta';
+import { Link } from 'react-router';
 import config from '../../config';
 
 export default class Home extends Component {
@@ -53,7 +54,7 @@ export default class Home extends Component {
         </header>
         <section className={styles.lead}>
           <p>
-            This app is designed to enhance your experience of the MSD Building. Whether you’re at home or taking a self-guided tour, it will explain why some of the key design decisions were made, and demonstrate what makes the building unique. Tap Explore when you’re ready to begin.
+            This app is designed to enhance your experience of the MSD Building. Whether you’re at home or taking a self-guided tour, it will explain why some of the key design decisions were made, and demonstrate what makes the building unique. Tap <Link to="/explore">Explore</Link> when you’re ready to begin.
           </p>
         </section>
         <section>

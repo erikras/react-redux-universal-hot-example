@@ -14,7 +14,7 @@
     width: 100%;
 
     &::after {
-      @extend %cardInset;
+      @extend %imageInset;
     }
 
     h3 {

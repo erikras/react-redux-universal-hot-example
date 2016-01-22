@@ -3,6 +3,7 @@
 .snippetList {
   @include rem(bottom, $navbar-height);
   @include rem(height, $snippet-height-small);
+  -webkit-overflow-scrolling: touch;
   background-color: $bgfallback;
   background-color: $bgfloating;
   width: 100%;

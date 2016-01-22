@@ -1,15 +1,3 @@
-%cardInset {
-  box-shadow: inset 0 0 50px rgba(0,0,0,.7575757575);
-  content: "";
-  display: block;
-  height: 100%;
-  left: 0;
-  opacity: .66;
-  position: absolute;
-  top: 0;
-  width: 100%;
-}
-
 %card {
   @include shadow-2dp();
   background-color: $white;
@@ -57,7 +45,7 @@
     width: 100%;
 
     &::after {
-      @extend %cardInset;
+      @extend %imageInset;
     }
 
     img {
