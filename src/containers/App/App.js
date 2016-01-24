@@ -47,7 +47,9 @@ export default class App extends Component {
     if (!isAuthLoaded(getState())) {
       promises.push(dispatch(loadAuth()));
     }
-    return Promise.all(promises);
+    if (promises.length > 0) {
+      return Promise.all(promises);
+    }
   }
 
   handleLogout = (event) => {
