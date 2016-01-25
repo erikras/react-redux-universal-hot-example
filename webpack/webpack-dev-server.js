@@ -4,8 +4,9 @@ var webpack = require('webpack');
 var config = require('../src/config');
 var webpackConfig = require('./dev.config');
 var compiler = webpack(webpackConfig);
+var getHost = require('./helpers/getServerIp');
 
-var host = process.env.HOST || 'localhost';
+var host = process.env.HOST || getHost.ip() || 'localhost';
 var port = parseInt(config.port, 10) + 1 || 3001;
 var serverOptions = {
   contentBase: 'http://' + host + ':' + port,
@@ -28,6 +29,6 @@ app.listen(port, function onAppListening(err) {
   if (err) {
     console.error(err);
   } else {
-    console.info('==> 🚧  Webpack development server listening on port %s', port);
+    console.info('==> 🚧  Webpack development server listening on host %s port %s', host, port);
   }
 });

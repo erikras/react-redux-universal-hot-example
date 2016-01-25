@@ -1,4 +1,5 @@
 require('babel/polyfill');
+var getHost = require('./helpers/getServerIp');
 
 // Webpack config for development
 var fs = require('fs');
@@ -6,7 +7,7 @@ var path = require('path');
 var webpack = require('webpack');
 var WebpackIsomorphicTools = require('webpack-isomorphic-tools');
 var assetsPath = path.resolve(__dirname, '../static/dist');
-var host = (process.env.HOST || 'localhost');
+var host = (process.env.HOST || getHost.ip() || 'localhost');
 var port = parseInt(process.env.PORT) + 1 || 3001;
 
 // https://github.com/halt-hammerzeit/webpack-isomorphic-tools
