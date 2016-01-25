@@ -2,11 +2,15 @@
 
 .pageHeader {
   @include rem(height, $header-height-small);
-  @include rem(padding-right, 50px);
+  @include rem(padding-right, 52px);
   align-items: center;
   background-color: $bgfallback;
   background-color: $bgfloating;
   display: flex;
+
+  @include breakpoint(tablet) {
+    @include rem(padding-right, 64px);
+  }
 
   @include breakpoint(height-small) {
     @include rem(height, $header-height-medium);

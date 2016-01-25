@@ -28,7 +28,7 @@
   button {
     @include rem(height, 40px);
     @include rem(margin-top, 8px);
-    @include rem(right, 12px);
+    @include rem(right, 2px);
     -webkit-appearance: none;
     background: transparent;
     border: none;
@@ -36,6 +36,10 @@
     pointer-events: auto;
     position: absolute;
     top: 0;
+
+    @include breakpoint(tablet) {
+      @include rem(right, 12px);
+    }
 
     .searchButton, .closeButton {
       transition: transform 120ms linear;
@@ -110,7 +114,7 @@
     }
 
     button {
-      @include rem(height, 52px);
+      @include rem(height, 50px);
       @include rem(top, 24px);
       svg { @include rem(width, 32px); }
       span { @include rem(font-size, 11px); }

@@ -3,3 +3,12 @@
 .home {
   @include padding-trailer(3);
 }
+
+.playButton {
+  @include rem(width, 128px);
+  position: absolute;
+  left: 50%;
+  top: 1em;
+  transform: translateX(-50%);
+
+}

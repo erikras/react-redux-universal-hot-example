@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+// import ReactDOM from 'react-dom';
 import DocumentMeta from 'react-document-meta';
 import { Link } from 'react-router';
 import config from '../../config';
@@ -9,9 +10,42 @@ export default class Home extends Component {
     changeHeader: PropTypes.func
   }
 
+  constructor() {
+    super();
+    // this.goFullscreen = this.goFullscreen.bind(this);
+    // this.showPlayButton = this.showPlayButton.bind(this);
+    this.video = this.video.bind(this);
+    this.state = {playButton: 'hidden'};
+  }
+
   componentDidMount() {
     this.props.changeHeader('Explore the MSD');
     this.props.activeNavItem('home');
+  }
+
+  // https://developer.apple.com/library/iad/documentation/UserExperience/Conceptual/iAdJSProgGuide/PlayingVideosinAds/PlayingVideosinAds.html
+
+  // https://developer.apple.com/library/safari/documentation/AudioVideo/Conceptual/Using_HTML5_Audio_Video/ControllingMediaWithJavaScript/ControllingMediaWithJavaScript.html
+
+  // showPlayButton() {
+  //   this.setState({playButton: 'visible'});
+  //   const vid = ReactDOM.findDOMNode(this.refs.video);
+  //   console.log(vid.webkitSupportsFullscreen);
+  //   if (vid.webkitSupportsFullscreen) {
+  //     // const playButton = ReactDOM.findDOMNode(this.refs.playVideo);
+  //     this.setState({playButton: 'visible'});
+  //   }
+  // }
+
+  // goFullscreen() {
+  //   const vid = ReactDOM.findDOMNode(this.refs.video);
+  //   vid.play();
+  // }
+
+  video(domNode) {
+    if (domNode) {
+      domNode.setAttribute('webkit-playsinline', true);
+    }
   }
 
   render() {
@@ -27,12 +61,13 @@ export default class Home extends Component {
         }
       }
     };
+    const { playButton } = this.state;
     return (
       <div className={styles.home}>
       <DocumentMeta {...meta} extend />
         <header className={styles.article} style={{backgroundImage: `url(${msdHero})`}}>
           <div className={styles.videoLoop}>
-            <video autoPlay="true" loop="true" preload="auto">
+            <video autoPlay="true" loop="true" preload="auto" ref={this.video}>
               {
               /* chrome doesn't care about media queries
               <source src="https://s3-ap-southeast-2.amazonaws.com/explore-msd/video/flyover_sm.mp4" type="video/mp4" media="all and (max-width: 960px)" />
@@ -42,6 +77,10 @@ export default class Home extends Component {
               <source src="https://s3-ap-southeast-2.amazonaws.com/explore-msd/video/flyover.mp4" type="video/mp4" />
               <source src="https://s3-ap-southeast-2.amazonaws.com/explore-msd/video/flyover.webm" type="video/webm" />
             </video>
+            <svg className={styles.playButton} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" xmlSpace="preserve">
+              <circle fill="rgba(0,0,0,.1)" stroke="#FFF" strokeWidth="8px" cx="500" cy="500" r="368.3" />
+              <polygon fill="none" stroke="#FFF" strokeWidth="8px" points="398.5,309.5 700.3,500 398.5,690.5 " />
+            </svg>
           </div>
           <div className={styles.bottomAlign}>
             <h1>
@@ -53,6 +92,7 @@ export default class Home extends Component {
           </div>
         </header>
         <section className={styles.lead}>
+          <button style={{'visibility': playButton}} ref="playVideo" onClick={this.goFullscreen}>Go Fullscreen!</button>
           <p>
             This app is designed to enhance your experience of the MSD Building. Whether you’re at home or taking a self-guided tour, it will explain why some of the key design decisions were made, and demonstrate what makes the building unique. Tap <Link to="/explore">Explore</Link> when you’re ready to begin.
           </p>
