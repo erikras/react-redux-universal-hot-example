@@ -9,7 +9,7 @@ import Helmet from 'react-helmet';
 import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
 import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
 import { InfoBar } from 'components';
-import { routeActions } from 'redux-simple-router';
+import { routeActions } from 'react-router-redux';
 import config from '../../config';
 
 @connect(
@@ -47,9 +47,8 @@ export default class App extends Component {
     if (!isAuthLoaded(getState())) {
       promises.push(dispatch(loadAuth()));
     }
-    if (promises.length > 0) {
-      return Promise.all(promises);
-    }
+
+    return Promise.all(promises);
   }
 
   handleLogout = (event) => {
