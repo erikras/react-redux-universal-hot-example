@@ -6,9 +6,43 @@
 
 .playButton {
   @include rem(width, 128px);
-  position: absolute;
+  background: transparent;
+  border-color: transparent;
   left: 50%;
+  padding: 0;
+  position: absolute;
   top: 1em;
   transform: translateX(-50%);
 
+  svg {
+    width: 100%;
+    height: auto;
+  }
+
+  &.loading {
+    .progress {
+      opacity: 1;
+    }
+
+    .triangle {
+      transition: all 300ms;
+      transform: scale(2);
+      opacity: 0;
+    }
+  }
+
+  .progress {
+    @include rem(font-size, 28px);
+    display: block;
+    font-weight: $light;
+    left: 0;
+    opacity: 0;
+    padding-left: 12px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    transition: opacity 300ms;
+    transform: translateY(-50%);
+    width: 100%;
+  }
 }

@@ -14,8 +14,9 @@ export default class Home extends Component {
     super();
     // this.goFullscreen = this.goFullscreen.bind(this);
     // this.showPlayButton = this.showPlayButton.bind(this);
+    this.playLoading = this.playLoading.bind(this);
     this.video = this.video.bind(this);
-    this.state = {playButton: 'hidden'};
+    this.state = { playButton: 'hidden', playLoading: false };
   }
 
   componentDidMount() {
@@ -42,6 +43,10 @@ export default class Home extends Component {
   //   vid.play();
   // }
 
+  playLoading() {
+    this.setState({ playLoading: true });
+  }
+
   video(domNode) {
     if (domNode) {
       domNode.setAttribute('webkit-playsinline', true);
@@ -61,7 +66,7 @@ export default class Home extends Component {
         }
       }
     };
-    const { playButton } = this.state;
+    const { playButton, playLoading } = this.state;
     return (
       <div className={styles.home}>
       <DocumentMeta {...meta} extend />
@@ -77,10 +82,13 @@ export default class Home extends Component {
               <source src="https://s3-ap-southeast-2.amazonaws.com/explore-msd/video/flyover.mp4" type="video/mp4" />
               <source src="https://s3-ap-southeast-2.amazonaws.com/explore-msd/video/flyover.webm" type="video/webm" />
             </video>
-            <svg className={styles.playButton} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" xmlSpace="preserve">
-              <circle fill="rgba(0,0,0,.1)" stroke="#FFF" strokeWidth="8px" cx="500" cy="500" r="368.3" />
-              <polygon fill="none" stroke="#FFF" strokeWidth="8px" points="398.5,309.5 700.3,500 398.5,690.5 " />
-            </svg>
+            <button className={playLoading ? styles.playButton : styles.playButton + ' ' + styles.playLoading} onClick={this.playLoading}>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" xmlSpace="preserve">
+                <circle fill="rgba(0,0,0,.16)" stroke="#FFF" strokeWidth="10px" cx="500" cy="500" r="368.3" />
+                <polygon className={styles.triangle} fill="none" stroke="#FFF" strokeWidth="10px" points="398.5,309.5 700.3,500 398.5,690.5 " />
+              </svg>
+              <span className={styles.progress}>20%</span>
+            </button>
           </div>
           <div className={styles.bottomAlign}>
             <h1>
