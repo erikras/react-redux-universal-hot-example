@@ -3,9 +3,7 @@ import {connectMultireducer} from 'multireducer';
 import {increment} from 'redux/modules/counter';
 
 @connectMultireducer(
-  (key, state) => {
-    return ({count: state.multireducer[key].count});
-  },
+  (key, state) => ({count: state.multireducer[key].count}),
   {increment}
 )
 export default class CounterButton extends Component {
