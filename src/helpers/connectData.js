@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import hoistStatics from 'hoist-non-react-statics';
 
 /*
   Note:
@@ -10,14 +9,15 @@ import hoistStatics from 'hoist-non-react-statics';
 export default function connectData(fetchData, fetchDataDeferred) {
   return function wrapWithFetchData(WrappedComponent) {
     class ConnectData extends Component {
+
+      static fetchData = fetchData;
+      static fetchDataDeferred = fetchDataDeferred;
+
       render() {
         return <WrappedComponent {...this.props} />;
       }
     }
 
-    ConnectData.fetchData = fetchData;
-    ConnectData.fetchDataDeferred = fetchDataDeferred;
-
-    return hoistStatics(ConnectData, WrappedComponent);
+    return ConnectData;
   };
 }
