@@ -28,7 +28,10 @@ export default class Widgets extends Component {
   static reduxAsyncConnect(params, store) {
     const {dispatch, getState} = store;
     if (!isLoaded(getState())) {
-      return dispatch(loadWidgets());
+      const promise = dispatch(loadWidgets());
+      if (__SERVER__) {
+        return promise;
+      }
     }
   }
 
