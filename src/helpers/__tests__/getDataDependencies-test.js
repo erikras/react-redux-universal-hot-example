@@ -1,9 +1,10 @@
+/* eslint func-names:0 */
 import { expect } from 'chai';
 import React from 'react';
 import { div } from 'react-dom';
 import getDataDependencies from '../getDataDependencies';
 
-describe('getDataDependencies', () => {
+describe('getDataDependencies', function() {
   let getState;
   let dispatch;
   let location;
@@ -13,7 +14,7 @@ describe('getDataDependencies', () => {
   let CompWithFetchDataDeferred;
   const NullComponent = null;
 
-  beforeEach(() => {
+  beforeEach(function() {
     getState = 'getState';
     dispatch = 'dispatch';
     location = 'location';
@@ -36,7 +37,7 @@ describe('getDataDependencies', () => {
     };
   });
 
-  it('should get fetchDatas', () => {
+  it('should get fetchDatas', function() {
     const deps = getDataDependencies([
       NullComponent,
       CompWithFetchData,
@@ -49,7 +50,7 @@ describe('getDataDependencies', () => {
     ]);
   });
 
-  it('should get fetchDataDeferreds', () => {
+  it('should get fetchDataDeferreds', function() {
     const deps = getDataDependencies([
       NullComponent,
       CompWithFetchData,
