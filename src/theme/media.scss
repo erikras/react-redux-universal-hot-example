@@ -55,7 +55,7 @@ header {
     background-color: $black;
     display: none;
 
-    @include breakpoint(wide) {
+    @include breakpoint(desktop) {
       display: block;
       height: 100%;
       overflow: hidden;

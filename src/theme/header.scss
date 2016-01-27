@@ -27,7 +27,7 @@ header {
     }
 
     @include breakpoint(height-small) {
-      @include rem(min-height, 500px);
+      @include rem(min-height, 435px);
     }
 
     @include breakpoint(height-medium) {
@@ -107,16 +107,23 @@ header {
     }
 
     h1 {
-      @include adjust-font-size-to(32px);
+      @include adjust-font-size-to(26px);
+
+      @include breakpoint(tablet) {
+        @include adjust-font-size-to(48px);
+      }
 
       @include breakpoint(desktop) {
-        @include adjust-font-size-to(64px);
+        @include adjust-font-size-to(60px);
       }
     }
 
     .bottomAlign {
-      @include padding-trailer(2);
       position: relative;
+
+      @include breakpoint(tablet) {
+        @include padding-trailer(2);
+      }
 
       @include breakpoint(desktop) {
         @include padding-trailer(3);

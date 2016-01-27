@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-// import ReactDOM from 'react-dom';
 import DocumentMeta from 'react-document-meta';
 import { Link } from 'react-router';
 import config from '../../config';
@@ -12,45 +11,85 @@ export default class Home extends Component {
 
   constructor() {
     super();
-    // this.goFullscreen = this.goFullscreen.bind(this);
-    // this.showPlayButton = this.showPlayButton.bind(this);
-    this.playLoading = this.playLoading.bind(this);
+    this.state = { playLoading: false, playLoadProg: 0, videoPlaying: false };
     this.video = this.video.bind(this);
-    this.state = { playButton: 'hidden', playLoading: false };
+
+    this.checkVideoPlaying = this.checkVideoPlaying.bind(this);
+    this.loadOrPlay = this.loadOrPlay.bind(this);
+    this.playButtonStyle = this.playButtonStyle.bind(this);
+    this.playVideo = this.playVideo.bind(this);
+    this.updatePlayLoadProg = this.updatePlayLoadProg.bind(this);
+    this.timeoutPlayLoadProg = this.timeoutPlayLoadProg.bind(this);
+    this.throttlePlayLoadProg = this.throttlePlayLoadProg.bind(this);
   }
 
   componentDidMount() {
     this.props.changeHeader('Explore the MSD');
     this.props.activeNavItem('home');
+    this.loadOrPlay();
+    setTimeout(this.checkVideoPlaying, 1000);
   }
 
-  // https://developer.apple.com/library/iad/documentation/UserExperience/Conceptual/iAdJSProgGuide/PlayingVideosinAds/PlayingVideosinAds.html
+  checkVideoPlaying() {
+    if (!this.videoElement.paused) this.setState({videoPlaying: true});
+  }
 
-  // https://developer.apple.com/library/safari/documentation/AudioVideo/Conceptual/Using_HTML5_Audio_Video/ControllingMediaWithJavaScript/ControllingMediaWithJavaScript.html
+  playVideo() {
+    this.videoElement.play();
+    setTimeout(this.checkVideoPlaying, 50);
+  }
 
-  // showPlayButton() {
-  //   this.setState({playButton: 'visible'});
-  //   const vid = ReactDOM.findDOMNode(this.refs.video);
-  //   console.log(vid.webkitSupportsFullscreen);
-  //   if (vid.webkitSupportsFullscreen) {
-  //     // const playButton = ReactDOM.findDOMNode(this.refs.playVideo);
-  //     this.setState({playButton: 'visible'});
-  //   }
-  // }
+  loadOrPlay() {
+    if (this.state.playLoadProg === 100) {
+      this.playVideo();
+    } else if (!this.state.playLoading) {
+      this.videoElement.play();
+      this.setState({ playLoading: true });
+      this.timeoutPlayLoadProg();
+    }
+  }
 
-  // goFullscreen() {
-  //   const vid = ReactDOM.findDOMNode(this.refs.video);
-  //   vid.play();
-  // }
+  timeoutPlayLoadProg() {
+    if (this.state.playLoadProg < 100) {
+      setTimeout(this.throttlePlayLoadProg, 50);
+    }
+  }
 
-  playLoading() {
-    this.setState({ playLoading: true });
+  throttlePlayLoadProg() {
+    this.updatePlayLoadProg();
+    this.timeoutPlayLoadProg();
+  }
+
+  updatePlayLoadProg() {
+    const myVideo = this.videoElement;
+    if (myVideo && myVideo.buffered && myVideo.buffered.length) {
+      const endBuf = myVideo.buffered.end(0);
+      const soFar = parseInt(((endBuf / myVideo.duration) * 100), 10);
+      this.setState({ playLoadProg: soFar });
+    }
   }
 
   video(domNode) {
     if (domNode) {
       domNode.setAttribute('webkit-playsinline', true);
     }
+    this.videoElement = domNode;
+    this.videoElement.currentTime = 0.1;
+  }
+
+  playButtonStyle() {
+    const styles = require('./Home.scss');
+    const { playLoading, playLoadProg, videoPlaying } = this.state;
+    if (playLoading && !videoPlaying) {
+      if (playLoadProg < 100) {
+        return ([styles.playButton, styles.playLoading].join(' '));
+      }
+      return [styles.playButton, styles.playReady].join(' ');
+    }
+    if (videoPlaying) {
+      return [styles.playButton, styles.playing].join(' ');
+    }
+    return styles.playButton;
   }
 
   render() {
@@ -66,13 +105,14 @@ export default class Home extends Component {
         }
       }
     };
-    const { playButton, playLoading } = this.state;
+    const { playLoadProg } = this.state;
+    const playButtonStyle = this.playButtonStyle();
     return (
       <div className={styles.home}>
       <DocumentMeta {...meta} extend />
         <header className={styles.article} style={{backgroundImage: `url(${msdHero})`}}>
           <div className={styles.videoLoop}>
-            <video autoPlay="true" loop="true" preload="auto" ref={this.video}>
+            <video autoPlay loop preload="auto" ref={this.video} onPlaying={this.playVideo}>
               {
               /* chrome doesn't care about media queries
               <source src="https://s3-ap-southeast-2.amazonaws.com/explore-msd/video/flyover_sm.mp4" type="video/mp4" media="all and (max-width: 960px)" />
@@ -82,12 +122,17 @@ export default class Home extends Component {
               <source src="https://s3-ap-southeast-2.amazonaws.com/explore-msd/video/flyover.mp4" type="video/mp4" />
               <source src="https://s3-ap-southeast-2.amazonaws.com/explore-msd/video/flyover.webm" type="video/webm" />
             </video>
-            <button className={playLoading ? styles.playButton : styles.playButton + ' ' + styles.playLoading} onClick={this.playLoading}>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" xmlSpace="preserve">
-                <circle fill="rgba(0,0,0,.16)" stroke="#FFF" strokeWidth="10px" cx="500" cy="500" r="368.3" />
-                <polygon className={styles.triangle} fill="none" stroke="#FFF" strokeWidth="10px" points="398.5,309.5 700.3,500 398.5,690.5 " />
+            <button className={playButtonStyle} onClick={this.loadOrPlay} onCanPlay={this.throttlePlayLoadProg} onLoadStart={this.throttlePlayLoadProg} onProgress={this.throttlePlayLoadProg}>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" xmlSpace="preserve">
+                <circle fill="rgba(0,0,0,.16)" stroke="#FFF" strokeWidth="2px" cx="50" cy="50" r="36.83" />
+                <polygon className={styles.triangle} fill="none" stroke="#FFF" strokeWidth="2px" points="39.85,30.95 70.03,50 39.85,69.05 " />
+                <g>
+                  <path className={styles.video} fill="none" stroke="#FFF" strokeWidth="2px" d="M68.9,58.9c0,0.4-0.3,0.8-0.6,1c-0.1,0-0.3,0.1-0.4,0.1c-0.3,0-0.5-0.1-0.7-0.3L60.6,53v2.7
+                    c0,2.6-2.1,4.7-4.7,4.7H37.8c-2.6,0-4.7-2.1-4.7-4.7V44.3c0-2.6,2.1-4.7,4.7-4.7h18.1c2.6,0,4.7,2.1,4.7,4.7V47l6.6-6.6
+                    c0.2-0.2,0.5-0.3,0.7-0.3c0.1,0,0.3,0,0.4,0.1c0.4,0.2,0.6,0.5,0.6,1V58.9z"/>
+                </g>
               </svg>
-              <span className={styles.progress}>20%</span>
+              <span className={styles.progress}>{playLoadProg}%</span>
             </button>
           </div>
           <div className={styles.bottomAlign}>
@@ -100,7 +145,6 @@ export default class Home extends Component {
           </div>
         </header>
         <section className={styles.lead}>
-          <button style={{'visibility': playButton}} ref="playVideo" onClick={this.goFullscreen}>Go Fullscreen!</button>
           <p>
             This app is designed to enhance your experience of the MSD Building. Whether you’re at home or taking a self-guided tour, it will explain why some of the key design decisions were made, and demonstrate what makes the building unique. Tap <Link to="/explore">Explore</Link> when you’re ready to begin.
           </p>
