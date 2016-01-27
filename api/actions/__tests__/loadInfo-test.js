@@ -1,9 +1,10 @@
+/* eslint func-names:0 */
 import {expect} from 'chai';
 import loadInfo from '../loadInfo';
 import timekeeper from 'timekeeper';
 
-describe('loadInfo', () => {
-  it('loads the current date', () => {
+describe('loadInfo', function() {
+  it('loads the current date', function() {
     const now = Date.now();
     timekeeper.freeze(now);
 

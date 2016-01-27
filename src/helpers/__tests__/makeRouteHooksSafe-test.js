@@ -1,11 +1,12 @@
+/* eslint func-names:0 */
 import { expect } from 'chai';
 import React from 'react';
 import { IndexRoute, Route } from 'react-router';
 import makeRouteHooksSafe from '../makeRouteHooksSafe';
 
 
-describe('makeRouteHooksSafe', () => {
-  it('should work with JSX routes', () => {
+describe('makeRouteHooksSafe', function() {
+  it('should work with JSX routes', function() {
     const onEnter = () => {
       throw new Error('Shouldn\'t call onEnter');
     };
@@ -30,7 +31,7 @@ describe('makeRouteHooksSafe', () => {
     expect(routes[0].childRoutes[1].childRoutes[1].onEnter).to.not.throw(Error);
   });
 
-  it('should work with JS routes', () => {
+  it('should work with JS routes', function() {
     const onEnter = () => {
       throw new Error('Shouldn\'t call onEnter');
     };
@@ -62,7 +63,7 @@ describe('makeRouteHooksSafe', () => {
     expect(routes[0].childRoutes[1].onEnter).to.not.throw(Error);
   });
 
-  it('should call onEnter if store is initialised', (done) => {
+  it('should call onEnter if store is initialised', function(done) {
     const store = {
       getState: () => {}
     };
@@ -80,7 +81,7 @@ describe('makeRouteHooksSafe', () => {
     routes[0].onEnter();
   });
 
-  it('should call callback', (done) => {
+  it('should call callback', function(done) {
     const getRoutes = makeRouteHooksSafe(() => {
       return {
         onEnter: (nextState, replaceState, cb) => {} // eslint-disable-line no-unused-vars
@@ -92,7 +93,7 @@ describe('makeRouteHooksSafe', () => {
     routes[0].onEnter(null, null, done);
   });
 
-  it('should not call callback', () => {
+  it('should not call callback', function() {
     const callback = () => {
       throw new Error('Should not be called');
     };

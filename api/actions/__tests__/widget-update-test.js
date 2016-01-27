@@ -1,20 +1,21 @@
+/* eslint func-names:0 */
 import {expect} from 'chai';
 import update from '../widget/update';
 import sinon from 'sinon';
 
-describe('widget update', () => {
-  afterEach(()=> {
+describe('widget update', function() {
+  afterEach(function() {
     if ('restore' in Math.random) {
       Math.random.restore(); // reset the Math.random fixture
     }
   });
 
-  describe('randomly successful', () => {
-    beforeEach(()=> {
+  describe('randomly successful', function() {
+    beforeEach(function() {
       sinon.stub(Math, 'random').returns(0.3);
     });
 
-    it('does not accept green widgets', () => {
+    it('does not accept green widgets', function() {
       return update({session: {}, body: {color: 'Green'}}).
       then(
         ()=> {
@@ -24,7 +25,7 @@ describe('widget update', () => {
         });
     });
 
-    it('updates a widget', () => {
+    it('updates a widget', function() {
       const widget = {id: 2, color: 'Blue'};
       return update({session: {}, body: widget}).
       then(
@@ -34,12 +35,12 @@ describe('widget update', () => {
     });
   });
 
-  describe('randomly unsuccessful', () => {
-    beforeEach(()=> {
+  describe('randomly unsuccessful', function() {
+    beforeEach(function() {
       sinon.stub(Math, 'random').returns(0.1);
     });
 
-    it('rejects the call in 20% of the time', () => {
+    it('rejects the call in 20% of the time', function() {
       return update().
       then(
         ()=> {
