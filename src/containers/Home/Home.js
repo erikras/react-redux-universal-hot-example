@@ -11,53 +11,86 @@ export default class Home extends Component {
 
   constructor() {
     super();
-    this.state = { playLoading: false, playLoadProg: 0, videoPlaying: false };
-    this.video = this.video.bind(this);
+    this.state = {
+      buffering: false,
+      canPlay: false,
+      playing: false,
+      playLoading: false,
+      playLoadProg: 0,
+      playPressed: false,
+      videoLoopInit: false
+    };
 
-    this.checkVideoPlaying = this.checkVideoPlaying.bind(this);
-    this.loadOrPlay = this.loadOrPlay.bind(this);
-    this.playButtonStyle = this.playButtonStyle.bind(this);
-    this.playVideo = this.playVideo.bind(this);
+    this.video = this.video.bind(this);
+    this.onCanPlayThrough = this.onCanPlayThrough.bind(this);
+    this.playLoop = this.playLoop.bind(this);
+    this.videoIsLoaded = this.videoIsLoaded.bind(this);
+    this.videoIsPlaying = this.videoIsPlaying.bind(this);
+    this.userPressedPlay = this.userPressedPlay.bind(this);
+    this.tryToPlay = this.tryToPlay.bind(this);
     this.updatePlayLoadProg = this.updatePlayLoadProg.bind(this);
-    this.timeoutPlayLoadProg = this.timeoutPlayLoadProg.bind(this);
-    this.throttlePlayLoadProg = this.throttlePlayLoadProg.bind(this);
   }
 
   componentDidMount() {
     this.props.changeHeader('Explore the MSD');
     this.props.activeNavItem('home');
-    this.loadOrPlay();
-    setTimeout(this.checkVideoPlaying, 1000);
+    this.playLoop();
   }
 
-  checkVideoPlaying() {
-    if (!this.videoElement.paused) this.setState({videoPlaying: true});
+  onCanPlayThrough() {
+    this.setState({ canPlayThrough: true });
   }
 
-  playVideo() {
-    this.videoElement.play();
-    setTimeout(this.checkVideoPlaying, 50);
+  video(domNode) {
+    if (!domNode) return;
+    domNode.setAttribute('webkit-playsinline', true);
+    this.videoElement = domNode;
   }
 
-  loadOrPlay() {
-    if (this.state.playLoadProg === 100) {
-      this.playVideo();
-    } else if (!this.state.playLoading) {
-      this.videoElement.play();
-      this.setState({ playLoading: true });
-      this.timeoutPlayLoadProg();
+  playLoop() {
+    if (!this.state.videoLoopInit) this.setState({ videoLoopInit: true });
+
+    if (this.videoIsPlaying() && this.videoIsLoaded()) {
+      this.setState({ playing: true });
+      return;
     }
-  }
 
-  timeoutPlayLoadProg() {
-    if (this.state.playLoadProg < 100) {
-      setTimeout(this.throttlePlayLoadProg, 50);
+    if (this.state.userPressedPlay) {
+      this.tryToPlay();
+    } else {
+      setTimeout(this.playLoop, 200);
+      return;
     }
-  }
 
-  throttlePlayLoadProg() {
     this.updatePlayLoadProg();
-    this.timeoutPlayLoadProg();
+    setTimeout(this.playLoop, 200);
+
+  }
+
+  videoIsPlaying() {
+    if (this.state.playing) return true;
+    if (this.videoElement && !this.videoElement.paused) {
+      return true;
+    }
+    return false;
+  }
+
+  videoIsLoaded() {
+    this.updatePlayLoadProg();
+    if (this.state.playLoadProg === 100) return true;
+    if (this.state.canPlayThrough) return true;
+    return false;
+  }
+
+  userPressedPlay() {
+    this.tryToPlay();
+    this.setState({ playPressed: true });
+    this.playLoop();
+  }
+
+  tryToPlay() {
+    if (this.videoElement) this.videoElement.play();
+    this.setState({ playLoading: true });
   }
 
   updatePlayLoadProg() {
@@ -65,29 +98,22 @@ export default class Home extends Component {
     if (myVideo && myVideo.buffered && myVideo.buffered.length) {
       const endBuf = myVideo.buffered.end(0);
       const soFar = parseInt(((endBuf / myVideo.duration) * 100), 10);
-      this.setState({ playLoadProg: soFar });
+      console.log('buffer amount: ', soFar);
+      this.setState({ buffering: true, playLoadProg: soFar });
+    } else {
+      this.setState({ buffering: false });
     }
-  }
-
-  video(domNode) {
-    if (domNode) {
-      domNode.setAttribute('webkit-playsinline', true);
-    }
-    this.videoElement = domNode;
-    this.videoElement.currentTime = 0.1;
   }
 
   playButtonStyle() {
     const styles = require('./Home.scss');
-    const { playLoading, playLoadProg, videoPlaying } = this.state;
-    if (playLoading && !videoPlaying) {
-      if (playLoadProg < 100) {
-        return ([styles.playButton, styles.playLoading].join(' '));
+    const { buffering, playLoading, playing } = this.state;
+    if (playing) return [styles.playButton, styles.playing].join(' ');
+    if (playLoading) {
+      if (buffering) {
+        return ([styles.playButton, styles.playLoading, styles.buffering].join(' '));
       }
-      return [styles.playButton, styles.playReady].join(' ');
-    }
-    if (videoPlaying) {
-      return [styles.playButton, styles.playing].join(' ');
+      return ([styles.playButton, styles.playLoading].join(' '));
     }
     return styles.playButton;
   }
@@ -107,12 +133,13 @@ export default class Home extends Component {
     };
     const { playLoadProg } = this.state;
     const playButtonStyle = this.playButtonStyle();
+    const playButtonVisible = this.state.videoLoopInit ? 'visible' : 'hidden';
     return (
       <div className={styles.home}>
       <DocumentMeta {...meta} extend />
         <header className={styles.article} style={{backgroundImage: `url(${msdHero})`}}>
           <div className={styles.videoLoop}>
-            <video autoPlay loop preload="auto" ref={this.video} onPlaying={this.playVideo}>
+            <video autoPlay loop preload="auto" ref={this.video} onCanPlayThrough={this.onCanPlayThrough} poster={msdHero}>
               {
               /* chrome doesn't care about media queries
               <source src="https://s3-ap-southeast-2.amazonaws.com/explore-msd/video/flyover_sm.mp4" type="video/mp4" media="all and (max-width: 960px)" />
@@ -122,17 +149,20 @@ export default class Home extends Component {
               <source src="https://s3-ap-southeast-2.amazonaws.com/explore-msd/video/flyover.mp4" type="video/mp4" />
               <source src="https://s3-ap-southeast-2.amazonaws.com/explore-msd/video/flyover.webm" type="video/webm" />
             </video>
-            <button className={playButtonStyle} onClick={this.loadOrPlay} onCanPlay={this.throttlePlayLoadProg} onLoadStart={this.throttlePlayLoadProg} onProgress={this.throttlePlayLoadProg}>
+            <button ref="playButton" className={playButtonStyle} onClick={this.userPressedPlay} style={{ 'visibility': playButtonVisible}}>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" xmlSpace="preserve">
-                <circle fill="rgba(0,0,0,.16)" stroke="#FFF" strokeWidth="2px" cx="50" cy="50" r="36.83" />
-                <polygon className={styles.triangle} fill="none" stroke="#FFF" strokeWidth="2px" points="39.85,30.95 70.03,50 39.85,69.05 " />
+                <circle fill="rgba(0,0,0,.25)" stroke="#FFF" strokeWidth="1px" cx="50" cy="50" r="36.83" />
+                <polygon className={styles.triangle} fill="none" stroke="#FFF" strokeWidth="1px" points="39.85,30.95 70.03,50 39.85,69.05 " />
                 <g>
-                  <path className={styles.video} fill="none" stroke="#FFF" strokeWidth="2px" d="M68.9,58.9c0,0.4-0.3,0.8-0.6,1c-0.1,0-0.3,0.1-0.4,0.1c-0.3,0-0.5-0.1-0.7-0.3L60.6,53v2.7
+                  <path className={styles.video} fill="none" stroke="#FFF" strokeWidth="1px" d="M68.9,58.9c0,0.4-0.3,0.8-0.6,1c-0.1,0-0.3,0.1-0.4,0.1c-0.3,0-0.5-0.1-0.7-0.3L60.6,53v2.7
                     c0,2.6-2.1,4.7-4.7,4.7H37.8c-2.6,0-4.7-2.1-4.7-4.7V44.3c0-2.6,2.1-4.7,4.7-4.7h18.1c2.6,0,4.7,2.1,4.7,4.7V47l6.6-6.6
                     c0.2-0.2,0.5-0.3,0.7-0.3c0.1,0,0.3,0,0.4,0.1c0.4,0.2,0.6,0.5,0.6,1V58.9z"/>
                 </g>
               </svg>
-              <span className={styles.progress}>{playLoadProg}%</span>
+              <span className={styles.progress}>
+                <span className={styles.percent}>{playLoadProg}%</span>
+                <span className={styles.loading}>Loading</span>
+              </span>
             </button>
           </div>
           <div className={styles.bottomAlign}>

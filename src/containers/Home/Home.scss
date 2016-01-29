@@ -14,6 +14,14 @@
 
 .home {
   @include padding-trailer(3);
+
+  .article {
+    min-height: calc(100vw * 9/16);
+
+    @include breakpoint(wide) {
+      @include rem(min-height, 618px);
+    }
+  }
 }
 
 .playButton {
@@ -28,12 +36,54 @@
   transform: translateX(-50%) scale(1);
   transform-origin: 100% 50%;
 
+  svg {
+    width: 100%;
+    height: auto;
+  }
+
+  .video {
+    @extend %out;
+    transform-origin: 33% 51%;
+  }
+
+  .triangle {
+    @extend %in;
+    transform-origin: 33% 51%;
+    // offset ff issue with transform-origin
+    -moz-transform: translateX(8px) translateY(5px);
+  }
+
+  .progress {
+    display: block;
+    font-weight: $light;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    text-align: center;
+    top: 34%;
+    transition: opacity 300ms;
+    width: 100%;
+
+    .percent {
+      @include rem(font-size, 28px);
+      @include rem(padding-left, 12px);
+      display: none;
+    }
+
+    .loading {
+      @include rem(font-size, 16px);
+      @include rem(padding-left, 4px);
+      line-height: 2.5;
+      text-transform: uppercase;
+    }
+  }
+
   &.playLoading {
     .progress {
       @extend %in;
     }
 
-    .video {
+    .triangle {
       @extend %out;
     }
   }
@@ -42,46 +92,19 @@
     .triangle {
       @extend %in;
     }
-
-    .video {
-      @extend %out;
-    }
   }
 
   &.playing {
     @extend %out;
+    pointer-events: none;
+  }
 
-    .video {
-      @extend %out;
+  &.buffering .progress {
+    .percent {
+      display: block;
     }
-  }
-
-  svg {
-    width: 100%;
-    height: auto;
-  }
-
-  .video {
-    @extend %in;
-    transform-origin: 33% 51%;
-  }
-
-  .triangle {
-    @extend %out;
-    transform-origin: 33% 51%;
-  }
-
-  .progress {
-    @include rem(font-size, 28px);
-    display: block;
-    font-weight: $light;
-    left: 0;
-    opacity: 0;
-    padding-left: 12px;
-    position: absolute;
-    text-align: center;
-    top: 34%;
-    transition: opacity 300ms;
-    width: 100%;
+    .loading {
+      display: none;
+    }
   }
 }

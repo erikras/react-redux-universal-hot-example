@@ -3,7 +3,7 @@ require('babel/polyfill');
 const environment = {
   development: {
     isProduction: false,
-    apiServer: 'https://api.explore.msd.unimelb.edu.au'
+    apiServer: 'https://api.explore.msd.unimelb.edu.au',
   },
   production: {
     isProduction: true,

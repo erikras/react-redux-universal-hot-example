@@ -110,7 +110,7 @@ header {
       @include adjust-font-size-to(26px);
 
       @include breakpoint(tablet) {
-        @include adjust-font-size-to(48px);
+        @include adjust-font-size-to(38px);
       }
 
       @include breakpoint(desktop) {
