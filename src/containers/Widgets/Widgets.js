@@ -31,7 +31,7 @@ export default class Widgets extends Component {
     editing: PropTypes.object.isRequired,
     load: PropTypes.func.isRequired,
     editStart: PropTypes.func.isRequired
-  }
+  };
 
   render() {
     const handleEdit = (widget) => {

@@ -11,14 +11,14 @@ export default class Login extends Component {
     user: PropTypes.object,
     login: PropTypes.func,
     logout: PropTypes.func
-  }
+  };
 
   handleSubmit = (event) => {
     event.preventDefault();
     const input = this.refs.username;
     this.props.login(input.value);
     input.value = '';
-  }
+  };
 
   render() {
     const {user, logout} = this.props;

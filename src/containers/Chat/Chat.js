@@ -34,7 +34,7 @@ export default class Chat extends Component {
     const messages = this.state.messages;
     messages.push(data);
     this.setState({messages});
-  }
+  };
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -47,7 +47,7 @@ export default class Chat extends Component {
       from: this.props.user.name,
       text: msg
     });
-  }
+  };
 
   render() {
     const style = require('./Chat.scss');
