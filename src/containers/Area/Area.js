@@ -23,13 +23,32 @@ class Area extends Component {
     title: PropTypes.string
   }
 
+  constructor() {
+    super();
+    this.ensureCorrectHeader = this.ensureCorrectHeader.bind(this);
+  }
+
   componentDidMount() {
     const headerTitle = 'Explore an area';
     this.props.changeHeader(headerTitle);
+    this.ensureCorrectHeader();
     this.props.activeNavItem('explore');
     //
     // TODO: store the snippets in the state
     //
+  }
+
+  componentDidUpdate() {
+    this.ensureCorrectHeader();
+  }
+
+  ensureCorrectHeader() {
+    const areaId = this.props.params.area;
+    const areaItem = this.props.areas[areaId];
+    if (areaItem && areaItem.payload) {
+      const { title } = areaItem.payload;
+      this.props.changeHeader(`Explore ${title}`);
+    }
   }
 
   static fetchDataDeferred(getState, dispatch) {

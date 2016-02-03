@@ -67,13 +67,12 @@ class Snippet extends Component {
             </div>
           </header>
           <div className={styles.breadcrumb}>
-          {
-            landmarkId ?
-            <Link to={`/landmark/${landmarkId}`}>← Back to {landmark}</Link>
-            : ''
-          }
+            { landmarkId ? <Link to={`/landmark/${landmarkId}`}>← Back to {landmark}</Link> : ''}
           </div>
           <section dangerouslySetInnerHTML={{__html: description}} />
+          <div className={styles.breadcrumb}>
+            { landmarkId ? <Link to={`/landmark/${landmarkId}`}>← Back to {landmark}</Link> : ''}
+          </div>
         </div>
       </article>
     );
