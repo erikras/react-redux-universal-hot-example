@@ -10,7 +10,7 @@
   margin: 0 auto;
   overflow: auto;
   padding: 0;
-  position: fixed;
+  position: absolute;
   right: 4%;
   z-index: 999;
 
@@ -19,9 +19,9 @@
   }
 
   .close {
-    @include rem(right, 16px);
-    @include rem(top, 8px);
-    position: absolute;
+    @include rem(right, 8px);
+    position: fixed;
+    top: 0;
     z-index: 999;
 
     a {
@@ -47,7 +47,9 @@
 
       .label {
         @include rem(font-size, 10px);
+        @include rem(top, -8px);
         font-weight: $regular;
+        position: relative;
         text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.95);
         text-transform: uppercase;
       }
