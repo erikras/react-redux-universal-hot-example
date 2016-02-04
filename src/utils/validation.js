@@ -44,7 +44,7 @@ export function oneOf(enumeration) {
   };
 }
 
-export function match(field) {
+export function matches(field) {
   return (value, data) => {
     if (data) {
       if (value !== data[field]) {
