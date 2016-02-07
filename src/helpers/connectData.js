@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 /*
   Note:
     When this decorator is used, it MUST be the first (outermost) decorator.
-    Otherwise, we cannot find and call the fetchData and fetchDataDeffered methods.
+    Otherwise, we cannot find and call the fetchData and fetchDataDeferred methods.
 */
 
 export default function connectData(fetchData, fetchDataDeferred) {
