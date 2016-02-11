@@ -14,7 +14,7 @@ import http from 'http';
 
 import { match } from 'react-router';
 import { ReduxAsyncConnect, loadOnServer } from 'redux-async-connect';
-import createHistory from 'history/lib/createMemoryHistory';
+import createHistory from 'react-router/lib/createMemoryHistory';
 import {Provider} from 'react-redux';
 import getRoutes from './routes';
 
@@ -66,7 +66,7 @@ app.use((req, res) => {
     webpackIsomorphicTools.refresh();
   }
   const client = new ApiClient(req);
-  const history = createHistory();
+  const history = createHistory(req.originalUrl);
 
   const store = createStore(getRoutes, history, client);
 
