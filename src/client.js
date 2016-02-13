@@ -10,13 +10,14 @@ import io from 'socket.io-client';
 import {Provider} from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import { ReduxAsyncConnect } from 'redux-async-connect';
+import useScroll from 'scroll-behavior/lib/useStandardScroll';
 
 import getRoutes from './routes';
 
 const client = new ApiClient();
-
+const history = useScroll(() => browserHistory)();
 const dest = document.getElementById('content');
-const store = createStore(getRoutes, browserHistory, client, window.__data);
+const store = createStore(getRoutes, history, client, window.__data);
 
 function initSocket() {
   const socket = io('', {path: '/ws'});
@@ -36,7 +37,7 @@ global.socket = initSocket();
 const component = (
   <Router render={(props) =>
         <ReduxAsyncConnect {...props} helpers={{client}} />
-      } history={browserHistory}>
+      } history={history}>
     {getRoutes(store)}
   </Router>
 );
