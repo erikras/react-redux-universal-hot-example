@@ -17,7 +17,7 @@ import getRoutes from './routes';
 const client = new ApiClient();
 const history = useScroll(() => browserHistory)();
 const dest = document.getElementById('content');
-const store = createStore(getRoutes, history, client, window.__data);
+const store = createStore(history, client, window.__data);
 
 function initSocket() {
   const socket = io('', {path: '/ws'});

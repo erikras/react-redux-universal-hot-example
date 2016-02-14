@@ -21,7 +21,7 @@ describe('InfoBar', () => {
       }
     }
   };
-  const store = createStore(null, browserHistory, client, mockStore);
+  const store = createStore(browserHistory, client, mockStore);
   const renderer = renderIntoDocument(
     <Provider store={store} key="provider">
       <InfoBar/>
