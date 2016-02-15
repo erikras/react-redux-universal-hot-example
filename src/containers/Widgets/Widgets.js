@@ -5,7 +5,16 @@ import * as widgetActions from 'redux/modules/widgets';
 import {isLoaded, load as loadWidgets} from 'redux/modules/widgets';
 import {initializeWithKey} from 'redux-form';
 import { WidgetForm } from 'components';
+import { asyncConnect } from 'redux-async-connect';
 
+@asyncConnect([{
+  deferred: true,
+  promise: ({store: {dispatch, getState}}) => {
+    if (!isLoaded(getState())) {
+      return dispatch(loadWidgets());
+    }
+  }
+}])
 @connect(
   state => ({
     widgets: state.widgets.data,
@@ -24,13 +33,6 @@ export default class Widgets extends Component {
     load: PropTypes.func.isRequired,
     editStart: PropTypes.func.isRequired
   };
-
-  static reduxAsyncConnect(params, store) {
-    const {dispatch, getState} = store;
-    if (!isLoaded(getState())) {
-      return dispatch(loadWidgets());
-    }
-  }
 
   render() {
     const handleEdit = (widget) => {
