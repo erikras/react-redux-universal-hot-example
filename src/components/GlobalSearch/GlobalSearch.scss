@@ -36,6 +36,7 @@
     pointer-events: auto;
     position: absolute;
     top: 0;
+    z-index: 1111;
 
     @include breakpoint(tablet) {
       @include rem(right, 12px);
@@ -69,26 +70,58 @@
       display: none;
     }
 
-    .searchForm form {
-      @include rem(margin-right, 68px);
-      @include rem(margin-top, 2px);
-      @include rem(padding-bottom, 10px);
-      left: 0;
-      margin-left: 1%;
-      padding: 0;
+    .searchForm {
+      @include shadow-6dp();
+      @include rem(height, $header-height-small);
+      overflow: hidden;
       position: fixed;
-      right: 0;
+      width: 100%;
+      z-index: 1100;
 
-      @include breakpoint(840px) {
-        margin-left: auto;
-        margin-right: auto;
+      @include breakpoint(height-small) {
+        @include rem(height, $header-height-medium);
       }
 
-      input[type="search"] {
-        margin-top: 0;
-        transform: translateY(-200%);
-        transition: transform 240ms;
-        transition-delay: 60ms;
+      @include breakpoint(height-medium) {
+        @include rem(height, $header-height-large);
+      }
+
+      &:after,
+      &::after {
+        background-color: $white;
+        bottom: 0;
+        content: "";
+        display: block;
+        left: 0;
+        opacity: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: opacity 240ms;
+        z-index: -1;
+      }
+
+      form {
+        @include rem(margin-right, 68px);
+        @include rem(margin-top, 2px);
+        @include rem(padding-bottom, 10px);
+        left: 0;
+        margin-left: 1%;
+        padding: 0;
+        position: fixed;
+        right: 0;
+
+        @include breakpoint(840px) {
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        input[type="search"] {
+          margin-top: 0;
+          transform: translateY(-200%);
+          transition: transform 240ms;
+          transition-delay: 60ms;
+        }
       }
     }
   }
@@ -149,8 +182,15 @@
         display: block;
       }
 
-      .searchForm form input[type="search"] {
-        transform: translateY(0);
+      .searchForm {
+        &:after,
+        &::after {
+          opacity: 1;
+        }
+
+        form input[type="search"] {
+          transform: translateY(0);
+        }
       }
     }
   }
