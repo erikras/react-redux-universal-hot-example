@@ -1,0 +1,84 @@
+%quote-style {
+  @include rem(font-size, 100px);
+  @include rem(margin-left, -50px);
+  @include rem(margin-right, 10px);
+  color: darken($lightgray, 10%);
+  content: open-quote;
+  line-height: .1em;
+  vertical-align: -.333em;
+}
+
+blockquote {
+  @include adjust-font-size-to(19px);
+  @include adjust-leading-to(1);
+  @include padding-leader(1);
+  @include padding-trailer(2);
+  @include rem(max-width, $w-mid);
+  @include rem(padding-left, 15px);
+  @include rem(padding-right, 15px);
+  color: $darkblue;
+  font-family: $ff-serif;
+  font-style: italic;
+  font-weight: $regular;
+  margin-bottom: 0;
+  margin-left: 10%;
+  margin-right: 0;
+  quotes: '\201C''\201D';
+  text-align: left;
+
+  &::after,
+  &::before {
+    @extend %quote-style;
+  }
+
+  &:before {
+    @extend %quote-style;
+  }
+
+  &:after {
+    @extend %quote-style;
+    content: close-quote;
+    margin-left: 0;
+    margin-right: 0;
+    vertical-align: -.667em;
+  }
+
+  &::after {
+    content: close-quote;
+    margin-left: 0;
+    margin-right: 0;
+    vertical-align: -.667em;
+  }
+
+  cite {
+    @include adjust-font-size-to(12px);
+    color: lighten($midgray, 20%);
+    float: left;
+    font-family: $ff-sans;
+    font-style: normal;
+    font-weight: $light;
+    text-align: left;
+    width: 100%;
+
+    &::before {
+      @include rem(padding-right, 5px);
+      content: '\2014';
+    }
+  }
+
+  p {
+    @include adjust-font-size-to(24px);
+    display: inline;
+    margin: 0;
+    padding: 0;
+  }
+
+  @include breakpoint(tablet) {
+    @include adjust-font-size-to(24px);
+  }
+
+  @include breakpoint(wide) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
