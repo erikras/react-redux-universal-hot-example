@@ -244,7 +244,6 @@ This project moves fast and has an active community, so if you have a question t
 
 Although this isn't a library, we recently started versioning to make it easier to track breaking changes and emerging best practices. 
 
-* [Babel 6](https://github.com/babel/babel) - Coming soon with v1 (see [#488](https://github.com/erikras/react-redux-universal-hot-example/issues/488))
 * [Inline Styles](docs/InlineStyles.md) - CSS is dead
 
 ## Contributing
