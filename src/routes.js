@@ -14,12 +14,12 @@ import {
   } from 'containers';
 
 export default (store) => {
-  const requireLogin = (nextState, replaceState, cb) => {
+  const requireLogin = (nextState, replace, cb) => {
     function checkAuth() {
       const { auth: { user }} = store.getState();
       if (!user) {
         // oops, not logged in, so can't be here!
-        replaceState(null, '/');
+        replace('/');
       }
       cb();
     }
