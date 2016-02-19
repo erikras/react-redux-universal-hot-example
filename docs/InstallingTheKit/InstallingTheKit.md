@@ -81,7 +81,7 @@ Now, open up your browser to [port 3000](http://localhost:3000/):
 
 ![Port 3000](port3000.png)
 
-The Redux developer bar takes up much of the screen.  Hide it with 'H'.
+The Redux developer bar takes up much of the screen.  Hide it with 'control-H'.
 
 You are now running the kit on your local machine.
 
