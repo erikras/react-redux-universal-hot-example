@@ -45,7 +45,7 @@ export default class Html extends Component {
           {/* outputs a <style/> tag with all bootstrap styles + App.scss + it could be CurrentPage.scss. */}
           {/* can smoothen the initial style flash (flicker) on page load in development mode. */}
           {/* ideally one could also include here the style for the current page (Home.scss, About.scss, etc) */}
-          { Object.keys(assets.styles).length === 0 ? <style dangerouslySetInnerHTML={{__html: require('../theme/bootstrap.config.js') + require('../containers/App/App.scss')._style}}/> : null }
+          { Object.keys(assets.styles).length === 0 ? <style dangerouslySetInnerHTML={{__html: require('bootstrap-loader/no-op') + require('../containers/App/App.scss')._style}}/> : null }
         </head>
         <body>
           <div id="content" dangerouslySetInnerHTML={{__html: content}}/>

@@ -38,7 +38,7 @@ module.exports = {
     // this whole "bootstrap" asset type is only used once in development mode.
     // the only place it's used is the Html.js file
     // where a <style/> tag is created with the contents of the
-    // './src/theme/bootstrap.config.js' file.
+    // './node_modules/bootstrap-loader/no-op.js' file.
     // (the aforementioned <style/> tag can reduce the white flash 
     //  when refreshing page in development mode)
     //
@@ -46,10 +46,10 @@ module.exports = {
     // and I'm leaving this comment here in case anyone finds a better idea.
     bootstrap: {
       extension: 'js',
-      include: ['./src/theme/bootstrap.config.js'],
+      include: ['./node_modules/bootstrap-loader/no-op.js'],
       filter: function(module, regex, options, log) {
         function is_bootstrap_style(name) {
-          return name.indexOf('./src/theme/bootstrap.config.js') >= 0;
+          return name.indexOf('./~/bootstrap-loader/no-op.js') >= 0;
         }
         if (options.development) {
           return is_bootstrap_style(module.name) && WebpackIsomorphicToolsPlugin.style_loader_filter(module, regex, options, log);
