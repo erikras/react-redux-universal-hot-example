@@ -142,7 +142,7 @@
     "babel-eslint": "^5.0.0-beta6",
     "babel-plugin-react-transform": "^2.0.0",
     "babel-plugin-typecheck": "^3.6.0",
-    "better-npm-run": "^0.0.4",
+    "better-npm-run": "0.0.7",
     "bootstrap-sass": "^3.3.5",
     "bootstrap-sass-loader": "^1.0.9",
     "chai": "^3.3.0",
