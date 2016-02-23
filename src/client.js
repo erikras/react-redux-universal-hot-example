@@ -16,10 +16,10 @@ import useScroll from 'scroll-behavior/lib/useStandardScroll';
 import getRoutes from './routes';
 
 const client = new ApiClient();
-const history = useScroll(() => browserHistory)();
+const _browserHistory = useScroll(() => browserHistory)();
 const dest = document.getElementById('content');
-const store = createStore(history, client, window.__data);
-const syncedHistory = syncHistoryWithStore(history, store);
+const store = createStore(_browserHistory, client, window.__data);
+const history = syncHistoryWithStore(_browserHistory, store);
 
 function initSocket() {
   const socket = io('', {path: '/ws'});
@@ -39,7 +39,7 @@ global.socket = initSocket();
 const component = (
   <Router render={(props) =>
         <ReduxAsyncConnect {...props} helpers={{client}} filter={item => !item.deferred} />
-      } history={syncedHistory}>
+      } history={history}>
     {getRoutes(store)}
   </Router>
 );

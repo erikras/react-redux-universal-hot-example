@@ -67,11 +67,9 @@ app.use((req, res) => {
     webpackIsomorphicTools.refresh();
   }
   const client = new ApiClient(req);
-  const history = createHistory(req.originalUrl);
-
-  const store = createStore(history, client);
-
-  const syncedHistory = syncHistoryWithStore(history, store);
+  const memoryHistory = createHistory(req.originalUrl);
+  const store = createStore(memoryHistory, client);
+  const history = syncHistoryWithStore(memoryHistory, store);
 
   function hydrateOnClient() {
     res.send('<!doctype html>\n' +
@@ -83,7 +81,7 @@ app.use((req, res) => {
     return;
   }
 
-  match({ syncedHistory, routes: getRoutes(store), location: req.originalUrl }, (error, redirectLocation, renderProps) => {
+  match({ history, routes: getRoutes(store), location: req.originalUrl }, (error, redirectLocation, renderProps) => {
     if (redirectLocation) {
       res.redirect(redirectLocation.pathname + redirectLocation.search);
     } else if (error) {
