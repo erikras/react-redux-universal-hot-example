@@ -18,18 +18,29 @@ export default class Home extends Component {
     const categoryList = [
       {
         id: 5,
-        slug: 5,
+        path: '/category/5',
         title: 'Sustainability',
         image: 'https://s3-ap-southeast-2.amazonaws.com/explore-msd-api/assets/files/000/000/007/original/forrest.jpg?1449803417'
       },
       {
         id: 2,
-        slug: 2,
+        path: '/category/2',
         title: 'Time-lapse videos',
         image: 'https://s3-ap-southeast-2.amazonaws.com/explore-msd-api/assets/files/000/000/008/original/silverbackgroundmodel.jpg?1449812198'
+      },
+      {
+        id: -1,
+        title: 'Building Awards',
+        url: 'https://msd.unimelb.edu.au/melbourne-school-design-building-awards',
+        image: 'https://s3-ap-southeast-2.amazonaws.com/explore-msd-api/assets/files/000/000/070/original/award3.jpg?1456205309'
+      },
+      {
+        id: -2,
+        title: 'Media Coverage',
+        url: 'https://msd.unimelb.edu.au/building-media-coverage',
+        image: 'https://s3-ap-southeast-2.amazonaws.com/explore-msd-api/assets/files/000/000/069/original/magazine-colors-media-page-colorful-sm.jpg?1456191164'
       }
     ];
-
     return (
       <div className={styles.more}>
         <DocumentMeta title="Explore the Melbourne School of Design"/>
@@ -44,7 +55,7 @@ export default class Home extends Component {
           <p>Notice anything missing? Is something not working the way it should be? Let us know by emailing <a href="mailto:abp-webmaster@unimelb.edu.au">abp-webmaster@unimelb.edu.au</a>.</p>
           <hr className="spacer" />
           <p>Visit the <a href="http://msd.unimelb.edu.au">Melbourne School of Design website</a>.</p>
-          <p>Have a look at our <a href="http://msd.unimelb.edu.au/graduate-programs">Graduate Programs</a>, or our Undergraduate Degree, the <a href="http://benvs.unimelb.edu.au/">Bachelor of Environments</a>.</p>
+          <p>Have a look at our <a href="http://msd.unimelb.edu.au/graduate-programs">Graduate Programs</a>, or our Undergraduate Degree, the <a href="http://benvs.unimelb.edu.au">Bachelor of Environments</a>.</p>
           <p>
             <b>Authoriser:</b> Manager, Engagement and Marketing, Faculty of Architecture, Building and Planning.
             <br/>

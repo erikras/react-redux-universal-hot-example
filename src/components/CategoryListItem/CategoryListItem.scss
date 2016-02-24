@@ -56,3 +56,12 @@
   background-image: -ms-linear-gradient(135deg, #d91f26, #f5eb47); /* ie10+ */
   background-image: linear-gradient(315deg, #d91f26, #f5eb47); /* w3c */
 }
+
+.categoryListItem:nth-of-type(4) .cardContent::after {
+  background-color: #D63410;
+  background-image: -moz-linear-gradient(135deg, #D63410, #4196FF); /* ff3.6+ */
+  background-image: -webkit-linear-gradient(135deg, #D63410, #4196FF); /* safari5.1+,chrome10+ */
+  background-image: -o-linear-gradient(135deg, #D63410, #4196FF); /* opera 11.10+ */
+  background-image: -ms-linear-gradient(135deg, #D63410, #4196FF); /* ie10+ */
+  background-image: linear-gradient(315deg, #D63410, #4196FF); /* w3c */
+}

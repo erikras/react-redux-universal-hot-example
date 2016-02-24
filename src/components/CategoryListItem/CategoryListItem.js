@@ -7,18 +7,25 @@ export default class CategoryListItem extends Component {
   }
 
   render() {
-    const { image, id, slug, title } = this.props.item;
+    const { image, id, path, url, title } = this.props.item;
     const styles = require('./CategoryListItem.scss');
     return (
       <li className={styles.categoryListItem} style={{backgroundImage: `url(${image})`}}>
-        <Link key={id} to={`/category/${slug}`} state={{title: title}}>
-          <div className={styles.cardContent}>
-            <h3 className={styles.cardTitle}>
-              {title}
-            </h3>
-          </div>
-        </Link>
+        { path ? (
+          <Link key={id} to={path} state={{title: title}}>
+            <div className={styles.cardContent}>
+              <h3 className={styles.cardTitle}>{title}</h3>
+            </div>
+          </Link> )
+        : (
+          <a href={url}>
+            <div className={styles.cardContent}>
+              <h3 className={styles.cardTitle}>{title}</h3>
+            </div>
+          </a>
+        ) }
       </li>
+
     );
   }
 }
