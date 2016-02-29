@@ -112,7 +112,7 @@ export default class Home extends Component {
             <dd>
               The <Link to="/widgets">Widgets page</Link> demonstrates how to fetch data asynchronously from
               some source that is needed to complete the server-side rendering. <code>Widgets.js</code>'s
-              <code>fetchData()</code> function is called before the widgets page is loaded, on either the server
+              <code>asyncConnect()</code> function is called before the widgets page is loaded, on either the server
               or the client, allowing all the widget data to be loaded and ready for the page to render.
             </dd>
             <dt>Data loading errors</dt>
