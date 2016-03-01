@@ -20,7 +20,7 @@ Looking with `ick about` and ignoring documentation, the word *about* appears in
 A new page requires new page renderer.  Copy the About page to a 
 new directory and trim out almost all of it:
 
-*  `cd ./src/containers && mkdir ./src/Hello` because each container goes in its own 
+*  `cd ./src/containers && mkdir ./Hello` because each container goes in its own 
     directory by convention.
 *  `cp About/About.js Hello/Hello.js`
 
