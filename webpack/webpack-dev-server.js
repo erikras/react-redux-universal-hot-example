@@ -6,7 +6,7 @@ var webpackConfig = require('./dev.config');
 var compiler = webpack(webpackConfig);
 
 var host = config.host || 'localhost';
-var port = (config.port + 1) || 3001;
+var port = (+config.port + 1) || 3001;
 var serverOptions = {
   contentBase: 'http://' + host + ':' + port,
   quiet: true,
