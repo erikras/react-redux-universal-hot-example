@@ -1,5 +1,5 @@
 export function mapUrl(availableActions = {}, url = []) {
-  const notFound = {action: null, params: []};
+  const notFound = { action: null, params: [] };
 
   // test for empty input
   if (url.length === 0 || Object.keys(availableActions).length === 0) {
@@ -19,7 +19,7 @@ export function mapUrl(availableActions = {}, url = []) {
   };
   /*eslint-enable */
 
-  const actionAndParams = url.reduce(reducer, {action: availableActions, params: []});
+  const actionAndParams = url.reduce(reducer, { action: availableActions, params: [] });
 
   return (typeof actionAndParams.action === 'function') ? actionAndParams : notFound;
 }

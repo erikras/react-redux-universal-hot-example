@@ -4,8 +4,10 @@
     "node": true,
     "mocha": true
   },
+  "parser": "babel-eslint",
   "rules": {
     "react/no-multi-comp": 0,
+    "react/prefer-stateless-function": 0,
     "import/default": 0,
     "import/no-duplicates": 0,
     "import/named": 0,
@@ -14,6 +16,7 @@
     "import/no-named-as-default": 2,
     "comma-dangle": 0,  // not sure why airbnb turned this on. gross!
     "indent": [2, 2, {"SwitchCase": 1}],
+    "no-case-declarations": 0,
     "no-console": 0,
     "no-alert": 0
   },
