@@ -15,7 +15,8 @@ export default function update(req) {
           });
         }
         if (widget.id) {
-          widgets[widget.id - 1] = widget;  // id is 1-based. please don't code like this in production! :-)
+          // id is 1-based. please don't code like this in production! :-)
+          widgets[widget.id - 1] = widget;
         }
         resolve(widget);
       }
