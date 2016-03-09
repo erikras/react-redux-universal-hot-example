@@ -8,7 +8,7 @@ import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
 import io from 'socket.io-client';
 import {Provider} from 'react-redux';
-import { Router, browserHistory } from 'react-router';
+import { Router, browserHistory, match } from 'react-router';
 import { ReduxAsyncConnect } from 'redux-async-connect';
 import useScroll from 'scroll-behavior/lib/useStandardScroll';
 
@@ -34,38 +34,40 @@ function initSocket() {
 
 global.socket = initSocket();
 
-const component = (
-  <Router render={(props) =>
-        <ReduxAsyncConnect {...props} helpers={{client}} filter={item => !item.deferred} />
-      } history={history}>
-    {getRoutes(store)}
-  </Router>
-);
+const routes = getRoutes(store);
 
-ReactDOM.render(
-  <Provider store={store} key="provider">
-    {component}
-  </Provider>,
-  dest
-);
+match({ history, routes }, (error, redirectLocation, renderProps) => {
+  const component = (
+    <Router {...renderProps} render={(props) =>
+          <ReduxAsyncConnect {...props} helpers={{client}} filter={item => !item.deferred} />
+        } history={history} routes={routes} />
+  );
 
-if (process.env.NODE_ENV !== 'production') {
-  window.React = React; // enable debugger
-
-  if (!dest || !dest.firstChild || !dest.firstChild.attributes || !dest.firstChild.attributes['data-react-checksum']) {
-    console.error('Server-side React render was discarded. Make sure that your initial render does not contain any client-side code.');
-  }
-}
-
-if (__DEVTOOLS__ && !window.devToolsExtension) {
-  const DevTools = require('./containers/DevTools/DevTools');
   ReactDOM.render(
     <Provider store={store} key="provider">
-      <div>
-        {component}
-        <DevTools />
-      </div>
+      {component}
     </Provider>,
     dest
   );
-}
+
+  if (process.env.NODE_ENV !== 'production') {
+    window.React = React; // enable debugger
+
+    if (!dest || !dest.firstChild || !dest.firstChild.attributes || !dest.firstChild.attributes['data-react-checksum']) {
+      console.error('Server-side React render was discarded. Make sure that your initial render does not contain any client-side code.');
+    }
+  }
+
+  if (__DEVTOOLS__ && !window.devToolsExtension) {
+    const DevTools = require('./containers/DevTools/DevTools');
+    ReactDOM.render(
+      <Provider store={store} key="provider">
+        <div>
+          {component}
+          <DevTools />
+        </div>
+      </Provider>,
+      dest
+    );
+  }
+});
