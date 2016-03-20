@@ -2,7 +2,12 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { IndexLink } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
-import Navbar from 'react-bootstrap/lib/Navbar';
+import Navbar, {
+  Header as NavbarHeader,
+  Brand as NavbarBrand,
+  Toggle as NavbarToggle,
+  Collapse as NavbarCollapse
+} from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
 import Helmet from 'react-helmet';
@@ -65,17 +70,17 @@ export default class App extends Component {
       <div className={styles.app}>
         <Helmet {...config.app.head}/>
         <Navbar fixedTop>
-          <Navbar.Header>
-            <Navbar.Brand>
+          <NavbarHeader>
+            <NavbarBrand>
               <IndexLink to="/" activeStyle={{color: '#33e0ff'}}>
                 <div className={styles.brand}/>
                 <span>{config.app.title}</span>
               </IndexLink>
-            </Navbar.Brand>
-            <Navbar.Toggle/>
-          </Navbar.Header>
+            </NavbarBrand>
+            <NavbarToggle/>
+          </NavbarHeader>
 
-          <Navbar.Collapse eventKey={0}>
+          <NavbarCollapse eventKey={0}>
             <Nav navbar>
               {user && <LinkContainer to="/chat">
                 <NavItem eventKey={1}>Chat</NavItem>
@@ -109,7 +114,7 @@ export default class App extends Component {
                 <i className="fa fa-github"/>
               </NavItem>
             </Nav>
-          </Navbar.Collapse>
+          </NavbarCollapse>
         </Navbar>
 
         <div className={styles.appContent}>
