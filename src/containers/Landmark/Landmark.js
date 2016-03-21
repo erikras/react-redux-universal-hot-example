@@ -64,7 +64,7 @@ class Landmark extends Component {
     };
 
     return (
-      <div className={styles.landmark}>
+      <div className={ snippets.length ? [styles.landmark, styles.landmarkWithSnippets].join(' ') : styles.landmark }>
         <DocumentMeta {...meta} extend />
         <div className={styles.coverImage}>
           <Image image={image} size="medium" />
