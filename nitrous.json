@@ -1,0 +1,10 @@
+{
+  "template": "nodejs",
+  "ports": [3000, 3030],
+  "name": "React Redux Universal Hot Example",
+  "description": "A starter boilerplate for a universal webapp using express, react, redux, webpack, and react-transform",
+  "scripts": {
+    "post-create": "cd ~/code/react-redux-universal-hot-example && echo 'running npm install...' && npm install --no-progress  && echo 'npm install done'",
+    "Start React Redux Example": "cd ~/code/react-redux-universal-hot-example && npm run dev"
+  }
+}
