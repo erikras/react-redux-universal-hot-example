@@ -18,6 +18,10 @@ import createHistory from 'react-router/lib/createMemoryHistory';
 import {Provider} from 'react-redux';
 import getRoutes from './routes';
 
+import i18n from './i18n';
+import i18nMiddleware from 'i18next-express-middleware';
+import { I18nextProvider } from 'react-i18next';
+
 const targetUrl = 'http://' + config.apiHost + ':' + config.apiPort;
 const pretty = new PrettyError();
 const app = new Express();
@@ -29,6 +33,7 @@ const proxy = httpProxy.createProxyServer({
 
 app.use(compression());
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
+app.use(i18nMiddleware.handle(i18n))
 
 app.use(Express.static(path.join(__dirname, '..', 'static')));
 
@@ -80,6 +85,9 @@ app.use((req, res) => {
     return;
   }
 
+  let useri18n = i18n.cloneInstance()
+  useri18n.changeLanguage(req.language);
+
   match({ history, routes: getRoutes(store), location: req.originalUrl }, (error, redirectLocation, renderProps) => {
     if (redirectLocation) {
       res.redirect(redirectLocation.pathname + redirectLocation.search);
@@ -90,9 +98,11 @@ app.use((req, res) => {
     } else if (renderProps) {
       loadOnServer({...renderProps, store, helpers: {client}}).then(() => {
         const component = (
-          <Provider store={store} key="provider">
-            <ReduxAsyncConnect {...renderProps} />
-          </Provider>
+          <I18nextProvider i18n={useri18n}>
+            <Provider store={store} key="provider">
+              <ReduxAsyncConnect {...renderProps} />
+            </Provider>
+          </I18nextProvider>
         );
 
         res.status(200);
