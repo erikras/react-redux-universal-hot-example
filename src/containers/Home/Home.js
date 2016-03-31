@@ -25,7 +25,8 @@ export default class Home extends Component {
 
             <p>
               <a className={styles.github} href="https://github.com/erikras/react-redux-universal-hot-example"
-                target="_blank">
+                target="_blank"
+              >
                 <i className="fa fa-github" /> View on Github
               </a>
             </p>
@@ -34,13 +35,15 @@ export default class Home extends Component {
               type="star"
               width={160}
               height={30}
-              count large />
+              count large
+            />
             <GithubButton user="erikras"
               repo="react-redux-universal-hot-example"
               type="fork"
               width={160}
               height={30}
-              count large />
+              count large
+            />
 
             <p className={styles.humility}>
               Created and maintained by <a href="https://twitter.com/erikras" target="_blank">@erikras</a>.
@@ -69,11 +72,20 @@ export default class Home extends Component {
             <li><a href="http://expressjs.com" target="_blank">Express</a></li>
             <li><a href="http://babeljs.io" target="_blank">Babel</a> for ES6 and ES7 magic</li>
             <li><a href="http://webpack.github.io" target="_blank">Webpack</a> for bundling</li>
-            <li><a href="http://webpack.github.io/docs/webpack-dev-middleware.html" target="_blank">Webpack Dev Middleware</a>
+            <li>
+              <a
+                href="http://webpack.github.io/docs/webpack-dev-middleware.html" target="_blank"
+              >Webpack Dev Middleware</a>
             </li>
-            <li><a href="https://github.com/glenjamin/webpack-hot-middleware" target="_blank">Webpack Hot Middleware</a></li>
-            <li><a href="https://github.com/rackt/redux" target="_blank">Redux</a>'s futuristic <a
-              href="https://facebook.github.io/react/blog/2014/05/06/flux.html" target="_blank">Flux</a> implementation
+            <li>
+              <a
+                href="https://github.com/glenjamin/webpack-hot-middleware" target="_blank"
+              >Webpack Hot Middleware</a>
+            </li>
+            <li>
+              <a href="https://github.com/rackt/redux" target="_blank">Redux</a>'s futuristic <a
+                href="https://facebook.github.io/react/blog/2014/05/06/flux.html" target="_blank"
+              >Flux</a> implementation
             </li>
             <li><a href="https://github.com/gaearon/redux-devtools" target="_blank">Redux Dev Tools</a> for next
               generation DX (developer experience).
@@ -89,11 +101,16 @@ export default class Home extends Component {
             <li><a href="https://github.com/erikras/multireducer" target="_blank">multireducer</a> combine several
               identical reducer states into one key-based reducer</li>
             <li><a href="https://github.com/webpack/style-loader" target="_blank">style-loader</a> and <a
-              href="https://github.com/jtangelder/sass-loader" target="_blank">sass-loader</a> to allow import of
+              href="https://github.com/jtangelder/sass-loader" target="_blank"
+            >sass-loader</a> to allow import of
               stylesheets
             </li>
-            <li><a href="https://github.com/shakacode/bootstrap-sass-loader" target="_blank">bootstrap-sass-loader</a> and <a
-              href="https://github.com/gowravshekar/font-awesome-webpack" target="_blank">font-awesome-webpack</a> to customize Bootstrap and FontAwesome
+            <li>
+              <a
+                href="https://github.com/shakacode/bootstrap-sass-loader" target="_blank"
+              >bootstrap-sass-loader</a> and <a
+                href="https://github.com/gowravshekar/font-awesome-webpack" target="_blank"
+              >font-awesome-webpack</a> to customize Bootstrap and FontAwesome
             </li>
             <li><a href="http://socket.io/">socket.io</a> for real-time communication</li>
           </ul>

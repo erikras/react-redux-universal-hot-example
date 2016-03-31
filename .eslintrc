@@ -14,9 +14,11 @@
     "import/no-named-as-default": 2,
     "comma-dangle": 0,  // not sure why airbnb turned this on. gross!
     "indent": [2, 2, {"SwitchCase": 1}],
+    "max-len": [2, 120, 2],
     "no-console": 0,
     "no-alert": 0
   },
+  "parser": "babel-eslint",
   "plugins": [
     "react", "import"
   ],

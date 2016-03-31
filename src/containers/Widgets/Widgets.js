@@ -1,15 +1,15 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as widgetActions from 'redux/modules/widgets';
-import {isLoaded, load as loadWidgets} from 'redux/modules/widgets';
-import {initializeWithKey} from 'redux-form';
+import { isLoaded, load as loadWidgets } from 'redux/modules/widgets';
+import { initializeWithKey } from 'redux-form';
 import { WidgetForm } from 'components';
 import { asyncConnect } from 'redux-async-connect';
 
 @asyncConnect([{
   deferred: true,
-  promise: ({store: {dispatch, getState}}) => {
+  promise: ({ store: { dispatch, getState } }) => {
     if (!isLoaded(getState())) {
       return dispatch(loadWidgets());
     }
@@ -22,7 +22,7 @@ import { asyncConnect } from 'redux-async-connect';
     error: state.widgets.error,
     loading: state.widgets.loading
   }),
-  {...widgetActions, initializeWithKey })
+  { ...widgetActions, initializeWithKey })
 export default class Widgets extends Component {
   static propTypes = {
     widgets: PropTypes.array,
@@ -36,10 +36,10 @@ export default class Widgets extends Component {
 
   render() {
     const handleEdit = (widget) => {
-      const {editStart} = this.props; // eslint-disable-line no-shadow
+      const { editStart } = this.props; // eslint-disable-line no-shadow
       return () => editStart(String(widget.id));
     };
-    const {widgets, error, editing, loading, load} = this.props;
+    const { widgets, error, editing, loading, load } = this.props;
     let refreshClassName = 'fa fa-refresh';
     if (loading) {
       refreshClassName += ' fa-spin';
@@ -50,10 +50,10 @@ export default class Widgets extends Component {
         <h1>
           Widgets
           <button className={styles.refreshBtn + ' btn btn-success'} onClick={load}>
-            <i className={refreshClassName}/> {' '} Reload Widgets
+            <i className={refreshClassName} /> {' '} Reload Widgets
           </button>
         </h1>
-        <Helmet title="Widgets"/>
+        <Helmet title="Widgets" />
         <p>
           If you hit refresh on your browser, the data loading will take place on the server before the page is returned.
           If you navigated here from another page, the data was fetched from the client after the route transition.
@@ -84,7 +84,7 @@ export default class Widgets extends Component {
           <tbody>
           {
             widgets.map((widget) => editing[widget.id] ?
-              <WidgetForm formKey={String(widget.id)} key={String(widget.id)} initialValues={widget}/> :
+              <WidgetForm formKey={String(widget.id)} key={String(widget.id)} initialValues={widget} /> :
               <tr key={widget.id}>
                 <td className={styles.idCol}>{widget.id}</td>
                 <td className={styles.colorCol}>{widget.color}</td>
@@ -92,7 +92,7 @@ export default class Widgets extends Component {
                 <td className={styles.ownerCol}>{widget.owner}</td>
                 <td className={styles.buttonCol}>
                   <button className="btn btn-primary" onClick={handleEdit(widget)}>
-                    <i className="fa fa-pencil"/> Edit
+                    <i className="fa fa-pencil" /> Edit
                   </button>
                 </td>
               </tr>)

@@ -14,7 +14,8 @@ const GithubButton = (props) => {
       scrolling="0"
       width={width}
       height={height}
-      style={{ border: 'none', width: width, height: height }}></iframe>
+      style={{ border: 'none', width, height }}
+    ></iframe>
   );
 };
 

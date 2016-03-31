@@ -79,10 +79,11 @@ if (config.apiPort) {
     });
 
     socket.on('msg', (data) => {
-      data.id = messageIndex;
-      messageBuffer[messageIndex % bufferSize] = data;
+      const messageData = Object.assign({}, data);
+      messageData.id = messageIndex;
+      messageBuffer[messageIndex % bufferSize] = messageData;
       messageIndex++;
-      io.emit('msg', data);
+      io.emit('msg', messageData);
     });
   });
   io.listen(runnable);

@@ -1,12 +1,12 @@
-import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import {initialize} from 'redux-form';
-import {SurveyForm} from 'components';
+import { initialize } from 'redux-form';
+import { SurveyForm } from 'components';
 
 @connect(
   () => ({}),
-  {initialize})
+  { initialize })
 export default class Survey extends Component {
   static propTypes = {
     initialize: PropTypes.func.isRequired
@@ -31,7 +31,7 @@ export default class Survey extends Component {
     return (
       <div className="container">
         <h1>Survey</h1>
-        <Helmet title="Survey"/>
+        <Helmet title="Survey" />
 
         <p>
           This is an example of a form in redux in which all the state is kept within the redux store.
@@ -59,16 +59,16 @@ export default class Survey extends Component {
           Pardon the use of <code>window.alert()</code>, but I wanted to keep this component stateless.
         </p>
 
-        <div style={{textAlign: 'center', margin: 15}}>
+        <div style={{ textAlign: 'center', margin: 15 }}>
           <button className="btn btn-primary" onClick={this.handleInitialize}>
-            <i className="fa fa-pencil"/> Initialize Form
+            <i className="fa fa-pencil" /> Initialize Form
           </button>
         </div>
 
         <p>The circles to the left of the inputs correspond to flags provided by <code>redux-form</code>:
           Touched, Visited, Active, and Dirty.</p>
 
-        <SurveyForm onSubmit={this.handleSubmit}/>
+        <SurveyForm onSubmit={this.handleSubmit} />
       </div>
     );
   }
