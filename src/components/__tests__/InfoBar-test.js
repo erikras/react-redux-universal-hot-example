@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {renderIntoDocument} from 'react-addons-test-utils';
-import { expect} from 'chai';
+import { renderIntoDocument } from 'react-addons-test-utils';
+import { expect } from 'chai';
 import { InfoBar } from 'components';
 import { Provider } from 'react-redux';
 import { browserHistory } from 'react-router';
@@ -24,7 +24,7 @@ describe('InfoBar', () => {
   const store = createStore(browserHistory, client, mockStore);
   const renderer = renderIntoDocument(
     <Provider store={store} key="provider">
-      <InfoBar/>
+      <InfoBar />
     </Provider>
   );
   const dom = ReactDOM.findDOMNode(renderer);

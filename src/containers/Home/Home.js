@@ -11,12 +11,12 @@ export default class Home extends Component {
     const logoImage = require('./logo.png');
     return (
       <div className={styles.home}>
-        <Helmet title="Home"/>
+        <Helmet title="Home" />
         <div className={styles.masthead}>
           <div className="container">
             <div className={styles.logo}>
               <p>
-                <img src={logoImage}/>
+                <img src={logoImage} />
               </p>
             </div>
             <h1>{config.app.title}</h1>
@@ -25,22 +25,22 @@ export default class Home extends Component {
 
             <p>
               <a className={styles.github} href="https://github.com/erikras/react-redux-universal-hot-example"
-                 target="_blank">
-                <i className="fa fa-github"/> View on Github
+                target="_blank">
+                <i className="fa fa-github" /> View on Github
               </a>
             </p>
             <GithubButton user="erikras"
-                          repo="react-redux-universal-hot-example"
-                          type="star"
-                          width={160}
-                          height={30}
-                          count large/>
+              repo="react-redux-universal-hot-example"
+              type="star"
+              width={160}
+              height={30}
+              count large />
             <GithubButton user="erikras"
-                          repo="react-redux-universal-hot-example"
-                          type="fork"
-                          width={160}
-                          height={30}
-                          count large/>
+              repo="react-redux-universal-hot-example"
+              type="fork"
+              width={160}
+              height={30}
+              count large />
 
             <p className={styles.humility}>
               Created and maintained by <a href="https://twitter.com/erikras" target="_blank">@erikras</a>.
@@ -50,9 +50,9 @@ export default class Home extends Component {
 
         <div className="container">
           <div className={styles.counterContainer}>
-            <CounterButton multireducerKey="counter1"/>
-            <CounterButton multireducerKey="counter2"/>
-            <CounterButton multireducerKey="counter3"/>
+            <CounterButton multireducerKey="counter1" />
+            <CounterButton multireducerKey="counter2" />
+            <CounterButton multireducerKey="counter3" />
           </div>
 
           <p>This starter boilerplate app uses the following technologies:</p>
