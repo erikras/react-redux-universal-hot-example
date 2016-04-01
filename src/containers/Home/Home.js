@@ -5,7 +5,7 @@ import config from '../../config';
 import Helmet from 'react-helmet';
 import { translate } from 'react-i18next';
 
-@translate('view')
+@translate(['common'])
 export default class Home extends Component {
   static propTypes = {
     t: PropTypes.func,
@@ -27,11 +27,9 @@ export default class Home extends Component {
                 <img src={logoImage}/>
               </p>
             </div>
-            <h1>{config.app.title}</h1>
+            <h1>{t('content.text')}</h1>
 
             <h2>{config.app.description}</h2>
-
-            <h3>{t('content.text')}</h3>
 
             <p>
               <a className={styles.github} href="https://github.com/erikras/react-redux-universal-hot-example"

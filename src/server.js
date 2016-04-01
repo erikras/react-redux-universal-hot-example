@@ -18,7 +18,7 @@ import createHistory from 'react-router/lib/createMemoryHistory';
 import {Provider} from 'react-redux';
 import getRoutes from './routes';
 
-import i18n from './i18n';
+import i18n from './i18n-server';
 import i18nMiddleware from 'i18next-express-middleware';
 import { I18nextProvider } from 'react-i18next';
 
@@ -74,19 +74,22 @@ app.use((req, res) => {
   const history = createHistory(req.originalUrl);
 
   const store = createStore(history, client);
+  const locale = req.language;
+  const resources = i18n.getResourceBundle(locale, 'common');
+  const i18nClient = {locale, resources};
+
+  const i18nServer = i18n.cloneInstance();
+  i18nServer.changeLanguage(locale);
 
   function hydrateOnClient() {
     res.send('<!doctype html>\n' +
-      ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} store={store}/>));
+      ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} store={store} i18n={i18nClient}/>));
   }
 
   if (__DISABLE_SSR__) {
     hydrateOnClient();
     return;
   }
-
-  let useri18n = i18n.cloneInstance()
-  useri18n.changeLanguage(req.language);
 
   match({ history, routes: getRoutes(store), location: req.originalUrl }, (error, redirectLocation, renderProps) => {
     if (redirectLocation) {
@@ -98,7 +101,7 @@ app.use((req, res) => {
     } else if (renderProps) {
       loadOnServer({...renderProps, store, helpers: {client}}).then(() => {
         const component = (
-          <I18nextProvider i18n={useri18n}>
+          <I18nextProvider i18n={i18nServer}>
             <Provider store={store} key="provider">
               <ReduxAsyncConnect {...renderProps} />
             </Provider>
@@ -110,7 +113,7 @@ app.use((req, res) => {
         global.navigator = {userAgent: req.headers['user-agent']};
 
         res.send('<!doctype html>\n' +
-          ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store}/>));
+          ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store} i18n={i18nClient}/>));
       });
     } else {
       res.status(404).send('Not found');

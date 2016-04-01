@@ -14,6 +14,9 @@ import useScroll from 'scroll-behavior/lib/useStandardScroll';
 
 import getRoutes from './routes';
 
+import { I18nextProvider } from 'react-i18next';
+import i18n from './i18n-client';
+
 const client = new ApiClient();
 const history = useScroll(() => browserHistory)();
 const dest = document.getElementById('content');
@@ -34,6 +37,9 @@ function initSocket() {
 
 global.socket = initSocket();
 
+i18n.changeLanguage(window.__i18n.locale);
+i18n.addResourceBundle(window.__i18n.locale, 'common', window.__i18n.resources, true);
+
 const component = (
   <Router render={(props) =>
         <ReduxAsyncConnect {...props} helpers={{client}} filter={item => !item.deferred} />
@@ -43,9 +49,11 @@ const component = (
 );
 
 ReactDOM.render(
-  <Provider store={store} key="provider">
-    {component}
-  </Provider>,
+  <I18nextProvider i18n={i18n}>
+    <Provider store={store} key="provider">
+      {component}
+    </Provider>
+  </I18nextProvider>,
   dest
 );
 
@@ -60,12 +68,14 @@ if (process.env.NODE_ENV !== 'production') {
 if (__DEVTOOLS__ && !window.devToolsExtension) {
   const DevTools = require('./containers/DevTools/DevTools');
   ReactDOM.render(
-    <Provider store={store} key="provider">
-      <div>
-        {component}
-        <DevTools />
-      </div>
-    </Provider>,
+    <I18nextProvider i18n={i18n}>
+      <Provider store={store} key="provider">
+        <div>
+          {component}
+          <DevTools />
+        </div>
+      </Provider>
+    </I18nextProvider>,
     dest
   );
 }
