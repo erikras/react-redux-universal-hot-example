@@ -59,13 +59,12 @@ if (process.env.NODE_ENV !== 'production') {
 
 if (__DEVTOOLS__ && !window.devToolsExtension) {
   const DevTools = require('./containers/DevTools/DevTools');
+  const devToolsDest = document.createElement('div');
+  dest.parentNode.insertBefore(devToolsDest, dest.nextSibling);
   ReactDOM.render(
     <Provider store={store} key="provider">
-      <div>
-        {component}
-        <DevTools />
-      </div>
+      <DevTools />
     </Provider>,
-    dest
+    devToolsDest
   );
 }
