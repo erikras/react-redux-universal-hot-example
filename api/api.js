@@ -10,6 +10,7 @@ import SocketIo from 'socket.io';
 
 const pretty = new PrettyError();
 const app = express();
+const RedisStore = require('connect-redis')(session);
 
 const server = new http.Server(app);
 
@@ -18,6 +19,10 @@ io.path('/ws');
 
 app.use(session({
   secret: 'react and redux rule!!!!',
+  store: new RedisStore({
+    host: '127.0.0.1',
+    port: 6379
+  }),
   resave: false,
   saveUninitialized: false,
   cookie: { maxAge: 60000 }
