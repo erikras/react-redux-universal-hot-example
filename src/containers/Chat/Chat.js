@@ -54,7 +54,7 @@ export default class Chat extends Component {
     const { user } = this.props;
 
     return (
-      <div className={style.chat + ' container'}>
+      <div className={`${style.chat} container`}>
         <h1 className={style}>Chat</h1>
 
         {user &&
@@ -70,7 +70,8 @@ export default class Chat extends Component {
               onChange={(event) => {
                 this.setState({ message: event.target.value });
               }
-            } />
+            }
+            />
             <button className="btn" onClick={this.handleSubmit}>Send</button>
           </form>
         </div>

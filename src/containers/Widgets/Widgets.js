@@ -13,6 +13,7 @@ import { asyncConnect } from 'redux-async-connect';
     if (!isLoaded(getState())) {
       return dispatch(loadWidgets());
     }
+    return true;
   }
 }])
 @connect(
@@ -31,7 +32,8 @@ export default class Widgets extends Component {
     initializeWithKey: PropTypes.func.isRequired,
     editing: PropTypes.object.isRequired,
     load: PropTypes.func.isRequired,
-    editStart: PropTypes.func.isRequired
+    editStart: PropTypes.func.isRequired,
+    store: PropTypes.object
   };
 
   render() {
@@ -46,20 +48,25 @@ export default class Widgets extends Component {
     }
     const styles = require('./Widgets.scss');
     return (
-      <div className={styles.widgets + ' container'}>
+      <div className={`${styles.widgets} container`}>
         <h1>
           Widgets
-          <button className={styles.refreshBtn + ' btn btn-success'} onClick={load}>
+          <button className={`${styles.refreshBtn} btn btn-success`} onClick={load}>
             <i className={refreshClassName} /> {' '} Reload Widgets
           </button>
         </h1>
         <Helmet title="Widgets" />
         <p>
-          If you hit refresh on your browser, the data loading will take place on the server before the page is returned.
-          If you navigated here from another page, the data was fetched from the client after the route transition.
-          This uses the decorator method <code>@asyncConnect</code> with the <code>deferred: true</code> flag. To block
-          a route transition until some data is loaded, remove the <code>deffered: true</code> flag.
-          To always render before loading data, even on the server, use <code>componentDidMount</code>.
+          If you hit refresh on your browser, the data loading will take place
+          on the server before the page is returned.
+          If you navigated here from another page, the data was fetched from
+          the client after the route transition.
+          This uses the decorator method <code>@asyncConnect</code> with the
+          <code>deferred: true</code> flag. To block
+          a route transition until some data is loaded, remove the
+          <code>deffered: true</code> flag.
+          To always render before loading data, even on the server,
+          use <code>componentDidMount</code>.
         </p>
         <p>
           This widgets are stored in your session, so feel free to edit it and refresh.

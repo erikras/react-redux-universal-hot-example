@@ -13,7 +13,7 @@ export default class Survey extends Component {
   }
 
   handleSubmit = (data) => {
-    window.alert('Data submitted! ' + JSON.stringify(data));
+    window.alert(`Data submitted! ${JSON.stringify(data)}`);
     this.props.initialize('survey', {});
   }
 

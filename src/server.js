@@ -18,7 +18,7 @@ import createHistory from 'react-router/lib/createMemoryHistory';
 import { Provider } from 'react-redux';
 import getRoutes from './routes';
 
-const targetUrl = 'http://' + config.apiHost + ':' + config.apiPort;
+const targetUrl = `http://${config.apiHost}:${config.apiPort}`;
 const pretty = new PrettyError();
 const app = new Express();
 const server = new http.Server(app);
@@ -38,7 +38,7 @@ app.use('/api', (req, res) => {
 });
 
 app.use('/ws', (req, res) => {
-  proxy.web(req, res, { target: targetUrl + '/ws' });
+  proxy.web(req, res, { target: `${targetUrl}/ws` });
 });
 
 server.on('upgrade', (req, socket, head) => {
@@ -47,7 +47,7 @@ server.on('upgrade', (req, socket, head) => {
 
 // added the error handling to avoid https://github.com/nodejitsu/node-http-proxy/issues/527
 proxy.on('error', (error, req, res) => {
-  let json;
+  let json = {};
   if (error.code !== 'ECONNRESET') {
     console.error('proxy error', error);
   }
@@ -71,8 +71,8 @@ app.use((req, res) => {
   const store = createStore(history, client);
 
   function hydrateOnClient() {
-    res.send('<!doctype html>\n' +
-      ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} store={store} />));
+    const html = ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} store={store} />);
+    res.send(`<!doctype html>\n${html}`);
   }
 
   if (__DISABLE_SSR__) {
@@ -98,9 +98,11 @@ app.use((req, res) => {
         res.status(200);
 
         global.navigator = { userAgent: req.headers['user-agent'] };
+        const html = ReactDOM.renderToString(
+          <Html assets={webpackIsomorphicTools.assets()} component={component} store={store} />
+        );
 
-        res.send('<!doctype html>\n' +
-          ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store} />));
+        res.send(`<!doctype html>\n${html}`);
       });
     } else {
       res.status(404).send('Not found');

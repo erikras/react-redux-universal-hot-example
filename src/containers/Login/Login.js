@@ -24,7 +24,7 @@ export default class Login extends Component {
     const { user, logout } = this.props;
     const styles = require('./Login.scss');
     return (
-      <div className={styles.loginPage + ' container'}>
+      <div className={`${styles.loginPage} container`}>
         <Helmet title="Login" />
         <h1>Login</h1>
         {!user &&

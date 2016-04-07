@@ -5,6 +5,7 @@
     "mocha": true
   },
   "rules": {
+    "arrow-body-style": 1,
     "react/no-multi-comp": 0,
     "import/default": 0,
     "import/no-duplicates": 0,
