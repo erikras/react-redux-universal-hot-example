@@ -45,6 +45,11 @@ describe('InfoBar', () => {
     expect(buttons.at(0).text()).toBeA('string');
   });
 
+  it('should call reload when the reload button is clicked', () => {
+    buttons.at(0).simulate('click');
+    expect(actions.load).toHaveBeenCalled();
+  });
+
   it('should render the correct className', () => {
     const styles = require('components/InfoBar/InfoBar.scss');
     expect(styles.infoBar).toBeA('string');
