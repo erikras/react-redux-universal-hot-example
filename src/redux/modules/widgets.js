@@ -1,3 +1,5 @@
+import { createReducer } from 'redux-blower';
+
 const LOAD = 'redux-example/widgets/LOAD';
 const LOAD_SUCCESS = 'redux-example/widgets/LOAD_SUCCESS';
 const LOAD_FAIL = 'redux-example/widgets/LOAD_FAIL';
@@ -13,14 +15,18 @@ const initialState = {
   saveError: {}
 };
 
-export default function reducer(state = initialState, action = {}) {
-  switch (action.type) {
-    case LOAD:
+const reducer = createReducer({
+  initialState,
+
+  listenTo: {
+    [LOAD](state) {
       return {
         ...state,
         loading: true
       };
-    case LOAD_SUCCESS:
+    },
+
+    [LOAD_SUCCESS](state, action) {
       return {
         ...state,
         loading: false,
@@ -28,7 +34,9 @@ export default function reducer(state = initialState, action = {}) {
         data: action.result,
         error: null
       };
-    case LOAD_FAIL:
+    },
+
+    [LOAD_FAIL](state, action) {
       return {
         ...state,
         loading: false,
@@ -36,7 +44,9 @@ export default function reducer(state = initialState, action = {}) {
         data: null,
         error: action.error
       };
-    case EDIT_START:
+    },
+
+    [EDIT_START](state, action) {
       return {
         ...state,
         editing: {
@@ -44,7 +54,9 @@ export default function reducer(state = initialState, action = {}) {
           [action.id]: true
         }
       };
-    case EDIT_STOP:
+    },
+
+    [EDIT_STOP](state, action) {
       return {
         ...state,
         editing: {
@@ -52,9 +64,13 @@ export default function reducer(state = initialState, action = {}) {
           [action.id]: false
         }
       };
-    case SAVE:
+    },
+
+    [SAVE](state) {
       return state; // 'saving' flag handled by redux-form
-    case SAVE_SUCCESS:
+    },
+
+    [SAVE_SUCCESS](state, action) {
       const data = [...state.data];
       data[action.result.id - 1] = action.result;
       return {
@@ -69,7 +85,9 @@ export default function reducer(state = initialState, action = {}) {
           [action.id]: null
         }
       };
-    case SAVE_FAIL:
+    },
+
+    [SAVE_FAIL](state, action) {
       return typeof action.error === 'string' ? {
         ...state,
         saveError: {
@@ -77,10 +95,11 @@ export default function reducer(state = initialState, action = {}) {
           [action.id]: action.error
         }
       } : state;
-    default:
-      return state;
+    }
   }
-}
+});
+
+export default reducer;
 
 export function isLoaded(globalState) {
   return globalState.widgets && globalState.widgets.loaded;

@@ -128,6 +128,7 @@
     "react-router-redux": "^3.0.0",
     "redux": "^3.0.4",
     "redux-async-connect": "^1.0.0-rc2",
+    "redux-blower": "^0.2.1",
     "redux-form": "^3.0.12",
     "scroll-behavior": "^0.3.2",
     "serialize-javascript": "^1.1.2",

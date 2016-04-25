@@ -1,3 +1,5 @@
+import { createReducer } from 'redux-blower';
+
 const LOAD = 'redux-example/auth/LOAD';
 const LOAD_SUCCESS = 'redux-example/auth/LOAD_SUCCESS';
 const LOAD_FAIL = 'redux-example/auth/LOAD_FAIL';
@@ -12,66 +14,85 @@ const initialState = {
   loaded: false
 };
 
-export default function reducer(state = initialState, action = {}) {
-  switch (action.type) {
-    case LOAD:
+const reducer = createReducer({
+  initialState,
+
+  listenTo: {
+    [LOAD](state) {
       return {
         ...state,
         loading: true
       };
-    case LOAD_SUCCESS:
+    },
+
+    [LOAD_SUCCESS](state, action) {
       return {
         ...state,
         loading: false,
         loaded: true,
         user: action.result
       };
-    case LOAD_FAIL:
+    },
+
+    [LOAD_FAIL](state, action) {
       return {
         ...state,
         loading: false,
         loaded: false,
         error: action.error
       };
-    case LOGIN:
+    },
+
+    [LOGIN](state) {
       return {
         ...state,
         loggingIn: true
       };
-    case LOGIN_SUCCESS:
+    },
+
+    [LOGIN_SUCCESS](state, action) {
       return {
         ...state,
         loggingIn: false,
         user: action.result
       };
-    case LOGIN_FAIL:
+    },
+
+    [LOGIN_FAIL](state, action) {
       return {
         ...state,
         loggingIn: false,
         user: null,
         loginError: action.error
       };
-    case LOGOUT:
+    },
+
+    [LOGOUT](state) {
       return {
         ...state,
         loggingOut: true
       };
-    case LOGOUT_SUCCESS:
+    },
+
+    [LOGOUT_SUCCESS](state) {
       return {
         ...state,
         loggingOut: false,
         user: null
       };
-    case LOGOUT_FAIL:
+    },
+
+    [LOGOUT_FAIL](state, action) {
       return {
         ...state,
         loggingOut: false,
         logoutError: action.error
       };
-    default:
-      return state;
+    }
   }
-}
+});
+
+export default reducer;
 
 export function isLoaded(globalState) {
   return globalState.auth && globalState.auth.loaded;
