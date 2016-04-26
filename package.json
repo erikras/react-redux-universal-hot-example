@@ -125,7 +125,7 @@
     "react-redux": "^4.0.0",
     "react-router": "2.0.0",
     "react-router-bootstrap": "^0.20.1",
-    "react-router-redux": "^3.0.0",
+    "react-router-redux": "^4.0.0",
     "redux": "^3.0.4",
     "redux-async-connect": "^1.0.0-rc2",
     "redux-form": "^3.0.12",

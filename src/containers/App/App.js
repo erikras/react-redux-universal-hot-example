@@ -9,7 +9,7 @@ import Helmet from 'react-helmet';
 import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
 import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
 import { InfoBar } from 'components';
-import { routeActions } from 'react-router-redux';
+import { push } from 'react-router-redux';
 import config from '../../config';
 import { asyncConnect } from 'redux-async-connect';
 
@@ -29,7 +29,7 @@ import { asyncConnect } from 'redux-async-connect';
 }])
 @connect(
   state => ({user: state.auth.user}),
-  {logout, pushState: routeActions.push})
+  {logout, pushState: push})
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
