@@ -25,3 +25,43 @@
 .appContent {
   margin: 50px 0 0 0; // for fixed top bar
 }
+
+.gs-ibox-title {
+  background-color: #fff;
+  border-color: #e7eaec;
+  //Instead of the line below you could use @include border-image($value)
+  border-image: none;
+  border-style: solid solid none;
+  border-width: 3px 0 0;
+  margin-bottom: 0;
+  padding: 14px 15px 7px;
+  min-height: 60px;
+  font-size: 18px;
+  color: #444;
+  font-weight: 200;
+  h1 {
+    margin-top: 5px;
+  }
+  h2 {
+    margin-top: 5px;
+  }
+  h3 {
+    margin-top: 5px;
+  }
+  h4 {
+    margin-top: 5px;
+  }
+  h5 {
+    margin-top: 5px;
+    display: inline-block;
+    font-size: 14px;
+    margin: 0 0 7px;
+    padding: 0;
+    text-overflow: ellipsis;
+    float: left;
+  }
+  .label {
+    float: left;
+    margin-left: 4px;
+  }
+}
