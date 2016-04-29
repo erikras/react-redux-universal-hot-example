@@ -16,7 +16,12 @@
     font-size: 2em;
     line-height: 20px;
   }
+  .navbarStaticSide{
+    z-index: 2001;
+    position: absolute;
+    width: 220px;
+  }
 }
 .appContent {
-  margin: 50px 0; // for fixed navbar
+  margin: 50px 0 0 0; // for fixed top bar
 }
