@@ -16,10 +16,9 @@ import { match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { ReduxAsyncConnect, loadOnServer } from 'redux-async-connect';
 import createHistory from 'react-router/lib/createMemoryHistory';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import getRoutes from './routes';
-
-const targetUrl = 'http://' + config.apiHost + ':' + config.apiPort;
+const targetUrl = `http://${config.apiHost}:${config.apiPort}`;
 const pretty = new PrettyError();
 const app = new Express();
 const server = new http.Server(app);
@@ -35,11 +34,11 @@ app.use(Express.static(path.join(__dirname, '..', 'static')));
 
 // Proxy to API server
 app.use('/api', (req, res) => {
-  proxy.web(req, res, {target: targetUrl});
+  proxy.web(req, res, { target: targetUrl });
 });
 
 app.use('/ws', (req, res) => {
-  proxy.web(req, res, {target: targetUrl + '/ws'});
+  proxy.web(req, res, { target: `${targetUrl}/ws` });
 });
 
 server.on('upgrade', (req, socket, head) => {
@@ -48,15 +47,14 @@ server.on('upgrade', (req, socket, head) => {
 
 // added the error handling to avoid https://github.com/nodejitsu/node-http-proxy/issues/527
 proxy.on('error', (error, req, res) => {
-  let json;
   if (error.code !== 'ECONNRESET') {
     console.error('proxy error', error);
   }
   if (!res.headersSent) {
-    res.writeHead(500, {'content-type': 'application/json'});
+    res.writeHead(500, { 'content-type': 'application/json' });
   }
 
-  json = {error: 'proxy_error', reason: error.message};
+  const json = { error: 'proxy_error', reason: error.message };
   res.end(JSON.stringify(json));
 });
 
@@ -71,9 +69,12 @@ app.use((req, res) => {
   const store = createStore(memoryHistory, client);
   const history = syncHistoryWithStore(memoryHistory, store);
 
+  const html = ReactDOM.renderToString(
+    <Html assets={webpackIsomorphicTools.assets()} store={store} />
+  );
+
   function hydrateOnClient() {
-    res.send('<!doctype html>\n' +
-      ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} store={store}/>));
+    res.send(`<!doctype html>\n ${html}`);
   }
 
   if (__DISABLE_SSR__) {
@@ -81,7 +82,8 @@ app.use((req, res) => {
     return;
   }
 
-  match({ history, routes: getRoutes(store), location: req.originalUrl }, (error, redirectLocation, renderProps) => {
+  match({ history, routes: getRoutes(store), location: req.originalUrl },
+  (error, redirectLocation, renderProps) => {
     if (redirectLocation) {
       res.redirect(redirectLocation.pathname + redirectLocation.search);
     } else if (error) {
@@ -89,7 +91,7 @@ app.use((req, res) => {
       res.status(500);
       hydrateOnClient();
     } else if (renderProps) {
-      loadOnServer({...renderProps, store, helpers: {client}}).then(() => {
+      loadOnServer({ ...renderProps, store, helpers: { client } }).then(() => {
         const component = (
           <Provider store={store} key="provider">
             <ReduxAsyncConnect {...renderProps} />
@@ -98,10 +100,12 @@ app.use((req, res) => {
 
         res.status(200);
 
-        global.navigator = {userAgent: req.headers['user-agent']};
+        global.navigator = { userAgent: req.headers['user-agent'] };
 
-        res.send('<!doctype html>\n' +
-          ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store}/>));
+        const htmlRouter = ReactDOM.renderToString(
+          <Html assets={webpackIsomorphicTools.assets()} component={component} store={store} />
+        );
+        res.send(`<!doctype html>\n ${htmlRouter}`);
       });
     } else {
       res.status(404).send('Not found');
@@ -114,7 +118,9 @@ if (config.port) {
     if (err) {
       console.error(err);
     }
-    console.info('----\n==> ✅  %s is running, talking to API server on %s.', config.app.title, config.apiPort);
+    console.info('----\n==> ✅  %s is running, talking to API server on %s.',
+                 config.app.title,
+                 config.apiPort);
     console.info('==> 💻  Open http://%s:%s in a browser to view the app.', config.host, config.port);
   });
 } else {
