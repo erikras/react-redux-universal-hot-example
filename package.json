@@ -119,6 +119,7 @@
     "pretty-error": "^1.2.0",
     "react": "^0.14.2",
     "react-bootstrap": "^0.28.1",
+    "react-data-components": "^0.6.0",
     "react-dom": "^0.14.1",
     "react-helmet": "^2.2.0",
     "react-inline-css": "^2.0.0",
