@@ -1,29 +1,19 @@
 import React, {Component, PropTypes} from 'react';
 import {reduxForm} from 'redux-form';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import surveyValidation from './surveyValidation';
+import * as surveyActions from 'redux/modules/survey';
 
-function asyncValidate(data) {
-  // TODO: figure out a way to move this to the server. need an instance of ApiClient
+function asyncValidate(data, dispatch, {isValidEmail}) {
   if (!data.email) {
     return Promise.resolve({});
   }
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const errors = {};
-      let valid = true;
-      if (~['bobby@gmail.com', 'timmy@microsoft.com'].indexOf(data.email)) {
-        errors.email = 'Email address already used';
-        valid = false;
-      }
-      if (valid) {
-        resolve();
-      } else {
-        reject(errors);
-      }
-    }, 1000);
-  });
+  return isValidEmail(data);
 }
-
+@connect(() => ({}),
+  dispatch => bindActionCreators(surveyActions, dispatch)
+)
 @reduxForm({
   form: 'survey',
   fields: ['name', 'email', 'occupation', 'currentlyEmployed', 'sex'],
@@ -137,4 +127,3 @@ class SurveyForm extends Component {
     );
   }
 }
-
