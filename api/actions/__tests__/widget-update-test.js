@@ -36,6 +36,19 @@ describe('widget update', () => {
         });
     });
 
+    it('fails to load widgets', () => {
+      sinon.stub(load, 'default').returns(new Promise((resolve, reject) => {
+        reject('Widget fail to load.');
+      }));
+      return update({session: {}, body: {color: 'Blue'}}).
+      then(
+        ()=> {
+        },
+        (err)=> {
+          expect(err).to.equal('Widget fail to load.');
+        });
+    });
+
     it('updates a widget', () => {
       sinon.stub(load, 'default').returns(new Promise((resolve) => {
         resolve(widgets);
