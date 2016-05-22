@@ -20,6 +20,8 @@ export default function update(req) {
             req.session.widgets = widgets;
           }
           resolve(widget);
+        }, err => {
+          reject(err);
         });
       }
     }, 1500); // simulate async db write
