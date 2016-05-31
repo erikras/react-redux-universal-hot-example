@@ -1,8 +1,8 @@
-import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {reduxForm} from 'redux-form';
-import widgetValidation, {colors} from './widgetValidation';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { reduxForm } from 'redux-form';
+import widgetValidation, { colors } from './widgetValidation';
 import * as widgetActions from 'redux/modules/widgets';
 
 @connect(
@@ -31,7 +31,7 @@ export default class WidgetForm extends Component {
   };
 
   render() {
-    const { editStop, fields: {id, color, sprocketCount, owner}, formKey, handleSubmit, invalid,
+    const { editStop, fields: { id, color, sprocketCount, owner }, formKey, handleSubmit, invalid,
       pristine, save, submitting, saveError: { [formKey]: saveError }, values } = this.props;
     const styles = require('containers/Widgets/Widgets.scss');
     return (
@@ -44,29 +44,31 @@ export default class WidgetForm extends Component {
           {color.error && color.touched && <div className="text-danger">{color.error}</div>}
         </td>
         <td className={styles.sprocketsCol}>
-          <input type="text" className="form-control" {...sprocketCount}/>
+          <input type="text" className="form-control" {...sprocketCount} />
           {sprocketCount.error && sprocketCount.touched && <div className="text-danger">{sprocketCount.error}</div>}
         </td>
         <td className={styles.ownerCol}>
-          <input type="text" className="form-control" {...owner}/>
+          <input type="text" className="form-control" {...owner} />
           {owner.error && owner.touched && <div className="text-danger">{owner.error}</div>}
         </td>
         <td className={styles.buttonCol}>
           <button className="btn btn-default"
-                  onClick={() => editStop(formKey)}
-                  disabled={submitting}>
-            <i className="fa fa-ban"/> Cancel
+            onClick={() => editStop(formKey)}
+            disabled={submitting}
+          >
+            <i className="fa fa-ban" /> Cancel
           </button>
           <button className="btn btn-success"
-                  onClick={handleSubmit(() => save(values)
+            onClick={handleSubmit(() => save(values)
                     .then(result => {
                       if (result && typeof result.error === 'object') {
                         return Promise.reject(result.error);
                       }
                     })
                   )}
-                  disabled={pristine || invalid || submitting}>
-            <i className={'fa ' + (submitting ? 'fa-cog fa-spin' : 'fa-cloud')}/> Save
+            disabled={pristine || invalid || submitting}
+          >
+            <i className={'fa ' + (submitting ? 'fa-cog fa-spin' : 'fa-cloud')} /> Save
           </button>
           {saveError && <div className="text-danger">{saveError}</div>}
         </td>

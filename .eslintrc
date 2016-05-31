@@ -5,23 +5,30 @@
     "mocha": true
   },
   "rules": {
-    "react/no-multi-comp": 0,
-    "import/default": 0,
-    "import/no-duplicates": 0,
-    "import/named": 0,
-    "import/namespace": 0,
-    "import/no-unresolved": 0,
-    "import/no-named-as-default": 2,
-    "comma-dangle": 0,  // not sure why airbnb turned this on. gross!
-    "indent": [2, 2, {"SwitchCase": 1}],
-    "no-console": 0,
-    "no-alert": 0
+    "comma-dangle": "off",  // not sure why airbnb turned this on. gross!
+    "consistent-return": "warn",
+    "global-require": "warn",
+    "import/default": "off",
+    "import/named": "off",
+    "import/namespace": "off",
+    "import/no-duplicates": "off",
+    "import/no-named-as-default": "error",
+    "import/no-unresolved": "off",
+    "indent": ["error", 2, {"SwitchCase": 1}],
+    "max-len": ["error", 120],
+    "no-alert": "off",
+    "no-console": "off",
+    "prefer-template": "warn",
+    "react/jsx-first-prop-new-line": ["warn", "multiline"],
+    "react/no-multi-comp": "off",
+    "react/prefer-stateless-function": "warn",
   },
   "plugins": [
     "react", "import"
   ],
+  "parser": "babel-eslint",
   "settings": {
-    "import/parser": "babel-eslint",
+    "import/ignore": ["node_modules", ".scss$"],
     "import/resolve": {
       "moduleDirectory": ["node_modules", "src"]
     }
