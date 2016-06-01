@@ -17,7 +17,7 @@ export default function update(req) {
           }
           if (widget.id) {
             widgets[widget.id - 1] = widget;  // id is 1-based. please don't code like this in production! :-)
-            req.session.widgets = widgets;
+            req.session.widgets = widgets; // eslint-disable-line no-param-reassign
           }
           resolve(widget);
         }, err => {
