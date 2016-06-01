@@ -16,9 +16,9 @@ import useScroll from 'scroll-behavior/lib/useStandardScroll';
 import getRoutes from './routes';
 
 const client = new ApiClient();
-const _browserHistory = useScroll(() => browserHistory)();
+const _browserHistory = useScroll(() => browserHistory)(); // eslint-disable-line no-underscore-dangle
 const dest = document.getElementById('content');
-const store = createStore(_browserHistory, client, window.__data);
+const store = createStore(_browserHistory, client, window.__data); // eslint-disable-line no-underscore-dangle
 const history = syncHistoryWithStore(_browserHistory, store);
 
 function initSocket() {
@@ -56,7 +56,8 @@ if (process.env.NODE_ENV !== 'production') {
   window.React = React; // enable debugger
 
   if (!dest || !dest.firstChild || !dest.firstChild.attributes || !dest.firstChild.attributes['data-react-checksum']) {
-    console.error('Server-side React render was discarded. Make sure that your initial render does not contain any client-side code.');
+    console.error('Server-side React render was discarded. ' +
+                  'Make sure that your initial render does not contain any client-side code.');
   }
 }
 

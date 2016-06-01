@@ -3,6 +3,8 @@ import update from '../widget/update';
 import * as load from '../widget/load';
 import sinon from 'sinon';
 
+/* eslint-disable arrow-body-style */
+
 describe('widget update', () => {
   afterEach(() => {
     if ('restore' in Math.random) {

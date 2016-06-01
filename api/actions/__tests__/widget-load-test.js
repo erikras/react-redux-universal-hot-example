@@ -2,6 +2,8 @@ import { expect } from 'chai';
 import load from '../widget/load';
 import sinon from 'sinon';
 
+/* eslint-disable arrow-body-style */
+
 describe('widget load', () => {
   afterEach(() => {
     if ('restore' in Math.random) {

@@ -9,7 +9,7 @@ export function getWidgets(req) {
   let widgets = req.session.widgets;
   if (!widgets) {
     widgets = initialWidgets;
-    req.session.widgets = widgets;
+    req.session.widgets = widgets; // eslint-disable-line no-param-reassign
   }
   return widgets;
 }

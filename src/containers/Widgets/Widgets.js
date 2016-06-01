@@ -2,14 +2,14 @@ import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import * as widgetActions from 'redux/modules/widgets';
-import { isLoaded, load as loadWidgets } from 'redux/modules/widgets';
+import { isLoaded, load as loadWidgets } from 'redux/modules/widgets'; // eslint-disable-line no-duplicate-imports
 import { initializeWithKey } from 'redux-form';
 import { WidgetForm } from 'components';
 import { asyncConnect } from 'redux-async-connect';
 
 @asyncConnect([{
   deferred: true,
-  promise: ({ store: { dispatch, getState } }) => {
+  promise: ({ store: { dispatch, getState } }) => { // eslint-disable-line react/prop-types
     if (!isLoaded(getState())) {
       return dispatch(loadWidgets());
     }
@@ -55,11 +55,16 @@ export default class Widgets extends Component {
         </h1>
         <Helmet title="Widgets" />
         <p>
-          If you hit refresh on your browser, the data loading will take place on the server before the page is returned.
-          If you navigated here from another page, the data was fetched from the client after the route transition.
-          This uses the decorator method <code>@asyncConnect</code> with the <code>deferred: true</code> flag. To block
-          a route transition until some data is loaded, remove the <code>deffered: true</code> flag.
-          To always render before loading data, even on the server, use <code>componentDidMount</code>.
+          If you hit refresh on your browser, the data loading will
+          take place on the server before the page is returned.  If
+          you navigated here from another page, the data was fetched
+          from the client after the route transition.  This uses the
+          decorator method <code>@asyncConnect</code> with the
+          <code>deferred: true</code> flag. To block a route
+          transition until some data is loaded, remove the
+          <code>deffered: true</code> flag.  To always render before
+          loading data, even on the server, use
+          <code>componentDidMount</code>.
         </p>
         <p>
           This widgets are stored in your session, so feel free to edit it and refresh.
@@ -83,7 +88,7 @@ export default class Widgets extends Component {
             </thead>
             <tbody>
             {
-              widgets.map((widget) => editing[widget.id] ?
+              widgets.map((widget) => (editing[widget.id] ?
                 <WidgetForm formKey={String(widget.id)} key={String(widget.id)} initialValues={widget} /> :
                 <tr key={widget.id}>
                   <td className={styles.idCol}>{widget.id}</td>
@@ -95,7 +100,7 @@ export default class Widgets extends Component {
                       <i className="fa fa-pencil" /> Edit
                     </button>
                   </td>
-                </tr>)
+                </tr>))
             }
             </tbody>
           </table>}

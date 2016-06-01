@@ -79,7 +79,7 @@ if (config.apiPort) {
     });
 
     socket.on('msg', (data) => {
-      data.id = messageIndex;
+      data.id = messageIndex; // eslint-disable-line no-param-reassign
       messageBuffer[messageIndex % bufferSize] = data;
       messageIndex++;
       io.emit('msg', data);

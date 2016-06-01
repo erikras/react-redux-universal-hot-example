@@ -9,6 +9,8 @@ import createStore from 'redux/create';
 import ApiClient from 'helpers/ApiClient';
 const client = new ApiClient();
 
+/* eslint-disable no-unused-expressions */
+
 describe('InfoBar', () => {
   const mockStore = {
     info: {

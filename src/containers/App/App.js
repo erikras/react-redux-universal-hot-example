@@ -14,7 +14,7 @@ import config from '../../config';
 import { asyncConnect } from 'redux-async-connect';
 
 @asyncConnect([{
-  promise: ({ store: { dispatch, getState } }) => {
+  promise: ({ store: { dispatch, getState } }) => { // eslint-disable-line react/prop-types
     const promises = [];
 
     if (!isInfoLoaded(getState())) {
@@ -105,7 +105,11 @@ export default class App extends Component {
             {user &&
               <p className={styles.loggedInMessage + ' navbar-text'}>Logged in as <strong>{user.name}</strong>.</p>}
             <Nav navbar pullRight>
-              <NavItem eventKey={1} target="_blank" title="View on Github" href="https://github.com/erikras/react-redux-universal-hot-example">
+              <NavItem
+                eventKey={1} target="_blank"
+                title="View on Github"
+                href="https://github.com/erikras/react-redux-universal-hot-example"
+              >
                 <i className="fa fa-github" />
               </NavItem>
             </Nav>
