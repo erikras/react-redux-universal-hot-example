@@ -154,7 +154,7 @@ const styles = require('./App.scss');
 Then you set the `className` of your element to match one of the CSS classes in your SCSS file, and you're good to go!
 
 ```jsx
-<div className={styles.mySection}> ... </div>
+<div class={styles.mySection}> ... </div>
 ```
 
 #### Alternative to Local Styles

@@ -2,6 +2,7 @@
   "presets": ["react", "es2015", "stage-0"],
 
   "plugins": [
+    "react-html-attrs",
     "transform-runtime",
     "add-module-exports",
     "transform-decorators-legacy",

@@ -24,16 +24,16 @@ export default class Login extends Component {
     const {user, logout} = this.props;
     const styles = require('./Login.scss');
     return (
-      <div className={styles.loginPage + ' container'}>
+      <div class={styles.loginPage + ' container'}>
         <Helmet title="Login"/>
         <h1>Login</h1>
         {!user &&
         <div>
-          <form className="login-form form-inline" onSubmit={this.handleSubmit}>
-            <div className="form-group">
-              <input type="text" ref="username" placeholder="Enter a username" className="form-control"/>
+          <form class="login-form form-inline" onSubmit={this.handleSubmit}>
+            <div class="form-group">
+              <input type="text" ref="username" placeholder="Enter a username" class="form-control"/>
             </div>
-            <button className="btn btn-success" onClick={this.handleSubmit}><i className="fa fa-sign-in"/>{' '}Log In
+            <button class="btn btn-success" onClick={this.handleSubmit}><i class="fa fa-sign-in"/>{' '}Log In
             </button>
           </form>
           <p>This will "log you in" as this user, storing the username in the session of the API server.</p>
@@ -44,7 +44,7 @@ export default class Login extends Component {
           <p>You are currently logged in as {user.name}.</p>
 
           <div>
-            <button className="btn btn-danger" onClick={logout}><i className="fa fa-sign-out"/>{' '}Log Out</button>
+            <button class="btn btn-danger" onClick={logout}><i class="fa fa-sign-out"/>{' '}Log Out</button>
           </div>
         </div>
         }

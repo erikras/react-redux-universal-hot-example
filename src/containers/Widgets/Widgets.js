@@ -46,11 +46,11 @@ export default class Widgets extends Component {
     }
     const styles = require('./Widgets.scss');
     return (
-      <div className={styles.widgets + ' container'}>
+      <div class={styles.widgets + ' container'}>
         <h1>
           Widgets
-          <button className={styles.refreshBtn + ' btn btn-success'} onClick={load}>
-            <i className={refreshClassName}/> {' '} Reload Widgets
+          <button class={styles.refreshBtn + ' btn btn-success'} onClick={load}>
+            <i class={refreshClassName}/> {' '} Reload Widgets
           </button>
         </h1>
         <Helmet title="Widgets"/>
@@ -65,20 +65,20 @@ export default class Widgets extends Component {
           This widgets are stored in your session, so feel free to edit it and refresh.
         </p>
         {error &&
-        <div className="alert alert-danger" role="alert">
-          <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <div class="alert alert-danger" role="alert">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
           {' '}
           {error}
         </div>}
         {widgets && widgets.length &&
-        <table className="table table-striped">
+        <table class="table table-striped">
           <thead>
           <tr>
-            <th className={styles.idCol}>ID</th>
-            <th className={styles.colorCol}>Color</th>
-            <th className={styles.sprocketsCol}>Sprockets</th>
-            <th className={styles.ownerCol}>Owner</th>
-            <th className={styles.buttonCol}></th>
+            <th class={styles.idCol}>ID</th>
+            <th class={styles.colorCol}>Color</th>
+            <th class={styles.sprocketsCol}>Sprockets</th>
+            <th class={styles.ownerCol}>Owner</th>
+            <th class={styles.buttonCol}></th>
           </tr>
           </thead>
           <tbody>
@@ -86,13 +86,13 @@ export default class Widgets extends Component {
             widgets.map((widget) => editing[widget.id] ?
               <WidgetForm formKey={String(widget.id)} key={String(widget.id)} initialValues={widget}/> :
               <tr key={widget.id}>
-                <td className={styles.idCol}>{widget.id}</td>
-                <td className={styles.colorCol}>{widget.color}</td>
-                <td className={styles.sprocketsCol}>{widget.sprocketCount}</td>
-                <td className={styles.ownerCol}>{widget.owner}</td>
-                <td className={styles.buttonCol}>
-                  <button className="btn btn-primary" onClick={handleEdit(widget)}>
-                    <i className="fa fa-pencil"/> Edit
+                <td class={styles.idCol}>{widget.id}</td>
+                <td class={styles.colorCol}>{widget.color}</td>
+                <td class={styles.sprocketsCol}>{widget.sprocketCount}</td>
+                <td class={styles.ownerCol}>{widget.owner}</td>
+                <td class={styles.buttonCol}>
+                  <button class="btn btn-primary" onClick={handleEdit(widget)}>
+                    <i class="fa fa-pencil"/> Edit
                   </button>
                 </td>
               </tr>)

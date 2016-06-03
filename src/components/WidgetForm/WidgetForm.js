@@ -35,29 +35,29 @@ export default class WidgetForm extends Component {
       pristine, save, submitting, saveError: { [formKey]: saveError }, values } = this.props;
     const styles = require('containers/Widgets/Widgets.scss');
     return (
-      <tr className={submitting ? styles.saving : ''}>
-        <td className={styles.idCol}>{id.value}</td>
-        <td className={styles.colorCol}>
-          <select name="color" className="form-control" {...color}>
+      <tr class={submitting ? styles.saving : ''}>
+        <td class={styles.idCol}>{id.value}</td>
+        <td class={styles.colorCol}>
+          <select name="color" class="form-control" {...color}>
             {colors.map(valueColor => <option value={valueColor} key={valueColor}>{valueColor}</option>)}
           </select>
-          {color.error && color.touched && <div className="text-danger">{color.error}</div>}
+          {color.error && color.touched && <div class="text-danger">{color.error}</div>}
         </td>
-        <td className={styles.sprocketsCol}>
-          <input type="text" className="form-control" {...sprocketCount}/>
-          {sprocketCount.error && sprocketCount.touched && <div className="text-danger">{sprocketCount.error}</div>}
+        <td class={styles.sprocketsCol}>
+          <input type="text" class="form-control" {...sprocketCount}/>
+          {sprocketCount.error && sprocketCount.touched && <div class="text-danger">{sprocketCount.error}</div>}
         </td>
-        <td className={styles.ownerCol}>
-          <input type="text" className="form-control" {...owner}/>
-          {owner.error && owner.touched && <div className="text-danger">{owner.error}</div>}
+        <td class={styles.ownerCol}>
+          <input type="text" class="form-control" {...owner}/>
+          {owner.error && owner.touched && <div class="text-danger">{owner.error}</div>}
         </td>
-        <td className={styles.buttonCol}>
-          <button className="btn btn-default"
+        <td class={styles.buttonCol}>
+          <button class="btn btn-default"
                   onClick={() => editStop(formKey)}
                   disabled={submitting}>
-            <i className="fa fa-ban"/> Cancel
+            <i class="fa fa-ban"/> Cancel
           </button>
-          <button className="btn btn-success"
+          <button class="btn btn-success"
                   onClick={handleSubmit(() => save(values)
                     .then(result => {
                       if (result && typeof result.error === 'object') {
@@ -66,9 +66,9 @@ export default class WidgetForm extends Component {
                     })
                   )}
                   disabled={pristine || invalid || submitting}>
-            <i className={'fa ' + (submitting ? 'fa-cog fa-spin' : 'fa-cloud')}/> Save
+            <i class={'fa ' + (submitting ? 'fa-cog fa-spin' : 'fa-cloud')}/> Save
           </button>
-          {saveError && <div className="text-danger">{saveError}</div>}
+          {saveError && <div class="text-danger">{saveError}</div>}
         </td>
       </tr>
     );

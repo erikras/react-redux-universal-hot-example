@@ -62,13 +62,13 @@ export default class App extends Component {
     const styles = require('./App.scss');
 
     return (
-      <div className={styles.app}>
+      <div class={styles.app}>
         <Helmet {...config.app.head}/>
         <Navbar fixedTop>
           <Navbar.Header>
             <Navbar.Brand>
               <IndexLink to="/" activeStyle={{color: '#33e0ff'}}>
-                <div className={styles.brand}/>
+                <div class={styles.brand}/>
                 <span>{config.app.title}</span>
               </IndexLink>
             </Navbar.Brand>
@@ -97,27 +97,27 @@ export default class App extends Component {
               </LinkContainer>}
               {user &&
               <LinkContainer to="/logout">
-                <NavItem eventKey={6} className="logout-link" onClick={this.handleLogout}>
+                <NavItem eventKey={6} class="logout-link" onClick={this.handleLogout}>
                   Logout
                 </NavItem>
               </LinkContainer>}
             </Nav>
             {user &&
-            <p className={styles.loggedInMessage + ' navbar-text'}>Logged in as <strong>{user.name}</strong>.</p>}
+            <p class={styles.loggedInMessage + ' navbar-text'}>Logged in as <strong>{user.name}</strong>.</p>}
             <Nav navbar pullRight>
               <NavItem eventKey={1} target="_blank" title="View on Github" href="https://github.com/erikras/react-redux-universal-hot-example">
-                <i className="fa fa-github"/>
+                <i class="fa fa-github"/>
               </NavItem>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
 
-        <div className={styles.appContent}>
+        <div class={styles.appContent}>
           {this.props.children}
         </div>
         <InfoBar/>
 
-        <div className="well text-center">
+        <div class="well text-center">
           Have questions? Ask for help <a
           href="https://github.com/erikras/react-redux-universal-hot-example/issues"
           target="_blank">on Github</a> or in the <a
