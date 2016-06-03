@@ -14,7 +14,7 @@ export default class About extends Component {
     const {showKitten} = this.state;
     const kitten = require('./kitten.jpg');
     return (
-      <div className="container">
+      <div class="container">
         <h1>About Us</h1>
         <Helmet title="About Us"/>
 
@@ -37,7 +37,7 @@ export default class About extends Component {
         <p>
           Psst! Would you like to see a kitten?
 
-          <button className={'btn btn-' + (showKitten ? 'danger' : 'success')}
+          <button class={'btn btn-' + (showKitten ? 'danger' : 'success')}
                   style={{marginLeft: 50}}
                   onClick={this.handleToggleKitten}>
             {showKitten ? 'No! Take it away!' : 'Yes! Please!'}</button>

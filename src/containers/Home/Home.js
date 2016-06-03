@@ -10,11 +10,11 @@ export default class Home extends Component {
     // require the logo image both from client and server
     const logoImage = require('./logo.png');
     return (
-      <div className={styles.home}>
+      <div class={styles.home}>
         <Helmet title="Home"/>
-        <div className={styles.masthead}>
-          <div className="container">
-            <div className={styles.logo}>
+        <div class={styles.masthead}>
+          <div class="container">
+            <div class={styles.logo}>
               <p>
                 <img src={logoImage}/>
               </p>
@@ -24,9 +24,9 @@ export default class Home extends Component {
             <h2>{config.app.description}</h2>
 
             <p>
-              <a className={styles.github} href="https://github.com/erikras/react-redux-universal-hot-example"
+              <a class={styles.github} href="https://github.com/erikras/react-redux-universal-hot-example"
                  target="_blank">
-                <i className="fa fa-github"/> View on Github
+                <i class="fa fa-github"/> View on Github
               </a>
             </p>
             <GithubButton user="erikras"
@@ -42,14 +42,14 @@ export default class Home extends Component {
                           height={30}
                           count large/>
 
-            <p className={styles.humility}>
+            <p class={styles.humility}>
               Created and maintained by <a href="https://twitter.com/erikras" target="_blank">@erikras</a>.
             </p>
           </div>
         </div>
 
-        <div className="container">
-          <div className={styles.counterContainer}>
+        <div class="container">
+          <div class={styles.counterContainer}>
             <CounterButton multireducerKey="counter1"/>
             <CounterButton multireducerKey="counter2"/>
             <CounterButton multireducerKey="counter3"/>

@@ -29,7 +29,7 @@ export default class Survey extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div class="container">
         <h1>Survey</h1>
         <Helmet title="Survey"/>
 
@@ -60,8 +60,8 @@ export default class Survey extends Component {
         </p>
 
         <div style={{textAlign: 'center', margin: 15}}>
-          <button className="btn btn-primary" onClick={this.handleInitialize}>
-            <i className="fa fa-pencil"/> Initialize Form
+          <button class="btn btn-primary" onClick={this.handleInitialize}>
+            <i class="fa fa-pencil"/> Initialize Form
           </button>
         </div>
 

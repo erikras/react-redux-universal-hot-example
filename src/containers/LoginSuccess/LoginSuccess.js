@@ -15,7 +15,7 @@ class LoginSuccess extends Component {
   render() {
     const {user, logout} = this.props;
     return (user &&
-      <div className="container">
+      <div class="container">
         <h1>Login Success</h1>
 
         <div>
@@ -29,7 +29,7 @@ class LoginSuccess extends Component {
           </p>
 
           <div>
-            <button className="btn btn-danger" onClick={logout}><i className="fa fa-sign-out"/>{' '}Log Out</button>
+            <button class="btn btn-danger" onClick={logout}><i class="fa fa-sign-out"/>{' '}Log Out</button>
           </div>
         </div>
       </div>

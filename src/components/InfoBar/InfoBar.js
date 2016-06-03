@@ -16,13 +16,13 @@ export default class InfoBar extends Component {
     const {info, load} = this.props; // eslint-disable-line no-shadow
     const styles = require('./InfoBar.scss');
     return (
-      <div className={styles.infoBar + ' well'}>
-        <div className="container">
+      <div class={styles.infoBar + ' well'}>
+        <div class="container">
           This is an info bar
           {' '}
           <strong>{info ? info.message : 'no info!'}</strong>
-          <span className={styles.time}>{info && new Date(info.time).toString()}</span>
-          <button className="btn btn-primary" onClick={load}>Reload from server</button>
+          <span class={styles.time}>{info && new Date(info.time).toString()}</span>
+          <button class="btn btn-primary" onClick={load}>Reload from server</button>
         </div>
       </div>
     );
