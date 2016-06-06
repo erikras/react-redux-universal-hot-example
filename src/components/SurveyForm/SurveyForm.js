@@ -46,7 +46,7 @@ class SurveyForm extends Component {
       resetForm,
       pristine,
       valid
-      } = this.props;
+    } = this.props;
     const styles = require('./SurveyForm.scss');
     const renderInput = (field, label, showAsyncValidating) =>
       <div className={'form-group' + (field.error && field.touched ? ' has-error' : '')}>

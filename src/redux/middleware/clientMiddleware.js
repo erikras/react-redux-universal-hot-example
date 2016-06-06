@@ -5,13 +5,17 @@ export default function clientMiddleware(client) {
         return action(dispatch, getState);
       }
 
-      const { promise, types, ...rest } = action; // eslint-disable-line no-redeclare
+      const {promise, types, ...rest} = action; // eslint-disable-line no-redeclare
       if (!promise) {
         return next(action);
       }
 
       const [REQUEST, SUCCESS, FAILURE] = types;
       next({...rest, type: REQUEST});
+
+      const {auth} = getState();
+
+      client.setJwtToken(auth.user && auth.user.token ? auth.user.token : null);
 
       const actionPromise = promise(client);
       actionPromise.then(

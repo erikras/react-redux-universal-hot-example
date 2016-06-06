@@ -104,9 +104,9 @@ export function save(widget) {
 }
 
 export function editStart(id) {
-  return { type: EDIT_START, id };
+  return {type: EDIT_START, id};
 }
 
 export function editStop(id) {
-  return { type: EDIT_STOP, id };
+  return {type: EDIT_STOP, id};
 }

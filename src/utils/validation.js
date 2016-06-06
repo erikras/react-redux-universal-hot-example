@@ -1,5 +1,5 @@
 const isEmpty = value => value === undefined || value === null || value === '';
-const join = (rules) => (value, data) => rules.map(rule => rule(value, data)).filter(error => !!error)[0 /* first error */ ];
+const join = (rules) => (value, data) => rules.map(rule => rule(value, data)).filter(error => !!error)[0 /* first error */];
 
 export function email(value) {
   // Let's not start a debate on email regex. This is just for an example app!

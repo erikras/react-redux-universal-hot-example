@@ -1,6 +1,6 @@
-import { createStore as _createStore, applyMiddleware, compose } from 'redux';
+import {createStore as _createStore, applyMiddleware, compose} from 'redux';
 import createMiddleware from './middleware/clientMiddleware';
-import { routerMiddleware } from 'react-router-redux';
+import {routerMiddleware} from 'react-router-redux';
 
 export default function createStore(history, client, data) {
   // Sync dispatched route actions to the history
@@ -10,7 +10,7 @@ export default function createStore(history, client, data) {
 
   let finalCreateStore;
   if (__DEVELOPMENT__ && __CLIENT__ && __DEVTOOLS__) {
-    const { persistState } = require('redux-devtools');
+    const {persistState} = require('redux-devtools');
     const DevTools = require('../containers/DevTools/DevTools');
     finalCreateStore = compose(
       applyMiddleware(...middleware),

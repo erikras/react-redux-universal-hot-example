@@ -44,7 +44,7 @@ export default class Chat extends Component {
     this.setState({message: ''});
 
     socket.emit('msg', {
-      from: this.props.user.name,
+      from: this.props.user.email,
       text: msg
     });
   }
@@ -60,14 +60,14 @@ export default class Chat extends Component {
         {user &&
         <div>
           <ul>
-          {this.state.messages.map((msg) => {
-            return <li key={`chat.msg.${msg.id}`}>{msg.from}: {msg.text}</li>;
-          })}
+            {this.state.messages.map((msg) => {
+              return <li key={`chat.msg.${msg.id}`}>{msg.from}: {msg.text}</li>;
+            })}
           </ul>
           <form className="login-form" onSubmit={this.handleSubmit}>
             <input type="text" ref="message" placeholder="Enter your message"
-             value={this.state.message}
-             onChange={(event) => {
+                   value={this.state.message}
+                   onChange={(event) => {
                this.setState({message: event.target.value});
              }
             }/>

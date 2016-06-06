@@ -27,8 +27,7 @@ describe('widget update', () => {
       sinon.stub(load, 'default').returns(new Promise((resolve) => {
         resolve(widgets);
       }));
-      return update({session: {}, body: {color: 'Green'}}).
-      then(
+      return update({session: {}, body: {color: 'Green'}}).then(
         ()=> {
         },
         (err)=> {
@@ -40,8 +39,7 @@ describe('widget update', () => {
       sinon.stub(load, 'default').returns(new Promise((resolve, reject) => {
         reject('Widget fail to load.');
       }));
-      return update({session: {}, body: {color: 'Blue'}}).
-      then(
+      return update({session: {}, body: {color: 'Blue'}}).then(
         ()=> {
         },
         (err)=> {
@@ -54,8 +52,7 @@ describe('widget update', () => {
         resolve(widgets);
       }));
       const widget = {id: 2, color: 'Blue'};
-      return update({session: {}, body: widget}).
-      then(
+      return update({session: {}, body: widget}).then(
         (res)=> {
           expect(res).to.deep.equal(widget);
           expect(widgets[1]).to.deep.equal(widget);
@@ -69,8 +66,7 @@ describe('widget update', () => {
     });
 
     it('rejects the call in 20% of the time', () => {
-      return update().
-      then(
+      return update().then(
         ()=> {
         },
         (err)=> {

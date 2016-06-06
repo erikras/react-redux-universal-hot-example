@@ -8,11 +8,10 @@ import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
 import io from 'socket.io-client';
 import {Provider} from 'react-redux';
-import { Router, browserHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
-import { ReduxAsyncConnect } from 'redux-async-connect';
+import {Router, browserHistory} from 'react-router';
+import {syncHistoryWithStore} from 'react-router-redux';
+import {ReduxAsyncConnect} from 'redux-async-connect';
 import useScroll from 'scroll-behavior/lib/useStandardScroll';
-
 import getRoutes from './routes';
 
 const client = new ApiClient();
@@ -25,7 +24,7 @@ function initSocket() {
   const socket = io('', {path: '/ws'});
   socket.on('news', (data) => {
     console.log(data);
-    socket.emit('my other event', { my: 'data from client' });
+    socket.emit('my other event', {my: 'data from client'});
   });
   socket.on('msg', (data) => {
     console.log(data);
