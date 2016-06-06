@@ -1,10 +1,10 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-export {User} from '../database';
+export { User } from '../database';
 
-export function initialize(config) {
-  mongoose.connect(`mongodb://${config.host}:${config.port}/${config.database}`, err => {
-    if (err) return console.error(err);
-    console.info('==> 🌎  Successfully connected to MongoDB');
-  });
+export function initialize( config ) {
+  mongoose.connect( `mongodb://${config.host}:${config.port}/${config.database}`, err => {
+    if ( err ) return console.error( err );
+    console.info( '==> 🌎  Successfully connected to MongoDB' );
+  } );
 }

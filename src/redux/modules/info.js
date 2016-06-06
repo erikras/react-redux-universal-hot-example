@@ -6,8 +6,8 @@ const initialState = {
   loaded: false
 };
 
-export default function info(state = initialState, action = {}) {
-  switch (action.type) {
+export default function info( state = initialState, action = {} ) {
+  switch ( action.type ) {
     case LOAD:
       return {
         ...state,
@@ -32,13 +32,13 @@ export default function info(state = initialState, action = {}) {
   }
 }
 
-export function isLoaded(globalState) {
+export function isLoaded( globalState ) {
   return globalState.info && globalState.info.loaded;
 }
 
 export function load() {
   return {
-    types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.get('/loadInfo')
+    types: [ LOAD, LOAD_SUCCESS, LOAD_FAIL ],
+    promise: ( client ) => client.get( '/loadInfo' )
   };
 }

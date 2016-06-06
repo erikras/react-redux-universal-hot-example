@@ -1,26 +1,26 @@
-import React, {Component, PropTypes} from 'react';
-import {reduxForm} from 'redux-form';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import surveyValidation from './surveyValidation';
-import * as surveyActions from 'redux/modules/survey';
+import React, { Component, PropTypes } from "react";
+import { reduxForm } from "redux-form";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import surveyValidation from "./surveyValidation";
+import * as surveyActions from "redux/modules/survey";
 
-function asyncValidate(data, dispatch, {isValidEmail}) {
-  if (!data.email) {
-    return Promise.resolve({});
+function asyncValidate( data, dispatch, { isValidEmail } ) {
+  if ( !data.email ) {
+    return Promise.resolve( {} );
   }
-  return isValidEmail(data);
+  return isValidEmail( data );
 }
-@connect(() => ({}),
-  dispatch => bindActionCreators(surveyActions, dispatch)
+@connect( () => ({}),
+  dispatch => bindActionCreators( surveyActions, dispatch )
 )
-@reduxForm({
+@reduxForm( {
   form: 'survey',
-  fields: ['name', 'email', 'occupation', 'currentlyEmployed', 'sex'],
+  fields: [ 'name', 'email', 'occupation', 'currentlyEmployed', 'sex' ],
   validate: surveyValidation,
   asyncValidate,
-  asyncBlurFields: ['email']
-})
+  asyncBlurFields: [ 'email' ]
+} )
 export default
 class SurveyForm extends Component {
   static propTypes = {
@@ -39,7 +39,7 @@ class SurveyForm extends Component {
     const {
       asyncValidating,
       dirty,
-      fields: {name, email, occupation, currentlyEmployed, sex},
+      fields: { name, email, occupation, currentlyEmployed, sex },
       active,
       handleSubmit,
       invalid,
@@ -47,8 +47,8 @@ class SurveyForm extends Component {
       pristine,
       valid
     } = this.props;
-    const styles = require('./SurveyForm.scss');
-    const renderInput = (field, label, showAsyncValidating) =>
+    const styles = require( './SurveyForm.scss' );
+    const renderInput = ( field, label, showAsyncValidating ) =>
       <div className={'form-group' + (field.error && field.touched ? ' has-error' : '')}>
         <label htmlFor={field.name} className="col-sm-2">{label}</label>
         <div className={'col-sm-8 ' + styles.inputGroup}>
@@ -67,9 +67,9 @@ class SurveyForm extends Component {
     return (
       <div>
         <form className="form-horizontal" onSubmit={handleSubmit}>
-          {renderInput(name, 'Full Name')}
-          {renderInput(email, 'Email', true)}
-          {renderInput(occupation, 'Occupation')}
+          {renderInput( name, 'Full Name' )}
+          {renderInput( email, 'Email', true )}
+          {renderInput( occupation, 'Occupation' )}
           <div className="form-group">
             <label htmlFor="currentlyEmployed" className="col-sm-2">Currently Employed?</label>
             <div className="col-sm-8">

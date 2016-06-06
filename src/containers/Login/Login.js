@@ -1,11 +1,11 @@
-import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
-import Helmet from 'react-helmet';
-import * as authActions from 'redux/modules/auth';
+import React, { Component, PropTypes } from "react";
+import { connect } from "react-redux";
+import Helmet from "react-helmet";
+import * as authActions from "redux/modules/auth";
 
 @connect(
-  state => ({user: state.auth.user}),
-  authActions)
+  state => ({ user: state.auth.user }),
+  authActions )
 export default class Login extends Component {
   static propTypes = {
     user: PropTypes.object,
@@ -13,18 +13,18 @@ export default class Login extends Component {
     logout: PropTypes.func
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = ( event ) => {
     event.preventDefault();
     const email = this.refs.email;
     const password = this.refs.password;
-    this.props.login(email.value, password.value);
+    this.props.login( email.value, password.value );
     email.value = '';
     password.value = '';
   }
 
   render() {
-    const {user, logout} = this.props;
-    const styles = require('./Login.scss');
+    const { user, logout } = this.props;
+    const styles = require( './Login.scss' );
     return (
       <div className={styles.loginPage + ' container'}>
         <Helmet title="Login"/>
