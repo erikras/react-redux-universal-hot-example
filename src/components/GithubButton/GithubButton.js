@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const GithubButton = ( props ) => {
   const { user, repo, type, width, height, count, large } = props;

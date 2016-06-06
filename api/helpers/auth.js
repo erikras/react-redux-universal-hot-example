@@ -1,7 +1,7 @@
-import passport from "passport";
-import passportJwt from "passport-jwt";
-import jwt from "jsonwebtoken";
-import { User } from "./database";
+import passport from 'passport';
+import passportJwt from 'passport-jwt';
+import jwt from 'jsonwebtoken';
+import { User } from './database';
 
 const { ExtractJwt, Strategy } = passportJwt;
 

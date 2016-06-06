@@ -1,4 +1,4 @@
-import { User } from "../../helpers/database";
+import { User } from '../../helpers/database';
 
 export default function register( req ) {
   return new Promise( ( resolve, reject ) => {
