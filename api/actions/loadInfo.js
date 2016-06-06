@@ -1,8 +1,6 @@
-export default function loadInfo() {
-  return new Promise((resolve) => {
-    resolve({
-      message: 'This came from the api server',
-      time: Date.now()
-    });
+export default function loadInfo(req) {
+  return Promise.resolve({
+    message: 'This came from the api server',
+    time: Date.now()
   });
 }

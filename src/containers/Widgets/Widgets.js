@@ -4,8 +4,8 @@ import {connect} from 'react-redux';
 import * as widgetActions from 'redux/modules/widgets';
 import {isLoaded, load as loadWidgets} from 'redux/modules/widgets';
 import {initializeWithKey} from 'redux-form';
-import { WidgetForm } from 'components';
-import { asyncConnect } from 'redux-async-connect';
+import {WidgetForm} from 'components';
+import {asyncConnect} from 'redux-async-connect';
 
 @asyncConnect([{
   deferred: true,
@@ -22,7 +22,7 @@ import { asyncConnect } from 'redux-async-connect';
     error: state.widgets.error,
     loading: state.widgets.loading
   }),
-  {...widgetActions, initializeWithKey })
+  {...widgetActions, initializeWithKey})
 export default class Widgets extends Component {
   static propTypes = {
     widgets: PropTypes.array,
@@ -55,7 +55,8 @@ export default class Widgets extends Component {
         </h1>
         <Helmet title="Widgets"/>
         <p>
-          If you hit refresh on your browser, the data loading will take place on the server before the page is returned.
+          If you hit refresh on your browser, the data loading will take place on the server before the page is
+          returned.
           If you navigated here from another page, the data was fetched from the client after the route transition.
           This uses the decorator method <code>@asyncConnect</code> with the <code>deferred: true</code> flag. To block
           a route transition until some data is loaded, remove the <code>deffered: true</code> flag.

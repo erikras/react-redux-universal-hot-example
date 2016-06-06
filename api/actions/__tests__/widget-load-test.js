@@ -34,8 +34,7 @@ describe('widget load', () => {
     });
 
     it('rejects the call', () => {
-      return load({session: {}}).
-      then(
+      return load({session: {}}).then(
         ()=> {
         },
         (err)=> {
