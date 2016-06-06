@@ -1,7 +1,7 @@
-import React from "react";
-import { IndexRoute, Route } from "react-router";
-import { isLoaded as isAuthLoaded, load as loadAuth } from "redux/modules/auth";
-import { App, Chat, Home, Widgets, About, Register, Login, LoginSuccess, Survey, NotFound } from "containers";
+import React from 'react';
+import { IndexRoute, Route } from 'react-router';
+import { isLoaded as isAuthLoaded, load as loadAuth } from 'redux/modules/auth';
+import { App, Chat, Home, Widgets, About, Register, Login, LoginSuccess, Survey, NotFound } from 'containers';
 
 export default ( store ) => {
   const requireLogin = ( nextState, replace, cb ) => {

@@ -1,6 +1,6 @@
-import config from "../../../src/config";
-import jwt from "jsonwebtoken";
-import { User } from "../../database";
+import config from '../../../src/config';
+import jwt from 'jsonwebtoken';
+import { User } from '../../database';
 
 export default function login( req ) {
   return new Promise( ( resolve, reject ) => {

@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from "react";
-import ReactDOM from "react-dom/server";
-import serialize from "serialize-javascript";
-import Helmet from "react-helmet";
+import React, { Component, PropTypes } from 'react';
+import ReactDOM from 'react-dom/server';
+import serialize from 'serialize-javascript';
+import Helmet from 'react-helmet';
 
 /**
  * Wrapper component containing HTML metadata and boilerplate tags.

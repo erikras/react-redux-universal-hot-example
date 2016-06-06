@@ -1,5 +1,5 @@
-import { expect } from "chai";
-import { mapUrl } from "../utils/url";
+import { expect } from 'chai';
+import { mapUrl } from '../utils/url';
 
 describe( 'mapUrl', () => {
   it( 'extracts nothing if both params are undefined', () => {

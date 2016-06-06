@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from "react";
-import { connect } from "react-redux";
-import * as authActions from "redux/modules/auth";
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import * as authActions from 'redux/modules/auth';
 
 @connect(
   state => ({ user: state.auth.user }),

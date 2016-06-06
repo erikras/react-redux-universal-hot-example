@@ -1,7 +1,7 @@
-import { expect } from "chai";
-import update from "../widget/update";
-import * as load from "../widget/load";
-import sinon from "sinon";
+import { expect } from 'chai';
+import update from '../widget/update';
+import * as load from '../widget/load';
+import sinon from 'sinon';
 
 describe( 'widget update', () => {
   afterEach( ()=> {
