@@ -13,8 +13,8 @@ const initialState = {
   saveError: {}
 };
 
-export default function reducer(state = initialState, action = {}) {
-  switch (action.type) {
+export default function reducer( state = initialState, action = {} ) {
+  switch ( action.type ) {
     case LOAD:
       return {
         ...state,
@@ -55,8 +55,8 @@ export default function reducer(state = initialState, action = {}) {
     case SAVE:
       return state; // 'saving' flag handled by redux-form
     case SAVE_SUCCESS:
-      const data = [...state.data];
-      data[action.result.id - 1] = action.result;
+      const data = [ ...state.data ];
+      data[ action.result.id - 1 ] = action.result;
       return {
         ...state,
         data: data,
@@ -82,31 +82,31 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-export function isLoaded(globalState) {
+export function isLoaded( globalState ) {
   return globalState.widgets && globalState.widgets.loaded;
 }
 
 export function load() {
   return {
-    types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.get('/widget/load/param1/param2') // params not used, just shown as demonstration
+    types: [ LOAD, LOAD_SUCCESS, LOAD_FAIL ],
+    promise: ( client ) => client.get( '/widget/load/param1/param2' ) // params not used, just shown as demonstration
   };
 }
 
-export function save(widget) {
+export function save( widget ) {
   return {
-    types: [SAVE, SAVE_SUCCESS, SAVE_FAIL],
+    types: [ SAVE, SAVE_SUCCESS, SAVE_FAIL ],
     id: widget.id,
-    promise: (client) => client.post('/widget/update', {
+    promise: ( client ) => client.post( '/widget/update', {
       data: widget
-    })
+    } )
   };
 }
 
-export function editStart(id) {
-  return {type: EDIT_START, id};
+export function editStart( id ) {
+  return { type: EDIT_START, id };
 }
 
-export function editStop(id) {
-  return {type: EDIT_STOP, id};
+export function editStop( id ) {
+  return { type: EDIT_STOP, id };
 }
