@@ -2,13 +2,12 @@ import { User } from '../../helpers/database';
 
 export default function register( req ) {
   return new Promise( ( resolve, reject ) => {
-
     if ( !req.body.email || !req.body.password ) {
       return reject( 'Please enter email and password.' );
     }
 
 
-    let newUser = new User( {
+    const newUser = new User( {
       email: req.body.email,
       password: req.body.password
     } );

@@ -14,5 +14,5 @@ export default function logout( req ) {
         return resolve( null );
       } );
     }
-  } )
+  } );
 }

@@ -68,8 +68,8 @@ export default class Chat extends Component {
             <input type="text" ref="message" placeholder="Enter your message"
                    value={this.state.message}
                    onChange={(event) => {
-               this.setState({message: event.target.value});
-             }
+                     this.setState({message: event.target.value});
+                   }
             }/>
             <button className="btn" onClick={this.handleSubmit}>Send</button>
           </form>
