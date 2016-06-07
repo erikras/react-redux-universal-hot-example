@@ -41,11 +41,11 @@ export function initialize( secret ) {
   } );
 }
 
-export function requireLogin( req, res ) {
+export function requireLogin( req ) {
   return new Promise( ( resolve, reject ) => {
     if ( req.session && req.session.user ) resolve( req.session.user );
 
-    passport.authenticate( 'jwt', function( err, user, info ) {
+    passport.authenticate( 'jwt', function( err, user ) {
       if ( err ) reject( err );
       if ( !user ) reject( 'Not authorized' );
       req.login( user, err => {
