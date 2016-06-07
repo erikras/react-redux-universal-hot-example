@@ -15,13 +15,13 @@ describe( 'widget load', () => {
     } );
 
     it( 'uses the widgets from the session', () => {
-      return load( { session: { widgets: [ 'a', 'b', 'c' ] } } ).then( widgets => {
+      return load( { session: { user: {}, widgets: [ 'a', 'b', 'c' ] } } ).then( widgets => {
         expect( widgets.length ).to.equal( 3 );
       } );
     } );
 
     it( 'initializes the widgets ', () => {
-      return load( { session: {} } ).then( widgets => {
+      return load( { session: { user: {} } } ).then( widgets => {
         expect( widgets.length ).to.equal( 4 );
         expect( widgets[ 0 ].color ).to.equal( 'Red' );
       } );
