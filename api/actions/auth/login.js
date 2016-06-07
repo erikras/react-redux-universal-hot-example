@@ -11,12 +11,12 @@ export default function login( req ) {
       if ( !user ) {
         reject( 'Authentication failed. User not found.' );
       } else {
-        user.comparePassword( req.body.password, function( err, isMatch ) {
-          if ( isMatch && !err ) {
-            let token = jwt.sign( user, config.secret, {
-                expiresIn: 60000
-              } ),
-              userLogged = Object.assign( user.toJSON(), { token: 'JWT ' + token } );
+        user.comparePassword( req.body.password, ( errMatch, isMatch ) => {
+          if ( isMatch && !errMatch ) {
+            const token = jwt.sign( user, config.secret, {
+              expiresIn: 60000
+            } );
+            const userLogged = Object.assign( user.toJSON(), { token: 'JWT ' + token } );
             req.session.user = userLogged;
             resolve( userLogged );
           } else {
