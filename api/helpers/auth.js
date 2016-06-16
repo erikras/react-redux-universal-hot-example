@@ -48,7 +48,7 @@ export function requireLogin(req) {
       if (!user) reject('Not authorized');
       req.login(user, errLogin => {
         if (errLogin) reject(errLogin);
-        resolve();
+        resolve(user);
       });
     })(req);
   });

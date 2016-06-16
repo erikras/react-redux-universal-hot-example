@@ -16,8 +16,7 @@ export function getWidgets(req) {
 
 export default function load(req, params, {auth}) {
   return auth.requireLogin(req)
-  .then(() => {
-    return new Promise((resolve, reject) => {
+  .then(user => new Promise((resolve, reject) => {
       // make async call to database
       setTimeout(() => {
         if (Math.random() < 0.33) {
@@ -26,6 +25,6 @@ export default function load(req, params, {auth}) {
           resolve(getWidgets(req));
         }
       }, 1000); // simulate async load
-    });
-  });
+    })
+  );
 }
