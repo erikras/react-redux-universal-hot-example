@@ -1,20 +1,20 @@
-import React, { Component, PropTypes } from 'react';
+import React, {Component, PropTypes} from 'react';
 import Helmet from 'react-helmet';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import * as widgetActions from 'redux/modules/widgets';
-import { isLoaded, load as loadWidgets } from 'redux/modules/widgets';
-import { initializeWithKey } from 'redux-form';
-import { WidgetForm } from 'components';
-import { asyncConnect } from 'redux-async-connect';
+import {isLoaded, load as loadWidgets} from 'redux/modules/widgets';
+import {initializeWithKey} from 'redux-form';
+import {WidgetForm} from 'components';
+import {asyncConnect} from 'redux-async-connect';
 
-@asyncConnect( [ {
+@asyncConnect([{
   deferred: true,
-  promise: ( { store: { dispatch, getState } } ) => {
-    if ( !isLoaded( getState() ) ) {
-      return dispatch( loadWidgets() );
+  promise: ({store: {dispatch, getState}}) => {
+    if (!isLoaded(getState())) {
+      return dispatch(loadWidgets());
     }
   }
-} ] )
+}])
 @connect(
   state => ({
     widgets: state.widgets.data,
@@ -22,7 +22,7 @@ import { asyncConnect } from 'redux-async-connect';
     error: state.widgets.error,
     loading: state.widgets.loading
   }),
-  { ...widgetActions, initializeWithKey } )
+  {...widgetActions, initializeWithKey})
 export default class Widgets extends Component {
   static propTypes = {
     widgets: PropTypes.array,
@@ -35,16 +35,16 @@ export default class Widgets extends Component {
   };
 
   render() {
-    const handleEdit = ( widget ) => {
-      const { editStart } = this.props; // eslint-disable-line no-shadow
-      return () => editStart( String( widget.id ) );
+    const handleEdit = (widget) => {
+      const {editStart} = this.props; // eslint-disable-line no-shadow
+      return () => editStart(String(widget.id));
     };
-    const { widgets, error, editing, loading, load } = this.props;
+    const {widgets, error, editing, loading, load} = this.props;
     let refreshClassName = 'fa fa-refresh';
-    if ( loading ) {
+    if (loading) {
       refreshClassName += ' fa-spin';
     }
-    const styles = require( './Widgets.scss' );
+    const styles = require('./Widgets.scss');
     return (
       <div className={styles.widgets + ' container'}>
         <h1>
@@ -84,7 +84,7 @@ export default class Widgets extends Component {
           </thead>
           <tbody>
           {
-            widgets.map( ( widget ) => editing[ widget.id ] ?
+            widgets.map((widget) => editing[widget.id] ?
               <WidgetForm formKey={String(widget.id)} key={String(widget.id)} initialValues={widget}/> :
               <tr key={widget.id}>
                 <td className={styles.idCol}>{widget.id}</td>
@@ -96,7 +96,7 @@ export default class Widgets extends Component {
                     <i className="fa fa-pencil"/> Edit
                   </button>
                 </td>
-              </tr> )
+              </tr>)
           }
           </tbody>
         </table>}

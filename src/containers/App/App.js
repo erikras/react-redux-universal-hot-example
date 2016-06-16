@@ -1,34 +1,34 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { IndexLink } from 'react-router';
-import { LinkContainer } from 'react-router-bootstrap';
+import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
+import {IndexLink} from 'react-router';
+import {LinkContainer} from 'react-router-bootstrap';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
 import Helmet from 'react-helmet';
-import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
-import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
-import { InfoBar } from 'components';
-import { push } from 'react-router-redux';
+import {isLoaded as isInfoLoaded, load as loadInfo} from 'redux/modules/info';
+import {isLoaded as isAuthLoaded, load as loadAuth, logout} from 'redux/modules/auth';
+import {InfoBar} from 'components';
+import {push} from 'react-router-redux';
 import config from '../../config';
-import { asyncConnect } from 'redux-async-connect';
+import {asyncConnect} from 'redux-async-connect';
 
-@asyncConnect( [ {
-  promise: ( { store: { dispatch, getState } } ) => {
+@asyncConnect([{
+  promise: ({store: {dispatch, getState}}) => {
     const promises = [];
 
-    if ( !isAuthLoaded( getState() ) ) {
-      promises.push( dispatch( loadAuth() ) );
+    if (!isAuthLoaded(getState())) {
+      promises.push(dispatch(loadAuth()));
     }
-    if ( !isInfoLoaded( getState() ) ) {
-      promises.push( dispatch( loadInfo() ) );
+    if (!isInfoLoaded(getState())) {
+      promises.push(dispatch(loadInfo()));
     }
-    return Promise.all( promises );
+    return Promise.all(promises);
   }
-} ] )
+}])
 @connect(
-  state => ({ user: state.auth.user }),
-  { logout, pushState: push } )
+  state => ({user: state.auth.user}),
+  {logout, pushState: push})
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
@@ -41,24 +41,24 @@ export default class App extends Component {
     store: PropTypes.object.isRequired
   };
 
-  componentWillReceiveProps( nextProps ) {
-    if ( !this.props.user && nextProps.user ) {
+  componentWillReceiveProps(nextProps) {
+    if (!this.props.user && nextProps.user) {
       // login
-      this.props.pushState( '/loginSuccess' );
-    } else if ( this.props.user && !nextProps.user ) {
+      this.props.pushState('/loginSuccess');
+    } else if (this.props.user && !nextProps.user) {
       // logout
-      this.props.pushState( '/' );
+      this.props.pushState('/');
     }
   }
 
-  handleLogout = ( event ) => {
+  handleLogout = (event) => {
     event.preventDefault();
     this.props.logout();
   };
 
   render() {
-    const { user } = this.props;
-    const styles = require( './App.scss' );
+    const {user} = this.props;
+    const styles = require('./App.scss');
 
     return (
       <div className={styles.app}>

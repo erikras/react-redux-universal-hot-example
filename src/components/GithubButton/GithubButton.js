@@ -1,10 +1,10 @@
 import React from 'react';
 
-const GithubButton = ( props ) => {
-  const { user, repo, type, width, height, count, large } = props;
+const GithubButton = (props) => {
+  const {user, repo, type, width, height, count, large} = props;
   let src = `https://ghbtns.com/github-btn.html?user=${user}&repo=${repo}&type=${type}`;
-  if ( count ) src += '&count=true';
-  if ( large ) src += '&size=large';
+  if (count) src += '&count=true';
+  if (large) src += '&size=large';
 
   return (
     <iframe
@@ -21,7 +21,7 @@ const GithubButton = ( props ) => {
 GithubButton.propTypes = {
   user: React.PropTypes.string.isRequired,
   repo: React.PropTypes.string.isRequired,
-  type: React.PropTypes.oneOf( [ 'star', 'watch', 'fork', 'follow' ] ).isRequired,
+  type: React.PropTypes.oneOf(['star', 'watch', 'fork', 'follow']).isRequired,
   width: React.PropTypes.number.isRequired,
   height: React.PropTypes.number.isRequired,
   count: React.PropTypes.bool,
