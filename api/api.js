@@ -4,98 +4,98 @@ import session from 'express-session';
 import bodyParser from 'body-parser';
 import config from '../src/config';
 import * as actions from './actions/index';
-import { mapUrl } from 'utils/url.js';
+import {mapUrl} from 'utils/url.js';
 import PrettyError from 'pretty-error';
 import http from 'http';
 import SocketIo from 'socket.io';
 import passport from 'passport';
 import * as helpers from './helpers';
 
-const { auth, database } = helpers;
+const {auth, database} = helpers;
 
 const pretty = new PrettyError();
 const app = express();
 
-const server = new http.Server( app );
+const server = new http.Server(app);
 
-const io = new SocketIo( server );
-io.path( '/ws' );
+const io = new SocketIo(server);
+io.path('/ws');
 
-database.initialize( config.mongo );
-auth.initialize( config.secret );
+database.initialize(config.mongo);
+auth.initialize(config.secret);
 
-app.use( morgan( 'dev' ) );
+app.use(morgan('dev'));
 
-app.use( session( {
+app.use(session({
   secret: 'react and redux rule!!!!',
   resave: false,
   saveUninitialized: false,
-  cookie: { maxAge: 60000 }
-} ) );
-app.use( bodyParser.json() );
-app.use( passport.initialize() );
+  cookie: {maxAge: 60000}
+}));
+app.use(bodyParser.json());
+app.use(passport.initialize());
 
-app.use( ( req, res ) => {
-  const splittedUrlPath = req.url.split( '?' )[ 0 ].split( '/' ).slice( 1 );
+app.use((req, res) => {
+  const splittedUrlPath = req.url.split('?')[0].split('/').slice(1);
 
-  const { action, params } = mapUrl( actions, splittedUrlPath );
+  const {action, params} = mapUrl(actions, splittedUrlPath);
 
-  if ( action ) {
-    action( req, params, helpers )
-    .then( ( result ) => {
-      if ( result instanceof Function ) {
-        result( res );
+  if (action) {
+    action(req, params, helpers)
+    .then((result) => {
+      if (result instanceof Function) {
+        result(res);
       } else {
-        res.json( result );
+        res.json(result);
       }
-    }, ( reason ) => {
-      if ( reason && reason.redirect ) {
-        res.redirect( reason.redirect );
+    }, (reason) => {
+      if (reason && reason.redirect) {
+        res.redirect(reason.redirect);
       } else {
-        console.error( 'API ERROR:', pretty.render( reason ) );
-        res.status( reason.status || 500 ).json( reason );
+        console.error('API ERROR:', pretty.render(reason));
+        res.status(reason.status || 500).json(reason);
       }
-    } );
+    });
   } else {
-    res.status( 404 ).end( 'NOT FOUND' );
+    res.status(404).end('NOT FOUND');
   }
-} );
+});
 
 
 const bufferSize = 100;
-const messageBuffer = new Array( bufferSize );
+const messageBuffer = new Array(bufferSize);
 let messageIndex = 0;
 
-if ( config.apiPort ) {
-  const runnable = app.listen( config.apiPort, ( err ) => {
-    if ( err ) {
-      console.error( err );
+if (config.apiPort) {
+  const runnable = app.listen(config.apiPort, (err) => {
+    if (err) {
+      console.error(err);
     }
-    console.info( '----\n==> 🌎  API is running on port %s', config.apiPort );
-    console.info( '==> 💻  Send requests to http://%s:%s', config.apiHost, config.apiPort );
-  } );
+    console.info('----\n==> 🌎  API is running on port %s', config.apiPort);
+    console.info('==> 💻  Send requests to http://%s:%s', config.apiHost, config.apiPort);
+  });
 
-  io.on( 'connection', ( socket ) => {
-    socket.emit( 'news', { msg: `'Hello World!' from server` } );
+  io.on('connection', (socket) => {
+    socket.emit('news', {msg: `'Hello World!' from server`});
 
-    socket.on( 'history', () => {
-      for ( let index = 0; index < bufferSize; index++ ) {
+    socket.on('history', () => {
+      for (let index = 0; index < bufferSize; index++) {
         const msgNo = (messageIndex + index) % bufferSize;
-        const msg = messageBuffer[ msgNo ];
-        if ( msg ) {
-          socket.emit( 'msg', msg );
+        const msg = messageBuffer[msgNo];
+        if (msg) {
+          socket.emit('msg', msg);
         }
       }
-    } );
+    });
 
-    socket.on( 'msg', ( data ) => {
+    socket.on('msg', (data) => {
       data.id = messageIndex;
-      messageBuffer[ messageIndex % bufferSize ] = data;
+      messageBuffer[messageIndex % bufferSize] = data;
       messageIndex++;
-      io.emit( 'msg', data );
-    } );
-  } );
-  io.listen( runnable );
+      io.emit('msg', data);
+    });
+  });
+  io.listen(runnable);
 } else {
-  console.error( '==>     ERROR: No PORT environment variable has been specified' );
+  console.error('==>     ERROR: No PORT environment variable has been specified');
 }

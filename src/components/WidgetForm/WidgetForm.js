@@ -1,21 +1,21 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { reduxForm } from 'redux-form';
-import widgetValidation, { colors } from './widgetValidation';
+import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {reduxForm} from 'redux-form';
+import widgetValidation, {colors} from './widgetValidation';
 import * as widgetActions from 'redux/modules/widgets';
 
 @connect(
   state => ({
     saveError: state.widgets.saveError
   }),
-  dispatch => bindActionCreators( widgetActions, dispatch )
+  dispatch => bindActionCreators(widgetActions, dispatch)
 )
-@reduxForm( {
+@reduxForm({
   form: 'widget',
-  fields: [ 'id', 'color', 'sprocketCount', 'owner' ],
+  fields: ['id', 'color', 'sprocketCount', 'owner'],
   validate: widgetValidation
-} )
+})
 export default class WidgetForm extends Component {
   static propTypes = {
     fields: PropTypes.object.isRequired,
@@ -32,16 +32,16 @@ export default class WidgetForm extends Component {
 
   render() {
     const {
-      editStop, fields: { id, color, sprocketCount, owner }, formKey, handleSubmit, invalid,
-      pristine, save, submitting, saveError: { [formKey]: saveError }, values
+      editStop, fields: {id, color, sprocketCount, owner}, formKey, handleSubmit, invalid,
+      pristine, save, submitting, saveError: {[formKey]: saveError}, values
     } = this.props;
-    const styles = require( 'containers/Widgets/Widgets.scss' );
+    const styles = require('containers/Widgets/Widgets.scss');
     return (
       <tr className={submitting ? styles.saving : ''}>
         <td className={styles.idCol}>{id.value}</td>
         <td className={styles.colorCol}>
           <select name="color" className="form-control" {...color}>
-            {colors.map( valueColor => <option value={valueColor} key={valueColor}>{valueColor}</option> )}
+            {colors.map(valueColor => <option value={valueColor} key={valueColor}>{valueColor}</option>)}
           </select>
           {color.error && color.touched && <div className="text-danger">{color.error}</div>}
         </td>
