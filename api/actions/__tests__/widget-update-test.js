@@ -28,8 +28,7 @@ describe('widget update', () => {
         resolve(widgets);
       }));
       return update({session: {}, body: {color: 'Green'}}).then(
-        ()=> {
-        },
+        ()=> {},
         (err)=> {
           expect(err.color).to.equal('We do not accept green widgets');
         });
@@ -40,8 +39,7 @@ describe('widget update', () => {
         reject('Widget fail to load.');
       }));
       return update({session: {}, body: {color: 'Blue'}}).then(
-        ()=> {
-        },
+        ()=> {},
         (err)=> {
           expect(err).to.equal('Widget fail to load.');
         });
@@ -67,8 +65,7 @@ describe('widget update', () => {
 
     it('rejects the call in 20% of the time', () => {
       return update().then(
-        ()=> {
-        },
+        ()=> {},
         (err)=> {
           expect(err).to.equal('Oh no! Widget save fails 20% of the time. Try again.');
         });
