@@ -40,7 +40,8 @@ export default class About extends Component {
         <p>
           Psst! Would you like to see a kitten?
 
-          <button className={'btn btn-' + (showKitten ? 'danger' : 'success')}
+          <button
+            className={`btn btn-${showKitten ? 'danger' : 'success'}`}
             style={{ marginLeft: 50 }}
             onClick={this.handleToggleKitten}>
             {showKitten ? 'No! Take it away!' : 'Yes! Please!'}</button>
