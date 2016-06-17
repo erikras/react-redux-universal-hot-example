@@ -15,8 +15,8 @@ function formatUrl(path) {
 
 export default class ApiClient {
   constructor(req) {
-    methods.forEach(method =>
-      this[method] = (path, {params, data} = {}) => new Promise((resolve, reject) => {
+    methods.forEach(method => {
+      this[method] = (path, { params, data } = {}) => new Promise((resolve, reject) => {
         const request = superagent[method](formatUrl(path));
 
         if (params) {
@@ -35,8 +35,9 @@ export default class ApiClient {
           request.send(data);
         }
 
-        request.end((err, {body} = {}) => err ? reject(body || err) : resolve(body));
-      }));
+        request.end((err, { body } = {}) => (err ? reject(body || err) : resolve(body)));
+      });
+    });
   }
 
   setJwtToken(token) {

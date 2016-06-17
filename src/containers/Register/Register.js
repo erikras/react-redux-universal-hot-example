@@ -1,10 +1,10 @@
-import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import * as authActions from 'redux/modules/auth';
 
 @connect(
-  state => ({user: state.auth.user}),
+  state => ({ user: state.auth.user }),
   authActions)
 export default class Register extends Component {
   static propTypes = {
@@ -23,22 +23,21 @@ export default class Register extends Component {
   }
 
   render() {
-    const {user} = this.props;
+    const { user } = this.props;
     const styles = require('./Register.scss');
     return (
       <div className={styles.registerPage + ' container'}>
-        <Helmet title="Register"/>
+        <Helmet title="Register" />
         <h1>Register</h1>
-        {!user &&
-        <div>
+        {!user && <div>
           <form className="register-form form-inline" onSubmit={this.handleSubmit}>
             <div className="form-group">
-              <input type="text" ref="email" placeholder="Enter a username" className="form-control"/>
+              <input type="text" ref="email" placeholder="Enter a username" className="form-control" />
             </div>
             <div className="form-group">
-              <input type="password" ref="password" placeholder="Enter your password" className="form-control"/>
+              <input type="password" ref="password" placeholder="Enter your password" className="form-control" />
             </div>
-            <button className="btn btn-success" onClick={this.handleSubmit}><i className="fa fa-sign-in"/>{' '}Register
+            <button className="btn btn-success" onClick={this.handleSubmit}><i className="fa fa-sign-in" />{' '}Register
             </button>
           </form>
         </div>

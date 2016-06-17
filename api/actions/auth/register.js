@@ -1,4 +1,4 @@
-import {User} from '../../helpers/database';
+import { User } from '../../helpers/database';
 
 export default function register(req) {
   return new Promise((resolve, reject) => {
@@ -17,7 +17,7 @@ export default function register(req) {
         console.log(err);
         return reject('Error in saving user.');
       }
-      resolve({user: newUser});
+      resolve({ user: newUser });
     });
   });
 }

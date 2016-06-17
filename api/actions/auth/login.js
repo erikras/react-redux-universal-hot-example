@@ -1,6 +1,6 @@
 import config from '../../../src/config';
 import jwt from 'jsonwebtoken';
-import {User} from '../../database';
+import { User } from '../../database';
 
 export default function login(req) {
   return new Promise((resolve, reject) => {
@@ -16,7 +16,7 @@ export default function login(req) {
             const token = jwt.sign(user, config.secret, {
               expiresIn: 60000
             });
-            const userLogged = Object.assign(user.toJSON(), {token: 'JWT ' + token});
+            const userLogged = Object.assign(user.toJSON(), { token: `JWT ${token}` });
             req.session.user = userLogged;
             resolve(userLogged);
           } else {
