@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import * as widgetActions from 'redux/modules/widgets';
 import { initializeWithKey } from 'redux-form';
 import { WidgetForm } from 'components';
-import { asyncConnect } from 'redux-async-connect';
+import { asyncConnect } from 'redux-connect';
 
 const { isLoaded, load: loadWidgets } = widgetActions;
 

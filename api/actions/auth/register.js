@@ -14,8 +14,7 @@ export default function register(req) {
 
     newUser.save(err => {
       if (err) {
-        console.log(err);
-        return reject('Error in saving user.');
+        return reject({ _error: 'Error in saving user.' });
       }
       resolve({ user: newUser });
     });

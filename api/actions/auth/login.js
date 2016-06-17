@@ -9,7 +9,7 @@ export default function login(req) {
     }, (err, user) => {
       if (err) reject(err);
       if (!user) {
-        reject('Authentication failed. User not found.');
+        reject({ _error: 'Authentication failed. User not found.' });
       } else {
         user.comparePassword(req.body.password, (errMatch, isMatch) => {
           if (isMatch && !errMatch) {
