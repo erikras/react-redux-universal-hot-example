@@ -9,7 +9,8 @@ const UserSchema = new Schema({
   password: { type: String, required: true }
 });
 
-UserSchema.pre('save', next => {
+// eslint-disable-next-line func-names
+UserSchema.pre('save', function (next) {
   const user = this;
 
   if (!user.isModified('password')) return next();
@@ -34,7 +35,6 @@ UserSchema.methods.comparePassword = function (candidatePassword, cb) {
   });
 };
 
-/* eslint-disable no-underscore-dangle */
 UserSchema.options.toJSON = {
   getters: true,
   virtuals: true,
@@ -49,7 +49,6 @@ UserSchema.options.toJSON = {
     return user;
   }
 };
-/* eslint-enable no-underscore-dangle */
 
 const User = mongoose.model('User', UserSchema);
 

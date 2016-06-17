@@ -20,7 +20,7 @@ export default function login(req) {
             req.session.user = userLogged;
             resolve(userLogged);
           } else {
-            reject('Authentication failed. Passwords did not match.');
+            reject({ _error: 'Authentication failed. Passwords did not match.' });
           }
         });
       }

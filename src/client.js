@@ -15,9 +15,9 @@ import withScroll from 'scroll-behavior';
 import getRoutes from './routes';
 
 const client = new ApiClient();
-const _browserHistory = withScroll(() => browserHistory); // eslint-disable-line no-underscore-dangle
+const _browserHistory = withScroll(browserHistory);
 const dest = document.getElementById('content');
-const store = createStore(_browserHistory, client, window.__data); // eslint-disable-line no-underscore-dangle
+const store = createStore(_browserHistory, client, window.__data);
 const history = syncHistoryWithStore(_browserHistory, store);
 
 function initSocket() {

@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
+import { LoginForm } from 'components';
 import * as authActions from 'redux/modules/auth';
 
 @connect(
@@ -13,33 +14,14 @@ export default class Login extends Component {
     logout: PropTypes.func
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-    const email = this.refs.email;
-    const password = this.refs.password;
-    this.props.login(email.value, password.value);
-    email.value = '';
-    password.value = '';
-  }
-
   render() {
-    const { user, logout } = this.props;
-    const styles = require('./Login.scss');
+    const { user, logout, login } = this.props;
     return (
-      <div className={styles.loginPage + ' container'}>
+      <div className="container">
         <Helmet title="Login" />
         <h1>Login</h1>
         {!user && <div>
-          <form className="login-form form-inline" onSubmit={this.handleSubmit}>
-            <div className="form-group">
-              <input type="text" ref="email" placeholder="Enter a username" className="form-control" />
-            </div>
-            <div className="form-group">
-              <input type="password" ref="password" placeholder="Enter your password" className="form-control" />
-            </div>
-            <button className="btn btn-success" onClick={this.handleSubmit}><i className="fa fa-sign-in" />{' '}Log In
-            </button>
-          </form>
+          <LoginForm onSubmit={login} />
           <p>This will "log you in" as this user, storing the username in the session of the API server.</p>
         </div>
         }
