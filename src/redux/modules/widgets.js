@@ -59,7 +59,7 @@ export default function reducer(state = initialState, action = {}) {
       data[action.result.id - 1] = action.result;
       return {
         ...state,
-        data: data,
+        data,
         editing: {
           ...state.editing,
           [action.id]: false
@@ -104,9 +104,9 @@ export function save(widget) {
 }
 
 export function editStart(id) {
-  return {type: EDIT_START, id};
+  return { type: EDIT_START, id };
 }
 
 export function editStop(id) {
-  return {type: EDIT_STOP, id};
+  return { type: EDIT_STOP, id };
 }

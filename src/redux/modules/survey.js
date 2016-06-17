@@ -15,7 +15,7 @@ export default function reducer(state = initialState, action = {}) {
       data[action.result.id - 1] = action.result;
       return {
         ...state,
-        data: data,
+        data,
         saveError: null,
       };
     case IS_VALID_FAIL:

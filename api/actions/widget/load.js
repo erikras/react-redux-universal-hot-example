@@ -1,8 +1,8 @@
 const initialWidgets = [
-  {id: 1, color: 'Red', sprocketCount: 7, owner: 'John'},
-  {id: 2, color: 'Taupe', sprocketCount: 1, owner: 'George'},
-  {id: 3, color: 'Green', sprocketCount: 8, owner: 'Ringo'},
-  {id: 4, color: 'Blue', sprocketCount: 2, owner: 'Paul'}
+  { id: 1, color: 'Red', sprocketCount: 7, owner: 'John' },
+  { id: 2, color: 'Taupe', sprocketCount: 1, owner: 'George' },
+  { id: 3, color: 'Green', sprocketCount: 8, owner: 'Ringo' },
+  { id: 4, color: 'Blue', sprocketCount: 2, owner: 'Paul' }
 ];
 
 export function getWidgets(req) {
@@ -14,7 +14,7 @@ export function getWidgets(req) {
   return widgets;
 }
 
-export default function load(req, params, {auth}) {
+export default function load(req, params, { auth }) {
   return auth.requireLogin(req)
   .then(() => new Promise((resolve, reject) => {
     // make async call to database

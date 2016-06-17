@@ -1,20 +1,20 @@
-import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
-import {IndexLink} from 'react-router';
-import {LinkContainer} from 'react-router-bootstrap';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { IndexLink } from 'react-router';
+import { LinkContainer } from 'react-router-bootstrap';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
 import Helmet from 'react-helmet';
-import {isLoaded as isInfoLoaded, load as loadInfo} from 'redux/modules/info';
-import {isLoaded as isAuthLoaded, load as loadAuth, logout} from 'redux/modules/auth';
-import {InfoBar} from 'components';
-import {push} from 'react-router-redux';
+import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
+import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
+import { InfoBar } from 'components';
+import { push } from 'react-router-redux';
 import config from '../../config';
-import {asyncConnect} from 'redux-async-connect';
+import { asyncConnect } from 'redux-async-connect';
 
 @asyncConnect([{
-  promise: ({store: {dispatch, getState}}) => {
+  promise: ({ store: { dispatch, getState } }) => {
     const promises = [];
 
     if (!isAuthLoaded(getState())) {
@@ -27,8 +27,8 @@ import {asyncConnect} from 'redux-async-connect';
   }
 }])
 @connect(
-  state => ({user: state.auth.user}),
-  {logout, pushState: push})
+  state => ({ user: state.auth.user }),
+  { logout, pushState: push })
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
@@ -57,21 +57,21 @@ export default class App extends Component {
   };
 
   render() {
-    const {user} = this.props;
+    const { user } = this.props;
     const styles = require('./App.scss');
 
     return (
       <div className={styles.app}>
-        <Helmet {...config.app.head}/>
+        <Helmet {...config.app.head} />
         <Navbar fixedTop>
           <Navbar.Header>
             <Navbar.Brand>
-              <IndexLink to="/" activeStyle={{color: '#33e0ff'}}>
-                <div className={styles.brand}/>
+              <IndexLink to="/" activeStyle={{ color: '#33e0ff' }}>
+                <div className={styles.brand} />
                 <span>{config.app.title}</span>
               </IndexLink>
             </Navbar.Brand>
-            <Navbar.Toggle/>
+            <Navbar.Toggle />
           </Navbar.Header>
 
           <Navbar.Collapse eventKey={0}>
@@ -90,27 +90,25 @@ export default class App extends Component {
                 <NavItem eventKey={4}>About Us</NavItem>
               </LinkContainer>
 
-              {!user &&
-              <LinkContainer to="/login">
+              {!user && <LinkContainer to="/login">
                 <NavItem eventKey={5}>Login</NavItem>
               </LinkContainer>}
-              {!user &&
-              <LinkContainer to="/register">
+              {!user && <LinkContainer to="/register">
                 <NavItem eventKey={6}>Register</NavItem>
               </LinkContainer>}
-              {user &&
-              <LinkContainer to="/logout">
+              {user && <LinkContainer to="/logout">
                 <NavItem eventKey={7} className="logout-link" onClick={this.handleLogout}>
                   Logout
                 </NavItem>
               </LinkContainer>}
             </Nav>
-            {user &&
-            <p className={styles.loggedInMessage + ' navbar-text'}>Logged in as <strong>{user.email}</strong>.</p>}
+            {user && <p className={styles.loggedInMessage + ' navbar-text'}>
+              Logged in as <strong>{user.email}</strong>.
+            </p>}
             <Nav navbar pullRight>
               <NavItem eventKey={1} target="_blank" title="View on Github"
-                       href="https://github.com/erikras/react-redux-universal-hot-example">
-                <i className="fa fa-github"/>
+                href="https://github.com/erikras/react-redux-universal-hot-example">
+                <i className="fa fa-github" />
               </NavItem>
             </Nav>
           </Navbar.Collapse>
@@ -119,13 +117,14 @@ export default class App extends Component {
         <div className={styles.appContent}>
           {this.props.children}
         </div>
-        <InfoBar/>
+        <InfoBar />
 
         <div className="well text-center">
-          Have questions? Ask for help <a
-          href="https://github.com/erikras/react-redux-universal-hot-example/issues"
-          target="_blank">on Github</a> or in the <a
-          href="https://discord.gg/0ZcbPKXt5bZZb1Ko" target="_blank">#react-redux-universal</a> Discord channel.
+          Have questions? Ask for help
+          <a href="https://github.com/erikras/react-redux-universal-hot-example/issues" target="_blank">on Github</a>
+          or in the
+          <a href="https://discord.gg/0ZcbPKXt5bZZb1Ko" target="_blank">#react-redux-universal</a>
+          Discord channel.
         </div>
       </div>
     );

@@ -1,8 +1,8 @@
 import passport from 'passport';
 import passportJwt from 'passport-jwt';
-import {User} from './database';
+import { User } from './database';
 
-const {ExtractJwt, Strategy} = passportJwt;
+const { ExtractJwt, Strategy } = passportJwt;
 
 export function initialize(secret) {
   function tokenExtractor(req) {
@@ -16,15 +16,10 @@ export function initialize(secret) {
   };
 
   passport.use(new Strategy(opts, (jwtPayload, done) => {
-    User.findOne({id: jwtPayload.sub}, (err, user) => {
-      if (err) {
-        return done(err, false);
-      }
-      if (user) {
-        done(null, user);
-      } else {
-        done(null, false);
-      }
+    User.findOne({ id: jwtPayload.sub }, (err, user) => {
+      if (err) return done(err, false);
+      if (user) return done(null, user);
+      return done(null, false);
     });
   }));
 

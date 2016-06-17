@@ -4,14 +4,14 @@ import session from 'express-session';
 import bodyParser from 'body-parser';
 import config from '../src/config';
 import * as actions from './actions/index';
-import {mapUrl} from 'utils/url.js';
+import { mapUrl } from 'utils/url.js';
 import PrettyError from 'pretty-error';
 import http from 'http';
 import SocketIo from 'socket.io';
 import passport from 'passport';
 import * as helpers from './helpers';
 
-const {auth, database} = helpers;
+const { auth, database } = helpers;
 
 const pretty = new PrettyError();
 const app = express();
@@ -30,16 +30,16 @@ app.use(session({
   secret: 'react and redux rule!!!!',
   resave: false,
   saveUninitialized: false,
-  cookie: {maxAge: 60000}
+  cookie: { maxAge: 60000 }
 }));
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(passport.initialize());
 
 app.use((req, res) => {
   const splittedUrlPath = req.url.split('?')[0].split('/').slice(1);
 
-  const {action, params} = mapUrl(actions, splittedUrlPath);
+  const { action, params } = mapUrl(actions, splittedUrlPath);
 
   if (action) {
     action(req, params, helpers)
@@ -77,7 +77,7 @@ if (config.apiPort) {
   });
 
   io.on('connection', (socket) => {
-    socket.emit('news', {msg: `'Hello World!' from server`});
+    socket.emit('news', { msg: '\'Hello World!\' from server' });
 
     socket.on('history', () => {
       for (let index = 0; index < bufferSize; index++) {
@@ -90,10 +90,10 @@ if (config.apiPort) {
     });
 
     socket.on('msg', (data) => {
-      data.id = messageIndex;
-      messageBuffer[messageIndex % bufferSize] = data;
+      const message = { ...data, id: messageIndex };
+      messageBuffer[messageIndex % bufferSize] = message;
       messageIndex++;
-      io.emit('msg', data);
+      io.emit('msg', message);
     });
   });
   io.listen(runnable);

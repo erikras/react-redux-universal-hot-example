@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {renderIntoDocument} from 'react-addons-test-utils';
-import {expect} from 'chai';
-import {InfoBar} from 'components';
-import {Provider} from 'react-redux';
-import {browserHistory} from 'react-router';
+import { renderIntoDocument } from 'react-addons-test-utils';
+import { expect } from 'chai';
+import { InfoBar } from 'components';
+import { Provider } from 'react-redux';
+import { browserHistory } from 'react-router';
 import createStore from 'redux/create';
 import ApiClient from 'helpers/ApiClient';
 const client = new ApiClient();
@@ -24,14 +24,12 @@ describe('InfoBar', () => {
   const store = createStore(browserHistory, client, mockStore);
   const renderer = renderIntoDocument(
     <Provider store={store} key="provider">
-      <InfoBar/>
+      <InfoBar />
     </Provider>
   );
   const dom = ReactDOM.findDOMNode(renderer);
 
-  it('should render correctly', () => {
-    return expect(renderer).to.be.ok;
-  });
+  it('should render correctly', () => expect(renderer).to.be.ok);
 
   it('should render with correct value', () => {
     const text = dom.getElementsByTagName('strong')[0].textContent;
