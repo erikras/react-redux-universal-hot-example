@@ -7,6 +7,14 @@ node_js:
   - "5"
   - "stable"
 
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - gcc-4.8
+    - g++-4.8
+
 sudo: false
 
 before_script:
@@ -17,3 +25,6 @@ script:
   - npm run lint
   - npm test
   - npm run test-node
+
+env:
+  - TRAVIS=travis CXX=g++-4.8
