@@ -28,4 +28,3 @@ export default class CounterButton extends Component {
     );
   }
 }
-
