@@ -4,7 +4,7 @@ import session from 'express-session';
 import bodyParser from 'body-parser';
 import config from '../src/config';
 import * as actions from './actions';
-import { mapUrl } from 'utils/url.js';
+import { mapUrl } from './utils/url.js';
 import PrettyError from 'pretty-error';
 import http from 'http';
 import SocketIo from 'socket.io';
@@ -98,5 +98,5 @@ if (config.apiPort) {
   });
   io.listen(runnable);
 } else {
-  console.error('==>     ERROR: No PORT environment variable has been specified');
+  console.error('==>     ERROR: No APIPORT environment variable has been specified');
 }

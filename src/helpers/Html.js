@@ -47,10 +47,8 @@ export default class Html extends Component {
           {/* can smoothen the initial style flash (flicker) on page load in development mode. */}
           {/* ideally one could also include here the style for the current page (Home.scss, About.scss, etc) */}
 
-          {Object.keys(assets.styles).length === 0 ? <style
-            dangerouslySetInnerHTML={{
-              __html: require('../theme/bootstrap.config.js') + require('../containers/App/App.scss')._style
-            }} /> : null}
+          {Object.keys(assets.styles).length === 0 ?
+            <style dangerouslySetInnerHTML={{ __html: '#content{display:none}' }} /> : null}
         </head>
         <body>
           <div id="content" dangerouslySetInnerHTML={{ __html: content }} />
@@ -59,6 +57,8 @@ export default class Html extends Component {
             charSet="UTF-8"
           />
           <script src={assets.javascript.main} charSet="UTF-8" />
+          {Object.keys(assets.styles).length === 0 ? <script
+            dangerouslySetInnerHTML={{ __html: 'document.getElementById("content").style.display="block";' }} /> : null}
         </body>
       </html>
     );

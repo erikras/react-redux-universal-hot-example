@@ -20,7 +20,7 @@ export default class About extends Component {
 
         <p>This project was originally created by Erik Rasmussen
           (<a href="https://twitter.com/erikras" target="_blank">@erikras</a>), but has since seen many contributions
-          from the open source community. Thank you to
+          from the open source community. Thank you to{' '}
           <a href="https://github.com/erikras/react-redux-universal-hot-example/graphs/contributors" target="_blank">
             all the contributors
           </a>.

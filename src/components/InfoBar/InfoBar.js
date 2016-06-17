@@ -18,8 +18,7 @@ export default class InfoBar extends Component {
     return (
       <div className={`${styles.infoBar} well`}>
         <div className="container">
-          This is an info bar
-          {' '}
+          This is an info bar{' '}
           <strong>{info ? info.message : 'no info!'}</strong>
           <span className={styles.time}>{info && new Date(info.time).toString()}</span>
           <button className="btn btn-primary" onClick={load}>Reload from server</button>

@@ -63,8 +63,7 @@ export default class Home extends Component {
 
           <ul>
             <li>
-              <del>Isomorphic</del>
-              {' '}
+              <del>Isomorphic</del>{' '}
               <a href="https://medium.com/@mjackson/universal-javascript-4761051b7ae9">Universal</a> rendering
             </li>
             <li>Both client and server make calls to load data from separate API server</li>
