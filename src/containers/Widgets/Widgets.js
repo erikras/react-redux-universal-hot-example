@@ -51,7 +51,7 @@ export default class Widgets extends Component {
         <h1>
           Widgets
           <button className={`${styles.refreshBtn} btn btn-success`} onClick={load}>
-            <i className={refreshClassName} /> {' '} Reload Widgets
+            <i className={refreshClassName} />{' '}Reload Widgets
           </button>
         </h1>
         <Helmet title="Widgets" />
@@ -67,9 +67,7 @@ export default class Widgets extends Component {
           This widgets are stored in your session, so feel free to edit it and refresh.
         </p>
         {error && <div className="alert alert-danger" role="alert">
-          <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-          {' '}
-          {error}
+          <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>{' '}{error}
         </div>}
         {widgets && widgets.length && <table className="table table-striped">
           <thead>
