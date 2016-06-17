@@ -31,7 +31,7 @@ export function maxLength(max) {
 }
 
 export function integer(value) {
-  if (!Number.isInteger(Number(value))) {
+  if (!isEmpty(value) && !Number.isInteger(Number(value))) {
     return 'Must be an integer';
   }
 }

@@ -47,10 +47,10 @@ export default class Widgets extends Component {
     }
     const styles = require('./Widgets.scss');
     return (
-      <div className={styles.widgets + ' container'}>
+      <div className={`${styles.widgets} container`}>
         <h1>
           Widgets
-          <button className={styles.refreshBtn + ' btn btn-success'} onClick={load}>
+          <button className={`${styles.refreshBtn} btn btn-success`} onClick={load}>
             <i className={refreshClassName} /> {' '} Reload Widgets
           </button>
         </h1>

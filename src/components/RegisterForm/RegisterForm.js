@@ -18,7 +18,7 @@ export default class RegisterForm extends Component {
       handleSubmit
     } = this.props;
     const renderInput = (field, label, type = 'text') =>
-      <div className={'form-group' + (field.error && field.touched ? ' has-error' : '')}>
+      <div className={`form-group ${field.error && field.touched ? 'has-error' : ''}`}>
         <label htmlFor={field.name} className="col-sm-2">{label}</label>
         <div className="col-sm-10">
           <input type={type} className="form-control" name={field.name} {...field} />

@@ -54,21 +54,23 @@ export default class WidgetForm extends Component {
           {owner.error && owner.touched && <div className="text-danger">{owner.error}</div>}
         </td>
         <td className={styles.buttonCol}>
-          <button className="btn btn-default"
+          <button
+            className="btn btn-default"
             onClick={() => editStop(formKey)}
             disabled={submitting}>
             <i className="fa fa-ban" /> Cancel
           </button>
-          <button className="btn btn-success"
+          <button
+            className="btn btn-success"
             onClick={handleSubmit(() => save(values)
-                    .then(result => {
-                      if (result && typeof result.error === 'object') {
-                        return Promise.reject(result.error);
-                      }
-                    })
-                  )}
+                      .then(result => {
+                        if (result && typeof result.error === 'object') {
+                          return Promise.reject(result.error);
+                        }
+                      })
+                    )}
             disabled={pristine || invalid || submitting}>
-            <i className={'fa ' + (submitting ? 'fa-cog fa-spin' : 'fa-cloud')} /> Save
+            <i className={`fa ${submitting ? 'fa-cog fa-spin' : 'fa-cloud'}`} /> Save
           </button>
           {saveError && <div className="text-danger">{saveError}</div>}
         </td>

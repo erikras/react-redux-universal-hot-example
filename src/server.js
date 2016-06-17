@@ -70,8 +70,8 @@ app.use((req, res) => {
   const history = syncHistoryWithStore(memoryHistory, store);
 
   function hydrateOnClient() {
-    res.send('<!doctype html>\n' +
-      ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} store={store} />));
+    res.send(`<!doctype html>
+      ${ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} store={store} />)}`);
   }
 
   if (__DISABLE_SSR__) {
@@ -102,10 +102,10 @@ app.use((req, res) => {
 
         global.navigator = { userAgent: req.headers['user-agent'] };
 
-        res.send('<!doctype html>\n' +
-          ReactDOM.renderToString(
+        res.send(`<!doctype html>\n' +
+          ${ReactDOM.renderToString(
             <Html assets={webpackIsomorphicTools.assets()} component={component} store={store} />
-          ));
+          )}`);
       });
     } else {
       res.status(404).send('Not found');

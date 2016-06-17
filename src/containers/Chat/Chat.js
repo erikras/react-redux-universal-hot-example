@@ -54,7 +54,7 @@ export default class Chat extends Component {
     const { user } = this.props;
 
     return (
-      <div className={style.chat + ' container'}>
+      <div className={`${style.chat} container`}>
         <h1 className={style}>Chat</h1>
 
         {user && <div>
@@ -62,8 +62,8 @@ export default class Chat extends Component {
             {this.state.messages.map((msg) => <li key={`chat.msg.${msg.id}`}>{msg.from}: {msg.text}</li>)}
           </ul>
           <form className="login-form" onSubmit={this.handleSubmit}>
-            <input type="text" ref="message" placeholder="Enter your message"
-              value={this.state.message}
+            <input
+              type="text" ref="message" placeholder="Enter your message" value={this.state.message}
               onChange={(event) => {
                 this.setState({ message: event.target.value });
               }}
