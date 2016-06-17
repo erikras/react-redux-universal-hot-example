@@ -13,7 +13,7 @@ export default class CounterButton extends Component {
     className: PropTypes.string
   }
 
-  props = {
+  defaultProps = {
     className: ''
   }
 

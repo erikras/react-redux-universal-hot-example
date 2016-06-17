@@ -23,6 +23,7 @@
     "prefer-template": 0,
     "global-require": 0,
     "no-case-declarations": 0,
+    "no-underscore-dangle": 0,
     "no-console": 0,
     "no-alert": 0,
     "max-len": [
