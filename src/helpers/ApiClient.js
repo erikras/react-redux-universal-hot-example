@@ -35,7 +35,7 @@ export default class ApiClient {
           request.send(data);
         }
 
-        request.end((err, { body, text } = {}) => (err ? reject(body || text || err) : resolve(body || text)));
+        request.end((err, { body } = {}) => (err ? reject(body || err) : resolve(body)));
       });
     });
   }
