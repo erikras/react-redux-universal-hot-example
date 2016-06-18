@@ -159,7 +159,7 @@
     "extract-text-webpack-plugin": "^0.9.1",
     "font-awesome": "^4.4.0",
     "font-awesome-webpack": "0.0.4",
-    "happypack": "2.0.3",
+    "happypack": "2.1.1",
     "json-loader": "^0.5.4",
     "karma": "^0.13.10",
     "karma-cli": "^0.1.1",
