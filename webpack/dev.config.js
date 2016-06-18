@@ -7,6 +7,8 @@ var webpack = require('webpack');
 var assetsPath = path.resolve(__dirname, '../static/dist');
 var host = (process.env.HOST || 'localhost');
 var port = (+process.env.PORT + 1) || 3001;
+var HappyPack = require('happypack');
+var happyThreadPool = HappyPack.ThreadPool({ size: 5 });
 
 // https://github.com/halt-hammerzeit/webpack-isomorphic-tools
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
@@ -80,12 +82,31 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.jsx?$/, exclude: /node_modules/, loaders: ['babel?' + JSON.stringify(babelLoaderQuery), 'eslint-loader']},
-      { test: /\.json$/, loader: 'json-loader' },
-      { test: /\.less$/, loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!less?outputStyle=expanded&sourceMap' },
-      { test: /\.scss$/, loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap' },
-      { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/font-woff" },
-      { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/font-woff" },
+      createSourceLoader({
+        happy: { id: 'jsx' },
+        test: /\.jsx?$/,
+        loaders: ['babel?' + JSON.stringify(babelLoaderQuery), 'eslint-loader'],
+      }),
+
+      createSourceLoader({
+        happy: { id: 'json' },
+        test: /\.json$/,
+        loader: 'json-loader',
+      }),
+
+      createSourceLoader({
+        happy: { id: 'less' },
+        test: /\.less$/,
+        loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!less?outputStyle=expanded&sourceMap',
+      }),
+
+      createSourceLoader({
+        happy: { id: 'sass' },
+        test: /\.scss$/,
+        loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap',
+      }),
+
+      { test: /\.woff2?(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/font-woff" },
       { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream" },
       { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file" },
       { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=image/svg+xml" },
@@ -110,6 +131,38 @@ module.exports = {
       __DEVELOPMENT__: true,
       __DEVTOOLS__: true  // <-------- DISABLE redux-devtools HERE
     }),
-    webpackIsomorphicToolsPlugin.development()
+    webpackIsomorphicToolsPlugin.development(),
+
+    createHappyPlugin('jsx'),
+    createHappyPlugin('json'),
+    createHappyPlugin('less'),
+    createHappyPlugin('sass'),
   ]
 };
+
+// restrict loader to files under /src
+function createSourceLoader(spec) {
+  return Object.keys(spec).reduce(function(x, key) {
+    x[key] = spec[key];
+
+    return x;
+  }, {
+    include: [ path.resolve(__dirname, '../src') ]
+  });
+}
+
+function createHappyPlugin(id) {
+  return new HappyPack({
+    id: id,
+    threadPool: happyThreadPool,
+
+    // disable happypack with HAPPY=0
+    enabled: process.env.HAPPY !== '0',
+
+    // disable happypack caching with HAPPY_CACHE=0
+    cache: process.env.HAPPY_CACHE !== '0',
+
+    // make happypack more verbose with HAPPY_VERBOSE=1
+    verbose: process.env.HAPPY_VERBOSE === '1',
+  });
+}
