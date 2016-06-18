@@ -15,19 +15,6 @@ module.exports = {
     }
   },
 
-  staging: {
-    client: 'mysql',
-    connection: {
-      database: 'myapp_test',
-      user:     'root',
-      password: 'grut'
-    },
-    migrations: {
-      tableName: 'migrations',
-      directory: './api/database/migrations'
-    }
-  },
-
   production: {
     client: 'mysql',
     connection: {
