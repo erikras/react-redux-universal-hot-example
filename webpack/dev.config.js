@@ -9,6 +9,7 @@ var host = (process.env.HOST || 'localhost');
 var port = (+process.env.PORT + 1) || 3001;
 var HappyPack = require('happypack');
 var happyThreadPool = HappyPack.ThreadPool({ size: 5 });
+var WebpackHelpers = require('./helpers');
 
 // https://github.com/halt-hammerzeit/webpack-isomorphic-tools
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
@@ -63,7 +64,7 @@ reactTransform[1].transforms.push({
   locals: ['module']
 });
 
-module.exports = {
+var webpackConfig = module.exports = {
   devtool: 'inline-source-map',
   context: path.resolve(__dirname, '..'),
   entry: {
@@ -129,7 +130,8 @@ module.exports = {
       __CLIENT__: true,
       __SERVER__: false,
       __DEVELOPMENT__: true,
-      __DEVTOOLS__: true  // <-------- DISABLE redux-devtools HERE
+      __DEVTOOLS__: true,  // <-------- DISABLE redux-devtools HERE
+      __DLLS__: process.env.WEBPACK_DLLS === '1'
     }),
     webpackIsomorphicToolsPlugin.development(),
 
@@ -139,6 +141,10 @@ module.exports = {
     createHappyPlugin('sass'),
   ]
 };
+
+if (process.env.WEBPACK_DLLS === '1') {
+  WebpackHelpers.installVendorDLL(webpackConfig, 'vendor');
+}
 
 // restrict loader to files under /src
 function createSourceLoader(spec) {
