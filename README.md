@@ -40,6 +40,52 @@ I cobbled this together from a wide variety of similar "starter" repositories. A
 npm install
 ```
 
+Now you must select your database system into the following and install them:
+ 
+Postgres, MSSQL, MySQL, MariaDB, SQLite3, and Oracle
+
+```bash
+eg:
+ npm install mysql [--save]
+```
+
+You must then configure the client in the API configuration file (http://knexjs.org/#Installation-client) in `knexfile.js` file for each environment, eg:
+```bash
+development: {
+  client: 'mysql',
+  connection: {
+    database: 'myapp_dev',
+    user:     'root',
+    password: 'grut'
+  },
+  migrations: {
+    tableName: 'migrations',
+    directory: './api/database/migrations'
+  }
+},
+ 
+staging: {
+  ...
+},
+
+production: {
+  ...
+}
+```
+
+If you will use migrations, you must install `knex` globally (http://knexjs.org/#Migrations-CLI)
+
+```bash
+npm install knex -g
+```
+
+and run the following command:
+
+```bash
+knex migrate:latest [--env production|development]
+```
+
+
 ## Running Dev Server
 
 ```bash
