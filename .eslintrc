@@ -7,7 +7,7 @@
     "es6": true
   },
   "rules": {
-    "react/no-multi-comp": "off",
+    "react/no-multi-comp": "warn",
     "react/jsx-first-prop-new-line": ["warn", "multiline"],
     "react/prefer-stateless-function": "off",
     "react/jsx-closing-bracket-location": "off",
@@ -17,8 +17,7 @@
     "import/namespace": "off",
     "import/no-unresolved": "off",
     "import/no-named-as-default": "error",
-    "comma-dangle": "off",
-    // not sure why airbnb turned this on. gross!
+    "comma-dangle": "off", // not sure why airbnb turned this on. gross!
     "consistent-return": "off",
     "no-param-reassign": "off",
     "prefer-template": "warn",
@@ -28,9 +27,7 @@
     "no-console": "off",
     "no-alert": "off",
     "max-len": ["error", 120],
-    "indent": [
-      "error", 2, {"SwitchCase": 1}
-    ]
+    "indent": ["error", 2, {"SwitchCase": 1}]
   },
   "plugins": [
     "react",

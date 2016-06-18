@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import session from 'express-session';
 import bodyParser from 'body-parser';
 import config from '../src/config';
+import apiConfig from './config';
 import * as actions from './actions';
 import { mapUrl } from './utils/url.js';
 import PrettyError from 'pretty-error';
@@ -10,8 +11,9 @@ import http from 'http';
 import SocketIo from 'socket.io';
 import passport from 'passport';
 import * as helpers from './helpers';
+import * as database from './database';
 
-const { auth, database } = helpers;
+const { auth } = helpers;
 
 const pretty = new PrettyError();
 const app = express();
@@ -21,8 +23,7 @@ const server = new http.Server(app);
 const io = new SocketIo(server);
 io.path('/ws');
 
-database.initialize(config.mongo);
-auth.initialize(config.secret);
+auth.initialize(apiConfig.secret);
 
 app.use(morgan('dev'));
 
@@ -42,7 +43,7 @@ app.use((req, res) => {
   const { action, params } = mapUrl(actions, splittedUrlPath);
 
   if (action) {
-    action(req, params, helpers)
+    action(req, params, { ...helpers, database })
     .then((result) => {
       if (result instanceof Function) {
         result(res);

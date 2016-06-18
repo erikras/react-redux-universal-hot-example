@@ -16,7 +16,7 @@ function formatUrl(path) {
 export default class ApiClient {
   constructor(req) {
     methods.forEach(method => {
-      this[method] = (path, { params, data, files, fields } = {}) => new Promise((resolve, reject) => {
+      this[method] = (path, { params, data, headers, files, fields } = {}) => new Promise((resolve, reject) => {
         const request = superagent[method](formatUrl(path));
 
         if (params) {
@@ -27,12 +27,12 @@ export default class ApiClient {
           request.set('cookie', req.get('cookie'));
         }
 
-        if (this.token) {
-          request.set('Authorization', this.token);
+        if (headers) {
+          request.set(headers);
         }
 
-        if (data) {
-          request.send(data);
+        if (this.token) {
+          request.set('Authorization', `JWT ${this.token}`);
         }
 
         if (files) {
@@ -41,6 +41,10 @@ export default class ApiClient {
 
         if (fields) {
           fields.forEach(item => request.field(item.key, item.value));
+        }
+
+        if (data) {
+          request.send(data);
         }
 
         request.end((err, { body } = {}) => (err ? reject(body || err) : resolve(body)));

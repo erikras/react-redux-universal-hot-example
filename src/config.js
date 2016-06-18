@@ -14,12 +14,6 @@ module.exports = Object.assign({
   port: process.env.PORT,
   apiHost: process.env.APIHOST || 'localhost',
   apiPort: process.env.APIPORT,
-  secret: 's*cr*tK*y',
-  mongo: {
-    host: process.env.DBHOST || 'localhost',
-    port: process.env.DBPORT || 27017,
-    database: 'ytdl'
-  },
   app: {
     title: 'React Redux Example',
     description: 'All the modern best practices in one example.',
