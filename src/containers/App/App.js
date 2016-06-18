@@ -5,12 +5,14 @@ import { LinkContainer } from 'react-router-bootstrap';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
+import Alert from 'react-bootstrap/lib/Alert';
 import Helmet from 'react-helmet';
+import { Notifs } from 're-notif';
 import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
 import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
 import { InfoBar } from 'components';
 import { push } from 'react-router-redux';
-import config from '../../config';
+import config from 'config';
 import { asyncConnect } from 'redux-connect';
 
 @asyncConnect([{
@@ -116,6 +118,14 @@ export default class App extends Component {
         </Navbar>
 
         <div className={styles.appContent}>
+          <div className="container">
+            <Notifs
+              className={styles.notifs}
+              theme={{}}
+              CustomComponent={props => <Alert bsStyle={props.kind}>{props.message}</Alert>}
+            />
+          </div>
+
           {this.props.children}
         </div>
         <InfoBar />

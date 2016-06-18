@@ -4,20 +4,25 @@ import { isLoaded as isAuthLoaded, load as loadAuth } from 'redux/modules/auth';
 import { App, Chat, Home, Widgets, About, Register, Login, LoginSuccess, Survey, NotFound } from 'containers';
 
 export default (store) => {
-  const requireLogin = (nextState, replace, cb) => {
-    function checkAuth() {
-      const { auth: { user } } = store.getState();
-      if (!user) {
-        // oops, not logged in, so can't be here!
-        replace('/');
-      }
-      cb();
-    }
+  function checkAuth(logged, replace, cb) {
+    const { auth: { user } } = store.getState();
+    if (!!user === !logged) replace('/');
+    cb();
+  }
 
+  const requireLogin = (nextState, replace, cb) => {
     if (!isAuthLoaded(store.getState())) {
-      store.dispatch(loadAuth()).then(checkAuth);
+      store.dispatch(loadAuth()).then(() => checkAuth(true, replace, cb));
     } else {
-      checkAuth();
+      checkAuth(true, replace, cb);
+    }
+  };
+
+  const requireNotLogged = (nextState, replace, cb) => {
+    if (!isAuthLoaded(store.getState())) {
+      store.dispatch(loadAuth()).then(() => checkAuth(false, replace, cb));
+    } else {
+      checkAuth(false, replace, cb);
     }
   };
 
@@ -35,10 +40,14 @@ export default (store) => {
         <Route path="loginSuccess" component={LoginSuccess} />
       </Route>
 
+      {/* Routes disallow login */}
+      <Route onEnter={requireNotLogged}>
+        <Route path="register" component={Register} />
+      </Route>
+
       {/* Routes */}
-      <Route path="about" component={About} />
-      <Route path="register" component={Register} />
       <Route path="login" component={Login} />
+      <Route path="about" component={About} />
       <Route path="survey" component={Survey} />
       <Route path="widgets" component={Widgets} />
 

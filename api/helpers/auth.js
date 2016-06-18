@@ -1,6 +1,6 @@
 import passport from 'passport';
 import passportJwt from 'passport-jwt';
-import { User } from './database';
+import { User } from '../database';
 
 const { ExtractJwt, Strategy } = passportJwt;
 

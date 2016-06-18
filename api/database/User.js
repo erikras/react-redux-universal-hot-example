@@ -1,55 +1,54 @@
-import mongoose from 'mongoose';
+import Bookshelf from './database';
 import bcrypt from 'bcrypt';
+import { createValidatorPromise as createValidator, required, email as isEmail } from '../utils/validation';
 
-const Schema = mongoose.Schema;
 const SALT_WORK_FACTOR = 10;
 
-const UserSchema = new Schema({
-  email: { type: String, lowercase: true, required: true, index: { unique: true } },
-  password: { type: String, required: true }
-});
+class User extends Bookshelf.Model {
+  get tableName() { return 'user'; }
 
-// eslint-disable-next-line func-names
-UserSchema.pre('save', function (next) {
-  const user = this;
+  get hasTimestamps() { return true; }
 
-  if (!user.isModified('password')) return next();
+  get hidden() { return ['password']; }
 
-  bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt) => {
-    if (err) return next(err);
-
-    bcrypt.hash(user.password, salt, (errSalt, hash) => {
-      if (errSalt) return next(errSalt);
-
-      user.password = hash;
-      return next();
-    });
-  });
-});
-
-// eslint-disable-next-line func-names
-UserSchema.methods.comparePassword = function (candidatePassword, cb) {
-  bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
-    if (err) return cb(err);
-    cb(null, isMatch);
-  });
-};
-
-UserSchema.options.toJSON = {
-  getters: true,
-  virtuals: true,
-  minimize: false,
-  transform: (doc, ret) => {
-    const user = ret;
-    user.id = user._id;
-    delete user.password;
-    delete user.token;
-    delete user._id;
-    delete user.__v;
-    return user;
+  initialize() {
+    this.on('creating', this.hashPassword, this);
+    this.on('saving', this.validate, this);
   }
-};
 
-const User = mongoose.model('User', UserSchema);
+  validate(model) {
+    return createValidator({
+      email: [required, isEmail],
+      password: [required]
+    })(model.attributes);
+  }
 
-export default User;
+  hashPassword(model) {
+    return new Promise((resolve, reject) => {
+      bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt) => {
+        if (err) return reject(err);
+
+        bcrypt.hash(model.get('password') || '', salt, (errHash, hash) => {
+          if (errHash) return reject(errHash);
+          model.set('password', hash);
+          resolve(model);
+        });
+      });
+    });
+  }
+
+  comparePassword(candidatePassword) {
+    return new Promise((resolve, reject) => {
+      bcrypt.compare(candidatePassword, this.get('password'), (err, isMatch) => {
+        if (err) return reject(err);
+        resolve(isMatch);
+      });
+    });
+  }
+
+  static byEmail(email) {
+    return this.forge().query({ where: { email } }).fetch();
+  }
+}
+
+export default Bookshelf.model('User', User);
