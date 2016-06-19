@@ -124,7 +124,6 @@
     "passport-jwt": "^2.0.0",
     "piping": "^1.0.0-rc.2",
     "pretty-error": "^2.0.0",
-    "re-notif": "^1.0.2",
     "react": "^15.1.0",
     "react-bootstrap": "^0.29.4",
     "react-dom": "^15.1.0",

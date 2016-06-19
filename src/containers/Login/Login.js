@@ -2,12 +2,12 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { LoginForm } from 'components';
-import { actions as notifActions } from 're-notif';
 import * as authActions from 'redux/modules/auth';
+import * as notifActions from 'redux/modules/notifs';
 
 @connect(
   state => ({ user: state.auth.user }),
-  { ...authActions, ...notifActions })
+  { ...notifActions, ...authActions })
 export default class Login extends Component {
   static propTypes = {
     user: PropTypes.object,
@@ -21,7 +21,7 @@ export default class Login extends Component {
     this.props.notifSend({
       message: 'You\'r logged !',
       kind: 'success',
-      dismissAfter: 1500
+      dismissAfter: 2000
     });
     return result;
   });
