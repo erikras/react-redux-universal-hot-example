@@ -42,10 +42,10 @@ npm install
 
 Now you must select your database system into the following and install them:
  
-Postgres, MSSQL, MySQL, MariaDB, SQLite3, and Oracle
+Postgres, MSSQL, MySQL, MariaDB, SQLite3, and Oracle are supported.
 
 ```bash
-eg:
+for example:
  npm install mysql [--save]
 ```
 
@@ -62,10 +62,6 @@ development: {
     tableName: 'migrations',
     directory: './api/database/migrations'
   }
-},
- 
-staging: {
-  ...
 },
 
 production: {
