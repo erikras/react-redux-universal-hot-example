@@ -49,7 +49,7 @@ for example:
  npm install mysql [--save]
 ```
 
-You must then configure the client in the API configuration file (http://knexjs.org/#Installation-client) in `knexfile.js` file for each environment, eg:
+You must then configure the database client in `knexfile.js` file (http://knexjs.org/#Installation-client) for each environment, eg:
 ```bash
 development: {
   client: 'mysql',
