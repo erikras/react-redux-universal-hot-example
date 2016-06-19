@@ -1,6 +1,7 @@
-exports.up = function (knex, Promise) { // eslint-disable-line func-names
+/* eslint-disable */
+exports.up = function (knex, Promise) {
   return Promise.all([
-    knex.schema.createTableIfNotExists('user', table => {
+    knex.schema.createTableIfNotExists('user', function (table) {
       table.increments('id').primary();
       table.string('email').unique();
       table.string('password');
@@ -10,8 +11,9 @@ exports.up = function (knex, Promise) { // eslint-disable-line func-names
 };
 
 
-exports.down = function (knex, Promise) { // eslint-disable-line func-names
+exports.down = function (knex, Promise) {
   return Promise.all([
     knex.schema.dropTableIfExists('user')
   ]);
 };
+/* eslint-enable */
