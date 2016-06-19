@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { RegisterForm } from 'components';
-import { actions as notifActions } from 're-notif';
 import * as authActions from 'redux/modules/auth';
+import * as notifActions from 'redux/modules/notifs';
 
 @connect(
   () => ({}),
@@ -19,7 +19,7 @@ export default class Register extends Component {
     this.props.notifSend({
       message: 'You\'r now registered !',
       kind: 'success',
-      dismissAfter: 1500
+      dismissAfter: 2000
     });
     return result;
   });

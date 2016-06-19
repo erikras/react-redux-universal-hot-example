@@ -104,7 +104,6 @@ export function load() {
 }
 
 export function register(data) {
-  console.log('REGISTER');
   return {
     types: [REGISTER, REGISTER_SUCCESS, REGISTER_FAIL],
     promise: (client) => client.post('/auth/register', { data })

@@ -7,10 +7,9 @@ import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
 import Alert from 'react-bootstrap/lib/Alert';
 import Helmet from 'react-helmet';
-import { Notifs } from 're-notif';
 import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
 import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
-import { InfoBar } from 'components';
+import { Notifs, InfoBar } from 'components';
 import { push } from 'react-router-redux';
 import config from 'config';
 import { asyncConnect } from 'redux-connect';
@@ -121,8 +120,8 @@ export default class App extends Component {
           <div className="container">
             <Notifs
               className={styles.notifs}
-              theme={{}}
-              CustomComponent={props => <Alert bsStyle={props.kind}>{props.message}</Alert>}
+              namespace="global"
+              NotifComponent={props => <Alert bsStyle={props.kind}>{props.message}</Alert>}
             />
           </div>
 
