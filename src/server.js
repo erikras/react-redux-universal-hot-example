@@ -81,11 +81,11 @@ app.use((req, res) => {
     return;
   }
 
-  match({ history, routes: getRoutes(store), location: req.originalUrl }, (error, redirectLocation, renderProps) => {
+  match({ history, routes: getRoutes(store), location: req.originalUrl }, (routeError, redirectLocation, renderProps) => {
     if (redirectLocation) {
       res.redirect(redirectLocation.pathname + redirectLocation.search);
-    } else if (error) {
-      console.error('ROUTER ERROR:', pretty.render(error));
+    } else if (routeError) {
+      console.error('ROUTER ERROR:', pretty.render(routeError));
       res.status(500);
       hydrateOnClient();
     } else if (renderProps) {
@@ -102,6 +102,11 @@ app.use((req, res) => {
 
         res.send('<!doctype html>\n' +
           ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store}/>));
+      }).catch((mountError) => {
+        console.error('Application crash!');
+        console.error(mountError.message);
+        console.error(mountError.stack);
+        res.status(500).send('Server error! Please check the logs');
       });
     } else {
       res.status(404).send('Not found');
