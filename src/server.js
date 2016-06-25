@@ -106,6 +106,9 @@ app.use((req, res) => {
           ${ReactDOM.renderToString(
             <Html assets={webpackIsomorphicTools.assets()} component={component} store={store} />
           )}`);
+      }).catch(mountError => {
+        console.error('MOUNT ERROR:', pretty.render(mountError));
+        res.status(500);
       });
     } else {
       res.status(404).send('Not found');
