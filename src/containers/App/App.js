@@ -28,12 +28,16 @@ import { asyncConnect } from 'redux-connect';
   }
 }])
 @connect(
-  state => ({ user: state.auth.user }),
+  state => ({
+    notifs: state.notifs,
+    user: state.auth.user
+  }),
   { logout, pushState: push })
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
     user: PropTypes.object,
+    notifs: PropTypes.object,
     logout: PropTypes.func.isRequired,
     pushState: PropTypes.func.isRequired
   };
@@ -58,7 +62,7 @@ export default class App extends Component {
   };
 
   render() {
-    const { user } = this.props;
+    const { user, notifs } = this.props;
     const styles = require('./App.scss');
 
     return (
@@ -117,13 +121,13 @@ export default class App extends Component {
         </Navbar>
 
         <div className={styles.appContent}>
-          <div className="container">
+          {notifs.global && <div className="container">
             <Notifs
               className={styles.notifs}
               namespace="global"
               NotifComponent={props => <Alert bsStyle={props.kind}>{props.message}</Alert>}
             />
-          </div>
+          </div>}
 
           {this.props.children}
         </div>
