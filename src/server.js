@@ -103,9 +103,9 @@ app.use((req, res) => {
         global.navigator = { userAgent: req.headers['user-agent'] };
 
         res.send(`<!doctype html>
-          ${ReactDOM.renderToString(
-            <Html assets={webpackIsomorphicTools.assets()} component={component} store={store} />
-          )}`);
+        ${ReactDOM.renderToString(
+          <Html assets={webpackIsomorphicTools.assets()} component={component} store={store} />
+        )}`);
       }).catch(mountError => {
         console.error('MOUNT ERROR:', pretty.render(mountError));
         res.status(500);
