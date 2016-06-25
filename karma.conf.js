@@ -11,9 +11,9 @@ module.exports = function(config) {
 
     files: [
       './node_modules/phantomjs-polyfill/bind-polyfill.js',
-      process.env.WEBPACK_DLLS === '1' ? './static/dist/dlls/dll__vendor.js' : null,
+      process.env.WEBPACK_DLLS === '1' && './static/dist/dlls/dll__vendor.js',
       'tests.webpack.js'
-    ],
+    ].filter(function(x) { return !!x; }),
 
     preprocessors: {
       'tests.webpack.js': ['webpack', 'sourcemap']
