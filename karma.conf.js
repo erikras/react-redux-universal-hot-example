@@ -11,6 +11,7 @@ module.exports = function(config) {
 
     files: [
       './node_modules/phantomjs-polyfill/bind-polyfill.js',
+      process.env.WEBPACK_DLLS === '1' ? './static/dist/dlls/dll__vendor.js' : null,
       'tests.webpack.js'
     ],
 
@@ -56,7 +57,8 @@ module.exports = function(config) {
           __CLIENT__: true,
           __SERVER__: false,
           __DEVELOPMENT__: true,
-          __DEVTOOLS__: false  // <-------- DISABLE redux-devtools HERE
+          __DEVTOOLS__: false,  // <-------- DISABLE redux-devtools HERE
+          __DLLS__: process.env.WEBPACK_DLLS === '1'
         })
       ]
     },

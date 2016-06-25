@@ -28,7 +28,8 @@
     "start-prod": "better-npm-run start-prod",
     "start-prod-api": "better-npm-run start-prod-api",
     "build": "better-npm-run build",
-    "postinstall": "npm run build",
+    "build-dlls": "webpack --verbose --colors --display-error-details --config webpack/vendor.config.js",
+    "postinstall": "npm run build && npm run build-dlls",
     "lint": "eslint -c .eslintrc src api",
     "start-dev": "better-npm-run start-dev",
     "start-dev-api": "better-npm-run start-dev-api",
@@ -62,7 +63,8 @@
         "NODE_PATH": "./src",
         "NODE_ENV": "development",
         "PORT": 3000,
-        "APIPORT": 3030
+        "APIPORT": 3030,
+        "WEBPACK_DLLS": 1
       }
     },
     "start-dev-api": {
@@ -79,7 +81,8 @@
         "UV_THREADPOOL_SIZE": 100,
         "NODE_PATH": "./src",
         "PORT": 3000,
-        "APIPORT": 3030
+        "APIPORT": 3030,
+        "WEBPACK_DLLS": 1
       }
     },
     "build": {
@@ -167,6 +170,7 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "font-awesome": "^4.4.0",
     "font-awesome-webpack": "0.0.4",
+    "happypack": "^2.1.1",
     "json-loader": "^0.5.4",
     "karma": "^0.13.10",
     "karma-cli": "^1.0.0",

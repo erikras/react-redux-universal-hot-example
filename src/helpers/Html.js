@@ -52,6 +52,7 @@ export default class Html extends Component {
             dangerouslySetInnerHTML={{ __html: `window.__data=${serialize(store.getState())};` }}
             charSet="UTF-8"
           />
+          {__DLLS__ && <script key="dlls__vendor" src="/dist/dlls/dll__vendor.js" charSet="UTF-8" />}
           <script src={assets.javascript.main} charSet="UTF-8" />
 
           {/* (will be present only in development mode) */}
