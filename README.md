@@ -15,6 +15,8 @@ This is a starter boilerplate app I've put together using the following technolo
 * [React](https://github.com/facebook/react)
 * [React Router](https://github.com/reactjs/react-router)
 * [Express](http://expressjs.com)
+* [Passport](http://passportjs.org) for authentication
+* [Knex](http://knexjs.org/) with [Bookshelf](http://bookshelfjs.org/) to use database and migrations
 * [Babel](http://babeljs.io) for ES6 and ES7 magic
 * [Webpack](http://webpack.github.io) for bundling
 * [Webpack Dev Middleware](http://webpack.github.io/docs/webpack-dev-middleware.html)

@@ -29,7 +29,7 @@
     "start-prod-api": "better-npm-run start-prod-api",
     "build": "better-npm-run build",
     "build-dlls": "webpack --verbose --colors --display-error-details --config webpack/vendor.config.js",
-    "postinstall": "npm run build && npm run build-dlls",
+    "postinstall": "concurrent \"npm run build\" \"npm run build-dlls\"",
     "lint": "eslint -c .eslintrc src api",
     "start-dev": "better-npm-run start-dev",
     "start-dev-api": "better-npm-run start-dev-api",
