@@ -13,8 +13,7 @@
   "env": {
     "development": {
       "plugins": [
-        "typecheck",
-        "react-hot-loader/babel"
+        "typecheck"
       ]
     }
   }
