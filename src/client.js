@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { ReduxAsyncConnect } from 'redux-connect';
+import { AppContainer as HotEnabler } from 'react-hot-loader';
 import withScroll from 'scroll-behavior';
 import getRoutes from './routes';
 
@@ -36,18 +37,27 @@ function initSocket() {
 global.socket = initSocket();
 
 const renderRouter = (props) => <ReduxAsyncConnect {...props} helpers={{ client }} filter={item => !item.deferred} />;
-const component = (
-  <Router history={history} render={renderRouter}>
-    {getRoutes(store)}
-  </Router>
-);
+const render = routes => {
+  ReactDOM.render(
+    <HotEnabler>
+      <Provider store={store} key="provider">
+        <Router history={history} render={renderRouter}>
+          {routes}
+        </Router>
+      </Provider>
+    </HotEnabler>,
+    dest
+  );
+};
 
-ReactDOM.render(
-  <Provider store={store} key="provider">
-    {component}
-  </Provider>,
-  dest
-);
+render(getRoutes(store));
+
+if (module.hot) {
+  module.hot.accept('./routes', () => {
+    const nextRoutes = require('./routes')(store);
+    render(nextRoutes);
+  });
+}
 
 if (process.env.NODE_ENV !== 'production') {
   window.React = React; // enable debugger
