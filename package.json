@@ -185,7 +185,6 @@
     "phantomjs-prebuilt": "^2.1.7",
     "react-a11y": "^0.3.3",
     "react-addons-test-utils": "^15.1.0",
-    "redbox-react": "^1.1.1",
     "redux-devtools": "^3.0.0-beta-3",
     "redux-devtools-dock-monitor": "^1.0.0-beta-3",
     "redux-devtools-log-monitor": "^1.0.0-beta-3",
