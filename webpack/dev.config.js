@@ -57,7 +57,7 @@ var webpackConfig = module.exports = {
         happy: { id: 'jsx' },
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loaders: ['babel?' + JSON.stringify(babelLoaderQuery), 'eslint-loader'],
+        loaders: ['react-hot-loader/webpack', 'babel?' + JSON.stringify(babelLoaderQuery), 'eslint-loader'],
       }),
       createSourceLoader({
         happy: { id: 'json' },

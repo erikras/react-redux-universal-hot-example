@@ -48,6 +48,7 @@ module.exports = {
       'react-bootstrap',
       'react-dom',
       'react-helmet',
+      'react-hot-loader',
       'react-inline-css',
       'react-redux',
       'react-router',
