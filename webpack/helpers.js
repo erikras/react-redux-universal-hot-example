@@ -5,9 +5,9 @@ var HappyPack = require('happypack');
 var happyThreadPool = HappyPack.ThreadPool({ size: 5 });
 
 module.exports = {
-  createSourceLoader,
-  createHappyPlugin,
-  installVendorDLL
+  createSourceLoader: createSourceLoader,
+  createHappyPlugin: createHappyPlugin,
+  installVendorDLL: installVendorDLL
 };
 
 // restrict loader to files under /src
