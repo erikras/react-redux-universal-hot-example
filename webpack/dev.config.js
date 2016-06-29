@@ -7,7 +7,7 @@ var webpack = require('webpack');
 var assetsPath = path.resolve(__dirname, '../static/dist');
 var host = (process.env.HOST || 'localhost');
 var port = (+process.env.PORT + 1) || 3001;
-var { installVendorDLL, createSourceLoader, createHappyPlugin } = require('./helpers');
+var helpers = require('./helpers');
 
 // https://github.com/halt-hammerzeit/webpack-isomorphic-tools
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
@@ -53,23 +53,23 @@ var webpackConfig = module.exports = {
   },
   module: {
     loaders: [
-      createSourceLoader({
+      helpers.createSourceLoader({
         happy: { id: 'jsx' },
         test: /\.jsx?$/,
         exclude: /node_modules/,
         loaders: ['react-hot-loader/webpack', 'babel?' + JSON.stringify(babelLoaderQuery), 'eslint-loader'],
       }),
-      createSourceLoader({
+      helpers.createSourceLoader({
         happy: { id: 'json' },
         test: /\.json$/,
         loader: 'json-loader',
       }),
-      createSourceLoader({
+      helpers.createSourceLoader({
         happy: { id: 'less' },
         test: /\.less$/,
         loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!less?outputStyle=expanded&sourceMap',
       }),
-      createSourceLoader({
+      helpers.createSourceLoader({
         happy: { id: 'sass' },
         test: /\.scss$/,
         loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap',
@@ -101,13 +101,13 @@ var webpackConfig = module.exports = {
     }),
     webpackIsomorphicToolsPlugin.development(),
 
-    createHappyPlugin('jsx'),
-    createHappyPlugin('json'),
-    createHappyPlugin('less'),
-    createHappyPlugin('sass'),
+    helpers.createHappyPlugin('jsx'),
+    helpers.createHappyPlugin('json'),
+    helpers.createHappyPlugin('less'),
+    helpers.createHappyPlugin('sass'),
   ]
 };
 
 if (process.env.WEBPACK_DLLS === '1') {
-  installVendorDLL(webpackConfig, 'vendor');
+  helpers.installVendorDLL(webpackConfig, 'vendor');
 }
