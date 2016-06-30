@@ -71,7 +71,7 @@ module.exports = {
       __SERVER__: false,
       __DEVELOPMENT__: false,
       __DEVTOOLS__: false,
-      __DLLS__: false,
+      __DLLS__: false
     }),
 
     // ignore dev config

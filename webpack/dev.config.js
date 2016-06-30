@@ -23,7 +23,6 @@ try {
   console.error(err);
 }
 
-
 var babelrcObjectDevelopment = babelrcObject.env && babelrcObject.env.development || {};
 
 // merge global and dev-only plugins
@@ -33,7 +32,8 @@ combinedPlugins = combinedPlugins.concat(babelrcObjectDevelopment.plugins);
 var babelLoaderQuery = Object.assign({}, babelrcObjectDevelopment, babelrcObject, { plugins: combinedPlugins });
 delete babelLoaderQuery.env;
 
-if (process.env.WEBPACK_DLLS === '1' && !helpers.isValidDLLs(['vendor'], assetsPath)) {
+var validDLLs = helpers.isValidDLLs(['vendor'], assetsPath);
+if (process.env.WEBPACK_DLLS === '1' && !validDLLs) {
   process.env.WEBPACK_DLLS = '0';
   console.warn('webpack dlls disabled');
 }
@@ -101,7 +101,8 @@ var webpackConfig = module.exports = {
       __CLIENT__: true,
       __SERVER__: false,
       __DEVELOPMENT__: true,
-      __DEVTOOLS__: true  // <-------- DISABLE redux-devtools HERE
+      __DEVTOOLS__: true,  // <-------- DISABLE redux-devtools HERE
+      __DLLS__: process.env.WEBPACK_DLLS === '1'
     }),
     webpackIsomorphicToolsPlugin.development(),
 
@@ -112,6 +113,6 @@ var webpackConfig = module.exports = {
   ]
 };
 
-if (process.env.WEBPACK_DLLS === '1') {
+if (process.env.WEBPACK_DLLS === '1' && validDLLs) {
   helpers.installVendorDLL(webpackConfig, 'vendor');
 }
