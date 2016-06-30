@@ -33,7 +33,7 @@ combinedPlugins = combinedPlugins.concat(babelrcObjectDevelopment.plugins);
 var babelLoaderQuery = Object.assign({}, babelrcObjectDevelopment, babelrcObject, { plugins: combinedPlugins });
 delete babelLoaderQuery.env;
 
-if (!helpers.isValidDLLs(['vendor'], assetsPath)) {
+if (process.env.WEBPACK_DLLS === '1' && !helpers.isValidDLLs(['vendor'], assetsPath)) {
   process.env.WEBPACK_DLLS = '0';
   console.warn('webpack dlls disabled');
 }
