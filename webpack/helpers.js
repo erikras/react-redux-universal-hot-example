@@ -1,4 +1,5 @@
 var path = require('path');
+var fs = require('fs');
 var projectRootPath = path.resolve(__dirname, '../');
 var webpack = require('webpack');
 var HappyPack = require('happypack');
@@ -7,7 +8,8 @@ var happyThreadPool = HappyPack.ThreadPool({ size: 5 });
 module.exports = {
   createSourceLoader: createSourceLoader,
   createHappyPlugin: createHappyPlugin,
-  installVendorDLL: installVendorDLL
+  installVendorDLL: installVendorDLL,
+  isValidDLLs: isValidDLLs
 };
 
 // restrict loader to files under /src
@@ -38,17 +40,15 @@ function createHappyPlugin(id) {
 }
 
 function installVendorDLL(config, dllName) {
-  if (process.env.WEBPACK_DLLS === '1') {
-    var manifest = loadDLLManifest(path.join(projectRootPath, `webpack/dlls/${dllName}.json`));
+  var manifest = loadDLLManifest(path.join(projectRootPath, `webpack/dlls/${dllName}.json`));
 
-    if (manifest) {
-      console.warn(`Webpack: will be using the ${dllName} DLL.`);
+  if (manifest) {
+    console.log(`Webpack: will be using the ${dllName} DLL.`);
 
-      config.plugins.push(new webpack.DllReferencePlugin({
-        context: projectRootPath,
-        manifest: manifest
-      }));
-    }
+    config.plugins.push(new webpack.DllReferencePlugin({
+      context: projectRootPath,
+      manifest: manifest
+    }));
   }
 };
 
@@ -71,4 +71,21 @@ The request to use DLLs for this build will be ignored.`);
   }
 
   return undefined;
+}
+
+function isValidDLLs(dllNames, assetsPath) {
+  for (var dllName of dllNames) {
+    try {
+      var manifest = require(path.join(projectRootPath, `webpack/dlls/${dllName}.json`));
+      var dll = fs.readFileSync(path.join(assetsPath, `dlls/dll__${dllName}.js`)).toString('utf-8');
+      if (dll.indexOf(manifest.name) === -1) {
+        console.warn(`Invalid dll: ${dllName}`);
+        return false;
+      }
+    } catch (e) {
+      console.warn(e.message);
+      return false;
+    }
+  }
+  return true;
 }

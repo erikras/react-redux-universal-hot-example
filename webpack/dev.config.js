@@ -33,6 +33,11 @@ combinedPlugins = combinedPlugins.concat(babelrcObjectDevelopment.plugins);
 var babelLoaderQuery = Object.assign({}, babelrcObjectDevelopment, babelrcObject, { plugins: combinedPlugins });
 delete babelLoaderQuery.env;
 
+if (!helpers.isValidDLLs(['vendor'], assetsPath)) {
+  process.env.WEBPACK_DLLS = '0';
+  console.warn('webpack dlls disabled');
+}
+
 var webpackConfig = module.exports = {
   devtool: 'inline-source-map',
   context: path.resolve(__dirname, '..'),
@@ -56,7 +61,6 @@ var webpackConfig = module.exports = {
       helpers.createSourceLoader({
         happy: { id: 'jsx' },
         test: /\.jsx?$/,
-        exclude: /node_modules/,
         loaders: ['react-hot-loader/webpack', 'babel?' + JSON.stringify(babelLoaderQuery), 'eslint-loader'],
       }),
       helpers.createSourceLoader({
