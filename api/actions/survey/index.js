@@ -1,1 +1,0 @@
-export isValid from './isValid';

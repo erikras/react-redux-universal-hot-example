@@ -116,7 +116,6 @@
     "http-proxy": "^1.12.0",
     "invariant": "^2.2.0",
     "jsonwebtoken": "^7.0.1",
-    "knex": "^0.11.5",
     "less": "^2.5.3",
     "less-loader": "^2.2.1",
     "lru-memoize": "^1.0.0",
