@@ -9,7 +9,11 @@ export default class Home extends Component {
       <div className={styles.home}>
         <Helmet title="Home" />
         <div>
-          <div>Contenido Principal</div>
+          <div>
+            <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+              Boton Default
+            </button>
+          </div>
         </div>
       </div>
     );
