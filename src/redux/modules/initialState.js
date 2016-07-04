@@ -7,7 +7,8 @@ const LOAD_SUCCESS = 'redux-example/auth/LOAD_SUCCESS';
 const LOAD_FAIL = 'redux-example/auth/LOAD_FAIL';
 
 const initialState = {
-  loaded: false
+  loaded: false,
+  initialMessage: ''
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -22,7 +23,7 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: true,
-        user: action.result
+        initialMessage: 'Hola Mundo'
       };
     case LOAD_FAIL:
       return {
@@ -42,8 +43,7 @@ export function isLoaded(globalState) {
 
 export function load() {
   return {
-    types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.get('/auth/load')
+    type: LOAD_SUCCESS
   };
 }
 

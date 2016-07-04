@@ -8,10 +8,9 @@ export default class Home extends Component {
     return (
       <div className={styles.home}>
         <Helmet title="Home" />
-        <div className={styles.masthead}>
-          <h2>Hola Mundo</h2>
+        <div>
+          <div>Contenido Principal</div>
         </div>
-
       </div>
     );
   }

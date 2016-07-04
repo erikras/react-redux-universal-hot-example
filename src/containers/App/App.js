@@ -41,9 +41,10 @@ export default class App extends Component {
     return (
       <div className={styles.app}>
         <Helmet {...config.app.head} />
-        <h2>{initialMessage}</h2>
+        <div>Contenido de la Aplicacion</div>
+        <div>{initialMessage}</div>
 
-        <div className={styles.appContent}>
+        <div>
           {this.props.children}
         </div>
       </div>
