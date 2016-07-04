@@ -59,16 +59,13 @@ module.exports = {
       // </babel-runtime>
 
       'invariant',
-      'multireducer',
       'react',
-      'react-bootstrap',
       'react-dom',
       'react-helmet',
       'react-hot-loader',
       'react-inline-css',
       'react-redux',
       'react-router',
-      'react-router-bootstrap',
       'react-router-redux',
       'redux',
       'redux-connect',
