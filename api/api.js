@@ -11,7 +11,6 @@ import http from 'http';
 import SocketIo from 'socket.io';
 import passport from 'passport';
 import * as helpers from './helpers';
-import * as database from './database';
 
 const { auth } = helpers;
 
@@ -43,7 +42,7 @@ app.use((req, res) => {
   const { action, params } = mapUrl(actions, splittedUrlPath);
 
   if (action) {
-    action(req, params, { ...helpers, database })
+    action(req, params, { ...helpers })
     .then((result) => {
       if (result instanceof Function) {
         result(res);

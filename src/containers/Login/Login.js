@@ -3,11 +3,10 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { LoginForm } from 'components';
 import * as authActions from 'redux/modules/auth';
-import * as notifActions from 'redux/modules/notifs';
 
 @connect(
   state => ({ user: state.auth.user }),
-  { ...notifActions, ...authActions })
+  { ...authActions })
 export default class Login extends Component {
   static propTypes = {
     user: PropTypes.object,

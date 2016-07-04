@@ -1,4 +1,3 @@
-import { User } from '../../database';
 import { createValidatorPromise as createValidator, required, email, match } from '../../utils/validation';
 
 export default function register(req) {
@@ -14,23 +13,5 @@ export default function register(req) {
     })
     .catch(err => reject(err));
 
-    function save() {
-      User.forge({
-        email: req.body.email,
-        password: req.body.password
-      })
-      .save()
-      .then(
-        user => resolve({ user }),
-        err => reject(err)
-      );
-    }
-
-    User.forge({ email: req.body.email })
-    .fetch()
-    .then(user => {
-      if (user) return reject({ email: 'Email address already used' });
-      save();
-    });
   });
 }

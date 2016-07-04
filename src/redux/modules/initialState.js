@@ -1,12 +1,16 @@
-const LOAD = 'redux-example/LOAD';
-const LOAD_SUCCESS = 'redux-example/LOAD_SUCCESS';
-const LOAD_FAIL = 'redux-example/LOAD_FAIL';
+/**
+ * Created by Okura on 03/07/2016.
+ */
+
+const LOAD = 'redux-example/auth/LOAD';
+const LOAD_SUCCESS = 'redux-example/auth/LOAD_SUCCESS';
+const LOAD_FAIL = 'redux-example/auth/LOAD_FAIL';
 
 const initialState = {
   loaded: false
 };
 
-export default function info(state = initialState, action = {}) {
+export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case LOAD:
       return {
@@ -18,7 +22,7 @@ export default function info(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: true,
-        data: action.result
+        user: action.result
       };
     case LOAD_FAIL:
       return {
@@ -33,12 +37,13 @@ export default function info(state = initialState, action = {}) {
 }
 
 export function isLoaded(globalState) {
-  return globalState.info && globalState.info.loaded;
+  return globalState.auth && globalState.auth.loaded;
 }
 
 export function load() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.get('/loadInfo')
+    promise: (client) => client.get('/auth/load')
   };
 }
+
