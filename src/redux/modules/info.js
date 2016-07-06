@@ -1,3 +1,5 @@
+import get from 'lodash/get';
+
 const LOAD = 'redux-example/LOAD';
 const LOAD_SUCCESS = 'redux-example/LOAD_SUCCESS';
 const LOAD_FAIL = 'redux-example/LOAD_FAIL';
@@ -5,6 +7,8 @@ const LOAD_FAIL = 'redux-example/LOAD_FAIL';
 const initialState = {
   loaded: false
 };
+// State domain: info
+const DOMAIN = 'info';
 
 export default function info(state = initialState, action = {}) {
   switch (action.type) {
@@ -42,3 +46,5 @@ export function load() {
     promise: (client) => client.get('/loadInfo')
   };
 }
+
+export const getInfoSelector = state => get(state, `${DOMAIN}.data`);

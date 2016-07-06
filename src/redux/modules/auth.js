@@ -1,3 +1,5 @@
+import get from 'lodash/get';
+
 const LOAD = 'redux-example/auth/LOAD';
 const LOAD_SUCCESS = 'redux-example/auth/LOAD_SUCCESS';
 const LOAD_FAIL = 'redux-example/auth/LOAD_FAIL';
@@ -8,10 +10,13 @@ const LOGOUT = 'redux-example/auth/LOGOUT';
 const LOGOUT_SUCCESS = 'redux-example/auth/LOGOUT_SUCCESS';
 const LOGOUT_FAIL = 'redux-example/auth/LOGOUT_FAIL';
 
+
 const initialState = {
   loaded: false
 };
 
+// State domain: auth
+const DOMAIN = 'auth';
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case LOAD:
@@ -101,3 +106,5 @@ export function logout() {
     promise: (client) => client.get('/logout')
   };
 }
+
+export const getUserSelector = state => get(state, `${DOMAIN}.user`);
