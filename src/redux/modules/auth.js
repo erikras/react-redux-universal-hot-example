@@ -1,3 +1,5 @@
+
+import {immutable} from 'utils';
 const LOAD = 'redux-example/auth/LOAD';
 const LOAD_SUCCESS = 'redux-example/auth/LOAD_SUCCESS';
 const LOAD_FAIL = 'redux-example/auth/LOAD_FAIL';
@@ -8,68 +10,59 @@ const LOGOUT = 'redux-example/auth/LOGOUT';
 const LOGOUT_SUCCESS = 'redux-example/auth/LOGOUT_SUCCESS';
 const LOGOUT_FAIL = 'redux-example/auth/LOGOUT_FAIL';
 
-const initialState = {
+const initialState = immutable({
   loaded: false
-};
+});
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case LOAD:
-      return {
-        ...state,
+      return state.merge({
         loading: true
-      };
+      });
     case LOAD_SUCCESS:
-      return {
-        ...state,
+      return state.merge({
         loading: false,
         loaded: true,
         user: action.result
-      };
+      });
     case LOAD_FAIL:
-      return {
-        ...state,
+      return state.merge({
         loading: false,
         loaded: false,
         error: action.error
-      };
+      });
     case LOGIN:
-      return {
-        ...state,
+      return state.merge({
         loggingIn: true
-      };
+      });
     case LOGIN_SUCCESS:
-      return {
-        ...state,
+      return state.merge({
         loggingIn: false,
         user: action.result
-      };
+      });
     case LOGIN_FAIL:
-      return {
-        ...state,
+      return state.merge({
         loggingIn: false,
         user: null,
         loginError: action.error
-      };
+      });
     case LOGOUT:
-      return {
-        ...state,
+      return state.merge({
         loggingOut: true
-      };
+      });
     case LOGOUT_SUCCESS:
-      return {
-        ...state,
+      return state.merge({
         loggingOut: false,
         user: null
-      };
+      });
     case LOGOUT_FAIL:
-      return {
-        ...state,
+      return state.merge({
         loggingOut: false,
         logoutError: action.error
-      };
+      });
     default:
-      return state;
+      return immutable(state);
   }
 }
 
