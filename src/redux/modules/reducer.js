@@ -1,6 +1,5 @@
-import { combineReducers } from 'redux';
+import { combineReducers, routerReducer } from 'redux-seamless-immutable';
 import multireducer from 'multireducer';
-import { routerReducer } from 'react-router-redux';
 import {reducer as reduxAsyncConnect} from 'redux-async-connect';
 
 import auth from './auth';
