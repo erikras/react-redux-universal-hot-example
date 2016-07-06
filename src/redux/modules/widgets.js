@@ -1,3 +1,5 @@
+import get from 'lodash/get';
+
 const LOAD = 'redux-example/widgets/LOAD';
 const LOAD_SUCCESS = 'redux-example/widgets/LOAD_SUCCESS';
 const LOAD_FAIL = 'redux-example/widgets/LOAD_FAIL';
@@ -12,6 +14,9 @@ const initialState = {
   editing: {},
   saveError: {}
 };
+
+// State domain: widgets
+const DOMAIN = 'widgets';
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
@@ -110,3 +115,5 @@ export function editStart(id) {
 export function editStop(id) {
   return { type: EDIT_STOP, id };
 }
+
+export const getWidgetsSelector = state => get(state, DOMAIN);

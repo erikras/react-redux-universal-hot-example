@@ -1,10 +1,11 @@
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {load} from 'redux/modules/info';
+import {load, getInfoSelector} from 'redux/modules/info';
+import {createSelector} from 'reselect';
 
 @connect(
-    state => ({info: state.info.data}),
+    createSelector(getInfoSelector, info => ({info})),
     dispatch => bindActionCreators({load}, dispatch))
 export default class InfoBar extends Component {
   static propTypes = {

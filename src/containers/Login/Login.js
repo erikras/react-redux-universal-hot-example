@@ -2,9 +2,11 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Helmet from 'react-helmet';
 import * as authActions from 'redux/modules/auth';
+import {createSelector} from 'reselect';
+import {getUserSelector} from 'redux/modules/auth';
 
 @connect(
-  state => ({user: state.auth.user}),
+  createSelector(getUserSelector, user => ({user})),
   authActions)
 export default class Login extends Component {
   static propTypes = {

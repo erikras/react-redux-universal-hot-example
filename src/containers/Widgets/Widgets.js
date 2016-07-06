@@ -6,6 +6,8 @@ import {isLoaded, load as loadWidgets} from 'redux/modules/widgets';
 import {initializeWithKey} from 'redux-form';
 import { WidgetForm } from 'components';
 import { asyncConnect } from 'redux-async-connect';
+import {createSelector} from 'reselect';
+import {getWidgetsSelector} from 'redux/modules/widgets';
 
 @asyncConnect([{
   deferred: true,
@@ -16,12 +18,17 @@ import { asyncConnect } from 'redux-async-connect';
   }
 }])
 @connect(
-  state => ({
-    widgets: state.widgets.data,
-    editing: state.widgets.editing,
-    error: state.widgets.error,
-    loading: state.widgets.loading
-  }),
+  createSelector(getWidgetsSelector, ({
+    widgets,
+    editing,
+    error,
+    loading
+  }) => ({
+    widgets,
+    editing,
+    error,
+    loading
+  })),
   {...widgetActions, initializeWithKey })
 export default class Widgets extends Component {
   static propTypes = {
@@ -103,4 +110,3 @@ export default class Widgets extends Component {
     );
   }
 }
-
