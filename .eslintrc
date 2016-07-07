@@ -1,30 +1,49 @@
-{ "extends": "eslint-config-airbnb",
+{
+  "extends": "eslint-config-airbnb",
   "env": {
     "browser": true,
     "node": true,
-    "mocha": true
+    "mocha": true,
+    "es6": true
   },
   "rules": {
-    "react/no-multi-comp": 0,
-    "import/default": 0,
-    "import/no-duplicates": 0,
-    "import/named": 0,
-    "import/namespace": 0,
-    "import/no-unresolved": 0,
-    "import/no-named-as-default": 2,
-    "comma-dangle": 0,  // not sure why airbnb turned this on. gross!
-    "indent": [2, 2, {"SwitchCase": 1}],
-    "no-console": 0,
-    "no-alert": 0
+    "react/no-multi-comp": "warn",
+    "react/jsx-first-prop-new-line": ["warn", "multiline"],
+    "react/prefer-stateless-function": "off",
+    "react/jsx-closing-bracket-location": "off",
+    "import/default": "off",
+    "import/no-duplicates": "off",
+    "import/named": "off",
+    "import/namespace": "off",
+    "import/no-unresolved": "off",
+    "import/no-named-as-default": "error",
+    "comma-dangle": "off", // not sure why airbnb turned this on. gross!
+    "consistent-return": "off",
+    "no-param-reassign": "off",
+    "prefer-template": "warn",
+    "global-require": "off",
+    "no-case-declarations": "off",
+    "no-underscore-dangle": "off",
+    "no-console": "off",
+    "no-alert": "off",
+    "max-len": ["error", 120],
+    "indent": ["error", 2, {"SwitchCase": 1}]
   },
   "plugins": [
-    "react", "import"
+    "react",
+    "import"
   ],
   "settings": {
-    "import/parser": "babel-eslint",
     "import/resolve": {
-      "moduleDirectory": ["node_modules", "src"]
+      "moduleDirectory": [
+        "node_modules",
+        "src"
+      ]
     }
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module"
   },
   "globals": {
     "__DEVELOPMENT__": true,
@@ -32,6 +51,7 @@
     "__SERVER__": true,
     "__DISABLE_SSR__": true,
     "__DEVTOOLS__": true,
+    "__DLLS__": true,
     "socket": true,
     "webpackIsomorphicTools": true
   }

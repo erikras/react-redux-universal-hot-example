@@ -1,3 +1,5 @@
+dist: trusty
+
 language: node_js
 
 node_js:
@@ -7,13 +9,28 @@ node_js:
   - "5"
   - "stable"
 
-sudo: false
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - gcc-4.8
+    - g++-4.8
+
+sudo: required
+
+services:
+  - mysql
 
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
+  - export NODE_ENV=development
 
 script:
   - npm run lint
   - npm test
   - npm run test-node
+
+env:
+  - TRAVIS=travis CXX=g++-4.8
