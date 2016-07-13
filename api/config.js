@@ -1,3 +1,4 @@
 module.exports = {
-  secret: 's*cr*tK*y'
+  secret: 's*cr*tK*y',
+  auth: {}
 };

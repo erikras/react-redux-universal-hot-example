@@ -1,3 +1,5 @@
+import { app } from 'app';
+
 const LOAD = 'redux-example/auth/LOAD';
 const LOAD_SUCCESS = 'redux-example/auth/LOAD_SUCCESS';
 const LOAD_FAIL = 'redux-example/auth/LOAD_FAIL';
@@ -10,6 +12,8 @@ const REGISTER_FAIL = 'redux-example/auth/REGISTER_FAIL';
 const LOGOUT = 'redux-example/auth/LOGOUT';
 const LOGOUT_SUCCESS = 'redux-example/auth/LOGOUT_SUCCESS';
 const LOGOUT_FAIL = 'redux-example/auth/LOGOUT_FAIL';
+
+const userService = app.service('users');
 
 const initialState = {
   loaded: false
@@ -106,14 +110,24 @@ export function load() {
 export function register(data) {
   return {
     types: [REGISTER, REGISTER_SUCCESS, REGISTER_FAIL],
-    promise: (client) => client.post('/auth/register', { data })
+    promise: () => userService.create(data)
+    // client.post('/auth/register', { data })
   };
 }
 
 export function login(data) {
   return {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
-    promise: (client) => client.post('/auth/login', { data })
+    promise: () => app.authenticate({
+        type: 'token',
+        'email': data.email,
+        'password': data.password
+      }).then(function (result) {
+        console.log('Authenticated!', result);
+      }).catch(function (error) {
+        console.error('Error authenticating!', error);
+      })
+    //client.post('/auth/login', { data })
   };
 }
 

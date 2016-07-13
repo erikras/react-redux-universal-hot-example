@@ -1,4 +1,4 @@
-import Express from 'express';
+import express from 'express';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 import config from './config';
@@ -20,7 +20,7 @@ import getRoutes from './routes';
 
 const targetUrl = `http://${config.apiHost}:${config.apiPort}`;
 const pretty = new PrettyError();
-const app = new Express();
+const app = express();
 const server = new http.Server(app);
 const proxy = httpProxy.createProxyServer({
   target: targetUrl,
@@ -30,15 +30,15 @@ const proxy = httpProxy.createProxyServer({
 app.use(compression());
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
 
-app.use(Express.static(path.join(__dirname, '..', 'static')));
+app.use(express.static(path.join(__dirname, '..', 'static')));
 
 // Proxy to API server
 app.use('/api', (req, res) => {
   proxy.web(req, res, { target: targetUrl });
 });
 
-app.use('/ws', (req, res) => {
-  proxy.web(req, res, { target: `${targetUrl}/ws` });
+app.use('/socket.io', (req, res) => {
+  proxy.web(req, res, { target: `${targetUrl}/socket.io` });
 });
 
 server.on('upgrade', (req, socket, head) => {

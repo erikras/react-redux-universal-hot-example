@@ -1,29 +1,26 @@
-import express from 'express';
+import feathers from 'feathers';
 import morgan from 'morgan';
 import session from 'express-session';
 import bodyParser from 'body-parser';
 import config from '../src/config';
-import apiConfig from './config';
+import hooks from 'feathers-hooks';
+import rest from 'feathers-rest';
+import socketio from 'feathers-socketio';
+import middleware from './middleware';
+import services from './services';
 import * as actions from './actions';
 import { mapUrl } from './utils/url.js';
 import PrettyError from 'pretty-error';
 import http from 'http';
 import SocketIo from 'socket.io';
-import passport from 'passport';
-import * as helpers from './helpers';
-import * as database from './database';
-
-const { auth } = helpers;
 
 const pretty = new PrettyError();
-const app = express();
+const app = feathers();
 
 const server = new http.Server(app);
 
 const io = new SocketIo(server);
 io.path('/ws');
-
-auth.initialize(apiConfig.secret);
 
 app.use(morgan('dev'));
 
@@ -35,15 +32,14 @@ app.use(session({
 }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(passport.initialize());
 
-app.use((req, res) => {
+app.use((req, res, next) => {
   const splittedUrlPath = req.url.split('?')[0].split('/').slice(1);
 
   const { action, params } = mapUrl(actions, splittedUrlPath);
 
   if (action) {
-    action(req, params, { ...helpers, database })
+    action(req, params)
     .then((result) => {
       if (result instanceof Function) {
         result(res);
@@ -59,10 +55,15 @@ app.use((req, res) => {
       }
     });
   } else {
-    res.status(404).end('NOT FOUND');
+    next(); // res.status(404).end('NOT FOUND');
   }
 });
 
+app.configure(hooks())
+.configure(rest())
+.configure(socketio())
+.configure(services)
+.configure(middleware);
 
 const bufferSize = 100;
 const messageBuffer = new Array(bufferSize);
