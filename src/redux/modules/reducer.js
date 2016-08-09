@@ -15,7 +15,7 @@ export default combineReducers({
   form,
   notifs,
   auth,
-  multireducer: multireducer({
+  counter: multireducer({
     counter1: counter,
     counter2: counter,
     counter3: counter

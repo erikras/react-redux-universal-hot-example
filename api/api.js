@@ -1,8 +1,11 @@
 import feathers from 'feathers';
+import http from 'http';
+import SocketIo from 'socket.io';
 import morgan from 'morgan';
 import session from 'express-session';
 import bodyParser from 'body-parser';
-import config from '../src/config';
+import globalConfig from '../src/config';
+import config from './config';
 import hooks from 'feathers-hooks';
 import rest from 'feathers-rest';
 import socketio from 'feathers-socketio';
@@ -11,11 +14,12 @@ import services from './services';
 import * as actions from './actions';
 import { mapUrl } from './utils/url.js';
 import PrettyError from 'pretty-error';
-import http from 'http';
-import SocketIo from 'socket.io';
+import authentication from './services/authentication';
 
 const pretty = new PrettyError();
 const app = feathers();
+
+app.set('config', config);
 
 const server = new http.Server(app);
 
@@ -33,49 +37,59 @@ app.use(session({
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use((req, res, next) => {
+const actionsHandler = (req, res, next) => {
   const splittedUrlPath = req.url.split('?')[0].split('/').slice(1);
 
   const { action, params } = mapUrl(actions, splittedUrlPath);
 
   if (action) {
-    action(req, params)
-    .then((result) => {
-      if (result instanceof Function) {
-        result(res);
-      } else {
-        res.json(result);
-      }
-    }, (reason) => {
-      if (reason && reason.redirect) {
-        res.redirect(reason.redirect);
-      } else {
-        console.error('API ERROR:', pretty.render(reason));
-        res.status(reason.status || 500).json(reason);
-      }
-    });
+    try {
+      action(req, params)
+        .then(result => {
+          if (result instanceof Function) {
+            result(res);
+          } else {
+            res.json(result);
+          }
+        })
+        .catch(reason => {
+          if (reason && reason.redirect) {
+            res.redirect(reason.redirect);
+          } else {
+            console.error('API ERROR:', pretty.render(reason));
+            res.status(reason.status || 500).json(reason);
+          }
+        });
+    } catch (error) {
+      console.error('API ERROR:', pretty.render(error));
+      res.status(500).json(error);
+    }
   } else {
-    next(); // res.status(404).end('NOT FOUND');
+    next(); // res.status(404).end('NOT FOUND'); <- disable feathers
   }
-});
+};
+
+// app.use(actionsHandler); <- disable feathers
 
 app.configure(hooks())
-.configure(rest())
-.configure(socketio())
-.configure(services)
-.configure(middleware);
+  .configure(rest())
+  .configure(socketio())
+  .configure(authentication)
+  .use(actionsHandler)
+  .configure(services)
+  .configure(middleware);
 
 const bufferSize = 100;
 const messageBuffer = new Array(bufferSize);
 let messageIndex = 0;
 
-if (config.apiPort) {
-  const runnable = app.listen(config.apiPort, (err) => {
+if (globalConfig.apiPort) {
+  const runnable = app.listen(globalConfig.apiPort, (err) => {
     if (err) {
       console.error(err);
     }
-    console.info('----\n==> 🌎  API is running on port %s', config.apiPort);
-    console.info('==> 💻  Send requests to http://%s:%s', config.apiHost, config.apiPort);
+    console.info('----\n==> 🌎  API is running on port %s', globalConfig.apiPort);
+    console.info('==> 💻  Send requests to http://%s:%s', globalConfig.apiHost, globalConfig.apiPort);
   });
 
   io.on('connection', (socket) => {

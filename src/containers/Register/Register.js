@@ -15,14 +15,14 @@ export default class Register extends Component {
   }
 
   register = data => this.props.register(data)
-  .then(result => {
-    this.props.notifSend({
-      message: 'You\'r now registered !',
-      kind: 'success',
-      dismissAfter: 2000
+    .then(result => {
+      this.props.notifSend({
+        message: 'You\'r now registered !',
+        kind: 'success',
+        dismissAfter: 2000
+      });
+      return result;
     });
-    return result;
-  });
 
   render() {
     return (

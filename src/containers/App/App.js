@@ -13,6 +13,7 @@ import { Notifs, InfoBar } from 'components';
 import { push } from 'react-router-redux';
 import config from 'config';
 import { asyncConnect } from 'redux-connect';
+import cookie from 'js-cookie';
 
 @asyncConnect([{
   promise: ({ store: { dispatch, getState } }) => {
@@ -58,6 +59,7 @@ export default class App extends Component {
 
   handleLogout = (event) => {
     event.preventDefault();
+    cookie.set('feathers-session', '', { expires: -1 });
     this.props.logout();
   };
 

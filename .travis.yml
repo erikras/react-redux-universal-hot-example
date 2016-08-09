@@ -25,11 +25,13 @@ sudo: required
 services:
   - mysql
 
+before_install:
+  - sudo apt-get -qq update
+
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
   - npm install -g knex
-  - npm install mysql
   - mysql -u root -e 'create database myapp_dev;'
   - echo "USE mysql;\nUPDATE user SET password=PASSWORD('grut') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
   - knex migrate:latest --env development

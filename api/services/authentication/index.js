@@ -1,9 +1,12 @@
-import authentication from 'feathers-authentication';
+// import authentication from 'feathers-authentication';
+import authentication, { TokenService as token, LocalService as local } from 'feathers-authentication';
 
 export default function authenticationService() {
   const app = this;
 
-  let config = app.get('auth');
-  
-  app.configure(authentication(config));
-};
+  const config = app.get('config');
+
+  app.configure(authentication(config.auth))
+    .configure(token())
+    .configure(local());
+}

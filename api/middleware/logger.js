@@ -6,11 +6,11 @@ export default function logger(app) {
   // Add a logger to our app object for convenience
   app.logger = pretty;
 
-  return function (error, req, res, next) {
+  return (error, req, res, next) => {
     if (error && error.code !== 404) {
       console.error('API ERROR:', pretty.render(error));
     }
 
     next(error);
   };
-};
+}

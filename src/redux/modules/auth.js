@@ -1,4 +1,4 @@
-import { app } from 'app';
+import app from 'app';
 
 const LOAD = 'redux-example/auth/LOAD';
 const LOAD_SUCCESS = 'redux-example/auth/LOAD_SUCCESS';
@@ -19,6 +19,17 @@ const initialState = {
   loaded: false
 };
 
+const catchValidation = error => {
+  console.log(error);
+  if (error.message) {
+    if (error.message === 'Validation failed' && error.data) {
+      return Promise.reject(error.data);
+    }
+    return Promise.reject({ _error: error.message });
+  }
+  return Promise.reject(error);
+};
+
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case LOAD:
@@ -31,7 +42,8 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: true,
-        user: action.result
+        token: action.result.token,
+        user: action.result.user
       };
     case LOAD_FAIL:
       return {
@@ -49,13 +61,14 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         loggingIn: false,
-        user: action.result
+        token: action.result.token,
+        user: action.result.user
       };
     case LOGIN_FAIL:
       return {
         ...state,
         loggingIn: false,
-        user: null,
+        token: null,
         loginError: action.error
       };
     case REGISTER:
@@ -83,7 +96,8 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         loggingOut: false,
-        user: null
+        user: null,
+        token: null
       };
     case LOGOUT_FAIL:
       return {
@@ -103,15 +117,14 @@ export function isLoaded(globalState) {
 export function load() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.get('/auth/load')
+    promise: client => client.get('/auth/load')
   };
 }
 
 export function register(data) {
   return {
     types: [REGISTER, REGISTER_SUCCESS, REGISTER_FAIL],
-    promise: () => userService.create(data)
-    // client.post('/auth/register', { data })
+    promise: () => userService.create(data).catch(catchValidation)
   };
 }
 
@@ -119,21 +132,22 @@ export function login(data) {
   return {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
     promise: () => app.authenticate({
-        type: 'token',
-        'email': data.email,
-        'password': data.password
-      }).then(function (result) {
-        console.log('Authenticated!', result);
-      }).catch(function (error) {
-        console.error('Error authenticating!', error);
-      })
-    //client.post('/auth/login', { data })
+      type: 'local',
+      email: data.email,
+      password: data.password
+    }).then(result => {
+      console.log(app.get('token')); // -> the JWT
+      console.log(app.get('user')); // -> the user
+      result.user = app.get('user');
+
+      return result;
+    }).catch(catchValidation)
   };
 }
 
 export function logout() {
   return {
     types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
-    promise: (client) => client.get('/auth/logout')
+    promise: () => app.logout()
   };
 }

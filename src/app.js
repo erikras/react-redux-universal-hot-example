@@ -7,15 +7,16 @@ import io from 'socket.io-client';
 import superagent from 'superagent';
 import config from './config';
 
-const host = __SERVER__ ? `http://${config.apiHost}:${config.apiPort}` : '/socket.io';
-const hostRest = __SERVER__ ? `http://${config.apiHost}:${config.apiPort}` : '/api';
+const storage = __SERVER__ ? new (require('node-localstorage').LocalStorage)('./.scratch') : window.localStorage;
 
-export const app = feathers()
-.configure(socketio(io('', { path: host })))
-.configure(hooks())
-.configure(authentication());
+const host = clientUrl => (__SERVER__ ? `http://${config.apiHost}:${config.apiPort}` : clientUrl);
 
-export const restApp = feathers()
-.configure(rest(hostRest).superagent(superagent))
-.configure(hooks())
-.configure(authentication());
+const configureApp = app => app
+  .configure(hooks())
+  .configure(authentication({ storage }));
+
+const app = configureApp(feathers().configure(socketio(io('', { path: host('/socket.io') }))));
+
+export default app;
+
+export const restApp = configureApp(feathers().configure(rest(host('/api')).superagent(superagent)));

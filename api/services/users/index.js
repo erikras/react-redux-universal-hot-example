@@ -1,4 +1,3 @@
-import { user } from '../../database';
 import feathersKnex from 'feathers-knex';
 import hooks from './hooks';
 
@@ -18,11 +17,11 @@ export default function userService() {
   app.use('/users', feathersKnex(options));
 
   // Get our initialize service to that we can bind hooks
-  const userService = app.service('/users');
+  const service = app.service('/users');
 
   // Set up our before hooks
-  userService.before(hooks.before);
+  service.before(hooks.before);
 
   // Set up our after hooks
-  userService.after(hooks.after);
+  service.after(hooks.after);
 }

@@ -32,7 +32,7 @@ export default class ApiClient {
         }
 
         if (this.token) {
-          request.set('Authorization', `JWT ${this.token}`);
+          request.set('Authorization', `Bearer ${this.token}`);
         }
 
         if (files) {

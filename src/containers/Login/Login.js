@@ -2,8 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { LoginForm } from 'components';
+import app from 'app';
 import * as authActions from 'redux/modules/auth';
 import * as notifActions from 'redux/modules/notifs';
+import cookie from 'js-cookie';
 
 @connect(
   state => ({ user: state.auth.user }),
@@ -17,14 +19,15 @@ export default class Login extends Component {
   }
 
   login = data => this.props.login(data)
-  .then(result => {
-    this.props.notifSend({
-      message: 'You\'r logged !',
-      kind: 'success',
-      dismissAfter: 2000
+    .then(result => {
+      cookie.set('feathers-session', app.get('token'), { expires: 1 });
+      this.props.notifSend({
+        message: 'You\'r logged !',
+        kind: 'success',
+        dismissAfter: 2000
+      });
+      return result;
     });
-    return result;
-  });
 
   render() {
     const { user, logout } = this.props;

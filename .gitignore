@@ -7,3 +7,4 @@ webpack-stats.json
 npm-debug.log
 .happypack
 webpack/dlls/*.json
+.scratch

@@ -63,12 +63,12 @@ export default class WidgetForm extends Component {
           <button
             className="btn btn-success"
             onClick={handleSubmit(() => save(values)
-                      .then(result => {
-                        if (result && typeof result.error === 'object') {
-                          return Promise.reject(result.error);
-                        }
-                      })
-                    )}
+              .then(result => {
+                if (result && typeof result.error === 'object') {
+                  return Promise.reject(result.error);
+                }
+              })
+            )}
             disabled={pristine || invalid || submitting}>
             <i className={`fa ${submitting ? 'fa-cog fa-spin' : 'fa-cloud'}`} /> Save
           </button>

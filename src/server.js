@@ -41,6 +41,10 @@ app.use('/socket.io', (req, res) => {
   proxy.web(req, res, { target: `${targetUrl}/socket.io` });
 });
 
+app.use('/ws', (req, res) => {
+  proxy.web(req, res, { target: `${targetUrl}/ws` });
+});
+
 server.on('upgrade', (req, socket, head) => {
   proxy.ws(req, socket, head);
 });

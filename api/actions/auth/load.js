@@ -1,3 +1,8 @@
 export default function load(req) {
-  return Promise.resolve(req.session.user || null);
+  const { token, user } = req;
+
+  return Promise.resolve({
+    user: user ? Object.assign({}, user, { password: undefined }) : null,
+    token: token || null
+  });
 }

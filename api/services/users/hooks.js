@@ -1,19 +1,13 @@
 import hooks from 'feathers-hooks';
 import { hooks as auth } from 'feathers-authentication';
 import { validateHook as validate } from '../../hooks';
-import { required, email, match } from '../../utils/validation';
+import { required, email, match, unique } from '../../utils/validation';
 
 const schemaValidator = {
-  email: [required, email],
+  email: [required, email, unique('email')],
   password: [required],
   password_confirmation: [required, match('password')]
 };
-
-function removePasswordConfirmation() {
-  return hook => {
-    delete hook.data.password_confirmation;
-  };
-}
 
 const userHooks = {
   before: {
@@ -31,8 +25,7 @@ const userHooks = {
     ],
     create: [
       validate(schemaValidator),
-      // TODO already exist
-      removePasswordConfirmation(),
+      hooks.remove('password_confirmation'),
       auth.hashPassword()
     ],
     update: [
