@@ -77,11 +77,11 @@ class SurveyForm extends Component {
             </div>
           </div>
           <div className="form-group">
-            <label className="col-sm-2">Sex</label>
+            <label className="col-sm-2" htmlFor="sex">Sex</label>
             <div className="col-sm-8">
-              <input type="radio" id="sex-male" {...sex} value="male" checked={sex.value === 'male'} />
+              <input type="radio" name="sex" id="sex-male" {...sex} value="male" checked={sex.value === 'male'} />
               <label htmlFor="sex-male" className={styles.radioLabel}>Male</label>
-              <input type="radio" id="sex-female" {...sex} value="female" checked={sex.value === 'female'} />
+              <input type="radio" name="sex" id="sex-female" {...sex} value="female" checked={sex.value === 'female'} />
               <label htmlFor="sex-female" className={styles.radioLabel}>Female</label>
             </div>
           </div>

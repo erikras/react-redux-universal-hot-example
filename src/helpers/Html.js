@@ -25,7 +25,7 @@ export default class Html extends Component {
     const head = Helmet.rewind();
 
     return (
-      <html lang="en-us">
+      <html lang="en-US">
         <head>
           {head.base.toComponent()}
           {head.title.toComponent()}
