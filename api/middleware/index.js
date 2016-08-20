@@ -1,5 +1,5 @@
 import errorHandler from 'feathers-errors/handler';
-import notFound from './not-found-handler';
+import notFound from './notFound';
 import logger from './logger';
 
 export default function middleware() {

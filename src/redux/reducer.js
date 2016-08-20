@@ -3,11 +3,11 @@ import multireducer from 'multireducer';
 import { routerReducer } from 'react-router-redux';
 import { reducer as reduxAsyncConnect } from 'redux-connect';
 import { reducer as form } from 'redux-form';
-import auth from './auth';
-import notifs from './notifs';
-import counter from './counter';
-import info from './info';
-import widgets from './widgets';
+import auth from './modules/auth';
+import notifs from './modules/notifs';
+import counter from './modules/counter';
+import info from './modules/info';
+import widgets from './modules/widgets';
 
 export default combineReducers({
   routing: routerReducer,

@@ -13,6 +13,7 @@ import middleware from './middleware';
 import services from './services';
 import * as actions from './actions';
 import { mapUrl } from './utils/url.js';
+import isPromise from 'is-promise';
 import PrettyError from 'pretty-error';
 import authentication from './services/authentication';
 
@@ -42,9 +43,17 @@ const actionsHandler = (req, res, next) => {
 
   const { action, params } = mapUrl(actions, splittedUrlPath);
 
+  const catchError = error => {
+    console.error('API ERROR:', pretty.render(error));
+    res.status(error.status || 500).json(error);
+  };
+
+  req.app = app;
+
   if (action) {
     try {
-      action(req, params)
+      const handle = action(req, params);
+      (isPromise(handle) ? handle : Promise.resolve(handle))
         .then(result => {
           if (result instanceof Function) {
             result(res);
@@ -56,20 +65,18 @@ const actionsHandler = (req, res, next) => {
           if (reason && reason.redirect) {
             res.redirect(reason.redirect);
           } else {
-            console.error('API ERROR:', pretty.render(reason));
-            res.status(reason.status || 500).json(reason);
+            catchError(reason);
           }
         });
     } catch (error) {
-      console.error('API ERROR:', pretty.render(error));
-      res.status(500).json(error);
+      catchError(error);
     }
   } else {
     next(); // res.status(404).end('NOT FOUND'); <- disable feathers
   }
 };
 
-// app.use(actionsHandler); <- disable feathers
+// app.use(actionsHandler); <- disable feathers (delete following configuration)
 
 app.configure(hooks())
   .configure(rest())

@@ -5,10 +5,7 @@ module.exports = {
       idField: 'id'
     },
     local: {
-      successHandler: (/* authConfig */) => (req, res, next) => {
-        delete res.data.user.password;
-        next();
-      }
+      successHandler: () => (req, res, next) => next // for rest login, pass redirection
     },
     token: {
       secret: 'super secret'

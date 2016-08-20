@@ -27,7 +27,7 @@ describe('InfoBar', () => {
       <InfoBar />
     </Provider>
   );
-  const dom = ReactDOM.findDOMNode(renderer);
+  const dom = ReactDOM.findDOMNode(renderer); // TODO replace findDOMNode method
 
   it('should render correctly', () => expect(renderer).to.be.ok);
 

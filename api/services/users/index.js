@@ -17,7 +17,7 @@ export default function userService() {
   app.use('/users', feathersKnex(options));
 
   // Get our initialize service to that we can bind hooks
-  const service = app.service('/users');
+  const service = app.service('users');
 
   // Set up our before hooks
   service.before(hooks.before);
