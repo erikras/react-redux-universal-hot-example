@@ -138,7 +138,6 @@ export function login(data) {
     }).then(result => {
       console.log(app.get('token')); // -> the JWT
       console.log(app.get('user')); // -> the user
-      result.user = app.get('user');
 
       return result;
     }).catch(catchValidation)

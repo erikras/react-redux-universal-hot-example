@@ -20,7 +20,9 @@ export default class Login extends Component {
 
   login = data => this.props.login(data)
     .then(result => {
-      cookie.set('feathers-session', app.get('token'), { expires: 1 });
+      if (result.expires) {
+        cookie.set('feathers-session', app.get('token'), { expires: result.expires / (60 * 60 * 24 * 1000) });
+      }
       this.props.notifSend({
         message: 'You\'r logged !',
         kind: 'success',

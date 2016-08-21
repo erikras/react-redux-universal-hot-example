@@ -12,8 +12,12 @@ export default function authenticationService() {
   const service = app.service('auth/local');
 
   service.after(hook => {
-    if (hook.result.user.password) {
-      delete hook.result.user.password;
+    const { user } = hook.result;
+    if (user.password) {
+      delete user.password;
+    }
+    if (user) {
+      hook.result.expires = app.get('auth').cookies['feathers-session'].maxAge || null;
     }
     return hook;
   });
