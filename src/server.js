@@ -37,10 +37,6 @@ app.use('/api', (req, res) => {
   proxy.web(req, res, { target: targetUrl });
 });
 
-app.use('/socket.io', (req, res) => {
-  proxy.web(req, res, { target: `${targetUrl}/socket.io` });
-});
-
 app.use('/ws', (req, res) => {
   proxy.web(req, res, { target: `${targetUrl}/ws` });
 });

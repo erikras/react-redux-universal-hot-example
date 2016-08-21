@@ -30,13 +30,13 @@ export default class Chat extends Component {
     }
   }
 
-  onMessageReceived = (data) => {
+  onMessageReceived = data => {
     const messages = this.state.messages;
     messages.push(data);
     this.setState({ messages });
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
 
     const msg = this.state.message;
@@ -59,12 +59,12 @@ export default class Chat extends Component {
 
         {user && <div>
           <ul>
-            {this.state.messages.map((msg) => <li key={`chat.msg.${msg.id}`}>{msg.from}: {msg.text}</li>)}
+            {this.state.messages.map(msg => <li key={`chat.msg.${msg.id}`}>{msg.from}: {msg.text}</li>)}
           </ul>
           <form className="login-form" onSubmit={this.handleSubmit}>
             <input
               type="text" ref={c => { this.message = c; }} placeholder="Enter your message" value={this.state.message}
-              onChange={(event) => {
+              onChange={event => {
                 this.setState({ message: event.target.value });
               }}
             />

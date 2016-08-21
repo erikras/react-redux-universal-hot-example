@@ -1,6 +1,4 @@
 import feathers from 'feathers';
-import http from 'http';
-import SocketIo from 'socket.io';
 import morgan from 'morgan';
 import session from 'express-session';
 import bodyParser from 'body-parser';
@@ -21,11 +19,6 @@ const pretty = new PrettyError();
 const app = feathers();
 
 app.set('config', config);
-
-const server = new http.Server(app);
-
-const io = new SocketIo(server);
-io.path('/ws');
 
 app.use(morgan('dev'));
 
@@ -72,34 +65,16 @@ const actionsHandler = (req, res, next) => {
       catchError(error);
     }
   } else {
-    next(); // res.status(404).end('NOT FOUND'); <- disable feathers
+    next();
   }
 };
 
-// app.use(actionsHandler); <- disable feathers (delete following configuration)
+const socketHandler = io => {
+  const bufferSize = 100;
+  const messageBuffer = new Array(bufferSize);
+  let messageIndex = 0;
 
-app.configure(hooks())
-  .configure(rest())
-  .configure(socketio())
-  .configure(authentication)
-  .use(actionsHandler)
-  .configure(services)
-  .configure(middleware);
-
-const bufferSize = 100;
-const messageBuffer = new Array(bufferSize);
-let messageIndex = 0;
-
-if (globalConfig.apiPort) {
-  const runnable = app.listen(globalConfig.apiPort, (err) => {
-    if (err) {
-      console.error(err);
-    }
-    console.info('----\n==> 🌎  API is running on port %s', globalConfig.apiPort);
-    console.info('==> 💻  Send requests to http://%s:%s', globalConfig.apiHost, globalConfig.apiPort);
-  });
-
-  io.on('connection', (socket) => {
+  io.on('connection', socket => {
     socket.emit('news', { msg: '\'Hello World!\' from server' });
 
     socket.on('history', () => {
@@ -112,14 +87,31 @@ if (globalConfig.apiPort) {
       }
     });
 
-    socket.on('msg', (data) => {
+    socket.on('msg', data => {
       const message = { ...data, id: messageIndex };
       messageBuffer[messageIndex % bufferSize] = message;
       messageIndex++;
       io.emit('msg', message);
     });
   });
-  io.listen(runnable);
+};
+
+app.configure(hooks())
+  .configure(rest())
+  .configure(socketio({ path: '/ws' }, socketHandler))
+  .configure(authentication)
+  .use(actionsHandler)
+  .configure(services)
+  .configure(middleware);
+
+if (globalConfig.apiPort) {
+  app.listen(globalConfig.apiPort, (err) => {
+    if (err) {
+      console.error(err);
+    }
+    console.info('----\n==> 🌎  API is running on port %s', globalConfig.apiPort);
+    console.info('==> 💻  Send requests to http://%s:%s', globalConfig.apiHost, globalConfig.apiPort);
+  });
 } else {
   console.error('==>     ERROR: No APIPORT environment variable has been specified');
 }

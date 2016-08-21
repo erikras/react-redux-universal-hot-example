@@ -16,7 +16,9 @@ const configureApp = transport => feathers()
   .configure(hooks())
   .configure(authentication({ storage }));
 
-const app = configureApp(socketio(io('', { path: host('/socket.io') })));
+export const socket = io('', { path: host('/ws') });
+
+const app = configureApp(socketio(socket));
 
 export default app;
 
