@@ -39,25 +39,25 @@ export default class Chat extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
+    const { user } = this.props;
     const msg = this.state.message;
 
     this.setState({ message: '' });
 
     socket.emit('msg', {
-      from: this.props.user.email,
+      from: (user && user.email) || 'Anonymous',
       text: msg
     });
   }
 
   render() {
     const style = require('./Chat.scss');
-    const { user } = this.props;
 
     return (
       <div className={`${style.chat} container`}>
-        <h1 className={style}>Chat</h1>
+        <h1>Chat</h1>
 
-        {user && <div>
+        <div>
           <ul>
             {this.state.messages.map(msg => <li key={`chat.msg.${msg.id}`}>{msg.from}: {msg.text}</li>)}
           </ul>
@@ -71,7 +71,6 @@ export default class Chat extends Component {
             <button className="btn" onClick={this.handleSubmit}>Send</button>
           </form>
         </div>
-        }
       </div>
     );
   }

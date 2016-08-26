@@ -1,29 +1,31 @@
 import React from 'react';
 import { IndexRoute, Route } from 'react-router';
 import { isLoaded as isAuthLoaded, load as loadAuth } from 'redux/modules/auth';
-import { App, Chat, Home, Widgets, About, Register, Login, LoginSuccess, Survey, NotFound } from 'containers';
+import {
+  App, Chat, ChatFeathers, Home, Widgets, About,
+  Register, Login, LoginSuccess, Survey, NotFound
+} from 'containers';
 
 export default (store) => {
-  function checkAuth(logged, replace, cb) {
-    const { auth: { user } } = store.getState();
-    if (!!user === !logged) replace('/');
-    cb();
-  }
-
-  const requireLogin = (nextState, replace, cb) => {
+  const loadAuthIfNeeded = cb => {
     if (!isAuthLoaded(store.getState())) {
-      store.dispatch(loadAuth()).then(() => checkAuth(true, replace, cb));
-    } else {
-      checkAuth(true, replace, cb);
+      return store.dispatch(loadAuth()).then(() => cb());
     }
+    return cb();
+  };
+  const checkUser = (cond, replace, cb) => {
+    const { auth: { user } } = store.getState();
+    if (!cond(user)) replace('/');
+    cb();
   };
 
   const requireNotLogged = (nextState, replace, cb) => {
-    if (!isAuthLoaded(store.getState())) {
-      store.dispatch(loadAuth()).then(() => checkAuth(false, replace, cb));
-    } else {
-      checkAuth(false, replace, cb);
-    }
+    const cond = user => !user;
+    loadAuthIfNeeded(() => checkUser(cond, replace, cb));
+  };
+  const requireLogin = (nextState, replace, cb) => {
+    const cond = user => !!user;
+    loadAuthIfNeeded(() => checkUser(cond, replace, cb));
   };
 
   /**
@@ -36,8 +38,8 @@ export default (store) => {
 
       {/* Routes requiring login */}
       <Route onEnter={requireLogin}>
-        <Route path="chat" component={Chat} />
         <Route path="loginSuccess" component={LoginSuccess} />
+        <Route path="chatFeathers" component={ChatFeathers} />
       </Route>
 
       {/* Routes disallow login */}
@@ -50,6 +52,7 @@ export default (store) => {
       <Route path="about" component={About} />
       <Route path="survey" component={Survey} />
       <Route path="widgets" component={Widgets} />
+      <Route path="chat" component={Chat} />
 
       {/* Catch all route */}
       <Route path="*" component={NotFound} status={404} />

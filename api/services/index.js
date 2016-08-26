@@ -2,6 +2,7 @@ import knex from 'knex';
 import knexConfig from '../../knexfile';
 import _bookshelf from 'bookshelf';
 import users from './users';
+import messages from './messages';
 
 export default function services() {
   const app = this;
@@ -10,7 +11,8 @@ export default function services() {
   bookshelf.plugin('registry'); // Resolve circular dependencies with relations
   bookshelf.plugin('visibility');
 
-  app.set('bookshelf', bookshelf);
+  app.set('database', bookshelf);
 
   app.configure(users);
+  app.configure(messages);
 }

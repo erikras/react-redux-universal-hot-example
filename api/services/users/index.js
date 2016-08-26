@@ -5,7 +5,7 @@ export default function userService() {
   const app = this;
 
   const options = {
-    Model: app.get('bookshelf').knex,
+    Model: app.get('database').knex,
     name: 'user',
     paginate: {
       default: 5,

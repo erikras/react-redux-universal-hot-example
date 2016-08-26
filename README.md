@@ -42,12 +42,15 @@ I cobbled this together from a wide variety of similar "starter" repositories. A
 npm install
 ```
 
-Now you must select your database system into the following and install them:
+### Database
+
+#### Knex (MySQL, SQLite, Postgres...)
+If you want to use knex you can change to one of the following database:
  
 Postgres, MSSQL, MySQL, MariaDB, SQLite3, and Oracle are supported.
 
-```bash
 for example:
+```bash
  npm install mysql [--save]
 ```
 
@@ -63,6 +66,9 @@ development: {
   migrations: {
     tableName: 'migrations',
     directory: './api/database/migrations'
+  },
+  seeds: {
+    directory: './api/database/seeds'
   }
 },
 
@@ -71,7 +77,7 @@ production: {
 }
 ```
 
-If you will use migrations, you must install `knex` globally (http://knexjs.org/#Migrations-CLI)
+If you will use migrations, you must install `knex` globally: (http://knexjs.org/#Migrations-CLI)
 
 ```bash
 npm install knex -g
@@ -83,6 +89,36 @@ and run the following command:
 knex migrate:latest [--env production|development]
 ```
 
+You can also use the seeder of knex with this command: (http://knexjs.org/#Seeds)
+
+```bash
+knex seed:run
+```
+
+##### The default user is:
+```
+email: test@test.fr
+password: test
+```
+
+#### Mongoose, Sequelize, Waterline and other connectors
+
+For those who prefer to use Mongoose, Sequelize or others:
+
+First you can delete the `database/migrations` and `database/seeds` directories.  
+Also you can remove `feathers-knex` dependencies, install an adapter Feathers below and configure it with feathers in [api.js](https://github.com/bertho-zero/react-redux-universal-hot-example/blob/master/api/api.js).  
+And to finish change the [User model/schema](https://github.com/bertho-zero/react-redux-universal-hot-example/blob/master/api/database/User.js) (or remove it if useless),
+and [Users service](https://github.com/bertho-zero/react-redux-universal-hot-example/blob/master/api/services/users/index.js) with your favorite adapter.
+
+- [feathers-memory](https://github.com/feathersjs/feathers-memory)
+- [feathers-mongodb](https://github.com/feathersjs/feathers-mongodb)
+- [feathers-mongoose](https://github.com/feathersjs/feathers-mongoose)
+- [feathers-nedb](https://github.com/feathersjs/feathers-nedb)
+- [feathers-rethinkdb](https://github.com/feathersjs/feathers-rethinkdb)
+- [feathers-sequelize](https://github.com/feathersjs/feathers-sequelize)
+- [feathers-waterline](https://github.com/feathersjs/feathers-waterline)
+- [feathers-localstorage](https://github.com/feathersjs/feathers-localstorage) (A client side service based on feathers-memory that persists to LocalStorage)
+- ...
 
 ## Running Dev Server
 

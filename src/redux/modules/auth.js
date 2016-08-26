@@ -20,7 +20,6 @@ const initialState = {
 };
 
 const catchValidation = error => {
-  console.log(error);
   if (error.message) {
     if (error.message === 'Validation failed' && error.data) {
       return Promise.reject(error.data);

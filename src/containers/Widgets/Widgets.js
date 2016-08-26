@@ -41,17 +41,13 @@ export default class Widgets extends Component {
       return () => editStart(String(widget.id));
     };
     const { widgets, error, editing, loading, load } = this.props;
-    let refreshClassName = 'fa fa-refresh';
-    if (loading) {
-      refreshClassName += ' fa-spin';
-    }
     const styles = require('./Widgets.scss');
     return (
       <div className={`${styles.widgets} container`}>
         <h1>
           Widgets
           <button className={`${styles.refreshBtn} btn btn-success`} onClick={load}>
-            <i className={refreshClassName} />{' '}Reload Widgets
+            <i className={`fa fa-refresh ${loading ? ' fa-spin' : ''}`} />{' '}Reload Widgets
           </button>
         </h1>
         <Helmet title="Widgets" />

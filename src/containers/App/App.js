@@ -13,7 +13,7 @@ import { Notifs, InfoBar } from 'components';
 import { push } from 'react-router-redux';
 import config from 'config';
 import { asyncConnect } from 'redux-connect';
-import cookie from 'js-cookie';
+// import cookie from 'js-cookie';
 
 @asyncConnect([{
   promise: ({ store: { dispatch, getState } }) => {
@@ -59,7 +59,8 @@ export default class App extends Component {
 
   handleLogout = (event) => {
     event.preventDefault();
-    cookie.set('feathers-session', '', { expires: -1 });
+    // Unsupported reconnection socket for now
+    // cookie.set('feathers-session', '', { expires: -1 });
     this.props.logout();
   };
 
@@ -83,10 +84,13 @@ export default class App extends Component {
 
           <Navbar.Collapse eventKey={0}>
             <Nav navbar>
-              {user && <LinkContainer to="/chat">
-                <NavItem eventKey={1}>Chat</NavItem>
+              {user && <LinkContainer to="/chatFeathers">
+                <NavItem>Chat with Feathers</NavItem>
               </LinkContainer>}
 
+              <LinkContainer to="/chat">
+                <NavItem eventKey={1}>Chat</NavItem>
+              </LinkContainer>
               <LinkContainer to="/widgets">
                 <NavItem eventKey={2}>Widgets</NavItem>
               </LinkContainer>

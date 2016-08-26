@@ -23,11 +23,11 @@ const history = syncHistoryWithStore(_browserHistory, store);
 
 
 function initSocket() {
-  socket.on('news', (data) => {
+  socket.on('news', data => {
     console.log(data);
     socket.emit('my other event', { my: 'data from client' });
   });
-  socket.on('msg', (data) => {
+  socket.on('msg', data => {
     console.log(data);
   });
 
@@ -37,7 +37,7 @@ function initSocket() {
 global.socket = initSocket();
 
 
-const renderRouter = (props) => <ReduxAsyncConnect {...props} helpers={{ client }} filter={item => !item.deferred} />;
+const renderRouter = props => <ReduxAsyncConnect {...props} helpers={{ client }} filter={item => !item.deferred} />;
 const render = routes => {
   ReactDOM.render(
     <HotEnabler>
