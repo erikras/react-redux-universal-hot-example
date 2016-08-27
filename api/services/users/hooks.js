@@ -1,6 +1,6 @@
 import hooks from 'feathers-hooks';
 import { hooks as auth } from 'feathers-authentication';
-import { validateHook as validate } from '../../hooks';
+import { validateHook } from '../../hooks';
 import { required, email, match, unique } from '../../utils/validation';
 
 const schemaValidator = {
@@ -8,6 +8,15 @@ const schemaValidator = {
   password: [required],
   password_confirmation: [required, match('password')]
 };
+
+function validate() {
+  return function (hook) { // eslint-disable-line func-names
+    if (hook.data.facebook) {
+      return hook;
+    }
+    return validateHook(schemaValidator).bind(this)(hook);
+  };
+}
 
 const userHooks = {
   before: {
@@ -24,7 +33,7 @@ const userHooks = {
       auth.restrictToOwner({ ownerField: 'id' })
     ],
     create: [
-      validate(schemaValidator),
+      validate(),
       hooks.remove('password_confirmation'),
       auth.hashPassword()
     ],

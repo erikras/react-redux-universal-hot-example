@@ -11,12 +11,7 @@ export default function messagesService() {
     }
   }));
 
-  // Get our initialize service to that we can bind hooks
-  const service = app.service('messages');
-
-  // Set up our before hooks
-  service.before(hooks.before);
-
-  // Set up our after hooks
-  service.after(hooks.after);
+  app.service('messages')
+    .before(hooks.before)
+    .after(hooks.after);
 }

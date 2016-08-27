@@ -1,4 +1,4 @@
-import app from 'app';
+import app, { restApp } from 'app';
 
 const LOAD = 'redux-example/auth/LOAD';
 const LOAD_SUCCESS = 'redux-example/auth/LOAD_SUCCESS';
@@ -140,6 +140,21 @@ export function login(data) {
 
       return result;
     }).catch(catchValidation)
+  };
+}
+
+export function oauthLogin(provider, data) {
+  return {
+    types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
+    promise: () => restApp.service(`/auth/${provider}`).create(data).then(result => {
+      app.set('token', result.token); // -> set manually the JWT
+      app.set('user', result.user); // -> set manually the user
+      console.log(app.get('token')); // -> the JWT
+      console.log(app.get('user')); // -> the user
+
+      return result;
+    }).catch(catchValidation)
+    /* client => client.post(`/auth/${provider}`, { data }).catch(catchValidation) */
   };
 }
 
