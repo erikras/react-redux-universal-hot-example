@@ -15,8 +15,8 @@ This is a starter boilerplate app I've put together using the following technolo
 * [React](https://github.com/facebook/react)
 * [React Router](https://github.com/reactjs/react-router)
 * [Express](http://expressjs.com)
+* [Feathers](http://feathersjs.com/)
 * [Passport](http://passportjs.org) for authentication
-* [Knex](http://knexjs.org/) with [Bookshelf](http://bookshelfjs.org/) to use database and migrations
 * [Babel](http://babeljs.io) for ES6 and ES7 magic
 * [Webpack](http://webpack.github.io) for bundling
 * [Webpack Dev Middleware](http://webpack.github.io/docs/webpack-dev-middleware.html)
@@ -44,71 +44,10 @@ npm install
 
 ### Database
 
-#### Knex (MySQL, SQLite, Postgres...)
-If you want to use knex you can change to one of the following database:
- 
-Postgres, MSSQL, MySQL, MariaDB, SQLite3, and Oracle are supported.
-
-for example:
-```bash
- npm install mysql [--save]
-```
-
-You must then configure the database client in `knexfile.js` file (http://knexjs.org/#Installation-client) for each environment, eg:
-```bash
-development: {
-  client: 'mysql',
-  connection: {
-    database: 'myapp_dev',
-    user:     'root',
-    password: 'grut'
-  },
-  migrations: {
-    tableName: 'migrations',
-    directory: './api/database/migrations'
-  },
-  seeds: {
-    directory: './api/database/seeds'
-  }
-},
-
-production: {
-  ...
-}
-```
-
-If you will use migrations, you must install `knex` globally: (http://knexjs.org/#Migrations-CLI)
-
-```bash
-npm install knex -g
-```
-
-and run the following command:
-
-```bash
-knex migrate:latest [--env production|development]
-```
-
-You can also use the seeder of knex with this command: (http://knexjs.org/#Seeds)
-
-```bash
-knex seed:run
-```
-
-##### The default user is:
-```
-email: test@test.fr
-password: test
-```
-
 #### Mongoose, Sequelize, Waterline and other connectors
 
-For those who prefer to use Mongoose, Sequelize or others:
-
-First you can delete the `database/migrations` and `database/seeds` directories.  
-Also you can remove `feathers-knex` dependencies, install an adapter Feathers below and configure it with feathers in [api.js](https://github.com/bertho-zero/react-redux-universal-hot-example/blob/master/api/api.js).  
-And to finish change the [User model/schema](https://github.com/bertho-zero/react-redux-universal-hot-example/blob/master/api/database/User.js) (or remove it if useless),
-and [Users service](https://github.com/bertho-zero/react-redux-universal-hot-example/blob/master/api/services/users/index.js) with your favorite adapter.
+For those who prefer to use Mongoose, Sequelize or others you can remove `feathers-nedb` dependencies, install a Feathers adapter below and configure it with feathers in [api.js](https://github.com/bertho-zero/react-redux-universal-hot-example/blob/master/api/api.js).  
+And to finish create the (eg: `/api/database/User.js`), and modify [Users service](https://github.com/bertho-zero/react-redux-universal-hot-example/blob/master/api/services/users/index.js) for your favorite adapter.
 
 - [feathers-memory](https://github.com/feathersjs/feathers-memory)
 - [feathers-mongodb](https://github.com/feathersjs/feathers-mongodb)
