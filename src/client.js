@@ -14,6 +14,7 @@ import { AppContainer as HotEnabler } from 'react-hot-loader';
 import withScroll from 'scroll-behavior';
 import getRoutes from './routes';
 import { socket } from 'app';
+// import { syncSocket } from './redux/modules/auth';
 
 const client = new ApiClient();
 const _browserHistory = withScroll(browserHistory);
@@ -23,6 +24,9 @@ const history = syncHistoryWithStore(_browserHistory, store);
 
 
 function initSocket() {
+  /* socket.on('connect', () => {
+    store.dispatch(syncSocket());
+  }); */
   socket.on('news', data => {
     console.log(data);
     socket.emit('my other event', { my: 'data from client' });
