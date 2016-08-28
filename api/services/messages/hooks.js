@@ -26,7 +26,7 @@ const messagesHooks = {
       hook => {
         hook.data = {
           text: hook.data.text,
-          sentBy: hook.params.user.id, // Set the id of current user
+          sentBy: hook.params.user._id, // Set the id of current user
         };
       }
     ],
