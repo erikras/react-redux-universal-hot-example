@@ -47,7 +47,7 @@ npm install
 #### Mongoose, Sequelize, Waterline and other connectors
 
 For those who prefer to use Mongoose, Sequelize or others you can remove `feathers-nedb` dependencies, install a Feathers adapter below and configure it with feathers in [api.js](https://github.com/bertho-zero/react-redux-universal-hot-example/blob/master/api/api.js).  
-And to finish create the (eg: `/api/database/User.js`), and modify [Users service](https://github.com/bertho-zero/react-redux-universal-hot-example/blob/master/api/services/users/index.js) for your favorite adapter.
+And to finish create the schema/model `User` (eg: `/api/database/User.js`), and modify [Users service](https://github.com/bertho-zero/react-redux-universal-hot-example/blob/master/api/services/users/index.js) for use your favorite adapter.
 
 - [feathers-memory](https://github.com/feathersjs/feathers-memory)
 - [feathers-mongodb](https://github.com/feathersjs/feathers-mongodb)
