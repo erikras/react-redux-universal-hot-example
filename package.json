@@ -113,7 +113,6 @@
     "feathers-authentication": "^0.8.0-alpha-1",
     "feathers-errors": "^2.4.0",
     "feathers-hooks": "^1.5.4",
-    "feathers-memory": "^0.7.5",
     "feathers-nedb": "^2.4.1",
     "feathers-rest": "^1.4.2",
     "feathers-socketio": "^1.4.1",
