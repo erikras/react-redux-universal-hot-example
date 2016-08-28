@@ -28,6 +28,9 @@ const messagesHooks = {
           text: hook.data.text,
           sentBy: hook.params.user._id, // Set the id of current user
         };
+      },
+      hook => {
+        hook.data.createdAt = new Date();
       }
     ],
     update: [hooks.disable()], // TODO: restrict to sender
@@ -36,7 +39,7 @@ const messagesHooks = {
   },
   after: {
     all: [],
-    find: [],
+    find: [hooks.populate('sentBy', options), hooks.remove('sentBy.password')],
     get: [hooks.populate('sentBy', options), hooks.remove('sentBy.password')],
     create: [hooks.populate('sentBy', options), hooks.remove('sentBy.password')],
     update: [],

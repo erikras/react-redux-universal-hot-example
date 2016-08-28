@@ -73,7 +73,7 @@ export default class ChatFeathers extends Component {
 
         {user && <div>
           <ul>
-            {this.state.messages.map(msg => <li key={`chat.msg.${msg.id}`}>{msg.sentBy.email}: {msg.text}</li>)}
+            {this.state.messages.map(msg => <li key={`chat.msg.${msg._id}`}>{msg.sentBy.email}: {msg.text}</li>)}
           </ul>
           <form className="login-form" onSubmit={this.handleSubmit}>
             <input
