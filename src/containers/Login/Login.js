@@ -20,7 +20,7 @@ export default class Login extends Component {
   onFacebookLogin = (err, data) => {
     if (err) return;
     this.props.oauthLogin('facebook', data)
-      .then(this.successLogin); // TODO: finalize register (associate to an email & password for local auth)
+      .then(this.successLogin); // TODO: finalize register (associate to an email & password for local auth) ?
   };
 
   login = data => this.props.login(data).then(this.successLogin);

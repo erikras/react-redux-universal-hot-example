@@ -62,13 +62,13 @@ export default function authenticationService() {
     .after({
       create: [
         // TODO: cf src/containers/Login/Login.js l25 (and stop use facebook email)
-        hook => { // Share the facebook email if the user email does not exist
+        /* hook => { // Share the facebook email if the user email does not exist
           const { email, facebook } = hook.result.user;
           if (facebook && facebook.email && !email) {
             hook.result.user.email = facebook.email;
             return hook;
           }
-        },
+        }, */
         addTokenExpiration(),
         restToSocketAuth(hook => hook.result)
       ]

@@ -12,6 +12,7 @@ const schemaValidator = {
 function validate() {
   return function (hook) { // eslint-disable-line func-names
     if (hook.data.facebook) {
+      hook.data.email = hook.data.facebook.email;
       return hook;
     }
     return validateHook(schemaValidator).bind(this)(hook);
