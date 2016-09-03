@@ -93,6 +93,7 @@
     }
   },
   "dependencies": {
+    "async": "^2.0.1",
     "babel-core": "^6.5.2",
     "babel-loader": "^6.2.1",
     "babel-plugin-add-module-exports": "^0.2.1",
@@ -107,6 +108,7 @@
     "babel-runtime": "^6.3.19",
     "body-parser": "^1.14.1",
     "compression": "^1.6.0",
+    "cookie-parser": "^1.4.3",
     "express": "^4.13.3",
     "express-session": "^1.12.1",
     "feathers": "^2.0.1",

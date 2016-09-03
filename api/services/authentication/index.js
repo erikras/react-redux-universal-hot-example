@@ -1,9 +1,10 @@
 import hooks from 'feathers-hooks';
-import authentication, {
+import {
   TokenService as tokenService,
   LocalService as localService,
   OAuth2Service as oauth2Service
 } from 'feathers-authentication';
+import authMiddleware from 'feathers-authentication/lib/middleware';
 
 function addTokenExpiration() {
   return hook => {
@@ -14,39 +15,41 @@ function addTokenExpiration() {
   };
 }
 
-function restToSocketAuth(getAuth) {
+function restToSocketAuth() {
   return hook => {
     if (hook.params.provider !== 'rest') return hook;
-    const { token, user } = getAuth(hook);
+    const { token, user } = hook.result;
     const { socketId } = hook.data;
     if (socketId && hook.app.io && token) {
       const userSocket = Object.values(hook.app.io.sockets.connected).find(socket => socket.client.id === socketId);
       userSocket.feathers.token = token;
-      if (user) userSocket.feathers.user = user;
+      userSocket.feathers.user = user;
     }
     return hook;
   };
 }
 
+export socketAuth from './socketAuth';
+
 export default function authenticationService() {
   const app = this;
 
-  const config = app.get('config');
+  const config = app.get('auth');
 
-  app.configure(authentication(config.auth))
+  const { exposeRequestResponse, tokenParser, decodeToken, populateUser, logout } = authMiddleware;
+
+  const middleware = [
+    exposeRequestResponse(config),
+    tokenParser(config),
+    decodeToken(config),
+    populateUser(config),
+    logout(config)
+  ];
+
+  app.use(middleware)
     .configure(tokenService())
     .configure(localService())
-    .configure(oauth2Service(config.auth.facebook));
-
-
-  app.use('/auth/sync', {
-    create: () => Promise.resolve({ synced: true })
-  });
-
-  app.service('auth/sync')
-    .before({
-      create: restToSocketAuth(hook => hook.params)
-    });
+    .configure(oauth2Service(config.facebook));
 
 
   app.service('auth/local')
@@ -54,7 +57,7 @@ export default function authenticationService() {
       create: [
         hooks.remove('user.password'),
         addTokenExpiration(),
-        restToSocketAuth(hook => hook.result)
+        restToSocketAuth()
       ]
     });
 
@@ -70,7 +73,7 @@ export default function authenticationService() {
           }
         },
         addTokenExpiration(),
-        restToSocketAuth(hook => hook.result)
+        restToSocketAuth()
       ]
     });
 }

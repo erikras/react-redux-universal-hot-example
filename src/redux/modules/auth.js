@@ -13,15 +13,11 @@ const REGISTER_FAIL = 'redux-example/auth/REGISTER_FAIL';
 const LOGOUT = 'redux-example/auth/LOGOUT';
 const LOGOUT_SUCCESS = 'redux-example/auth/LOGOUT_SUCCESS';
 const LOGOUT_FAIL = 'redux-example/auth/LOGOUT_FAIL';
-const SYNC_SOCKET = 'redux-example/auth/SYNC_SOCKET';
-const SYNC_SOCKET_SUCCESS = 'redux-example/auth/SYNC_SOCKET_SUCCESS';
-const SYNC_SOCKET_FAIL = 'redux-example/auth/SYNC_SOCKET_FAIL';
 
 const userService = app.service('users');
 
 const initialState = {
-  loaded: false,
-  socketSynced: false
+  loaded: false
 };
 
 const catchValidation = error => {
@@ -109,30 +105,13 @@ export default function reducer(state = initialState, action = {}) {
         loggingOut: false,
         logoutError: action.error
       };
-    case SYNC_SOCKET:
-      return {
-        ...state,
-        socketSyncing: true
-      };
-    case SYNC_SOCKET_SUCCESS:
-      return {
-        ...state,
-        socketSyncing: false,
-        socketSynced: true
-      };
-    case SYNC_SOCKET_FAIL:
-      return {
-        ...state,
-        socketSyncing: false,
-        socketSyncError: action.error
-      };
     default:
       return state;
   }
 }
 
 function shareFeathersAuth(response) {
-  const { token = undefined, user = undefined } = response;
+  const { token, user } = response;
   const storage = app.get('storage');
   if (token) {
     storage.setItem('feathers-jwt', token);
@@ -162,33 +141,10 @@ export function isLoaded(globalState) {
   return globalState.auth && globalState.auth.loaded;
 }
 
-export function isSocketSynced(globalState) {
-  return globalState.auth && globalState.auth.socketSynced;
-}
-
-export function socketSyncing(globalState) {
-  return globalState.auth && globalState.auth.socketSyncing;
-}
-
 export function load() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
     promise: client => client.get('/auth/load')
-  };
-}
-
-export function syncSocket() {
-  return {
-    types: [SYNC_SOCKET, SYNC_SOCKET_SUCCESS, SYNC_SOCKET_FAIL],
-    promise: () => new Promise(resolve => {
-      const socketId = socket.io.engine.id;
-      if (socketId) {
-        return resolve(restApp.service('/auth/sync').create({ socketId }));
-      }
-      socket.on('connect', () => {
-        resolve(restApp.service('/auth/sync').create({ socketId: socket.io.engine.id }));
-      });
-    })
   };
 }
 
