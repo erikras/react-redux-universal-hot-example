@@ -1,21 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import app from 'app';
-import * as authActions from 'redux/modules/auth';
 
 @connect(
-  state => ({
-    user: state.auth.user,
-    socketSynced: state.auth.socketSynced
-  }),
-  authActions
+  state => ({ user: state.auth.user })
 )
 export default class ChatFeathers extends Component {
 
   static propTypes = {
-    user: PropTypes.object,
-    socketSynced: PropTypes.bool,
-    syncSocket: PropTypes.func
+    user: PropTypes.object
   };
 
   state = {
@@ -25,25 +18,6 @@ export default class ChatFeathers extends Component {
   };
 
   componentDidMount() {
-    const { socketSynced, syncSocket } = this.props;
-    if (!socketSynced) {
-      syncSocket().then(() => this.initService());
-    } else {
-      this.initService();
-    }
-  }
-
-  componentWillUnmount() {
-    app.service('messages').removeListener('created', this.onMessageReceived);
-  }
-
-  onMessageReceived = data => {
-    const messages = this.state.messages;
-    messages.push(data);
-    this.setState({ messages });
-  }
-
-  initService = () => {
     const messageService = app.service('messages');
     // Find the last 25 messages
     messageService.find({
@@ -54,6 +28,16 @@ export default class ChatFeathers extends Component {
     }).then(page => this.setState({ messages: page.data }));
     // Listen to newly created messages
     messageService.on('created', this.onMessageReceived);
+  }
+
+  componentWillUnmount() {
+    app.service('messages').removeListener('created', this.onMessageReceived);
+  }
+
+  onMessageReceived = data => {
+    const messages = this.state.messages;
+    messages.push(data);
+    this.setState({ messages });
   }
 
   handleSubmit = event => {

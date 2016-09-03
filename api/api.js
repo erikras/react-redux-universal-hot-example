@@ -2,6 +2,7 @@ import feathers from 'feathers';
 import morgan from 'morgan';
 import session from 'express-session';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 import globalConfig from '../src/config';
 import config from './config';
 import hooks from 'feathers-hooks';
@@ -13,7 +14,8 @@ import * as actions from './actions';
 import { mapUrl } from './utils/url.js';
 import isPromise from 'is-promise';
 import PrettyError from 'pretty-error';
-import authentication from './services/authentication';
+import authentication, { middleware as authMiddleware } from 'feathers-authentication';
+import authService, { socketAuth } from './services/authentication';
 
 const pretty = new PrettyError();
 const app = feathers();
@@ -22,6 +24,7 @@ app.set('config', config);
 
 app.use(morgan('dev'));
 
+app.use(cookieParser());
 app.use(session({
   secret: 'react and redux rule!!!!',
   resave: false,
@@ -74,8 +77,12 @@ const socketHandler = io => {
   const messageBuffer = new Array(bufferSize);
   let messageIndex = 0;
 
+  io.use(socketAuth(app));
+  io.on('connection', authMiddleware.setupSocketIOAuthentication(app, app.get('auth')));
+
   io.on('connection', socket => {
-    socket.emit('news', { msg: '\'Hello World!\' from server' });
+    const user = socket.feathers.user ? { ...socket.feathers.user, password: undefined } : undefined;
+    socket.emit('news', { msg: '\'Hello World!\' from server', user });
 
     socket.on('history', () => {
       for (let index = 0; index < bufferSize; index++) {
@@ -97,9 +104,10 @@ const socketHandler = io => {
 };
 
 app.configure(hooks())
+  .configure(authentication(config.auth))
   .configure(rest())
   .configure(socketio({ path: '/ws' }, socketHandler))
-  .configure(authentication)
+  .configure(authService)
   .use(actionsHandler)
   .configure(services)
   .configure(middleware);
