@@ -61,27 +61,27 @@ var webpackConfig = module.exports = {
       helpers.createSourceLoader({
         happy: { id: 'jsx' },
         test: /\.jsx?$/,
-        loaders: ['react-hot-loader/webpack', 'babel?' + JSON.stringify(babelLoaderQuery), 'eslint-loader'],
+        loaders: ['react-hot-loader/webpack', 'babel?' + JSON.stringify(babelLoaderQuery), 'eslint-loader']
       }),
       helpers.createSourceLoader({
         happy: { id: 'json' },
         test: /\.json$/,
-        loader: 'json-loader',
+        loader: 'json-loader'
       }),
       helpers.createSourceLoader({
         happy: { id: 'less' },
         test: /\.less$/,
-        loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!less?outputStyle=expanded&sourceMap',
+        loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!less?outputStyle=expanded&sourceMap'
       }),
       helpers.createSourceLoader({
         happy: { id: 'sass' },
         test: /\.scss$/,
-        loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap',
+        loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap'
       }),
-      { test: /\.woff2?(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/font-woff" },
-      { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream" },
-      { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file" },
-      { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=image/svg+xml" },
+      { test: /\.woff2?(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
+      { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream' },
+      { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file' },
+      { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml' },
       { test: webpackIsomorphicToolsPlugin.regular_expression('images'), loader: 'url-loader?limit=10240' }
     ]
   },
@@ -109,7 +109,7 @@ var webpackConfig = module.exports = {
     helpers.createHappyPlugin('jsx'),
     helpers.createHappyPlugin('json'),
     helpers.createHappyPlugin('less'),
-    helpers.createHappyPlugin('sass'),
+    helpers.createHappyPlugin('sass')
   ]
 };
 

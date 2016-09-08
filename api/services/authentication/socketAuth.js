@@ -3,12 +3,13 @@ import authMiddleware from 'feathers-authentication/lib/middleware';
 
 export default function socketAuth(app) {
   return (socket, next) => {
+    const { cookie } = socket.request.headers;
     const req = {
       app,
       headers: socket.request.headers,
       body: {},
       query: {},
-      cookies: socket.request.headers.cookie.split('; ').reduce((prev, cookie) => {
+      cookies: cookie && cookie.split('; ').reduce((prev, cookie) => {
         const [name, value] = cookie.split('=');
         return {
           ...prev,

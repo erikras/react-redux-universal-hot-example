@@ -84,3 +84,17 @@ if (__DEVTOOLS__ && !window.devToolsExtension) {
     devToolsDest
   );
 }
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
+    .then(() => {
+      console.log('Service worker registered!');
+    })
+    .catch(error => {
+      console.log('Error registering service worker: ', error);
+    });
+
+  navigator.serviceWorker.ready.then((/* registration */) => {
+    console.log('Service Worker Ready');
+  });
+}

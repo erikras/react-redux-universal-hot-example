@@ -1,4 +1,4 @@
-require('babel-polyfill');
+// require('babel-polyfill');
 
 // Webpack config for creating the production bundle.
 var path = require('path');
@@ -14,11 +14,14 @@ var assetsPath = path.resolve(projectRootPath, './static/dist');
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools'));
 
+var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
   devtool: 'source-map',
   context: path.resolve(__dirname, '..'),
   entry: {
-    'main': [
+    main: [
       'bootstrap-sass!./src/theme/bootstrap.config.prod.js',
       'font-awesome-webpack!./src/theme/font-awesome.config.prod.js',
       './src/client.js'
@@ -58,7 +61,7 @@ module.exports = {
     extensions: ['', '.json', '.js', '.jsx']
   },
   plugins: [
-    new CleanPlugin([assetsPath], { root: projectRootPath }),
+    new CleanPlugin([assetsPath, 'static/service-worker.js'], { root: projectRootPath }),
 
     // css files from the extract-text-plugin loader
     new ExtractTextPlugin('[name]-[chunkhash].css', { allChunks: true }),
@@ -86,6 +89,31 @@ module.exports = {
       }
     }),
 
-    webpackIsomorphicToolsPlugin
+    webpackIsomorphicToolsPlugin,
+
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'src/progressive.js'
+    }),
+
+    new SWPrecacheWebpackPlugin(
+      {
+        cacheId: 'react-redux-universal-hot-example',
+        filename: '../service-worker.js',
+        maximumFileSizeToCacheInBytes: 8388608,
+
+        // Ensure all our static, local assets are cached.
+        staticFileGlobs: [assetsPath + '/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff}'],
+        stripPrefix: assetsPath + '/',
+
+        directoryIndex: '/',
+        verbose: true,
+        navigateFallback: '/dist/index.html',
+        /* runtimeCaching: [{
+          handler: 'cacheFirst',
+          urlPattern: /[.]mp3$/
+        }] */
+      }
+    )
   ]
 };

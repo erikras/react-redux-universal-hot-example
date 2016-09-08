@@ -29,8 +29,14 @@ const proxy = httpProxy.createProxyServer({
 
 app.use(compression());
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
+app.get('manifest.json', (req, res) => { res.sendFile(path.join(__dirname, '..', 'static', 'manifest.json')); });
 
 app.use(express.static(path.join(__dirname, '..', 'static')));
+
+app.use((req, res, next) => {
+  res.setHeader('Service-Worker-Allowed', '*');
+  return next();
+});
 
 // Proxy to API server
 app.use('/api', (req, res) => {

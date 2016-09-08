@@ -1,6 +1,7 @@
 .idea/
 node_modules/
-dist/
+static/dist/
+static/service-worker.js
 *.iml
 webpack-assets.json
 webpack-stats.json
