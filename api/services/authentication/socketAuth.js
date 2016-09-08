@@ -9,8 +9,8 @@ export default function socketAuth(app) {
       headers: socket.request.headers,
       body: {},
       query: {},
-      cookies: cookie && cookie.split('; ').reduce((prev, cookie) => {
-        const [name, value] = cookie.split('=');
+      cookies: cookie && cookie.split('; ').reduce((prev, nextCookie) => {
+        const [name, value] = nextCookie.split('=');
         return {
           ...prev,
           [name]: value
