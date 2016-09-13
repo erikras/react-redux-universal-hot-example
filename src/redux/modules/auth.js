@@ -1,4 +1,5 @@
 import app, { restApp, socket } from 'app';
+import { SubmissionError } from 'redux-form';
 import cookie from 'js-cookie';
 
 const LOAD = 'redux-example/auth/LOAD';
@@ -23,9 +24,9 @@ const initialState = {
 const catchValidation = error => {
   if (error.message) {
     if (error.message === 'Validation failed' && error.data) {
-      return Promise.reject(error.data);
+      throw new SubmissionError(error.data);
     }
-    return Promise.reject({ _error: error.message });
+    throw new SubmissionError({ _error: error.message });
   }
   return Promise.reject(error);
 };
