@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { reduxForm, Field, getFormValues } from 'redux-form';
+import { reduxForm, Field, getFormValues, SubmissionError } from 'redux-form';
 import widgetValidation, { colors } from './widgetValidation';
 import * as widgetActions from 'redux/modules/widgets';
 
@@ -28,14 +28,14 @@ export default class WidgetForm extends Component {
     values: PropTypes.object.isRequired
   };
 
-  renderInput = ({ input, meta: { touched, error } }) => <div>
-    <input type="text" className="form-control" {...input} />
+  renderInput = ({ input, className, meta: { touched, error } }) => <div>
+    <input type="text" className={className} {...input} />
     {error && touched && <div className="text-danger">{error}</div>}
   </div>;
 
-  renderColorSelect = ({ input, meta: { touched, error } }) => <div>
-    <select name="color" className="form-control" {...input}>
-      {colors.map(valueColor => <option value={valueColor} key={valueColor}>{valueColor}</option>)}
+  renderSelect = ({ options, input, className, meta: { touched, error } }) => <div>
+    <select className={className} {...input}>
+      {options.map(option => <option value={option} key={option}>{option}</option>)}
     </select>
     {error && touched && <div className="text-danger">{error}</div>}
   </div>;
@@ -48,9 +48,12 @@ export default class WidgetForm extends Component {
     const styles = require('containers/Widgets/Widgets.scss');
     return (
       <tr className={submitting ? styles.saving : ''}>
-        <td className={styles.idCol}>{form}</td>
+        <td className={styles.idCol}>
+          {values.id}
+          <Field name="id" type="hidden" component="input" />
+        </td>
         <td className={styles.colorCol}>
-          <Field name="color" className="form-control" component={this.renderColorSelect} />
+          <Field name="color" className="form-control" component={this.renderSelect} options={colors} />
         </td>
         <td className={styles.sprocketsCol}>
           <Field name="sprocketCount" className="form-control" component={this.renderInput} />
@@ -68,10 +71,11 @@ export default class WidgetForm extends Component {
           <button
             className="btn btn-success"
             onClick={handleSubmit(() => save(values)
-                .then(result => {
-                  if (result && typeof result.error === 'object') {
-                    return Promise.reject(result.error);
+                .catch(err => {
+                  if (typeof err === 'object') {
+                    throw new SubmissionError(err);
                   }
+                  return Promise.reject(err);
                 })
               )}
             disabled={pristine || invalid || submitting}>
