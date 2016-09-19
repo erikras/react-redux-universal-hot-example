@@ -10,7 +10,6 @@ export default function checkNet(path = '/favicon.ico') {
     xhr.onreadystatechange = () => {
       if (xhr.readyState === 4) {
         if (xhr.status >= 200 && (xhr.status < 300 || xhr.status === 304)) {
-          console.log('connected');
           return resolve(true);
         }
         resolve(false);

@@ -9,7 +9,6 @@ export default function middleware() {
   app.use(logger(app));
   app.use(errorHandler({
     json: (error, req, res) => {
-      if (error.message === 'Validation failed') return res.json(error.data);
       res.json(error);
     },
     html: (error, req, res) => {
