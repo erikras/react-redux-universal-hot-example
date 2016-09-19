@@ -109,10 +109,13 @@ module.exports = {
         directoryIndex: '/',
         verbose: true,
         navigateFallback: '/dist/index.html',
-        /* runtimeCaching: [{
-          handler: 'cacheFirst',
-          urlPattern: /[.]mp3$/
-        }] */
+        runtimeCaching: [{
+          urlPattern: /\/api\/widget\/load(.*)/,
+          handler: 'networkFirst',
+          options: {
+            debug: true
+          }
+        }]
       }
     )
   ]

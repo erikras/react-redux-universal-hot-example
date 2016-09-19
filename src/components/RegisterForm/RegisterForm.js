@@ -22,7 +22,7 @@ export default class RegisterForm extends Component {
     </div>;
 
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, error } = this.props;
 
     return (
       <form className="form-horizontal" onSubmit={handleSubmit}>
@@ -30,6 +30,7 @@ export default class RegisterForm extends Component {
         <Field name="password" type="password" component={this.renderInput} label="Password" />
         <Field name="password_confirmation" type="password"
           component={this.renderInput} label="Password confirmation" />
+        {error && <p className="text-danger"><strong>{error}</strong></p>}
         <button className="btn btn-success" type="submit">
           <i className="fa fa-sign-in" />{' '}Register
         </button>

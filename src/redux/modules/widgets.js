@@ -34,7 +34,7 @@ export default function reducer(state = initialState, action = {}) {
         loading: false,
         loaded: false,
         data: null,
-        error: action.error
+        error: typeof action.error === 'string' ? action.error : 'Error'
       };
     case EDIT_START:
       return {

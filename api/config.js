@@ -10,7 +10,7 @@ module.exports = {
       idField: '_id'
     },
     local: {
-      successHandler: () => (req, res, next) => next // for login with rest provider, pass redirection
+      successHandler: () => (req, res) => res.json(res.data)
     },
     token: {
       secret: 'super secret'
@@ -18,7 +18,7 @@ module.exports = {
     cookies: {
       enable: true,
       'feathers-session': { // set to false to disable this cookie
-        httpOnly: true,
+        httpOnly: false,
         maxAge: ONE_DAY,
         secure: process.env.NODE_ENV === 'production'
       }

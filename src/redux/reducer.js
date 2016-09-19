@@ -8,6 +8,7 @@ import notifs from './modules/notifs';
 import counter from './modules/counter';
 import info from './modules/info';
 import widgets from './modules/widgets';
+import chat from './modules/chat';
 
 export default combineReducers({
   routing: routerReducer,
@@ -21,5 +22,6 @@ export default combineReducers({
     counter3: counter
   }),
   info,
-  widgets
+  widgets,
+  chat
 });

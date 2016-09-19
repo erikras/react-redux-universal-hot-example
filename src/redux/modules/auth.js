@@ -15,7 +15,7 @@ const LOGOUT = 'redux-example/auth/LOGOUT';
 const LOGOUT_SUCCESS = 'redux-example/auth/LOGOUT_SUCCESS';
 const LOGOUT_FAIL = 'redux-example/auth/LOGOUT_FAIL';
 
-const userService = app.service('users');
+const userService = restApp.service('users');
 
 const initialState = {
   loaded: false
@@ -132,9 +132,8 @@ function shareFeathersAuth(response) {
 }
 
 function setCookie(result) {
-  if (result.expires) {
-    cookie.set('feathers-session', app.get('token'), { expires: result.expires / (60 * 60 * 24 * 1000) });
-  }
+  const options = result.expires ? { expires: result.expires / (60 * 60 * 24 * 1000) } : undefined;
+  cookie.set('feathers-session', app.get('token'), options);
   return result;
 }
 
@@ -160,7 +159,7 @@ export function login(data) {
   const socketId = socket.io.engine.id;
   return {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
-    promise: () => app.authenticate({
+    promise: () => restApp.authenticate({
       type: 'local',
       email: data.email,
       password: data.password,
