@@ -186,9 +186,8 @@ export function oauthLogin(provider, data) {
 export function logout() {
   return {
     types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
-    promise: () => app.logout()
-      .then(() => {
-        cookie.set('feathers-session', '', { expires: -1 });
-      })
+    promise: () => (socket.connected ? app : restApp).logout().then(() => {
+      cookie.set('feathers-session', '', { expires: -1 });
+    })
   };
 }
