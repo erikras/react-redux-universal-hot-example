@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import * as widgetActions from 'redux/modules/widgets';
-import { initializeWithKey } from 'redux-form';
 import { WidgetForm } from 'components';
 import { asyncConnect } from 'redux-connect';
 
@@ -23,13 +22,12 @@ const { isLoaded, load: loadWidgets } = widgetActions;
     error: state.widgets.error,
     loading: state.widgets.loading
   }),
-  { ...widgetActions, initializeWithKey })
+  { ...widgetActions })
 export default class Widgets extends Component {
   static propTypes = {
     widgets: PropTypes.array,
     error: PropTypes.string,
     loading: PropTypes.bool,
-    initializeWithKey: PropTypes.func.isRequired,
     editing: PropTypes.object.isRequired,
     load: PropTypes.func.isRequired,
     editStart: PropTypes.func.isRequired
@@ -78,7 +76,7 @@ export default class Widgets extends Component {
           <tbody>
             {
               widgets.map((widget) => (editing[widget.id] ?
-                <WidgetForm formKey={String(widget.id)} key={String(widget.id)} initialValues={widget} /> :
+                <WidgetForm form={String(widget.id)} key={String(widget.id)} initialValues={widget} /> :
                 <tr key={widget.id}>
                   <td className={styles.idCol}>{widget.id}</td>
                   <td className={styles.colorCol}>{widget.color}</td>

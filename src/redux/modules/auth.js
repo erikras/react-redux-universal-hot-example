@@ -1,4 +1,6 @@
-import app from 'app';
+import app, { restApp, socket } from 'app';
+import { SubmissionError } from 'redux-form';
+import cookie from 'js-cookie';
 
 const LOAD = 'redux-example/auth/LOAD';
 const LOAD_SUCCESS = 'redux-example/auth/LOAD_SUCCESS';
@@ -13,7 +15,7 @@ const LOGOUT = 'redux-example/auth/LOGOUT';
 const LOGOUT_SUCCESS = 'redux-example/auth/LOGOUT_SUCCESS';
 const LOGOUT_FAIL = 'redux-example/auth/LOGOUT_FAIL';
 
-const userService = app.service('users');
+const userService = restApp.service('users');
 
 const initialState = {
   loaded: false
@@ -22,9 +24,9 @@ const initialState = {
 const catchValidation = error => {
   if (error.message) {
     if (error.message === 'Validation failed' && error.data) {
-      return Promise.reject(error.data);
+      throw new SubmissionError(error.data);
     }
-    return Promise.reject({ _error: error.message });
+    throw new SubmissionError({ _error: error.message });
   }
   return Promise.reject(error);
 };
@@ -109,6 +111,32 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
+function shareFeathersAuth(response) {
+  const { token, user } = response;
+  const storage = app.get('storage');
+  if (token) {
+    storage.setItem('feathers-jwt', token);
+  } else {
+    storage.removeItem('feathers-jwt');
+  }
+
+  app.set('token', token); // -> set manually the JWT
+  app.set('user', user); // -> set manually the user
+  restApp.set('token', token);
+  restApp.set('user', user);
+
+  console.log(app.get('token')); // -> the JWT
+  console.log(app.get('user')); // -> the user
+
+  return response;
+}
+
+function setCookie(result) {
+  const options = result.expires ? { expires: result.expires / (60 * 60 * 24 * 1000) } : undefined;
+  cookie.set('feathers-session', app.get('token'), options);
+  return result;
+}
+
 export function isLoaded(globalState) {
   return globalState.auth && globalState.auth.loaded;
 }
@@ -128,24 +156,38 @@ export function register(data) {
 }
 
 export function login(data) {
+  const socketId = socket.io.engine.id;
   return {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
-    promise: () => app.authenticate({
+    promise: () => restApp.authenticate({
       type: 'local',
       email: data.email,
-      password: data.password
-    }).then(result => {
-      console.log(app.get('token')); // -> the JWT
-      console.log(app.get('user')); // -> the user
+      password: data.password,
+      socketId
+    })
+      .then(shareFeathersAuth)
+      .then(setCookie)
+      .catch(catchValidation)
+  };
+}
 
-      return result;
-    }).catch(catchValidation)
+export function oauthLogin(provider, data) {
+  const socketId = socket.io.engine.id;
+  return {
+    types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
+    promise: () => restApp.service(`/auth/${provider}`)
+      .create({ ...data, socketId })
+      .then(shareFeathersAuth)
+      .then(setCookie)
+      .catch(catchValidation)
   };
 }
 
 export function logout() {
   return {
     types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
-    promise: () => app.logout()
+    promise: () => (socket.connected ? app : restApp).logout().then(() => {
+      cookie.set('feathers-session', '', { expires: -1 });
+    })
   };
 }

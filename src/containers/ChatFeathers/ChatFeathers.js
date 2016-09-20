@@ -1,21 +1,25 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import app from 'app';
+import { addMessage } from 'redux/modules/chat';
 
 @connect(
   state => ({
-    user: state.auth.user
-  })
+    user: state.auth.user,
+    messages: state.chat.messages
+  }),
+  { addMessage }
 )
 export default class ChatFeathers extends Component {
 
   static propTypes = {
-    user: PropTypes.object
+    user: PropTypes.object,
+    addMessage: PropTypes.func,
+    messages: PropTypes.array
   };
 
   state = {
     message: '',
-    messages: [],
     error: null
   };
 
@@ -24,22 +28,16 @@ export default class ChatFeathers extends Component {
     // Find the last 25 messages
     messageService.find({
       query: {
-        $sort: { createdAt: 1 },
+        $sort: { createdAt: -1 },
         $limit: 25
       }
-    }).then(page => this.setState({ messages: page.data }));
+    }).then(page => this.props.addMessage(page.data.reverse()));
     // Listen to newly created messages
-    messageService.on('created', this.onMessageReceived);
+    messageService.on('created', this.props.addMessage);
   }
 
   componentWillUnmount() {
-    app.service('messages').removeListener('created', this.onMessageReceived);
-  }
-
-  onMessageReceived = data => {
-    const messages = this.state.messages;
-    messages.push(data);
-    this.setState({ messages });
+    app.service('messages').removeListener('created', this.props.addMessage);
   }
 
   handleSubmit = event => {
@@ -50,7 +48,7 @@ export default class ChatFeathers extends Component {
   }
 
   render() {
-    const { user } = this.props;
+    const { user, messages } = this.props;
     const { error } = this.state;
 
     return (
@@ -59,7 +57,7 @@ export default class ChatFeathers extends Component {
 
         {user && <div>
           <ul>
-            {this.state.messages.map(msg => <li key={`chat.msg.${msg.id}`}>{msg.sentBy.email}: {msg.text}</li>)}
+            {messages.map(msg => <li key={`chat.msg.${msg._id}`}>{msg.sentBy.email}: {msg.text}</li>)}
           </ul>
           <form className="login-form" onSubmit={this.handleSubmit}>
             <input

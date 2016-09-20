@@ -15,14 +15,8 @@ addons:
     packages:
     - gcc-4.8
     - g++-4.8
-    - mysql-server-5.6
-    - mysql-client-core-5.6
-    - mysql-client-5.6
 
 sudo: required
-
-services:
-  - mysql
 
 before_install:
   - sudo apt-get -qq update
@@ -30,10 +24,6 @@ before_install:
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
-  - npm install -g knex
-  - mysql -u root -e 'create database myapp_dev;'
-  - echo "USE mysql;\nUPDATE user SET password=PASSWORD('grut') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
-  - knex migrate:latest --env development
   - export NODE_ENV=development
 
 script:

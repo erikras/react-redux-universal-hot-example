@@ -35,28 +35,34 @@ export default class Html extends Component {
 
           <link rel="shortcut icon" href="/favicon.ico" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <link rel="manifest" href="/manifest.json" />
+          <meta name="mobile-web-app-capable" content="yes" />
+          <meta name="apple-mobile-web-app-capable" content="yes" />
+          <meta name="application-name" content="React Hot" />
+          <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+          <meta name="apple-mobile-web-app-title" content="React Hot" />
           {/* styles (will be present only in production with webpack extract text plugin) */}
-          {Object.keys(assets.styles).map((style, key) =>
+          {assets.styles && Object.keys(assets.styles).map((style, key) =>
             <link
               href={assets.styles[style]} key={key} media="screen, projection"
               rel="stylesheet" type="text/css" charSet="UTF-8" />
           )}
 
           {/* (will be present only in development mode) */}
-          {Object.keys(assets.styles).length === 0 ?
+          {assets.styles && Object.keys(assets.styles).length === 0 ?
             <style dangerouslySetInnerHTML={{ __html: '#content{display:none}' }} /> : null}
         </head>
         <body>
           <div id="content" dangerouslySetInnerHTML={{ __html: content }} />
-          <script
+          {store && <script
             dangerouslySetInnerHTML={{ __html: `window.__data=${serialize(store.getState())};` }}
             charSet="UTF-8"
-          />
+          />}
           {__DLLS__ && <script key="dlls__vendor" src="/dist/dlls/dll__vendor.js" charSet="UTF-8" />}
-          <script src={assets.javascript.main} charSet="UTF-8" />
+          {assets.javascript && <script src={assets.javascript.main} charSet="UTF-8" />}
 
           {/* (will be present only in development mode) */}
-          {Object.keys(assets.styles).length === 0 ? <script
+          {assets.styles && Object.keys(assets.styles).length === 0 ? <script
             dangerouslySetInnerHTML={{ __html: 'document.getElementById("content").style.display="block";' }} /> : null}
         </body>
       </html>

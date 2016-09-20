@@ -1,12 +1,15 @@
-import feathersKnex from 'feathers-knex';
+import feathersNedb from 'feathers-nedb';
+import NeDB from 'nedb';
 import hooks from './hooks';
 
 export default function userService() {
   const app = this;
 
   const options = {
-    Model: app.get('database').knex,
-    name: 'user',
+    Model: new NeDB({
+      filename: `${__dirname}/users.nedb`,
+      autoload: true
+    }),
     paginate: {
       default: 5,
       max: 25
@@ -14,14 +17,9 @@ export default function userService() {
   };
 
   // Initialize our service with any options it requires
-  app.use('/users', feathersKnex(options));
+  app.use('/users', feathersNedb(options));
 
-  // Get our initialize service to that we can bind hooks
-  const service = app.service('users');
-
-  // Set up our before hooks
-  service.before(hooks.before);
-
-  // Set up our after hooks
-  service.after(hooks.after);
+  app.service('users')
+    .before(hooks.before)
+    .after(hooks.after);
 }

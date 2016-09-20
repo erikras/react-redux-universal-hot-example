@@ -1,10 +1,10 @@
 import feathers from 'feathers/client';
 import hooks from 'feathers-hooks';
-// import rest from 'feathers-rest/client';
+import rest from 'feathers-rest/client';
 import socketio from 'feathers-socketio/client';
 import authentication from 'feathers-authentication/client';
 import io from 'socket.io-client';
-// import superagent from 'superagent';
+import superagent from 'superagent';
 import config from './config';
 
 const storage = __SERVER__ ? new (require('node-localstorage').LocalStorage)('./.scratch') : window.localStorage;
@@ -22,4 +22,4 @@ const app = configureApp(socketio(socket));
 
 export default app;
 
-// export const restApp = configureApp(rest(host('/api')).superagent(superagent));
+export const restApp = configureApp(rest(host('/api')).superagent(superagent));
