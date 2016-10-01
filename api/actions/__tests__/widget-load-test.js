@@ -36,7 +36,7 @@ describe('widget load', () => {
     it('rejects the call', () => {
       load({ session: { user: {} } }, undefined).then(
         () => {},
-        (err) => {
+        err => {
           expect(err).to.equal('Widget load fails 33% of the time. You were unlucky.');
         });
     });

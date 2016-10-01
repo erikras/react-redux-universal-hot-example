@@ -34,7 +34,7 @@ export default class Widgets extends Component {
   };
 
   render() {
-    const handleEdit = (widget) => {
+    const handleEdit = widget => {
       const { editStart } = this.props; // eslint-disable-line no-shadow
       return () => editStart(String(widget.id));
     };
@@ -75,7 +75,7 @@ export default class Widgets extends Component {
           </thead>
           <tbody>
             {
-              widgets.map((widget) => (editing[widget.id] ?
+              widgets.map(widget => (editing[widget.id] ?
                 <WidgetForm form={String(widget.id)} key={String(widget.id)} initialValues={widget} /> :
                 <tr key={widget.id}>
                   <td className={styles.idCol}>{widget.id}</td>

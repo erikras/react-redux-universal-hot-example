@@ -113,7 +113,7 @@ app.configure(hooks())
   .configure(middleware);
 
 if (globalConfig.apiPort) {
-  app.listen(globalConfig.apiPort, (err) => {
+  app.listen(globalConfig.apiPort, err => {
     if (err) {
       console.error(err);
     }

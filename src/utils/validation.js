@@ -57,7 +57,7 @@ export function match(field) {
 export function createValidator(rules, params) {
   return (data = {}) => {
     const errors = {};
-    Object.keys(rules).forEach((key) => {
+    Object.keys(rules).forEach(key => {
       const rule = join([].concat(rules[key])); // concat enables both functions and arrays of functions
       const error = rule(data[key], data, { key, ...params });
       if (error) {

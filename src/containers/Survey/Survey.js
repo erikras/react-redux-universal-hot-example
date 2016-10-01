@@ -12,7 +12,7 @@ export default class Survey extends Component {
     initialize: PropTypes.func.isRequired
   }
 
-  handleSubmit = (data) => {
+  handleSubmit = data => {
     window.alert(`Data submitted! ${JSON.stringify(data)}`);
     this.props.initialize('survey', {});
   }

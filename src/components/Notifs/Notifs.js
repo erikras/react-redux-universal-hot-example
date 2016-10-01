@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 @connect(
-  state => ({ notifs: state.notifs }),
+  state => ({ notifs: state.notifs }), // TODO namespace with props ?
   {}
 )
 export default class Notifs extends Component {

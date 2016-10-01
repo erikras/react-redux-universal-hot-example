@@ -6,7 +6,7 @@ import {
   Register, Login, LoginSuccess, Survey, NotFound
 } from 'containers';
 
-export default (store) => {
+export default store => {
   const loadAuthIfNeeded = cb => {
     if (!isAuthLoaded(store.getState())) {
       return store.dispatch(loadAuth()).then(() => cb());
