@@ -29,8 +29,8 @@ module.exports = {
       endpoint: '/auth/facebook',
       strategy: FacebookStrategy,
       tokenStrategy: FacebookTokenStrategy,
-      clientID: '619121718248110',
-      clientSecret: '765220c3e424174af8fb691a37c0b8f4',
+      clientID: '635147529978862',
+      clientSecret: '28c16a4effa4a5f1371924e4dd12c8cd',
       permissions: {
         authType: 'rerequest',
         scope: ['public_profile', 'email']

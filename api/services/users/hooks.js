@@ -2,6 +2,7 @@ import hooks from 'feathers-hooks';
 import { hooks as auth } from 'feathers-authentication';
 import { validateHook } from '../../hooks';
 import { required, email, match, unique } from '../../utils/validation';
+import errors from 'feathers-errors';
 
 const schemaValidator = {
   email: [required, email, unique('email')],
@@ -11,12 +12,11 @@ const schemaValidator = {
 
 function validate() {
   return function (hook) { // eslint-disable-line func-names
-    if (hook.data.facebook) {
-      hook.data.email = hook.data.facebook.email;
-      return hook;
+    if (hook.data.facebook && !hook.data.email) {
+      throw new errors.BadRequest('Incomplete oauth registration');
     }
     return validateHook(schemaValidator).bind(this)(hook);
-  };
+  }
 }
 
 const userHooks = {
@@ -34,6 +34,11 @@ const userHooks = {
       auth.restrictToOwner({ ownerField: 'id' })
     ],
     create: [
+      hook => {
+        if (hook.params.body && hook.params.body.user) {
+          hook.data = { ...hook.data, ...hook.params.body.user };
+        }
+      },
       validate(),
       hooks.remove('password_confirmation'),
       auth.hashPassword()

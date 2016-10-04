@@ -17,10 +17,22 @@ export default class Login extends Component {
     notifSend: PropTypes.func
   }
 
+  static contextTypes = {
+    router: PropTypes.object
+  }
+
   onFacebookLogin = (err, data) => {
     if (err) return;
     this.props.oauthLogin('facebook', data)
-      .then(this.successLogin); // TODO: finalize register (associate to an email & password for local auth) ?
+      .then(this.successLogin)
+      .catch(error => {
+        if (error.message === 'Incomplete oauth registration') {
+          this.context.router.push({
+            pathname: '/register',
+            state: { oauth: { provider: 'facebook', data } }
+          });
+        }
+      });
   };
 
   login = data => this.props.login(data).then(this.successLogin);
@@ -49,7 +61,7 @@ export default class Login extends Component {
           <LoginForm onSubmit={this.login} />
           <p>This will "log you in" as this user, storing the username in the session of the API server.</p>
           <FacebookLogin
-            appId="619121718248110"
+            appId="635147529978862"
             /* autoLoad={true} */
             fields="name,email,picture"
             callback={this.onFacebookLogin}

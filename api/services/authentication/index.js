@@ -3,8 +3,8 @@ import {
   TokenService as tokenService,
   LocalService as localService,
   OAuth2Service as oauth2Service
-} from 'feathers-authentication';
-import authMiddleware from 'feathers-authentication/lib/middleware';
+} from '../../../feathers-authentication'; // TODO update ?
+import authMiddleware from '../../../feathers-authentication/lib/middleware';
 
 function addTokenExpiration() {
   return hook => {
@@ -64,14 +64,6 @@ export default function authenticationService() {
   app.service('auth/facebook')
     .after({
       create: [
-        // TODO: cf src/containers/Login/Login.js l25 (and stop use facebook email)
-        /* hook => { // Share the facebook email if the user email does not exist
-          const { email, facebook } = hook.result.user;
-          if (facebook && facebook.email && !email) {
-            hook.result.user.email = facebook.email;
-            return hook;
-          }
-        }, */
         addTokenExpiration(),
         restToSocketAuth()
       ]

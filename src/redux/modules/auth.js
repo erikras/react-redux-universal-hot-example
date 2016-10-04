@@ -11,6 +11,9 @@ const LOGIN_FAIL = 'redux-example/auth/LOGIN_FAIL';
 const REGISTER = 'redux-example/auth/REGISTER';
 const REGISTER_SUCCESS = 'redux-example/auth/REGISTER_SUCCESS';
 const REGISTER_FAIL = 'redux-example/auth/REGISTER_FAIL';
+const OAUTHLOGIN = 'redux-example/auth/OAUTHLOGIN';
+const OAUTHLOGIN_SUCCESS = 'redux-example/auth/OAUTHLOGIN_SUCCESS';
+const OAUTHLOGIN_FAIL = 'redux-example/auth/OAUTHLOGIN_FAIL';
 const LOGOUT = 'redux-example/auth/LOGOUT';
 const LOGOUT_SUCCESS = 'redux-example/auth/LOGOUT_SUCCESS';
 const LOGOUT_FAIL = 'redux-example/auth/LOGOUT_FAIL';
@@ -54,11 +57,13 @@ export default function reducer(state = initialState, action = {}) {
         error: action.error
       };
     case LOGIN:
+    case OAUTHLOGIN:
       return {
         ...state,
         loggingIn: true
       };
     case LOGIN_SUCCESS:
+    case OAUTHLOGIN_SUCCESS:
       return {
         ...state,
         loggingIn: false,
@@ -66,6 +71,7 @@ export default function reducer(state = initialState, action = {}) {
         user: action.result.user
       };
     case LOGIN_FAIL:
+    case OAUTHLOGIN_FAIL:
       return {
         ...state,
         loggingIn: false,
@@ -86,7 +92,7 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         registeringIn: false,
-        loginError: action.error
+        registerError: action.error
       };
     case LOGOUT:
       return {
@@ -171,15 +177,15 @@ export function login(data) {
   };
 }
 
-export function oauthLogin(provider, data) {
+export function oauthLogin(provider, data, validation = false) {
   const socketId = socket.io.engine.id;
   return {
-    types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
+    types: [OAUTHLOGIN, OAUTHLOGIN_SUCCESS, OAUTHLOGIN_FAIL],
     promise: () => restApp.service(`/auth/${provider}`)
       .create({ ...data, socketId })
       .then(shareFeathersAuth)
       .then(setCookie)
-      .catch(catchValidation)
+      .catch(validation ? catchValidation : error => Promise.reject(error))
   };
 }
 
