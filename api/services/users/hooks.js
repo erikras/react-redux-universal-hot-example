@@ -16,7 +16,7 @@ function validate() {
       throw new errors.BadRequest('Incomplete oauth registration');
     }
     return validateHook(schemaValidator).bind(this)(hook);
-  }
+  };
 }
 
 const userHooks = {
