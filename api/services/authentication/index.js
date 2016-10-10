@@ -3,8 +3,8 @@ import {
   TokenService as tokenService,
   LocalService as localService,
   OAuth2Service as oauth2Service
-} from '../../../feathers-authentication'; // TODO update ?
-import authMiddleware from '../../../feathers-authentication/lib/middleware';
+} from 'feathers-authentication';
+import authMiddleware from 'feathers-authentication/lib/middleware';
 
 function addTokenExpiration() {
   return hook => {

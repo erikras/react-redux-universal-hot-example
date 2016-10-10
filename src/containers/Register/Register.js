@@ -12,19 +12,15 @@ export default class Register extends Component {
   static propTypes = {
     location: PropTypes.object,
     register: PropTypes.func,
-    notifSend: PropTypes.func,
-    oauthLogin: PropTypes.func
+    notifSend: PropTypes.func
   }
 
-  register = data => {
+  getInitialValues = () => {
     const { location } = this.props;
-    if (location.state && location.state.oauth) {
-      const { provider, data: oauthData } = location.state.oauth;
-      console.log(oauthData, data);
-      return this.props.oauthLogin(provider, { ...oauthData, user: data }, true).then(this.successRegister);
-    }
-    return this.props.register(data).then(this.successRegister);
+    return location.state && location.state.oauth;
   }
+
+  register = data => this.props.register(data).then(this.successRegister);
 
   successRegister = result => {
     this.props.notifSend({
@@ -40,7 +36,7 @@ export default class Register extends Component {
       <div className="container">
         <Helmet title="Register" />
         <h1>Register</h1>
-        <RegisterForm onSubmit={this.register} />
+        <RegisterForm onSubmit={this.register} initialValues={this.getInitialValues()} />
       </div>
     );
   }

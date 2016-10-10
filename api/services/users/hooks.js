@@ -13,7 +13,7 @@ const schemaValidator = {
 function validate() {
   return function (hook) { // eslint-disable-line func-names
     if (hook.data.facebook && !hook.data.email) {
-      throw new errors.BadRequest('Incomplete oauth registration');
+      throw new errors.BadRequest('Incomplete oauth registration', hook.data);
     }
     return validateHook(schemaValidator).bind(this)(hook);
   };

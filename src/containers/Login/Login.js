@@ -29,7 +29,7 @@ export default class Login extends Component {
         if (error.message === 'Incomplete oauth registration') {
           this.context.router.push({
             pathname: '/register',
-            state: { oauth: { provider: 'facebook', data } }
+            state: { oauth: error.data }
           });
         }
       });
