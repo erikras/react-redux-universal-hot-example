@@ -34,11 +34,6 @@ const userHooks = {
       auth.restrictToOwner({ ownerField: 'id' })
     ],
     create: [
-      hook => {
-        if (hook.params.body && hook.params.body.user) {
-          hook.data = { ...hook.data, ...hook.params.body.user };
-        }
-      },
       validate(),
       hooks.remove('password_confirmation'),
       auth.hashPassword()
