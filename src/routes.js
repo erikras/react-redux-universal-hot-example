@@ -1,17 +1,4 @@
-import React from 'react';
-import {IndexRoute, Route} from 'react-router';
 import { isLoaded as isAuthLoaded, load as loadAuth } from 'redux/modules/auth';
-import {
-    App,
-    Chat,
-    Home,
-    Widgets,
-    About,
-    Login,
-    LoginSuccess,
-    Survey,
-    NotFound,
-  } from 'containers';
 
 export default (store) => {
   const requireLogin = (nextState, replace, cb) => {
@@ -30,29 +17,92 @@ export default (store) => {
       checkAuth();
     }
   };
-
   /**
    * Please keep routes in alphabetical order
    */
-  return (
-    <Route path="/" component={App}>
-      { /* Home (main) route */ }
-      <IndexRoute component={Home}/>
+  if (typeof require.ensure !== 'function') require.ensure = (deps, cb) => cb(require);
 
-      { /* Routes requiring login */ }
-      <Route onEnter={requireLogin}>
-        <Route path="chat" component={Chat}/>
-        <Route path="loginSuccess" component={LoginSuccess}/>
-      </Route>
+  return {
+    path: '/',
+    component: require('./containers/App/App'),
+    indexRoute: {
+      component: require('./containers/Home/Home')
+    },
+    childRoutes: [{
+      path: 'login',
+      getComponent(nextState, cb) {
+        console.time('gettingComponent');
+        store.dispatch({
+          type: 'WEBPACK_LOAD'
+        });
+        require.ensure([], (require) => {
+          cb(null, require('./containers/Login/Login'));
+          store.dispatch({
+            type: 'WEBPACK_LOAD_END'
+          });
+          console.timeEnd('gettingComponent');
+        }, 'login');
+      }
 
-      { /* Routes */ }
-      <Route path="about" component={About}/>
-      <Route path="login" component={Login}/>
-      <Route path="survey" component={Survey}/>
-      <Route path="widgets" component={Widgets}/>
+    }, {
+      path: 'about',
+      getComponent(nextState, cb) {
+        console.time('gettingComponent');
+        store.dispatch({
+          type: 'WEBPACK_LOAD'
+        });
+        require.ensure([], (require) => {
+          cb(null, require('./containers/About/About'));
+          store.dispatch({
+            type: 'WEBPACK_LOAD_END'
+          });
+          console.timeEnd('gettingComponent');
+        }, 'about');
+      }
 
-      { /* Catch all route */ }
-      <Route path="*" component={NotFound} status={404} />
-    </Route>
-  );
+    }, {
+      path: 'survey',
+      getComponent(nextState, cb) {
+        require.ensure([], (require) =>
+          cb(null, require('./containers/Survey/Survey')), 'survey');
+      }
+    }, {
+      path: 'widgets',
+      getComponent(nextState, cb) {
+        store.dispatch({
+          type: 'WEBPACK_LOAD'
+        });
+        require.ensure([], (require) => {
+          cb(null, require('./containers/Widgets/Widgets'));
+          store.dispatch({
+            type: 'WEBPACK_LOAD_END'
+          });
+        }, 'widgets');
+      }
+    }, {
+      onEnter: requireLogin,
+      childRoutes: [
+        {
+          path: 'chat',
+          getComponent(nextState, cb) {
+            require.ensure([], (require) =>
+              cb(null, require('./containers/Chat/Chat')), 'chat');
+          }
+        },
+        {
+          path: 'loginSuccess',
+          getComponent(nextState, cb) {
+            require.ensure([], (require) =>
+              cb(null, require('./containers/LoginSuccess/LoginSuccess')), 'loginsuccess');
+          }
+        }
+      ]
+    }, {
+      path: '*',
+      getComponent(nextState, cb) {
+        require.ensure([], (require) =>
+          cb(null, require('./containers/NotFound/NotFound')), '404');
+      }
+    }]
+  };
 };
