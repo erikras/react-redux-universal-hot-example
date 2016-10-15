@@ -15,9 +15,7 @@ const options = {
 const messagesHooks = {
   before: {
     all: [
-      auth.verifyToken(),
-      auth.populateUser(),
-      auth.restrictToAuthenticated()
+      auth.isAuthenticated()
     ],
     find: [],
     get: [],
@@ -33,9 +31,9 @@ const messagesHooks = {
         hook.data.createdAt = new Date();
       }
     ],
-    update: [hooks.disable()], // TODO: restrict to sender
-    patch: [hooks.disable()], // TODO: restrict to sender
-    remove: [hooks.disable()] // TODO: restrict to sender
+    update: [hooks.disable()],
+    patch: [hooks.disable()],
+    remove: [hooks.disable()]
   },
   after: {
     all: [],

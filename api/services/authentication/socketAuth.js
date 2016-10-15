@@ -19,17 +19,18 @@ export default function socketAuth(app) {
     };
     const res = {};
 
-    const { exposeRequestResponse, tokenParser, decodeToken, populateUser } = authMiddleware;
+    const { exposeRequestResponse, tokenParser, verifyToken, populateUser } = authMiddleware;
 
     async.waterfall([
       cb => exposeRequestResponse()(req, res, cb),
       cb => tokenParser(app.get('auth'))(req, res, cb),
-      cb => decodeToken(app.get('auth'))(req, res, cb),
+      cb => verifyToken(app.get('auth'))(req, res, cb),
       cb => populateUser(app.get('auth'))(req, res, cb)
     ], err => {
       if (err) return next(err);
       socket.feathers.token = req.token;
       socket.feathers.user = req.user;
+      socket.feathers.authenticated = !!req.token;
       next();
     });
   };

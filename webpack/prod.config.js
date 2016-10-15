@@ -96,27 +96,25 @@ module.exports = {
       template: 'src/progressive.js'
     }),
 
-    new SWPrecacheWebpackPlugin(
-      {
-        cacheId: 'react-redux-universal-hot-example',
-        filename: '../service-worker.js',
-        maximumFileSizeToCacheInBytes: 8388608,
+    new SWPrecacheWebpackPlugin({
+      cacheId: 'react-redux-universal-hot-example',
+      filename: '../service-worker.js',
+      maximumFileSizeToCacheInBytes: 8388608,
 
-        // Ensure all our static, local assets are cached.
-        staticFileGlobs: [assetsPath + '/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff}'],
-        stripPrefix: assetsPath + '/',
+      // Ensure all our static, local assets are cached.
+      staticFileGlobs: [assetsPath + '/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff}'],
+      stripPrefix: assetsPath + '/',
 
-        directoryIndex: '/',
-        verbose: true,
-        navigateFallback: '/dist/index.html',
-        runtimeCaching: [{
-          urlPattern: /\/api\/widget\/load(.*)/,
-          handler: 'networkFirst',
-          options: {
-            debug: true
-          }
-        }]
-      }
-    )
+      directoryIndex: '/',
+      verbose: true,
+      navigateFallback: '/dist/index.html',
+      runtimeCaching: [{
+        urlPattern: /\/api\/widget\/load(.*)/,
+        handler: 'networkFirst',
+        options: {
+          debug: true
+        }
+      }]
+    })
   ]
 };

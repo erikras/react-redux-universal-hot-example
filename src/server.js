@@ -81,8 +81,7 @@ app.use((req, res) => {
   }
 
   if (__DISABLE_SSR__) {
-    hydrateOnClient();
-    return;
+    return hydrateOnClient();
   }
 
   match({

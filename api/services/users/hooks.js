@@ -1,6 +1,6 @@
 import hooks from 'feathers-hooks';
 import { hooks as auth } from 'feathers-authentication';
-import { validateHook } from '../../hooks';
+import { validateHook, restrictToOwner } from '../../hooks';
 import { required, email, match, unique } from '../../utils/validation';
 import errors from 'feathers-errors';
 
@@ -23,15 +23,11 @@ const userHooks = {
   before: {
     all: [],
     find: [
-      auth.verifyToken(),
-      auth.populateUser(),
-      auth.restrictToAuthenticated()
+      auth.isAuthenticated()
     ],
     get: [
-      auth.verifyToken(),
-      auth.populateUser(),
-      auth.restrictToAuthenticated(),
-      auth.restrictToOwner({ ownerField: 'id' })
+      auth.isAuthenticated(),
+      restrictToOwner({ ownerField: 'id' })
     ],
     create: [
       validate(),
@@ -39,22 +35,16 @@ const userHooks = {
       auth.hashPassword()
     ],
     update: [
-      auth.verifyToken(),
-      auth.populateUser(),
-      auth.restrictToAuthenticated(),
-      auth.restrictToOwner({ ownerField: 'id' })
+      auth.isAuthenticated(),
+      restrictToOwner({ ownerField: 'id' })
     ],
     patch: [
-      auth.verifyToken(),
-      auth.populateUser(),
-      auth.restrictToAuthenticated(),
-      auth.restrictToOwner({ ownerField: 'id' })
+      auth.isAuthenticated(),
+      restrictToOwner({ ownerField: 'id' })
     ],
     remove: [
-      auth.verifyToken(),
-      auth.populateUser(),
-      auth.restrictToAuthenticated(),
-      auth.restrictToOwner({ ownerField: 'id' })
+      auth.isAuthenticated(),
+      restrictToOwner({ ownerField: 'id' })
     ]
   },
   after: {

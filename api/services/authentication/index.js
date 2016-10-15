@@ -9,7 +9,7 @@ import authMiddleware from 'feathers-authentication/lib/middleware';
 function addTokenExpiration() {
   return hook => {
     if (hook.result.token) {
-      hook.result.expires = hook.app.get('auth').cookies['feathers-session'].maxAge || null;
+      hook.result.expires = hook.app.get('auth').cookie.maxAge || null;
     }
     return hook;
   };
@@ -24,6 +24,7 @@ function restToSocketAuth() {
       const userSocket = Object.values(hook.app.io.sockets.connected).find(socket => socket.client.id === socketId);
       userSocket.feathers.token = token;
       userSocket.feathers.user = user;
+      userSocket.feathers.authenticated = !!token;
     }
     return hook;
   };
@@ -36,12 +37,12 @@ export default function authenticationService() {
 
   const config = app.get('auth');
 
-  const { exposeRequestResponse, tokenParser, decodeToken, populateUser, logout } = authMiddleware;
+  const { exposeRequestResponse, tokenParser, verifyToken, populateUser, logout } = authMiddleware;
 
   const middleware = [
     exposeRequestResponse(config),
     tokenParser(config),
-    decodeToken(config),
+    verifyToken(config),
     populateUser(config),
     logout(config)
   ];
