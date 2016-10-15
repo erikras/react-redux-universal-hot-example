@@ -75,6 +75,7 @@ export default class Widgets extends Component {
           </thead>
           <tbody>
             {
+              /* eslint-disable react/jsx-indent */
               widgets.map(widget => (editing[widget.id] ?
                 <WidgetForm form={String(widget.id)} key={String(widget.id)} initialValues={widget} /> :
                 <tr key={widget.id}>
@@ -89,6 +90,7 @@ export default class Widgets extends Component {
                   </td>
                 </tr>)
               )
+              /* eslint-enable react/jsx-indent */
             }
           </tbody>
         </table>}
