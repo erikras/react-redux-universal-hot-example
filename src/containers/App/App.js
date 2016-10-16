@@ -62,7 +62,7 @@ export default class App extends Component {
   };
 
   render() {
-    const { user, notifs } = this.props;
+    const { user, notifs, children } = this.props;
     const styles = require('./App.scss');
 
     return (
@@ -110,7 +110,7 @@ export default class App extends Component {
                 </NavItem>
               </LinkContainer>}
             </Nav>
-            {user && <p className={`${styles.loggedInMessage} navbar-text`}>
+            {user && <p className="navbar-text">
               Logged in as <strong>{user.email}</strong>.
             </p>}
             <Nav navbar pullRight>
@@ -132,7 +132,7 @@ export default class App extends Component {
             />
           </div>}
 
-          {this.props.children}
+          {children}
         </div>
         <InfoBar />
 

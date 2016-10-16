@@ -117,7 +117,7 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-function shareFeathersAuth(response) {
+function saveAuth(response) {
   const { token, user } = response;
   const storage = app.get('storage');
   if (token) {
@@ -171,7 +171,7 @@ export function login(data) {
       password: data.password,
       socketId
     })
-      .then(shareFeathersAuth)
+      .then(saveAuth)
       .then(setCookie)
       .catch(catchValidation)
   };
@@ -183,7 +183,7 @@ export function oauthLogin(provider, data, validation = false) {
     types: [OAUTHLOGIN, OAUTHLOGIN_SUCCESS, OAUTHLOGIN_FAIL],
     promise: () => restApp.service(`/auth/${provider}`)
       .create({ ...data, socketId })
-      .then(shareFeathersAuth)
+      .then(saveAuth)
       .then(setCookie)
       .catch(validation ? catchValidation : error => Promise.reject(error))
   };

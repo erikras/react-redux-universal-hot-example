@@ -7,7 +7,7 @@ import io from 'socket.io-client';
 import superagent from 'superagent';
 import config from './config';
 
-const storage = __SERVER__ ? new (require('node-localstorage').LocalStorage)('./.scratch') : window.localStorage;
+const storage = __SERVER__ ? require('localstorage-memory') : window.localStorage;
 
 const host = clientUrl => (__SERVER__ ? `http://${config.apiHost}:${config.apiPort}` : clientUrl);
 

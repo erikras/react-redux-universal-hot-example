@@ -1,4 +1,5 @@
 const ADD_MESSAGE = 'redux-example/chat/ADD_MESSAGE';
+const CLEAN = 'redux-example/chat/CLEAN';
 
 const initialState = {
   messages: []
@@ -11,6 +12,8 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         messages: state.messages.concat(action.message)
       };
+    case CLEAN:
+      return initialState;
     default:
       return state;
   }
@@ -18,4 +21,8 @@ export default function reducer(state = initialState, action = {}) {
 
 export function addMessage(message) {
   return { type: ADD_MESSAGE, message };
+}
+
+export function clean() {
+  return { type: CLEAN };
 }

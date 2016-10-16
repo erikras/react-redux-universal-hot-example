@@ -20,19 +20,17 @@ import authService, { socketAuth } from './services/authentication';
 const pretty = new PrettyError();
 const app = feathers();
 
-app.set('config', config);
-
-app.use(morgan('dev'));
-
-app.use(cookieParser());
-app.use(session({
-  secret: 'react and redux rule!!!!',
-  resave: false,
-  saveUninitialized: false,
-  cookie: { maxAge: 60000 }
-}));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.set('config', config)
+  .use(morgan('dev'))
+  .use(cookieParser())
+  .use(session({
+    secret: 'react and redux rule!!!!',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 60000 }
+  }))
+  .use(bodyParser.urlencoded({ extended: false }))
+  .use(bodyParser.json());
 
 const actionsHandler = (req, res, next) => {
   const splittedUrlPath = req.url.split('?')[0].split('/').slice(1);

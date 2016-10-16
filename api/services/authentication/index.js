@@ -22,9 +22,11 @@ function restToSocketAuth() {
     const { socketId } = hook.data;
     if (socketId && hook.app.io && token) {
       const userSocket = Object.values(hook.app.io.sockets.connected).find(socket => socket.client.id === socketId);
-      userSocket.feathers.token = token;
-      userSocket.feathers.user = user;
-      userSocket.feathers.authenticated = !!token;
+      if (userSocket && userSocket.feathers) {
+        userSocket.feathers.token = token;
+        userSocket.feathers.user = user;
+        userSocket.feathers.authenticated = !!token;
+      }
     }
     return hook;
   };

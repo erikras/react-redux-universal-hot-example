@@ -8,6 +8,7 @@ import notifs from './modules/notifs';
 import counter from './modules/counter';
 import info from './modules/info';
 import widgets from './modules/widgets';
+import survey from './modules/survey';
 import chat from './modules/chat';
 
 export default combineReducers({
@@ -23,5 +24,6 @@ export default combineReducers({
   }),
   info,
   widgets,
+  survey,
   chat
 });

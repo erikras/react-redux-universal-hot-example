@@ -74,8 +74,7 @@ module.exports = {
       'scroll-behavior',
       'serialize-javascript',
       'socket.io-client',
-      'superagent',
-      'warning',
+      'superagent'
     ]
   },
 

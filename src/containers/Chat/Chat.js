@@ -61,7 +61,7 @@ export default class Chat extends Component {
           <ul>
             {this.state.messages.map(msg => <li key={`chat.msg.${msg.id}`}>{msg.from}: {msg.text}</li>)}
           </ul>
-          <form className="login-form" onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit}>
             <input
               type="text" ref={c => { this.message = c; }} placeholder="Enter your message" value={this.state.message}
               onChange={event => {

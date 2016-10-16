@@ -37,7 +37,7 @@ module.exports = {
     },
     style_modules: {
       extensions: ['less', 'scss'],
-      filter: function(module, regex, options, log) {
+      filter: function (module, regex, options, log) {
         if (options.development) {
           // in development mode there's webpack "style-loader",
           // so the module.name is not equal to module.name
@@ -48,7 +48,7 @@ module.exports = {
           return regex.test(module.name);
         }
       },
-      path: function(module, options, log) {
+      path: function (module, options, log) {
         if (options.development) {
           // in development mode there's webpack "style-loader",
           // so the module.name is not equal to module.name
@@ -59,7 +59,7 @@ module.exports = {
           return module.name;
         }
       },
-      parser: function(module, options, log) {
+      parser: function (module, options, log) {
         if (options.development) {
           return WebpackIsomorphicToolsPlugin.css_modules_loader_parser(module, options, log);
         } else {

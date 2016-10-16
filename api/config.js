@@ -3,7 +3,6 @@ import FacebookTokenStrategy from 'passport-facebook-token';
 const ONE_DAY = 60 * 60 * 24 * 1000;
 
 module.exports = {
-  secret: 's*cr*tK*y',
   auth: {
     setupMiddleware: false,
     user: {
