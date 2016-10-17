@@ -3,7 +3,7 @@ import morgan from 'morgan';
 import session from 'express-session';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-import globalConfig from '../src/config';
+import publicConfig from '../src/config';
 import config from './config';
 import hooks from 'feathers-hooks';
 import rest from 'feathers-rest';
@@ -110,13 +110,13 @@ app.configure(hooks())
   .configure(services)
   .configure(middleware);
 
-if (globalConfig.apiPort) {
-  app.listen(globalConfig.apiPort, err => {
+if (publicConfig.apiPort) {
+  app.listen(publicConfig.apiPort, err => {
     if (err) {
       console.error(err);
     }
-    console.info('----\n==> 🌎  API is running on port %s', globalConfig.apiPort);
-    console.info('==> 💻  Send requests to http://%s:%s', globalConfig.apiHost, globalConfig.apiPort);
+    console.info('----\n==> 🌎  API is running on port %s', publicConfig.apiPort);
+    console.info('==> 💻  Send requests to http://%s:%s', publicConfig.apiHost, publicConfig.apiPort);
   });
 } else {
   console.error('==>     ERROR: No APIPORT environment variable has been specified');
