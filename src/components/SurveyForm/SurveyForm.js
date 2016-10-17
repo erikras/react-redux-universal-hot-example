@@ -24,7 +24,10 @@ export default
 class SurveyForm extends Component {
   static propTypes = {
     active: PropTypes.string,
-    asyncValidating: PropTypes.bool.isRequired,
+    asyncValidating: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.string
+    ]).isRequired,
     dirty: PropTypes.bool.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     reset: PropTypes.func.isRequired,
@@ -69,16 +72,16 @@ class SurveyForm extends Component {
       <div>
         <form className="form-horizontal" onSubmit={handleSubmit}>
           <Field name="name" type="text" component={this.renderInput} label="Full Name"
-            className="form-control" asyncValidating={asyncValidating} styles={styles} />
+            className="form-control" styles={styles} />
 
           <Field name="email" type="text" component={this.renderInput} label="Email"
-            className="form-control" asyncValidating={asyncValidating} styles={styles} showAsyncValidating />
+            className="form-control" styles={styles} asyncValidating={asyncValidating} />
 
           <Field name="occupation" type="text" component={this.renderInput} label="Occupation"
-            className="form-control" asyncValidating={asyncValidating} styles={styles} />
+            className="form-control" styles={styles} />
 
           <Field name="currentlyEmployed" type="checkbox" component={this.renderInput}
-            label="Currently Employed?" asyncValidating={asyncValidating} styles={styles} />
+            label="Currently Employed?" styles={styles} />
 
           <div className="form-group">
             <label className="col-sm-2" htmlFor="sex">Sex</label>
