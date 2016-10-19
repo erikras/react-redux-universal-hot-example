@@ -11,7 +11,7 @@ import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/module
 import { InfoBar } from 'components';
 import { push } from 'react-router-redux';
 import config from '../../config';
-import { asyncConnect } from 'redux-async-connect';
+import { asyncConnect } from 'redux-connect';
 
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {
@@ -24,7 +24,7 @@ import { asyncConnect } from 'redux-async-connect';
       promises.push(dispatch(loadAuth()));
     }
 
-    return Promise.all(promises);
+    return __CLIENT__ ? null : Promise.all(promises);
   }
 }])
 @connect(
@@ -75,29 +75,29 @@ export default class App extends Component {
             <Navbar.Toggle/>
           </Navbar.Header>
 
-          <Navbar.Collapse eventKey={0}>
+          <Navbar.Collapse>
             <Nav navbar>
               {user && <LinkContainer to="/chat">
-                <NavItem eventKey={1}>Chat</NavItem>
+                <NavItem>Chat</NavItem>
               </LinkContainer>}
 
               <LinkContainer to="/widgets">
-                <NavItem eventKey={2}>Widgets</NavItem>
+                <NavItem>Widgets</NavItem>
               </LinkContainer>
               <LinkContainer to="/survey">
-                <NavItem eventKey={3}>Survey</NavItem>
+                <NavItem>Survey</NavItem>
               </LinkContainer>
               <LinkContainer to="/about">
-                <NavItem eventKey={4}>About Us</NavItem>
+                <NavItem>About Us</NavItem>
               </LinkContainer>
 
               {!user &&
               <LinkContainer to="/login">
-                <NavItem eventKey={5}>Login</NavItem>
+                <NavItem>Login</NavItem>
               </LinkContainer>}
               {user &&
               <LinkContainer to="/logout">
-                <NavItem eventKey={6} className="logout-link" onClick={this.handleLogout}>
+                <NavItem className="logout-link" onClick={this.handleLogout}>
                   Logout
                 </NavItem>
               </LinkContainer>}
@@ -105,7 +105,7 @@ export default class App extends Component {
             {user &&
             <p className={styles.loggedInMessage + ' navbar-text'}>Logged in as <strong>{user.name}</strong>.</p>}
             <Nav navbar pullRight>
-              <NavItem eventKey={1} target="_blank" title="View on Github" href="https://github.com/erikras/react-redux-universal-hot-example">
+              <NavItem target="_blank" title="View on Github" href="https://github.com/erikras/react-redux-universal-hot-example">
                 <i className="fa fa-github"/>
               </NavItem>
             </Nav>
