@@ -14,7 +14,7 @@ through that Demo App to show some features and code.
 The project hosts a running demo on Heroku, a hosting company.  Open 
 [https://react-redux.herokuapp.com/](https://react-redux.herokuapp.com/) in your browser to see this page:
 
-![Screenshot](frontpage.png)
+![Screenshot](ExploringTheDemoApp/frontpage.png)
 
 Much of the text is cut-and-paste from the project's 
 [README.md](https://github.com/erikras/react-redux-universal-hot-example/blob/master/README.md) file into 
@@ -29,14 +29,14 @@ to google for 'slideshare theModuleName' and skim someone's presentation.
 The page is rendered from HTML including React components coded as custom HTML tags.
 The components use properties to alter appearance and sets of data.  Notice some of the components on the page:
 
-![Screenshot with Annotations](frontpage_markup.png)
+![Screenshot with Annotations](ExploringTheDemoApp/frontpage_markup.png)
 
 ### Explore the Widgets Page
 
 Click on *Widgets* link on the top of the screen.   You come to a page with some arbitrary widgets and more logic
 in the form.  Notice how much state affects the display and formatting of buttons:
 
-![Screenshot with Annotations](widgets_markup.png)
+![Screenshot with Annotations](ExploringTheDemoApp/widgets_markup.png)
 
 ### Explore the Survey Page
 
@@ -51,7 +51,7 @@ Try clicking on the 'Initialize Form' button and then hitting Submit.  You will 
 'Little Bobby Tables'.  Now click in the email field then the name field.   You now see errors in both
 the name and the email.  Even with a good kit, forms can be difficult to code.
 
-![Screenshot with Annotations](survey_markup.png)
+![Screenshot with Annotations](ExploringTheDemoApp/survey_markup.png)
 [scont]: https://github.com/erikras/react-redux-universal-hot-example/tree/master/src/containers/Survey
 [scomp]: https://github.com/erikras/react-redux-universal-hot-example/tree/master/src/components/SurveyForm
 [conlist]: https://github.com/erikras/react-redux-universal-hot-example/blob/master/src/containers/index.js
@@ -67,7 +67,7 @@ uses a casual mix of HTML, ECMA7 JavaScript, and React components.   This transl
 simple JavaScript code for the browser.   Notice how the local state `showKitten` being false causes no
 `div` or `img` tag in the output.
 
-![Screenshot with Annotations](about_markup.png)
+![Screenshot with Annotations](ExploringTheDemoApp/about_markup.png)
 
 ### Explore the Login Page
 

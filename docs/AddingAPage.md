@@ -9,11 +9,11 @@ Searching strings is one way to [grok](https://en.wikipedia.org/wiki/Grok) the s
 of the kit and sample application.   You can use *grep* or [ack](http://beyondgrep.com) (`brew install ack`).
 I use *ack* with this alias:
 
-![ick Alias](ick_alias.png)
+![ick Alias](AddingAPage/ick_alias.png)
 
 Looking with `ick about` and ignoring documentation, the word *about* appears in these files:
 
-![ick for About](ick_about.png)
+![ick for About](AddingAPage/ick_about.png)
 
 ## Add the Hello page container
 
@@ -26,7 +26,7 @@ new directory and trim out almost all of it:
 
 Edit `Hello/Hello.js` into this file:
 
-![New Hello.js](new_hello.png)
+![New Hello.js](AddingAPage/new_hello.png)
 
 
 
@@ -34,20 +34,20 @@ Edit `Hello/Hello.js` into this file:
 
 #### Add to `./src/containers/index.js` to include and export the React component:
 
-![Edit index.js](edit_index.png)
+![Edit index.js](AddingAPage/edit_index.png)
 
 #### Add to `./routes.js` to connect the `/hello` url path to the component:
 
-![Edit routes.js 1](edit_route1.png)
-![Edit routes.js 2](edit_route2.png)
+![Edit routes.js 1](AddingAPage/edit_route1.png)
+![Edit routes.js 2](AddingAPage/edit_route2.png)
 
 #### Add to `./src/containers/App/App.js` to add "Hello" to the NavBar
 
-![Edit App.js](edit_app.png)
+![Edit App.js](AddingAPage/edit_app.png)
 
 And voila, the new 'Hello' page:
 
-![Show Hello](show_hello.png)
+![Show Hello](AddingAPage/show_hello.png)
 
 # Take-away:  Notice the trade-offs
 
@@ -84,7 +84,7 @@ All *eventkey* fields in `App.js` are unused and can be removed.  The
 [old error](https://github.com/erikras/react-redux-universal-hot-example/commit/d67a79c1e7da5367dc8922019ca726e69d56bf0e)
 and reinforces confusion.
 
-![Edit App revisted](edit_app2.png)
+![Edit App revisted](AddingAPage/edit_app2.png)
 
 The use of the **cut and paste** style raises well known issues in
 maintenance, documentation, and code quality.  It is not for use in

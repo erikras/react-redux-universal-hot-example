@@ -64,7 +64,7 @@ export default class Login extends Component {
             appId="635147529978862"
             /* autoLoad={true} */
             fields="name,email,picture"
-            callback={this.onFacebookLogin}
+            onLogin={this.onFacebookLogin}
             component={this.FacebookLoginButton}
           />
         </div>

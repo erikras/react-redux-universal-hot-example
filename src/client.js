@@ -27,6 +27,18 @@ const client = new ApiClient();
 const _browserHistory = withScroll(browserHistory);
 const dest = document.getElementById('content');
 
+function initSocket() {
+  socket.on('news', data => {
+    console.log(data);
+    socket.emit('my other event', { my: 'data from client' });
+  });
+  socket.on('msg', data => {
+    console.log(data);
+  });
+
+  return socket;
+}
+
 Promise.all([window.__data ? true : checkNet(), getStoredState(offlinePersistConfig)])
   .then(([online, storedData]) => {
     const data = !online ? { ...storedData, ...window.__data } : window.__data;
@@ -35,20 +47,7 @@ Promise.all([window.__data ? true : checkNet(), getStoredState(offlinePersistCon
   .then(store => {
     const history = syncHistoryWithStore(_browserHistory, store);
 
-    function initSocket() {
-      socket.on('news', data => {
-        console.log(data);
-        socket.emit('my other event', { my: 'data from client' });
-      });
-      socket.on('msg', data => {
-        console.log(data);
-      });
-
-      return socket;
-    }
-
     global.socket = initSocket();
-
 
     const renderRouter = props => <ReduxAsyncConnect {...props} helpers={{ client }} filter={item => !item.deferred} />;
     const render = routes => {
