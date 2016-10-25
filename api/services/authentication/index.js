@@ -1,10 +1,9 @@
 import hooks from 'feathers-hooks';
-import {
+import authentication, {
   TokenService as tokenService,
   LocalService as localService,
   OAuth2Service as oauth2Service
 } from 'feathers-authentication';
-import authMiddleware from 'feathers-authentication/lib/middleware';
 
 function addTokenExpiration() {
   return hook => {
@@ -37,19 +36,9 @@ export socketAuth from './socketAuth';
 export default function authenticationService() {
   const app = this;
 
-  const config = app.get('auth');
+  const config = app.get('config').auth;
 
-  const { exposeRequestResponse, tokenParser, verifyToken, populateUser, logout } = authMiddleware;
-
-  const middleware = [
-    exposeRequestResponse(config),
-    tokenParser(config),
-    verifyToken(config),
-    populateUser(config),
-    logout(config)
-  ];
-
-  app.use(middleware)
+  app.configure(authentication(config))
     .configure(tokenService())
     .configure(localService())
     .configure(oauth2Service(config.facebook));

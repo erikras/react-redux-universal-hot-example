@@ -4,7 +4,6 @@ const ONE_DAY = 60 * 60 * 24 * 1000;
 
 module.exports = {
   auth: {
-    setupMiddleware: false,
     user: {
       idField: '_id'
     },
