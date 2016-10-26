@@ -110,7 +110,7 @@
     "express": "^4.14.0",
     "express-session": "^1.14.1",
     "feathers": "^2.0.1",
-    "feathers-authentication": "git+https://github.com/bertho-zero/feathers-authentication.git",
+    "feathers-authentication": "^0.8.0-beta-1",
     "feathers-errors": "^2.4.0",
     "feathers-hooks": "^1.5.7",
     "feathers-nedb": "^2.5.0",
