@@ -1,0 +1,329 @@
+{
+  "passes": [
+    {
+      "recordNetwork": true,
+      "recordTrace": true,
+      "gatherers": [
+        "url",
+        "https",
+        "viewport",
+        "theme-color",
+        "manifest",
+        "accessibility",
+        "content-width",
+        "cache-contents",
+        "geolocation-on-start"
+      ]
+    },
+    {
+      "passName": "offlinePass",
+      "recordNetwork": true,
+      "gatherers": [
+        "service-worker",
+        "offline"
+      ]
+    },
+    {
+      "gatherers": [
+        "http-redirect",
+        "html-without-javascript"
+      ]
+    }
+  ],
+  "audits": [
+    "is-on-https",
+    "redirects-http",
+    "service-worker",
+    "works-offline",
+    "viewport",
+    "manifest-display",
+    "without-javascript",
+    "first-meaningful-paint",
+    "speed-index-metric",
+    "estimated-input-latency",
+    "time-to-interactive",
+    "user-timings",
+    "screenshots",
+    "critical-request-chains",
+    "manifest-exists",
+    "manifest-background-color",
+    "manifest-theme-color",
+    "manifest-icons-min-192",
+    "manifest-icons-min-144",
+    "manifest-name",
+    "manifest-short-name",
+    "manifest-short-name-length",
+    "manifest-start-url",
+    "meta-theme-color",
+    "aria-valid-attr",
+    "aria-allowed-attr",
+    "color-contrast",
+    "image-alt",
+    "label",
+    "tabindex",
+    "content-width",
+    "geolocation-on-start"
+  ],
+  "aggregations": [
+    {
+      "name": "Progressive Web App",
+      "description": "These audits validate the aspects of a Progressive Web App.",
+      "scored": true,
+      "categorizable": true,
+      "items": [
+        {
+          "name": "App can load on offline/flaky connections",
+          "description": "Ensuring your web app can respond when the network connection is unavailable or flaky is critical to providing your users a good experience. This is achieved through use of a <a href=\"https://developers.google.com/web/fundamentals/primers/service-worker/\">Service Worker</a>.",
+          "audits": {
+            "service-worker": {
+              "expectedValue": true,
+              "weight": 1
+            },
+            "works-offline": {
+              "expectedValue": true,
+              "weight": 1
+            },
+            "cache-start-url": {
+              "expectedValue": true,
+              "weight": 1
+            }
+          }
+        }, {
+          "name": "Page load performance is fast",
+          "description": "Users notice if sites and apps don't perform well. These top-level metrics capture the most important perceived performance concerns.",
+          "audits": {
+            "first-meaningful-paint": {
+              "expectedValue": 100,
+              "weight": 1
+            },
+            "speed-index-metric": {
+              "expectedValue": 100,
+              "weight": 1
+            },
+            "estimated-input-latency": {
+              "expectedValue": 100,
+              "weight": 1
+            },
+            "time-to-interactive": {
+              "expectedValue": 100,
+              "weight": 1
+            },
+            "scrolling-60fps": {
+              "expectedValue": true,
+              "weight": 0,
+              "comingSoon": true,
+              "description": "Content scrolls at 60fps",
+              "category": "UX"
+            },
+            "touch-150ms": {
+              "expectedValue": true,
+              "weight": 0,
+              "comingSoon": true,
+              "description": "Touch input gets a response in < 150ms",
+              "category": "UX"
+            },
+            "fmp-no-jank": {
+              "expectedValue": true,
+              "weight": 0,
+              "comingSoon": true,
+              "description": "App is interactive without jank after the first meaningful paint",
+              "category": "UX"
+            }
+          }
+        }, {
+          "name": "Site is progressively enhanced",
+          "description": "Progressive enhancement means that everyone can access the basic content and functionality of a page in any browser, and those without certain browser features may receive a reduced but still functional experience.",
+          "audits": {
+            "without-javascript": {
+              "expectedValue": true,
+              "weight": 1
+            }
+          }
+        }, {
+          "name": "User can be prompted to Add to Homescreen",
+          "description": "While users can manually add your site to their homescreen in the browser menu, the <a href=\"https://developers.google.com/web/updates/2015/03/increasing-engagement-with-app-install-banners-in-chrome-for-android?hl=en\">prompt (aka app install banner)</a> will proactively prompt the user to install the app if the below requirements are met and the user has visited your site at least twice (with at least five minutes between visits).",
+          "see": "https://github.com/GoogleChrome/lighthouse/issues/23",
+          "audits": {
+            "service-worker": {
+              "expectedValue": true,
+              "weight": 1
+            },
+            "manifest-exists": {
+              "expectedValue": true,
+              "weight": 1
+            },
+            "manifest-start-url": {
+              "expectedValue": true,
+              "weight": 1
+            },
+            "manifest-icons-min-144": {
+              "expectedValue": true,
+              "weight": 1
+            },
+            "manifest-short-name": {
+              "expectedValue": true,
+              "weight": 1
+            }
+          }
+        }, {
+          "name": "Installed web app will launch with custom splash screen",
+          "description": "A default splash screen will be constructed, but meeting these requirements guarantee a high-quality and customizable <a href=\"https://developers.google.com/web/updates/2015/10/splashscreen?hl=en\">splash screen</a> the user sees between tapping the home screen icon and your app’s first paint.",
+          "see": "https://github.com/GoogleChrome/lighthouse/issues/24",
+          "audits": {
+            "manifest-exists": {
+              "expectedValue": true,
+              "weight": 1
+            },
+            "manifest-name": {
+              "expectedValue": true,
+              "weight": 1
+            },
+            "manifest-background-color": {
+              "expectedValue": true,
+              "weight": 1
+            },
+            "manifest-theme-color": {
+              "expectedValue": true,
+              "weight": 1
+            },
+            "manifest-icons-min-192": {
+              "expectedValue": true,
+              "weight": 1
+            }
+          }
+        }, {
+          "name": "Address bar matches brand colors",
+          "description": "The browser address bar can be themed to match your site. A theme-color <a href=\"https://developers.google.com/web/updates/2014/11/Support-for-theme-color-in-Chrome-39-for-Android\">meta tag</a> will upgrade the address bar when a user browses the site, and the <a href=\"https://developers.google.com/web/updates/2015/08/using-manifest-to-set-sitewide-theme-color\">manifest theme-color</a> will apply the same theme site-wide once it's been added to homescreen.",
+          "audits": {
+            "manifest-exists": {
+              "expectedValue": true,
+              "weight": 1
+            },
+            "theme-color-meta": {
+              "expectedValue": true,
+              "weight": 1
+            },
+            "manifest-theme-color": {
+              "expectedValue": true,
+              "weight": 1
+            }
+          }
+        }, {
+          "name": "Design is mobile-friendly",
+          "description": "Users increasingly experience your app on mobile devices, so it's important to ensure that the experience can adapt to smaller screens.",
+          "audits": {
+            "viewport": {
+              "expectedValue": true,
+              "weight": 1
+            },
+            "content-width": {
+              "expectedValue": true,
+              "weight": 1
+            }
+          }
+        }
+      ]
+    }, {
+      "name": "Best Practices",
+      "description": "These audits do not affect your score but are worth a look.",
+      "scored": false,
+      "categorizable": false,
+      "items": [
+        {
+          "audits": {
+            "aria-allowed-attr": {
+              "expectedValue": true,
+              "weight": 1
+            },
+            "aria-valid-attr": {
+              "expectedValue": true,
+              "weight": 1
+            },
+            "color-contrast": {
+              "expectedValue": true,
+              "weight": 1
+            },
+            "image-alt": {
+              "expectedValue": true,
+              "weight": 1
+            },
+            "label": {
+              "expectedValue": true,
+              "weight": 1
+            },
+            "tabindex": {
+              "expectedValue": true,
+              "weight": 1
+            },
+            "manifest-short-name-length": {
+              "expectedValue": true,
+              "weight": 1
+            },
+            "manifest-display": {
+              "expectedValue": true,
+              "weight": 1
+            },
+            "geolocation-on-start": {
+              "expectedValue": true,
+              "weight": 1
+            },
+            "serviceworker-push": {
+              "expectedValue": true,
+              "weight": 0,
+              "comingSoon": true,
+              "description": "Service worker makes use of push notifications, if appropriate",
+              "category": "UX"
+            },
+            "tap-targets": {
+              "expectedValue": true,
+              "weight": 0,
+              "comingSoon": true,
+              "description": "Tap targets are appropriately sized for touch",
+              "category": "UX"
+            },
+            "payments-autocomplete": {
+              "expectedValue": true,
+              "weight": 0,
+              "comingSoon": true,
+              "description": "Payment forms marked up with [autocomplete] attributes",
+              "category": "UX"
+            },
+            "login-autocomplete": {
+              "expectedValue": true,
+              "weight": 0,
+              "comingSoon": true,
+              "description": "Login forms marked up with [autocomplete] attributes",
+              "category": "UX"
+            },
+            "input-type": {
+              "expectedValue": true,
+              "weight": 0,
+              "comingSoon": true,
+              "description": "Input fields use appropriate [type] attributes for custom keyboards",
+              "category": "UX"
+            }
+          }
+        }
+      ]
+    }, {
+      "name": "Performance Metrics",
+      "description": "These encapsulate your app's performance.",
+      "scored": false,
+      "categorizable": false,
+      "items": [
+        {
+          "audits": {
+            "critical-request-chains": {
+              "expectedValue": 0,
+              "weight": 1
+            },
+            "user-timings": {
+              "expectedValue": 0,
+              "weight": 1
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

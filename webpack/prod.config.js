@@ -102,7 +102,7 @@ module.exports = {
       maximumFileSizeToCacheInBytes: 8388608,
 
       // Ensure all our static, local assets are cached.
-      staticFileGlobs: [assetsPath + '/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff}'],
+      staticFileGlobs: [path.dirname(assetsPath) + '/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff,woff2}'],
       stripPrefix: assetsPath + '/',
 
       directoryIndex: '/',

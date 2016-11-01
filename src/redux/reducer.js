@@ -11,19 +11,28 @@ import widgets from './modules/widgets';
 import survey from './modules/survey';
 import chat from './modules/chat';
 
-export default combineReducers({
-  routing: routerReducer,
-  reduxAsyncConnect,
-  form,
-  notifs,
-  auth,
-  counter: multireducer({
-    counter1: counter,
-    counter2: counter,
-    counter3: counter
-  }),
-  info,
-  widgets,
-  survey,
-  chat
-});
+export default function createReducer(asyncReducers) {
+  return combineReducers({
+    routing: routerReducer,
+    reduxAsyncConnect,
+    online: (v = true) => v,
+    form,
+    notifs,
+    auth,
+    counter: multireducer({
+      counter1: counter,
+      counter2: counter,
+      counter3: counter
+    }),
+    info,
+    widgets,
+    survey,
+    chat,
+    ...asyncReducers
+  });
+}
+
+export function injectAsyncReducer(store, name, asyncReducer) {
+  store.asyncReducers[name] = asyncReducer;
+  store.replaceReducer(createReducer(store.asyncReducers));
+}

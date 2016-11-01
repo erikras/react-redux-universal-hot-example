@@ -9,3 +9,4 @@ npm-debug.log
 .happypack
 webpack/dlls/*.json
 api/**/*.nedb
+*.report.html

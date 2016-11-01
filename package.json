@@ -37,7 +37,8 @@
     "dev": "concurrently --kill-others \"npm run watch-client\" \"npm run start-dev\" \"npm run start-dev-api\"",
     "test": "karma start",
     "test-node": "./node_modules/mocha/bin/mocha $(find api -name '*-test.js') --compilers js:babel-core/register",
-    "test-node-watch": "./node_modules/mocha/bin/mocha $(find api -name '*-test.js') --compilers js:babel-core/register --watch"
+    "test-node-watch": "./node_modules/mocha/bin/mocha $(find api -name '*-test.js') --compilers js:babel-core/register --watch",
+    "lighthouse-report": "LIGHTHOUSE_CHROMIUM_PATH=$(which google-chrome) lighthouse --config-path=lighthouse.json http://localhost:8080"
   },
   "betterScripts": {
     "start-prod": {
@@ -182,6 +183,7 @@
     "karma-webpack": "^1.8.0",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
+    "lighthouse": "^1.1.7",
     "mocha": "^3.0.2",
     "node-sass": "^3.9.3",
     "phantomjs-polyfill": "^0.0.2",

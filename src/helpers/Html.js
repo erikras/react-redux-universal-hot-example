@@ -41,6 +41,7 @@ export default class Html extends Component {
           <meta name="application-name" content="React Hot" />
           <meta name="apple-mobile-web-app-status-bar-style" content="black" />
           <meta name="apple-mobile-web-app-title" content="React Hot" />
+          <meta name="theme-color" content="#3677dd" />
           {/* styles (will be present only in production with webpack extract text plugin) */}
           {assets.styles && Object.keys(assets.styles).map((style, key) =>
             <link

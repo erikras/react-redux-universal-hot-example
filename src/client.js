@@ -13,7 +13,7 @@ import { ReduxAsyncConnect } from 'redux-connect';
 import { AppContainer as HotEnabler } from 'react-hot-loader';
 import withScroll from 'scroll-behavior';
 import getRoutes from './routes';
-import { socket } from 'app';
+import { init, socket } from 'app';
 import checkNet from './utils/checkNet';
 import { getStoredState } from 'redux-persist';
 import localForage from 'localforage';
@@ -43,10 +43,11 @@ global.socket = initSocket();
 
 Promise.all([window.__data ? true : checkNet(), getStoredState(offlinePersistConfig)])
   .then(([online, storedData]) => {
-    const data = !online ? { ...storedData, ...window.__data } : window.__data;
-    return createStore(_browserHistory, client, data, online, offlinePersistConfig);
-  })
-  .then(store => {
+    init();
+    if (online) socket.open();
+
+    const data = !online ? { ...storedData, ...window.__data, online } : { ...window.__data, online };
+    const store = createStore(_browserHistory, client, data, online, offlinePersistConfig);
     const history = syncHistoryWithStore(_browserHistory, store);
 
     const renderRouter = props => <ReduxAsyncConnect {...props} helpers={{ client }} filter={item => !item.deferred} />;
@@ -93,18 +94,18 @@ Promise.all([window.__data ? true : checkNet(), getStoredState(offlinePersistCon
         devToolsDest
       );
     }
-  });
 
-if (!__DEVELOPMENT__ && 'serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
-    .then(() => {
-      console.log('Service worker registered!');
-    })
-    .catch(error => {
-      console.log('Error registering service worker: ', error);
-    });
+    if (online && !__DEVELOPMENT__ && 'serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
+        .then(() => {
+          console.log('Service worker registered!');
+        })
+        .catch(error => {
+          console.log('Error registering service worker: ', error);
+        });
 
-  navigator.serviceWorker.ready.then((/* registration */) => {
-    console.log('Service Worker Ready');
+      navigator.serviceWorker.ready.then((/* registration */) => {
+        console.log('Service Worker Ready');
+      });
+    }
   });
-}
