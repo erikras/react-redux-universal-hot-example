@@ -36,8 +36,8 @@
     "watch-client": "better-npm-run watch-client",
     "dev": "concurrently --kill-others \"npm run watch-client\" \"npm run start-dev\" \"npm run start-dev-api\"",
     "test": "karma start",
-    "test-node": "./node_modules/mocha/bin/mocha $(find api -name '*-test.js') --compilers js:babel-core/register",
-    "test-node-watch": "./node_modules/mocha/bin/mocha $(find api -name '*-test.js') --compilers js:babel-core/register --watch",
+    "test-node": "jest $(find api -name '*-test.js')",
+    "test-node-watch": "jest $(find api -name '*-test.js') --watch",
     "lighthouse-report": "LIGHTHOUSE_CHROMIUM_PATH=$(which google-chrome) lighthouse --config-path=lighthouse.json http://localhost:8080"
   },
   "betterScripts": {
@@ -152,6 +152,7 @@
   "devDependencies": {
     "autoprefixer-loader": "^3.2.0",
     "babel-eslint": "^7.0.0",
+    "babel-jest": "^16.0.0",
     "babel-loader": "^6.2.5",
     "babel-plugin-typecheck": "^3.9.0",
     "better-npm-run": "^0.0.11",
@@ -173,6 +174,7 @@
     "font-awesome-webpack": "^0.0.4",
     "happypack": "^2.2.1",
     "html-webpack-plugin": "^2.22.0",
+    "jest": "^16.0.2",
     "json-loader": "^0.5.4",
     "karma": "^1.3.0",
     "karma-cli": "^1.0.1",
