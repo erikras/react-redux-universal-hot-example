@@ -28,7 +28,7 @@ app.set('config', config)
     saveUninitialized: false,
     cookie: { maxAge: 60000 }
   }))
-  .use(bodyParser.urlencoded({ extended: false }))
+  .use(bodyParser.urlencoded({ extended: true }))
   .use(bodyParser.json());
 
 const actionsHandler = (req, res, next) => {
