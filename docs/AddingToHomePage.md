@@ -7,14 +7,14 @@ home page of the sample application.
 
 First, find the correct file to change by walking through the kit's directory tree:
 
-![Finding The Home Page 1](find_home1.png)
+![Finding The Home Page 1](AddingToHomePage/find_home1.png)
 
 
-![Finding The Home Page 2](find_home2.png)
+![Finding The Home Page 2](AddingToHomePage/find_home2.png)
 
-![Finding The Home Page 3](find_home3.png)
+![Finding The Home Page 3](AddingToHomePage/find_home3.png)
 
-![Finding The Home Page 4](find_home4.png)
+![Finding The Home Page 4](AddingToHomePage/find_home4.png)
 
 So, the likely file is `src/containers/Home/Home.js`.
 
@@ -42,7 +42,7 @@ other JSON objects.
 
 Add the static text to (`src/containers/Home/Home.js`):
 
-![Add Hello Header to Home](add_home.png)
+![Add Hello Header to Home](AddingToHomePage/add_home.png)
 
 
 When you save the file to disk, the change to the `./src` directory is picked up by the 
@@ -52,7 +52,7 @@ reload.   The rebuilding processes through webpack middleware and plugins that c
 transpile JAX and ES6 (or ES7), and bundles together all the resources into one package in about 6 seconds.
 That is, the browser will show "Hello, World!" on your web page in about 6 seconds:
 
-![Hello World rendered on home page](hello_rendered.png)
+![Hello World rendered on home page](AddingToHomePage/hello_rendered.png)
 
 ## Conclusion
 

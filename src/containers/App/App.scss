@@ -17,6 +17,16 @@
     line-height: 20px;
   }
 }
+
 .appContent {
   margin: 50px 0; // for fixed navbar
+  position: relative;
+}
+
+.notifs {
+  margin: 15px 0;
+}
+
+:global(.form-control-feedback) {
+  text-align: inherit;
 }

@@ -34,7 +34,7 @@ export default function reducer(state = initialState, action = {}) {
         loading: false,
         loaded: false,
         data: null,
-        error: action.error
+        error: typeof action.error === 'string' ? action.error : 'Error'
       };
     case EDIT_START:
       return {
@@ -59,7 +59,7 @@ export default function reducer(state = initialState, action = {}) {
       data[action.result.id - 1] = action.result;
       return {
         ...state,
-        data: data,
+        data,
         editing: {
           ...state.editing,
           [action.id]: false
@@ -89,7 +89,7 @@ export function isLoaded(globalState) {
 export function load() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.get('/widget/load/param1/param2') // params not used, just shown as demonstration
+    promise: client => client.get('/widget/load/param1/param2') // params not used, just shown as demonstration
   };
 }
 
@@ -97,7 +97,7 @@ export function save(widget) {
   return {
     types: [SAVE, SAVE_SUCCESS, SAVE_FAIL],
     id: widget.id,
-    promise: (client) => client.post('/widget/update', {
+    promise: client => client.post('/widget/update', {
       data: widget
     })
   };

@@ -9,6 +9,7 @@ global.__CLIENT__ = false;
 global.__SERVER__ = true;
 global.__DISABLE_SSR__ = false;  // <----- DISABLES SERVER SIDE RENDERING FOR ERROR DEBUGGING
 global.__DEVELOPMENT__ = process.env.NODE_ENV !== 'production';
+global.__DLLS__ = process.env.WEBPACK_DLLS === '1';
 
 if (__DEVELOPMENT__) {
   if (!require('piping')({
@@ -22,7 +23,6 @@ if (__DEVELOPMENT__) {
 // https://github.com/halt-hammerzeit/webpack-isomorphic-tools
 var WebpackIsomorphicTools = require('webpack-isomorphic-tools');
 global.webpackIsomorphicTools = new WebpackIsomorphicTools(require('../webpack/webpack-isomorphic-tools'))
-  .development(__DEVELOPMENT__)
-  .server(rootDir, function() {
-    require('../src/server');
-  });
+.server(rootDir, function() {
+  require('../src/server');
+});

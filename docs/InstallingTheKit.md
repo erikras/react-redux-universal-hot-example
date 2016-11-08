@@ -8,7 +8,7 @@ There is no failure except when nothing is learned.
 
 First you should clone the project from GitHub.  The easiest way is to use something like this:
 
-![Cloning from GitHub](git_clone.png)
+![Cloning from GitHub](InstallingTheKit/git_clone.png)
 
 This puts a copy of the whole project into your directory `mycopy`.   All the files you will change are
 in this directory.   You can `rm -rf mycopy`, clone it again, and continue on.   
@@ -27,7 +27,7 @@ up to date; OS/X users type `brew upgrade && brew update`.
 Npm installs libraries according to the [semvar](https://docs.npmjs.com/getting-started/semantic-versioning) 
 minimum versions in the `dependencies` section of `package.json` file:
 
-![The Dependencies](dependencies.png)
+![The Dependencies](InstallingTheKit/dependencies.png)
 
 We also install the packages listed in the `devDependencies` section,  
 [because we are installing from source](http://stackoverflow.com/questions/18875674/whats-the-difference-between-dependencies-devdependencies-and-peerdependencies).
@@ -38,7 +38,7 @@ to over 1,000 packages.
 
 ### Let's install a thousand packages:
 
-![Start of install](start_npm.png)
+![Start of install](InstallingTheKit/start_npm.png)
 
 And then you should see pages and pages of output.  Some packages suggest installing "globally" or "-g"; don't. 
 Global packages install into  `/usr/local/lib/node_modules` and mix links to binaries into `/usr/local/bin`.
@@ -56,11 +56,11 @@ running `npm run test`.  The only way to know it works is to run it.
 
 First, find the command. 
 
-![List of scripts](npm_run.png)
+![List of scripts](InstallingTheKit/npm_run.png)
 
 Now, run it!
 
-![Run dev, part 1](run_dev1.png)
+![Run dev, part 1](InstallingTheKit/run_dev1.png)
 
 We run:
 
@@ -72,14 +72,14 @@ We run:
    
 The second part shows these running:
 
-![Run dev, part 2](run_dev2.png)
+![Run dev, part 2](InstallingTheKit/run_dev2.png)
 
 You can see WebPack rebuilding static assets into `./webpack-assets.json`.  If you check the id, you
 can also view it on port 3001, http://localhost:3001/dist/main-b6c55eaa1c8d8efc7190.js in this example.
 
 Now, open up your browser to [port 3000](http://localhost:3000/):
 
-![Port 3000](port3000.png)
+![Port 3000](InstallingTheKit/port3000.png)
 
 The Redux developer bar takes up much of the screen.  Hide it with 'control-H'.
 

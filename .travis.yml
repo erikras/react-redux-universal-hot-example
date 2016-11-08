@@ -1,19 +1,35 @@
+dist: trusty
+
 language: node_js
 
 node_js:
-  - "0.12"
   - "4.0"
   - "4"
   - "5"
   - "stable"
 
-sudo: false
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - gcc-4.8
+    - g++-4.8
+
+sudo: required
+
+before_install:
+  - sudo apt-get -qq update
 
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
+  - export NODE_ENV=development
 
 script:
   - npm run lint
   - npm test
   - npm run test-node
+
+env:
+  - TRAVIS=travis CXX=g++-4.8
