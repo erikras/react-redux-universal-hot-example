@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import load from '../widget/load';
 import sinon from 'sinon';
+import load from '../widget/load';
 
 describe('widget load', () => {
   afterEach(() => {

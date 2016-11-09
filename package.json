@@ -30,7 +30,7 @@
     "build": "better-npm-run build",
     "build-dlls": "webpack --verbose --colors --display-error-details --config webpack/vendor.config.js",
     "postinstall": "concurrently \"npm run build\" \"npm run build-dlls\"",
-    "lint": "eslint -c .eslintrc src api",
+    "lint": "eslint -c .eslintrc api src",
     "start-dev": "better-npm-run start-dev",
     "start-dev-api": "better-npm-run start-dev-api",
     "watch-client": "better-npm-run watch-client",

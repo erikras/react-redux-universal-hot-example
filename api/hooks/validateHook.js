@@ -1,5 +1,5 @@
-import { createValidatorPromise as validator } from '../utils/validation';
 import errors from 'feathers-errors';
+import { createValidatorPromise as validator } from '../utils/validation';
 
 export default function validateHook(schema) {
   return function (hook) { // eslint-disable-line func-names

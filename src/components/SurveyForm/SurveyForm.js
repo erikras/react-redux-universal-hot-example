@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
-import surveyValidation from './surveyValidation';
 import { isValidEmail } from 'redux/modules/survey';
+import surveyValidation from './surveyValidation';
 
 function asyncValidate(data, dispatch) {
   if (!data.email) return Promise.resolve();

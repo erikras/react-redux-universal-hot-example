@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import loadInfo from '../loadInfo';
 import timekeeper from 'timekeeper';
+import loadInfo from '../loadInfo';
 
 describe('loadInfo', () => {
   it('loads the current date', () => {

@@ -1,8 +1,8 @@
 import hooks from 'feathers-hooks';
 import { hooks as auth } from 'feathers-authentication';
+import errors from 'feathers-errors';
 import { validateHook, restrictToOwner } from '../../hooks';
 import { required, email, match, unique } from '../../utils/validation';
-import errors from 'feathers-errors';
 
 const schemaValidator = {
   email: [required, email, unique('email')],
