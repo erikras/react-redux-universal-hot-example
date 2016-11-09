@@ -4,19 +4,19 @@
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import createStore from './redux/create';
-import ApiClient from './helpers/ApiClient';
 import { Provider } from 'react-redux';
-import { Router, browserHistory } from 'react-router';
+import { applyRouterMiddleware, Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { ReduxAsyncConnect } from 'redux-connect';
 import { AppContainer as HotEnabler } from 'react-hot-loader';
-import withScroll from 'scroll-behavior';
-import getRoutes from './routes';
-import { init, socket } from 'app';
-import checkNet from './utils/checkNet';
+import { useScroll } from 'react-router-scroll';
 import { getStoredState } from 'redux-persist';
 import localForage from 'localforage';
+import { init, socket } from 'app';
+import createStore from './redux/create';
+import ApiClient from './helpers/ApiClient';
+import getRoutes from './routes';
+import checkNet from './utils/checkNet';
 
 const offlinePersistConfig = {
   storage: localForage,
@@ -24,7 +24,6 @@ const offlinePersistConfig = {
 };
 
 const client = new ApiClient();
-const _browserHistory = withScroll(browserHistory);
 const dest = document.getElementById('content');
 
 function initSocket() {
@@ -47,10 +46,16 @@ Promise.all([window.__data ? true : checkNet(), getStoredState(offlinePersistCon
     if (online) socket.open();
 
     const data = !online ? { ...storedData, ...window.__data, online } : { ...window.__data, online };
-    const store = createStore(_browserHistory, client, data, online, offlinePersistConfig);
-    const history = syncHistoryWithStore(_browserHistory, store);
+    const store = createStore(browserHistory, client, data, online, offlinePersistConfig);
+    const history = syncHistoryWithStore(browserHistory, store);
 
-    const renderRouter = props => <ReduxAsyncConnect {...props} helpers={{ client }} filter={item => !item.deferred} />;
+    const renderRouter = props => <ReduxAsyncConnect
+      {...props}
+      helpers={{ client }}
+      filter={item => !item.deferred}
+      render={applyRouterMiddleware(useScroll())}
+    />;
+
     const render = routes => {
       ReactDOM.render(
         <HotEnabler>

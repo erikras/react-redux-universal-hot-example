@@ -79,11 +79,12 @@ class FacebookLogin extends React.Component {
   render() {
     const { className, textButton, typeButton, component: Component } = this.props;
 
+    if (Component) return <Component facebookLogin={this.click} />;
+
     return (
-      Component ? <Component facebookLogin={this.click} /> :
-        <button className={className} onClick={this.click} type={typeButton}>
-          {textButton}
-        </button>
+      <button className={className} onClick={this.click} type={typeButton}>
+        {textButton}
+      </button>
     );
   }
 }

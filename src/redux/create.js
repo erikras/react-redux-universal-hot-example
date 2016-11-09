@@ -1,7 +1,7 @@
 import { createStore as _createStore, applyMiddleware, compose } from 'redux';
-import createMiddleware from './middleware/clientMiddleware';
 import { routerMiddleware } from 'react-router-redux';
 import { autoRehydrate, createPersistor } from 'redux-persist';
+import createMiddleware from './middleware/clientMiddleware';
 import createReducer, { injectAsyncReducer } from './reducer';
 
 export default function createStore(history, client, data, online = true, persistConfig = null) {
