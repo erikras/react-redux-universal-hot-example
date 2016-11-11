@@ -86,6 +86,9 @@ export default class Home extends Component {
             <li><a href="https://github.com/erikras/redux-form" target="_blank">redux-form</a> to manage form state
               in Redux
             </li>
+            <li><a href="https://github.com/sslotsky/violet-paginator" target="_blank">violet-paginator</a> to manage list state
+              in Redux, including pagination, sorting, filtering, updating, and more.
+            </li>
             <li><a href="https://github.com/erikras/multireducer" target="_blank">multireducer</a> combine several
               identical reducer states into one key-based reducer</li>
             <li><a href="https://github.com/webpack/style-loader" target="_blank">style-loader</a> and <a
@@ -146,6 +149,12 @@ export default class Home extends Component {
               The <Link to="/survey">Survey page</Link> uses the
               still-experimental <a href="https://github.com/erikras/redux-form" target="_blank">redux-form</a> to
               manage form state inside the Redux store. This includes immediate client-side validation.
+            </dd>
+            <dt>Pagination</dt>
+            <dd>
+              The <Link to="/pagination">Pagination page</Link> uses
+              <a href="https://www.npmjs.com/package/violet-paginator" target="_blank">violet-paginator</a> to
+              paginate and sort records in a data table.
             </dd>
             <dt>WebSockets / socket.io</dt>
             <dd>

@@ -1,12 +1,14 @@
 import { createStore as _createStore, applyMiddleware, compose } from 'redux';
 import createMiddleware from './middleware/clientMiddleware';
 import { routerMiddleware } from 'react-router-redux';
+import thunk from 'redux-thunk';
+import Immutable from 'immutable';
 
 export default function createStore(history, client, data) {
   // Sync dispatched route actions to the history
   const reduxRouterMiddleware = routerMiddleware(history);
 
-  const middleware = [createMiddleware(client), reduxRouterMiddleware];
+  const middleware = [createMiddleware(client), reduxRouterMiddleware, thunk];
 
   let finalCreateStore;
   if (__DEVELOPMENT__ && __CLIENT__ && __DEVTOOLS__) {
@@ -22,6 +24,9 @@ export default function createStore(history, client, data) {
   }
 
   const reducer = require('./modules/reducer');
+  if (data) {
+    data.pagination = Immutable.fromJS(data.pagination);
+  }
   const store = finalCreateStore(reducer, data);
 
 
