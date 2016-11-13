@@ -1,17 +1,8 @@
 import React from 'react';
-import {IndexRoute, Route} from 'react-router';
+import { Route } from 'react-router';
 import { isLoaded as isAuthLoaded, load as loadAuth } from 'redux/modules/auth';
 import {
     App,
-    Chat,
-    Home,
-    Widgets,
-    About,
-    Login,
-    LoginSuccess,
-    Survey,
-    NotFound,
-    Pagination,
   } from 'containers';
 
 export default (store) => {
@@ -36,25 +27,8 @@ export default (store) => {
    * Please keep routes in alphabetical order
    */
   return (
-    <Route path="/" component={App}>
-      { /* Home (main) route */ }
-      <IndexRoute component={Home}/>
-
-      { /* Routes requiring login */ }
-      <Route onEnter={requireLogin}>
-        <Route path="chat" component={Chat}/>
-        <Route path="loginSuccess" component={LoginSuccess}/>
-      </Route>
-
-      { /* Routes */ }
-      <Route path="about" component={About}/>
-      <Route path="login" component={Login}/>
-      <Route path="pagination" component={Pagination}/>
-      <Route path="survey" component={Survey}/>
-      <Route path="widgets" component={Widgets}/>
-
-      { /* Catch all route */ }
-      <Route path="*" component={NotFound} status={404} />
+    <Route path="/" component={App} >
+      <Route onEnter={requireLogin}/>
     </Route>
   );
 };
