@@ -40,7 +40,8 @@ I cobbled this together from a wide variety of similar "starter" repositories. A
 ## Installation
 
 ```bash
-git clone git@github.com:erikras/react-redux-universal-hot-example.git -o react-redux-universal-hot-example <YOUR_APP_FOLDER_NAME>
+git clone git@github.com:erikras/react-redux-universal-hot-example.git \
+-o react-redux-universal-hot-example <YOUR_APP_FOLDER_NAME>
 cd <YOUR_APP_FOLDER_NAME>
 npm install
 ```
