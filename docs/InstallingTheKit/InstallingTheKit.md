@@ -6,9 +6,7 @@ There is no failure except when nothing is learned.
 
 ##  Clone from github
 
-First you should clone the project from GitHub.  The easiest way is to use something like this:
-
-Say you want to call your app <YOUR_APP_NAME>:
+First you should clone the project from GitHub.  The easiest way is to use something like this. Say you want to call your app &lt;YOUR_APP_NAME&gt;:
 
 ```bash
 git clone git@github.com:erikras/react-redux-universal-hot-example.git \
