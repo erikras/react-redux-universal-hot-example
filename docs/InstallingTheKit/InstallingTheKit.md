@@ -23,7 +23,13 @@ That's the minimum view of git, equivalent to the [xkcd view](https://xkcd.com/1
 [github](https://github.com) make every manipulation and automated workflow possible but none easy.
 Nothing more complex than creating new copy is necessary until contributing code to a project.
 
-Note: You'll probably want to have your own Git repo somewhere like github to keep your own updates safe. To do that you'll first create the empty (no README.md or any other files) repo on github and then add it as the ``origin``
+Note: You'll probably want to have your own Git repo somewhere like github to keep your own updates safe. 
+
+To do that:
+
+* First create the empty (no README.md or any other files) repo on [github.com](https://github.com)
+
+* Then add it as the ``origin`` remote locally
 
 ```bash
 git remote add origin git@github.com:<YOUR_GITHUB_USERNAME>/<YOUR_APP_NAME>.git
