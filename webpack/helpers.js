@@ -6,26 +6,15 @@ var HappyPack = require('happypack');
 var happyThreadPool = HappyPack.ThreadPool({ size: 5 });
 
 module.exports = {
-  createSourceLoader: createSourceLoader,
   createHappyPlugin: createHappyPlugin,
   installVendorDLL: installVendorDLL,
   isValidDLLs: isValidDLLs
 };
 
-// restrict loader to files under /src
-function createSourceLoader(spec) {
-  return Object.keys(spec).reduce(function (x, key) {
-    x[key] = spec[key];
-
-    return x;
-  }, {
-    include: [path.resolve(__dirname, '../src')]
-  });
-}
-
-function createHappyPlugin(id) {
+function createHappyPlugin(id, loaders) {
   return new HappyPack({
     id: id,
+    loaders: loaders,
     threadPool: happyThreadPool,
 
     // disable happypack with HAPPY=0

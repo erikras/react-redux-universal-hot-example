@@ -12,7 +12,7 @@ import { AppContainer as HotEnabler } from 'react-hot-loader';
 import { useScroll } from 'react-router-scroll';
 import { getStoredState } from 'redux-persist';
 import localForage from 'localforage';
-import { init, socket } from 'app';
+import { socket } from 'app';
 import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
 import getRoutes from './routes';
@@ -42,11 +42,10 @@ global.socket = initSocket();
 
 Promise.all([window.__data ? true : checkNet(), getStoredState(offlinePersistConfig)])
   .then(([online, storedData]) => {
-    init();
     if (online) socket.open();
 
     const data = !online ? { ...storedData, ...window.__data, online } : { ...window.__data, online };
-    const store = createStore(browserHistory, client, data, online, offlinePersistConfig);
+    const store = createStore(browserHistory, client, data, offlinePersistConfig);
     const history = syncHistoryWithStore(browserHistory, store);
 
     const renderRouter = props => <ReduxAsyncConnect

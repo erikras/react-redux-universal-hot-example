@@ -11,20 +11,15 @@ const storage = __SERVER__ ? require('localstorage-memory') : window.localStorag
 
 const host = clientUrl => (__SERVER__ ? `http://${config.apiHost}:${config.apiPort}` : clientUrl);
 
-const configureApp = (app, transport) => app
+const configureApp = transport => feathers()
   .configure(transport)
   .configure(hooks())
   .configure(authentication({ storage }));
 
 export const socket = io('', { path: host('/ws'), autoConnect: false });
 
-const app = feathers();
+const app = configureApp(socketio(socket));
 
 export default app;
 
-export const restApp = feathers();
-
-export const init = () => {
-  configureApp(app, socketio(socket));
-  configureApp(restApp, rest(host('/api')).superagent(superagent));
-};
+export const restApp = configureApp(rest(host('/api')).superagent(superagent));

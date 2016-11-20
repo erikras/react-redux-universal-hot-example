@@ -147,7 +147,7 @@
     "serve-favicon": "^2.3.0",
     "socket.io": "^1.4.8",
     "socket.io-client": "^1.4.8",
-    "superagent": "^2.2.0"
+    "superagent": "^3.0.0"
   },
   "devDependencies": {
     "autoprefixer-loader": "^3.2.0",
@@ -161,7 +161,7 @@
     "chai": "^3.5.0",
     "clean-webpack-plugin": "^0.1.10",
     "concurrently": "^3.1.0",
-    "css-loader": "^0.25.0",
+    "css-loader": "^0.26.0",
     "eslint": "^3.9.1",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-loader": "^1.5.0",
@@ -172,7 +172,7 @@
     "file-loader": "^0.9.0",
     "font-awesome": "^4.6.3",
     "font-awesome-webpack": "^0.0.4",
-    "happypack": "^2.2.1",
+    "happypack": "^3.0.0",
     "html-webpack-plugin": "^2.22.0",
     "jest": "^17.0.0",
     "json-loader": "^0.5.4",
@@ -202,7 +202,7 @@
     "sinon": "^1.17.5",
     "strip-loader": "^0.1.2",
     "style-loader": "^0.13.1",
-    "sw-precache-webpack-plugin": "^0.5.1",
+    "sw-precache-webpack-plugin": "^0.6.1",
     "timekeeper": "^1.0.0",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.2",

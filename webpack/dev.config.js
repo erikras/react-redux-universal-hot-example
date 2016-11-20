@@ -58,26 +58,30 @@ var webpackConfig = module.exports = {
   },
   module: {
     loaders: [
-      helpers.createSourceLoader({
+      {
         happy: { id: 'jsx' },
         test: /\.jsx?$/,
-        loaders: ['react-hot-loader/webpack', 'babel?' + JSON.stringify(babelLoaderQuery), 'eslint-loader']
-      }),
-      helpers.createSourceLoader({
+        loader: 'happypack/loader?id=jsx',
+        include: [path.resolve(__dirname, '../src')]
+      },
+      {
         happy: { id: 'json' },
         test: /\.json$/,
-        loader: 'json-loader'
-      }),
-      helpers.createSourceLoader({
+        loader: 'happypack/loader?id=json',
+        include: [path.resolve(__dirname, '../src')]
+      },
+      {
         happy: { id: 'less' },
         test: /\.less$/,
-        loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!less?outputStyle=expanded&sourceMap'
-      }),
-      helpers.createSourceLoader({
+        loader: 'happypack/loader?id=less',
+        include: [path.resolve(__dirname, '../src')]
+      },
+      {
         happy: { id: 'sass' },
         test: /\.scss$/,
-        loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap'
-      }),
+        loader: 'happypack/loader?id=sass',
+        include: [path.resolve(__dirname, '../src')]
+      },
       { test: /\.woff2?(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
       { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream' },
       { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file' },
@@ -106,10 +110,24 @@ var webpackConfig = module.exports = {
     }),
     webpackIsomorphicToolsPlugin.development(),
 
-    helpers.createHappyPlugin('jsx'),
-    helpers.createHappyPlugin('json'),
-    helpers.createHappyPlugin('less'),
-    helpers.createHappyPlugin('sass')
+    helpers.createHappyPlugin('jsx', [
+      'react-hot-loader/webpack',
+      'babel?' + JSON.stringify(babelLoaderQuery),
+      'eslint-loader'
+    ]),
+    helpers.createHappyPlugin('json', ['json']),
+    helpers.createHappyPlugin('less', [
+      'style',
+      'css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]',
+      'autoprefixer?browsers=last 2 version',
+      'less?outputStyle=expanded&sourceMap'
+    ]),
+    helpers.createHappyPlugin('sass', [
+      'style',
+      'css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]',
+      'autoprefixer?browsers=last 2 version',
+      'sass?outputStyle=expanded&sourceMap'
+    ])
   ]
 };
 

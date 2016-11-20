@@ -1,31 +1,29 @@
 import { createStore as _createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
-import { autoRehydrate, createPersistor } from 'redux-persist';
+import { createPersistor } from 'redux-persist';
 import createMiddleware from './middleware/clientMiddleware';
 import createReducer, { injectAsyncReducer } from './reducer';
 
-export default function createStore(history, client, data, online = true, persistConfig = null) {
-  const reduxRouterMiddleware = routerMiddleware(history);
-  const middleware = [createMiddleware(client), reduxRouterMiddleware];
+export default function createStore(history, client, data, persistConfig = null) {
+  const middleware = [createMiddleware(client), routerMiddleware(history)];
 
-  let finalCreateStore;
+  let enhancers = [applyMiddleware(...middleware)];
   if (__CLIENT__ && __DEVTOOLS__) {
     const { persistState } = require('redux-devtools');
     const DevTools = require('../containers/DevTools/DevTools');
-    const enhancers = (!online ? [autoRehydrate({ log: true })] : []).concat([
-      applyMiddleware(...middleware),
+    enhancers = [
+      ...enhancers,
       window.devToolsExtension ? window.devToolsExtension() : DevTools.instrument(),
       persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
-    ]);
-    finalCreateStore = compose(...enhancers)(_createStore);
-  } else {
-    const enhancers = (__CLIENT__ && !online ? [autoRehydrate()] : []).concat(applyMiddleware(...middleware));
-    finalCreateStore = compose(...enhancers)(_createStore);
+    ];
   }
 
+  const finalCreateStore = compose(...enhancers)(_createStore);
   const store = finalCreateStore(createReducer(), data);
+
   store.asyncReducers = {};
   store.injectAsyncReducer = injectAsyncReducer.bind(null, store);
+
   if (persistConfig) createPersistor(store, persistConfig);
   store.dispatch({ type: 'PERSIST' });
 
