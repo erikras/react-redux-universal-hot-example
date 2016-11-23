@@ -44,13 +44,6 @@ const component = (
   </Router>
 );
 
-ReactDOM.render(
-  <Provider store={store} key="provider">
-    {component}
-  </Provider>,
-  dest
-);
-
 if (process.env.NODE_ENV !== 'production') {
   window.React = React; // enable debugger
 
@@ -67,6 +60,13 @@ if (__DEVTOOLS__ && !window.devToolsExtension) {
         {component}
         <DevTools />
       </div>
+    </Provider>,
+    dest
+  );
+} else {
+  ReactDOM.render(
+    <Provider store={store} key="provider">
+      {component}
     </Provider>,
     dest
   );
