@@ -1,3 +1,5 @@
+import { createReducer } from 'redux-blower';
+
 const LOAD = 'redux-example/LOAD';
 const LOAD_SUCCESS = 'redux-example/LOAD_SUCCESS';
 const LOAD_FAIL = 'redux-example/LOAD_FAIL';
@@ -6,31 +8,38 @@ const initialState = {
   loaded: false
 };
 
-export default function info(state = initialState, action = {}) {
-  switch (action.type) {
-    case LOAD:
+const info = createReducer({
+  initialState,
+
+  listenTo: {
+    [LOAD](state) {
       return {
         ...state,
         loading: true
       };
-    case LOAD_SUCCESS:
+    },
+
+    [LOAD_SUCCESS](state, action) {
       return {
         ...state,
         loading: false,
         loaded: true,
         data: action.result
       };
-    case LOAD_FAIL:
+    },
+
+    [LOAD_FAIL](state, action) {
       return {
         ...state,
         loading: false,
         loaded: false,
         error: action.error
       };
-    default:
-      return state;
+    }
   }
-}
+});
+
+export default info;
 
 export function isLoaded(globalState) {
   return globalState.info && globalState.info.loaded;
