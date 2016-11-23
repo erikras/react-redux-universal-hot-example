@@ -1,4 +1,4 @@
-//  enable runtime transpilation to use ES6/7 in node
+//  enable runtime translation to use ES6/7 in node
 
 var fs = require('fs');
 
