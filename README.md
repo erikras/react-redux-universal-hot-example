@@ -177,7 +177,7 @@ In `dev.config.js` modify **module loaders** to include a test and loader for cs
 ```javascript
   module: {
     loaders: [
-      { test: /\.css$/, loader: 'style-loader!css-loader'},
+      { test: /\.css$/, loader: 'style!css!autoprefixer?browsers=last 2 version' },
 ```
 
 **3. Add a CSS loader to the webpack prod config**
@@ -187,7 +187,7 @@ You must use the **ExtractTextPlugin** in this loader. In `prod.config.js` modif
 ```javascript
   module: {
     loaders: [
-      { test: /\.css$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader')},
+      { test: /\.css$/, loader: ExtractTextPlugin.extract('style', 'css!autoprefixer?browsers=last 2 version') },
 ```
 
 **Now you may simply omit assigning the `required` stylesheet to a variable and keep it at the top of your `render()` function.**
