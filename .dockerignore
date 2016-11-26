@@ -1,0 +1,27 @@
+# Files
+Dockerfile
+
+# Folders
+data
+node_modules
+tmp
+
+# Stuff which has no impact on Docker
+
+## Local config files
+.babelrc
+.bowerrc
+.dockerignore
+.editorconfig
+.eslintignore
+.eslintrc
+.gitattributes
+.gitignore
+.travis.yml
+
+## Markdown stuff
+*.md
+
+# Temporary files
+webpack-*.json
+
