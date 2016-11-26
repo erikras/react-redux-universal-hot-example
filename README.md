@@ -9,6 +9,17 @@
 
 ---
 
+## Next version
+
+It is located in [simple-router](https://github.com/erikras/react-redux-universal-hot-example/tree/simple-router) branch.
+Nex version will use:
+
+* [redux-async-connect](https://github.com/Rezonans/redux-async-connect) instead of @connectData decorator
+* [react-router v2.0.x](https://github.com/rackt/react-router) (update to new version)
+* [redux-simple-router](https://github.com/rackt/redux-simple-router) instead of redux-router
+
+This branch is been tested now, welcome to try it.
+
 ## About
 
 This is a starter boilerplate app I've put together using the following technologies:
