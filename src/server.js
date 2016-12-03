@@ -35,6 +35,7 @@ app.use(express.static(path.join(__dirname, '..', 'static')));
 
 app.use((req, res, next) => {
   res.setHeader('Service-Worker-Allowed', '*');
+  res.setHeader('X-Forwarded-For', req.ip);
   return next();
 });
 
