@@ -1,4 +1,4 @@
-import hooks from 'feathers-hooks';
+import hooks from 'feathers-hooks-common';
 import authentication, {
   TokenService as tokenService,
   LocalService as localService,

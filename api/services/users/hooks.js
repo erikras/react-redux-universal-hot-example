@@ -1,4 +1,4 @@
-import hooks from 'feathers-hooks';
+import hooks from 'feathers-hooks-common';
 import { hooks as auth } from 'feathers-authentication';
 import errors from 'feathers-errors';
 import { validateHook, restrictToOwner } from '../../hooks';
@@ -11,11 +11,11 @@ const schemaValidator = {
 };
 
 function validate() {
-  return function (hook) { // eslint-disable-line func-names
+  return hook => {
     if (hook.data.facebook && !hook.data.email) {
       throw new errors.BadRequest('Incomplete oauth registration', hook.data);
     }
-    return validateHook(schemaValidator).bind(this)(hook);
+    return validateHook(schemaValidator)(hook);
   };
 }
 
@@ -26,8 +26,7 @@ const userHooks = {
       auth.isAuthenticated()
     ],
     get: [
-      auth.isAuthenticated(),
-      restrictToOwner({ ownerField: 'id' })
+      auth.isAuthenticated()
     ],
     create: [
       validate(),
@@ -36,15 +35,15 @@ const userHooks = {
     ],
     update: [
       auth.isAuthenticated(),
-      restrictToOwner({ ownerField: 'id' })
+      restrictToOwner({ ownerField: '_id' })
     ],
     patch: [
       auth.isAuthenticated(),
-      restrictToOwner({ ownerField: 'id' })
+      restrictToOwner({ ownerField: '_id' })
     ],
     remove: [
       auth.isAuthenticated(),
-      restrictToOwner({ ownerField: 'id' })
+      restrictToOwner({ ownerField: '_id' })
     ]
   },
   after: {

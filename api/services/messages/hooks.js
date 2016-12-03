@@ -1,4 +1,4 @@
-import hooks from 'feathers-hooks';
+import hooks from 'feathers-hooks-common';
 import { hooks as auth } from 'feathers-authentication';
 import { validateHook as validate } from '../../hooks';
 import { required } from '../../utils/validation';
