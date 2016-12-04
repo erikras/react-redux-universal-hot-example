@@ -16,7 +16,7 @@ import { socket } from 'app';
 import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
 import getRoutes from './routes';
-import checkNet from './utils/checkNet';
+import isOnline from './utils/isOnline';
 
 const offlinePersistConfig = {
   storage: localForage,
@@ -40,7 +40,7 @@ function initSocket() {
 
 global.socket = initSocket();
 
-Promise.all([window.__data ? true : checkNet(), getStoredState(offlinePersistConfig)])
+Promise.all([window.__data ? true : isOnline(), getStoredState(offlinePersistConfig)])
   .then(([online, storedData]) => {
     if (online) socket.open();
 

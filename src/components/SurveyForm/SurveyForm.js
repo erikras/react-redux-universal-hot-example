@@ -71,17 +71,25 @@ class SurveyForm extends Component {
     return (
       <div>
         <form className="form-horizontal" onSubmit={handleSubmit}>
-          <Field name="name" type="text" component={this.renderInput} label="Full Name"
-            className="form-control" styles={styles} />
+          <Field
+            name="name" type="text" component={this.renderInput} label="Full Name"
+            className="form-control" styles={styles}
+          />
 
-          <Field name="email" type="text" component={this.renderInput} label="Email"
-            className="form-control" styles={styles} asyncValidating={asyncValidating} />
+          <Field
+            name="email" type="text" component={this.renderInput} label="Email"
+            className="form-control" styles={styles} asyncValidating={asyncValidating}
+          />
 
-          <Field name="occupation" type="text" component={this.renderInput} label="Occupation"
-            className="form-control" styles={styles} />
+          <Field
+            name="occupation" type="text" component={this.renderInput} label="Occupation"
+            className="form-control" styles={styles}
+          />
 
-          <Field name="currentlyEmployed" type="checkbox" component={this.renderInput}
-            label="Currently Employed?" styles={styles} />
+          <Field
+            name="currentlyEmployed" type="checkbox" component={this.renderInput}
+            label="Currently Employed?" styles={styles}
+          />
 
           <div className="form-group">
             <label className="col-sm-2" htmlFor="sex">Sex</label>
