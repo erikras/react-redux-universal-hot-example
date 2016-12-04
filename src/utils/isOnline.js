@@ -1,4 +1,4 @@
-export default function checkNet(path = '/favicon.ico') {
+export default function isOnline(path = '/favicon.ico') {
   // Handle IE and more capable browsers
   const xhr = new (window.ActiveXObject || XMLHttpRequest)('Microsoft.XMLHTTP');
 

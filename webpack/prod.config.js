@@ -22,7 +22,7 @@ module.exports = {
   context: path.resolve(__dirname, '..'),
   entry: {
     main: [
-      'bootstrap-sass!./src/theme/bootstrap.config.prod.js',
+      'bootstrap-loader',
       'font-awesome-webpack!./src/theme/font-awesome.config.prod.js',
       './src/client.js'
     ]
@@ -34,41 +34,126 @@ module.exports = {
     publicPath: '/dist/'
   },
   module: {
-    loaders: [
-      { test: /\.jsx?$/, exclude: /node_modules/, loaders: [strip.loader('debug'), 'babel'] },
-      { test: /\.json$/, loader: 'json' },
+    rules: [
       {
+        test: /\.jsx?$/,
+        use: [{
+          loader: 'strip-loader',
+          options: {
+            strip: ['debug']
+          }
+        }, {
+          loader: 'babel-loader'
+        }],
+        exclude: /node_modules/
+      }, {
+        test: /\.json$/,
+        loader: 'json-loader'
+      }, {
         test: /\.less$/,
-        loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version!less?outputStyle=expanded&sourceMap=true&sourceMapContents=true')
-      },
-      {
+        loader: ExtractTextPlugin.extract({
+          fallbackLoader: 'style-loader',
+          loader: [
+            {
+              loader: 'css-loader',
+              query: {
+                modules: true,
+                importLoaders: 2,
+                sourceMap: true
+              }
+            }, {
+              loader: 'autoprefixer-loader',
+              query: {
+                browsers: 'last 2 version'
+              }
+            }, {
+              loader: 'less-loader',
+              query: {
+                outputStyle: 'expanded',
+                sourceMap: true,
+                sourceMapContents: true
+              }
+            }
+          ]
+        })
+      }, {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true')
-      },
-      { test: /\.woff2?(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/font-woff" },
-      { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream" },
-      { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file" },
-      { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=image/svg+xml" },
-      { test: webpackIsomorphicToolsPlugin.regular_expression('images'), loader: 'url?limit=10240' }
+        loader: ExtractTextPlugin.extract({
+          fallbackLoader: 'style-loader',
+          loader: [
+            {
+              loader: 'css-loader',
+              query: {
+                modules: true,
+                importLoaders: 2,
+                sourceMap: true
+              }
+            }, {
+              loader: 'autoprefixer-loader',
+              query: {
+                browsers: 'last 2 version'
+              }
+            }, {
+              loader: 'sass-loader',
+              query: {
+                outputStyle: 'expanded',
+                sourceMap: true,
+                sourceMapContents: true
+              }
+            }
+          ]
+        })
+      }, {
+        test: /\.woff2?(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10240,
+          mimetype: 'application/font-woff'
+        }
+      }, {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10240,
+          mimetype: 'application/octet-stream'
+        }
+      }, {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'file-loader'
+      }, {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10240,
+          mimetype: 'image/svg+xml'
+        }
+      }, {
+        test: webpackIsomorphicToolsPlugin.regular_expression('images'),
+        loader: 'url-loader',
+        options: {
+          limit: 10240
+        }
+      }
     ]
   },
-  progress: true,
   resolve: {
-    modulesDirectories: [
+    modules: [
       'src',
       'node_modules'
     ],
-    extensions: ['', '.json', '.js', '.jsx']
+    extensions: ['.json', '.js', '.jsx']
   },
   plugins: [
     new CleanPlugin([assetsPath, 'static/service-worker.js'], { root: projectRootPath }),
 
     // css files from the extract-text-plugin loader
-    new ExtractTextPlugin('[name]-[chunkhash].css', { allChunks: true }),
+    new ExtractTextPlugin({
+      filename: '[name]-[chunkhash].css',
+      // disable: false,
+      allChunks: true
+    }),
     new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"production"'
-      },
+      'process.env.NODE_ENV': '"production"',
 
       __CLIENT__: true,
       __SERVER__: false,
@@ -81,8 +166,6 @@ module.exports = {
     new webpack.IgnorePlugin(/\.\/dev/, /\/config$/),
 
     // optimizations
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false

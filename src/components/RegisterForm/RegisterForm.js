@@ -28,8 +28,10 @@ export default class RegisterForm extends Component {
       <form className="form-horizontal" onSubmit={handleSubmit}>
         <Field name="email" type="text" component={this.renderInput} label="Email" />
         <Field name="password" type="password" component={this.renderInput} label="Password" />
-        <Field name="password_confirmation" type="password"
-          component={this.renderInput} label="Password confirmation" />
+        <Field
+          name="password_confirmation" type="password"
+          component={this.renderInput} label="Password confirmation"
+        />
         {error && <p className="text-danger"><strong>{error}</strong></p>}
         <button className="btn btn-success" type="submit">
           <i className="fa fa-sign-in" />{' '}Register
