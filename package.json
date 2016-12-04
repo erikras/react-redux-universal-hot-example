@@ -158,7 +158,7 @@
     "babel-loader": "^6.2.8",
     "babel-plugin-typecheck": "^3.9.0",
     "better-npm-run": "^0.0.13",
-    "bootstrap-loader": "git+ssh://git@github.com/bertho-zero/bootstrap-loader.git#patch-build",
+    "bootstrap-loader": "git+https://git@github.com/bertho-zero/bootstrap-loader.git#patch-build",
     "bootstrap-sass": "^3.3.7",
     "chai": "^3.5.0",
     "clean-webpack-plugin": "^0.1.14",
