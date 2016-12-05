@@ -1,6 +1,6 @@
 var webpack = require('webpack');
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
 
     browsers: ['PhantomJS'],
@@ -13,7 +13,7 @@ module.exports = function(config) {
       './node_modules/phantomjs-polyfill/bind-polyfill.js',
       process.env.WEBPACK_DLLS === '1' && './static/dist/dlls/dll__vendor.js',
       'tests.webpack.js'
-    ].filter(function(x) { return !!x; }),
+    ].filter(function (x) { return !!x; }),
 
     preprocessors: {
       'tests.webpack.js': ['webpack', 'sourcemap']
@@ -33,22 +33,22 @@ module.exports = function(config) {
       devtool: 'inline-source-map',
       module: {
         loaders: [
-          { test: /\.(jpe?g|png|gif|svg)$/, loader: 'url', query: { limit: 10240 } },
-          { test: /\.js$/, exclude: /node_modules/, loaders: ['babel'] },
+          { test: /\.(jpe?g|png|gif|svg)$/, loader: 'url', options: { limit: 10240 } },
+          { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
           { test: /\.json$/, loader: 'json-loader' },
-          { test: /\.less$/, loader: 'style!css!less' },
+          { test: /\.less$/, loader: 'style-loader!css-loader!less-loader' },
           {
             test: /\.scss$/,
-            loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap'
+            loader: 'style-loader!css-loader?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer-loader?browsers=last 2 version!sass-loader?outputStyle=expanded&sourceMap'
           }
         ]
       },
       resolve: {
-        modulesDirectories: [
+        modules: [
           'src',
           'node_modules'
         ],
-        extensions: ['', '.json', '.js']
+        extensions: ['.json', '.js']
       },
       plugins: [
         new webpack.IgnorePlugin(/\.json$/),
