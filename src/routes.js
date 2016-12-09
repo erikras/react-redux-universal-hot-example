@@ -1,10 +1,10 @@
 import React from 'react';
 import { IndexRoute, Route } from 'react-router';
 import { isLoaded as isAuthLoaded, load as loadAuth } from 'redux/modules/auth';
-import {
-  App, Chat, ChatFeathers, Home, Widgets, About,
-  Register, Login, LoginSuccess, Survey, NotFound
-} from 'containers';
+import { App, Home, NotFound } from 'containers';
+
+// eslint-disable-next-line import/no-dynamic-require
+if (typeof System.import === 'undefined') System.import = module => Promise.resolve(require(module));
 
 export default store => {
   const loadAuthIfNeeded = cb => {
@@ -38,21 +38,21 @@ export default store => {
 
       {/* Routes requiring login */}
       <Route onEnter={requireLogin}>
-        <Route path="loginSuccess" component={LoginSuccess} />
-        <Route path="chatFeathers" component={ChatFeathers} />
+        <Route path="loginSuccess" getComponent={() => System.import('./containers/LoginSuccess/LoginSuccess')} />
+        <Route path="chatFeathers" getComponent={() => System.import('./containers/ChatFeathers/ChatFeathers')} />
       </Route>
 
       {/* Routes disallow login */}
       <Route onEnter={requireNotLogged}>
-        <Route path="register" component={Register} />
+        <Route path="register" getComponent={() => System.import('./containers/Register/Register')} />
       </Route>
 
       {/* Routes */}
-      <Route path="login" component={Login} />
-      <Route path="about" component={About} />
-      <Route path="survey" component={Survey} />
-      <Route path="widgets" component={Widgets} />
-      <Route path="chat" component={Chat} />
+      <Route path="login" getComponent={() => System.import('./containers/Login/Login')} />
+      <Route path="about" getComponent={() => System.import('./containers/About/About')} />
+      <Route path="survey" getComponent={() => System.import('./containers/Survey/Survey')} />
+      <Route path="widgets" getComponent={() => System.import('./containers/Widgets/Widgets')} />
+      <Route path="chat" getComponent={() => System.import('./containers/Chat/Chat')} />
 
       {/* Catch all route */}
       <Route path="*" component={NotFound} status={404} />

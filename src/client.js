@@ -5,7 +5,7 @@ import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { applyRouterMiddleware, Router, browserHistory } from 'react-router';
+import { applyRouterMiddleware, Router, browserHistory, match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { ReduxAsyncConnect } from 'redux-connect';
 import { AppContainer as HotEnabler } from 'react-hot-loader';
@@ -56,16 +56,18 @@ Promise.all([window.__data ? true : isOnline(), getStoredState(offlinePersistCon
     />;
 
     const render = routes => {
-      ReactDOM.render(
-        <HotEnabler>
-          <Provider store={store} key="provider">
-            <Router history={history} render={renderRouter}>
-              {routes}
-            </Router>
-          </Provider>
-        </HotEnabler>,
-        dest
-      );
+      match({ history, routes }, (error, redirectLocation, renderProps) => {
+        ReactDOM.render(
+          <HotEnabler>
+            <Provider store={store} key="provider">
+              <Router {...renderProps} render={renderRouter}>
+                {routes}
+              </Router>
+            </Provider>
+          </HotEnabler>,
+          dest
+        );
+      });
     };
 
     render(getRoutes(store));

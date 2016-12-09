@@ -30,8 +30,12 @@ var babelrcObjectDevelopment = babelrcObject.env && babelrcObject.env.developmen
 var combinedPlugins = babelrcObject.plugins || [];
 combinedPlugins = combinedPlugins.concat(babelrcObjectDevelopment.plugins);
 
-var babelLoaderQuery = Object.assign({}, babelrcObjectDevelopment, babelrcObject, { plugins: combinedPlugins });
+var babelLoaderQuery = Object.assign({}, babelrcObject, babelrcObjectDevelopment, { plugins: combinedPlugins });
 delete babelLoaderQuery.env;
+
+babelLoaderQuery.presets = babelLoaderQuery.presets.map(function (v) {
+  return v === 'es2015' ? ['es2015', { modules: false }] : v;
+});
 
 var validDLLs = helpers.isValidDLLs(['vendor'], assetsPath);
 if (process.env.WEBPACK_DLLS === '1' && !validDLLs) {
