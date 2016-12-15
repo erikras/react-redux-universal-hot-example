@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { LoginForm, FacebookLogin } from 'components';
+import LoginForm from 'components/LoginForm/LoginForm';
+import FacebookLogin from 'components/FacebookLogin/FacebookLogin';
 import * as authActions from 'redux/modules/auth';
 import * as notifActions from 'redux/modules/notifs';
 
@@ -12,7 +13,6 @@ export default class Login extends Component {
   static propTypes = {
     user: PropTypes.object,
     login: PropTypes.func,
-    oauthLogin: PropTypes.func,
     logout: PropTypes.func,
     notifSend: PropTypes.func
   }
@@ -23,7 +23,7 @@ export default class Login extends Component {
 
   onFacebookLogin = (err, data) => {
     if (err) return;
-    this.props.oauthLogin('facebook', data)
+    this.props.login('facebook', data, false)
       .then(this.successLogin)
       .catch(error => {
         if (error.message === 'Incomplete oauth registration') {
@@ -35,7 +35,7 @@ export default class Login extends Component {
       });
   };
 
-  login = data => this.props.login(data).then(this.successLogin);
+  login = data => this.props.login('local', data).then(this.successLogin);
 
   successLogin = data => {
     this.props.notifSend({

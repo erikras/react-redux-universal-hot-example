@@ -1,5 +1,5 @@
 import errors from 'feathers-errors';
-import { createValidatorPromise as validator } from '../utils/validation';
+import { createAsyncValidator as validator } from 'utils/validation';
 
 export default function validateHook(schema) {
   return hook => validator(schema, { hook })(hook.data)

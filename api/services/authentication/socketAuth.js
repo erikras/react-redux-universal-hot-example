@@ -1,37 +1,33 @@
-import async from 'async';
-import authMiddleware from 'feathers-authentication/lib/middleware';
+import { verifyJWT } from 'feathers-authentication/lib/utils';
 
 export default function socketAuth(app) {
   return (socket, next) => {
     const { cookie } = socket.request.headers;
-    const req = {
-      app,
-      headers: socket.request.headers,
-      body: {},
-      query: {},
-      cookies: cookie && cookie.split('; ').reduce((prev, nextCookie) => {
-        const [name, value] = nextCookie.split('=');
-        return {
-          ...prev,
-          [name]: value
-        };
-      }, {})
-    };
-    const res = {};
+    const cookies = cookie && cookie.split('; ')
+        .reduce((prev, nextCookie) => {
+          const [name, value] = nextCookie.split('=');
+          return {
+            ...prev,
+            [name]: value
+          };
+        }, {});
 
-    const { exposeRequestResponse, tokenParser, verifyToken, populateUser } = authMiddleware;
+    const accessToken = cookies['feathers-jwt'] || null;
 
-    async.waterfall([
-      cb => exposeRequestResponse()(req, res, cb),
-      cb => tokenParser(app.get('auth'))(req, res, cb),
-      cb => verifyToken(app.get('auth'))(req, res, cb),
-      cb => populateUser(app.get('auth'))(req, res, cb)
-    ], err => {
-      if (err) return next(err);
-      socket.feathers.token = req.token;
-      socket.feathers.user = req.user;
-      socket.feathers.authenticated = !!req.token;
-      next();
-    });
+    socket._feathers = {};
+
+    if (!accessToken) return next();
+
+    verifyJWT(accessToken, app.get('auth'))
+      .then(payload => app.service('users').get(payload.userId))
+      .then(user => {
+        Object.assign(socket.feathers, {
+          accessToken,
+          user,
+          authenticated: true
+        });
+        next();
+      })
+      .catch(() => next());
   };
 }

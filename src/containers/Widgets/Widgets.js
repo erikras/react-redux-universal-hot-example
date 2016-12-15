@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import * as widgetActions from 'redux/modules/widgets';
-import { WidgetForm } from 'components';
+import WidgetForm from 'components/WidgetForm/WidgetForm';
 import { asyncConnect } from 'redux-connect';
 
 const { isLoaded, load: loadWidgets } = widgetActions;

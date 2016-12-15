@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { socket } from 'app';
 
 @connect(
   state => ({ user: state.auth.user })
@@ -16,18 +17,14 @@ export default class Chat extends Component {
   };
 
   componentDidMount() {
-    if (socket) {
-      socket.on('msg', this.onMessageReceived);
-      setTimeout(() => {
-        socket.emit('history', { offset: 0, length: 100 });
-      }, 100);
-    }
+    socket.on('msg', this.onMessageReceived);
+    setTimeout(() => {
+      socket.emit('history', { offset: 0, length: 100 });
+    }, 100);
   }
 
   componentWillUnmount() {
-    if (socket) {
-      socket.removeListener('msg', this.onMessageReceived);
-    }
+    socket.removeListener('msg', this.onMessageReceived);
   }
 
   onMessageReceived = data => {

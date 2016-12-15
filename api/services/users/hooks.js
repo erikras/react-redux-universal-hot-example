@@ -1,8 +1,9 @@
 import hooks from 'feathers-hooks-common';
-import { hooks as auth } from 'feathers-authentication';
+import auth from 'feathers-authentication';
+import local from 'feathers-authentication-local';
 import errors from 'feathers-errors';
-import { validateHook, restrictToOwner } from '../../hooks';
-import { required, email, match, unique } from '../../utils/validation';
+import { validateHook, restrictToOwner } from 'hooks';
+import { required, email, match, unique } from 'utils/validation';
 
 const schemaValidator = {
   email: [required, email, unique('email')],
@@ -21,28 +22,27 @@ function validate() {
 
 const userHooks = {
   before: {
-    all: [],
     find: [
-      auth.isAuthenticated()
+      auth.hooks.authenticate('jwt')
     ],
     get: [
-      auth.isAuthenticated()
+      auth.hooks.authenticate('jwt')
     ],
     create: [
       validate(),
       hooks.remove('password_confirmation'),
-      auth.hashPassword()
+      local.hooks.hashPassword()
     ],
     update: [
-      auth.isAuthenticated(),
+      auth.hooks.authenticate('jwt'),
       restrictToOwner({ ownerField: '_id' })
     ],
     patch: [
-      auth.isAuthenticated(),
+      auth.hooks.authenticate('jwt'),
       restrictToOwner({ ownerField: '_id' })
     ],
     remove: [
-      auth.isAuthenticated(),
+      auth.hooks.authenticate('jwt'),
       restrictToOwner({ ownerField: '_id' })
     ]
   },
