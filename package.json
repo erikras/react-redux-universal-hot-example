@@ -161,7 +161,7 @@
     "babel-loader": "^6.2.10",
     "babel-plugin-typecheck": "^3.9.0",
     "better-npm-run": "^0.0.13",
-    "bootstrap-loader": "^2.0.0-beta.17",
+    "bootstrap-loader": "git+https://github.com/bertho-zero/bootstrap-loader.git#patch-2-build",
     "bootstrap-sass": "^3.3.7",
     "chai": "^3.5.0",
     "clean-webpack-plugin": "^0.1.14",
