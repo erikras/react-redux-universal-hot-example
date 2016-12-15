@@ -49,7 +49,10 @@ export default class ChatFeathers extends Component {
     event.preventDefault();
     app.service('messages').create({ text: this.state.message })
       .then(() => this.setState({ message: '', error: false }))
-      .catch(error => this.setState({ error: error.message || false }));
+      .catch(error => {
+        console.log(error);
+        this.setState({ error: error.message || false });
+      });
   }
 
   render() {

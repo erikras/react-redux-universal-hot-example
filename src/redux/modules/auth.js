@@ -11,9 +11,6 @@ const LOGIN_FAIL = 'redux-example/auth/LOGIN_FAIL';
 const REGISTER = 'redux-example/auth/REGISTER';
 const REGISTER_SUCCESS = 'redux-example/auth/REGISTER_SUCCESS';
 const REGISTER_FAIL = 'redux-example/auth/REGISTER_FAIL';
-const OAUTHLOGIN = 'redux-example/auth/OAUTHLOGIN';
-const OAUTHLOGIN_SUCCESS = 'redux-example/auth/OAUTHLOGIN_SUCCESS';
-const OAUTHLOGIN_FAIL = 'redux-example/auth/OAUTHLOGIN_FAIL';
 const LOGOUT = 'redux-example/auth/LOGOUT';
 const LOGOUT_SUCCESS = 'redux-example/auth/LOGOUT_SUCCESS';
 const LOGOUT_FAIL = 'redux-example/auth/LOGOUT_FAIL';
@@ -22,16 +19,6 @@ const userService = restApp.service('users');
 
 const initialState = {
   loaded: false
-};
-
-const catchValidation = error => {
-  if (error.message) {
-    if (error.message === 'Validation failed' && error.data) {
-      throw new SubmissionError(error.data);
-    }
-    throw new SubmissionError({ _error: error.message });
-  }
-  return Promise.reject(error);
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -46,7 +33,7 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: true,
-        token: action.result.token,
+        accessToken: action.result.accessToken,
         user: action.result.user
       };
     case LOAD_FAIL:
@@ -57,25 +44,21 @@ export default function reducer(state = initialState, action = {}) {
         error: action.error
       };
     case LOGIN:
-    case OAUTHLOGIN:
       return {
         ...state,
         loggingIn: true
       };
     case LOGIN_SUCCESS:
-    case OAUTHLOGIN_SUCCESS:
       return {
         ...state,
         loggingIn: false,
-        token: action.result.token,
+        accessToken: action.result.accessToken,
         user: action.result.user
       };
     case LOGIN_FAIL:
-    case OAUTHLOGIN_FAIL:
       return {
         ...state,
         loggingIn: false,
-        token: null,
         loginError: action.error
       };
     case REGISTER:
@@ -103,8 +86,8 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         loggingOut: false,
-        user: null,
-        token: null
+        accessToken: null,
+        user: null
       };
     case LOGOUT_FAIL:
       return {
@@ -117,31 +100,36 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-function saveAuth(response) {
-  const { token, user } = response;
-  const storage = app.get('storage');
-  if (token) {
-    storage.setItem('feathers-jwt', token);
-  } else {
-    storage.removeItem('feathers-jwt');
+const catchValidation = error => {
+  if (error.message) {
+    if (error.message === 'Validation failed' && error.data) {
+      throw new SubmissionError(error.data);
+    }
+    throw new SubmissionError({ _error: error.message });
   }
+  return Promise.reject(error);
+};
 
-  app.set('token', token); // -> set manually the JWT
-  app.set('user', user); // -> set manually the user
-  restApp.set('token', token);
-  restApp.set('user', user);
+function changeToken(client, response) {
+  const { accessToken } = response;
 
-  console.log(app.get('token')); // -> the JWT
-  console.log(app.get('user')); // -> the user
+  // set manually the JWT for both instances
+  app.set('accessToken', accessToken);
+  restApp.set('accessToken', accessToken);
+  client.setJwtToken(accessToken);
 
   return response;
 }
 
-function setCookie(result) {
-  const options = result.expires ? { expires: result.expires / (60 * 60 * 24 * 1000) } : undefined;
-  cookie.set('feathers-session', app.get('token'), options);
-  return result;
+function setCookie(response) {
+  const options = response.expires ? { expires: response.expires / (60 * 60 * 24 * 1000) } : undefined;
+  cookie.set('feathers-jwt', app.get('accessToken'), options);
+  return response;
 }
+
+/*
+* Actions
+* * * * */
 
 export function isLoaded(globalState) {
   return globalState.auth && globalState.auth.loaded;
@@ -161,30 +149,21 @@ export function register(data) {
   };
 }
 
-export function login(data) {
+export function login(strategy, data, validation = true) {
   const socketId = socket.io.engine.id;
   return {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
-    promise: () => restApp.authenticate({
-      type: 'local',
-      email: data.email,
-      password: data.password,
+    promise: client => restApp.authenticate({
+      strategy,
+      ...data,
       socketId
     })
-      .then(saveAuth)
+      .then(response => changeToken(client, response))
       .then(setCookie)
-      .catch(catchValidation)
-  };
-}
-
-export function oauthLogin(provider, data, validation = false) {
-  const socketId = socket.io.engine.id;
-  return {
-    types: [OAUTHLOGIN, OAUTHLOGIN_SUCCESS, OAUTHLOGIN_FAIL],
-    promise: () => restApp.service(`/auth/${provider}`)
-      .create({ ...data, socketId })
-      .then(saveAuth)
-      .then(setCookie)
+      .then(response => {
+        app.set('user', response.user);
+        return response;
+      })
       .catch(validation ? catchValidation : error => Promise.reject(error))
   };
 }
@@ -192,8 +171,7 @@ export function oauthLogin(provider, data, validation = false) {
 export function logout() {
   return {
     types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
-    promise: () => (socket.connected ? app : restApp).logout().then(() => {
-      cookie.set('feathers-session', '', { expires: -1 });
-    })
+    promise: client => app.logout()
+      .then(() => changeToken(client, { accessToken: null }))
   };
 }
