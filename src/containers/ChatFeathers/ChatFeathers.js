@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import app from 'app';
 import * as chatActions from 'redux/modules/chat';
 
+// TODO app with feathers-socketio-ssr & use @asyncConnect
 @connect(
   state => ({
     user: state.auth.user,

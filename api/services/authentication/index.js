@@ -1,4 +1,4 @@
-import authentication from 'feathers-authentication';
+import auth from 'feathers-authentication';
 import jwt from 'feathers-authentication-jwt';
 import local from 'feathers-authentication-local';
 // import oauth1 from 'feathers-authentication-oauth1';
@@ -50,7 +50,7 @@ export default function authenticationService() {
 
   const config = app.get('config').auth;
 
-  app.configure(authentication(config))
+  app.configure(auth(config))
     .configure(jwt())
     .configure(local())
     // .configure(oauth1()) // TODO twitter example
@@ -64,10 +64,10 @@ export default function authenticationService() {
     .before({
       create: [
         // You can chain multiple strategies
-        authentication.hooks.authenticate(['jwt', 'local', 'facebook'])
+        auth.hooks.authenticate(['jwt', 'local', 'facebook'])
       ],
       remove: [
-        authentication.hooks.authenticate('jwt')
+        auth.hooks.authenticate('jwt')
       ]
     })
     .after({

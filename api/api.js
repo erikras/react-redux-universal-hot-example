@@ -14,7 +14,7 @@ import middleware from './middleware';
 import services from './services';
 import * as actions from './actions';
 import { mapUrl } from './utils/url.js';
-import authentication, { socketAuth } from './services/authentication';
+import auth, { socketAuth } from './services/authentication';
 
 const pretty = new PrettyError();
 const app = feathers();
@@ -72,7 +72,7 @@ const actionsHandler = (req, res, next) => {
 app.configure(hooks())
   .configure(rest())
   .configure(socketio({ path: '/ws' }))
-  .configure(authentication)
+  .configure(auth)
   .use(actionsHandler)
   .configure(services)
   .configure(middleware);

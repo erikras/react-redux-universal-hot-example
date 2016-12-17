@@ -27,17 +27,20 @@
     "start": "concurrently --kill-others \"npm run start-prod\" \"npm run start-prod-api\"",
     "start-prod": "better-npm-run start-prod",
     "start-prod-api": "better-npm-run start-prod-api",
+    "dev": "concurrently --kill-others \"npm run watch-client\" \"npm run start-dev\" \"npm run start-dev-api\"",
+    "start-dev": "better-npm-run start-dev",
+    "start-dev-api": "better-npm-run start-dev-api",
+    "watch-client": "better-npm-run watch-client",
     "build": "better-npm-run build",
     "build-dlls": "webpack --colors --display-error-details --config webpack/vendor.config.js",
     "postinstall": "concurrently \"npm run build\" \"npm run build-dlls\"",
     "lint": "eslint -c .eslintrc api src",
-    "start-dev": "better-npm-run start-dev",
-    "start-dev-api": "better-npm-run start-dev-api",
-    "watch-client": "better-npm-run watch-client",
-    "dev": "concurrently --kill-others \"npm run watch-client\" \"npm run start-dev\" \"npm run start-dev-api\"",
     "test": "karma start",
     "test-node": "jest $(find api -name '*-test.js')",
     "test-node-watch": "jest $(find api -name '*-test.js') --watch",
+    "docker-build": ". ./docker/build.sh",
+    "docker-dev": ". ./docker/run.dev.sh",
+    "docker-prod": ". ./docker/run.prod.sh",
     "lighthouse-report": "LIGHTHOUSE_CHROMIUM_PATH=$(which google-chrome) lighthouse --config-path=lighthouse.json http://localhost:8080"
   },
   "betterScripts": {
@@ -95,7 +98,7 @@
     }
   },
   "dependencies": {
-    "babel-core": "^6.20.0",
+    "babel-core": "^6.21.0",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-plugin-transform-runtime": "^6.15.0",
@@ -118,8 +121,8 @@
     "feathers-authentication-oauth1": "^0.2.3",
     "feathers-authentication-oauth2": "^0.2.3",
     "feathers-errors": "^2.5.0",
-    "feathers-hooks": "^1.7.0",
-    "feathers-hooks-common": "^2.0.2",
+    "feathers-hooks": "^1.7.1",
+    "feathers-hooks-common": "^2.0.3",
     "feathers-nedb": "^2.6.0",
     "feathers-rest": "^1.5.2",
     "feathers-socketio": "^1.4.2",
@@ -145,9 +148,9 @@
     "react-router-redux": "^4.0.7",
     "react-router-scroll": "^0.4.1",
     "redux": "^3.6.0",
-    "redux-connect": "^4.0.2",
+    "redux-connect": "^5.0.0",
     "redux-form": "^6.3.2",
-    "redux-persist": "^4.0.0-beta1",
+    "redux-persist": "^4.0.0-beta2",
     "serialize-javascript": "^1.3.0",
     "serve-favicon": "^2.3.2",
     "socket.io": "^1.7.2",
@@ -212,9 +215,9 @@
     "timekeeper": "^1.0.0",
     "url-loader": "^0.5.7",
     "webpack": "^2.1.0-beta.27",
-    "webpack-dev-middleware": "^1.8.4",
+    "webpack-dev-middleware": "^1.9.0",
     "webpack-hot-middleware": "^2.13.2",
-    "webpack-isomorphic-tools": "^2.6.4"
+    "webpack-isomorphic-tools": "^2.6.5"
   },
   "engines": {
     "node": "5.6.0"

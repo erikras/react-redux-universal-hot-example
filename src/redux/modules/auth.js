@@ -110,10 +110,10 @@ const catchValidation = error => {
   return Promise.reject(error);
 };
 
-function changeToken(client, response) {
+function setToken(client, response) {
   const { accessToken } = response;
 
-  // set manually the JWT for both instances
+  // set manually the JWT for both instances of feathers/client
   app.set('accessToken', accessToken);
   restApp.set('accessToken', accessToken);
   client.setJwtToken(accessToken);
@@ -158,7 +158,7 @@ export function login(strategy, data, validation = true) {
       ...data,
       socketId
     })
-      .then(response => changeToken(client, response))
+      .then(response => setToken(client, response))
       .then(setCookie)
       .then(response => {
         app.set('user', response.user);
@@ -172,6 +172,6 @@ export function logout() {
   return {
     types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
     promise: client => app.logout()
-      .then(() => changeToken(client, { accessToken: null }))
+      .then(() => setToken(client, { accessToken: null }))
   };
 }

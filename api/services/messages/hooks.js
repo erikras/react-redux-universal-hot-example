@@ -1,5 +1,5 @@
 import hooks from 'feathers-hooks-common';
-import authentication from 'feathers-authentication';
+import auth from 'feathers-authentication';
 import { required } from 'utils/validation';
 import { validateHook as validate } from 'hooks';
 
@@ -15,7 +15,7 @@ const populateUserOptions = {
 const messagesHooks = {
   before: {
     all: [
-      authentication.hooks.authenticate('jwt')
+      auth.hooks.authenticate('jwt')
     ],
     find: [],
     get: [],
