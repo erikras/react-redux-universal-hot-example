@@ -61,21 +61,23 @@ export default function authenticationService() {
 
 
   app.service('authentication')
-    .before({
-      create: [
-        // You can chain multiple strategies
-        auth.hooks.authenticate(['jwt', 'local', 'facebook'])
-      ],
-      remove: [
-        auth.hooks.authenticate('jwt')
-      ]
-    })
-    .after({
-      create: [
-        populateUser(config),
-        hooks.remove('user.password'),
-        addTokenExpiration(),
-        restToSocketAuth()
-      ]
+    .hooks({
+      before: {
+        create: [
+          // You can chain multiple strategies
+          auth.hooks.authenticate(['jwt', 'local', 'facebook'])
+        ],
+        remove: [
+          auth.hooks.authenticate('jwt')
+        ]
+      },
+      after: {
+        create: [
+          populateUser(config),
+          hooks.remove('user.password'),
+          addTokenExpiration(),
+          restToSocketAuth()
+        ]
+      }
     });
 }

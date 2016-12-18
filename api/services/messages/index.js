@@ -5,7 +5,7 @@ import hooks from './hooks';
 export default function messagesService() {
   const app = this;
 
-  app.use('/messages', feathersNedb({
+  const options = {
     Model: new NeDB({
       filename: `${__dirname}/messages.nedb`,
       autoload: true
@@ -14,9 +14,9 @@ export default function messagesService() {
       default: 25,
       max: 100
     }
-  }));
+  };
 
-  app.service('messages')
-    .before(hooks.before)
-    .after(hooks.after);
+  app.use('/messages', feathersNedb(options));
+
+  app.service('messages').hooks(hooks);
 }

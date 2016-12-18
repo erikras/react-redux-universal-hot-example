@@ -16,10 +16,7 @@ export default function userService() {
     }
   };
 
-  // Initialize our service with any options it requires
   app.use('/users', feathersNedb(options));
 
-  app.service('users')
-    .before(hooks.before)
-    .after(hooks.after);
+  app.service('users').hooks(hooks);
 }
