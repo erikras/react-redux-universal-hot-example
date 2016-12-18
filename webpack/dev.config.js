@@ -37,7 +37,7 @@ babelLoaderQuery.presets = babelLoaderQuery.presets.map(function (v) {
   return v === 'es2015' ? ['es2015', { modules: false }] : v;
 });
 
-var validDLLs = helpers.isValidDLLs(['vendor'], assetsPath);
+var validDLLs = helpers.isValidDLLs('vendor', assetsPath);
 if (process.env.WEBPACK_DLLS === '1' && !validDLLs) {
   process.env.WEBPACK_DLLS = '0';
   console.warn('webpack dlls disabled');
@@ -60,6 +60,9 @@ var webpackConfig = module.exports = {
     filename: '[name]-[hash].js',
     chunkFilename: '[name]-[chunkhash].js',
     publicPath: 'http://' + host + ':' + port + '/dist/'
+  },
+  performance: {
+    hints: false
   },
   module: {
     rules: [

@@ -33,6 +33,9 @@ module.exports = {
     chunkFilename: '[name]-[chunkhash].js',
     publicPath: '/dist/'
   },
+  performance: {
+    hints: false
+  },
   module: {
     rules: [
       {

@@ -63,7 +63,7 @@ The request to use DLLs for this build will be ignored.`);
 }
 
 function isValidDLLs(dllNames, assetsPath) {
-  for (var dllName of dllNames) {
+  for (var dllName of [].concat(dllNames)) {
     try {
       var manifest = require(path.join(projectRootPath, `webpack/dlls/${dllName}.json`));
       var dll = fs.readFileSync(path.join(assetsPath, `dlls/dll__${dllName}.js`)).toString('utf-8');
@@ -72,7 +72,6 @@ function isValidDLLs(dllNames, assetsPath) {
         return false;
       }
     } catch (e) {
-      console.warn(e.message);
       return false;
     }
   }
