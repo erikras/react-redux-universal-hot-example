@@ -1,9 +1,9 @@
 import React, {Component, PropTypes} from 'react';
-import {connectMultireducer} from 'multireducer';
+import {connect} from 'react-redux';
 import {increment} from 'redux/modules/counter';
 
-@connectMultireducer(
-  (key, state) => ({count: state.multireducer[key].count}),
+@connect(
+  (state, { as }) => ({count: state.multireducer[as].count}),
   {increment}
 )
 export default class CounterButton extends Component {

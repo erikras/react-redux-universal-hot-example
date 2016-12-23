@@ -50,9 +50,9 @@ export default class Home extends Component {
 
         <div className="container">
           <div className={styles.counterContainer}>
-            <CounterButton multireducerKey="counter1"/>
-            <CounterButton multireducerKey="counter2"/>
-            <CounterButton multireducerKey="counter3"/>
+            <CounterButton as="counter1"/>
+            <CounterButton as="counter2"/>
+            <CounterButton as="counter3"/>
           </div>
 
           <p>This starter boilerplate app uses the following technologies:</p>
