@@ -63,7 +63,7 @@ Promise.all([window.__data ? true : isOnline(), getStoredState(offlinePersistCon
         ReactDOM.render(
           <HotEnabler>
             <Provider store={store} key="provider">
-              <Router {...renderProps} render={renderRouter}>
+              <Router {...renderProps} render={renderRouter} history={history}>
                 {routes}
               </Router>
             </Provider>
