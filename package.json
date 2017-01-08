@@ -115,7 +115,7 @@
     "express-session": "^1.14.2",
     "feathers": "^2.0.3",
     "feathers-authentication": "^1.0.2",
-    "feathers-authentication-client": "^0.1.6",
+    "feathers-authentication-client": "git+https://github.com/bertho-zero/feathers-authentication-client.git#patch-3",
     "feathers-authentication-jwt": "^0.3.0",
     "feathers-authentication-local": "^0.3.2",
     "feathers-authentication-oauth1": "^0.2.3",
