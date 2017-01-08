@@ -41,7 +41,7 @@
     "docker-build": ". ./docker/build.sh",
     "docker-dev": ". ./docker/run.dev.sh",
     "docker-prod": ". ./docker/run.prod.sh",
-    "lighthouse-report": "LIGHTHOUSE_CHROMIUM_PATH=$(which google-chrome) lighthouse --config-path=lighthouse.json http://localhost:8080"
+    "lighthouse-report": "LIGHTHOUSE_CHROMIUM_PATH=$(which google-chrome) lighthouse http://localhost:8080"
   },
   "betterScripts": {
     "start-prod": {
