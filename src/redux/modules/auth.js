@@ -138,7 +138,7 @@ export function isLoaded(globalState) {
 export function load() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: client => client.get('/auth/load')
+    promise: () => restApp.authenticate()
   };
 }
 
@@ -154,8 +154,8 @@ export function login(strategy, data, validation = true) {
   return {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
     promise: client => restApp.authenticate({
-      strategy,
       ...data,
+      strategy,
       socketId
     })
       .then(response => setToken(client, response))

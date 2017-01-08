@@ -33,4 +33,7 @@ export function exposeInitialRequest(req) {
       authorization: req.header('authorization')
     }
   }));
+
+  const accessToken = req.header('authorization') || (req.cookies && req.cookies['feathers-jwt']);
+  restApp.set('accessToken', accessToken);
 }
