@@ -2,7 +2,7 @@ import { createStore as _createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import { createPersistor } from 'redux-persist';
 import createMiddleware from './middleware/clientMiddleware';
-import createReducer, { injectAsyncReducer } from './reducer';
+import reducer from './reducer';
 
 export default function createStore(history, client, data, persistConfig = null) {
   const middleware = [createMiddleware(client), routerMiddleware(history)];
@@ -19,17 +19,16 @@ export default function createStore(history, client, data, persistConfig = null)
   }
 
   const finalCreateStore = compose(...enhancers)(_createStore);
-  const store = finalCreateStore(createReducer(), data);
+  const store = finalCreateStore(reducer, data);
 
-  store.asyncReducers = {};
-  store.injectAsyncReducer = injectAsyncReducer.bind(null, store);
-
-  if (persistConfig) createPersistor(store, persistConfig);
-  store.dispatch({ type: 'PERSIST' });
+  if (persistConfig) {
+    createPersistor(store, persistConfig);
+    store.dispatch({ type: 'PERSIST' });
+  }
 
   if (__DEVELOPMENT__ && module.hot) {
     module.hot.accept('./reducer', () => {
-      store.replaceReducer(require('./reducer').default());
+      store.replaceReducer(require('./reducer'));
     });
   }
 
