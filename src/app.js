@@ -14,7 +14,8 @@ const host = clientUrl => (__SERVER__ ? `http://${config.apiHost}:${config.apiPo
 
 const configureApp = transport => feathers()
   .configure(transport)
-  .configure(hooks());
+  .configure(hooks())
+  .configure(authentication({ storage }));
 
 export const socket = io('', { path: host('/ws'), autoConnect: false });
 
@@ -24,9 +25,12 @@ export default app;
 
 export const restApp = configureApp(rest(host('/api')).superagent(superagent));
 
-export function init(online) {
-  if (online) socket.open();
-  if (!online) app.io = undefined;
-  app.configure(authentication({ storage }));
-  restApp.configure(authentication({ storage }));
+export function exposeInitialRequest(req) {
+  restApp.defaultService = null;
+  restApp.configure(rest(host('/api')).superagent(superagent, {
+    headers: {
+      Cookie: req.get('cookie'),
+      authorization: req.header('authorization')
+    }
+  }));
 }

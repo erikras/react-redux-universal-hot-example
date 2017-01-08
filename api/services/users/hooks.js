@@ -7,7 +7,7 @@ import { required, email, match, unique } from 'utils/validation';
 
 const schemaValidator = {
   email: [required, email, unique('email')],
-  password: [required],
+  password: required,
   password_confirmation: [required, match('password')]
 };
 
@@ -22,12 +22,8 @@ function validate() {
 
 const userHooks = {
   before: {
-    find: [
-      auth.hooks.authenticate('jwt')
-    ],
-    get: [
-      auth.hooks.authenticate('jwt')
-    ],
+    find: auth.hooks.authenticate('jwt'),
+    get: auth.hooks.authenticate('jwt'),
     create: [
       validate(),
       hooks.remove('password_confirmation'),
@@ -47,7 +43,7 @@ const userHooks = {
     ]
   },
   after: {
-    all: [hooks.remove('password')],
+    all: hooks.remove('password'),
     find: [],
     get: [],
     create: [],

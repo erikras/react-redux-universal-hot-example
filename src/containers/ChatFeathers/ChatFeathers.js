@@ -1,9 +1,13 @@
 import React, { Component, PropTypes } from 'react';
+import { asyncConnect } from 'redux-connect';
 import { connect } from 'react-redux';
 import app from 'app';
 import * as chatActions from 'redux/modules/chat';
 
-// TODO app with feathers-socketio-ssr & use @asyncConnect
+@asyncConnect([{
+  promise: ({ store: { dispatch, getState } }) =>
+    (!chatActions.isLoaded(getState()) ? dispatch(chatActions.load()) : Promise.resolve())
+}])
 @connect(
   state => ({
     user: state.auth.user,
@@ -16,7 +20,6 @@ export default class ChatFeathers extends Component {
   static propTypes = {
     user: PropTypes.object,
     addMessage: PropTypes.func,
-    clean: PropTypes.func,
     messages: PropTypes.array
   };
 
@@ -26,25 +29,12 @@ export default class ChatFeathers extends Component {
   };
 
   componentDidMount() {
-    const messageService = app.service('messages');
-    const { addMessage, clean } = this.props;
-    // Find the last 25 messages
-    messageService.find({
-      query: {
-        $sort: { createdAt: -1 },
-        $limit: 25
-      }
-    }).then(page => {
-      clean();
-      addMessage(page.data.reverse());
-    });
-    // Listen to newly created messages
-    messageService.on('created', addMessage);
+    app.service('messages').on('created', this.props.addMessage);
   }
 
-  componentWillUnmount() {
+  /* componentWillUnmount() {
     app.service('messages').removeListener('created', this.props.addMessage);
-  }
+  } */
 
   handleSubmit = event => {
     event.preventDefault();

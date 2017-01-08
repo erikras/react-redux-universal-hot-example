@@ -12,7 +12,7 @@ import { AppContainer as HotEnabler } from 'react-hot-loader';
 import { useScroll } from 'react-router-scroll';
 import { getStoredState } from 'redux-persist';
 import localForage from 'localforage';
-import { init, socket } from 'app';
+import { socket } from 'app';
 import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
 import getRoutes from './routes';
@@ -42,7 +42,7 @@ global.socket = initSocket();
 
 Promise.all([window.__data ? true : isOnline(), getStoredState(offlinePersistConfig)])
   .then(([online, storedData]) => {
-    init(online);
+    if (online) socket.open();
 
     // if your server doesn't authenticate socket connexion by cookie
     // if (online) app.authenticate().catch(() => null);

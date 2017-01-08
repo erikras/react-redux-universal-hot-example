@@ -63,13 +63,9 @@ export default function authenticationService() {
   app.service('authentication')
     .hooks({
       before: {
-        create: [
-          // You can chain multiple strategies
-          auth.hooks.authenticate(['jwt', 'local', 'facebook'])
-        ],
-        remove: [
-          auth.hooks.authenticate('jwt')
-        ]
+        // You can chain multiple strategies on create method
+        create: auth.hooks.authenticate(['jwt', 'local', 'facebook']),
+        remove: auth.hooks.authenticate('jwt')
       },
       after: {
         create: [

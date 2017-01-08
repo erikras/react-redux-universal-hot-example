@@ -4,19 +4,25 @@ import { required } from 'utils/validation';
 import { validateHook as validate } from 'hooks';
 
 const schemaValidator = {
-  text: [required]
+  text: required
 };
 
-const populateUserOptions = {
-  service: 'users',
-  field: 'sentBy'
-};
+function populateUser() {
+  return hooks.populate({
+    schema: {
+      include: [{
+        nameAs: 'sentBy',
+        service: 'users',
+        parentField: 'sentBy',
+        childField: '_id'
+      }]
+    }
+  });
+}
 
 const messagesHooks = {
   before: {
-    all: [
-      auth.hooks.authenticate('jwt')
-    ],
+    all: auth.hooks.authenticate('jwt'),
     find: [],
     get: [],
     create: [
@@ -29,15 +35,24 @@ const messagesHooks = {
         };
       }
     ],
-    update: [hooks.disable()],
-    patch: [hooks.disable()],
-    remove: [hooks.disable()]
+    update: hooks.disable(),
+    patch: hooks.disable(),
+    remove: hooks.disable()
   },
   after: {
     all: [],
-    find: [hooks.populate('sentBy', populateUserOptions), hooks.remove('sentBy.password')],
-    get: [hooks.populate('sentBy', populateUserOptions), hooks.remove('sentBy.password')],
-    create: [hooks.populate('sentBy', populateUserOptions), hooks.remove('sentBy.password')],
+    find: [
+      populateUser(),
+      hooks.remove('sentBy.password')
+    ],
+    get: [
+      populateUser(),
+      hooks.remove('sentBy.password')
+    ],
+    create: [
+      populateUser(),
+      hooks.remove('sentBy.password')
+    ],
     update: [],
     patch: [],
     remove: []

@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/server';
 import favicon from 'serve-favicon';
 import compression from 'compression';
+import cookieParser from 'cookie-parser';
 import httpProxy from 'http-proxy';
 import path from 'path';
 import PrettyError from 'pretty-error';
@@ -12,11 +13,12 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { ReduxAsyncConnect, loadOnServer } from 'redux-connect';
 import createHistory from 'react-router/lib/createMemoryHistory';
 import { Provider } from 'react-redux';
-import config from './config';
-import createStore from './redux/create';
-import ApiClient from './helpers/ApiClient';
-import Html from './helpers/Html';
-import getRoutes from './routes';
+import config from 'config';
+import createStore from 'redux/create';
+import ApiClient from 'helpers/ApiClient';
+import Html from 'helpers/Html';
+import getRoutes from 'routes';
+import { exposeInitialRequest } from 'app';
 
 const targetUrl = `http://${config.apiHost}:${config.apiPort}`;
 const pretty = new PrettyError();
@@ -27,9 +29,10 @@ const proxy = httpProxy.createProxyServer({
   ws: true
 });
 
+app.use(cookieParser());
 app.use(compression());
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
-app.get('manifest.json', (req, res) => { res.sendFile(path.join(__dirname, '..', 'static', 'manifest.json')); });
+app.get('/manifest.json', (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'manifest.json')));
 
 app.use(express.static(path.join(__dirname, '..', 'static')));
 
@@ -84,6 +87,9 @@ app.use((req, res) => {
   if (__DISABLE_SSR__) {
     return hydrateOnClient();
   }
+
+  // Re-configure restApp for apply client cookies
+  exposeInitialRequest(req);
 
   match({
     history,

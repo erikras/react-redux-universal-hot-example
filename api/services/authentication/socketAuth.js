@@ -12,9 +12,9 @@ export default function socketAuth(app) {
           };
         }, {});
 
-    const accessToken = cookies['feathers-jwt'] || null;
+    const accessToken = cookies && cookies['feathers-jwt'];
 
-    socket._feathers = {};
+    socket._feathers = {}; // TODO remove this when possible...
 
     if (!accessToken) return next();
 
