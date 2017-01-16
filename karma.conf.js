@@ -31,6 +31,7 @@ module.exports = function (config) {
 
     webpack: {
       devtool: 'inline-source-map',
+      entry: {},
       module: {
         loaders: [
           { test: /\.(jpe?g|png|gif|svg)$/, loader: 'url', options: { limit: 10240 } },
