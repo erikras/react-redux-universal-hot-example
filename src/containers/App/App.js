@@ -36,10 +36,14 @@ import { asyncConnect } from 'redux-connect';
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired,
+    user: PropTypes.object,
     notifs: PropTypes.object.isRequired,
     logout: PropTypes.func.isRequired,
     pushState: PropTypes.func.isRequired
+  };
+
+  static defaultProps = {
+    user: null
   };
 
   static contextTypes = {

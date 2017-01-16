@@ -11,10 +11,14 @@ import * as notifActions from 'redux/modules/notifs';
   { ...notifActions, ...authActions })
 export default class Login extends Component {
   static propTypes = {
-    user: PropTypes.object.isRequired,
+    user: PropTypes.object,
     login: PropTypes.func.isRequired,
     logout: PropTypes.func.isRequired,
     notifSend: PropTypes.func.isRequired
+  }
+
+  static defaultProps = {
+    user: null
   }
 
   static contextTypes = {

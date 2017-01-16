@@ -7,9 +7,13 @@ import { load } from 'redux/modules/info';
   { load })
 export default class InfoBar extends Component {
   static propTypes = {
-    info: PropTypes.object.isRequired,
+    info: PropTypes.object,
     load: PropTypes.func.isRequired
   }
+
+  static defaultProps = {
+    info: null
+  };
 
   render() {
     const { info, load } = this.props; // eslint-disable-line no-shadow

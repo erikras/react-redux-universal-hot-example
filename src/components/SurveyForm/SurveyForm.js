@@ -23,7 +23,7 @@ function asyncValidate(data, dispatch) {
 export default
 class SurveyForm extends Component {
   static propTypes = {
-    active: PropTypes.string.isRequired,
+    active: PropTypes.string,
     asyncValidating: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.string
@@ -34,6 +34,10 @@ class SurveyForm extends Component {
     invalid: PropTypes.bool.isRequired,
     pristine: PropTypes.bool.isRequired,
     valid: PropTypes.bool.isRequired
+  }
+
+  static defaultProps = {
+    active: null
   }
 
   renderInput = ({

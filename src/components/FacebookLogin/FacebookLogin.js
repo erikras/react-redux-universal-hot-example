@@ -7,7 +7,7 @@ class FacebookLogin extends React.Component {
     xfbml: PropTypes.bool,
     cookie: PropTypes.bool,
     scope: PropTypes.string,
-    autoLoad: PropTypes.bool.isRequired,
+    autoLoad: PropTypes.bool,
     version: PropTypes.string,
     language: PropTypes.string,
     textButton: PropTypes.string,
@@ -25,7 +25,8 @@ class FacebookLogin extends React.Component {
     cookie: false,
     version: '2.3',
     language: 'en_US',
-  };
+    autoLoad: false
+  }
 
   componentDidMount() {
     const { appId, xfbml, cookie, version, autoLoad, language } = this.props;
