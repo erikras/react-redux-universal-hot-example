@@ -79,33 +79,33 @@ export default class App extends Component {
             <Navbar.Toggle />
           </Navbar.Header>
 
-          <Navbar.Collapse eventKey={0}>
+          <Navbar.Collapse>
             <Nav navbar>
               {user && <LinkContainer to="/chatFeathers">
                 <NavItem>Chat with Feathers</NavItem>
               </LinkContainer>}
 
               <LinkContainer to="/chat">
-                <NavItem eventKey={1}>Chat</NavItem>
+                <NavItem>Chat</NavItem>
               </LinkContainer>
               <LinkContainer to="/widgets">
-                <NavItem eventKey={2}>Widgets</NavItem>
+                <NavItem>Widgets</NavItem>
               </LinkContainer>
               <LinkContainer to="/survey">
-                <NavItem eventKey={3}>Survey</NavItem>
+                <NavItem>Survey</NavItem>
               </LinkContainer>
               <LinkContainer to="/about">
-                <NavItem eventKey={4}>About Us</NavItem>
+                <NavItem>About Us</NavItem>
               </LinkContainer>
 
               {!user && <LinkContainer to="/login">
-                <NavItem eventKey={5}>Login</NavItem>
+                <NavItem>Login</NavItem>
               </LinkContainer>}
               {!user && <LinkContainer to="/register">
-                <NavItem eventKey={6}>Register</NavItem>
+                <NavItem>Register</NavItem>
               </LinkContainer>}
               {user && <LinkContainer to="/logout">
-                <NavItem eventKey={7} className="logout-link" onClick={this.handleLogout}>
+                <NavItem className="logout-link" onClick={this.handleLogout}>
                   Logout
                 </NavItem>
               </LinkContainer>}
@@ -115,8 +115,9 @@ export default class App extends Component {
             </p>}
             <Nav navbar pullRight>
               <NavItem
-                eventKey={1} target="_blank" title="View on Github"
-                href="https://github.com/erikras/react-redux-universal-hot-example">
+                target="_blank" title="View on Github"
+                href="https://github.com/erikras/react-redux-universal-hot-example"
+              >
                 <i className="fa fa-github" />
               </NavItem>
             </Nav>

@@ -9,7 +9,7 @@ if (typeof System.import === 'undefined') System.import = module => Promise.reso
 export default store => {
   const loadAuthIfNeeded = cb => {
     if (!isAuthLoaded(store.getState())) {
-      return store.dispatch(loadAuth()).then(() => cb());
+      return store.dispatch(loadAuth()).then(() => cb()).catch(cb);
     }
     return cb();
   };
@@ -28,6 +28,13 @@ export default store => {
     loadAuthIfNeeded(() => checkUser(cond, replace, cb));
   };
 
+  const injectAndRender = (name, reducerPromise, containerPromise) =>
+    Promise.all([reducerPromise, containerPromise])
+      .then(([reducer, container]) => {
+        store.inject(name, reducer.default || reducer);
+        return container.default || container;
+      });
+
   /**
    * Please keep routes in alphabetical order
    */
@@ -39,7 +46,13 @@ export default store => {
       {/* Routes requiring login */}
       <Route onEnter={requireLogin}>
         <Route path="loginSuccess" getComponent={() => System.import('./containers/LoginSuccess/LoginSuccess')} />
-        <Route path="chatFeathers" getComponent={() => System.import('./containers/ChatFeathers/ChatFeathers')} />
+        <Route
+          path="chatFeathers"
+          getComponent={() => injectAndRender(
+            'chat',
+            System.import('./redux/modules/chat'),
+            System.import('./containers/ChatFeathers/ChatFeathers')
+          )} />
       </Route>
 
       {/* Routes disallow login */}
@@ -50,8 +63,20 @@ export default store => {
       {/* Routes */}
       <Route path="login" getComponent={() => System.import('./containers/Login/Login')} />
       <Route path="about" getComponent={() => System.import('./containers/About/About')} />
-      <Route path="survey" getComponent={() => System.import('./containers/Survey/Survey')} />
-      <Route path="widgets" getComponent={() => System.import('./containers/Widgets/Widgets')} />
+      <Route
+        path="survey"
+        getComponent={() => injectAndRender(
+          'survey',
+          System.import('./redux/modules/survey'),
+          System.import('./containers/Survey/Survey')
+        )} />
+      <Route
+        path="widgets"
+        getComponent={() => injectAndRender(
+          'widgets',
+          System.import('./redux/modules/widgets'),
+          System.import('./containers/Widgets/Widgets')
+        )} />
       <Route path="chat" getComponent={() => System.import('./containers/Chat/Chat')} />
 
       {/* Catch all route */}

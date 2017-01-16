@@ -1,8 +1,22 @@
-import { createStore as _createStore, applyMiddleware, compose } from 'redux';
+import { createStore as _createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import { createPersistor } from 'redux-persist';
 import createMiddleware from './middleware/clientMiddleware';
-import reducer from './reducer';
+import createReducers from './reducer';
+
+export function inject(store, name, asyncReducer) {
+  if (store.asyncReducers[name]) return;
+  store.asyncReducers[name] = asyncReducer;
+  store.replaceReducer(combineReducers(createReducers(store.asyncReducers)));
+}
+
+function getMissingReducers(reducers, data) {
+  if (!data) return {};
+  return Object.keys(data).reduce(
+    (prev, next) => (reducers[next] ? prev : { ...prev, [next]: (state = {}) => state }),
+    {}
+  );
+}
 
 export default function createStore(history, client, data, persistConfig = null) {
   const middleware = [createMiddleware(client), routerMiddleware(history)];
@@ -19,7 +33,11 @@ export default function createStore(history, client, data, persistConfig = null)
   }
 
   const finalCreateStore = compose(...enhancers)(_createStore);
-  const store = finalCreateStore(reducer, data);
+  const asyncNoopReducers = getMissingReducers(createReducers(), data);
+  const store = finalCreateStore(combineReducers(createReducers(asyncNoopReducers)), data);
+
+  store.asyncReducers = {};
+  store.inject = inject.bind(null, store);
 
   if (persistConfig) {
     createPersistor(store, persistConfig);
@@ -28,7 +46,7 @@ export default function createStore(history, client, data, persistConfig = null)
 
   if (__DEVELOPMENT__ && module.hot) {
     module.hot.accept('./reducer', () => {
-      store.replaceReducer(require('./reducer'));
+      store.replaceReducer(combineReducers(require('./reducer').default(store.asyncReducers)));
     });
   }
 

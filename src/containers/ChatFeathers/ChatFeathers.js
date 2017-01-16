@@ -5,8 +5,7 @@ import app from 'app';
 import * as chatActions from 'redux/modules/chat';
 
 @asyncConnect([{
-  promise: ({ store: { dispatch, getState } }) =>
-    (!chatActions.isLoaded(getState()) ? dispatch(chatActions.load()) : Promise.resolve())
+  promise: ({ store: { dispatch } }) => dispatch(chatActions.load())
 }])
 @connect(
   state => ({
@@ -32,9 +31,9 @@ export default class ChatFeathers extends Component {
     app.service('messages').on('created', this.props.addMessage);
   }
 
-  /* componentWillUnmount() {
+  componentWillUnmount() {
     app.service('messages').removeListener('created', this.props.addMessage);
-  } */
+  }
 
   handleSubmit = event => {
     event.preventDefault();
