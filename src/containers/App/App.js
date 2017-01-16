@@ -36,8 +36,8 @@ import { asyncConnect } from 'redux-connect';
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
-    user: PropTypes.object,
-    notifs: PropTypes.object,
+    user: PropTypes.object.isRequired,
+    notifs: PropTypes.object.isRequired,
     logout: PropTypes.func.isRequired,
     pushState: PropTypes.func.isRequired
   };
@@ -139,9 +139,19 @@ export default class App extends Component {
 
         <div className="well text-center">
           Have questions? Ask for help{' '}
-          <a href="https://github.com/erikras/react-redux-universal-hot-example/issues" target="_blank">on Github</a>
+          <a
+            href="https://github.com/erikras/react-redux-universal-hot-example/issues"
+            target="_blank" rel="noopener noreferrer"
+          >
+            on Github
+          </a>
           {' '}or in the{' '}
-          <a href="https://discord.gg/0ZcbPKXt5bZZb1Ko" target="_blank">#react-redux-universal</a>
+          <a
+            href="https://discord.gg/0ZcbPKXt5bZZb1Ko"
+            target="_blank" rel="noopener noreferrer"
+          >
+            #react-redux-universal
+          </a>
           {' '}Discord channel.
         </div>
       </div>

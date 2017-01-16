@@ -7,13 +7,13 @@ class FacebookLogin extends React.Component {
     xfbml: PropTypes.bool,
     cookie: PropTypes.bool,
     scope: PropTypes.string,
-    autoLoad: PropTypes.bool,
+    autoLoad: PropTypes.bool.isRequired,
     version: PropTypes.string,
     language: PropTypes.string,
     textButton: PropTypes.string,
     typeButton: PropTypes.string,
     className: PropTypes.string,
-    component: PropTypes.func
+    component: PropTypes.func.isRequired
   };
 
   static defaultProps = {

@@ -8,7 +8,7 @@ import { socket } from 'app';
 export default class Chat extends Component {
 
   static propTypes = {
-    user: PropTypes.object
+    user: PropTypes.object.isRequired
   };
 
   state = {

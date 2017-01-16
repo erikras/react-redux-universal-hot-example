@@ -8,7 +8,7 @@ export default class Notifs extends Component {
   static propTypes = {
     notifs: PropTypes.array.isRequired,
     NotifComponent: PropTypes.func.isRequired,
-    className: PropTypes.string
+    className: PropTypes.string.isRequired
   };
 
   render() {

@@ -25,9 +25,9 @@ const { isLoaded, load: loadWidgets } = widgetActions;
   { ...widgetActions })
 export default class Widgets extends Component {
   static propTypes = {
-    widgets: PropTypes.array,
-    error: PropTypes.string,
-    loading: PropTypes.bool,
+    widgets: PropTypes.array.isRequired,
+    error: PropTypes.string.isRequired,
+    loading: PropTypes.bool.isRequired,
     editing: PropTypes.object.isRequired,
     load: PropTypes.func.isRequired,
     editStart: PropTypes.func.isRequired

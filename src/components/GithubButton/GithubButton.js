@@ -7,8 +7,8 @@ export default class GithubButton extends Component {
     type: PropTypes.oneOf(['star', 'watch', 'fork', 'follow']).isRequired,
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
-    count: PropTypes.bool,
-    large: PropTypes.bool
+    count: PropTypes.bool.isRequired,
+    large: PropTypes.bool.isRequired
   };
 
   render() {

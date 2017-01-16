@@ -17,9 +17,9 @@ import * as chatActions from 'redux/modules/chat';
 export default class ChatFeathers extends Component {
 
   static propTypes = {
-    user: PropTypes.object,
-    addMessage: PropTypes.func,
-    messages: PropTypes.array
+    user: PropTypes.object.isRequired,
+    addMessage: PropTypes.func.isRequired,
+    messages: PropTypes.array.isRequired
   };
 
   state = {

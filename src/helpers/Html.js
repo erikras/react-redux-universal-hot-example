@@ -14,9 +14,9 @@ import Helmet from 'react-helmet';
  */
 export default class Html extends Component {
   static propTypes = {
-    assets: PropTypes.object,
-    component: PropTypes.node,
-    store: PropTypes.object
+    assets: PropTypes.object.isRequired,
+    component: PropTypes.node.isRequired,
+    store: PropTypes.object.isRequired
   };
 
   render() {
@@ -43,9 +43,9 @@ export default class Html extends Component {
           <meta name="apple-mobile-web-app-title" content="React Hot" />
           <meta name="theme-color" content="#3677dd" />
           {/* styles (will be present only in production with webpack extract text plugin) */}
-          {assets.styles && Object.keys(assets.styles).map((style, key) =>
+          {assets.styles && Object.keys(assets.styles).map(style =>
             <link
-              href={assets.styles[style]} key={key} media="screen, projection"
+              href={assets.styles[style]} key={style} media="screen, projection"
               rel="stylesheet" type="text/css" charSet="UTF-8" />
           )}
 

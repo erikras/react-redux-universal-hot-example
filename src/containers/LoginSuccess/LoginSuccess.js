@@ -8,8 +8,8 @@ import * as authActions from 'redux/modules/auth';
 export default
 class LoginSuccess extends Component {
   static propTypes = {
-    user: PropTypes.object,
-    logout: PropTypes.func
+    user: PropTypes.object.isRequired,
+    logout: PropTypes.func.isRequired
   }
 
   render() {

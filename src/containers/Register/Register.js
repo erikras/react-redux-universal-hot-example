@@ -10,9 +10,9 @@ import * as notifActions from 'redux/modules/notifs';
   { ...notifActions, ...authActions })
 export default class Register extends Component {
   static propTypes = {
-    location: PropTypes.object,
-    register: PropTypes.func,
-    notifSend: PropTypes.func
+    location: PropTypes.object.isRequired,
+    register: PropTypes.func.isRequired,
+    notifSend: PropTypes.func.isRequired
   }
 
   getInitialValues = () => {

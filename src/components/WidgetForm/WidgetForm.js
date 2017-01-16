@@ -23,7 +23,7 @@ export default class WidgetForm extends Component {
     pristine: PropTypes.bool.isRequired,
     save: PropTypes.func.isRequired,
     submitting: PropTypes.bool.isRequired,
-    saveError: PropTypes.object,
+    saveError: PropTypes.object.isRequired,
     form: PropTypes.string.isRequired,
     values: PropTypes.object.isRequired
   };
