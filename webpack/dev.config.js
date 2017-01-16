@@ -157,7 +157,6 @@ var webpackConfig = module.exports = {
         loader: 'eslint-loader'
       }
     ]),
-    helpers.createHappyPlugin('json', ['json-loader']),
     helpers.createHappyPlugin('less', [
       {
         loader: 'style-loader'

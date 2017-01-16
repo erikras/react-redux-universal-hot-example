@@ -36,7 +36,6 @@ module.exports = function (config) {
         loaders: [
           { test: /\.(jpe?g|png|gif|svg)$/, loader: 'url', options: { limit: 10240 } },
           { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
-          { test: /\.json$/, loader: 'json-loader' },
           { test: /\.less$/, loader: 'style-loader!css-loader!less-loader' },
           {
             test: /\.scss$/,
