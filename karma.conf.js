@@ -32,8 +32,11 @@ module.exports = function (config) {
     webpack: {
       devtool: 'inline-source-map',
       entry: {},
+      performance: {
+        hints: false
+      },
       module: {
-        loaders: [
+        rules: [
           { test: /\.(jpe?g|png|gif|svg)$/, loader: 'url', options: { limit: 10240 } },
           { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
           { test: /\.less$/, loader: 'style-loader!css-loader!less-loader' },
@@ -47,8 +50,7 @@ module.exports = function (config) {
         modules: [
           'src',
           'node_modules'
-        ],
-        extensions: ['.json', '.js']
+        ]
       },
       plugins: [
         new webpack.IgnorePlugin(/\.json$/),
@@ -65,6 +67,10 @@ module.exports = function (config) {
 
     webpackServer: {
       noInfo: true
+    },
+
+    devServer: {
+      stats: 'errors-only',
     }
 
   });

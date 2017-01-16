@@ -11,6 +11,10 @@ module.exports = {
     library: 'DLL_[name]_[hash]'
   },
 
+  performance: {
+    hints: false
+  },
+
   entry: {
     vendor: [
       'babel-polyfill',
