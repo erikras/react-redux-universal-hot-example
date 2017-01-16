@@ -50,9 +50,6 @@ module.exports = {
         }],
         exclude: /node_modules/
       }, {
-        test: /\.json$/,
-        loader: 'json-loader'
-      }, {
         test: /\.less$/,
         loader: ExtractTextPlugin.extract({
           fallbackLoader: 'style-loader',

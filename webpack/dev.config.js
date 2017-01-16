@@ -139,10 +139,6 @@ var webpackConfig = module.exports = {
       happy: { id: 'jsx' }
     }),
     new webpack.LoaderOptionsPlugin({
-      test: /\.json$/,
-      happy: { id: 'json' }
-    }),
-    new webpack.LoaderOptionsPlugin({
       test: /\.less$/,
       happy: { id: 'less' }
     }),
