@@ -36,6 +36,7 @@ import { asyncConnect } from 'redux-connect';
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
+    router: PropTypes.object.isRequired,
     user: PropTypes.object,
     notifs: PropTypes.object.isRequired,
     logout: PropTypes.func.isRequired,
@@ -53,7 +54,8 @@ export default class App extends Component {
   componentWillReceiveProps(nextProps) {
     if (!this.props.user && nextProps.user) {
       // login
-      this.props.pushState('/loginSuccess');
+      const redirect = this.props.router.location.query && this.props.router.location.query.redirect;
+      this.props.pushState(redirect || '/loginSuccess');
     } else if (this.props.user && !nextProps.user) {
       // logout
       this.props.pushState('/');
