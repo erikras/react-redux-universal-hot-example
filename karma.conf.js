@@ -54,7 +54,7 @@ module.exports = function (config) {
       },
       plugins: [
         new webpack.IgnorePlugin(/\.json$/),
-        new webpack.NoErrorsPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
         new webpack.DefinePlugin({
           __CLIENT__: true,
           __SERVER__: false,
