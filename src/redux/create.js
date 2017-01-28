@@ -33,8 +33,8 @@ export default function createStore(history, client, data, persistConfig = null)
   }
 
   const finalCreateStore = compose(...enhancers)(_createStore);
-  const asyncNoopReducers = getMissingReducers(createReducers(), data);
-  const store = finalCreateStore(combineReducers(createReducers(asyncNoopReducers)), data);
+  const missingReducers = getMissingReducers(createReducers(), data);
+  const store = finalCreateStore(combineReducers(createReducers(missingReducers)), data);
 
   store.asyncReducers = {};
   store.inject = inject.bind(null, store);
