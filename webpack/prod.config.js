@@ -176,7 +176,7 @@ module.exports = {
 
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: 'src/progressive.js'
+      template: 'src/pwa.js'
     }),
 
     new SWPrecacheWebpackPlugin({
