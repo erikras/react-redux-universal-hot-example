@@ -5,10 +5,9 @@ import socketio from 'feathers-socketio/client';
 import authentication from 'feathers-authentication-client';
 import io from 'socket.io-client';
 import superagent from 'superagent';
-import localForage from 'localforage';
 import config from './config';
 
-const storage = __SERVER__ ? require('localstorage-memory') : localForage;
+const storage = __SERVER__ ? require('localstorage-memory') : require('localforage');
 
 const host = clientUrl => (__SERVER__ ? `http://${config.apiHost}:${config.apiPort}` : clientUrl);
 
