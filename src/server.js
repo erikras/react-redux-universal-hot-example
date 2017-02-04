@@ -20,6 +20,8 @@ import Html from 'helpers/Html';
 import getRoutes from 'routes';
 import { exposeInitialRequest } from 'app';
 
+process.on('unhandledRejection', error => console.error(error));
+
 const targetUrl = `http://${config.apiHost}:${config.apiPort}`;
 const pretty = new PrettyError();
 const app = express();

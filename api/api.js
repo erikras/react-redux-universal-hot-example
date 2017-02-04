@@ -16,6 +16,8 @@ import * as actions from './actions';
 import { mapUrl } from './utils/url.js';
 import auth, { socketAuth } from './services/authentication';
 
+process.on('unhandledRejection', error => console.error(error));
+
 const pretty = new PrettyError();
 const app = feathers();
 
