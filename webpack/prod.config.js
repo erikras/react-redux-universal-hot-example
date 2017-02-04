@@ -58,7 +58,7 @@ module.exports = {
               loader: 'css-loader',
               query: {
                 modules: true,
-                importLoaders: 2,
+                importLoaders: 3,
                 sourceMap: true
               }
             }, {
@@ -66,6 +66,8 @@ module.exports = {
               query: {
                 browsers: 'last 2 version'
               }
+            }, {
+              loader: 'resolve-url-loader',
             }, {
               loader: 'less-loader',
               query: {
@@ -85,7 +87,7 @@ module.exports = {
               loader: 'css-loader',
               query: {
                 modules: true,
-                importLoaders: 2,
+                importLoaders: 3,
                 sourceMap: true
               }
             }, {
@@ -93,6 +95,8 @@ module.exports = {
               query: {
                 browsers: 'last 2 version'
               }
+            }, {
+              loader: 'resolve-url-loader',
             }, {
               loader: 'sass-loader',
               query: {
