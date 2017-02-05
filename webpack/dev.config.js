@@ -134,19 +134,6 @@ var webpackConfig = module.exports = {
     }),
     webpackIsomorphicToolsPlugin.development(),
 
-    new webpack.LoaderOptionsPlugin({
-      test: /\.jsx?$/,
-      happy: { id: 'jsx' }
-    }),
-    new webpack.LoaderOptionsPlugin({
-      test: /\.less$/,
-      happy: { id: 'less' }
-    }),
-    new webpack.LoaderOptionsPlugin({
-      test: /\.scss$/,
-      happy: { id: 'sass' }
-    }),
-
     helpers.createHappyPlugin('jsx', [
       {
         loader: 'react-hot-loader/webpack'
