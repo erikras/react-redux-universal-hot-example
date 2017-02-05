@@ -74,7 +74,7 @@ This new level of quality allows Progressive Web Apps to earn a place on the use
 <a href="https://github.com/halt-hammerzeit/webpack-isomorphic-tools">Webpack-isomorphic-tools</a> to allow require() work for statics both on client and server.</dd>
 
   <dt>SEO</dt>
-  <dd>We support SEO for search engines even whithout support indexing of JavaScript content with server side rendering.</dd>
+  <dd>This project supports SEO for search engines even whithout support indexing of JavaScript content, thanks to server-side rendering.</dd>
 </dl>
 
 ## Installation
