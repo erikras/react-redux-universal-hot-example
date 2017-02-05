@@ -39,6 +39,7 @@ I cobbled this together from a wide variety of similar "starter" repositories. A
 
 ## Features
 
+<dl>
   <dt>Hot reload</dt>
   <dd>Enjoy the developer experience! Your saved changes to the CSS and JS are reflected instantaneously without refreshing the page and preserving application state ! On the server as on the client.</dd>
 
