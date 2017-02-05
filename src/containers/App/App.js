@@ -71,10 +71,6 @@ export default class App extends Component {
     const { user, notifs, children } = this.props;
     const styles = require('./App.scss');
 
-    const add = (a: number, b: number): number => a + b;
-    console.log(add(3, 4));
-    console.log(add(3, false));
-
     return (
       <div className={styles.app}>
         <Helmet {...config.app.head} />
