@@ -7,13 +7,18 @@
   "plugins": [
     "transform-runtime",
     "add-module-exports",
-    "transform-decorators-legacy"
+    "transform-decorators-legacy",
+    [
+      "flow-runtime",
+      {
+        "assert": true,
+        "annotate": true
+      }
+    ]
   ],
   "env": {
     "development": {
-      "plugins": [
-        "typecheck"
-      ]
+      "plugins": []
     }
   }
 }
