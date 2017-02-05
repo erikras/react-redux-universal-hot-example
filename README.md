@@ -41,7 +41,8 @@ I cobbled this together from a wide variety of similar "starter" repositories. A
 
 <dl>
   <dt>Hot reload</dt>
-  <dd>Enjoy the developer experience! Your saved changes to the CSS and JS are reflected instantaneously without refreshing the page and preserving application state ! On the server as on the client.</dd>
+  <dd>Enjoy the developer experience! Your saved changes to the CSS and JS are reflected instantaneously without refreshing the page ! On the server as on the client.
+  Preserving the state of application on the client.</dd>
 
   <dt>Next generation JavaScript</dt>
   <dd>Use JSX syntax with all ES6 features, and some of ES7 (see <a href=".babelrc">.babelrc</a>).</dd>
