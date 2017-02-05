@@ -44,7 +44,7 @@ I cobbled this together from a wide variety of similar "starter" repositories. A
   <dd>Enjoy the developer experience! Your saved changes to the CSS and JS are reflected instantaneously without refreshing the page and preserving application state ! On the server as on the client.</dd>
 
   <dt>Next generation JavaScript</dt>
-  <dd>Use JSX syntax with all ES6 features, and some of ES7 (see <a href=".babel.rc">.babel.rc</a>).</dd>
+  <dd>Use JSX syntax with all ES6 features, and some of ES7 (see <a href=".babelrc">.babelrc</a>).</dd>
 
   <dt>CSS in modules</dt>
   <dd>Write composable, modular and maintenable CSS with your components.</dd>
