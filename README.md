@@ -51,14 +51,14 @@ I cobbled this together from a wide variety of similar "starter" repositories. A
   <dd>Write composable, modular and maintenable CSS with your components.</dd>
 
   <dt>Predictable state management</dt>
-  <dd>Unidirectional data flow with Redux helps you write applications that behave consistently and are easy to test. On top of that, it provides a great developer experience.</dd>
+  <dd>Unidirectional data flow with <a href="http://redux.js.org">Redux</a> helps you write applications that behave consistently and are easy to test. On top of that, it provides a great developer experience.</dd>
 
   <dt>Backend API oriented services</dt>
-  <dd>With Feathers it's easy to create scalable real-time applications with services and hooks. 
+  <dd>With <a href="http://feathersjs.com">Feathers</a> it's easy to create scalable real-time applications with services and hooks. 
   <a href="https://en.wikipedia.org/wiki/Cross-cutting_concern">Cross cutting concerns</a> are an extremely powerful part of aspect oriented programming. They are a very good fit for web and mobile applications since the majority are primarily CRUD applications with lots of shared functionality. You can create before and after hooks and chain them together to create very complex processes while still maintaining modularity and flexibility.</dd>
 
   <dt>Authentication</dt>
-  <dd>Passport authentication allows you to use all the desired strategies. The connections in REST and in real time are protected in the same way with the hooks. React-router, redux and <a href="https://github.com/mjrussell/redux-auth-wrapper">redux-auth-wrapper</a> allow you to keep control in your React app.</dd>
+  <dd><a href="http://passportjs.org">Passport</a> authentication allows you to use all the desired strategies. The connections in REST and in real time are protected in the same way with the hooks. React-router, redux and <a href="https://github.com/mjrussell/redux-auth-wrapper">redux-auth-wrapper</a> allow you to keep control in your React app.</dd>
 
   <dt>Progressive wep app & Offline-first</dt>
   <dd>Progressive Web Apps are user experiences that have the reach of the web, and are:<br>
@@ -75,7 +75,7 @@ This new level of quality allows Progressive Web Apps to earn a place on the use
 <a href="https://github.com/halt-hammerzeit/webpack-isomorphic-tools">Webpack-isomorphic-tools</a> to allow require() work for statics both on client and server.</dd>
 
   <dt>SEO</dt>
-  <dd>This project supports SEO for search engines even whithout support indexing of JavaScript content, thanks to server-side rendering.</dd>
+  <dd>This project supports SEO for search engines even without support indexing of JavaScript content, thanks to server-side rendering.</dd>
 </dl>
 
 ## Installation
