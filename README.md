@@ -68,7 +68,7 @@ Engaging - Feel like a natural app on the device, with an immersive user experie
 This new level of quality allows Progressive Web Apps to earn a place on the user's home screen.</dd>
 
   <dt>Lazy loading & dynamic routing</dt>
-  <dd>The lazy loading makes the size of your main bundle almost fixed, and with react-router you can load application pieces on demand. You can send bundles to people who are only trained, such as administration.</dd>
+  <dd>The code splitting makes the size of your main bundle almost fixed, and with react-router you can load application pieces on demand. You can send bundles to people who are only trained, such as administration.</dd>
 
   <dt>Universal rendering</dt>
   <dd>With the help of server side rendering the first rendering is never empty and performance is better. This is the time for example to prefetch the data.
