@@ -8,13 +8,7 @@
     "transform-runtime",
     "add-module-exports",
     "transform-decorators-legacy",
-    [
-      "flow-runtime",
-      {
-        "assert": true,
-        "annotate": true
-      }
-    ]
+    "flow-runtime"
   ],
   "env": {
     "development": {
