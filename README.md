@@ -282,4 +282,4 @@ Created by:
 – Erik Rasmussen, [@erikras](https://twitter.com/erikras)
 
 Maintened by:
-– Berthommier Kévin, [@bertho-zero](https://github.com/bertho-zero)
+– Kévin Berthommier, [@bertho-zero](https://github.com/bertho-zero)
