@@ -1,6 +1,6 @@
 {
   "bootstrapVersion": 3,
-  "bootstrapCustomizations": "./src/theme/variables.scss",
+  "preBootstrapCustomizations": "./src/theme/variables.scss",
   "appStyles": "./src/theme/bootstrap.overrides.scss",
   "loglevel": "disabled",
   "env": {
