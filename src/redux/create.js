@@ -18,8 +18,8 @@ function getMissingReducers(reducers, data) {
   );
 }
 
-export default function createStore(history, client, data, persistConfig = null) {
-  const middleware = [createMiddleware(client), routerMiddleware(history)];
+export default function createStore(history, { client, app, restApp }, data, persistConfig = null) {
+  const middleware = [createMiddleware({ client, app, restApp }), routerMiddleware(history)];
 
   let enhancers = [applyMiddleware(...middleware)];
   if (__CLIENT__ && __DEVTOOLS__) {

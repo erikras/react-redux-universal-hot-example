@@ -1,5 +1,3 @@
-import { restApp } from 'app';
-
 const LOAD = 'redux-example/chat/LOAD';
 const LOAD_SUCCESS = 'redux-example/chat/LOAD_SUCCESS';
 const LOAD_FAIL = 'redux-example/chat/LOAD_FAIL';
@@ -48,8 +46,7 @@ export function isLoaded(globalState) {
 export function load() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    // Use restApp on load functions, socket is not supported with SSR
-    promise: () => restApp.service('messages').find({
+    promise: ({ app }) => app.service('messages').find({
       query: {
         $sort: { createdAt: -1 },
         $limit: 25

@@ -12,13 +12,13 @@ import { match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { ReduxAsyncConnect, loadOnServer } from 'redux-connect';
 import createHistory from 'react-router/lib/createMemoryHistory';
-import { Provider } from 'react-redux';
+import { Provider } from 'components';
 import config from 'config';
 import createStore from 'redux/create';
 import ApiClient from 'helpers/ApiClient';
 import Html from 'helpers/Html';
 import getRoutes from 'routes';
-import { exposeInitialRequest } from 'app';
+import { createApp } from 'app';
 
 process.on('unhandledRejection', error => console.error(error));
 
@@ -76,9 +76,13 @@ app.use((req, res) => {
     // hot module replacement is enabled in the development env
     webpackIsomorphicTools.refresh();
   }
-  const client = new ApiClient(req);
+  const providers = {
+    client: new ApiClient(req),
+    app: createApp(req),
+    restApp: createApp(req)
+  };
   const memoryHistory = createHistory(req.originalUrl);
-  const store = createStore(memoryHistory, client);
+  const store = createStore(memoryHistory, providers);
   const history = syncHistoryWithStore(memoryHistory, store);
 
   function hydrateOnClient() {
@@ -89,9 +93,6 @@ app.use((req, res) => {
   if (__DISABLE_SSR__) {
     return hydrateOnClient();
   }
-
-  // Re-configure restApp for apply client cookies
-  exposeInitialRequest(req);
 
   match({
     history,
@@ -105,9 +106,9 @@ app.use((req, res) => {
       res.status(500);
       hydrateOnClient();
     } else if (renderProps) {
-      loadOnServer({ ...renderProps, store, helpers: { client } }).then(() => {
+      loadOnServer({ ...renderProps, store, helpers: providers }).then(() => {
         const component = (
-          <Provider store={store} key="provider">
+          <Provider store={store} app={providers.app} restApp={providers.restApp} key="provider">
             <ReduxAsyncConnect {...renderProps} />
           </Provider>
         );

@@ -1,6 +1,7 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-class FacebookLogin extends React.Component {
+class FacebookLogin extends Component {
   static propTypes = {
     onLogin: PropTypes.func.isRequired,
     appId: PropTypes.string.isRequired,
@@ -78,9 +79,9 @@ class FacebookLogin extends React.Component {
   };
 
   render() {
-    const { className, textButton, typeButton, component: Component } = this.props;
+    const { className, textButton, typeButton, component: WrappedComponent } = this.props;
 
-    if (Component) return <Component facebookLogin={this.click} />;
+    if (WrappedComponent) return <WrappedComponent facebookLogin={this.click} />;
 
     return (
       <button className={className} onClick={this.click} type={typeButton}>

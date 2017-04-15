@@ -1,9 +1,11 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { asyncConnect } from 'redux-connect';
 import { connect } from 'react-redux';
-import app from 'app';
+import { withApp } from 'app';
 import * as chatActions from 'redux/modules/chat';
 
+@withApp
 @asyncConnect([{
   promise: ({ store: { dispatch } }) => dispatch(chatActions.load())
 }])
@@ -17,6 +19,7 @@ import * as chatActions from 'redux/modules/chat';
 export default class ChatFeathers extends Component {
 
   static propTypes = {
+    app: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired,
     addMessage: PropTypes.func.isRequired,
     messages: PropTypes.array.isRequired
@@ -28,16 +31,16 @@ export default class ChatFeathers extends Component {
   };
 
   componentDidMount() {
-    app.service('messages').on('created', this.props.addMessage);
+    this.props.app.service('messages').on('created', this.props.addMessage);
   }
 
   componentWillUnmount() {
-    app.service('messages').removeListener('created', this.props.addMessage);
+    this.props.app.service('messages').removeListener('created', this.props.addMessage);
   }
 
   handleSubmit = event => {
     event.preventDefault();
-    app.service('messages').create({ text: this.state.message })
+    this.props.app.service('messages').create({ text: this.state.message })
       .then(() => this.setState({ message: '', error: false }))
       .catch(error => {
         console.log(error);

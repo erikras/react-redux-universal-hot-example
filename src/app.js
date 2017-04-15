@@ -1,3 +1,5 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import feathers from 'feathers/client';
 import hooks from 'feathers-hooks';
 import rest from 'feathers-rest/client';
@@ -18,21 +20,40 @@ const configureApp = transport => feathers()
 
 export const socket = io('', { path: host('/ws'), autoConnect: false });
 
-const app = configureApp(socketio(socket));
+export function createApp(req) {
+  if (req === 'rest') {
+    return configureApp(rest(host('/api')).superagent(superagent));
+  }
 
-export default app;
+  if (__SERVER__ && req) {
+    const app = configureApp(rest(host('/api')).superagent(superagent, {
+      headers: {
+        Cookie: req.get('cookie'),
+        authorization: req.header('authorization')
+      }
+    }));
 
-export const restApp = configureApp(rest(host('/api')).superagent(superagent));
+    const accessToken = req.header('authorization') || (req.cookies && req.cookies['feathers-jwt']);
+    app.set('accessToken', accessToken);
 
-export function exposeInitialRequest(req) {
-  restApp.defaultService = null;
-  restApp.configure(rest(host('/api')).superagent(superagent, {
-    headers: {
-      Cookie: req.get('cookie'),
-      authorization: req.header('authorization')
+    return app;
+  }
+
+  return configureApp(socketio(socket));
+}
+
+export function withApp(WrappedComponent) {
+  class WithAppComponent extends Component {
+    static contextTypes = {
+      app: PropTypes.object.isRequired,
+      restApp: PropTypes.object.isRequired,
     }
-  }));
 
-  const accessToken = req.header('authorization') || (req.cookies && req.cookies['feathers-jwt']);
-  restApp.set('accessToken', accessToken);
+    render() {
+      const { app, restApp } = this.context;
+      return <WrappedComponent {...this.props} app={app} restApp={restApp} />;
+    }
+  }
+
+  return WithAppComponent;
 }

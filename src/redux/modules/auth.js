@@ -1,4 +1,4 @@
-import app, { restApp, socket } from 'app';
+import { socket } from 'app';
 import { SubmissionError } from 'redux-form';
 import cookie from 'js-cookie';
 
@@ -14,8 +14,6 @@ const REGISTER_FAIL = 'redux-example/auth/REGISTER_FAIL';
 const LOGOUT = 'redux-example/auth/LOGOUT';
 const LOGOUT_SUCCESS = 'redux-example/auth/LOGOUT_SUCCESS';
 const LOGOUT_FAIL = 'redux-example/auth/LOGOUT_FAIL';
-
-const userService = restApp.service('users');
 
 const initialState = {
   loaded: false
@@ -110,21 +108,25 @@ const catchValidation = error => {
   return Promise.reject(error);
 };
 
-function setToken(client, response) {
-  const { accessToken } = response;
+function setToken({ client, app, restApp }) {
+  return response => {
+    const { accessToken } = response;
 
-  // set manually the JWT for both instances of feathers/client
-  app.set('accessToken', accessToken);
-  restApp.set('accessToken', accessToken);
-  client.setJwtToken(accessToken);
+    // set manually the JWT for both instances of feathers/client
+    app.set('accessToken', accessToken);
+    restApp.set('accessToken', accessToken);
+    client.setJwtToken(accessToken);
 
-  return response;
+    return response;
+  };
 }
 
-function setCookie(response) {
-  const options = response.expires ? { expires: response.expires / (60 * 60 * 24 * 1000) } : undefined;
-  cookie.set('feathers-jwt', app.get('accessToken'), options);
-  return response;
+function setCookie({ app }) {
+  return response => {
+    const options = response.expires ? { expires: response.expires / (60 * 60 * 24 * 1000) } : undefined;
+    cookie.set('feathers-jwt', app.get('accessToken'), options);
+    return response;
+  };
 }
 
 /*
@@ -138,14 +140,14 @@ export function isLoaded(globalState) {
 export function load() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: () => restApp.authenticate()
+    promise: ({ app }) => app.authenticate()
   };
 }
 
 export function register(data) {
   return {
     types: [REGISTER, REGISTER_SUCCESS, REGISTER_FAIL],
-    promise: () => userService.create(data).catch(catchValidation)
+    promise: ({ app }) => app.service('users').create(data).catch(catchValidation)
   };
 }
 
@@ -153,13 +155,13 @@ export function login(strategy, data, validation = true) {
   const socketId = socket.io.engine.id;
   return {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
-    promise: client => restApp.authenticate({
+    promise: ({ client, restApp, app }) => restApp.authenticate({
       ...data,
       strategy,
       socketId
     })
-      .then(response => setToken(client, response))
-      .then(setCookie)
+      .then(setToken({ client, restApp, app }))
+      .then(setCookie({ app }))
       .then(response => {
         app.set('user', response.user);
         return response;
@@ -171,7 +173,7 @@ export function login(strategy, data, validation = true) {
 export function logout() {
   return {
     types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
-    promise: client => app.logout()
-      .then(() => setToken(client, { accessToken: null }))
+    promise: ({ client, app, restApp }) => app.logout()
+      .then(() => setToken({ client, app, restApp })({ accessToken: null }))
   };
 }

@@ -7,8 +7,7 @@
   "plugins": [
     "transform-runtime",
     "add-module-exports",
-    "transform-decorators-legacy",
-    "flow-runtime"
+    "transform-decorators-legacy"
   ],
   "env": {
     "development": {

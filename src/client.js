@@ -4,7 +4,6 @@
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
 import { applyRouterMiddleware, Router, browserHistory, match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { ReduxAsyncConnect } from 'redux-connect';
@@ -12,7 +11,8 @@ import { AppContainer as HotEnabler } from 'react-hot-loader';
 import { useScroll } from 'react-router-scroll';
 import { getStoredState } from 'redux-persist';
 import localForage from 'localforage';
-import { socket } from 'app';
+import { socket, createApp } from 'app';
+import { Provider } from 'components';
 import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
 import getRoutes from './routes';
@@ -24,6 +24,8 @@ const offlinePersistConfig = {
 };
 
 const client = new ApiClient();
+const app = createApp();
+const restApp = createApp('rest');
 const dest = document.getElementById('content');
 
 function initSocket() {
@@ -48,12 +50,12 @@ Promise.all([window.__data ? true : isOnline(), getStoredState(offlinePersistCon
     // if (online) app.authenticate().catch(() => null);
 
     const data = !online ? { ...storedData, ...window.__data, online } : { ...window.__data, online };
-    const store = createStore(browserHistory, client, data, offlinePersistConfig);
+    const store = createStore(browserHistory, { client, app, restApp }, data, offlinePersistConfig);
     const history = syncHistoryWithStore(browserHistory, store);
 
     const renderRouter = props => <ReduxAsyncConnect
       {...props}
-      helpers={{ client }}
+      helpers={{ client, app, restApp }}
       filter={item => !item.deferred}
       render={applyRouterMiddleware(useScroll())}
     />;
@@ -62,7 +64,7 @@ Promise.all([window.__data ? true : isOnline(), getStoredState(offlinePersistCon
       match({ history, routes }, (error, redirectLocation, renderProps) => {
         ReactDOM.render(
           <HotEnabler>
-            <Provider store={store} key="provider">
+            <Provider store={store} app={app} restApp={restApp} key="provider">
               <Router {...renderProps} render={renderRouter} history={history}>
                 {routes}
               </Router>
