@@ -9,7 +9,7 @@ function createAsyncValidator(rules, params) {
       .map(name => {
         const error = errors[name];
         const myResolve = () => ({ status: 'resolved', name });
-        const myReject = () => ({ status: 'rejected', name, error });
+        const myReject = err => ({ status: 'rejected', name, error: err });
 
         if (isPromise(error)) {
           return error.then(myResolve).catch(myReject);
