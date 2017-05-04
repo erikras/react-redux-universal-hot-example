@@ -29,7 +29,7 @@ export function createApp(req) {
     const app = configureApp(rest(host('/api')).superagent(superagent, {
       headers: {
         Cookie: req.get('cookie'),
-        authorization: req.header('authorization')
+        authorization: req.header('authorization') || ''
       }
     }));
 
