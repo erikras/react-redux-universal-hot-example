@@ -52,8 +52,8 @@ module.exports = {
       }, {
         test: /\.less$/,
         loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: [
+          fallback: 'style-loader',
+          use: [
             {
               loader: 'css-loader',
               query: {
@@ -81,8 +81,8 @@ module.exports = {
       }, {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: [
+          fallback: 'style-loader',
+          use: [
             {
               loader: 'css-loader',
               query: {
