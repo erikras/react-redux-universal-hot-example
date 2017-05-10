@@ -5,9 +5,14 @@ import { connect } from 'react-redux';
 import { withApp } from 'app';
 import * as chatActions from 'redux/modules/chat';
 
-@withApp
 @asyncConnect([{
-  promise: ({ store: { dispatch } }) => dispatch(chatActions.load())
+  promise: ({ store: { dispatch, getState } }) => {
+    const state = getState();
+
+    if (state.online) {
+      return dispatch(chatActions.load());
+    }
+  }
 }])
 @connect(
   state => ({
@@ -16,6 +21,7 @@ import * as chatActions from 'redux/modules/chat';
   }),
   { ...chatActions }
 )
+@withApp
 export default class ChatFeathers extends Component {
 
   static propTypes = {

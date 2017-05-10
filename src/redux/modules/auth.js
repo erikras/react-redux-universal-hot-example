@@ -140,7 +140,7 @@ export function isLoaded(globalState) {
 export function load() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: ({ app }) => app.authenticate()
+    promise: ({ client }) => client.get('/auth/load')
   };
 }
 
