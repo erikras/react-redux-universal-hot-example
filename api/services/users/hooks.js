@@ -1,4 +1,4 @@
-import hooks from 'feathers-hooks-common';
+import { discard, iff, isProvider } from 'feathers-hooks-common';
 import auth from 'feathers-authentication';
 import local from 'feathers-authentication-local';
 import errors from 'feathers-errors';
@@ -26,7 +26,7 @@ const userHooks = {
     get: auth.hooks.authenticate('jwt'),
     create: [
       validate(),
-      hooks.remove('password_confirmation'),
+      discard('password_confirmation'),
       local.hooks.hashPassword()
     ],
     update: [
@@ -43,7 +43,7 @@ const userHooks = {
     ]
   },
   after: {
-    all: hooks.remove('password'),
+    all: iff(isProvider('external'), discard('password')),
     find: [],
     get: [],
     create: [],

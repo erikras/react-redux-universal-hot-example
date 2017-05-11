@@ -4,7 +4,7 @@ import local from 'feathers-authentication-local';
 // import oauth1 from 'feathers-authentication-oauth1';
 import oauth2 from 'feathers-authentication-oauth2';
 import FacebookTokenStrategy from 'passport-facebook-token';
-import hooks from 'feathers-hooks-common';
+import { discard } from 'feathers-hooks-common';
 import { verifyJWT } from 'feathers-authentication/lib/utils';
 
 export socketAuth from './socketAuth';
@@ -70,7 +70,7 @@ export default function authenticationService() {
       after: {
         create: [
           populateUser(config),
-          hooks.remove('user.password'),
+          discard('user.password'),
           addTokenExpiration(),
           restToSocketAuth()
         ]

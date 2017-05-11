@@ -1,4 +1,4 @@
-import hooks from 'feathers-hooks-common';
+import { disallow, discard, populate } from 'feathers-hooks-common';
 import auth from 'feathers-authentication';
 import { required } from 'utils/validation';
 import { validateHook as validate } from 'hooks';
@@ -8,7 +8,7 @@ const schemaValidator = {
 };
 
 function populateUser() {
-  return hooks.populate({
+  return populate({
     schema: {
       include: [{
         nameAs: 'sentBy',
@@ -35,23 +35,23 @@ const messagesHooks = {
         };
       }
     ],
-    update: hooks.disable(),
-    patch: hooks.disable(),
-    remove: hooks.disable()
+    update: disallow(),
+    patch: disallow(),
+    remove: disallow()
   },
   after: {
     all: [],
     find: [
       populateUser(),
-      hooks.remove('sentBy.password')
+      discard('sentBy.password')
     ],
     get: [
       populateUser(),
-      hooks.remove('sentBy.password')
+      discard('sentBy.password')
     ],
     create: [
       populateUser(),
-      hooks.remove('sentBy.password')
+      discard('sentBy.password')
     ],
     update: [],
     patch: [],
