@@ -68,7 +68,10 @@ export default class ChatFeathers extends Component {
           </ul>
           <form onSubmit={this.handleSubmit}>
             <input
-              type="text" ref={c => { this.message = c; }} placeholder="Enter your message" value={this.state.message}
+              type="text"
+              ref={c => { this.message = c; }}
+              placeholder="Enter your message"
+              value={this.state.message}
               onChange={event => this.setState({ message: event.target.value })}
             />
             <button className="btn" onClick={this.handleSubmit}>Send</button>

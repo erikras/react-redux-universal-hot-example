@@ -173,7 +173,7 @@
     "concurrently": "^3.3.0",
     "css-loader": "^0.28.0",
     "eslint": "^3.15.0",
-    "eslint-config-airbnb": "^14.1.0",
+    "eslint-config-airbnb": "^15.0.0",
     "eslint-loader": "^1.6.1",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^5.0.1",

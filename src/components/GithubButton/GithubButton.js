@@ -20,6 +20,7 @@ export default class GithubButton extends Component {
 
     return (
       <iframe
+        title={`github-button-${user}-${repo}-${type}`}
         src={src}
         frameBorder="0"
         allowTransparency="true"

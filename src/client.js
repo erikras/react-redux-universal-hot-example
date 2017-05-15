@@ -53,12 +53,14 @@ Promise.all([window.__data ? true : isOnline(), getStoredState(offlinePersistCon
     const store = createStore(browserHistory, { client, app, restApp }, data, offlinePersistConfig);
     const history = syncHistoryWithStore(browserHistory, store);
 
-    const renderRouter = props => <ReduxAsyncConnect
-      {...props}
-      helpers={{ client, app, restApp }}
-      filter={item => !item.deferred}
-      render={applyRouterMiddleware(useScroll())}
-    />;
+    const renderRouter = props => (
+      <ReduxAsyncConnect
+        {...props}
+        helpers={{ client, app, restApp }}
+        filter={item => !item.deferred}
+        render={applyRouterMiddleware(useScroll())}
+      />
+    );
 
     const render = routes => {
       match({ history, routes }, (error, redirectLocation, renderProps) => {

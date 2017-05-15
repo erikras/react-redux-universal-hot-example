@@ -29,17 +29,21 @@ export default class WidgetForm extends Component {
     values: PropTypes.object.isRequired
   };
 
-  renderInput = ({ input, className, meta: { touched, error } }) => <div>
-    <input type="text" className={className} {...input} />
-    {error && touched && <div className="text-danger">{error}</div>}
-  </div>;
+  renderInput = ({ input, className, meta: { touched, error } }) => (
+    <div>
+      <input type="text" className={className} {...input} />
+      {error && touched && <div className="text-danger">{error}</div>}
+    </div>
+  );
 
-  renderSelect = ({ options, input, className, meta: { touched, error } }) => <div>
-    <select className={className} {...input}>
-      {options.map(option => <option value={option} key={option}>{option}</option>)}
-    </select>
-    {error && touched && <div className="text-danger">{error}</div>}
-  </div>;
+  renderSelect = ({ options, input, className, meta: { touched, error } }) => (
+    <div>
+      <select className={className} {...input}>
+        {options.map(option => <option value={option} key={option}>{option}</option>)}
+      </select>
+      {error && touched && <div className="text-danger">{error}</div>}
+    </div>
+  );
 
   render() {
     const {
@@ -72,13 +76,13 @@ export default class WidgetForm extends Component {
           <button
             className="btn btn-success"
             onClick={handleSubmit(() => save(values)
-                .catch(err => {
-                  if (typeof err === 'object') {
-                    throw new SubmissionError(err);
-                  }
-                  return Promise.reject(err);
-                })
-              )}
+              .catch(err => {
+                if (typeof err === 'object') {
+                  throw new SubmissionError(err);
+                }
+                return Promise.reject(err);
+              })
+            )}
             disabled={pristine || invalid || submitting}>
             <i className={`fa ${submitting ? 'fa-cog fa-spin' : 'fa-cloud'}`} /> Save
           </button>

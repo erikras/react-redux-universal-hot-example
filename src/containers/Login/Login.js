@@ -51,10 +51,11 @@ export default class Login extends Component {
     return data;
   };
 
-  FacebookLoginButton = ({ facebookLogin }) =>
+  FacebookLoginButton = ({ facebookLogin }) => (
     <button className="btn btn-primary" onClick={facebookLogin}>
       Login with <i className="fa fa-facebook-f" />
-    </button>;
+    </button>
+  );
 
   render() {
     const { user, logout } = this.props;

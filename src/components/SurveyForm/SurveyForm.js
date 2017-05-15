@@ -44,7 +44,7 @@ class SurveyForm extends Component {
   renderInput = ({
     input, label, type, showAsyncValidating, className, styles,
     meta: { touched, error, dirty, active, visited, asyncValidating }
-  }) =>
+  }) => (
     <div className={`form-group ${error && touched ? 'has-error' : ''}`}>
       <label htmlFor={input.name} className="col-sm-2">{label}</label>
       <div className={`col-sm-8 ${styles.inputGroup}`}>
@@ -58,7 +58,8 @@ class SurveyForm extends Component {
           {touched && <span className={styles.touched} title="Touched">T</span>}
         </div>
       </div>
-    </div>;
+    </div>
+  );
 
   render() {
     const {
@@ -77,23 +78,39 @@ class SurveyForm extends Component {
       <div>
         <form className="form-horizontal" onSubmit={handleSubmit}>
           <Field
-            name="name" type="text" component={this.renderInput} label="Full Name"
-            className="form-control" styles={styles}
+            name="name"
+            type="text"
+            component={this.renderInput}
+            label="Full Name"
+            className="form-control"
+            styles={styles}
           />
 
           <Field
-            name="email" type="text" component={this.renderInput} label="Email"
-            className="form-control" styles={styles} asyncValidating={asyncValidating}
+            name="email"
+            type="text"
+            component={this.renderInput}
+            label="Email"
+            className="form-control"
+            styles={styles}
+            asyncValidating={asyncValidating}
           />
 
           <Field
-            name="occupation" type="text" component={this.renderInput} label="Occupation"
-            className="form-control" styles={styles}
+            name="occupation"
+            type="text"
+            component={this.renderInput}
+            label="Occupation"
+            className="form-control"
+            styles={styles}
           />
 
           <Field
-            name="currentlyEmployed" type="checkbox" component={this.renderInput}
-            label="Currently Employed?" styles={styles}
+            name="currentlyEmployed"
+            type="checkbox"
+            component={this.renderInput}
+            label="Currently Employed?"
+            styles={styles}
           />
 
           <div className="form-group">

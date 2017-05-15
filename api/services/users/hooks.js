@@ -1,8 +1,9 @@
 import { discard, iff, isProvider } from 'feathers-hooks-common';
 import auth from 'feathers-authentication';
 import local from 'feathers-authentication-local';
+import { restrictToOwner } from 'feathers-authentication-hooks';
 import errors from 'feathers-errors';
-import { validateHook, restrictToOwner } from 'hooks';
+import { validateHook } from 'hooks';
 import { required, email, match, unique } from 'utils/validation';
 
 const schemaValidator = {
