@@ -46,7 +46,8 @@ export default function createStore(history, { client, app, restApp }, data, per
 
   if (__DEVELOPMENT__ && module.hot) {
     module.hot.accept('./reducer', () => {
-      store.replaceReducer(combineReducers(require('./reducer').default(store.asyncReducers)));
+      const reducer = require('./reducer');
+      store.replaceReducer(combineReducers((reducer.default || reducer)(store.asyncReducers)));
     });
   }
 

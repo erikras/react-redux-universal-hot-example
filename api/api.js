@@ -8,7 +8,6 @@ import rest from 'feathers-rest';
 import socketio from 'feathers-socketio';
 import isPromise from 'is-promise';
 import PrettyError from 'pretty-error';
-import publicConfig from '../src/config';
 import config from './config';
 import middleware from './middleware';
 import services from './services';
@@ -35,15 +34,14 @@ app.set('config', config)
 
 const actionsHandler = (req, res, next) => {
   const splittedUrlPath = req.url.split('?')[0].split('/').slice(1);
-
   const { action, params } = mapUrl(actions, splittedUrlPath);
+
+  req.app = app;
 
   const catchError = error => {
     console.error('API ERROR:', pretty.render(error));
     res.status(error.status || 500).json(error);
   };
-
-  req.app = app;
 
   if (action) {
     try {
@@ -79,13 +77,13 @@ app.configure(hooks())
   .configure(services)
   .configure(middleware);
 
-if (publicConfig.apiPort) {
-  app.listen(publicConfig.apiPort, err => {
+if (process.env.APIPORT) {
+  app.listen(process.env.APIPORT, err => {
     if (err) {
       console.error(err);
     }
-    console.info('----\n==> 🌎  API is running on port %s', publicConfig.apiPort);
-    console.info('==> 💻  Send requests to http://%s:%s', publicConfig.apiHost, publicConfig.apiPort);
+    console.info('----\n==> 🌎  API is running on port %s', process.env.APIPORT);
+    console.info('==> 💻  Send requests to http://%s:%s', process.env.APIHOST, process.env.APIPORT);
   });
 } else {
   console.error('==>     ERROR: No APIPORT environment variable has been specified');

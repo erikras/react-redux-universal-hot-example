@@ -1,5 +1,3 @@
-import { verifyJWT } from 'feathers-authentication/lib/utils';
-
 export default function socketAuth(app) {
   return (socket, next) => {
     const { cookie } = socket.request.headers;
@@ -18,7 +16,7 @@ export default function socketAuth(app) {
 
     if (!accessToken) return next();
 
-    verifyJWT(accessToken, app.get('auth'))
+    app.passport.verifyJWT(accessToken, app.get('auth'))
       .then(payload => app.service('users').get(payload.userId))
       .then(user => {
         Object.assign(socket.feathers, {

@@ -112,7 +112,6 @@ function setToken({ client, app, restApp }) {
   return response => {
     const { accessToken } = response;
 
-    // set manually the JWT for both instances of feathers/client
     app.set('accessToken', accessToken);
     restApp.set('accessToken', accessToken);
     client.setJwtToken(accessToken);
@@ -122,9 +121,18 @@ function setToken({ client, app, restApp }) {
 }
 
 function setCookie({ app }) {
+  return response => app.passport.verifyJWT(response.accessToken)
+    .then(payload => {
+      const options = payload.exp ? { expires: new Date(payload.exp * 1000) } : undefined;
+      cookie.set('feathers-jwt', app.get('accessToken'), options);
+      return response;
+    });
+}
+
+function setUser({ app, restApp }) {
   return response => {
-    const options = response.expires ? { expires: response.expires / (60 * 60 * 24 * 1000) } : undefined;
-    cookie.set('feathers-jwt', app.get('accessToken'), options);
+    app.set('user', response.user);
+    restApp.set('user', response.user);
     return response;
   };
 }
@@ -140,7 +148,10 @@ export function isLoaded(globalState) {
 export function load() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: ({ client }) => client.get('/auth/load')
+    promise: ({ app, restApp, client }) => restApp.authenticate()
+      .then(setToken({ client, app, restApp }))
+      .then(setCookie({ app }))
+      .then(setUser({ app, restApp }))
   };
 }
 
@@ -160,12 +171,9 @@ export function login(strategy, data, validation = true) {
       strategy,
       socketId
     })
-      .then(setToken({ client, restApp, app }))
+      .then(setToken({ client, app, restApp }))
       .then(setCookie({ app }))
-      .then(response => {
-        app.set('user', response.user);
-        return response;
-      })
+      .then(setUser({ app, restApp }))
       .catch(validation ? catchValidation : error => Promise.reject(error))
   };
 }
