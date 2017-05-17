@@ -10,6 +10,28 @@ function asyncValidate(data, dispatch) {
   return dispatch(isValidEmail(data));
 }
 
+/* eslint-disable react/prop-types */
+const Input = ({
+  input, label, type, showAsyncValidating, className, styles,
+  meta: { touched, error, dirty, active, visited, asyncValidating }
+}) => (
+  <div className={`form-group ${error && touched ? 'has-error' : ''}`}>
+    <label htmlFor={input.name} className="col-sm-2">{label}</label>
+    <div className={`col-sm-8 ${styles.inputGroup}`}>
+      {showAsyncValidating && asyncValidating && <i className={`fa fa-cog fa-spin ${styles.cog}`} />}
+      <input {...input} type={type} className={className} id={input.name} />
+      {error && touched && <div className="text-danger">{error}</div>}
+      <div className={styles.flags}>
+        {dirty && <span className={styles.dirty} title="Dirty">D</span>}
+        {active && <span className={styles.active} title="Active">A</span>}
+        {visited && <span className={styles.visited} title="Visited">V</span>}
+        {touched && <span className={styles.touched} title="Touched">T</span>}
+      </div>
+    </div>
+  </div>
+);
+/* eslint-enable react/prop-types */
+
 @reduxForm({
   form: 'survey',
   validate: surveyValidation,
@@ -41,26 +63,6 @@ class SurveyForm extends Component {
     active: null
   }
 
-  renderInput = ({
-    input, label, type, showAsyncValidating, className, styles,
-    meta: { touched, error, dirty, active, visited, asyncValidating }
-  }) => (
-    <div className={`form-group ${error && touched ? 'has-error' : ''}`}>
-      <label htmlFor={input.name} className="col-sm-2">{label}</label>
-      <div className={`col-sm-8 ${styles.inputGroup}`}>
-        {showAsyncValidating && asyncValidating && <i className={`fa fa-cog fa-spin ${styles.cog}`} />}
-        <input {...input} type={type} className={className} id={input.name} />
-        {error && touched && <div className="text-danger">{error}</div>}
-        <div className={styles.flags}>
-          {dirty && <span className={styles.dirty} title="Dirty">D</span>}
-          {active && <span className={styles.active} title="Active">A</span>}
-          {visited && <span className={styles.visited} title="Visited">V</span>}
-          {touched && <span className={styles.touched} title="Touched">T</span>}
-        </div>
-      </div>
-    </div>
-  );
-
   render() {
     const {
       asyncValidating,
@@ -80,7 +82,7 @@ class SurveyForm extends Component {
           <Field
             name="name"
             type="text"
-            component={this.renderInput}
+            component={Input}
             label="Full Name"
             className="form-control"
             styles={styles}
@@ -89,7 +91,7 @@ class SurveyForm extends Component {
           <Field
             name="email"
             type="text"
-            component={this.renderInput}
+            component={Input}
             label="Email"
             className="form-control"
             styles={styles}
@@ -99,7 +101,7 @@ class SurveyForm extends Component {
           <Field
             name="occupation"
             type="text"
-            component={this.renderInput}
+            component={Input}
             label="Occupation"
             className="form-control"
             styles={styles}
@@ -108,7 +110,7 @@ class SurveyForm extends Component {
           <Field
             name="currentlyEmployed"
             type="checkbox"
-            component={this.renderInput}
+            component={Input}
             label="Currently Employed?"
             styles={styles}
           />

@@ -5,6 +5,24 @@ import { reduxForm, Field, getFormValues, SubmissionError } from 'redux-form';
 import * as widgetActions from 'redux/modules/widgets';
 import widgetValidation, { colors } from './widgetValidation';
 
+/* eslint-disable react/prop-types */
+const Input = ({ input, className, meta: { touched, error } }) => (
+  <div>
+    <input type="text" className={className} {...input} />
+    {error && touched && <div className="text-danger">{error}</div>}
+  </div>
+);
+
+const Select = ({ options, input, className, meta: { touched, error } }) => (
+  <div>
+    <select className={className} {...input}>
+      {options.map(option => <option value={option} key={option}>{option}</option>)}
+    </select>
+    {error && touched && <div className="text-danger">{error}</div>}
+  </div>
+);
+/* eslint-enable react/prop-types */
+
 @reduxForm({
   form: 'widget',
   validate: widgetValidation
@@ -29,22 +47,6 @@ export default class WidgetForm extends Component {
     values: PropTypes.object.isRequired
   };
 
-  renderInput = ({ input, className, meta: { touched, error } }) => (
-    <div>
-      <input type="text" className={className} {...input} />
-      {error && touched && <div className="text-danger">{error}</div>}
-    </div>
-  );
-
-  renderSelect = ({ options, input, className, meta: { touched, error } }) => (
-    <div>
-      <select className={className} {...input}>
-        {options.map(option => <option value={option} key={option}>{option}</option>)}
-      </select>
-      {error && touched && <div className="text-danger">{error}</div>}
-    </div>
-  );
-
   render() {
     const {
       editStop, form, handleSubmit, invalid, pristine, save,
@@ -58,13 +60,13 @@ export default class WidgetForm extends Component {
           <Field name="id" type="hidden" component="input" />
         </td>
         <td className={styles.colorCol}>
-          <Field name="color" className="form-control" component={this.renderSelect} options={colors} />
+          <Field name="color" className="form-control" component={Select} options={colors} />
         </td>
         <td className={styles.sprocketsCol}>
-          <Field name="sprocketCount" className="form-control" component={this.renderInput} />
+          <Field name="sprocketCount" className="form-control" component={Input} />
         </td>
         <td className={styles.ownerCol}>
-          <Field name="owner" className="form-control" component={this.renderInput} />
+          <Field name="owner" className="form-control" component={Input} />
         </td>
         <td className={styles.buttonCol}>
           <button

@@ -9,7 +9,7 @@ import io from 'socket.io-client';
 import superagent from 'superagent';
 import config from './config';
 
-const storage = __SERVER__ ? require('localstorage-memory') : require('localforage');
+const storage = __SERVER__ ? null : require('localforage');
 
 const host = clientUrl => (__SERVER__ ? `http://${config.apiHost}:${config.apiPort}` : clientUrl);
 
