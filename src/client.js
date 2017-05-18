@@ -5,7 +5,8 @@ import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { applyRouterMiddleware, Router, browserHistory, match } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
+import { bindActionCreators } from 'redux';
+import { syncHistoryWithStore, replace } from 'react-router-redux';
 import { ReduxAsyncConnect } from 'redux-connect';
 import { AppContainer as HotEnabler } from 'react-hot-loader';
 import { useScroll } from 'react-router-scroll';
@@ -53,10 +54,12 @@ Promise.all([window.__data ? true : isOnline(), getStoredState(offlinePersistCon
     const store = createStore(browserHistory, { client, app, restApp }, data, offlinePersistConfig);
     const history = syncHistoryWithStore(browserHistory, store);
 
+    const redirect = bindActionCreators(replace, store.dispatch);
+
     const renderRouter = props => (
       <ReduxAsyncConnect
         {...props}
-        helpers={{ client, app, restApp }}
+        helpers={{ client, app, restApp, redirect }}
         filter={item => !item.deferred}
         render={applyRouterMiddleware(useScroll())}
       />

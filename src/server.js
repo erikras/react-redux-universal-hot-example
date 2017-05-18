@@ -106,7 +106,10 @@ app.use((req, res) => {
       res.status(500);
       hydrateOnClient();
     } else if (renderProps) {
-      loadOnServer({ ...renderProps, store, helpers: providers }).then(() => {
+      const redirect = ::res.redirect;
+      loadOnServer({ ...renderProps, store, helpers: { ...providers, redirect } }).then(() => {
+        if ( res.headersSent ) return;
+
         const component = (
           <Provider store={store} app={providers.app} restApp={providers.restApp} key="provider">
             <ReduxAsyncConnect {...renderProps} />
