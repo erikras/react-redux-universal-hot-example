@@ -108,7 +108,7 @@ app.use((req, res) => {
     } else if (renderProps) {
       const redirect = ::res.redirect;
       loadOnServer({ ...renderProps, store, helpers: { ...providers, redirect } }).then(() => {
-        if ( res.headersSent ) return;
+        if (res.headersSent) return;
 
         const component = (
           <Provider store={store} app={providers.app} restApp={providers.restApp} key="provider">
