@@ -9,7 +9,7 @@
       "extractStyles": false
     },
     "production": {
-      "styleLoaders": ["style-loader", "css-loader", "sass-loader"],
+      "styleLoaders": ["style-loader", "css-loader", "resolve-url-loader", "sass-loader"],
       "extractStyles": true
     }
   },
