@@ -33,7 +33,7 @@ export default class RegisterForm extends Component {
         <Field
           name="password_confirmation"
           type="password"
-          component={this.renderInput}
+          component={Input}
           label="Password confirmation"
         />
         {error && <p className="text-danger"><strong>{error}</strong></p>}
