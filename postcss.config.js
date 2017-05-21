@@ -1,6 +1,9 @@
-module.exports = ({ file, options }) => ({
-  plugins: [
-    require('postcss-import')({ root: file.dirname }),
-    require('cssnext')(options.cssnext ? options.cssnext : false)
+module.exports = {
+  use: [
+    'postcss-import',
+    'postcss-url',
+    'postcss-cssnext',
+    'postcss-browser-reporter',
+    'postcss-reporter'
   ]
-});
+};

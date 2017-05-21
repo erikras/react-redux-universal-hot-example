@@ -123,6 +123,25 @@ var webpackConfig = module.exports = {
     extensions: ['.json', '.js', '.jsx']
   },
   plugins: [
+    new webpack.LoaderOptionsPlugin({
+      test: /\.(less|scss)/,
+      options: {
+        postcss: function (webpack) {
+          return [
+            require("postcss-import")({ addDependencyTo: webpack }),
+            require("postcss-url")(),
+            require("postcss-cssnext")({ browsers: 'last 2 version' }),
+            // add your "plugins" here
+            // ...
+            // and if you want to compress,
+            // just use css-loader option that already use cssnano under the hood
+            require("postcss-browser-reporter")(),
+            require("postcss-reporter")(),
+          ]
+        }
+      }
+    }),
+
     // hot reload
     new webpack.HotModuleReplacementPlugin(),
 
@@ -156,22 +175,15 @@ var webpackConfig = module.exports = {
         loader: 'css-loader',
         options: {
           modules: true,
-          importLoaders: 3,
+          importLoaders: 2,
           sourceMap: true,
           localIdentName: '[local]___[hash:base64:5]'
         }
       }, {
         loader: 'postcss-loader',
         options: {
-          sourceMap: true,
-          ctx: {
-            cssnext: {
-              browsers: 'last 2 version'
-            }
-          }
+          sourceMap: true
         }
-      }, {
-        loader: 'resolve-url-loader',
       }, {
         loader: 'less-loader',
         query: {
@@ -188,22 +200,15 @@ var webpackConfig = module.exports = {
         loader: 'css-loader',
         options: {
           modules: true,
-          importLoaders: 3,
+          importLoaders: 2,
           sourceMap: true,
           localIdentName: '[local]___[hash:base64:5]'
         }
       }, {
         loader: 'postcss-loader',
         options: {
-          sourceMap: true,
-          ctx: {
-            cssnext: {
-              browsers: 'last 2 version'
-            }
-          }
+          sourceMap: true
         }
-      }, {
-        loader: 'resolve-url-loader',
       }, {
         loader: 'sass-loader',
         options: {
