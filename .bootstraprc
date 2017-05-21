@@ -5,11 +5,21 @@
   "loglevel": "disabled",
   "env": {
     "development": {
-      "styleLoaders": ["style-loader", "css-loader", "resolve-url-loader", "sass-loader"],
+      "styleLoaders": [
+        "style-loader?sourceMap",
+        "css-loader?sourceMap&importLoaders=2",
+        "resolve-url-loader",
+        "sass-loader?sourceMap"
+      ],
       "extractStyles": false
     },
     "production": {
-      "styleLoaders": ["style-loader", "css-loader", "resolve-url-loader", "sass-loader"],
+      "styleLoaders": [
+        "style-loader",
+        "css-loader?importLoaders=2",
+        "resolve-url-loader",
+        "sass-loader?sourceMap"
+      ],
       "extractStyles": true
     }
   },

@@ -160,7 +160,6 @@
     "superagent": "^3.4.4"
   },
   "devDependencies": {
-    "autoprefixer-loader": "^3.2.0",
     "babel-eslint": "^7.1.1",
     "babel-jest": "^20.0.1",
     "babel-loader": "^7.0.0",
@@ -171,6 +170,7 @@
     "clean-webpack-plugin": "^0.1.15",
     "concurrently": "^3.3.0",
     "css-loader": "^0.28.0",
+    "cssnext": "^1.8.4",
     "eslint": "^3.15.0",
     "eslint-config-airbnb": "^15.0.0",
     "eslint-loader": "^1.6.1",
@@ -200,6 +200,8 @@
     "phantomjs-polyfill": "^0.0.2",
     "phantomjs-prebuilt": "^2.1.14",
     "piping": "^1.0.0-rc.4",
+    "postcss-import": "^10.0.0",
+    "postcss-loader": "^2.0.5",
     "react-a11y": "^0.3.3",
     "react-addons-test-utils": "^15.4.2",
     "react-hot-loader": "^3.0.0-beta.3",
@@ -210,7 +212,6 @@
     "resolve-url-loader": "^2.0.0",
     "sass-loader": "^6.0.1",
     "sinon": "^2.1.0",
-    "strip-loader": "^0.1.2",
     "style-loader": "^0.17.0",
     "sw-precache-webpack-plugin": "^0.11.0",
     "timekeeper": "^1.0.0",

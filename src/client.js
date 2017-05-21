@@ -112,7 +112,7 @@ Promise.all([window.__data ? true : isOnline(), getStoredState(offlinePersistCon
     }
 
     if (online && !__DEVELOPMENT__ && 'serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
+      navigator.serviceWorker.register('/dist/service-worker.js', { scope: '/' })
         .then(() => {
           console.log('Service worker registered!');
         })

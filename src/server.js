@@ -36,10 +36,14 @@ app.use(compression());
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
 app.get('/manifest.json', (req, res) => res.sendFile(path.join(__dirname, '..', 'static', 'manifest.json')));
 
+app.use('/dist/service-worker.js', (req, res, next) => {
+  res.setHeader('Service-Worker-Allowed', '/');
+  return next();
+});
+
 app.use(express.static(path.join(__dirname, '..', 'static')));
 
 app.use((req, res, next) => {
-  res.setHeader('Service-Worker-Allowed', '*');
   res.setHeader('X-Forwarded-For', req.ip);
   return next();
 });
