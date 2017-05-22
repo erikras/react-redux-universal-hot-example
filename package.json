@@ -216,7 +216,7 @@
     "resolve-url-loader": "^2.0.2",
     "sass-loader": "^6.0.1",
     "sinon": "^2.1.0",
-    "style-loader": "^0.17.0",
+    "style-loader": "^0.18.0",
     "sw-precache-webpack-plugin": "^0.11.0",
     "timekeeper": "^1.0.0",
     "url-loader": "^0.5.7",
