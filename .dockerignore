@@ -2,7 +2,6 @@
 .idea/
 node_modules/
 yarn.lock
-package-lock.json
 static/dist/
 *.iml
 webpack-assets.json
