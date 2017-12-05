@@ -9,8 +9,6 @@
 
 ---
 
-<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/P3WjkUw9LiYdiQBdHrtHZSSL/erikras/react-redux-universal-hot-example'>  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/P3WjkUw9LiYdiQBdHrtHZSSL/erikras/react-redux-universal-hot-example.svg' /></a>
-
 ## About
 
 This is a starter boilerplate app I've put together using the following technologies:
