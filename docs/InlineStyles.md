@@ -32,6 +32,7 @@ This is a list of possible style libraries that we could implement into this pro
 * [css-modules](https://github.com/css-modules/css-modules)
 * [babel-plugin-react-autoprefix](https://github.com/UXtemple/babel-plugin-react-autoprefix)
 * [babel-plugin-css-in-js](https://github.com/martinandert/babel-plugin-css-in-js)
+* [jss](http://cssinjs.org/server-side-rendering?v=v9.8.0) has SSR.  [Vendor auto-prefix is a WIP](https://github.com/cssinjs/jss/issues/279) .  I _think_ SSR media queries should work fine.  [JSS was selected for material-ui 1.0](https://material-ui-next.com/customization/css-in-js/).
 * _Add more if you know of others._
 
 Users and contributors to this project should periodically go through this list and see if any of them have developed features that make them really worthy of server side rendering in a production environment.
