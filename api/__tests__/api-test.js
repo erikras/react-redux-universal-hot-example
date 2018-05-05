@@ -53,7 +53,7 @@ describe('mapUrl', () => {
     });
   });
 
-  it('does not find the avaialble action if deeper nesting is required', () => {
+  it('does not find the available action if deeper nesting is required', () => {
     const url = '/widget';
     const splittedUrlPath = url.split('?')[0].split('/').slice(1);
     const availableActions = {a: 1, widget: {c: 1, load: () => 'baz'}};
