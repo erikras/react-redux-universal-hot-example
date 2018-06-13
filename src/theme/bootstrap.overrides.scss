@@ -2,7 +2,17 @@
  * Override Bootstrap styles that you can't modify via variables here.
  *
  */
+@import "./variables.scss";
+// @import "./katex.css";
+@import "../../node_modules/katex/dist/katex.min.css";
 
+@import '../../node_modules/react-select/dist/react-select.css';
+
+@import '../../node_modules/draft-js/dist/Draft.css';
+
+@import './draft-js-custom.css';
+
+@import '../../node_modules/react-tabs/style/react-tabs.css';
 .navbar-brand {
   position: relative;
   padding-left: 50px;
@@ -13,4 +23,37 @@
 .navbar-default .navbar-nav > .active > a:focus {
   color: #33e0ff;
   background-color: transparent;
+}
+
+//drag and drop component
+.dnd_container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.dnd_item {
+  background-color: steelblue;
+  color: #ffffff;
+  font-size: 24px;
+  line-height: 50px;
+  border-style: solid;
+  border-color:#ccc;
+  text-align: center;
+  margin: 10px;
+}
+
+.dnd_item_content {
+  background-color: steelblue;
+  color: #ffffff;
+  font-size: 24px;
+  line-height: 50px;
+  border-style: solid;
+  border-color:#ccc;
+  text-align: center;
+  margin: 10px;
+}
+
+.dnd_item:hover {
+  cursor: move;
 }

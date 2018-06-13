@@ -11,25 +11,42 @@ import SocketIo from 'socket.io';
 const pretty = new PrettyError();
 const app = express();
 
+const redis = require('redis').createClient({
+  host: config.redis_db,
+  // host: '127.0.0.1',
+  port: 6379
+});
+const RedisStore = require('connect-redis')(session);
+
 const server = new http.Server(app);
 
 const io = new SocketIo(server);
 io.path('/ws');
 
 app.use(session({
-  secret: 'react and redux rule!!!!',
-  resave: false,
-  saveUninitialized: false,
-  cookie: { maxAge: 60000 }
+  secret: 'supersecret.. hoc hoc hoc!!!!',
+    resave: true,
+    saveUninitialized: false,
+    rolling: true,
+    cookie: { maxAge: 60000 * 100 }, // miliseconds
+    store: new RedisStore({
+      // host: '127.0.0.2',
+      // port: 6380,
+      // url: 'redis://127.0.0.2:8888',
+      client: redis,
+      logErrors: true
+    })
 }));
 app.use(bodyParser.json());
 
 
 app.use((req, res) => {
+  // if (!req.session) {
+  //   return next(new Error('oh no')) // handle error
+  // }
   const splittedUrlPath = req.url.split('?')[0].split('/').slice(1);
 
   const {action, params} = mapUrl(actions, splittedUrlPath);
-
   if (action) {
     action(req, params)
       .then((result) => {

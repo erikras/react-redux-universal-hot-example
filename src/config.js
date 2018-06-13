@@ -9,11 +9,18 @@ const environment = {
   }
 }[process.env.NODE_ENV || 'development'];
 
+//Remember that server differ to client....
+// console.log(! (typeof window != 'undefined' && window.document)); is_server
+const is_on_server = !(typeof window != 'undefined' && window.document);
+
 module.exports = Object.assign({
   host: process.env.HOST || 'localhost',
   port: process.env.PORT,
   apiHost: process.env.APIHOST || 'localhost',
   apiPort: process.env.APIPORT,
+  oneApiHost: is_on_server ? 'oneapi.hochochoc.local' : 'oneapi.hochochoc.local' , //docker: server-only
+  oneApiPort: is_on_server ? 80: 80,
+  redis_db: '127.0.0.1',
   app: {
     title: 'React Redux Example',
     description: 'All the modern best practices in one example.',

@@ -11,6 +11,15 @@ import {
     LoginSuccess,
     Survey,
     NotFound,
+    Content,
+    ContentEditor,
+    ContentPage,
+    Lesson,
+    Lessons,
+    LessonEditor,
+    CreateLesson,
+    HomeDev,
+    MyContents,
   } from 'containers';
 
 export default (store) => {
@@ -19,7 +28,7 @@ export default (store) => {
       const { auth: { user }} = store.getState();
       if (!user) {
         // oops, not logged in, so can't be here!
-        replace('/');
+        replace('/login');
       }
       cb();
     }
@@ -43,6 +52,7 @@ export default (store) => {
       <Route onEnter={requireLogin}>
         <Route path="chat" component={Chat}/>
         <Route path="loginSuccess" component={LoginSuccess}/>
+        <Route path="account/contents" component={MyContents}/>
       </Route>
 
       { /* Routes */ }
@@ -50,6 +60,16 @@ export default (store) => {
       <Route path="login" component={Login}/>
       <Route path="survey" component={Survey}/>
       <Route path="widgets" component={Widgets}/>
+      <Route path="content/create" component={ContentEditor}/>
+      <Route path="content/:id" component={Content}/>
+      <Route path="content/:id/edit" component={ContentEditor}/>
+      <Route path="lessons" component={Lessons}/>
+      <Route path="homedev" component={HomeDev}/>
+      <Route path="lesson/create" component={CreateLesson}/>
+      <Route path="lesson/:id" component={Lesson}/>
+      <Route path="lesson/:id/edit" component={LessonEditor}/>
+      <Route path="page/:id" component={ContentPage}/>
+
 
       { /* Catch all route */ }
       <Route path="*" component={NotFound} status={404} />

@@ -1,0 +1,12 @@
+{
+  "content": {
+    "text": "React Redux i18n Example",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "previous_page": "Previous Page",
+    "next_page": "Next Page",
+    "see_more": "See more...",
+    "see": "See..."
+  }
+}

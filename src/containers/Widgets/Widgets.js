@@ -10,9 +10,10 @@ import { asyncConnect } from 'redux-async-connect';
 @asyncConnect([{
   deferred: true,
   promise: ({store: {dispatch, getState}}) => {
-    if (!isLoaded(getState())) {
-      return dispatch(loadWidgets());
-    }
+    // if (!isLoaded(getState())) {
+    //
+    // }
+    return dispatch(loadWidgets());
   }
 }])
 @connect(
@@ -103,4 +104,3 @@ export default class Widgets extends Component {
     );
   }
 }
-

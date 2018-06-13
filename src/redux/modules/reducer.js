@@ -8,6 +8,10 @@ import counter from './counter';
 import {reducer as form} from 'redux-form';
 import info from './info';
 import widgets from './widgets';
+import home from './home';
+import content from './content';
+import lesson from './lesson';
+import contentPage from './contentPage';
 
 export default combineReducers({
   routing: routerReducer,
@@ -20,5 +24,9 @@ export default combineReducers({
     counter3: counter
   }),
   info,
-  widgets
+  widgets,
+  home,
+  content,
+  contentPage,
+  lesson,
 });

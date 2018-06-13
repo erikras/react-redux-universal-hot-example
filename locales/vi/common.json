@@ -1,0 +1,12 @@
+{
+  "content": {
+    "text": "Hello vietnamese",
+    "login": "Đăng nhập",
+    "register": "Đăng ký",
+    "logout": "Đăng xuất",
+    "previous_page": "Trang trước",
+    "next_page": "Trang sau",
+    "see_more": "Xem thêm...",
+    "see": "Xem..."
+  }
+}

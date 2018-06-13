@@ -34,6 +34,7 @@ This is a starter boilerplate app I've put together using the following technolo
 * [react-helmet](https://github.com/nfl/react-helmet) to manage title and meta tag information on both server and client
 * [webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools) to allow require() work for statics both on client and server
 * [mocha](https://mochajs.org/) to allow writing unit tests for the project.
+* [React-i18next](https://github.com/i18next/react-i18next) Higher-order components and components for React when using i18next.
 
 I cobbled this together from a wide variety of similar "starter" repositories. As I post this in June 2015, all of these libraries are right at the bleeding edge of web development. They may fall out of fashion as quickly as they have come into it, but I personally believe that this stack is the future of web development and will survive for several years. I'm building my new projects like this, and I recommend that you do, too.
 
