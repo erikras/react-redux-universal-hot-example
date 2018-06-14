@@ -30,6 +30,7 @@ This is a list of possible style libraries that we could implement into this pro
 * [React-JSS](https://github.com/jsstyles/react-jss)
 * [jsxstyle](https://github.com/petehunt/jsxstyle)
 * [css-modules](https://github.com/css-modules/css-modules)
+* [react-css-modules](https://github.com/gajus/react-css-modules)
 * [babel-plugin-react-autoprefix](https://github.com/UXtemple/babel-plugin-react-autoprefix)
 * [babel-plugin-css-in-js](https://github.com/martinandert/babel-plugin-css-in-js)
 * _Add more if you know of others._
