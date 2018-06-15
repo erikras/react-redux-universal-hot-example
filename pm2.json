@@ -1,0 +1,25 @@
+{
+  "apps" : [
+    {
+      "name": "react-redux-universal-hot-example",
+      "script": "./bin/server.js",
+      "exec_mode"  : "fork",
+      "env": {
+        "NODE_PATH": "./src",
+        "NODE_ENV": "production",
+        "PORT": 8080,
+        "APIPORT": 3030
+      }
+    },
+    {
+      "name": "react-redux-universal-hot-example_api",
+      "script": "./bin/api.js",
+      "exec_mode"  : "fork",
+      "env": {
+        "NODE_PATH": "./api",
+        "NODE_ENV": "production",
+        "APIPORT": 3030
+      }
+    }
+  ]
+}

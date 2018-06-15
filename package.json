@@ -24,9 +24,9 @@
   ],
   "main": "bin/server.js",
   "scripts": {
-    "start": "concurrent --kill-others \"npm run start-prod\" \"npm run start-prod-api\"",
-    "start-prod": "better-npm-run start-prod",
-    "start-prod-api": "better-npm-run start-prod-api",
+    "start": "pm2 start ./pm2.json",
+    "restart": "pm2 restart ./pm2.json",
+    "stop": "pm2 stop ./pm2.json",
     "build": "better-npm-run build",
     "postinstall": "npm run build",
     "lint": "eslint -c .eslintrc src api",
@@ -39,23 +39,6 @@
     "test-node-watch": "./node_modules/mocha/bin/mocha $(find api -name '*-test.js') --compilers js:babel-core/register --watch"
   },
   "betterScripts": {
-    "start-prod": {
-      "command": "node ./bin/server.js",
-      "env": {
-        "NODE_PATH": "./src",
-        "NODE_ENV": "production",
-        "PORT": 8080,
-        "APIPORT": 3030
-      }
-    },
-    "start-prod-api": {
-      "command": "node ./bin/api.js",
-      "env": {
-        "NODE_PATH": "./api",
-        "NODE_ENV": "production",
-        "APIPORT": 3030
-      }
-    },
     "start-dev": {
       "command": "node ./bin/server.js",
       "env": {
@@ -117,6 +100,7 @@
     "map-props": "^1.0.0",
     "multireducer": "^2.0.0",
     "piping": "^0.3.0",
+    "pm2": "^2.0.18",
     "pretty-error": "^1.2.0",
     "react": "0.14.8",
     "react-bootstrap": "^0.28.1",
