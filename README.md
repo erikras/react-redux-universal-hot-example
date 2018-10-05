@@ -206,11 +206,19 @@ require('aModule/dist/style.css');
 
 Before:
 ```javascript
+// dev.config.js:
 { test: /\.less$/, loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!less?outputStyle=expanded&sourceMap' },
+
+// prod.config.js:
+{ test: /\.less$/, loader: ExtractTextPlugin.extract('style', 'css?importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version!less?outputStyle=expanded&sourceMap=true&sourceMapContents=true') },
 ```
 After:
 ```javascript
+// dev.config.js:
 { test: /\.less$/, loader: 'style!css?importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version!less?outputStyle=expanded&sourceMap' },
+
+// prod.config.js:
+{ test: /\.less$/, loader: ExtractTextPlugin.extract('style', 'css?importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version!less?outputStyle=expanded&sourceMap=true&sourceMapContents=true') },
 ```
 
 After this modification to both loaders you will be able to use scss and less files in the same way as css files.
