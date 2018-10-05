@@ -44,9 +44,11 @@ const component = (
   </Router>
 );
 
+// extra <div> required so component doesn't
+// re-mount when devtools are loaded below
 ReactDOM.render(
   <Provider store={store} key="provider">
-    {component}
+    <div>{component}</div>
   </Provider>,
   dest
 );

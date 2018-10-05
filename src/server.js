@@ -90,9 +90,11 @@ app.use((req, res) => {
       hydrateOnClient();
     } else if (renderProps) {
       loadOnServer({...renderProps, store, helpers: {client}}).then(() => {
+        // extra <div> required so component doesn't
+        // re-mount when devtools are loaded in client.js
         const component = (
           <Provider store={store} key="provider">
-            <ReduxAsyncConnect {...renderProps} />
+            <div><ReduxAsyncConnect {...renderProps} /></div>
           </Provider>
         );
 
