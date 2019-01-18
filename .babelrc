@@ -21,5 +21,7 @@
         }]
       ]
     }
-  }
+  },
+
+  "retainLines": true
 }
