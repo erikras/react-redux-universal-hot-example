@@ -72,6 +72,16 @@ npm run build
 npm run start
 ```
 
+## Nitrous Quickstart
+
+You can quickly create a free development environment for this project in the cloud on www.nitrous.io:
+
+<a href="https://www.nitrous.io/quickstart">
+  <img src="https://nitrous-image-icons.s3.amazonaws.com/quickstart.png" alt="Nitrous Quickstart" width=142 height=34>
+</a>
+
+In the IDE, start this project via `Run > Start React Redux Example` and access your site via `Preview > 3000`.
+
 ## Demo
 
 A demonstration of this app can be seen [running on heroku](https://react-redux.herokuapp.com), which is a deployment of the [heroku branch](https://github.com/erikras/react-redux-universal-hot-example/tree/heroku).
