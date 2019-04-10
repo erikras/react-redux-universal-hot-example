@@ -6,7 +6,7 @@ export default class About extends Component {
 
   state = {
     showKitten: false
-  }
+  };
 
   handleToggleKitten = () => this.setState({showKitten: !this.state.showKitten});
 

@@ -33,7 +33,7 @@ class SurveyForm extends Component {
     invalid: PropTypes.bool.isRequired,
     pristine: PropTypes.bool.isRequired,
     valid: PropTypes.bool.isRequired
-  }
+  };
 
   render() {
     const {
