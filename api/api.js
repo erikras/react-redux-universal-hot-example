@@ -87,5 +87,5 @@ if (config.apiPort) {
   });
   io.listen(runnable);
 } else {
-  console.error('==>     ERROR: No PORT environment variable has been specified');
+  console.error('==>     ERROR: No APIPORT environment variable has been specified');
 }
