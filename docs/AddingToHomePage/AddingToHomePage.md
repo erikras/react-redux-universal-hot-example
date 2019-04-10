@@ -30,9 +30,9 @@ and [better-npm-run](https://www.npmjs.com/package/better-npm-run), runs
 * `./bin/server.js` calls `./src/server.js` and uses the [HMR plugin](http://andrewhfarmer.com/webpack-hmr-tutorial/)
 for hot reloading, meaning the browser refreshes automatically when any file in `./src` is changed.
 
-* `./webpack/webpack-dev-server` does teh actual compilation with the 
+* `./webpack/webpack-dev-server` does the actual compilation with the 
 [webpack dev middleware package](https://github.com/webpack/webpack-dev-middleware) to provide a key feature found
-in Glup:  compilation without writing intermediate files to disk.  Configuring webpack
+in Gulp:  compilation without writing intermediate files to disk.  Configuring webpack
 [can be confusing](https://medium.com/@dtothefp/why-can-t-anyone-write-a-simple-webpack-tutorial-d0b075db35ed#.cle1vv5ql).
 
 * `./bin/api.js` calls `./api/api.js`.  It receives incoming REST requests as JSON objects and responds with
