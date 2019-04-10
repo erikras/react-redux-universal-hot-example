@@ -49,7 +49,7 @@ When you save the file to disk, the change to the `./src` directory is picked up
 [piping](https://www.npmjs.com/package/piping) module, triggering the webpack-dev-server to rebuild 
 `./static/dist/[checksum].js`, and triggering a stub injected into the HTML file served to the browser to 
 reload.   The rebuilding processes through webpack middleware and plugins that compile `*.sccs` files, 
-transpile JAX and ES6 (or ES7), and bundles together all the resources into one package in about 6 seconds.
+transpile JSX and ES6 (or ES7), and bundles together all the resources into one package in about 6 seconds.
 That is, the browser will show "Hello, World!" on your web page in about 6 seconds:
 
 ![Hello World rendered on home page](hello_rendered.png)
