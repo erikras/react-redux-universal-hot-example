@@ -6,7 +6,7 @@
   "version": "0.9.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/erikras/react-redux-universal-hot-example"
+    "url": "git+https://github.com/erikras/react-redux-universal-hot-example.git"
   },
   "homepage": "https://github.com/erikras/react-redux-universal-hot-example",
   "keywords": [
@@ -28,7 +28,6 @@
     "start-prod": "better-npm-run start-prod",
     "start-prod-api": "better-npm-run start-prod-api",
     "build": "better-npm-run build",
-    "postinstall": "npm run build",
     "lint": "eslint -c .eslintrc src api",
     "start-dev": "better-npm-run start-dev",
     "start-dev-api": "better-npm-run start-dev-api",
@@ -36,7 +35,8 @@
     "dev": "concurrent --kill-others \"npm run watch-client\" \"npm run start-dev\" \"npm run start-dev-api\"",
     "test": "karma start",
     "test-node": "./node_modules/mocha/bin/mocha $(find api -name '*-test.js') --compilers js:babel-core/register",
-    "test-node-watch": "./node_modules/mocha/bin/mocha $(find api -name '*-test.js') --compilers js:babel-core/register --watch"
+    "test-node-watch": "./node_modules/mocha/bin/mocha $(find api -name '*-test.js') --compilers js:babel-core/register --watch",
+    "postinstall": "npm run build"
   },
   "betterScripts": {
     "start-prod": {
@@ -90,6 +90,7 @@
     }
   },
   "dependencies": {
+    "@types/react": "^18.3.3",
     "babel-core": "^6.5.2",
     "babel-loader": "^6.2.1",
     "babel-plugin-add-module-exports": "^0.1.2",
@@ -102,7 +103,9 @@
     "babel-preset-stage-0": "^6.3.13",
     "babel-register": "^6.3.13",
     "babel-runtime": "^6.3.19",
+    "binary-extensions": "^2.3.0",
     "body-parser": "^1.14.1",
+    "component-emitter": "^1.3.1",
     "compression": "^1.6.0",
     "express": "^4.13.3",
     "express-session": "^1.12.1",
@@ -111,15 +114,19 @@
     "http-proxy": "^1.12.0",
     "immutable": "^3.8.1",
     "invariant": "^2.2.0",
+    "is-finite": "^1.1.0",
     "less": "^2.5.3",
     "less-loader": "^2.2.1",
     "lru-memoize": "^1.0.0",
     "map-props": "^1.0.0",
     "multireducer": "^2.0.0",
     "piping": "^0.3.0",
+    "postinstall": "^0.10.3",
     "pretty-error": "^1.2.0",
-    "react": "0.14.8",
+    "react": "^0.14.10",
     "react-bootstrap": "^0.28.1",
+    "react-doc": "^1.2.6",
+    "react-dock": "^0.3.0",
     "react-dom": "0.14.8",
     "react-helmet": "^2.2.0",
     "react-inline-css": "^2.0.0",
@@ -127,7 +134,7 @@
     "react-router": "2.0.0",
     "react-router-bootstrap": "^0.20.1",
     "react-router-redux": "^4.0.0",
-    "redux": "^3.0.4",
+    "redux": "^3.7.2",
     "redux-async-connect": "^1.0.0-rc2",
     "redux-form": "^3.0.12",
     "redux-thunk": "^2.1.0",
@@ -136,7 +143,9 @@
     "serve-favicon": "^2.3.0",
     "socket.io": "^1.3.7",
     "socket.io-client": "^1.3.7",
+    "string-width": "^5.1.2",
     "superagent": "^1.4.0",
+    "throttleit": "^1.0.1",
     "url-loader": "^0.5.7",
     "violet-paginator": "^1.8.1",
     "warning": "^2.1.0",
@@ -182,7 +191,8 @@
     "redux-devtools": "^3.0.0-beta-3",
     "redux-devtools-dock-monitor": "^1.0.0-beta-3",
     "redux-devtools-log-monitor": "^1.0.0-beta-3",
-    "sass-loader": "^3.1.2",
+    "sass": "^1.77.8",
+    "sass-loader": "^3.2.3",
     "sinon": "^1.17.2",
     "strip-loader": "^0.1.0",
     "style-loader": "^0.13.0",
@@ -193,5 +203,14 @@
   },
   "engines": {
     "node": "5.6.0"
+  },
+  "bin": {
+    "react-redux-universal-hot-example": "bin/api.js"
+  },
+  "directories": {
+    "doc": "docs"
+  },
+  "bugs": {
+    "url": "https://github.com/erikras/react-redux-universal-hot-example/issues"
   }
 }
