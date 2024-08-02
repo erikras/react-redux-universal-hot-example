@@ -1,0 +1,38 @@
+# Wild
+*.log
+*.tmp
+*.bak
+*.bck
+
+# Files
+Dockerfile
+
+# Folders
+.git
+data
+docker
+docks
+docs
+node_modules
+scripts
+# tmp
+
+# Stuff which has no impact on Docker
+
+## Local config files
+# .babelrc
+# .bowerrc
+.dockerignore
+.editorconfig
+.eslintignore
+.eslintrc
+.gitattributes
+.gitignore
+.travis.yml
+
+## Markdown stuff
+*.md
+
+# Temporary files
+webpack-*.json
+
