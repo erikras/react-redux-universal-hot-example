@@ -17,6 +17,15 @@ var serverOptions = {
   publicPath: webpackConfig.output.publicPath,
   headers: {'Access-Control-Allow-Origin': '*'},
   stats: {colors: true}
+  // COMMENT OUT FOR VAGRANT/VM USE (will enable file watching)
+  /*,
+  watchOptions: {
+    aggregateTimeout: 300,
+    poll: true,
+    ignored: /node_modules/ //will enable file watching without hitting high CPU/Memory Usage. Affecting only on WebPack that includes watchpack 1.1.0+
+  }
+  */
+  
 };
 
 var app = new Express();
