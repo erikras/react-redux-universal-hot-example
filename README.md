@@ -1,3 +1,7 @@
+# ⚠️ DO NOT USE THIS!! ⚠️
+
+Once upon a time, this repo helped a lot of people, but it's _waaaay_ out of date. It's now more of a historical artifact of what React development looked like in 2015.
+
 # React Redux Universal Hot Example
 
 [![build status](https://img.shields.io/travis/erikras/react-redux-universal-hot-example/master.svg?style=flat-square)](https://travis-ci.org/erikras/react-redux-universal-hot-example)
