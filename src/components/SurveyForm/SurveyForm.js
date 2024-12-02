@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import surveyValidation from './surveyValidation';
 import * as surveyActions from 'redux/modules/survey';
+import {input, textArea, selector} from './Inputs';
 
 function asyncValidate(data, dispatch, {isValidEmail}) {
   if (!data.email) {
@@ -16,7 +17,8 @@ function asyncValidate(data, dispatch, {isValidEmail}) {
 )
 @reduxForm({
   form: 'survey',
-  fields: ['name', 'email', 'occupation', 'currentlyEmployed', 'sex'],
+  fields: ['name', 'email', 'occupation',
+   'currentlyEmployed', 'sex', 'address', 'blood'],
   validate: surveyValidation,
   asyncValidate,
   asyncBlurFields: ['email']
@@ -39,7 +41,8 @@ class SurveyForm extends Component {
     const {
       asyncValidating,
       dirty,
-      fields: {name, email, occupation, currentlyEmployed, sex},
+      fields: {name, email, occupation,
+        currentlyEmployed, sex, address, blood},
       active,
       handleSubmit,
       invalid,
@@ -48,28 +51,23 @@ class SurveyForm extends Component {
       valid
       } = this.props;
     const styles = require('./SurveyForm.scss');
-    const renderInput = (field, label, showAsyncValidating) =>
-      <div className={'form-group' + (field.error && field.touched ? ' has-error' : '')}>
-        <label htmlFor={field.name} className="col-sm-2">{label}</label>
-        <div className={'col-sm-8 ' + styles.inputGroup}>
-          {showAsyncValidating && asyncValidating && <i className={'fa fa-cog fa-spin ' + styles.cog}/>}
-          <input type="text" className="form-control" id={field.name} {...field}/>
-          {field.error && field.touched && <div className="text-danger">{field.error}</div>}
-          <div className={styles.flags}>
-            {field.dirty && <span className={styles.dirty} title="Dirty">D</span>}
-            {field.active && <span className={styles.active} title="Active">A</span>}
-            {field.visited && <span className={styles.visited} title="Visited">V</span>}
-            {field.touched && <span className={styles.touched} title="Touched">T</span>}
-          </div>
-        </div>
-      </div>;
+
+    const bloodData = [
+      {value: '', show: 'please select'},
+      {value: 'A', show: 'A'},
+      {value: 'B', show: 'B'},
+      {value: 'O', show: 'O'},
+      {value: 'AB', show: 'AB'},
+    ];
 
     return (
       <div>
         <form className="form-horizontal" onSubmit={handleSubmit}>
-          {renderInput(name, 'Full Name')}
-          {renderInput(email, 'Email', true)}
-          {renderInput(occupation, 'Occupation')}
+          {input(name, 'Full Name', asyncValidating)}
+          {input(email, 'Email', asyncValidating, true)}
+          {input(occupation, 'Occupation', asyncValidating)}
+          {textArea(address, 'Address', asyncValidating)}
+          {selector(bloodData, blood, 'Blood group', asyncValidate)}
           <div className="form-group">
             <label htmlFor="currentlyEmployed" className="col-sm-2">Currently Employed?</label>
             <div className="col-sm-8">

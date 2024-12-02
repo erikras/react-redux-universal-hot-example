@@ -23,7 +23,9 @@ export default class Survey extends Component {
       email: 'bobby@gmail.com',
       occupation: 'Redux Wizard',
       currentlyEmployed: true,
-      sex: 'male'
+      sex: 'male',
+      address: '99/999 thailand',
+      blood: 'A'
     });
   }
 
