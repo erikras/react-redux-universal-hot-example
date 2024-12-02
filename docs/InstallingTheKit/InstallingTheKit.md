@@ -6,16 +6,32 @@ There is no failure except when nothing is learned.
 
 ##  Clone from github
 
-First you should clone the project from GitHub.  The easiest way is to use something like this:
+First you should clone the project from GitHub.  The easiest way is to use something like this. Say you want to call your app &lt;YOUR_APP_NAME&gt;:
 
-![Cloning from GitHub](git_clone.png)
+```bash
+git clone git@github.com:erikras/react-redux-universal-hot-example.git \
+    -o react-redux-universal-hot-example <YOUR_APP_NAME>
+cd <YOUR_APP_NAME>
+```
 
-This puts a copy of the whole project into your directory `mycopy`.   All the files you will change are
-in this directory.   You can `rm -rf mycopy`, clone it again, and continue on.   
+This puts a copy of the whole project into your directory `<YOUR_APP_NAME>`.   All the files you will change are
+in this directory.   You can `rm -rf <YOUR_APP_NAME>`, clone it again, and continue on.   
 
 That's the minimum view of git, equivalent to the [xkcd view](https://xkcd.com/1597/).   Git and 
 [github](https://github.com) make every manipulation and automated workflow possible but none easy.
 Nothing more complex than creating new copy is necessary until contributing code to a project.
+
+Note: You'll probably want to have your own Git repo somewhere like github to keep your own updates safe. 
+
+To do that:
+
+* First create the empty (no README.md or any other files) repo on [github.com](https://github.com)
+
+* Then add it as the ``origin`` remote locally
+
+```bash
+git remote add origin git@github.com:<YOUR_GITHUB_USERNAME>/<YOUR_APP_NAME>.git
+```
 
 
 ## Run npm install
