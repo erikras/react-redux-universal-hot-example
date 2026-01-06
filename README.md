@@ -1,4 +1,4 @@
-# ⚠️ DO NOT USE THIS!! ⚠️
+# ABC
 
 Once upon a time, this repo helped a lot of people, but it's _waaaay_ out of date. It's now more of a historical artifact of what React development looked like in 2015.
 
